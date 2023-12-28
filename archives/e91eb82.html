@@ -1,0 +1,352 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Windows10下安装使用WSA | Pi3's Notebook</title><meta name="author" content="LiuChao"><meta name="copyright" content="LiuChao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="在Windows10下安装和使用带有Magisk或者KernelSU的WSA(Windows安卓子系统)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows10下安装使用WSA">
+<meta property="og:url" content="https://pi3yyy.love/archives/e91eb82.html">
+<meta property="og:site_name" content="Pi3&#39;s Notebook">
+<meta property="og:description" content="在Windows10下安装和使用带有Magisk或者KernelSU的WSA(Windows安卓子系统)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner6.jpg">
+<meta property="article:published_time" content="2023-12-22T13:13:00.000Z">
+<meta property="article:modified_time" content="2023-12-28T11:11:44.107Z">
+<meta property="article:author" content="LiuChao">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="WSA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner6.jpg"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi3.png"><link rel="canonical" href="https://pi3yyy.love/archives/e91eb82.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//www.clarity.ms"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="VawN-8WG_4bj-ToUYin2KVDZV20YU4VwRZNYyJ2mhpo"/><meta name="baidu-site-verification" content="codeva-NffhRTbji8"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a8ae34c41457a14d356310f67e84e435";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>(function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "jvasgyk9yi");</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":2,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: LiuChao","link":"链接: ","source":"来源: Pi3's Notebook","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体中文","cht_to_chs":"你已切换为简体中文","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#957DAD","bgDark":"#E0BBE4","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Windows10下安装使用WSA',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-28 19:11:44'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/style.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/logo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner6.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Pi3's Notebook"><span class="site-name">Pi3's Notebook</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Windows10下安装使用WSA</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-22T13:13:00.000Z" title="发表于 2023-12-22 21:13:00">2023-12-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-28T11:11:44.107Z" title="更新于 2023-12-28 19:11:44">2023-12-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%95%99%E7%A8%8B/">配置与教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">805</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Windows10下安装使用WSA"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Windows10下安装使用WSA"><a href="#Windows10下安装使用WSA" class="headerlink" title="Windows10下安装使用WSA"></a>Windows10下安装使用WSA</h1><p>如何在Windows10中使用带有Magisk的安卓子系统<br>需要系统版本高于Windows10 22H2<br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://learn.microsoft.com/zh-cn/windows/android/wsa/">适用于 Android™️ 的 Windows 子系统 | Microsoft Learn</a></p>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p>首先在Github上找到<a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/MustardChef/WSABuilds/releases">MustardChef&#x2F;WSABuilds</a>，下载相应的安装包，Magisk和KernelSU都可以<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212033.png" alt="WSA不同版本的安装包"></p>
+<p>下载解压完成之后进入文件夹，运行<code>run.bat</code>就可以进行安装。安装过程中会自动启动安卓子系统，同时可以修补Magisk镜像<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212306.png" alt="运行run.bat"><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212736.png" alt="启动WSA"><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212433.png" alt="WSA界面"><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222214229.png" alt="Magisk"></p>
+<h2 id="使用ADB命令"><a href="#使用ADB命令" class="headerlink" title="使用ADB命令"></a>使用ADB命令</h2><p>安装完成之后，还需要打开系统的开发者选项，方便用adb命令连接和操作安卓子系统<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212637.png" alt="打开开发者选项"><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212805.png" alt="确保开发者选项已经打开"></p>
+<p>打开开发者选择就可以使用电脑上的ADB进行连接操作<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212957.png" alt="adb连接"><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/2023-12-22_20-54-15.png" alt="弹出连接窗口"></p>
+<p>连接时如果出现，不能连接的情况，需要重启电脑或者多试几次<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222213301.png" alt="连接不上的情况"></p>
+<p>连接上就可以使用ADB命令操作手机，安装APP，传输文件等功能，当然也可以使用微软商店中的WSA工具箱等软件，更加方便管理安卓子系统<br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/lb245557472/article/details/84068519">ADB 操作命令详解及用法大全</a><br>如：<br>查看所有应用</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell pm list packages</span><br></pre></td></tr></table></figure>
+
+<p>查看第三方应用</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell pm list packages <span class="literal">-3</span></span><br></pre></td></tr></table></figure>
+
+<p>安装APK</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb install 包名</span><br></pre></td></tr></table></figure>
+
+<p>卸载软件</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb uninstall 包名</span><br></pre></td></tr></table></figure>
+
+<p>打开WSA设置</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell am <span class="built_in">start</span> <span class="literal">-n</span> com.android.settings/.Settings\<span class="variable">$WifiSettingsActivity</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222225746.png" alt="设置界面"></p>
+<p>文件操作</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">下载文件到电脑</span><br><span class="line">adb pull &lt;remote&gt; [<span class="type">local</span>]</span><br><span class="line"></span><br><span class="line">上传文件至手机</span><br><span class="line">adb push &lt;local&gt; &lt;remote&gt;</span><br><span class="line"></span><br><span class="line">列出目录内容</span><br><span class="line">adb shell <span class="built_in">ls</span> [<span class="type">options</span>] &lt;directory&gt;</span><br><span class="line"></span><br><span class="line">切换目录</span><br><span class="line">adb shell <span class="built_in">cd</span> &lt;directory&gt;</span><br><span class="line"></span><br><span class="line">删除文件或目录</span><br><span class="line">adb shell <span class="built_in">rm</span> [<span class="type">options</span>] &lt;files or directory&gt;</span><br><span class="line"></span><br><span class="line">创建目录</span><br><span class="line">adb shell mkdir [<span class="type">options</span>] &lt;directory<span class="literal">-name</span>&gt;</span><br><span class="line"></span><br><span class="line">………………</span><br><span class="line"></span><br><span class="line">都是Linux上的命令前加上adb shell</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装应用程序"><a href="#安装应用程序" class="headerlink" title="安装应用程序"></a>安装应用程序</h2><p>我们可以使用文件操作命令为WSA安装应用程序<br>比如我电脑桌面上有一个apk安装包，可以先将文件上传至手机目录</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb push C:\desktop\kuan.apk /storage/emulated/<span class="number">0</span>/Download</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222214717.png" alt="上传文件"></p>
+<p>然后在WSA中对应的文件夹中就可以看见apk安装包<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222214810.png" alt="上传成功的安装包"></p>
+<p>接着点击就可以安装，或者也可以使用ADB命令进行安装</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb install /storage/emulated/<span class="number">0</span>/Download/kuan.apk</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222215038.png" alt="安装APP"><br>可以直接在电脑桌面打开手机应用程序<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222220529.png" alt="桌面的APP"></p>
+<h2 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h2><p>WSA一开始好像是无网络不能上网的，所以还需要配置一下网络环境<br>同样使用ADB命令完成</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell settings put global http_proxy <span class="number">172.24</span>.<span class="number">128.1</span>:<span class="number">12345</span></span><br></pre></td></tr></table></figure>
+<p>IP是在电脑终端输入<code>ipconfig</code>找到本机在WSL中的IP<br>端口是本机的代理端口<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222224919.png" alt="查看本机在WSL中的IP"><br>这样之后就可以上网，并且已经挂上代理<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222225110.png" alt="Google商店"><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222230453.png" alt="酷安"></p>
+<blockquote>
+<p>在配置网络的时候，可能遇到WSA获取不到IP的情况<br>确保在<strong>启动或关闭Windows功能</strong>中的Hyper-V及其包括的全部选项、虚拟化已经打开<br>并且BIOS中已经启设备的虚拟化<br>如果上面都已完成，还是不能获取到IP<br>最好的办法就是卸载删除后重新安装</p>
+</blockquote>
+<p>正常情况，在WSA的网络设置中，可以看见一个虚拟WIFI<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222230044.png" alt="虚拟WIFI"></p>
+<h2 id="卸载删除"><a href="#卸载删除" class="headerlink" title="卸载删除"></a>卸载删除</h2><p>只需要在Windows设置中卸载 <em>适用于Android的Windows子系统</em> 程序，然后直接删除原先下载解压出来的文件夹即可<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222225018.png" alt="卸载WSA"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://pi3-l22.github.io/">LiuChao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://pi3yyy.love/archives/e91eb82.html">https://pi3yyy.love/archives/e91eb82.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://pi3yyy.love" target="_blank">Pi3's Notebook</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Windows/">Windows</a><a class="post-meta__tags" href="/tags/WSA/">WSA</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner6.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/archives/d604709c.html" title="微信定时发送倒数日"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner11.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">微信定时发送倒数日</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/archives/9edefb84.html" title="Oh My Posh 配置教程"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner6.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-25</div><div class="title">Oh My Posh 配置教程</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81OTIyNi8zNTY4OA=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/logo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">LiuChao</div><div class="author-info__description">enjoy life, enjoy coding</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/pi3-l22"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Pi3-l22" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #957DAD;"></i></a><a class="social-icon" href="mailto:622.511.liuchao@gmail.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="http://pan.pi3yyy.love/" rel="external nofollow noreferrer" target="_blank" title="云盘"><i class="fa-solid fa-cloud" style="color: #1e90ff;"></i></a><a class="social-icon" href="https://chat.pi3yyy.love/" rel="external nofollow noreferrer" target="_blank" title="GeminiChat"><i class="fa-brands fa-gofore" style="color: #FFC628;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Windows10%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8WSA"><span class="toc-text">Windows10下安装使用WSA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8ADB%E5%91%BD%E4%BB%A4"><span class="toc-text">使用ADB命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="toc-text">安装应用程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C"><span class="toc-text">配置网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%B8%E8%BD%BD%E5%88%A0%E9%99%A4"><span class="toc-text">卸载删除</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/archives/e91eb82.html" title="Windows10下安装使用WSA"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Windows10下安装使用WSA"/></a><div class="content"><a class="title" href="/archives/e91eb82.html" title="Windows10下安装使用WSA">Windows10下安装使用WSA</a><time datetime="2023-12-22T13:13:00.000Z" title="发表于 2023-12-22 21:13:00">2023-12-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/d604709c.html" title="微信定时发送倒数日"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner11.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="微信定时发送倒数日"/></a><div class="content"><a class="title" href="/archives/d604709c.html" title="微信定时发送倒数日">微信定时发送倒数日</a><time datetime="2023-12-20T14:27:00.000Z" title="发表于 2023-12-20 22:27:00">2023-12-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/8630530e.html" title="不同网络架构下文件下载服务协议设计"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi3.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="不同网络架构下文件下载服务协议设计"/></a><div class="content"><a class="title" href="/archives/8630530e.html" title="不同网络架构下文件下载服务协议设计">不同网络架构下文件下载服务协议设计</a><time datetime="2023-12-20T11:14:00.000Z" title="发表于 2023-12-20 19:14:00">2023-12-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/61fee1d7.html" title="数据库应用系统设计实验"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据库应用系统设计实验"/></a><div class="content"><a class="title" href="/archives/61fee1d7.html" title="数据库应用系统设计实验">数据库应用系统设计实验</a><time datetime="2023-12-17T16:01:00.000Z" title="发表于 2023-12-18 00:01:00">2023-12-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/2a47b3f8.html" title="T-SQL语句操作(二)"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="T-SQL语句操作(二)"/></a><div class="content"><a class="title" href="/archives/2a47b3f8.html" title="T-SQL语句操作(二)">T-SQL语句操作(二)</a><time datetime="2023-12-17T15:57:00.000Z" title="发表于 2023-12-17 23:57:00">2023-12-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By LiuChao</div><div class="footer_custom_text"><div>Hi, Welcome To My Notebook.🌈</div><div class="beian"><a onclick="window.open('http://beian.miit.gov.cn/')">浙ICP备2023048596号</a></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(()=>{
+  const loadLivere = () => {
+    if (typeof LivereTower === 'object') window.LivereTower.init()
+    else {
+      (function(d, s) {
+          var j, e = d.getElementsByTagName(s)[0];
+          if (typeof LivereTower === 'function') { return; }
+          j = d.createElement(s);
+          j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+          j.async = true;
+          e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    }
+  }
+
+  if ('Livere' === 'Livere' || !false) {
+    if (false) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+    else loadLivere()
+  } else {
+    window.loadOtherComment = loadLivere
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="8063632071" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false" data-theme='#FFDFD3'> </div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

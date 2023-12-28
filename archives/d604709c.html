@@ -1,0 +1,386 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>微信定时发送倒数日 | Pi3's Notebook</title><meta name="author" content="LiuChao"><meta name="copyright" content="LiuChao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="微信机器人定时发送倒数日信息给联系人">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信定时发送倒数日">
+<meta property="og:url" content="https://pi3yyy.love/archives/d604709c.html">
+<meta property="og:site_name" content="Pi3&#39;s Notebook">
+<meta property="og:description" content="微信机器人定时发送倒数日信息给联系人">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner11.jpg">
+<meta property="article:published_time" content="2023-12-20T14:27:00.000Z">
+<meta property="article:modified_time" content="2023-12-22T12:57:00.000Z">
+<meta property="article:author" content="LiuChao">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner11.jpg"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi3.png"><link rel="canonical" href="https://pi3yyy.love/archives/d604709c.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//www.clarity.ms"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="VawN-8WG_4bj-ToUYin2KVDZV20YU4VwRZNYyJ2mhpo"/><meta name="baidu-site-verification" content="codeva-NffhRTbji8"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a8ae34c41457a14d356310f67e84e435";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>(function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "jvasgyk9yi");</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":2,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: LiuChao","link":"链接: ","source":"来源: Pi3's Notebook","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体中文","cht_to_chs":"你已切换为简体中文","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#957DAD","bgDark":"#E0BBE4","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '微信定时发送倒数日',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-22 20:57:00'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/style.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/logo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner11.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Pi3's Notebook"><span class="site-name">Pi3's Notebook</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">微信定时发送倒数日</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-20T14:27:00.000Z" title="发表于 2023-12-20 22:27:00">2023-12-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-22T12:57:00.000Z" title="更新于 2023-12-22 20:57:00">2023-12-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/">个人项目</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="微信定时发送倒数日"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="微信定时发送倒数日"><a href="#微信定时发送倒数日" class="headerlink" title="微信定时发送倒数日"></a>微信定时发送倒数日</h1><p>微信定时发送倒数日是基于Github项目<a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/lich0821/WeChatFerry">WeChatFerry</a>实现的<br>这个项目实现的功能：</p>
+<ul>
+<li>检查登录状态</li>
+<li>获取登录账号的 wxid</li>
+<li>获取消息类型</li>
+<li>获取所有联系人</li>
+<li>获取所有好友</li>
+<li>获取数据库</li>
+<li>获取某数据库下的表</li>
+<li>获取用户信息</li>
+<li>发送文本消息（可 @）</li>
+<li>发送图片</li>
+<li>发送文件</li>
+<li>允许接收消息</li>
+<li>停止接收消息</li>
+<li>执行 SQL 查询</li>
+<li>接受好友申请</li>
+<li>添加群成员</li>
+<li>删除群成员</li>
+<li>解密图片</li>
+<li>获取朋友圈消息</li>
+<li>保存图片</li>
+<li>保存语音</li>
+<li>发送卡片消息</li>
+<li>拍一拍群友</li>
+<li>邀请群成员</li>
+<li>图片 OCR</li>
+</ul>
+<p>同时支持多个客户端：</p>
+<ul>
+<li>Go</li>
+<li>HTTP</li>
+<li>Java</li>
+<li>Python</li>
+<li>Rust</li>
+</ul>
+<hr>
+<p><strong>对于HTTP客户端：</strong></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">pip install <span class="literal">--upgrade</span> wcfhttp</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line"><span class="comment"># 查看版本</span></span><br><span class="line">wcfhttp <span class="literal">-v</span></span><br><span class="line"><span class="comment"># 查看帮助</span></span><br><span class="line">wcfhttp <span class="literal">-h</span></span><br><span class="line"><span class="comment"># 忽略新消息运行</span></span><br><span class="line">wcfhttp</span><br><span class="line"><span class="comment"># 新消息转发到指定地址</span></span><br><span class="line">wcfhttp <span class="literal">--cb</span> http://your_host:your_port/callback</span><br></pre></td></tr></table></figure>
+<p>访问<code>http://your_host:your_port/docs</code>就可以查看接口文档</p>
+<p><strong>对于Python客户端：</strong></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装Python库</span></span><br><span class="line">pip install <span class="literal">--upgrade</span> wcfhttp</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/lich0821/WeChatFerry/blob/master/clients/python/wcferry/client.py">接口信息</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/lich0821/WeChatFerry/blob/master/clients/python/test.py">示例程序</a></p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><h3 id="保存联系人列表"><a href="#保存联系人列表" class="headerlink" title="保存联系人列表"></a>保存联系人列表</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">save_contacts</span>(<span class="params">wcf</span>):</span><br><span class="line">    <span class="comment"># 保存联系人列表</span></span><br><span class="line">    data = wcf.get_contacts()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> data:</span><br><span class="line">        wxid = i[<span class="string">&#x27;wxid&#x27;</span>]</span><br><span class="line">        code = i[<span class="string">&#x27;code&#x27;</span>]</span><br><span class="line">        name = i[<span class="string">&#x27;name&#x27;</span>]</span><br><span class="line">        <span class="keyword">if</span> i[<span class="string">&#x27;wxid&#x27;</span>].startswith(<span class="string">&#x27;wxid_&#x27;</span>):</span><br><span class="line">            contacts_dict[wxid] = [name, code]</span><br><span class="line">        <span class="keyword">elif</span> i[<span class="string">&#x27;wxid&#x27;</span>].endswith(<span class="string">&#x27;@chatroom&#x27;</span>):</span><br><span class="line">            chatroom_dict[wxid] = [name, code]</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;contacts.csv&#x27;</span>, <span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> contacts_dict:</span><br><span class="line">            f.write(<span class="string">f&#x27;<span class="subst">&#123;i&#125;</span>,<span class="subst">&#123;contacts_dict[i][<span class="number">0</span>]&#125;</span>,<span class="subst">&#123;contacts_dict[i][<span class="number">1</span>]&#125;</span>\n&#x27;</span>)</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;chatroom.csv&#x27;</span>, <span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> chatroom_dict:</span><br><span class="line">            f.write(<span class="string">f&#x27;<span class="subst">&#123;i&#125;</span>,<span class="subst">&#123;chatroom_dict[i][<span class="number">0</span>]&#125;</span>,<span class="subst">&#123;chatroom_dict[i][<span class="number">1</span>]&#125;</span>\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="有关倒数日的操作"><a href="#有关倒数日的操作" class="headerlink" title="有关倒数日的操作"></a>有关倒数日的操作</h3><p>获取倒数日</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_countdown</span>():</span><br><span class="line">    <span class="comment"># 获取倒数日</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="string">&#x27;countdown.csv&#x27;</span>):</span><br><span class="line">        <span class="comment"># 创建一个新的文件</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;countdown.csv&#x27;</span>, <span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;countdown.csv&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> f:</span><br><span class="line">            title, date = i.strip().split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">            countdown_day[title] = date</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;[+] 获取倒数日成功&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>保存倒数日</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">save_countdown</span>():</span><br><span class="line">    <span class="comment"># 保存倒数日</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;countdown.csv&#x27;</span>, <span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> countdown_day:</span><br><span class="line">            f.write(<span class="string">f&#x27;<span class="subst">&#123;i&#125;</span>,<span class="subst">&#123;countdown_day[i]&#125;</span>\n&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;[+] 保存倒数日成功&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>处理倒数日</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">process_countdown</span>(<span class="params">wcf</span>):</span><br><span class="line">    <span class="comment"># 处理倒数日</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span> time.strftime(<span class="string">&#x27;%H:%M&#x27;</span>, time.localtime()) == time.strftime(<span class="string">&#x27;%H:%M&#x27;</span>, remind_time):</span><br><span class="line">                content = <span class="string">f&#x27;今天是<span class="subst">&#123;time.strftime(<span class="string">&quot;%Y-%m-%d&quot;</span>, time.localtime())&#125;</span>\n\n&#x27;</span></span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> countdown_day:</span><br><span class="line">                    <span class="comment"># 计算还剩多少天</span></span><br><span class="line">                    days = (datetime.datetime.strptime(countdown_day[i], <span class="string">&#x27;%Y-%m-%d&#x27;</span>) - datetime.datetime.strptime(time.strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>, time.localtime()), <span class="string">&#x27;%Y-%m-%d&#x27;</span>)).days</span><br><span class="line">                    content += <span class="string">f&#x27;[+] [<span class="subst">&#123;i&#125;</span>]\n&#x27;</span></span><br><span class="line">                    content += <span class="string">f&#x27;[<span class="subst">&#123;countdown_day[i]&#125;</span>] [还剩<span class="subst">&#123;days&#125;</span>天]\n\n&#x27;</span></span><br><span class="line">                    <span class="comment"># 如果是最后一天 则删除倒数日</span></span><br><span class="line">                    <span class="keyword">if</span> days == <span class="number">0</span>:</span><br><span class="line">                        countdown_day.pop(i)</span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> send_wxid:</span><br><span class="line">                    wcf.send_text(content, j)</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;[+] 发送倒数日成功&#x27;</span>)</span><br><span class="line">                time.sleep(<span class="number">60</span>)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;[-] 处理倒数日错误:&#x27;</span>, e)</span><br></pre></td></tr></table></figure>
+
+<p>添加倒数日</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add_countdown</span>(<span class="params">wcf, msg</span>):</span><br><span class="line">    <span class="comment"># 添加倒数日</span></span><br><span class="line">    stop_date = msg.content.split(<span class="string">&#x27; &#x27;</span>)[<span class="number">2</span>]</span><br><span class="line">    title = msg.content.split(<span class="string">&#x27; &#x27;</span>)[<span class="number">1</span>]</span><br><span class="line">    <span class="comment"># 检查时间格式</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        time.strptime(stop_date, <span class="string">&#x27;%Y-%m-%d&#x27;</span>)</span><br><span class="line">        <span class="comment"># 如果倒数日已存在</span></span><br><span class="line">        <span class="keyword">if</span> title <span class="keyword">in</span> countdown_day:</span><br><span class="line">            wcf.send_text(<span class="string">f&#x27;[-] 倒数日 <span class="subst">&#123;title&#125;</span> 已存在&#x27;</span>, msg.sender)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="comment"># 如果时间已过</span></span><br><span class="line">        <span class="keyword">if</span> (datetime.datetime.strptime(stop_date, <span class="string">&#x27;%Y-%m-%d&#x27;</span>) - datetime.datetime.strptime(time.strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>, time.localtime()), <span class="string">&#x27;%Y-%m-%d&#x27;</span>)).days &lt; <span class="number">0</span>:</span><br><span class="line">            wcf.send_text(<span class="string">f&#x27;[-] 倒数日 <span class="subst">&#123;title&#125;</span> 时间已过&#x27;</span>, msg.sender)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;[-] 添加倒数日错误:&#x27;</span>, e)</span><br><span class="line">        wcf.send_text(<span class="string">&#x27;[-] 添加倒数日错误&#x27;</span>, msg.sender)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        countdown_day[title] = stop_date</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;[+] <span class="subst">&#123;msg.sender&#125;</span> 添加倒数日 <span class="subst">&#123;title&#125;</span> <span class="subst">&#123;stop_date&#125;</span>&#x27;</span>)</span><br><span class="line">        wcf.send_text(<span class="string">f&#x27;[+] 添加倒数日 <span class="subst">&#123;title&#125;</span> 截止日期 <span class="subst">&#123;stop_date&#125;</span>&#x27;</span>, msg.sender)</span><br></pre></td></tr></table></figure>
+
+<p>删除倒数日</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">del_countdown</span>(<span class="params">wcf, msg</span>):</span><br><span class="line">    <span class="comment"># 删除倒数日</span></span><br><span class="line">    title = msg.content.split(<span class="string">&#x27; &#x27;</span>)[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        countdown_day.pop(title)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;[-] 删除倒数日错误:&#x27;</span>, e)</span><br><span class="line">        wcf.send_text(<span class="string">&#x27;[-] 删除倒数日错误&#x27;</span>, msg.sender)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;[+] <span class="subst">&#123;msg.sender&#125;</span> 删除倒数日 <span class="subst">&#123;title&#125;</span>&#x27;</span>)</span><br><span class="line">        wcf.send_text(<span class="string">f&#x27;[+] 删除倒数日 <span class="subst">&#123;title&#125;</span>&#x27;</span>, msg.sender)</span><br></pre></td></tr></table></figure>
+
+<p>列出倒数日</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">list_countdown</span>(<span class="params">wcf, msg</span>):</span><br><span class="line">    <span class="comment"># 列出倒数日</span></span><br><span class="line">    content = <span class="string">f&#x27;今天是<span class="subst">&#123;time.strftime(<span class="string">&quot;%Y-%m-%d&quot;</span>, time.localtime())&#125;</span>\n\n&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> countdown_day:</span><br><span class="line">        <span class="comment"># 计算还剩多少天</span></span><br><span class="line">        days = (datetime.datetime.strptime(countdown_day[i], <span class="string">&#x27;%Y-%m-%d&#x27;</span>) - datetime.datetime.strptime(time.strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>, time.localtime()), <span class="string">&#x27;%Y-%m-%d&#x27;</span>)).days</span><br><span class="line">        content += <span class="string">f&#x27;[+] [<span class="subst">&#123;i&#125;</span>]\n&#x27;</span></span><br><span class="line">        content += <span class="string">f&#x27;[<span class="subst">&#123;countdown_day[i]&#125;</span>] [还剩<span class="subst">&#123;days&#125;</span>天]\n\n&#x27;</span></span><br><span class="line">    content += <span class="string">f&#x27;\n提醒时间为每天的 <span class="subst">&#123;time.strftime(<span class="string">&quot;%H:%M&quot;</span>, remind_time)&#125;</span>\n&#x27;</span></span><br><span class="line">    content += <span class="string">f&#x27;发送倒数日的对象为 <span class="subst">&#123;send_wxid&#125;</span>&#x27;</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;[+] <span class="subst">&#123;msg.sender&#125;</span> 列出倒数日&#x27;</span>)</span><br><span class="line">    wcf.send_text(content, msg.sender)</span><br></pre></td></tr></table></figure>
+
+<p>设置提醒时间</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">set_remind_time</span>(<span class="params">wcf, msg</span>):</span><br><span class="line">    <span class="comment"># 设置提醒时间</span></span><br><span class="line">    <span class="keyword">global</span> remind_time</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        time_ = msg.content.split(<span class="string">&#x27; &#x27;</span>)[<span class="number">1</span>]</span><br><span class="line">        <span class="comment"># 检查时间格式</span></span><br><span class="line">        remind_time = time.strptime(time_, <span class="string">&#x27;%H:%M&#x27;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;[-] 设置提醒时间错误:&#x27;</span>, e)</span><br><span class="line">        wcf.send_text(<span class="string">&#x27;[-] 设置提醒时间错误&#x27;</span>, msg.sender)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;[+] <span class="subst">&#123;msg.sender&#125;</span> 设置提醒时间为每天的 <span class="subst">&#123;time.strftime(<span class="string">&quot;%H:%M&quot;</span>, remind_time)&#125;</span>&#x27;</span>)</span><br><span class="line">        wcf.send_text(<span class="string">f&#x27;[+] 设置提醒时间为每天的 <span class="subst">&#123;time.strftime(<span class="string">&quot;%H:%M&quot;</span>, remind_time)&#125;</span>&#x27;</span>, msg.sender)</span><br></pre></td></tr></table></figure>
+
+<p>设置发送倒数日的对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">update_send_wxid</span>(<span class="params">wcf, msg</span>):</span><br><span class="line">    <span class="comment"># 设置发送倒数日的对象</span></span><br><span class="line">    <span class="keyword">global</span> send_wxid</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;,&#x27;</span> <span class="keyword">in</span> msg.content.split(<span class="string">&#x27; &#x27;</span>)[<span class="number">1</span>]:</span><br><span class="line">            send_wxid = msg.content.split(<span class="string">&#x27; &#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            send_wxid = [msg.content.split(<span class="string">&#x27; &#x27;</span>)[<span class="number">1</span>]]</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;[-] 设置发送倒数日的对象错误:&#x27;</span>, e)</span><br><span class="line">        wcf.send_text(<span class="string">&#x27;[-] 设置发送倒数日的对象错误&#x27;</span>, msg.sender)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;[+] <span class="subst">&#123;msg.sender&#125;</span> 设置发送倒数日的对象为 <span class="subst">&#123;send_wxid&#125;</span>&#x27;</span>)</span><br><span class="line">    wcf.send_text(<span class="string">f&#x27;[+] 设置发送倒数日的对象为 <span class="subst">&#123;send_wxid&#125;</span>&#x27;</span>, msg.sender)</span><br></pre></td></tr></table></figure>
+
+<h3 id="处理发送的指令"><a href="#处理发送的指令" class="headerlink" title="处理发送的指令"></a>处理发送的指令</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">process_msg</span>(<span class="params">wcf</span>):</span><br><span class="line">    <span class="keyword">while</span> wcf.is_receiving_msg():</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            msg = wcf.get_msg()</span><br><span class="line">            content = msg.content</span><br><span class="line">            <span class="keyword">if</span> content.startswith(<span class="string">&#x27;$add&#x27;</span>):  <span class="comment"># 添加倒数日</span></span><br><span class="line">                add_countdown(wcf, msg)</span><br><span class="line">            <span class="keyword">elif</span> content.startswith(<span class="string">&#x27;$del&#x27;</span>):  <span class="comment"># 删除倒数日</span></span><br><span class="line">                del_countdown(wcf, msg)</span><br><span class="line">            <span class="keyword">elif</span> content == <span class="string">&#x27;$list&#x27;</span>:  <span class="comment"># 列出倒数日</span></span><br><span class="line">                list_countdown(wcf, msg)</span><br><span class="line">            <span class="keyword">elif</span> content == <span class="string">&#x27;$help&#x27;</span>:  <span class="comment"># 帮助信息</span></span><br><span class="line">                help_info(wcf, msg)</span><br><span class="line">            <span class="keyword">elif</span> content.startswith(<span class="string">&#x27;$set&#x27;</span>):  <span class="comment"># 设置提醒时间</span></span><br><span class="line">                set_remind_time(wcf, msg)</span><br><span class="line">            <span class="keyword">elif</span> content.startswith(<span class="string">&#x27;$send&#x27;</span>):  <span class="comment"># 设置发送倒数日的对象</span></span><br><span class="line">                update_send_wxid(wcf, msg)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">except</span> Empty:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;[-] 处理消息错误:&#x27;</span>, e)</span><br></pre></td></tr></table></figure>
+
+<h3 id="主函数"><a href="#主函数" class="headerlink" title="主函数"></a>主函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    wcf = Wcf()</span><br><span class="line">    <span class="comment"># 保存联系人列表</span></span><br><span class="line">    save_contacts(wcf)</span><br><span class="line">    <span class="comment"># 获取倒数日</span></span><br><span class="line">    get_countdown()</span><br><span class="line">    <span class="comment"># 处理倒数日</span></span><br><span class="line">    Thread(target=process_countdown, args=(wcf,)).start()</span><br><span class="line">    <span class="comment"># 处理消息</span></span><br><span class="line">    wcf.enable_receiving_msg()</span><br><span class="line">    Thread(target=process_msg, args=(wcf,), daemon=<span class="literal">True</span>).start()</span><br><span class="line">    <span class="keyword">return</span> wcf</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    wcf = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        wcf = main()</span><br><span class="line">        wcf.keep_running()</span><br><span class="line">    <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;[-] 服务停止&#x27;</span>)</span><br><span class="line">        save_countdown()</span><br><span class="line">        wcf.cleanup()</span><br><span class="line">        sys.exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="实现成果"><a href="#实现成果" class="headerlink" title="实现成果"></a>实现成果</h2><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231221091026.png" alt="$help命令"><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231221091104.png" alt="$list命令"><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231221091116.png" alt="$add命令"><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231221091144.png" alt="$del命令"><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231221091203.png" alt="$send命令"><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231221091214.png" alt="$set命令"><br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231221091240.png" alt="定时提醒效果"></p>
+<h3 id="增加讯飞星火大模型"><a href="#增加讯飞星火大模型" class="headerlink" title="增加讯飞星火大模型"></a>增加讯飞星火大模型</h3><p>在上面的基础上，也可以接入一些AI大模型或者一些智能聊天的机器人<br>我这里使用讯飞星火V3.0模型接口，个人认证和免费体验一年，200万token<br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://xinghuo.xfyun.cn/?ch=blzc_WjOjQX&ref=ainavtool.com">讯飞星火认知大模型</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.xfyun.cn/doc/spark/Web.html">星火认知大模型Web API文档</a><br>参考Web API的文档<br>实现的结果：<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20231222210352.jpg" alt="讯飞星火模型"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://pi3-l22.github.io/">LiuChao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://pi3yyy.love/archives/d604709c.html">https://pi3yyy.love/archives/d604709c.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://pi3yyy.love" target="_blank">Pi3's Notebook</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner11.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/archives/8630530e.html" title="不同网络架构下文件下载服务协议设计"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi3.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">不同网络架构下文件下载服务协议设计</div></div></a></div><div class="next-post pull-right"><a href="/archives/e91eb82.html" title="Windows10下安装使用WSA"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner6.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Windows10下安装使用WSA</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/archives/d9a4c6ca.html" title="Python爬虫之蓝奏云文件批量下载"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi33.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-07</div><div class="title">Python爬虫之蓝奏云文件批量下载</div></div></a></div><div><a href="/archives/6cb7cff5.html" title="基于Socket的远程控制程序"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-29</div><div class="title">基于Socket的远程控制程序</div></div></a></div><div><a href="/archives/7c353064.html" title="量子加解密方法及云盘桌面客户端"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-29</div><div class="title">量子加解密方法及云盘桌面客户端</div></div></a></div><div><a href="/archives/8630530e.html" title="不同网络架构下文件下载服务协议设计"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi3.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-20</div><div class="title">不同网络架构下文件下载服务协议设计</div></div></a></div><div><a href="/archives/82146f84.html" title="基于UDP的多人在线聊天室"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-07</div><div class="title">基于UDP的多人在线聊天室</div></div></a></div><div><a href="/archives/a0f6d86b.html" title="Neo4j安装与使用"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi3.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-24</div><div class="title">Neo4j安装与使用</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81OTIyNi8zNTY4OA=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/logo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">LiuChao</div><div class="author-info__description">enjoy life, enjoy coding</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">40</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/pi3-l22"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Pi3-l22" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #957DAD;"></i></a><a class="social-icon" href="mailto:622.511.liuchao@gmail.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="http://pan.pi3yyy.love/" rel="external nofollow noreferrer" target="_blank" title="云盘"><i class="fa-solid fa-cloud" style="color: #1e90ff;"></i></a><a class="social-icon" href="https://chat.pi3yyy.love/" rel="external nofollow noreferrer" target="_blank" title="GeminiChat"><i class="fa-brands fa-gofore" style="color: #FFC628;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BE%AE%E4%BF%A1%E5%AE%9A%E6%97%B6%E5%8F%91%E9%80%81%E5%80%92%E6%95%B0%E6%97%A5"><span class="toc-text">微信定时发送倒数日</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="toc-text">实现过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98%E8%81%94%E7%B3%BB%E4%BA%BA%E5%88%97%E8%A1%A8"><span class="toc-text">保存联系人列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%85%B3%E5%80%92%E6%95%B0%E6%97%A5%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-text">有关倒数日的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E5%8F%91%E9%80%81%E7%9A%84%E6%8C%87%E4%BB%A4"><span class="toc-text">处理发送的指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E5%87%BD%E6%95%B0"><span class="toc-text">主函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%88%90%E6%9E%9C"><span class="toc-text">实现成果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0%E8%AE%AF%E9%A3%9E%E6%98%9F%E7%81%AB%E5%A4%A7%E6%A8%A1%E5%9E%8B"><span class="toc-text">增加讯飞星火大模型</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/archives/e91eb82.html" title="Windows10下安装使用WSA"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Windows10下安装使用WSA"/></a><div class="content"><a class="title" href="/archives/e91eb82.html" title="Windows10下安装使用WSA">Windows10下安装使用WSA</a><time datetime="2023-12-22T13:13:00.000Z" title="发表于 2023-12-22 21:13:00">2023-12-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/d604709c.html" title="微信定时发送倒数日"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner11.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="微信定时发送倒数日"/></a><div class="content"><a class="title" href="/archives/d604709c.html" title="微信定时发送倒数日">微信定时发送倒数日</a><time datetime="2023-12-20T14:27:00.000Z" title="发表于 2023-12-20 22:27:00">2023-12-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/8630530e.html" title="不同网络架构下文件下载服务协议设计"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi3.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="不同网络架构下文件下载服务协议设计"/></a><div class="content"><a class="title" href="/archives/8630530e.html" title="不同网络架构下文件下载服务协议设计">不同网络架构下文件下载服务协议设计</a><time datetime="2023-12-20T11:14:00.000Z" title="发表于 2023-12-20 19:14:00">2023-12-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/61fee1d7.html" title="数据库应用系统设计实验"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据库应用系统设计实验"/></a><div class="content"><a class="title" href="/archives/61fee1d7.html" title="数据库应用系统设计实验">数据库应用系统设计实验</a><time datetime="2023-12-17T16:01:00.000Z" title="发表于 2023-12-18 00:01:00">2023-12-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/2a47b3f8.html" title="T-SQL语句操作(二)"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="T-SQL语句操作(二)"/></a><div class="content"><a class="title" href="/archives/2a47b3f8.html" title="T-SQL语句操作(二)">T-SQL语句操作(二)</a><time datetime="2023-12-17T15:57:00.000Z" title="发表于 2023-12-17 23:57:00">2023-12-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By LiuChao</div><div class="footer_custom_text"><div>Hi, Welcome To My Notebook.🌈</div><div class="beian"><a onclick="window.open('http://beian.miit.gov.cn/')">浙ICP备2023048596号</a></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(()=>{
+  const loadLivere = () => {
+    if (typeof LivereTower === 'object') window.LivereTower.init()
+    else {
+      (function(d, s) {
+          var j, e = d.getElementsByTagName(s)[0];
+          if (typeof LivereTower === 'function') { return; }
+          j = d.createElement(s);
+          j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+          j.async = true;
+          e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    }
+  }
+
+  if ('Livere' === 'Livere' || !false) {
+    if (false) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+    else loadLivere()
+  } else {
+    window.loadOtherComment = loadLivere
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="8063632071" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false" data-theme='#FFDFD3'> </div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

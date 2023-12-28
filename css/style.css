@@ -1,0 +1,69 @@
+/* 鼠标样式 */
+body {
+  cursor: url(https://cdn.jsdelivr.net/gh/constown/HexoCustomFile/public/cursors/default.cur),
+    /* cursor: url(https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/Comix_White_Pointer.cur), */
+    default;
+}
+
+a,
+i,
+input,
+span,
+time,
+img {
+  cursor: url(https://cdn.jsdelivr.net/gh/constown/HexoCustomFile/public/cursors/pointer.cur),
+    /* cursor: url(https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/Comix_White_Link.cur), */
+    default;
+}
+
+/* 页脚footer */
+#footer {
+  background-color: transparent;
+}
+
+#page-header {
+  background-color: transparent !important;
+  /* 去除背景图片 */
+  background-image: none !important;
+}
+
+.aplayer-lrc {
+  display: none !important;
+}
+
+@font-face {
+  /* 为载入的字体取名字(随意) */
+  font-family: '霞鹜';
+  /* 字体文件地址(相对或者绝对路径都可以) */
+  src: url(/fonts/LXGWWenKaiGBScreen.ttf);
+  /* 定义加粗样式(加粗多少) */
+  font-weight: normal;
+  /* 定义字体样式(斜体/非斜体) */
+  font-style: normal;
+  /* 定义显示样式 */
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'SF Mono';
+  src: url(/fonts/SFMonoMedium.otf);
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+/* 卡片毛玻璃效果 */
+/* .recent-post-item,
+.card-widget,
+#page {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(10px) !important;
+} */
+
+/* 备案信息 */
+.beian a:hover {
+  /* 去除a标签下划线 */
+  text-decoration: none !important;
+  /* 鼠标悬停时字体颜色 */
+  color: #D291BC !important;
+}
