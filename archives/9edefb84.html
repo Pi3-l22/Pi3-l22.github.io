@@ -1,0 +1,360 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Oh My Posh 配置教程 | Pi3's Notebook</title><meta name="author" content="LiuChao"><meta name="copyright" content="LiuChao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Oh My Posh 为 PowerShell 和 WSL 配置终端样式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oh My Posh 配置教程">
+<meta property="og:url" content="https://pi3yyy.love/archives/9edefb84.html">
+<meta property="og:site_name" content="Pi3&#39;s Notebook">
+<meta property="og:description" content="Oh My Posh 为 PowerShell 和 WSL 配置终端样式">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner2.jpg">
+<meta property="article:published_time" content="2023-11-25T09:38:00.000Z">
+<meta property="article:modified_time" content="2024-02-10T16:10:05.427Z">
+<meta property="article:author" content="LiuChao">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="Oh My Posh">
+<meta property="article:tag" content="PowerShell">
+<meta property="article:tag" content="WSL">
+<meta property="article:tag" content="Shell">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner2.jpg"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi3.png"><link rel="canonical" href="https://pi3yyy.love/archives/9edefb84.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//www.clarity.ms"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="VawN-8WG_4bj-ToUYin2KVDZV20YU4VwRZNYyJ2mhpo"/><meta name="baidu-site-verification" content="codeva-NffhRTbji8"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a8ae34c41457a14d356310f67e84e435";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>(function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "jvasgyk9yi");</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":2,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: LiuChao","link":"链接: ","source":"来源: Pi3's Notebook","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体中文","cht_to_chs":"你已切换为简体中文","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#957DAD","bgDark":"#E0BBE4","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Oh My Posh 配置教程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-11 00:10:05'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/style.css"><meta name="generator" content="Hexo 7.1.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/logo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">41</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner2.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Pi3's Notebook"><span class="site-name">Pi3's Notebook</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Oh My Posh 配置教程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-25T09:38:00.000Z" title="发表于 2023-11-25 17:38:00">2023-11-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-02-10T16:10:05.427Z" title="更新于 2024-02-11 00:10:05">2024-02-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%95%99%E7%A8%8B/">配置与教程</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Oh My Posh 配置教程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Oh-My-Posh-为-PowerShell-和-WSL-配置终端样式"><a href="#Oh-My-Posh-为-PowerShell-和-WSL-配置终端样式" class="headerlink" title="Oh My Posh 为 PowerShell 和 WSL 配置终端样式"></a>Oh My Posh 为 PowerShell 和 WSL 配置终端样式</h1><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://ohmyposh.dev/docs/">Oh My Posh官方文档</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://learn.microsoft.com/zh-cn/windows/terminal/tutorials/custom-prompt-setup">Microsoft文档</a></p>
+<h2 id="PowerShell配置"><a href="#PowerShell配置" class="headerlink" title="PowerShell配置"></a>PowerShell配置</h2><p>首先就是下载带图标的Nerd字体，下载地址：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.nerdfonts.com/">Nerd Fonts官方网址</a><br>下载并安装好图标字体，在Windows terminal终端上把Power Shell和WSL的字体都配置为这个图标字体<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125173959.png"></p>
+<p>根据官方文档，下载oh-my-posh，在PowerShell中输入以下命令</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winget install JanDeDobbeleer.OhMyPosh <span class="literal">-s</span> winget</span><br></pre></td></tr></table></figure>
+<p>这样会下载下面的两个文件<br> <code>oh-my-posh.exe</code> - Windows 可执行文件<br> <code>themes</code> - 最新的 Oh My Posh 主题<br>下载的默认路径为：<code>C:\Users\用户名\AppData\Local\Programs\oh-my-posh</code></p>
+<p>这里需要配置oh-my-posh和themes的可执行文件，以便后续不会出错<br>在环境变量的path值中添加路径：<code>C:\Users\用户名\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe</code><br><em>（这一步可不做）</em> 在环境变量中增加一个字段POSH_THEMES_PATH，值为：<code>C:\Users\86135\AppData\Local\Programs\oh-my-posh\themes</code></p>
+<p>在PowerShell终端中输入：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果这一步报错，文件不存在则需要先创建配置文件<br>执行<code>New-Item -Path $PROFILE -Type File -Force</code></p>
+</blockquote>
+<p>在打开的记事本中，填入<code>oh-my-posh init pwsh | Invoke-Expression</code><br>接着输入<code>. $PROFILE</code>重新加载配置</p>
+<blockquote>
+<p>如果这一步，报错，红字显示找不到oh-my-posh的命令<br>那么说明前面的环境变量没有配置好</p>
+</blockquote>
+<p>接着重新启动终端，就发现已经应用了默认主题<br>如果需要更改主题，则只需要到<a target="_blank" rel="noopener external nofollow noreferrer" href="https://ohmyposh.dev/docs/themes">官方文档主题</a>中，挑选好主题，记下主题名字<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125174014.png"></p>
+<p>同样在PowerShell终端中输入：<code>notepad $PROFILE</code>打开配置文件<br>修改之前输入的<code>oh-my-posh init pwsh | Invoke-Expression</code><br>改为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">oh-my-posh init pwsh --config &#x27;`C:\Users\用户名\AppData\Local\Programs\oh-my-posh\themes\1_shell.omp.json&#x27; | Invoke-Expression</span><br></pre></td></tr></table></figure>
+<p>这里的主题路径应该根据自己的情况更改，<code>1_shell.omp.json</code>是主题文件<br>如果在上面的步骤中，你已经配置了主题文件夹的环境变量，则可以：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">oh-my-posh init pwsh --config &quot;$env:POSH_THEMES_PATH/1_shell.omp.json&quot; | Invoke-Expression</span><br></pre></td></tr></table></figure>
+
+<p>重新启动终端，就可以应用。</p>
+<h2 id="WSL配置"><a href="#WSL配置" class="headerlink" title="WSL配置"></a>WSL配置</h2><p>WSL的配置和PowerShell的十分相似，但是需要注意的是，WSL下可能有好多种类的Shell，配置的时候，需要先查看自己的WSL是什么类型的shell<br>查看方法，输入以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $SHELL</span><br></pre></td></tr></table></figure>
+<p>如果是<code>bash</code>就在官方文档Linux教程中找对应的方法，我这里以<code>zsh</code>为例。</p>
+<p>同样的，在配置之前，需要先给WSL的终端文字更改为Nerd带图标的字体，否则图标不能生效</p>
+<p>下载oh-my-posh，输入以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s https://ohmyposh.dev/install.sh | bash -s -- -d /bin</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里可能会报错<br><code>-d</code> 后面指定的是下载的位置，最好是下载到根目录下的<code>/bin</code>文件，因为这样就不需要配置环境变量，可以在任意位置执行<code>oh-my-posh</code>的命令，避免了之后很多的报错<br>因此，如果你在普通用户下可能需要加上<code>sudo</code><br>或者你可以先下载到其他位置，之后把可执行文件复制到<code>/bin</code>目录下，这一步同样需要root权限</p>
+</blockquote>
+<p>接着，输入以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">oh-my-posh get shell</span><br></pre></td></tr></table></figure>
+<p>如果返回了你当前的shell，说明下载成功，如果返回‘找不到命令’，可能没有下载到正确的位置<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125174023.png"></p>
+<p>输入命令，打开shell的配置文件，这里演示的是zsh，所以打开<code>~/.zshrc</code><br>如果你是bash，那么打开的就是<code>~/.bashrc</code>，配置命令也要改为bash</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim ~/.zshrc</span><br></pre></td></tr></table></figure>
+<p>添加以下配置到文件中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval &quot;$(oh-my-posh init zsh)&quot;</span><br></pre></td></tr></table></figure>
+<p>退出文件，终端输入<code>exec zsh</code>，更新配置，也可以输入<code>source ~/.zshrc</code>，两者是一样的</p>
+<p>（这一步不一定）重新启动终端，可以发现oh-my-posh已经应用成功</p>
+<p>更改主题，和PowerShell是类似的<br>同样打开配置文件<code>~/.zshrc</code>，将原先输入的配置改为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval &quot;$(oh-my-posh init zsh --config ~/.cache/oh-my-posh/themes/1_shell.omp.json)&quot;</span><br></pre></td></tr></table></figure>
+<p>其中，<code>--config</code>后面填入，你的主题路径和主题名字，我的主题路径可能有所不同，需要更改为自己的<br>退出文件，终端输入<code>exec zsh</code>，主题就会立马应用。<br><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125174037.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://pi3-l22.github.io/">LiuChao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://pi3yyy.love/archives/9edefb84.html">https://pi3yyy.love/archives/9edefb84.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://pi3yyy.love" target="_blank">Pi3's Notebook</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/Windows/">Windows</a><a class="post-meta__tags" href="/tags/Oh-My-Posh/">Oh My Posh</a><a class="post-meta__tags" href="/tags/PowerShell/">PowerShell</a><a class="post-meta__tags" href="/tags/WSL/">WSL</a><a class="post-meta__tags" href="/tags/Shell/">Shell</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner2.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/archives/a0f6d86b.html" title="Neo4j安装与使用"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi33.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Neo4j安装与使用</div></div></a></div><div class="next-post pull-right"><a href="/archives/94129fcc.html" title="T-SQL语句操作(一)"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner6.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">T-SQL语句操作(一)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/archives/4544560.html" title="Shell基础"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner10.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-24</div><div class="title">Shell基础</div></div></a></div><div><a href="/archives/868b3395.html" title="Kali Linux下使用VMware遇到的问题"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi31.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-10</div><div class="title">Kali Linux下使用VMware遇到的问题</div></div></a></div><div><a href="/archives/33e9ac6f.html" title="Kali Linux的安装与配置"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner6.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-08</div><div class="title">Kali Linux的安装与配置</div></div></a></div><div><a href="/archives/23408978.html" title="Netcat工具的简单使用"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi32.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-27</div><div class="title">Netcat工具的简单使用</div></div></a></div><div><a href="/archives/7f58ba79.html" title="Linux使用技巧"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner9.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-24</div><div class="title">Linux使用技巧</div></div></a></div><div><a href="/archives/e91eb82.html" title="Windows10下安装使用WSA"><img class="cover" src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-22</div><div class="title">Windows10下安装使用WSA</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81OTIyNi8zNTY4OA=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/logo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">LiuChao</div><div class="author-info__description">enjoy life, enjoy coding</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">41</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/pi3-l22"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Pi3-l22" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #957DAD;"></i></a><a class="social-icon" href="mailto:622.511.liuchao@gmail.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="http://pan.pi3yyy.love/" rel="external nofollow noreferrer" target="_blank" title="云盘"><i class="fa-solid fa-cloud" style="color: #1e90ff;"></i></a><a class="social-icon" href="https://chat.pi3yyy.love/" rel="external nofollow noreferrer" target="_blank" title="GeminiChat"><i class="fa-brands fa-gofore" style="color: #FFC628;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Oh-My-Posh-%E4%B8%BA-PowerShell-%E5%92%8C-WSL-%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E6%A0%B7%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">Oh My Posh 为 PowerShell 和 WSL 配置终端样式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PowerShell%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">PowerShell配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WSL%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.</span> <span class="toc-text">WSL配置</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/archives/868b3395.html" title="Kali Linux下使用VMware遇到的问题"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi31.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Kali Linux下使用VMware遇到的问题"/></a><div class="content"><a class="title" href="/archives/868b3395.html" title="Kali Linux下使用VMware遇到的问题">Kali Linux下使用VMware遇到的问题</a><time datetime="2024-02-10T15:55:00.000Z" title="发表于 2024-02-10 23:55:00">2024-02-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/33e9ac6f.html" title="Kali Linux的安装与配置"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Kali Linux的安装与配置"/></a><div class="content"><a class="title" href="/archives/33e9ac6f.html" title="Kali Linux的安装与配置">Kali Linux的安装与配置</a><time datetime="2024-02-08T02:31:00.000Z" title="发表于 2024-02-08 10:31:00">2024-02-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/e91eb82.html" title="Windows10下安装使用WSA"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Windows10下安装使用WSA"/></a><div class="content"><a class="title" href="/archives/e91eb82.html" title="Windows10下安装使用WSA">Windows10下安装使用WSA</a><time datetime="2023-12-22T13:13:00.000Z" title="发表于 2023-12-22 21:13:00">2023-12-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/d604709c.html" title="微信定时发送倒数日"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/banner10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="微信定时发送倒数日"/></a><div class="content"><a class="title" href="/archives/d604709c.html" title="微信定时发送倒数日">微信定时发送倒数日</a><time datetime="2023-12-20T14:27:00.000Z" title="发表于 2023-12-20 22:27:00">2023-12-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/archives/8630530e.html" title="不同网络架构下文件下载服务协议设计"><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi31.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="不同网络架构下文件下载服务协议设计"/></a><div class="content"><a class="title" href="/archives/8630530e.html" title="不同网络架构下文件下载服务协议设计">不同网络架构下文件下载服务协议设计</a><time datetime="2023-12-20T11:14:00.000Z" title="发表于 2023-12-20 19:14:00">2023-12-20</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By LiuChao</div><div class="footer_custom_text"><div>Hi, Welcome To My Notebook.🌈</div><div class="beian"><a onclick="window.open('http://beian.miit.gov.cn/')">浙ICP备2023048596号</a></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(()=>{
+  const loadLivere = () => {
+    if (typeof LivereTower === 'object') window.LivereTower.init()
+    else {
+      (function(d, s) {
+          var j, e = d.getElementsByTagName(s)[0];
+          if (typeof LivereTower === 'function') { return; }
+          j = d.createElement(s);
+          j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+          j.async = true;
+          e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    }
+  }
+
+  if ('Livere' === 'Livere' || !false) {
+    if (false) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+    else loadLivere()
+  } else {
+    window.loadOtherComment = loadLivere
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="8063632071" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false" data-theme='#FFDFD3'> </div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
