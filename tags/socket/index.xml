@@ -609,8 +609,7 @@ import selectors  # selectors模块单线程异步轮询&lt;/p&gt;
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/12/%E5%9F%BA%E4%BA%8Eudp%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%AE%A4/</guid>
       
-      <description>&lt;p&gt;这是网络编程课程 实验1&lt;/p&gt;
-&lt;h2 id=&#34;实验内容&#34;&gt;实验内容&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;实验内容&#34;&gt;实验内容&lt;/h2&gt;
 &lt;p&gt;编写基于UDP的聊天室程序，实现多人聊天功能。自己设计应用协议，要求实现以下功能：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;用户注册：服务器端记录已注册的用户名和密码。&lt;/li&gt;
