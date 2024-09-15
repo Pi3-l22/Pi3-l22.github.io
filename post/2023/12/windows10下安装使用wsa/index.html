@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="在Windows10下安装和使用带有Magisk或者KernelSU的WSA(Windows安卓子系统)">
+  
+
+  
+  <link rel="icon" href="https://pi3-l22.github.io/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://pi3-l22.github.io/post/2023/12/windows10%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8wsa/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="Windows10下安装使用WSA">
+  <meta property="og:description" content="在Windows10下安装和使用带有Magisk或者KernelSU的WSA(Windows安卓子系统)">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-12-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-12-22T00:00:00+00:00">
+    <meta property="article:tag" content="Windows">
+    <meta property="article:tag" content="WSA">
+
+
+  
+  <link rel="canonical" href="https://pi3-l22.github.io/post/2023/12/windows10%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8wsa/">
+
+  
+  
+  
+  <meta itemprop="name" content="Windows10下安装使用WSA">
+  <meta itemprop="description" content="在Windows10下安装和使用带有Magisk或者KernelSU的WSA(Windows安卓子系统)">
+  <meta itemprop="datePublished" content="2023-12-22T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2023-12-22T00:00:00+00:00">
+  <meta itemprop="wordCount" content="990">
+  <meta itemprop="keywords" content="Windows,WSA">
+
+  
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/content.css'>
+
+  
+  
+  <title>Windows10下安装使用WSA - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://pi3-l22.github.io/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://pi3-l22.github.io/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>Windows10下安装使用WSA</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/windows'>#Windows</a>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/wsa'>#WSA</a>
+    
+  </div>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#下载安装">下载安装</a></li>
+    <li><a href="#使用adb命令">使用ADB命令</a></li>
+    <li><a href="#安装应用程序">安装应用程序</a></li>
+    <li><a href="#配置网络">配置网络</a></li>
+    <li><a href="#卸载删除">卸载删除</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <h1 id="windows10下安装使用wsa">Windows10下安装使用WSA</h1>
+<p>如何在Windows10中使用带有Magisk的安卓子系统
+需要系统版本高于Windows10 22H2
+<a href="https://learn.microsoft.com/zh-cn/windows/android/wsa/">适用于 Android™️ 的 Windows 子系统 | Microsoft Learn</a></p>
+<h2 id="下载安装">下载安装</h2>
+<p>首先在Github上找到<a href="https://github.com/MustardChef/WSABuilds/releases">MustardChef/WSABuilds</a>，下载相应的安装包，Magisk和KernelSU都可以
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212033.png" alt="WSA不同版本的安装包"></p>
+<p>下载解压完成之后进入文件夹，运行<code>run.bat</code>就可以进行安装。安装过程中会自动启动安卓子系统，同时可以修补Magisk镜像
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212306.png" alt="运行run.bat">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212736.png" alt="启动WSA">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212433.png" alt="WSA界面">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222214229.png" alt="Magisk"></p>
+<h2 id="使用adb命令">使用ADB命令</h2>
+<p>安装完成之后，还需要打开系统的开发者选项，方便用adb命令连接和操作安卓子系统
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212637.png" alt="打开开发者选项">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212805.png" alt="确保开发者选项已经打开"></p>
+<p>打开开发者选择就可以使用电脑上的ADB进行连接操作
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212957.png" alt="adb连接">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/2023-12-22_20-54-15.png" alt="弹出连接窗口"></p>
+<p>连接时如果出现，不能连接的情况，需要重启电脑或者多试几次
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222213301.png" alt="连接不上的情况"></p>
+<p>连接上就可以使用ADB命令操作手机，安装APP，传输文件等功能，当然也可以使用微软商店中的WSA工具箱等软件，更加方便管理安卓子系统
+<a href="https://blog.csdn.net/lb245557472/article/details/84068519">ADB 操作命令详解及用法大全</a>
+如：
+查看所有应用</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>adb shell pm list packages
+</span></span></code></pre></div><p>查看第三方应用</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>adb shell pm list packages <span style="color:#666">-3</span>
+</span></span></code></pre></div><p>安装APK</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>adb install 包名
+</span></span></code></pre></div><p>卸载软件</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>adb uninstall 包名
+</span></span></code></pre></div><p>打开WSA设置</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>adb shell am <span style="color:#a2f">start </span>-n com.android.settings/.Settings\<span style="color:#b8860b">$WifiSettingsActivity</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222225746.png" alt="设置界面"></p>
+<p>文件操作</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>下载文件到电脑
+</span></span><span style="display:flex;"><span>adb pull &lt;remote&gt; [<span style="color:#800">local</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>上传文件至手机
+</span></span><span style="display:flex;"><span>adb push &lt;local&gt; &lt;remote&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>列出目录内容
+</span></span><span style="display:flex;"><span>adb shell <span style="color:#a2f">ls </span>[<span style="color:#800">options</span>] &lt;directory&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>切换目录
+</span></span><span style="display:flex;"><span>adb shell <span style="color:#a2f">cd </span>&lt;directory&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>删除文件或目录
+</span></span><span style="display:flex;"><span>adb shell <span style="color:#a2f">rm </span>[<span style="color:#800">options</span>] &lt;files or directory&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>创建目录
+</span></span><span style="display:flex;"><span>adb shell mkdir [<span style="color:#800">options</span>] &lt;<span style="color:#a2f">directory-name</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="">………………</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>都是Linux上的命令前加上adb shell
+</span></span></code></pre></div><h2 id="安装应用程序">安装应用程序</h2>
+<p>我们可以使用文件操作命令为WSA安装应用程序
+比如我电脑桌面上有一个apk安装包，可以先将文件上传至手机目录</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>adb push C:\desktop\kuan.apk /storage/emulated/<span style="color:#666">0</span>/Download
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222214717.png" alt="上传文件"></p>
+<p>然后在WSA中对应的文件夹中就可以看见apk安装包
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222214810.png" alt="上传成功的安装包"></p>
+<p>接着点击就可以安装，或者也可以使用ADB命令进行安装</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>adb install /storage/emulated/<span style="color:#666">0</span>/Download/kuan.apk
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222215038.png" alt="安装APP">
+可以直接在电脑桌面打开手机应用程序
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222220529.png" alt="桌面的APP"></p>
+<h2 id="配置网络">配置网络</h2>
+<p>WSA一开始好像是无网络不能上网的，所以还需要配置一下网络环境
+同样使用ADB命令完成</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>adb shell settings put global http_proxy <span style="color:#666">172.24</span>.128.<span style="color:#666">1</span><span style="">:</span><span style="color:#666">12345</span>
+</span></span></code></pre></div><p>IP是在电脑终端输入<code>ipconfig</code>找到本机在WSL中的IP
+端口是本机的代理端口
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222224919.png" alt="查看本机在WSL中的IP">
+这样之后就可以上网，并且已经挂上代理
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222225110.png" alt="Google商店">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222230453.png" alt="酷安"></p>
+<blockquote>
+<p>在配置网络的时候，可能遇到WSA获取不到IP的情况
+确保在<strong>启动或关闭Windows功能</strong>中的Hyper-V及其包括的全部选项、虚拟化已经打开
+并且BIOS中已经启设备的虚拟化
+如果上面都已完成，还是不能获取到IP
+最好的办法就是卸载删除后重新安装</p>
+</blockquote>
+<p>正常情况，在WSA的网络设置中，可以看见一个虚拟WIFI
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222230044.png" alt="虚拟WIFI"></p>
+<h2 id="卸载删除">卸载删除</h2>
+<p>只需要在Windows设置中卸载 <em>适用于Android的Windows子系统</em> 程序，然后直接删除原先下载解压出来的文件夹即可
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222225018.png" alt="卸载WSA"></p>
+
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/12/%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/">← prev</a>
+    
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2024/2/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">next →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2021</span> - <span>2024</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+    <span> 🍦 Theme </span>
+    <a class="link" href="https://github.com/queensferryme/hugo-theme-texify">TeXify</a>
+  </div>
+
+  <div class="footnote">
+    <span>Follow me on <a class=link href=https://github.com/Pi3-l22>GitHub</a> |
+<a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+
+</body>
+
+</html>

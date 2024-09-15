@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="利用httpcanary抓千变语音包，再用开源转码器实现最好音质转码微信语音包，利用微x模块发送。">
+  
+
+  
+  <link rel="icon" href="https://pi3-l22.github.io/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://pi3-l22.github.io/post/2023/10/%E8%8E%B7%E5%8F%96%E5%B9%B6%E6%8E%A8%E9%80%81%E8%AF%AD%E9%9F%B3%E5%8C%85%E5%88%B0%E6%89%8B%E6%9C%BA%E5%BE%AE%E4%BF%A1/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="获取并推送语音包到手机微信">
+  <meta property="og:description" content="利用httpcanary抓千变语音包，再用开源转码器实现最好音质转码微信语音包，利用微x模块发送。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:tag" content="Android">
+
+
+  
+  <link rel="canonical" href="https://pi3-l22.github.io/post/2023/10/%E8%8E%B7%E5%8F%96%E5%B9%B6%E6%8E%A8%E9%80%81%E8%AF%AD%E9%9F%B3%E5%8C%85%E5%88%B0%E6%89%8B%E6%9C%BA%E5%BE%AE%E4%BF%A1/">
+
+  
+  
+  
+  <meta itemprop="name" content="获取并推送语音包到手机微信">
+  <meta itemprop="description" content="利用httpcanary抓千变语音包，再用开源转码器实现最好音质转码微信语音包，利用微x模块发送。">
+  <meta itemprop="wordCount" content="521">
+  <meta itemprop="keywords" content="Android">
+
+  
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/content.css'>
+
+  
+  
+  <title>获取并推送语音包到手机微信 - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://pi3-l22.github.io/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://pi3-l22.github.io/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>获取并推送语音包到手机微信</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/android'>#Android</a>
+    
+  </div>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#测试环境">测试环境</a></li>
+    <li><a href="#操作过程">操作过程</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <h1 id="推送手机微信语音包">推送手机微信语音包</h1>
+<p>利用httpcanary抓千变语音包，再用开源转码器实现最好音质转码微信语音包，利用微x模块发送。</p>
+<h2 id="测试环境">测试环境</h2>
+<p>千变语音包8.1.4 swin.com.iapp
+微信play版 8.0.33
+微x模块 2.41</p>
+<h2 id="操作过程">操作过程</h2>
+<p>千变语音包非会员每天下载有限制，可以用http canary抓包获取音频。
+打开小黄鸟，进入千变语音包，点击音频播放，找到有音频的数据包，预览可以下载音频。
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/0faed221bf354763eced656933c0b2e.jpg" alt="抓包音频">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/249a9d8934fded24a0f395a7703281b.jpg" alt="保存音频"></p>
+<p>配合自动下载音频插件，更方便，不用手动点击保存，自动保存在<code>/storage/emulated/0/HttpCanary/plugins/AudioDownloader/</code>路径下
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/dfbbce2e6e8640496fbf7356308a3b0.jpg" alt="自动下载保存插件">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/dcfd5dc39fd4186106c00f70455d677.jpg" alt="自动保存在本地"></p>
+<p>把音频文件上传到电脑，手机数据线连上电脑，打开adb，利用GitHub上开源项目<a href="https://github.com/foyoux/weixin-wxposed-silk-voice">weixin-wxposed-silk-voice</a>
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/a5f62d9412721323ce363584fe3b0f9.jpg" alt="项目主页"></p>
+<p>需要确认，手机用数据线连接电脑，并且有adb环境（adb最好添加进环境变量）
+查看adb版本</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>adb -version
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220230534.png" alt="查看adb版本"></p>
+<p>列出连接的设备</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>adb devices -l
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220230450.png" alt="列出连接的设备"></p>
+<p>安装Github项目</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>pip install -U <span style="color:#a2f">foyou-wilk</span>
+</span></span></code></pre></div><blockquote>
+<p>需要注意，该项目有依赖库：<code>av</code>和<code>pilk</code>
+需要执行<code>pip install av</code>和<code>pip install pilk</code>
+或者下载源码的requirements.txt，执行<code>pip install -r requirements.txt</code></p>
+</blockquote>
+<p>检查是否安装成功</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>wilk -v
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220230919.png" alt="wilk -v"></p>
+<p>推送文件至手机</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>wilk &lt;媒体文件1&gt; &lt;媒体文件2&gt; ...
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/003990e368e357a1ae134bccaff44c0.jpg" alt="推送文件">
+直接把音频文件发送到微x模块的语音包。
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/c5ae37d06d90180db62a762cc3432df.jpg" alt="微信上的语音包"></p>
+
+    
+  </article>
+  <div class="paginator">
+    
+    <a></a>
+    
+    
+    <a class="link" href="https://pi3-l22.github.io/post/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">next →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2021</span> - <span>2024</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+    <span> 🍦 Theme </span>
+    <a class="link" href="https://github.com/queensferryme/hugo-theme-texify">TeXify</a>
+  </div>
+
+  <div class="footnote">
+    <span>Follow me on <a class=link href=https://github.com/Pi3-l22>GitHub</a> |
+<a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+
+</body>
+
+</html>

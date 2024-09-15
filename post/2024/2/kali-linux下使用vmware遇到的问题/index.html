@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="在Kali Linux中使用VMware导致重启卡LOGO界面的问题与解决">
+  
+
+  
+  <link rel="icon" href="https://pi3-l22.github.io/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://pi3-l22.github.io/post/2024/2/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="Kali Linux下使用VMware遇到的问题">
+  <meta property="og:description" content="在Kali Linux中使用VMware导致重启卡LOGO界面的问题与解决">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-02-10T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-02-10T00:00:00+00:00">
+    <meta property="article:tag" content="Kali">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="VMware Workstasion">
+
+
+  
+  <link rel="canonical" href="https://pi3-l22.github.io/post/2024/2/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+  
+  
+  
+  <meta itemprop="name" content="Kali Linux下使用VMware遇到的问题">
+  <meta itemprop="description" content="在Kali Linux中使用VMware导致重启卡LOGO界面的问题与解决">
+  <meta itemprop="datePublished" content="2024-02-10T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2024-02-10T00:00:00+00:00">
+  <meta itemprop="wordCount" content="1273">
+  <meta itemprop="keywords" content="Kali,Linux,VMware Workstasion">
+
+  
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/content.css'>
+
+  
+  
+  <title>Kali Linux下使用VMware遇到的问题 - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://pi3-l22.github.io/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://pi3-l22.github.io/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>Kali Linux下使用VMware遇到的问题</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/kali'>#Kali</a>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/linux'>#Linux</a>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/vmware-workstasion'>#VMware Workstasion</a>
+    
+  </div>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装">安装</a></li>
+    <li><a href="#问题出现">问题出现</a></li>
+    <li><a href="#问题解决">问题解决</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <h1 id="kali-linux下使用vmware遇到的问题">Kali Linux下使用VMware遇到的问题</h1>
+<h2 id="安装">安装</h2>
+<p>到官网下载Linux的资源文件，运行按照提示下一步就可以完成安装
+在这个过程中有可能会提示缺少Linux-header文件，只需要在终端用apt下载对应版本的header就可以</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt install linux-headers-6.6.9-amd64
+</span></span></code></pre></div><p><a href="https://pi3yyy.love/archives/33e9ac6f.html">安装具体步骤参考文章中的安装VMware</a>
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240211000531.png" alt="VMware Workstation pro 17"></p>
+<h2 id="问题出现">问题出现</h2>
+<p>刚开始使用虚拟机没有任何问题，但是在安装了虚拟机并运行之后，再重启电脑就会卡在Kali的logo界面
+刚开始还没在意，没有想到和VMware有关，但是随着使用虚拟机次数的增多，我渐渐发现每次只要开了虚拟机重启就会卡在logo界面，不能正常进入系统
+所以我在logo界面，使用ctrl+alt+f1，打开日志信息，发现居然是vmware.service不能正常启动导致的
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/95_1707580958_hd.jpeg" alt="开机错误日志">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/96_1707580962_hd.jpeg" alt="开机错误日志"></p>
+<h2 id="问题解决">问题解决</h2>
+<p>我只能强制关机后再开机，进入系统开始解决问题，我上网搜索了很多一样的情况，他们都是不能正常启动vmnet服务或者是vmon服务，解决办法就是重新安装所有的VM模块，再手动编译安装vmnet和vmon模块</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#080">#!/bin/bash                                                 
+</span></span></span><span style="display:flex;"><span><span style="color:#080"></span><span style="color:#b8860b">VMWARE_VERSION</span><span style="color:#666">=</span>workstation-17.5.0 
+</span></span><span style="display:flex;"><span><span style="color:#b8860b">TMP_FOLDER</span><span style="color:#666">=</span>/tmp/patch-vmware
+</span></span><span style="display:flex;"><span>rm -fdr <span style="color:#b8860b">$TMP_FOLDER</span>
+</span></span><span style="display:flex;"><span>mkdir -p <span style="color:#b8860b">$TMP_FOLDER</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f">cd</span> <span style="color:#b8860b">$TMP_FOLDER</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/mkubecek/vmware-host-modules.git
+</span></span><span style="display:flex;"><span><span style="color:#a2f">cd</span> <span style="color:#b8860b">$TMP_FOLDER</span>/vmware-host-modules
+</span></span><span style="display:flex;"><span>git checkout <span style="color:#b8860b">$VMWARE_VERSION</span>
+</span></span><span style="display:flex;"><span>git fetch
+</span></span><span style="display:flex;"><span>make
+</span></span><span style="display:flex;"><span>sudo make install
+</span></span><span style="display:flex;"><span>sudo ln -s /lib/x86_64-linux-gnu/libz.so.1
+</span></span><span style="display:flex;"><span>/usr/lib/vmware/lib/libz.so.1/libz.so.1
+</span></span><span style="display:flex;"><span>sudo /etc/init.d/vmware restart
+</span></span></code></pre></div><p>我也照做了，但是依旧不能解决问题，不论通过什么方法启动network服务，都不行</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>┌──<span style="color:#666">(</span>pi3㉿kali-l22<span style="color:#666">)</span>-<span style="color:#666">[</span>~<span style="color:#666">]</span>
+</span></span><span style="display:flex;"><span>└─$ service vmware status                 
+</span></span><span style="display:flex;"><span>× vmware.service - LSB: This service starts and stops VMware services
+</span></span><span style="display:flex;"><span>     Loaded: loaded <span style="color:#666">(</span>/etc/init.d/vmware; generated<span style="color:#666">)</span>
+</span></span><span style="display:flex;"><span>     Active: failed <span style="color:#666">(</span>Result: exit-code<span style="color:#666">)</span> since Sat 2024-02-10 23:10:37 CST; 29min ago
+</span></span><span style="display:flex;"><span>       Docs: man:systemd-sysv-generator<span style="color:#666">(</span>8<span style="color:#666">)</span>
+</span></span><span style="display:flex;"><span>    Process: <span style="color:#666">1734</span> <span style="color:#b8860b">ExecStart</span><span style="color:#666">=</span>/etc/init.d/vmware start <span style="color:#666">(</span><span style="color:#b8860b">code</span><span style="color:#666">=</span>exited, <span style="color:#b8860b">status</span><span style="color:#666">=</span>1/FAILURE<span style="color:#666">)</span>
+</span></span><span style="display:flex;"><span>      Tasks: <span style="color:#666">1</span> <span style="color:#666">(</span>limit: 16495<span style="color:#666">)</span>
+</span></span><span style="display:flex;"><span>     Memory: 5.4M <span style="color:#666">(</span>peak: 14.6M<span style="color:#666">)</span>
+</span></span><span style="display:flex;"><span>        CPU: 444ms
+</span></span><span style="display:flex;"><span>     CGroup: /system.slice/vmware.service
+</span></span><span style="display:flex;"><span>             └─1861 /usr/sbin/vmware-authdlauncher
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2月 <span style="color:#666">10</span> 23:10:33 kali-l22 vmware<span style="color:#666">[</span>1734<span style="color:#666">]</span>:    Virtual machine monitor - <span style="color:#a2f;font-weight:bold">done</span>
+</span></span><span style="display:flex;"><span>2月 <span style="color:#666">10</span> 23:10:33 kali-l22 vmware<span style="color:#666">[</span>1734<span style="color:#666">]</span>:    Virtual machine communication interface - <span style="color:#a2f;font-weight:bold">done</span>
+</span></span><span style="display:flex;"><span>2月 <span style="color:#666">10</span> 23:10:33 kali-l22 vmware<span style="color:#666">[</span>1734<span style="color:#666">]</span>:    VM communication interface socket family - <span style="color:#a2f;font-weight:bold">done</span>
+</span></span><span style="display:flex;"><span>2月 <span style="color:#666">10</span> 23:10:37 kali-l22 vmware<span style="color:#666">[</span>1734<span style="color:#666">]</span>:    Virtual ethernet - failed
+</span></span><span style="display:flex;"><span>2月 <span style="color:#666">10</span> 23:10:37 kali-l22 vmware<span style="color:#666">[</span>1734<span style="color:#666">]</span>:    VMware Authentication Daemon - <span style="color:#a2f;font-weight:bold">done</span>
+</span></span><span style="display:flex;"><span>2月 <span style="color:#666">10</span> 23:10:37 kali-l22 systemd<span style="color:#666">[</span>1<span style="color:#666">]</span>: vmware.service: Control process exited, <span style="color:#b8860b">code</span><span style="color:#666">=</span>exited, <span style="color:#b8860b">status</span><span style="color:#666">=</span>1/&gt;
+</span></span><span style="display:flex;"><span>2月 <span style="color:#666">10</span> 23:10:37 kali-l22 systemd<span style="color:#666">[</span>1<span style="color:#666">]</span>: vmware.service: Failed with result <span style="color:#b44">&#39;exit-code&#39;</span>.
+</span></span><span style="display:flex;"><span>2月 <span style="color:#666">10</span> 23:10:37 kali-l22 systemd<span style="color:#666">[</span>1<span style="color:#666">]</span>: vmware.service: Unit process <span style="color:#666">1806</span> <span style="color:#666">(</span>vmware-authdlau<span style="color:#666">)</span> remains ru&gt;
+</span></span><span style="display:flex;"><span>2月 <span style="color:#666">10</span> 23:10:37 kali-l22 systemd<span style="color:#666">[</span>1<span style="color:#666">]</span>: vmware.service: Unit process <span style="color:#666">1807</span> <span style="color:#666">(</span>logger<span style="color:#666">)</span> remains running aft&gt;
+</span></span><span style="display:flex;"><span>2月 <span style="color:#666">10</span> 23:10:37 kali-l22 systemd<span style="color:#666">[</span>1<span style="color:#666">]</span>: Failed to start vmware.service - LSB: This service starts and &gt;
+</span></span></code></pre></div><p>Virtual ethernet依旧是启动失败</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>┌──<span style="color:#666">(</span>pi3㉿kali-l22<span style="color:#666">)</span>-<span style="color:#666">[</span>~<span style="color:#666">]</span>
+</span></span><span style="display:flex;"><span>└─$ sudo /etc/init.d/vmware restart
+</span></span><span style="display:flex;"><span>Stopping VMware services:
+</span></span><span style="display:flex;"><span>   VMware Authentication Daemon                                        <span style="color:#a2f;font-weight:bold">done</span>
+</span></span><span style="display:flex;"><span>   Virtual machine monitor                                             <span style="color:#a2f;font-weight:bold">done</span>
+</span></span><span style="display:flex;"><span>Starting VMware services:
+</span></span><span style="display:flex;"><span>   Virtual machine monitor                                             <span style="color:#a2f;font-weight:bold">done</span>
+</span></span><span style="display:flex;"><span>   Virtual machine communication interface                             <span style="color:#a2f;font-weight:bold">done</span>
+</span></span><span style="display:flex;"><span>   VM communication interface socket family                            <span style="color:#a2f;font-weight:bold">done</span>
+</span></span><span style="display:flex;"><span>   Virtual ethernet                                                    failed
+</span></span><span style="display:flex;"><span>   VMware Authentication Daemon                                        <span style="color:#a2f;font-weight:bold">done</span>
+</span></span><span style="display:flex;"><span>   Shared Memory Available                                             <span style="color:#a2f;font-weight:bold">done</span>
+</span></span></code></pre></div><p>所以我也重装了好几遍VMware，也装了17、16和15的版本，15版本甚至连Virtual machine monitor都启动失败
+最后在google上找了很多的问答，也都是差不多，最后只能求助AI，他告诉我：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>**Remove Lock Files**: 
+</span></span><span style="display:flex;"><span>If network connections fail to initialize, check for a lock file/directory at <span style="color:#b44">`/etc/vmware/networking.lck/`</span>. 
+</span></span><span style="display:flex;"><span>[<span style="color:#008000;font-weight:bold">Removing this directory and reconfiguring VMware Workstation might resolve the issue</span>](<span style="color:#b44">https://forums.gentoo.org/viewtopic-t-955980-start-0.html</span>)
+</span></span></code></pre></div><p>我一看，在/etc/vmware还真有这样一个networking.lck文件，我直接删除了这个文件，然后重启服务，成功了！</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>┌──<span style="color:#666">(</span>pi3㉿kali-l22<span style="color:#666">)</span>-<span style="color:#666">[</span>~<span style="color:#666">]</span>
+</span></span><span style="display:flex;"><span>└─$ sudo vmware-networks --status  
+</span></span><span style="display:flex;"><span><span style="color:#666">[</span>sudo<span style="color:#666">]</span> pi3 的密码：
+</span></span><span style="display:flex;"><span>Bridge networking on vmnet0 is running
+</span></span><span style="display:flex;"><span>All the services configured on all the networks are running
+</span></span></code></pre></div><ul>
+<li><strong>.lck</strong> 通常指的是 <strong class=chinese>锁定文件</strong>。这些文件用于防止多个进程同时访问或修改资源（例如文件或数据库）。当进程打开文件时，它可能会创建相应的锁定文件，以表示它正在主动使用该资源。其他进程在尝试修改相同资源之前可以检查此锁定文件。</li>
+<li>例如：
+<ul>
+<li>在 <strong>VMware Workstation Pro</strong> 中，缺少 <strong>/etc/vmware/networking</strong> 文件可能会导致网络问题。一些用户报告找到了一个包含 <strong>/etc/vmware/networking.lck</strong> 文件夹的 <strong>M44303.lck</strong> 文件。如果您遇到网络问题，您可能需要重新创建所需的文件。</li>
+<li>在 <strong>Adobe FrameMaker</strong> 中，“网络上的锁定文件”功能会生成一个 <strong>.lck</strong> 文件，以管理对FrameMaker文档的并发访问。这个功能有时既有帮助又有时会让人感到烦恼，具体取决于情况。</li>
+</ul>
+</li>
+</ul>
+
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2024/2/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">← prev</a>
+    
+    
+    <a></a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2021</span> - <span>2024</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+    <span> 🍦 Theme </span>
+    <a class="link" href="https://github.com/queensferryme/hugo-theme-texify">TeXify</a>
+  </div>
+
+  <div class="footnote">
+    <span>Follow me on <a class=link href=https://github.com/Pi3-l22>GitHub</a> |
+<a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+
+</body>
+
+</html>

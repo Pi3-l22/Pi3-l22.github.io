@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="基于量子随机数文件加解密方法及其私人云存储网盘桌面客户端">
+  
+
+  
+  <link rel="icon" href="https://pi3-l22.github.io/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://pi3-l22.github.io/post/2023/10/%E9%87%8F%E5%AD%90%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%96%B9%E6%B3%95%E5%8F%8A%E4%BA%91%E7%9B%98%E6%A1%8C%E9%9D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="量子加解密方法及云盘桌面客户端">
+  <meta property="og:description" content="基于量子随机数文件加解密方法及其私人云存储网盘桌面客户端">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-10-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-10-29T00:00:00+00:00">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Flet">
+    <meta property="article:tag" content="Alist">
+
+
+  
+  <link rel="canonical" href="https://pi3-l22.github.io/post/2023/10/%E9%87%8F%E5%AD%90%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%96%B9%E6%B3%95%E5%8F%8A%E4%BA%91%E7%9B%98%E6%A1%8C%E9%9D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF/">
+
+  
+  
+  
+  <meta itemprop="name" content="量子加解密方法及云盘桌面客户端">
+  <meta itemprop="description" content="基于量子随机数文件加解密方法及其私人云存储网盘桌面客户端">
+  <meta itemprop="datePublished" content="2023-10-29T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2023-10-29T00:00:00+00:00">
+  <meta itemprop="wordCount" content="4590">
+  <meta itemprop="keywords" content="Python,Flet,Alist">
+
+  
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/content.css'>
+
+  
+  
+  <title>量子加解密方法及云盘桌面客户端 - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://pi3-l22.github.io/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://pi3-l22.github.io/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>量子加解密方法及云盘桌面客户端</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/python'>#Python</a>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/flet'>#Flet</a>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/alist'>#Alist</a>
+    
+  </div>
+  
+  
+  
+  
+  <article class="content">
+    
+    <h1 id="起源">起源</h1>
+<p>在学校创新实践课程上，老师希望我们在这个课程上完成一个有关量子加密（量子随机数）的项目。</p>
+<p>经过一段时间的调研和思考，结合老师的建议，我还是决定做<strong class=chinese>基于本地量子加密的私人存储网盘</strong>这样一个量子密码的项目。</p>
+<p>整个项目需要实现的功能就是，首先对一个文件进行加密，加密的方式是，通过生成一个与文件字节数一致的量子随机数（物理量子随机数生成器件）作为加密的KEY密钥，随后与文件进行异或加密，生成加密过后的文件，并上传网盘，而KEY密钥则是存储在本地。我这里使用的网盘是百度网盘，当然也可以是阿里云盘等等现成的网盘。当然后续的改进过程中，我还会尝试运用云服务云存储，自己搭建一个网盘，同时写出一个网盘客户端，打通加密文件和网盘上传下载的功能。</p>
+<p>对于这个项目，我认为安全性是最大的特点。因为对于一次一密的逐bit异或运算，虽然是最简单的形式，但是在量子随机数和本地密钥存储的条件下，这样的方案似乎是不可能被破解的。由于是私人网盘，所以最关键的密钥是不需要考虑密钥分发中怎么保证安全不会泄露这个问题的。不过在后续，如果需要增加利用网盘进行文件的分享还是需要设计这个问题的解决，这也是后续需要考虑的问题。</p>
+<h1 id="设计过程">设计过程</h1>
+<blockquote>
+<p>需要注意的是，这里的量子随机数生成是利用Python的随机数生成进行模拟，两者有本质的区别，程序生成的是伪随机数，而量子随机数生成器件是利用物理光学器件生成真随机数</p>
+</blockquote>
+<p>实现一个简单的文件加密程序，由于读写都是用UTF-8编码，所以对于一些文件，就会报错。如docx或者图片和视频等二进制文件。就不支持这样的加密方式。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">json</span>  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">pathlib</span> <span style="color:#a2f;font-weight:bold">import</span> Path  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">secrets</span> <span style="color:#a2f;font-weight:bold">import</span> token_bytes  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">sys</span>  
+</span></span><span style="display:flex;"><span>sys<span style="color:#666">.</span>set_int_max_str_digits(<span style="color:#666">0</span>)  <span style="color:#080;font-style:italic"># 解除int转str的长度限制  </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># TODO: 1. 支持大文件的分片加密  </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># TODO: 2. 支持其他文件（不是UTF-8的文件）  </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">random_key</span>(length):  
+</span></span><span style="display:flex;"><span>	key <span style="color:#666">=</span> token_bytes(nbytes<span style="color:#666">=</span>length)  <span style="color:#080;font-style:italic"># 生成随机字节串  </span>
+</span></span><span style="display:flex;"><span>	key_int <span style="color:#666">=</span> <span style="color:#a2f">int</span><span style="color:#666">.</span>from_bytes(key, <span style="color:#b44">&#39;big&#39;</span>)  <span style="color:#080;font-style:italic"># 将字节串转换成整数  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">return</span> key_int  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">encrypt</span>(raw):  
+</span></span><span style="display:flex;"><span>	raw_bytes <span style="color:#666">=</span> raw<span style="color:#666">.</span>encode()  <span style="color:#080;font-style:italic"># 将字符串编码成字节串  </span>
+</span></span><span style="display:flex;"><span>	raw_int <span style="color:#666">=</span> <span style="color:#a2f">int</span><span style="color:#666">.</span>from_bytes(raw_bytes, <span style="color:#b44">&#39;big&#39;</span>)  <span style="color:#080;font-style:italic"># 将字节串转换成整数  </span>
+</span></span><span style="display:flex;"><span>	key_int <span style="color:#666">=</span> random_key(<span style="color:#a2f">len</span>(raw_bytes))  <span style="color:#080;font-style:italic"># 生成密钥  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">return</span> raw_int <span style="color:#666">^</span> key_int, key_int  <span style="color:#080;font-style:italic"># 异或运算  </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">decrypt</span>(encrypted, key_int):  
+</span></span><span style="display:flex;"><span>	decrypted <span style="color:#666">=</span> encrypted <span style="color:#666">^</span> key_int  <span style="color:#080;font-style:italic"># 异或运算  </span>
+</span></span><span style="display:flex;"><span>	length <span style="color:#666">=</span> (decrypted<span style="color:#666">.</span>bit_length() <span style="color:#666">+</span> <span style="color:#666">7</span>) <span style="color:#666">//</span> <span style="color:#666">8</span>  <span style="color:#080;font-style:italic"># 计算字节串长度  </span>
+</span></span><span style="display:flex;"><span>	decrypted_bytes <span style="color:#666">=</span> <span style="color:#a2f">int</span><span style="color:#666">.</span>to_bytes(decrypted, length, <span style="color:#b44">&#39;big&#39;</span>)  <span style="color:#080;font-style:italic"># 将整数转换成字节串  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">return</span> decrypted_bytes<span style="color:#666">.</span>decode()  <span style="color:#080;font-style:italic"># 将字节串解码成字符串  </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">encrypt_file</span>(path, key_path<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">None</span>, <span style="color:#666">*</span>, encoding<span style="color:#666">=</span><span style="color:#b44">&#39;utf-8&#39;</span>):  
+</span></span><span style="display:flex;"><span>	path <span style="color:#666">=</span> Path(path)  <span style="color:#080;font-style:italic"># 将字符串转换成Path对象  </span>
+</span></span><span style="display:flex;"><span>	cwd <span style="color:#666">=</span> path<span style="color:#666">.</span>cwd() <span style="color:#666">/</span> path<span style="color:#666">.</span>name<span style="color:#666">.</span>split(<span style="color:#b44">&#39;.&#39;</span>)[<span style="color:#666">0</span>]  <span style="color:#080;font-style:italic"># 获取当前目录  </span>
+</span></span><span style="display:flex;"><span>	path_encrypted <span style="color:#666">=</span> cwd <span style="color:#666">/</span> path<span style="color:#666">.</span>name  <span style="color:#080;font-style:italic"># 密文文件路径  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">if</span> key_path <span style="color:#a2f;font-weight:bold">is</span> <span style="color:#a2f;font-weight:bold">None</span>:  
+</span></span><span style="display:flex;"><span>		key_path <span style="color:#666">=</span> cwd <span style="color:#666">/</span> <span style="color:#b44">&#39;key&#39;</span>  <span style="color:#080;font-style:italic"># 密钥文件路径  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">if</span> <span style="color:#a2f;font-weight:bold">not</span> cwd<span style="color:#666">.</span>exists():  
+</span></span><span style="display:flex;"><span>		cwd<span style="color:#666">.</span>mkdir()  <span style="color:#080;font-style:italic"># 创建当前目录  </span>
+</span></span><span style="display:flex;"><span>		path_encrypted<span style="color:#666">.</span>touch()  <span style="color:#080;font-style:italic"># 创建密文文件  </span>
+</span></span><span style="display:flex;"><span>		key_path<span style="color:#666">.</span>touch()  <span style="color:#080;font-style:italic"># 创建密钥文件  </span>
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">with</span> path<span style="color:#666">.</span>open(<span style="color:#b44">&#39;rt&#39;</span>, encoding<span style="color:#666">=</span>encoding, errors<span style="color:#666">=</span><span style="color:#b44">&#39;ignore&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f1, \  
+</span></span><span style="display:flex;"><span>	path_encrypted<span style="color:#666">.</span>open(<span style="color:#b44">&#39;wt&#39;</span>, encoding<span style="color:#666">=</span>encoding, errors<span style="color:#666">=</span><span style="color:#b44">&#39;ignore&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f2, \  
+</span></span><span style="display:flex;"><span>	key_path<span style="color:#666">.</span>open(<span style="color:#b44">&#39;wt&#39;</span>, encoding<span style="color:#666">=</span>encoding, errors<span style="color:#666">=</span><span style="color:#b44">&#39;ignore&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f3:  
+</span></span><span style="display:flex;"><span>		encrypted, key <span style="color:#666">=</span> encrypt(f1<span style="color:#666">.</span>read())  
+</span></span><span style="display:flex;"><span>		json<span style="color:#666">.</span>dump(encrypted, f2)  <span style="color:#080;font-style:italic"># 将密文写入文件  </span>
+</span></span><span style="display:flex;"><span>		json<span style="color:#666">.</span>dump(key, f3)  <span style="color:#080;font-style:italic"># 将密钥写入文件  </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">decrypt_file</span>(path_encrypted, key_path<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">None</span>, <span style="color:#666">*</span>, encoding<span style="color:#666">=</span><span style="color:#b44">&#39;utf-8&#39;</span>):  
+</span></span><span style="display:flex;"><span>	path_encrypted <span style="color:#666">=</span> Path(path_encrypted)  <span style="color:#080;font-style:italic"># 将字符串转换成Path对象  </span>
+</span></span><span style="display:flex;"><span>	cwd <span style="color:#666">=</span> path_encrypted<span style="color:#666">.</span>cwd() <span style="color:#666">/</span> path_encrypted<span style="color:#666">.</span>name<span style="color:#666">.</span>split(<span style="color:#b44">&#39;.&#39;</span>)[<span style="color:#666">0</span>]  <span style="color:#080;font-style:italic"># 获取当前目录  </span>
+</span></span><span style="display:flex;"><span>	path_decrypted <span style="color:#666">=</span> cwd <span style="color:#666">/</span> <span style="color:#b44">&#39;decrypted&#39;</span>  <span style="color:#080;font-style:italic"># 明文文件路径  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">if</span> <span style="color:#a2f;font-weight:bold">not</span> path_decrypted<span style="color:#666">.</span>exists():  
+</span></span><span style="display:flex;"><span>	path_decrypted<span style="color:#666">.</span>mkdir()  <span style="color:#080;font-style:italic"># 创建明文文件目录  </span>
+</span></span><span style="display:flex;"><span>	path_decrypted <span style="color:#666">/=</span> path_encrypted<span style="color:#666">.</span>name  <span style="color:#080;font-style:italic"># 明文文件路径  </span>
+</span></span><span style="display:flex;"><span>	path_decrypted<span style="color:#666">.</span>touch()  <span style="color:#080;font-style:italic"># 创建明文文件  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">if</span> key_path <span style="color:#a2f;font-weight:bold">is</span> <span style="color:#a2f;font-weight:bold">None</span>:  
+</span></span><span style="display:flex;"><span>		<span style="color:#080;font-style:italic"># key_path = cwd / &#39;key&#39;  # 密钥文件路径  </span>
+</span></span><span style="display:flex;"><span>		key_path <span style="color:#666">=</span> cwd <span style="color:#666">/</span> <span style="color:#b44">&#39;key&#39;</span>  <span style="color:#080;font-style:italic"># 密钥文件路径  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">with</span> path_encrypted<span style="color:#666">.</span>open(<span style="color:#b44">&#39;rt&#39;</span>, encoding<span style="color:#666">=</span>encoding, errors<span style="color:#666">=</span><span style="color:#b44">&#39;ignore&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f1, \  
+</span></span><span style="display:flex;"><span>	key_path<span style="color:#666">.</span>open(<span style="color:#b44">&#39;rt&#39;</span>, encoding<span style="color:#666">=</span>encoding, errors<span style="color:#666">=</span><span style="color:#b44">&#39;ignore&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f2, \  
+</span></span><span style="display:flex;"><span>	path_decrypted<span style="color:#666">.</span>open(<span style="color:#b44">&#39;wt&#39;</span>, encoding<span style="color:#666">=</span>encoding, errors<span style="color:#666">=</span><span style="color:#b44">&#39;ignore&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f3:  
+</span></span><span style="display:flex;"><span>		decrypted <span style="color:#666">=</span> decrypt(json<span style="color:#666">.</span>load(f1), json<span style="color:#666">.</span>load(f2))  <span style="color:#080;font-style:italic"># 解密  </span>
+</span></span><span style="display:flex;"><span>		f3<span style="color:#666">.</span>write(decrypted)  <span style="color:#080;font-style:italic"># 将明文写入文件</span>
+</span></span></code></pre></div><p>接着修改以上的代码，利用二进制文件的读写形式，实现了图片视频等文件的加解密，但是这里只是实现了简单的文件解密，还没有把加密生成的随机数密钥存储下来，写进文件。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">secrets</span> <span style="color:#a2f;font-weight:bold">import</span> token_bytes  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">sys</span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>sys<span style="color:#666">.</span>set_int_max_str_digits(<span style="color:#666">0</span>)  <span style="color:#080;font-style:italic"># 解除int转str的长度限制  </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 没有进行文件的写入  </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># TODO: 1. 支持大文件的分片加密  </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">random_key</span>(length):  
+</span></span><span style="display:flex;"><span>    key <span style="color:#666">=</span> token_bytes(nbytes<span style="color:#666">=</span>length)  <span style="color:#080;font-style:italic"># 生成随机字节串  </span>
+</span></span><span style="display:flex;"><span>    key_int <span style="color:#666">=</span> <span style="color:#a2f">int</span><span style="color:#666">.</span>from_bytes(key, <span style="color:#b44">&#39;big&#39;</span>)  <span style="color:#080;font-style:italic"># 将字节串转换成整数  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> key_int  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">encrypt</span>(content):  
+</span></span><span style="display:flex;"><span>    key_int <span style="color:#666">=</span> random_key(<span style="color:#a2f">len</span>(content))  <span style="color:#080;font-style:italic"># 调用生成大随机数  </span>
+</span></span><span style="display:flex;"><span>    content_encrypted <span style="color:#666">=</span> <span style="color:#a2f">int</span><span style="color:#666">.</span>from_bytes(content, <span style="color:#b44">&#39;big&#39;</span>) <span style="color:#666">^</span> key_int  <span style="color:#080;font-style:italic"># 字节串转整数类型 并异或  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> content_encrypted, key_int  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">decrypt</span>(content_length, content_encrypted, key_int):  
+</span></span><span style="display:flex;"><span>    content_decrypted <span style="color:#666">=</span> content_encrypted <span style="color:#666">^</span> key_int  <span style="color:#080;font-style:italic"># 异或解密  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># return int.to_bytes(content_decrypted, length=len(content), byteorder=&#39;big&#39;).decode()  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">int</span><span style="color:#666">.</span>to_bytes(content_decrypted, length<span style="color:#666">=</span>content_length, byteorder<span style="color:#666">=</span><span style="color:#b44">&#39;big&#39;</span>)  <span style="color:#080;font-style:italic"># 整数转字节串返回  </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">main</span>():  
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">with</span> <span style="color:#a2f">open</span>(<span style="color:#b44">&#34;video_test.mkv&#34;</span>, <span style="color:#b44">&#39;rb&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> fp:  
+</span></span><span style="display:flex;"><span>        content <span style="color:#666">=</span> fp<span style="color:#666">.</span>read()  
+</span></span><span style="display:flex;"><span>        content_encrypted, key_int <span style="color:#666">=</span> encrypt(content)  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;加密完成！&#34;</span>)  
+</span></span><span style="display:flex;"><span>        content_decrypted <span style="color:#666">=</span> decrypt(<span style="color:#a2f">len</span>(content), content_encrypted, key_int)  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;解密完成！&#34;</span>)  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">with</span> <span style="color:#a2f">open</span>(<span style="color:#b44">&#34;video_decrypted.mkv&#34;</span>, <span style="color:#b44">&#39;wb&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f:  
+</span></span><span style="display:flex;"><span>            f<span style="color:#666">.</span>write(content_decrypted)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#b44">&#39;__main__&#39;</span>:  
+</span></span><span style="display:flex;"><span>    main()
+</span></span></code></pre></div><p>随后更改上面的代码实现了，把密钥、数据长度写入文件，保存成字符串文件。
+接着就是根据上面的代码，增加与百度网盘的交互，实现上传网盘和从网盘上下载。这里我使用的是python的第三方库bypy，用于实现与百度网盘的关联。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">json</span>  
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># import io  </span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">pathlib</span> <span style="color:#a2f;font-weight:bold">import</span> Path  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">secrets</span> <span style="color:#a2f;font-weight:bold">import</span> token_bytes  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">bypy</span> <span style="color:#a2f;font-weight:bold">import</span> ByPy  
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># import threading  </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># import struct  </span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">sys</span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># threadLock = threading.Lock()  # 线程锁  </span>
+</span></span><span style="display:flex;"><span>sys<span style="color:#666">.</span>set_int_max_str_digits(<span style="color:#666">0</span>)  <span style="color:#080;font-style:italic"># 解除int转str的长度限制  </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># TODO: 1. 支持大文件的分片加密  </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># TODO: 2. 由于大量的IO操作，所以速度很慢，需要优化  </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># FIXME 进行量子加密的过程中，只需要把生成随机数的函数改成量子随机数生成器即可  </span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">random_key</span>(length):  
+</span></span><span style="display:flex;"><span>    key <span style="color:#666">=</span> token_bytes(nbytes<span style="color:#666">=</span>length)  <span style="color:#080;font-style:italic"># 生成随机字节串  </span>
+</span></span><span style="display:flex;"><span>    key_int <span style="color:#666">=</span> <span style="color:#a2f">int</span><span style="color:#666">.</span>from_bytes(key, <span style="color:#b44">&#39;big&#39;</span>)  <span style="color:#080;font-style:italic"># 将字节串转换成整数  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> key_int  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">encrypt</span>(content):  
+</span></span><span style="display:flex;"><span>    key_int <span style="color:#666">=</span> random_key(<span style="color:#a2f">len</span>(content))  <span style="color:#080;font-style:italic"># 调用生成大随机数  </span>
+</span></span><span style="display:flex;"><span>    content_encrypted <span style="color:#666">=</span> <span style="color:#a2f">int</span><span style="color:#666">.</span>from_bytes(content, <span style="color:#b44">&#39;big&#39;</span>) <span style="color:#666">^</span> key_int  <span style="color:#080;font-style:italic"># 字节串转整数类型 并异或  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> content_encrypted, key_int  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">decrypt</span>(content_length, content_encrypted, key_int):  
+</span></span><span style="display:flex;"><span>    content_decrypted <span style="color:#666">=</span> content_encrypted <span style="color:#666">^</span> key_int  <span style="color:#080;font-style:italic"># 异或解密  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># return int.to_bytes(content_decrypted, length=len(content), byteorder=&#39;big&#39;).decode()  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">int</span><span style="color:#666">.</span>to_bytes(content_decrypted, length<span style="color:#666">=</span>content_length, byteorder<span style="color:#666">=</span><span style="color:#b44">&#39;big&#39;</span>)  <span style="color:#080;font-style:italic"># 整数转字节串返回  </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># def write_string(string, path):  </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">#     threadLock.acquire()  # 同步锁  </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">#     with open(path, &#39;wt&#39;) as f:  </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">#         json.dump(string, f)  </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">#     threadLock.release()  </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">encrypt_file</span>(file_path):  
+</span></span><span style="display:flex;"><span>    path <span style="color:#666">=</span> Path(file_path)  <span style="color:#080;font-style:italic"># 转化为Path对象  </span>
+</span></span><span style="display:flex;"><span>    dir_path <span style="color:#666">=</span> path<span style="color:#666">.</span>parent <span style="color:#666">/</span> <span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span><span style="color:#a2f">str</span>(path<span style="color:#666">.</span>stem)<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">_key&#39;</span>  <span style="color:#080;font-style:italic"># 文件夹路径  </span>
+</span></span><span style="display:flex;"><span>    dir_path<span style="color:#666">.</span>mkdir(exist_ok<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>)  <span style="color:#080;font-style:italic"># 创建文件夹 文件夹已存在不执行  </span>
+</span></span><span style="display:flex;"><span>    encrypted_file_path <span style="color:#666">=</span> dir_path <span style="color:#666">/</span> path<span style="color:#666">.</span>name  <span style="color:#080;font-style:italic"># 加密文件路径  </span>
+</span></span><span style="display:flex;"><span>    key_path <span style="color:#666">=</span> dir_path <span style="color:#666">/</span> <span style="color:#b44">&#39;key&#39;</span>  <span style="color:#080;font-style:italic"># 密钥文件路径  </span>
+</span></span><span style="display:flex;"><span>    data_length_path <span style="color:#666">=</span> dir_path <span style="color:#666">/</span> <span style="color:#b44">&#39;data_length&#39;</span>  <span style="color:#080;font-style:italic"># 数据长度文件路径  </span>
+</span></span><span style="display:flex;"><span>    data <span style="color:#666">=</span> path<span style="color:#666">.</span>read_bytes()  <span style="color:#080;font-style:italic"># 读取文件内容  </span>
+</span></span><span style="display:flex;"><span>    data_length <span style="color:#666">=</span> <span style="color:#a2f">len</span>(data)  <span style="color:#080;font-style:italic"># 获取文件长度  </span>
+</span></span><span style="display:flex;"><span>    data_encrypted, key <span style="color:#666">=</span> encrypt(data)  <span style="color:#080;font-style:italic"># 加密  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">with</span> encrypted_file_path<span style="color:#666">.</span>open(<span style="color:#b44">&#39;wt&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f1, \  
+</span></span><span style="display:flex;"><span>            key_path<span style="color:#666">.</span>open(<span style="color:#b44">&#39;wt&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f2, \  
+</span></span><span style="display:flex;"><span>            data_length_path<span style="color:#666">.</span>open(<span style="color:#b44">&#39;wt&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f3:  
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># 写入文件  </span>
+</span></span><span style="display:flex;"><span>        json<span style="color:#666">.</span>dump(data_encrypted, f1)  
+</span></span><span style="display:flex;"><span>        json<span style="color:#666">.</span>dump(key, f2)  
+</span></span><span style="display:flex;"><span>        json<span style="color:#666">.</span>dump(data_length, f3)  
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">str</span>(encrypted_file_path)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">decrypt_file</span>(encrypted_file_path, key_path):  
+</span></span><span style="display:flex;"><span>    path_encrypted <span style="color:#666">=</span> Path(encrypted_file_path)  <span style="color:#080;font-style:italic"># 转化为Path对象  </span>
+</span></span><span style="display:flex;"><span>    key_path <span style="color:#666">=</span> Path(key_path)  <span style="color:#080;font-style:italic"># 转化为Path对象  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># key_path = path_encrypted.parent / &#39;key&#39;  # 密钥文件路径  </span>
+</span></span><span style="display:flex;"><span>    data_length_path <span style="color:#666">=</span> key_path<span style="color:#666">.</span>parent <span style="color:#666">/</span> <span style="color:#b44">&#39;data_length&#39;</span>  <span style="color:#080;font-style:italic"># 数据长度文件路径  </span>
+</span></span><span style="display:flex;"><span>    dir_path <span style="color:#666">=</span> path_encrypted<span style="color:#666">.</span>parent <span style="color:#666">/</span> <span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span><span style="color:#a2f">str</span>(path_encrypted<span style="color:#666">.</span>stem)<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">_decrypted&#39;</span>  <span style="color:#080;font-style:italic"># 解密文件夹路径  </span>
+</span></span><span style="display:flex;"><span>    dir_path<span style="color:#666">.</span>mkdir(exist_ok<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>)  <span style="color:#080;font-style:italic"># 创建文件夹 文件夹已存在不执行  </span>
+</span></span><span style="display:flex;"><span>    decrypted_file_path <span style="color:#666">=</span> dir_path <span style="color:#666">/</span> path_encrypted<span style="color:#666">.</span>name  <span style="color:#080;font-style:italic"># 解密文件路径  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> <span style="color:#a2f;font-weight:bold">not</span> path_encrypted<span style="color:#666">.</span>exists() <span style="color:#a2f;font-weight:bold">or</span> <span style="color:#a2f;font-weight:bold">not</span> key_path<span style="color:#666">.</span>exists() <span style="color:#a2f;font-weight:bold">or</span> <span style="color:#a2f;font-weight:bold">not</span> data_length_path<span style="color:#666">.</span>exists():  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;加密文件不存在！&#34;</span>)  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> <span style="color:#a2f;font-weight:bold">not</span> key_path<span style="color:#666">.</span>exists():  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;密钥文件不存在！&#34;</span>)  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">with</span> path_encrypted<span style="color:#666">.</span>open(<span style="color:#b44">&#39;rt&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f1, \  
+</span></span><span style="display:flex;"><span>            key_path<span style="color:#666">.</span>open(<span style="color:#b44">&#39;rt&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f2, \  
+</span></span><span style="display:flex;"><span>            decrypted_file_path<span style="color:#666">.</span>open(<span style="color:#b44">&#39;wb&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f3, \  
+</span></span><span style="display:flex;"><span>            data_length_path<span style="color:#666">.</span>open(<span style="color:#b44">&#39;rt&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f4:  
+</span></span><span style="display:flex;"><span>        decrypted <span style="color:#666">=</span> decrypt(json<span style="color:#666">.</span>load(f4), json<span style="color:#666">.</span>load(f1), json<span style="color:#666">.</span>load(f2))  <span style="color:#080;font-style:italic"># 解密  </span>
+</span></span><span style="display:flex;"><span>        f3<span style="color:#666">.</span>write(decrypted)  <span style="color:#080;font-style:italic"># 将明文写入文件  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 删除加密文件  </span>
+</span></span><span style="display:flex;"><span>    path_encrypted<span style="color:#666">.</span>unlink()  
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">main</span>():  
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> <span style="color:#a2f;font-weight:bold">True</span>:  
+</span></span><span style="display:flex;"><span>        bp <span style="color:#666">=</span> ByPy()  
+</span></span><span style="display:flex;"><span>        choose <span style="color:#666">=</span> <span style="color:#a2f">input</span>(<span style="color:#b44">&#34;请选择：1.上传文件 2.下载文件 3.退出</span><span style="color:#b62;font-weight:bold">\n</span><span style="color:#b44">&#34;</span>)  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> choose <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>:  
+</span></span><span style="display:flex;"><span>            path <span style="color:#666">=</span> <span style="color:#a2f">input</span>(<span style="color:#b44">&#34;请输入文件路径：&#34;</span>)  
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;正在加密中...&#34;</span>)  
+</span></span><span style="display:flex;"><span>            file_path <span style="color:#666">=</span> encrypt_file(path)  
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> file_path:  
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;加密成功！&#34;</span>)  
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span>:  
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;加密失败！&#34;</span>)  
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>  
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;正在上传中...&#34;</span>)  
+</span></span><span style="display:flex;"><span>            bp<span style="color:#666">.</span>upload(file_path)  
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;上传成功！&#34;</span>)  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">elif</span> choose <span style="color:#666">==</span> <span style="color:#b44">&#39;2&#39;</span>:  
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;文件列表：&#34;</span>)  
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f">print</span>(bp<span style="color:#666">.</span>list())  
+</span></span><span style="display:flex;"><span>            file_name <span style="color:#666">=</span> <span style="color:#a2f">input</span>(<span style="color:#b44">&#34;请输入下载文件名：&#34;</span>)  
+</span></span><span style="display:flex;"><span>            path <span style="color:#666">=</span> <span style="color:#a2f">input</span>(<span style="color:#b44">&#34;请输入文件下载位置：&#34;</span>)  
+</span></span><span style="display:flex;"><span>            key_path <span style="color:#666">=</span> <span style="color:#a2f">input</span>(<span style="color:#b44">&#34;请输入本地密钥文件位置：&#34;</span>)  
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;正在下载中...&#34;</span>)  
+</span></span><span style="display:flex;"><span>            bp<span style="color:#666">.</span>downfile(file_name, path)  
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;下载成功！&#34;</span>)  
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;正在解密中...&#34;</span>)  
+</span></span><span style="display:flex;"><span>            decrypt_file(path <span style="color:#666">+</span> <span style="color:#b44">&#39;</span><span style="color:#b62;font-weight:bold">\\</span><span style="color:#b44">&#39;</span> <span style="color:#666">+</span> file_name, key_path)  
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;解密成功！&#34;</span>)  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">elif</span> choose <span style="color:#666">==</span> <span style="color:#b44">&#39;3&#39;</span>:  
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;退出成功！&#34;</span>)  
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>:  
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;输入错误！&#34;</span>)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#b44">&#39;__main__&#39;</span>:  
+</span></span><span style="display:flex;"><span>    main()
+</span></span></code></pre></div><p>其实写到这里，基本上的功能已经能够实现了，但是在测试的过程中发现，对于小文件加解密和上传下载的速度很快，但是文件稍微大一点，例如5mb的图片，整个过程就十分缓慢。
+分析过程发现，文件卡在==正在加密中==的阶段，再仔细分析，确定就是文件写入的速度太慢，包括Key、加密后的文件的写入。</p>
+<pre tabindex="0"><code class="language-ad-warning" data-lang="ad-warning">由于一次一密的加密形式，导致了当需要加密的文件很大时，key的长度也随之增加到很大，如果使用wt、rt的形式进行写和读，整个IO操作就会十分缓慢，这是整个程序最大的弊端。不过好在key和加密后的文件都是int类型的整数，我们完全可以转换成二进制的形式进行存储，而对于wb、rb二进制形式的读写，IO操作就会快得多，所以这是修改的方法
+</code></pre><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">encrypt</span>(content):  
+</span></span><span style="display:flex;"><span>    key_int <span style="color:#666">=</span> random_key(<span style="color:#a2f">len</span>(content))  <span style="color:#080;font-style:italic"># 调用生成大随机数  </span>
+</span></span><span style="display:flex;"><span>    content_encrypted <span style="color:#666">=</span> <span style="color:#a2f">int</span><span style="color:#666">.</span>from_bytes(content, <span style="color:#b44">&#39;big&#39;</span>) <span style="color:#666">^</span> key_int  <span style="color:#080;font-style:italic"># 字节串转整数类型 并异或  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> content_encrypted, key_int  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">decrypt</span>(content_length, content_encrypted, key_int):  
+</span></span><span style="display:flex;"><span>    content_decrypted <span style="color:#666">=</span> content_encrypted <span style="color:#666">^</span> key_int  <span style="color:#080;font-style:italic"># 异或解密  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># return int.to_bytes(content_decrypted, length=len(content), byteorder=&#39;big&#39;).decode()  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">int</span><span style="color:#666">.</span>to_bytes(content_decrypted, length<span style="color:#666">=</span>content_length, byteorder<span style="color:#666">=</span><span style="color:#b44">&#39;big&#39;</span>)  <span style="color:#080;font-style:italic"># 整数转字节串返回  </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">encrypt_file</span>(file_path):  
+</span></span><span style="display:flex;"><span>    path <span style="color:#666">=</span> Path(file_path)  <span style="color:#080;font-style:italic"># 转化为Path对象  </span>
+</span></span><span style="display:flex;"><span>    dir_path <span style="color:#666">=</span> path<span style="color:#666">.</span>parent <span style="color:#666">/</span> <span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span><span style="color:#a2f">str</span>(path<span style="color:#666">.</span>stem)<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">_key&#39;</span>  <span style="color:#080;font-style:italic"># 文件夹路径  </span>
+</span></span><span style="display:flex;"><span>    dir_path<span style="color:#666">.</span>mkdir(exist_ok<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>)  <span style="color:#080;font-style:italic"># 创建文件夹 文件夹已存在不执行  </span>
+</span></span><span style="display:flex;"><span>    encrypted_file_path <span style="color:#666">=</span> dir_path <span style="color:#666">/</span> path<span style="color:#666">.</span>name  <span style="color:#080;font-style:italic"># 加密文件路径  </span>
+</span></span><span style="display:flex;"><span>    key_path <span style="color:#666">=</span> dir_path <span style="color:#666">/</span> <span style="color:#b44">&#39;key&#39;</span>  <span style="color:#080;font-style:italic"># 密钥文件路径  </span>
+</span></span><span style="display:flex;"><span>    data_length_path <span style="color:#666">=</span> dir_path <span style="color:#666">/</span> <span style="color:#b44">&#39;data_length&#39;</span>  <span style="color:#080;font-style:italic"># 数据长度文件路径  </span>
+</span></span><span style="display:flex;"><span>    data <span style="color:#666">=</span> path<span style="color:#666">.</span>read_bytes()  <span style="color:#080;font-style:italic"># 读取文件内容  </span>
+</span></span><span style="display:flex;"><span>    data_length <span style="color:#666">=</span> <span style="color:#a2f">len</span>(data)  <span style="color:#080;font-style:italic"># 获取文件长度  </span>
+</span></span><span style="display:flex;"><span>    data_encrypted, key <span style="color:#666">=</span> encrypt(data)  <span style="color:#080;font-style:italic"># 加密  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">with</span> encrypted_file_path<span style="color:#666">.</span>open(<span style="color:#b44">&#39;wb&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f1, \  
+</span></span><span style="display:flex;"><span>            key_path<span style="color:#666">.</span>open(<span style="color:#b44">&#39;wb&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f2, \  
+</span></span><span style="display:flex;"><span>            data_length_path<span style="color:#666">.</span>open(<span style="color:#b44">&#39;wb&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f3:  
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># 写入文件  </span>
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># 将大整数转换为字节数组  </span>
+</span></span><span style="display:flex;"><span>        byte_array <span style="color:#666">=</span> data_encrypted<span style="color:#666">.</span>to_bytes((data_encrypted<span style="color:#666">.</span>bit_length() <span style="color:#666">+</span> <span style="color:#666">7</span>) <span style="color:#666">//</span> <span style="color:#666">8</span>, byteorder<span style="color:#666">=</span><span style="color:#b44">&#39;big&#39;</span>)  
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># 将字节数组写入文件  </span>
+</span></span><span style="display:flex;"><span>        f1<span style="color:#666">.</span>write(byte_array)  
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># 将大整数转换为字节数组  </span>
+</span></span><span style="display:flex;"><span>        byte_array <span style="color:#666">=</span> data_length<span style="color:#666">.</span>to_bytes((data_length<span style="color:#666">.</span>bit_length() <span style="color:#666">+</span> <span style="color:#666">7</span>) <span style="color:#666">//</span> <span style="color:#666">8</span>, byteorder<span style="color:#666">=</span><span style="color:#b44">&#39;big&#39;</span>)  
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># # 将字节数组写入文件  </span>
+</span></span><span style="display:flex;"><span>        f3<span style="color:#666">.</span>write(byte_array)  
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># 将大整数转换为字节数组  </span>
+</span></span><span style="display:flex;"><span>        byte_array <span style="color:#666">=</span> key<span style="color:#666">.</span>to_bytes((key<span style="color:#666">.</span>bit_length() <span style="color:#666">+</span> <span style="color:#666">7</span>) <span style="color:#666">//</span> <span style="color:#666">8</span>, byteorder<span style="color:#666">=</span><span style="color:#b44">&#39;big&#39;</span>)  
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># 将字节数组写入文件  </span>
+</span></span><span style="display:flex;"><span>        f2<span style="color:#666">.</span>write(byte_array)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">str</span>(encrypted_file_path)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">decrypt_file</span>(encrypted_file_path, key_path):  
+</span></span><span style="display:flex;"><span>    path_encrypted <span style="color:#666">=</span> Path(encrypted_file_path)  <span style="color:#080;font-style:italic"># 转化为Path对象  </span>
+</span></span><span style="display:flex;"><span>    key_path <span style="color:#666">=</span> Path(key_path)  <span style="color:#080;font-style:italic"># 转化为Path对象  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># key_path = path_encrypted.parent / &#39;key&#39;  # 密钥文件路径  </span>
+</span></span><span style="display:flex;"><span>    data_length_path <span style="color:#666">=</span> key_path<span style="color:#666">.</span>parent <span style="color:#666">/</span> <span style="color:#b44">&#39;data_length&#39;</span>  <span style="color:#080;font-style:italic"># 数据长度文件路径  </span>
+</span></span><span style="display:flex;"><span>    dir_path <span style="color:#666">=</span> path_encrypted<span style="color:#666">.</span>parent <span style="color:#666">/</span> <span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span><span style="color:#a2f">str</span>(path_encrypted<span style="color:#666">.</span>stem)<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">_decrypted&#39;</span>  <span style="color:#080;font-style:italic"># 解密文件夹路径  </span>
+</span></span><span style="display:flex;"><span>    dir_path<span style="color:#666">.</span>mkdir(exist_ok<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>)  <span style="color:#080;font-style:italic"># 创建文件夹 文件夹已存在不执行  </span>
+</span></span><span style="display:flex;"><span>    decrypted_file_path <span style="color:#666">=</span> dir_path <span style="color:#666">/</span> path_encrypted<span style="color:#666">.</span>name  <span style="color:#080;font-style:italic"># 解密文件路径  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> <span style="color:#a2f;font-weight:bold">not</span> path_encrypted<span style="color:#666">.</span>exists() <span style="color:#a2f;font-weight:bold">or</span> <span style="color:#a2f;font-weight:bold">not</span> key_path<span style="color:#666">.</span>exists():  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;加密文件不存在！&#34;</span>)  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> <span style="color:#a2f;font-weight:bold">not</span> key_path<span style="color:#666">.</span>exists():  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;密钥文件不存在！&#34;</span>)  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">with</span> path_encrypted<span style="color:#666">.</span>open(<span style="color:#b44">&#39;rb&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f1, \  
+</span></span><span style="display:flex;"><span>            key_path<span style="color:#666">.</span>open(<span style="color:#b44">&#39;rb&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f2, \  
+</span></span><span style="display:flex;"><span>            decrypted_file_path<span style="color:#666">.</span>open(<span style="color:#b44">&#39;wb&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f3, \  
+</span></span><span style="display:flex;"><span>            data_length_path<span style="color:#666">.</span>open(<span style="color:#b44">&#39;rb&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f4:  
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># 读取文件内容  </span>
+</span></span><span style="display:flex;"><span>        data_encrypted <span style="color:#666">=</span> <span style="color:#a2f">int</span><span style="color:#666">.</span>from_bytes(f1<span style="color:#666">.</span>read(), byteorder<span style="color:#666">=</span><span style="color:#b44">&#39;big&#39;</span>)  
+</span></span><span style="display:flex;"><span>        key <span style="color:#666">=</span> <span style="color:#a2f">int</span><span style="color:#666">.</span>from_bytes(f2<span style="color:#666">.</span>read(), byteorder<span style="color:#666">=</span><span style="color:#b44">&#39;big&#39;</span>)  
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># 通过key的大小获取data_length的大小  </span>
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># data_length = key.bit_length() // 8  </span>
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># print(data_length)        data_length = int.from_bytes(f4.read(), byteorder=&#39;big&#39;)  </span>
+</span></span><span style="display:flex;"><span>        decrypted <span style="color:#666">=</span> decrypt(data_length, data_encrypted, key)  
+</span></span><span style="display:flex;"><span>        f3<span style="color:#666">.</span>write(decrypted)  <span style="color:#080;font-style:italic"># 将明文写入文件  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 删除加密文件  </span>
+</span></span><span style="display:flex;"><span>    path_encrypted<span style="color:#666">.</span>unlink()  
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>  
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231130232255.png" alt="">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231130232249.png" alt="">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231130232242.png" alt=""></p>
+<hr>
+<p>利用二进制类型来读写文件，大大提升了整个程序的执行效率，对于大文件在加密后的加密文件和key文件写入速度慢的问题得到了解决。</p>
+<p>与此同时，我也在进行图形化界面的实现，希望能够写出一个桌面程序，来完成这个项目。对于桌面程序的实现，我也经过了长时间的网上调研和检索。最终确定用python的flet框架进行桌面应用的开发。 flet框架是基于谷歌的flutter开发的，所以用起来很容易上手，而且优点在于开发速度快、效率高。 以下是我简单写的一个demo：
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231130232234.png" alt="">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231130232227.png" alt=""></p>
+<p>目前已经实现了文件的加密和上传功能，接下来还需要实现文件的下载和解密功能，在这个过程中还需要联系云端网盘程序，也许之后会将这个网盘程序换成自己搭建的云端存储。</p>
+<hr>
+<p>2023年11月8日 21点31分<br>
+更新日志：</p>
+<ol>
+<li>增加了自动搜索key的功能，不用手动输入密钥位置（密钥存储在固定密钥库）</li>
+<li>更改了key、datalength、加密文件等文件的命名方式：<code>文件名称[创建时间戳].文件类型</code><br>
+如：<code>test_1[1699444671-0686579].txt</code>、<code>test_1[1699444671-0686579].key</code>、<code>test_1[1699444671-0686579].length</code></li>
+</ol>
+<p>增加的两个函数，寻找密钥路径和验证密钥是否正确</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 在指定密钥库中寻找相对应的密钥路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">find_key_path</span>(download_file_path):
+</span></span><span style="display:flex;"><span>    download_file_name <span style="color:#666">=</span> download_file_path<span style="color:#666">.</span>name  <span style="color:#080;font-style:italic"># 获取文件名</span>
+</span></span><span style="display:flex;"><span>    file_name <span style="color:#666">=</span> download_file_name<span style="color:#666">.</span>split(<span style="color:#b44">&#39;[&#39;</span>)[<span style="color:#666">0</span>]  <span style="color:#080;font-style:italic"># 从文件名中提取文件名称</span>
+</span></span><span style="display:flex;"><span>    time_id <span style="color:#666">=</span> download_file_name<span style="color:#666">.</span>split(<span style="color:#b44">&#39;]&#39;</span>)[<span style="color:#666">-</span><span style="color:#666">2</span>]<span style="color:#666">.</span>split(<span style="color:#b44">&#39;[&#39;</span>)[<span style="color:#666">-</span><span style="color:#666">1</span>]  <span style="color:#080;font-style:italic"># 从文件名中提取时间戳</span>
+</span></span><span style="display:flex;"><span>    dir_keyword <span style="color:#666">=</span> <span style="color:#b44">f</span><span style="color:#b44">&#34;</span><span style="color:#b68;font-weight:bold">{</span>file_name<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">*</span><span style="color:#b68;font-weight:bold">{</span>time_id<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">*&#34;</span>  <span style="color:#080;font-style:italic"># 需要同时满足 文件名和时间戳</span>
+</span></span><span style="display:flex;"><span>    key_keyword <span style="color:#666">=</span> <span style="color:#b44">f</span><span style="color:#b44">&#34;</span><span style="color:#b68;font-weight:bold">{</span>file_name<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">*</span><span style="color:#b68;font-weight:bold">{</span>time_id<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">*.key&#34;</span>  <span style="color:#080;font-style:italic"># 密钥文件的关键字</span>
+</span></span><span style="display:flex;"><span>    key_store_path <span style="color:#666">=</span> Path(<span style="color:#b44">&#34;C:</span><span style="color:#b62;font-weight:bold">\\</span><span style="color:#b44">desktop</span><span style="color:#b62;font-weight:bold">\\</span><span style="color:#b44">KEY_STORE&#34;</span>)  <span style="color:#080;font-style:italic"># 密钥库路径</span>
+</span></span><span style="display:flex;"><span>    dirs <span style="color:#666">=</span> <span style="color:#a2f">list</span>(key_store_path<span style="color:#666">.</span>glob(dir_keyword))  <span style="color:#080;font-style:italic"># 寻找密钥库中的指定文件夹</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> <span style="color:#a2f">len</span>(dirs) <span style="color:#666">==</span> <span style="color:#666">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;没有找到密钥文件夹&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> di <span style="color:#a2f;font-weight:bold">in</span> dirs:  <span style="color:#080;font-style:italic"># 遍历文件夹</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> di<span style="color:#666">.</span>is_dir():  <span style="color:#080;font-style:italic"># 判断是否为文件夹</span>
+</span></span><span style="display:flex;"><span>            key_path <span style="color:#666">=</span> di<span style="color:#666">.</span>glob(key_keyword)  <span style="color:#080;font-style:italic"># 寻找密钥文件</span>
+</span></span><span style="display:flex;"><span>            key_paths <span style="color:#666">=</span> <span style="color:#a2f">list</span>(key_path)  <span style="color:#080;font-style:italic"># 迭代器转列表</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> <span style="color:#a2f;font-weight:bold">not</span> key_paths:
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;没有找到密钥文件!&#34;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic"># 把每个 key 都验证一遍，验证通过之间返回</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span> key <span style="color:#a2f;font-weight:bold">in</span> key_paths:
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span> verify_key(key, download_file_path):
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;找到密钥:&#34;</span> <span style="color:#666">+</span> <span style="color:#a2f">str</span>(key))
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">return</span> key
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;没有找到密钥文件!!&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 验证密钥文件的大小是否正确</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">verify_key</span>(key_path: Path, download_file_path: Path):
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 匹配密钥和加密文件的长度</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> key_path<span style="color:#666">.</span>stat()<span style="color:#666">.</span>st_size <span style="color:#666">==</span> download_file_path<span style="color:#666">.</span>stat()<span style="color:#666">.</span>st_size:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;密钥文件大小正确！&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;密钥文件大小不正确！&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>
+</span></span></code></pre></div><hr>
+<p>2023年11月16日 19点00分<br>
+更新说明：</p>
+<ol>
+<li>完成桌面端应用程序开发</li>
+<li>修复单选框不能横向滚动</li>
+<li>修复异常情况抛出</li>
+<li>删除加密后产生的文件，防止占用空间</li>
+<li>云盘存储从百度网盘迁移至阿里云服务器（alist本地存储驱动映射）</li>
+<li>修复验证key函数bug</li>
+<li>增加服务器在线判断，修复异常抛出报错</li>
+<li>修复异常报错</li>
+<li>更改默认密钥库存放位置</li>
+<li>修复目录选中后取消bug</li>
+<li>增加用户后端验证</li>
+<li>优化登录回车确认事件</li>
+<li>增加用户权限判断</li>
+</ol>
+<p>增加的alist接口请求代码</p>
+<blockquote>
+<p>Alist是一个支持多种存储的文件列表程序，具有以下功能</p>
+<ol>
+<li>支持多种存储服务</li>
+<li>网页版管理</li>
+<li>WebDAV 服务</li>
+<li>在线播放和浏览</li>
+<li>部署简便</li>
+</ol>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231130232217.png" alt=""></p>
+
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/09/python%E7%88%AC%E8%99%AB%E4%B9%8B%E8%93%9D%E5%A5%8F%E4%BA%91%E6%96%87%E4%BB%B6%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD/">← prev</a>
+    
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/11/wsl%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3/">next →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2021</span> - <span>2024</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+    <span> 🍦 Theme </span>
+    <a class="link" href="https://github.com/queensferryme/hugo-theme-texify">TeXify</a>
+  </div>
+
+  <div class="footnote">
+    <span>Follow me on <a class=link href=https://github.com/Pi3-l22>GitHub</a> |
+<a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+
+</body>
+
+</html>

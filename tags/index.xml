@@ -8,33 +8,11 @@
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
-    <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://pi3-l22.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Css</title>
-      <link>https://pi3-l22.github.io/tags/css/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/tags/css/</guid>
-      
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>Html</title>
-      <link>https://pi3-l22.github.io/tags/html/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/tags/html/</guid>
-      
-      <description></description>
-      
-    </item>
-    
+    <lastBuildDate>Sat, 10 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://pi3-l22.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Index</title>
       <link>https://pi3-l22.github.io/tags/index/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 10 Feb 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/tags/index/</guid>
       
@@ -43,33 +21,99 @@
     </item>
     
     <item>
-      <title>Markdown</title>
-      <link>https://pi3-l22.github.io/tags/markdown/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      <title>Kali</title>
+      <link>https://pi3-l22.github.io/tags/kali/</link>
+      <pubDate>Sat, 10 Feb 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/tags/markdown/</guid>
+      <guid>https://pi3-l22.github.io/tags/kali/</guid>
       
       <description></description>
       
     </item>
     
     <item>
-      <title>Text</title>
-      <link>https://pi3-l22.github.io/tags/text/</link>
-      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
+      <title>Linux</title>
+      <link>https://pi3-l22.github.io/tags/linux/</link>
+      <pubDate>Sat, 10 Feb 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/tags/text/</guid>
+      <guid>https://pi3-l22.github.io/tags/linux/</guid>
       
       <description></description>
       
     </item>
     
     <item>
-      <title>Emoji</title>
-      <link>https://pi3-l22.github.io/tags/emoji/</link>
-      <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
+      <title>VMware Workstasion</title>
+      <link>https://pi3-l22.github.io/tags/vmware-workstasion/</link>
+      <pubDate>Sat, 10 Feb 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/tags/emoji/</guid>
+      <guid>https://pi3-l22.github.io/tags/vmware-workstasion/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>https://pi3-l22.github.io/tags/windows/</link>
+      <pubDate>Fri, 22 Dec 2023 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://pi3-l22.github.io/tags/windows/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>WSA</title>
+      <link>https://pi3-l22.github.io/tags/wsa/</link>
+      <pubDate>Fri, 22 Dec 2023 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://pi3-l22.github.io/tags/wsa/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://pi3-l22.github.io/tags/python/</link>
+      <pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://pi3-l22.github.io/tags/python/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Socket</title>
+      <link>https://pi3-l22.github.io/tags/socket/</link>
+      <pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://pi3-l22.github.io/tags/socket/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>TCP</title>
+      <link>https://pi3-l22.github.io/tags/tcp/</link>
+      <pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://pi3-l22.github.io/tags/tcp/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>SQL</title>
+      <link>https://pi3-l22.github.io/tags/sql/</link>
+      <pubDate>Mon, 18 Dec 2023 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://pi3-l22.github.io/tags/sql/</guid>
       
       <description></description>
       

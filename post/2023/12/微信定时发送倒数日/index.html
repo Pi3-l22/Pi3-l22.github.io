@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="微信机器人定时发送倒数日信息给联系人">
+  
+
+  
+  <link rel="icon" href="https://pi3-l22.github.io/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://pi3-l22.github.io/post/2023/12/%E5%BE%AE%E4%BF%A1%E5%AE%9A%E6%97%B6%E5%8F%91%E9%80%81%E5%80%92%E6%95%B0%E6%97%A5/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="微信定时发送倒数日">
+  <meta property="og:description" content="微信机器人定时发送倒数日信息给联系人">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-12-20T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-12-20T00:00:00+00:00">
+    <meta property="article:tag" content="Python">
+
+
+  
+  <link rel="canonical" href="https://pi3-l22.github.io/post/2023/12/%E5%BE%AE%E4%BF%A1%E5%AE%9A%E6%97%B6%E5%8F%91%E9%80%81%E5%80%92%E6%95%B0%E6%97%A5/">
+
+  
+  
+  
+  <meta itemprop="name" content="微信定时发送倒数日">
+  <meta itemprop="description" content="微信机器人定时发送倒数日信息给联系人">
+  <meta itemprop="datePublished" content="2023-12-20T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2023-12-20T00:00:00+00:00">
+  <meta itemprop="wordCount" content="1606">
+  <meta itemprop="keywords" content="Python">
+
+  
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/content.css'>
+
+  
+  
+  <title>微信定时发送倒数日 - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://pi3-l22.github.io/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://pi3-l22.github.io/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>微信定时发送倒数日</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/python'>#Python</a>
+    
+  </div>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#实现过程">实现过程</a>
+      <ul>
+        <li><a href="#保存联系人列表">保存联系人列表</a></li>
+        <li><a href="#有关倒数日的操作">有关倒数日的操作</a></li>
+        <li><a href="#处理发送的指令">处理发送的指令</a></li>
+        <li><a href="#主函数">主函数</a></li>
+      </ul>
+    </li>
+    <li><a href="#实现成果">实现成果</a>
+      <ul>
+        <li><a href="#增加讯飞星火大模型">增加讯飞星火大模型</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <h1 id="微信定时发送倒数日">微信定时发送倒数日</h1>
+<p>微信定时发送倒数日是基于Github项目<a href="https://github.com/lich0821/WeChatFerry">WeChatFerry</a>实现的
+这个项目实现的功能：</p>
+<ul>
+<li>检查登录状态</li>
+<li>获取登录账号的 wxid</li>
+<li>获取消息类型</li>
+<li>获取所有联系人</li>
+<li>获取所有好友</li>
+<li>获取数据库</li>
+<li>获取某数据库下的表</li>
+<li>获取用户信息</li>
+<li>发送文本消息（可 @）</li>
+<li>发送图片</li>
+<li>发送文件</li>
+<li>允许接收消息</li>
+<li>停止接收消息</li>
+<li>执行 SQL 查询</li>
+<li>接受好友申请</li>
+<li>添加群成员</li>
+<li>删除群成员</li>
+<li>解密图片</li>
+<li>获取朋友圈消息</li>
+<li>保存图片</li>
+<li>保存语音</li>
+<li>发送卡片消息</li>
+<li>拍一拍群友</li>
+<li>邀请群成员</li>
+<li>图片 OCR</li>
+</ul>
+<p>同时支持多个客户端：</p>
+<ul>
+<li>Go</li>
+<li>HTTP</li>
+<li>Java</li>
+<li>Python</li>
+<li>Rust</li>
+</ul>
+<hr>
+<p><strong>对于HTTP客户端：</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 安装</span>
+</span></span><span style="display:flex;"><span>pip install --upgrade wcfhttp
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 运行</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 查看版本</span>
+</span></span><span style="display:flex;"><span>wcfhttp -v
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 查看帮助</span>
+</span></span><span style="display:flex;"><span>wcfhttp -h
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 忽略新消息运行</span>
+</span></span><span style="display:flex;"><span>wcfhttp
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 新消息转发到指定地址</span>
+</span></span><span style="display:flex;"><span>wcfhttp --cb http<span style="">:</span>//your_host<span style="">:</span>your_port/callback
+</span></span></code></pre></div><p>访问<code>http://your_host:your_port/docs</code>就可以查看接口文档</p>
+<p><strong>对于Python客户端：</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 安装Python库</span>
+</span></span><span style="display:flex;"><span>pip install --upgrade wcfhttp
+</span></span></code></pre></div><p><a href="https://github.com/lich0821/WeChatFerry/blob/master/clients/python/wcferry/client.py">接口信息</a>
+<a href="https://github.com/lich0821/WeChatFerry/blob/master/clients/python/test.py">示例程序</a></p>
+<h2 id="实现过程">实现过程</h2>
+<h3 id="保存联系人列表">保存联系人列表</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">save_contacts</span>(wcf):
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 保存联系人列表</span>
+</span></span><span style="display:flex;"><span>    data <span style="color:#666">=</span> wcf<span style="color:#666">.</span>get_contacts()
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> i <span style="color:#a2f;font-weight:bold">in</span> data:
+</span></span><span style="display:flex;"><span>        wxid <span style="color:#666">=</span> i[<span style="color:#b44">&#39;wxid&#39;</span>]
+</span></span><span style="display:flex;"><span>        code <span style="color:#666">=</span> i[<span style="color:#b44">&#39;code&#39;</span>]
+</span></span><span style="display:flex;"><span>        name <span style="color:#666">=</span> i[<span style="color:#b44">&#39;name&#39;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> i[<span style="color:#b44">&#39;wxid&#39;</span>]<span style="color:#666">.</span>startswith(<span style="color:#b44">&#39;wxid_&#39;</span>):
+</span></span><span style="display:flex;"><span>            contacts_dict[wxid] <span style="color:#666">=</span> [name, code]
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">elif</span> i[<span style="color:#b44">&#39;wxid&#39;</span>]<span style="color:#666">.</span>endswith(<span style="color:#b44">&#39;@chatroom&#39;</span>):
+</span></span><span style="display:flex;"><span>            chatroom_dict[wxid] <span style="color:#666">=</span> [name, code]
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">with</span> <span style="color:#a2f">open</span>(<span style="color:#b44">&#39;contacts.csv&#39;</span>, <span style="color:#b44">&#39;w&#39;</span>, encoding<span style="color:#666">=</span><span style="color:#b44">&#39;utf-8&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> i <span style="color:#a2f;font-weight:bold">in</span> contacts_dict:
+</span></span><span style="display:flex;"><span>            f<span style="color:#666">.</span>write(<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span>i<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">,</span><span style="color:#b68;font-weight:bold">{</span>contacts_dict[i][<span style="color:#666">0</span>]<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">,</span><span style="color:#b68;font-weight:bold">{</span>contacts_dict[i][<span style="color:#666">1</span>]<span style="color:#b68;font-weight:bold">}</span><span style="color:#b62;font-weight:bold">\n</span><span style="color:#b44">&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">with</span> <span style="color:#a2f">open</span>(<span style="color:#b44">&#39;chatroom.csv&#39;</span>, <span style="color:#b44">&#39;w&#39;</span>, encoding<span style="color:#666">=</span><span style="color:#b44">&#39;utf-8&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> i <span style="color:#a2f;font-weight:bold">in</span> chatroom_dict:
+</span></span><span style="display:flex;"><span>            f<span style="color:#666">.</span>write(<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span>i<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">,</span><span style="color:#b68;font-weight:bold">{</span>chatroom_dict[i][<span style="color:#666">0</span>]<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">,</span><span style="color:#b68;font-weight:bold">{</span>chatroom_dict[i][<span style="color:#666">1</span>]<span style="color:#b68;font-weight:bold">}</span><span style="color:#b62;font-weight:bold">\n</span><span style="color:#b44">&#39;</span>)
+</span></span></code></pre></div><h3 id="有关倒数日的操作">有关倒数日的操作</h3>
+<p>获取倒数日</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">get_countdown</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 获取倒数日</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> <span style="color:#a2f;font-weight:bold">not</span> os<span style="color:#666">.</span>path<span style="color:#666">.</span>exists(<span style="color:#b44">&#39;countdown.csv&#39;</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># 创建一个新的文件</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">with</span> <span style="color:#a2f">open</span>(<span style="color:#b44">&#39;countdown.csv&#39;</span>, <span style="color:#b44">&#39;w&#39;</span>, encoding<span style="color:#666">=</span><span style="color:#b44">&#39;utf-8&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f:
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">pass</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">with</span> <span style="color:#a2f">open</span>(<span style="color:#b44">&#39;countdown.csv&#39;</span>, <span style="color:#b44">&#39;r&#39;</span>, encoding<span style="color:#666">=</span><span style="color:#b44">&#39;utf-8&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> i <span style="color:#a2f;font-weight:bold">in</span> f:
+</span></span><span style="display:flex;"><span>            title, date <span style="color:#666">=</span> i<span style="color:#666">.</span>strip()<span style="color:#666">.</span>split(<span style="color:#b44">&#39;,&#39;</span>)
+</span></span><span style="display:flex;"><span>            countdown_day[title] <span style="color:#666">=</span> date
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">&#39;[+] 获取倒数日成功&#39;</span>)
+</span></span></code></pre></div><p>保存倒数日</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">save_countdown</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 保存倒数日</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">with</span> <span style="color:#a2f">open</span>(<span style="color:#b44">&#39;countdown.csv&#39;</span>, <span style="color:#b44">&#39;w&#39;</span>, encoding<span style="color:#666">=</span><span style="color:#b44">&#39;utf-8&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> i <span style="color:#a2f;font-weight:bold">in</span> countdown_day:
+</span></span><span style="display:flex;"><span>            f<span style="color:#666">.</span>write(<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span>i<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">,</span><span style="color:#b68;font-weight:bold">{</span>countdown_day[i]<span style="color:#b68;font-weight:bold">}</span><span style="color:#b62;font-weight:bold">\n</span><span style="color:#b44">&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">&#39;[+] 保存倒数日成功&#39;</span>)
+</span></span></code></pre></div><p>处理倒数日</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">process_countdown</span>(wcf):
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 处理倒数日</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> <span style="color:#a2f;font-weight:bold">True</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">try</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> time<span style="color:#666">.</span>strftime(<span style="color:#b44">&#39;%H:%M&#39;</span>, time<span style="color:#666">.</span>localtime()) <span style="color:#666">==</span> time<span style="color:#666">.</span>strftime(<span style="color:#b44">&#39;%H:%M&#39;</span>, remind_time):
+</span></span><span style="display:flex;"><span>                content <span style="color:#666">=</span> <span style="color:#b44">f</span><span style="color:#b44">&#39;今天是</span><span style="color:#b68;font-weight:bold">{</span>time<span style="color:#666">.</span>strftime(<span style="color:#b44">&#34;%Y-%m-</span><span style="color:#b68;font-weight:bold">%d</span><span style="color:#b44">&#34;</span>, time<span style="color:#666">.</span>localtime())<span style="color:#b68;font-weight:bold">}</span><span style="color:#b62;font-weight:bold">\n\n</span><span style="color:#b44">&#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span> i <span style="color:#a2f;font-weight:bold">in</span> countdown_day:
+</span></span><span style="display:flex;"><span>                    <span style="color:#080;font-style:italic"># 计算还剩多少天</span>
+</span></span><span style="display:flex;"><span>                    days <span style="color:#666">=</span> (datetime<span style="color:#666">.</span>datetime<span style="color:#666">.</span>strptime(countdown_day[i], <span style="color:#b44">&#39;%Y-%m-</span><span style="color:#b68;font-weight:bold">%d</span><span style="color:#b44">&#39;</span>) <span style="color:#666">-</span> datetime<span style="color:#666">.</span>datetime<span style="color:#666">.</span>strptime(time<span style="color:#666">.</span>strftime(<span style="color:#b44">&#39;%Y-%m-</span><span style="color:#b68;font-weight:bold">%d</span><span style="color:#b44">&#39;</span>, time<span style="color:#666">.</span>localtime()), <span style="color:#b44">&#39;%Y-%m-</span><span style="color:#b68;font-weight:bold">%d</span><span style="color:#b44">&#39;</span>))<span style="color:#666">.</span>days
+</span></span><span style="display:flex;"><span>                    content <span style="color:#666">+=</span> <span style="color:#b44">f</span><span style="color:#b44">&#39;[+] [</span><span style="color:#b68;font-weight:bold">{</span>i<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">]</span><span style="color:#b62;font-weight:bold">\n</span><span style="color:#b44">&#39;</span>
+</span></span><span style="display:flex;"><span>                    content <span style="color:#666">+=</span> <span style="color:#b44">f</span><span style="color:#b44">&#39;[</span><span style="color:#b68;font-weight:bold">{</span>countdown_day[i]<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">] [还剩</span><span style="color:#b68;font-weight:bold">{</span>days<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">天]</span><span style="color:#b62;font-weight:bold">\n\n</span><span style="color:#b44">&#39;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#080;font-style:italic"># 如果是最后一天 则删除倒数日</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span> days <span style="color:#666">==</span> <span style="color:#666">0</span>:
+</span></span><span style="display:flex;"><span>                        countdown_day<span style="color:#666">.</span>pop(i)
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span> j <span style="color:#a2f;font-weight:bold">in</span> send_wxid:
+</span></span><span style="display:flex;"><span>                    wcf<span style="color:#666">.</span>send_text(content, j)
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f">print</span>(<span style="color:#b44">&#39;[+] 发送倒数日成功&#39;</span>)
+</span></span><span style="display:flex;"><span>                time<span style="color:#666">.</span>sleep(<span style="color:#666">60</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">except</span> <span style="color:#d2413a;font-weight:bold">Exception</span> <span style="color:#a2f;font-weight:bold">as</span> e:
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f">print</span>(<span style="color:#b44">&#39;[-] 处理倒数日错误:&#39;</span>, e)
+</span></span></code></pre></div><p>添加倒数日</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">add_countdown</span>(wcf, msg):
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 添加倒数日</span>
+</span></span><span style="display:flex;"><span>    stop_date <span style="color:#666">=</span> msg<span style="color:#666">.</span>content<span style="color:#666">.</span>split(<span style="color:#b44">&#39; &#39;</span>)[<span style="color:#666">2</span>]
+</span></span><span style="display:flex;"><span>    title <span style="color:#666">=</span> msg<span style="color:#666">.</span>content<span style="color:#666">.</span>split(<span style="color:#b44">&#39; &#39;</span>)[<span style="color:#666">1</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 检查时间格式</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">try</span>:
+</span></span><span style="display:flex;"><span>        time<span style="color:#666">.</span>strptime(stop_date, <span style="color:#b44">&#39;%Y-%m-</span><span style="color:#b68;font-weight:bold">%d</span><span style="color:#b44">&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># 如果倒数日已存在</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> title <span style="color:#a2f;font-weight:bold">in</span> countdown_day:
+</span></span><span style="display:flex;"><span>            wcf<span style="color:#666">.</span>send_text(<span style="color:#b44">f</span><span style="color:#b44">&#39;[-] 倒数日 </span><span style="color:#b68;font-weight:bold">{</span>title<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> 已存在&#39;</span>, msg<span style="color:#666">.</span>sender)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># 如果时间已过</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (datetime<span style="color:#666">.</span>datetime<span style="color:#666">.</span>strptime(stop_date, <span style="color:#b44">&#39;%Y-%m-</span><span style="color:#b68;font-weight:bold">%d</span><span style="color:#b44">&#39;</span>) <span style="color:#666">-</span> datetime<span style="color:#666">.</span>datetime<span style="color:#666">.</span>strptime(time<span style="color:#666">.</span>strftime(<span style="color:#b44">&#39;%Y-%m-</span><span style="color:#b68;font-weight:bold">%d</span><span style="color:#b44">&#39;</span>, time<span style="color:#666">.</span>localtime()), <span style="color:#b44">&#39;%Y-%m-</span><span style="color:#b68;font-weight:bold">%d</span><span style="color:#b44">&#39;</span>))<span style="color:#666">.</span>days <span style="color:#666">&lt;</span> <span style="color:#666">0</span>:
+</span></span><span style="display:flex;"><span>            wcf<span style="color:#666">.</span>send_text(<span style="color:#b44">f</span><span style="color:#b44">&#39;[-] 倒数日 </span><span style="color:#b68;font-weight:bold">{</span>title<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> 时间已过&#39;</span>, msg<span style="color:#666">.</span>sender)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">except</span> <span style="color:#d2413a;font-weight:bold">Exception</span> <span style="color:#a2f;font-weight:bold">as</span> e:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">&#39;[-] 添加倒数日错误:&#39;</span>, e)
+</span></span><span style="display:flex;"><span>        wcf<span style="color:#666">.</span>send_text(<span style="color:#b44">&#39;[-] 添加倒数日错误&#39;</span>, msg<span style="color:#666">.</span>sender)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>        countdown_day[title] <span style="color:#666">=</span> stop_date
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#39;[+] </span><span style="color:#b68;font-weight:bold">{</span>msg<span style="color:#666">.</span>sender<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> 添加倒数日 </span><span style="color:#b68;font-weight:bold">{</span>title<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> </span><span style="color:#b68;font-weight:bold">{</span>stop_date<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>)
+</span></span><span style="display:flex;"><span>        wcf<span style="color:#666">.</span>send_text(<span style="color:#b44">f</span><span style="color:#b44">&#39;[+] 添加倒数日 </span><span style="color:#b68;font-weight:bold">{</span>title<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> 截止日期 </span><span style="color:#b68;font-weight:bold">{</span>stop_date<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>, msg<span style="color:#666">.</span>sender)
+</span></span></code></pre></div><p>删除倒数日</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">del_countdown</span>(wcf, msg):
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 删除倒数日</span>
+</span></span><span style="display:flex;"><span>    title <span style="color:#666">=</span> msg<span style="color:#666">.</span>content<span style="color:#666">.</span>split(<span style="color:#b44">&#39; &#39;</span>)[<span style="color:#666">1</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">try</span>:
+</span></span><span style="display:flex;"><span>        countdown_day<span style="color:#666">.</span>pop(title)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">except</span> <span style="color:#d2413a;font-weight:bold">Exception</span> <span style="color:#a2f;font-weight:bold">as</span> e:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">&#39;[-] 删除倒数日错误:&#39;</span>, e)
+</span></span><span style="display:flex;"><span>        wcf<span style="color:#666">.</span>send_text(<span style="color:#b44">&#39;[-] 删除倒数日错误&#39;</span>, msg<span style="color:#666">.</span>sender)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#39;[+] </span><span style="color:#b68;font-weight:bold">{</span>msg<span style="color:#666">.</span>sender<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> 删除倒数日 </span><span style="color:#b68;font-weight:bold">{</span>title<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>)
+</span></span><span style="display:flex;"><span>        wcf<span style="color:#666">.</span>send_text(<span style="color:#b44">f</span><span style="color:#b44">&#39;[+] 删除倒数日 </span><span style="color:#b68;font-weight:bold">{</span>title<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>, msg<span style="color:#666">.</span>sender)
+</span></span></code></pre></div><p>列出倒数日</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">list_countdown</span>(wcf, msg):
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 列出倒数日</span>
+</span></span><span style="display:flex;"><span>    content <span style="color:#666">=</span> <span style="color:#b44">f</span><span style="color:#b44">&#39;今天是</span><span style="color:#b68;font-weight:bold">{</span>time<span style="color:#666">.</span>strftime(<span style="color:#b44">&#34;%Y-%m-</span><span style="color:#b68;font-weight:bold">%d</span><span style="color:#b44">&#34;</span>, time<span style="color:#666">.</span>localtime())<span style="color:#b68;font-weight:bold">}</span><span style="color:#b62;font-weight:bold">\n\n</span><span style="color:#b44">&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> i <span style="color:#a2f;font-weight:bold">in</span> countdown_day:
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># 计算还剩多少天</span>
+</span></span><span style="display:flex;"><span>        days <span style="color:#666">=</span> (datetime<span style="color:#666">.</span>datetime<span style="color:#666">.</span>strptime(countdown_day[i], <span style="color:#b44">&#39;%Y-%m-</span><span style="color:#b68;font-weight:bold">%d</span><span style="color:#b44">&#39;</span>) <span style="color:#666">-</span> datetime<span style="color:#666">.</span>datetime<span style="color:#666">.</span>strptime(time<span style="color:#666">.</span>strftime(<span style="color:#b44">&#39;%Y-%m-</span><span style="color:#b68;font-weight:bold">%d</span><span style="color:#b44">&#39;</span>, time<span style="color:#666">.</span>localtime()), <span style="color:#b44">&#39;%Y-%m-</span><span style="color:#b68;font-weight:bold">%d</span><span style="color:#b44">&#39;</span>))<span style="color:#666">.</span>days
+</span></span><span style="display:flex;"><span>        content <span style="color:#666">+=</span> <span style="color:#b44">f</span><span style="color:#b44">&#39;[+] [</span><span style="color:#b68;font-weight:bold">{</span>i<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">]</span><span style="color:#b62;font-weight:bold">\n</span><span style="color:#b44">&#39;</span>
+</span></span><span style="display:flex;"><span>        content <span style="color:#666">+=</span> <span style="color:#b44">f</span><span style="color:#b44">&#39;[</span><span style="color:#b68;font-weight:bold">{</span>countdown_day[i]<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">] [还剩</span><span style="color:#b68;font-weight:bold">{</span>days<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">天]</span><span style="color:#b62;font-weight:bold">\n\n</span><span style="color:#b44">&#39;</span>
+</span></span><span style="display:flex;"><span>    content <span style="color:#666">+=</span> <span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b62;font-weight:bold">\n</span><span style="color:#b44">提醒时间为每天的 </span><span style="color:#b68;font-weight:bold">{</span>time<span style="color:#666">.</span>strftime(<span style="color:#b44">&#34;%H:%M&#34;</span>, remind_time)<span style="color:#b68;font-weight:bold">}</span><span style="color:#b62;font-weight:bold">\n</span><span style="color:#b44">&#39;</span>
+</span></span><span style="display:flex;"><span>    content <span style="color:#666">+=</span> <span style="color:#b44">f</span><span style="color:#b44">&#39;发送倒数日的对象为 </span><span style="color:#b68;font-weight:bold">{</span>send_wxid<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#39;[+] </span><span style="color:#b68;font-weight:bold">{</span>msg<span style="color:#666">.</span>sender<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> 列出倒数日&#39;</span>)
+</span></span><span style="display:flex;"><span>    wcf<span style="color:#666">.</span>send_text(content, msg<span style="color:#666">.</span>sender)
+</span></span></code></pre></div><p>设置提醒时间</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">set_remind_time</span>(wcf, msg):
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 设置提醒时间</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">global</span> remind_time
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">try</span>:
+</span></span><span style="display:flex;"><span>        time_ <span style="color:#666">=</span> msg<span style="color:#666">.</span>content<span style="color:#666">.</span>split(<span style="color:#b44">&#39; &#39;</span>)[<span style="color:#666">1</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># 检查时间格式</span>
+</span></span><span style="display:flex;"><span>        remind_time <span style="color:#666">=</span> time<span style="color:#666">.</span>strptime(time_, <span style="color:#b44">&#39;%H:%M&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">except</span> <span style="color:#d2413a;font-weight:bold">Exception</span> <span style="color:#a2f;font-weight:bold">as</span> e:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">&#39;[-] 设置提醒时间错误:&#39;</span>, e)
+</span></span><span style="display:flex;"><span>        wcf<span style="color:#666">.</span>send_text(<span style="color:#b44">&#39;[-] 设置提醒时间错误&#39;</span>, msg<span style="color:#666">.</span>sender)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#39;[+] </span><span style="color:#b68;font-weight:bold">{</span>msg<span style="color:#666">.</span>sender<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> 设置提醒时间为每天的 </span><span style="color:#b68;font-weight:bold">{</span>time<span style="color:#666">.</span>strftime(<span style="color:#b44">&#34;%H:%M&#34;</span>, remind_time)<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>)
+</span></span><span style="display:flex;"><span>        wcf<span style="color:#666">.</span>send_text(<span style="color:#b44">f</span><span style="color:#b44">&#39;[+] 设置提醒时间为每天的 </span><span style="color:#b68;font-weight:bold">{</span>time<span style="color:#666">.</span>strftime(<span style="color:#b44">&#34;%H:%M&#34;</span>, remind_time)<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>, msg<span style="color:#666">.</span>sender)
+</span></span></code></pre></div><p>设置发送倒数日的对象</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">update_send_wxid</span>(wcf, msg):
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 设置发送倒数日的对象</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">global</span> send_wxid
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">try</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> <span style="color:#b44">&#39;,&#39;</span> <span style="color:#a2f;font-weight:bold">in</span> msg<span style="color:#666">.</span>content<span style="color:#666">.</span>split(<span style="color:#b44">&#39; &#39;</span>)[<span style="color:#666">1</span>]:
+</span></span><span style="display:flex;"><span>            send_wxid <span style="color:#666">=</span> msg<span style="color:#666">.</span>content<span style="color:#666">.</span>split(<span style="color:#b44">&#39; &#39;</span>)[<span style="color:#666">1</span>]<span style="color:#666">.</span>split(<span style="color:#b44">&#39;,&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>            send_wxid <span style="color:#666">=</span> [msg<span style="color:#666">.</span>content<span style="color:#666">.</span>split(<span style="color:#b44">&#39; &#39;</span>)[<span style="color:#666">1</span>]]
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">except</span> <span style="color:#d2413a;font-weight:bold">Exception</span> <span style="color:#a2f;font-weight:bold">as</span> e:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">&#39;[-] 设置发送倒数日的对象错误:&#39;</span>, e)
+</span></span><span style="display:flex;"><span>        wcf<span style="color:#666">.</span>send_text(<span style="color:#b44">&#39;[-] 设置发送倒数日的对象错误&#39;</span>, msg<span style="color:#666">.</span>sender)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#39;[+] </span><span style="color:#b68;font-weight:bold">{</span>msg<span style="color:#666">.</span>sender<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> 设置发送倒数日的对象为 </span><span style="color:#b68;font-weight:bold">{</span>send_wxid<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>)
+</span></span><span style="display:flex;"><span>    wcf<span style="color:#666">.</span>send_text(<span style="color:#b44">f</span><span style="color:#b44">&#39;[+] 设置发送倒数日的对象为 </span><span style="color:#b68;font-weight:bold">{</span>send_wxid<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>, msg<span style="color:#666">.</span>sender)
+</span></span></code></pre></div><h3 id="处理发送的指令">处理发送的指令</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">process_msg</span>(wcf):
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> wcf<span style="color:#666">.</span>is_receiving_msg():
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">try</span>:
+</span></span><span style="display:flex;"><span>            msg <span style="color:#666">=</span> wcf<span style="color:#666">.</span>get_msg()
+</span></span><span style="display:flex;"><span>            content <span style="color:#666">=</span> msg<span style="color:#666">.</span>content
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> content<span style="color:#666">.</span>startswith(<span style="color:#b44">&#39;$add&#39;</span>):  <span style="color:#080;font-style:italic"># 添加倒数日</span>
+</span></span><span style="display:flex;"><span>                add_countdown(wcf, msg)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">elif</span> content<span style="color:#666">.</span>startswith(<span style="color:#b44">&#39;$del&#39;</span>):  <span style="color:#080;font-style:italic"># 删除倒数日</span>
+</span></span><span style="display:flex;"><span>                del_countdown(wcf, msg)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">elif</span> content <span style="color:#666">==</span> <span style="color:#b44">&#39;$list&#39;</span>:  <span style="color:#080;font-style:italic"># 列出倒数日</span>
+</span></span><span style="display:flex;"><span>                list_countdown(wcf, msg)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">elif</span> content <span style="color:#666">==</span> <span style="color:#b44">&#39;$help&#39;</span>:  <span style="color:#080;font-style:italic"># 帮助信息</span>
+</span></span><span style="display:flex;"><span>                help_info(wcf, msg)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">elif</span> content<span style="color:#666">.</span>startswith(<span style="color:#b44">&#39;$set&#39;</span>):  <span style="color:#080;font-style:italic"># 设置提醒时间</span>
+</span></span><span style="display:flex;"><span>                set_remind_time(wcf, msg)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">elif</span> content<span style="color:#666">.</span>startswith(<span style="color:#b44">&#39;$send&#39;</span>):  <span style="color:#080;font-style:italic"># 设置发送倒数日的对象</span>
+</span></span><span style="display:flex;"><span>                update_send_wxid(wcf, msg)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">continue</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">except</span> Empty:
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">continue</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">except</span> <span style="color:#d2413a;font-weight:bold">Exception</span> <span style="color:#a2f;font-weight:bold">as</span> e:
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f">print</span>(<span style="color:#b44">&#39;[-] 处理消息错误:&#39;</span>, e)
+</span></span></code></pre></div><h3 id="主函数">主函数</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">main</span>():
+</span></span><span style="display:flex;"><span>    wcf <span style="color:#666">=</span> Wcf()
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 保存联系人列表</span>
+</span></span><span style="display:flex;"><span>    save_contacts(wcf)
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 获取倒数日</span>
+</span></span><span style="display:flex;"><span>    get_countdown()
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 处理倒数日</span>
+</span></span><span style="display:flex;"><span>    Thread(target<span style="color:#666">=</span>process_countdown, args<span style="color:#666">=</span>(wcf,))<span style="color:#666">.</span>start()
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 处理消息</span>
+</span></span><span style="display:flex;"><span>    wcf<span style="color:#666">.</span>enable_receiving_msg()
+</span></span><span style="display:flex;"><span>    Thread(target<span style="color:#666">=</span>process_msg, args<span style="color:#666">=</span>(wcf,), daemon<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>)<span style="color:#666">.</span>start()
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> wcf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#b44">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    wcf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">try</span>:
+</span></span><span style="display:flex;"><span>        wcf <span style="color:#666">=</span> main()
+</span></span><span style="display:flex;"><span>        wcf<span style="color:#666">.</span>keep_running()
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">except</span> <span style="color:#d2413a;font-weight:bold">KeyboardInterrupt</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f">print</span>(<span style="color:#b44">&#39;[-] 服务停止&#39;</span>)
+</span></span><span style="display:flex;"><span>        save_countdown()
+</span></span><span style="display:flex;"><span>        wcf<span style="color:#666">.</span>cleanup()
+</span></span><span style="display:flex;"><span>        sys<span style="color:#666">.</span>exit(<span style="color:#666">0</span>)
+</span></span></code></pre></div><h2 id="实现成果">实现成果</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231221091026.png" alt="$help命令">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231221091104.png" alt="$list命令">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231221091116.png" alt="$add命令">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231221091144.png" alt="$del命令">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231221091203.png" alt="$send命令">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231221091214.png" alt="$set命令">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231221091240.png" alt="定时提醒效果"></p>
+<h3 id="增加讯飞星火大模型">增加讯飞星火大模型</h3>
+<p>在上面的基础上，也可以接入一些AI大模型或者一些智能聊天的机器人
+我这里使用讯飞星火V3.0模型接口，个人认证和免费体验一年，200万token
+<a href="https://xinghuo.xfyun.cn/?ch=blzc_WjOjQX&amp;ref=ainavtool.com">讯飞星火认知大模型</a>
+<a href="https://www.xfyun.cn/doc/spark/Web.html">星火认知大模型Web API文档</a>
+参考Web API的文档
+实现的结果：
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20231222210352.jpg" alt="讯飞星火模型"></p>
+
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">← prev</a>
+    
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/12/%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/">next →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2021</span> - <span>2024</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+    <span> 🍦 Theme </span>
+    <a class="link" href="https://github.com/queensferryme/hugo-theme-texify">TeXify</a>
+  </div>
+
+  <div class="footnote">
+    <span>Follow me on <a class=link href=https://github.com/Pi3-l22>GitHub</a> |
+<a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Oh My Posh on Pi3&#39;Notes</title>
+    <link>https://pi3-l22.github.io/tags/oh-my-posh/</link>
+    <description>Recent content in Oh My Posh on Pi3&#39;Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
+    <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
+    <lastBuildDate>Sat, 25 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://pi3-l22.github.io/tags/oh-my-posh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Oh My Posh 配置教程</title>
+      <link>https://pi3-l22.github.io/post/2023/11/oh-my-posh-%E4%B8%BA-powershell-%E5%92%8C-wsl-%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E6%A0%B7%E5%BC%8F/</link>
+      <pubDate>Sat, 25 Nov 2023 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://pi3-l22.github.io/post/2023/11/oh-my-posh-%E4%B8%BA-powershell-%E5%92%8C-wsl-%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E6%A0%B7%E5%BC%8F/</guid>
+      
+      <description>&lt;h1 id=&#34;oh-my-posh-为-powershell-和-wsl-配置终端样式&#34;&gt;Oh My Posh 为 PowerShell 和 WSL 配置终端样式&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://ohmyposh.dev/docs/&#34;&gt;Oh My Posh官方文档&lt;/a&gt;
+&lt;a href=&#34;https://learn.microsoft.com/zh-cn/windows/terminal/tutorials/custom-prompt-setup&#34;&gt;Microsoft文档&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;powershell配置&#34;&gt;PowerShell配置&lt;/h2&gt;
+&lt;p&gt;首先就是下载带图标的Nerd字体，下载地址：&lt;a href=&#34;https://www.nerdfonts.com/&#34;&gt;Nerd Fonts官方网址&lt;/a&gt;
+下载并安装好图标字体，在Windows terminal终端上把Power Shell和WSL的字体都配置为这个图标字体
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125173959.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;根据官方文档，下载oh-my-posh，在PowerShell中输入以下命令&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;winget install JanDeDobbeleer.OhMyPosh -s winget
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样会下载下面的两个文件
+&lt;code&gt;oh-my-posh.exe&lt;/code&gt; - Windows 可执行文件
+&lt;code&gt;themes&lt;/code&gt; - 最新的 Oh My Posh 主题
+下载的默认路径为：&lt;code&gt;C:\Users\用户名\AppData\Local\Programs\oh-my-posh&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这里需要配置oh-my-posh和themes的可执行文件，以便后续不会出错
+在环境变量的path值中添加路径：&lt;code&gt;C:\Users\用户名\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe&lt;/code&gt;
+&lt;em&gt;（这一步可不做）&lt;/em&gt; 在环境变量中增加一个字段POSH_THEMES_PATH，值为：&lt;code&gt;C:\Users\86135\AppData\Local\Programs\oh-my-posh\themes&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在PowerShell终端中输入：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;notepad &lt;span style=&#34;color:#b8860b&#34;&gt;$PROFILE&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;如果这一步报错，文件不存在则需要先创建配置文件
+执行&lt;code&gt;New-Item -Path $PROFILE -Type File -Force&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在打开的记事本中，填入&lt;code&gt;oh-my-posh init pwsh | Invoke-Expression&lt;/code&gt;
+接着输入&lt;code&gt;. $PROFILE&lt;/code&gt;重新加载配置&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果这一步，报错，红字显示找不到oh-my-posh的命令
+那么说明前面的环境变量没有配置好&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;接着重新启动终端，就发现已经应用了默认主题
+如果需要更改主题，则只需要到&lt;a href=&#34;https://ohmyposh.dev/docs/themes&#34;&gt;官方文档主题&lt;/a&gt;中，挑选好主题，记下主题名字
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125174014.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;同样在PowerShell终端中输入：&lt;code&gt;notepad $PROFILE&lt;/code&gt;打开配置文件
+修改之前输入的&lt;code&gt;oh-my-posh init pwsh | Invoke-Expression&lt;/code&gt;
+改为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;oh-my-posh init pwsh --config &lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;`C:\Users\用户名\AppData\Local\Programs\oh-my-posh\themes\1_shell.omp.json&amp;#39;&lt;/span&gt; | Invoke-Expression
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里的主题路径应该根据自己的情况更改，&lt;code&gt;1_shell.omp.json&lt;/code&gt;是主题文件
+如果在上面的步骤中，你已经配置了主题文件夹的环境变量，则可以：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;oh-my-posh init pwsh --config &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#b8860b&#34;&gt;$env&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;:POSH_THEMES_PATH/1_shell.omp.json&amp;#34;&lt;/span&gt; | Invoke-Expression
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;重新启动终端，就可以应用。&lt;/p&gt;
+&lt;h2 id=&#34;wsl配置&#34;&gt;WSL配置&lt;/h2&gt;
+&lt;p&gt;WSL的配置和PowerShell的十分相似，但是需要注意的是，WSL下可能有好多种类的Shell，配置的时候，需要先查看自己的WSL是什么类型的shell
+查看方法，输入以下命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#b8860b&#34;&gt;$SHELL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果是&lt;code&gt;bash&lt;/code&gt;就在官方文档Linux教程中找对应的方法，我这里以&lt;code&gt;zsh&lt;/code&gt;为例。&lt;/p&gt;
+&lt;p&gt;同样的，在配置之前，需要先给WSL的终端文字更改为Nerd带图标的字体，否则图标不能生效&lt;/p&gt;
+&lt;p&gt;下载oh-my-posh，输入以下命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -s https://ohmyposh.dev/install.sh | bash -s -- -d /bin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;这里可能会报错
+&lt;code&gt;-d&lt;/code&gt; 后面指定的是下载的位置，最好是下载到根目录下的&lt;code&gt;/bin&lt;/code&gt;文件，因为这样就不需要配置环境变量，可以在任意位置执行&lt;code&gt;oh-my-posh&lt;/code&gt;的命令，避免了之后很多的报错
+因此，如果你在普通用户下可能需要加上&lt;code&gt;sudo&lt;/code&gt;
+或者你可以先下载到其他位置，之后把可执行文件复制到&lt;code&gt;/bin&lt;/code&gt;目录下，这一步同样需要root权限&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;接着，输入以下命令&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;oh-my-posh get shell
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果返回了你当前的shell，说明下载成功，如果返回‘找不到命令’，可能没有下载到正确的位置
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125174023.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;输入命令，打开shell的配置文件，这里演示的是zsh，所以打开&lt;code&gt;~/.zshrc&lt;/code&gt;
+如果你是bash，那么打开的就是&lt;code&gt;~/.bashrc&lt;/code&gt;，配置命令也要改为bash&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo vim ~/.zshrc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;添加以下配置到文件中&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f&#34;&gt;eval&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;$(&lt;/span&gt;oh-my-posh init zsh&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;退出文件，终端输入&lt;code&gt;exec zsh&lt;/code&gt;，更新配置，也可以输入&lt;code&gt;source ~/.zshrc&lt;/code&gt;，两者是一样的&lt;/p&gt;
+&lt;p&gt;（这一步不一定）重新启动终端，可以发现oh-my-posh已经应用成功&lt;/p&gt;
+&lt;p&gt;更改主题，和PowerShell是类似的
+同样打开配置文件&lt;code&gt;~/.zshrc&lt;/code&gt;，将原先输入的配置改为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f&#34;&gt;eval&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;$(&lt;/span&gt;oh-my-posh init zsh --config ~/.cache/oh-my-posh/themes/1_shell.omp.json&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中，&lt;code&gt;--config&lt;/code&gt;后面填入，你的主题路径和主题名字，我的主题路径可能有所不同，需要更改为自己的
+退出文件，终端输入&lt;code&gt;exec zsh&lt;/code&gt;，主题就会立马应用。
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125174037.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+      
+    </item>
+    
+  </channel>
+</rss>

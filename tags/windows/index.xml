@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on Pi3&#39;Notes</title>
+    <link>https://pi3-l22.github.io/tags/windows/</link>
+    <description>Recent content in Windows on Pi3&#39;Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
+    <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
+    <lastBuildDate>Fri, 22 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://pi3-l22.github.io/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows10下安装使用WSA</title>
+      <link>https://pi3-l22.github.io/post/2023/12/windows10%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8wsa/</link>
+      <pubDate>Fri, 22 Dec 2023 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://pi3-l22.github.io/post/2023/12/windows10%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8wsa/</guid>
+      
+      <description>&lt;h1 id=&#34;windows10下安装使用wsa&#34;&gt;Windows10下安装使用WSA&lt;/h1&gt;
+&lt;p&gt;如何在Windows10中使用带有Magisk的安卓子系统
+需要系统版本高于Windows10 22H2
+&lt;a href=&#34;https://learn.microsoft.com/zh-cn/windows/android/wsa/&#34;&gt;适用于 Android™️ 的 Windows 子系统 | Microsoft Learn&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;下载安装&#34;&gt;下载安装&lt;/h2&gt;
+&lt;p&gt;首先在Github上找到&lt;a href=&#34;https://github.com/MustardChef/WSABuilds/releases&#34;&gt;MustardChef/WSABuilds&lt;/a&gt;，下载相应的安装包，Magisk和KernelSU都可以
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212033.png&#34; alt=&#34;WSA不同版本的安装包&#34;&gt;&lt;/p&gt;
+&lt;p&gt;下载解压完成之后进入文件夹，运行&lt;code&gt;run.bat&lt;/code&gt;就可以进行安装。安装过程中会自动启动安卓子系统，同时可以修补Magisk镜像
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212306.png&#34; alt=&#34;运行run.bat&#34;&gt;
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212736.png&#34; alt=&#34;启动WSA&#34;&gt;
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212433.png&#34; alt=&#34;WSA界面&#34;&gt;
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222214229.png&#34; alt=&#34;Magisk&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;使用adb命令&#34;&gt;使用ADB命令&lt;/h2&gt;
+&lt;p&gt;安装完成之后，还需要打开系统的开发者选项，方便用adb命令连接和操作安卓子系统
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212637.png&#34; alt=&#34;打开开发者选项&#34;&gt;
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212805.png&#34; alt=&#34;确保开发者选项已经打开&#34;&gt;&lt;/p&gt;
+&lt;p&gt;打开开发者选择就可以使用电脑上的ADB进行连接操作
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212957.png&#34; alt=&#34;adb连接&#34;&gt;
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/2023-12-22_20-54-15.png&#34; alt=&#34;弹出连接窗口&#34;&gt;&lt;/p&gt;
+&lt;p&gt;连接时如果出现，不能连接的情况，需要重启电脑或者多试几次
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222213301.png&#34; alt=&#34;连接不上的情况&#34;&gt;&lt;/p&gt;
+&lt;p&gt;连接上就可以使用ADB命令操作手机，安装APP，传输文件等功能，当然也可以使用微软商店中的WSA工具箱等软件，更加方便管理安卓子系统
+&lt;a href=&#34;https://blog.csdn.net/lb245557472/article/details/84068519&#34;&gt;ADB 操作命令详解及用法大全&lt;/a&gt;
+如：
+查看所有应用&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb shell pm list packages
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;查看第三方应用&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb shell pm list packages &lt;span style=&#34;color:#666&#34;&gt;-3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装APK&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb install 包名
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;卸载软件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb uninstall 包名
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;打开WSA设置&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb shell am &lt;span style=&#34;color:#a2f&#34;&gt;start &lt;/span&gt;-n com.android.settings/.Settings\&lt;span style=&#34;color:#b8860b&#34;&gt;$WifiSettingsActivity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222225746.png&#34; alt=&#34;设置界面&#34;&gt;&lt;/p&gt;
+&lt;p&gt;文件操作&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;下载文件到电脑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb pull &amp;lt;remote&amp;gt; [&lt;span style=&#34;color:#800&#34;&gt;local&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;上传文件至手机
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb push &amp;lt;local&amp;gt; &amp;lt;remote&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;列出目录内容
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb shell &lt;span style=&#34;color:#a2f&#34;&gt;ls &lt;/span&gt;[&lt;span style=&#34;color:#800&#34;&gt;options&lt;/span&gt;] &amp;lt;directory&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;切换目录
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb shell &lt;span style=&#34;color:#a2f&#34;&gt;cd &lt;/span&gt;&amp;lt;directory&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;删除文件或目录
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb shell &lt;span style=&#34;color:#a2f&#34;&gt;rm &lt;/span&gt;[&lt;span style=&#34;color:#800&#34;&gt;options&lt;/span&gt;] &amp;lt;files or directory&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;创建目录
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb shell mkdir [&lt;span style=&#34;color:#800&#34;&gt;options&lt;/span&gt;] &amp;lt;&lt;span style=&#34;color:#a2f&#34;&gt;directory-name&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;&#34;&gt;………………&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;都是Linux上的命令前加上adb shell
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;安装应用程序&#34;&gt;安装应用程序&lt;/h2&gt;
+&lt;p&gt;我们可以使用文件操作命令为WSA安装应用程序
+比如我电脑桌面上有一个apk安装包，可以先将文件上传至手机目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb push C:\desktop\kuan.apk /storage/emulated/&lt;span style=&#34;color:#666&#34;&gt;0&lt;/span&gt;/Download
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222214717.png&#34; alt=&#34;上传文件&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后在WSA中对应的文件夹中就可以看见apk安装包
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222214810.png&#34; alt=&#34;上传成功的安装包&#34;&gt;&lt;/p&gt;
+&lt;p&gt;接着点击就可以安装，或者也可以使用ADB命令进行安装&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb install /storage/emulated/&lt;span style=&#34;color:#666&#34;&gt;0&lt;/span&gt;/Download/kuan.apk
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222215038.png&#34; alt=&#34;安装APP&#34;&gt;
+可以直接在电脑桌面打开手机应用程序
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222220529.png&#34; alt=&#34;桌面的APP&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;配置网络&#34;&gt;配置网络&lt;/h2&gt;
+&lt;p&gt;WSA一开始好像是无网络不能上网的，所以还需要配置一下网络环境
+同样使用ADB命令完成&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb shell settings put global http_proxy &lt;span style=&#34;color:#666&#34;&gt;172.24&lt;/span&gt;.128.&lt;span style=&#34;color:#666&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;12345&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;IP是在电脑终端输入&lt;code&gt;ipconfig&lt;/code&gt;找到本机在WSL中的IP
+端口是本机的代理端口
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222224919.png&#34; alt=&#34;查看本机在WSL中的IP&#34;&gt;
+这样之后就可以上网，并且已经挂上代理
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222225110.png&#34; alt=&#34;Google商店&#34;&gt;
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222230453.png&#34; alt=&#34;酷安&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在配置网络的时候，可能遇到WSA获取不到IP的情况
+确保在&lt;strong&gt;启动或关闭Windows功能&lt;/strong&gt;中的Hyper-V及其包括的全部选项、虚拟化已经打开
+并且BIOS中已经启设备的虚拟化
+如果上面都已完成，还是不能获取到IP
+最好的办法就是卸载删除后重新安装&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;正常情况，在WSA的网络设置中，可以看见一个虚拟WIFI
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222230044.png&#34; alt=&#34;虚拟WIFI&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;卸载删除&#34;&gt;卸载删除&lt;/h2&gt;
+&lt;p&gt;只需要在Windows设置中卸载 &lt;em&gt;适用于Android的Windows子系统&lt;/em&gt; 程序，然后直接删除原先下载解压出来的文件夹即可
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222225018.png&#34; alt=&#34;卸载WSA&#34;&gt;&lt;/p&gt;
+</description>
+      
+    </item>
+    
+  </channel>
+</rss>

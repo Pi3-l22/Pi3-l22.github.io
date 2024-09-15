@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="WSL相关问题与解决
+WSL进行内核模块编程
+[第一节] WSL2 内核编译/安装内核头文件/驱动调试_wsl2编译和安装内核以支持驱动编译_landaliming的博客-CSDN博客
+
+
+查看当前系统的内核版本号
+uname -r
+5.4.72-microsoft-standard-WSL2">
+  
+
+  
+  <link rel="icon" href="https://pi3-l22.github.io/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://pi3-l22.github.io/post/2023/11/wsl%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="WSL相关问题与解决">
+  <meta property="og:description" content="WSL相关问题与解决 WSL进行内核模块编程 [第一节] WSL2 内核编译/安装内核头文件/驱动调试_wsl2编译和安装内核以支持驱动编译_landaliming的博客-CSDN博客
+查看当前系统的内核版本号 uname -r 5.4.72-microsoft-standard-WSL2">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-11-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-11-21T00:00:00+00:00">
+    <meta property="article:tag" content="WSL">
+    <meta property="article:tag" content="Linux">
+
+
+  
+  <link rel="canonical" href="https://pi3-l22.github.io/post/2023/11/wsl%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3/">
+
+  
+  
+  
+  <meta itemprop="name" content="WSL相关问题与解决">
+  <meta itemprop="description" content="WSL相关问题与解决 WSL进行内核模块编程 [第一节] WSL2 内核编译/安装内核头文件/驱动调试_wsl2编译和安装内核以支持驱动编译_landaliming的博客-CSDN博客
+查看当前系统的内核版本号 uname -r 5.4.72-microsoft-standard-WSL2">
+  <meta itemprop="datePublished" content="2023-11-21T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2023-11-21T00:00:00+00:00">
+  <meta itemprop="wordCount" content="846">
+  <meta itemprop="keywords" content="WSL,Linux">
+
+  
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/content.css'>
+
+  
+  
+  <title>WSL相关问题与解决 - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://pi3-l22.github.io/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://pi3-l22.github.io/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>WSL相关问题与解决</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/wsl'>#WSL</a>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/linux'>#linux</a>
+    
+  </div>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#wsl进行内核模块编程">WSL进行内核模块编程</a></li>
+    <li><a href="#wsl安装新的内核">WSL安装新的内核</a></li>
+    <li><a href="#wsl与主机进行局域网通信">WSL与主机进行局域网通信</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <h1 id="wsl相关问题与解决">WSL相关问题与解决</h1>
+<h2 id="wsl进行内核模块编程">WSL进行内核模块编程</h2>
+<p><a href="https://blog.csdn.net/dubuhongchen/article/details/118460376">[第一节] WSL2 内核编译/安装内核头文件/驱动调试_wsl2编译和安装内核以支持驱动编译_landaliming的博客-CSDN博客</a></p>
+<ol>
+<li>
+<p>查看当前系统的内核版本号
+<code>uname -r</code>
+5.4.72-microsoft-standard-WSL2</p>
+</li>
+<li>
+<p>下载内核源码
+去github下载对应的linux内核源码包
+wget <a href="https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs/tags/linux-msft-5.4.72.tar.gz">https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs/tags/linux-msft-5.4.72.tar.gz</a></p>
+</li>
+<li>
+<p>安装依赖库
+先安装如下库，如果编译报错，再安装缺失的库</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SHELL" data-lang="SHELL"><span style="display:flex;"><span>sudo apt-get install libelf-dev build-essential pkg-config
+</span></span><span style="display:flex;"><span>sudo apt-get install bison build-essential flex libssl-dev libelf-dev bc
+</span></span></code></pre></div><ol start="4">
+<li>编译安装</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar xvf WSL2-Linux-Kernel-linux-msft-5.4.72.tar.gz 
+</span></span><span style="display:flex;"><span><span style="color:#a2f">cd</span> WSL2-Linux-Kernel-linux-msft-5.4.72/
+</span></span><span style="display:flex;"><span>zcat /proc/config.gz &gt; .config
+</span></span><span style="display:flex;"><span>make -j <span style="color:#a2f;font-weight:bold">$(</span>nproc<span style="color:#a2f;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>sudo make -j <span style="color:#a2f;font-weight:bold">$(</span>nproc<span style="color:#a2f;font-weight:bold">)</span> modules_install
+</span></span></code></pre></div><p>安装后会看到<code>/lib/modules/5.4.72-microsoft-standard-WSL2</code>目录下相关文件指到了源码所在的目录
+接着就可以进行内核的模块编程</p>
+<h2 id="wsl安装新的内核">WSL安装新的内核</h2>
+<p><a href="https://blog.csdn.net/qq_40856284/article/details/106535962">为你的WSL 2编译一个最新的Linux内核吧！</a></p>
+<p>进入内核源码文件，增加系统调用例程 或者 更改内核源码之后，重新编译成新的内核并安装</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>make <span style="color:#b8860b">KCONFIG_CONFIG</span><span style="color:#666">=</span>Microsoft/config-wsl -j <span style="color:#666">16</span>
+</span></span></code></pre></div><p>编译完成后的内核镜像存放为<code>arch/x86/boot/bzImage</code>文件，将其重命名为<code>kernel</code>，并拷贝到win 10中
+在C:\user[用户名]目录下，增加WSL配置文件，<code>.wslconfig</code>，在文件中指定内核路径为新生成的内核（win10路径）</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#666">[</span>wsl2<span style="color:#666">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#b8860b">kernel</span><span style="color:#666">=</span>D:<span style="color:#b62;font-weight:bold">\\</span>WSL<span style="color:#b62;font-weight:bold">\\</span>kali-linux<span style="color:#b62;font-weight:bold">\\</span>bzImage
+</span></span></code></pre></div><p>在CMD中执行：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wsl --shutdown
+</span></span></code></pre></div><p>关闭WSL，并重新启动，检查内核版本，发现内核已更新。</p>
+<h2 id="wsl与主机进行局域网通信">WSL与主机进行局域网通信</h2>
+<p><a href="https://blog.csdn.net/weixin_43997331/article/details/122593312">【精选】同一局域网下windows主机和wsl子系统相互网络服务访问_局域网访问wsl-CSDN博客</a></p>
+<p>正常来说，WSL和主机之间的局域网通信，只能是单向的，主机可以ping通WSL，但是WSL却无法访问主机。
+接下来是解决的办法</p>
+<p>在WSL中，查询WSL的IP地址：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ip addr | grep eth0
+</span></span></code></pre></div><p>WSL的网卡是eth0
+<code>python -m http.server 8080</code>启动服务，在主机端是可以访问的</p>
+<p>接着就是在Windows中操作。
+以管理员打开powershell，输入指令：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#a2f">New-NetFirewallRule</span> -DisplayName <span style="color:#b44">&#34;WSL&#34;</span> -Direction Inbound -InterfaceAlias <span style="color:#b44">&#34;vEthernet (WSL)&#34;</span> -Action Allow
+</span></span></code></pre></div><p>同时在WSL中输入：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat /etc/resolv.conf | grep nameserver | awk <span style="color:#b44">&#39;{ print $2 }&#39;</span>
+</span></span></code></pre></div><p>这时候就出现了一个IP，这个就是主机的IP地址，通过这个地址可以访问主机</p>
+<p>同样在主机上<code>python -m http.server 8080</code> 启动服务，在WSL端是可以访问到的</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left"></th>
+          <th style="text-align: left">IP地址</th>
+          <th style="text-align: left">网关</th>
+          <th style="text-align: left">子网掩码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Windows</td>
+          <td style="text-align: left">172.19.240.1</td>
+          <td style="text-align: left">172.19.255.255</td>
+          <td style="text-align: left">255.255.240.0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">WSL</td>
+          <td style="text-align: left">172.19.247.201</td>
+          <td style="text-align: left">172.19.255.255</td>
+          <td style="text-align: left">255.255.240.0</td>
+      </tr>
+  </tbody>
+</table>
+
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/10/%E9%87%8F%E5%AD%90%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%96%B9%E6%B3%95%E5%8F%8A%E4%BA%91%E7%9B%98%E6%A1%8C%E9%9D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF/">← prev</a>
+    
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/11/%E8%A7%A3%E5%86%B3git%E5%A4%B1%E8%B4%A5%E7%9A%84%E6%96%B9%E6%B3%95/">next →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2021</span> - <span>2024</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+    <span> 🍦 Theme </span>
+    <a class="link" href="https://github.com/queensferryme/hugo-theme-texify">TeXify</a>
+  </div>
+
+  <div class="footnote">
+    <span>Follow me on <a class=link href=https://github.com/Pi3-l22>GitHub</a> |
+<a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+
+</body>
+
+</html>

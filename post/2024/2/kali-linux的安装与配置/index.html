@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="Kali Linux的安装与配置">
+  
+
+  
+  <link rel="icon" href="https://pi3-l22.github.io/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://pi3-l22.github.io/post/2024/2/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="Kali Linux的安装与配置">
+  <meta property="og:description" content="Kali Linux的安装与配置">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-02-08T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-02-08T00:00:00+00:00">
+    <meta property="article:tag" content="Kali">
+    <meta property="article:tag" content="Linux">
+
+
+  
+  <link rel="canonical" href="https://pi3-l22.github.io/post/2024/2/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">
+
+  
+  
+  
+  <meta itemprop="name" content="Kali Linux的安装与配置">
+  <meta itemprop="description" content="Kali Linux的安装与配置">
+  <meta itemprop="datePublished" content="2024-02-08T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2024-02-08T00:00:00+00:00">
+  <meta itemprop="wordCount" content="2167">
+  <meta itemprop="keywords" content="Kali,Linux">
+
+  
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/content.css'>
+
+  
+  
+  <title>Kali Linux的安装与配置 - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://pi3-l22.github.io/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://pi3-l22.github.io/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>Kali Linux的安装与配置</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/kali'>#Kali</a>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/linux'>#Linux</a>
+    
+  </div>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#快速安装">快速安装</a></li>
+    <li><a href="#换源">换源</a></li>
+    <li><a href="#安装中文输入法">安装中文输入法</a></li>
+    <li><a href="#安装qq">安装QQ</a></li>
+    <li><a href="#安装微信">安装微信</a></li>
+    <li><a href="#安装clash">安装Clash</a></li>
+    <li><a href="#安装wps">安装WPS</a></li>
+    <li><a href="#安装vmware-workstation">安装VMware Workstation</a></li>
+    <li><a href="#安装typora">安装Typora</a></li>
+    <li><a href="#配置picgo">配置PicGo</a></li>
+    <li><a href="#安装pycharm">安装PyCharm</a></li>
+    <li><a href="#安装ollydbg">安装ollydbg</a></li>
+    <li><a href="#其他可能需要的软件">其他可能需要的软件</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <h1 id="kali-linux的安装与配置">Kali Linux的安装与配置</h1>
+<h2 id="快速安装">快速安装</h2>
+<p><a href="https://www.kali.org/">官网</a>下载Kali Linux镜像文件（ISO）
+虽然2023年推出来Kali Purple但是不太推荐安装，因为有一些库和依赖环境没有，安装一些软件程序会很麻烦
+比如安装了Remmina就没有RDP协议的远程桌面连接
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208104233.png" alt="Kali官网下载ISO文件"></p>
+<p>使用<a href="https://sourceforge.net/projects/win32diskimager/">Win32DiskImager</a>把ISO文件刻录进U盘
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208104838.png" alt="Win32DiskImager下载"></p>
+<p>关闭电脑，使用U盘启动，进入Kali Linux安装界面，如果是安装双系统注意规划好磁盘分区，如果不是可以直接清空安装
+推荐把Swap分区改大点（默认1GB），16GB的物理内存可以分配8GB的Swap空间
+安装桌面环境可以根据喜好选择Xfce、Gnome、KDE</p>
+<h2 id="换源">换源</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo vim /etc/apt/sources.list
+</span></span></code></pre></div><p>把官方源注释掉，更改国内源</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#080;font-style:italic">#中科大</span>
+</span></span><span style="display:flex;"><span>deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
+</span></span><span style="display:flex;"><span>deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">#阿里云</span>
+</span></span><span style="display:flex;"><span>deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
+</span></span><span style="display:flex;"><span>deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">#清华大学</span>
+</span></span><span style="display:flex;"><span>deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free
+</span></span><span style="display:flex;"><span>deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">#浙大</span>
+</span></span><span style="display:flex;"><span>deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free
+</span></span><span style="display:flex;"><span>deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">#东软大学</span>
+</span></span><span style="display:flex;"><span>deb http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib
+</span></span><span style="display:flex;"><span>deb-src http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">#重庆大学</span>
+</span></span><span style="display:flex;"><span>deb http://http.kali.org/kali kali-rolling main non-free contrib
+</span></span><span style="display:flex;"><span>deb-src http://http.kali.org/kali kali-rolling main non-free contrib
+</span></span></code></pre></div><p>更新软件列表</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>apt-get update 更新索引
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>apt-get upgrade 更新软件
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>apt-get dist-upgrade 升级
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>apt-get clean 删除缓存包
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>apt-get autoclean 删除未安装的deb包
+</span></span></code></pre></div><h2 id="安装中文输入法">安装中文输入法</h2>
+<p>安装中文输入法，Kali Linux自带的Fcitx4，推荐安装使用Fcitx5输入法，Fcitx4会出现一些问题，并且Fcitx5界面好看更好用</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt install fcitx5 <span style="color:#b62;font-weight:bold">\
+</span></span></span><span style="display:flex;"><span><span style="color:#b62;font-weight:bold"></span>fcitx5-chinese-addons <span style="color:#b62;font-weight:bold">\
+</span></span></span><span style="display:flex;"><span><span style="color:#b62;font-weight:bold"></span>fcitx5-frontend-gtk4 fcitx5-frontend-gtk3 fcitx5-frontend-gtk2 <span style="color:#b62;font-weight:bold">\
+</span></span></span><span style="display:flex;"><span><span style="color:#b62;font-weight:bold"></span>fcitx5-frontend-qt5
+</span></span></code></pre></div><p>设置Fcitx5为默认输入法:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>im-config
+</span></span></code></pre></div><p>将首选输入法设置为Fcitx5
+不用再安装其他输入法，Fcitx5就已经很好用了，且自定义程度高，根据自己情况设置
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208113424.png" alt="Fcitx5配置界面"></p>
+<p>如果在桌面环境（Xfce、Gnome）的设置或者应用面板，不能输入中文，可以安装Gnome扩展<a href="https://extensions.gnome.org/extension/261/kimpanel/">Input Method Panel</a>解决</p>
+<h2 id="安装qq">安装QQ</h2>
+<p>QQ官网<a href="https://im.qq.com/linuxqq/download.html">Linux版本</a>
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208121336.png" alt="QQ·Linux版"></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo dpkg -i linuxqqXXX.deb
+</span></span></code></pre></div><h2 id="安装微信">安装微信</h2>
+<p>wine版本的微信Bug有点多，这里还是使用<a href="https://www.ubuntukylin.com/applications/106-cn.html?spm=a2c6h.12873639.article-detail.7.6da76897yhuHta">优麒麟版本</a>的，虽然简陋但是够用
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208122241.png" alt="ukylin版本微信下载"></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo dpkg -i weixin.deb
+</span></span></code></pre></div><h2 id="安装clash">安装Clash</h2>
+<p><a href="https://github.com/CHH3213/clash-for-windows-backup/releases/tag/v0.20.39">Clash备份地址</a>
+下载<a href="https://github.com/CHH3213/clash-for-windows-backup/releases/tag/v0.20.39">Clash.for.Windows-0.20.39-x64-linux.tar.gz</a>，并解压</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>tar zxvf Clash.for.Windows-0.20.39-x64-linux.tar.gz
+</span></span></code></pre></div><p>把解压后的文件夹移动到<code>/opt/</code>目录（一般用来存放软件程序目录）</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mv Clash<span style="color:#b62;font-weight:bold">\ </span><span style="color:#a2f;font-weight:bold">for</span><span style="color:#b62;font-weight:bold">\ </span>Windows-0.20.39-x64-linux /opt/Clash-GUI
+</span></span></code></pre></div><p>运行文件夹中的<code>cfw</code>程序就可以运行</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./cfw
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208122944.png" alt="Clash界面"></p>
+<p>为了方便寻找软件，可以在应用面板或者桌面添加应用图标
+创建<code>clash.desktop</code>，输入以下内容：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-desktop" data-lang="desktop"><span style="display:flex;"><span><span style="">[Desktop Entry]  
+</span></span></span><span style="display:flex;"><span><span style=""></span><span style="color:#b44">Name</span><span style="color:#666">=</span><span style="color:#b44">clash for linux  </span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#b44">Icon</span><span style="color:#666">=</span><span style="color:#b44">/opt/Clash-GUI/clash.png  </span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#b44">Exec</span><span style="color:#666">=</span><span style="color:#b44">/opt/Clash-GUI/cfw  </span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#b44">Type</span><span style="color:#666">=</span><span style="color:#b44">Application</span><span style="color:#bbb">
+</span></span></span></code></pre></div><p>Name：显示的名称
+Icon：图标图片路径
+Exec：运行程序路径
+Type：应用类型</p>
+<p>如果要在==应用面版==添加图标，就把clash.desktop移动到<code>/usr/share/applications</code>和<code>~/.local/share/applications</code>
+如果要在==桌面==添加图标，就把clash.desktop移动到桌面目录<code>~/Desktop</code></p>
+<p>其他程序想要添加桌面图标也是相同的道理</p>
+<h2 id="安装wps">安装WPS</h2>
+<p><a href="https://www.wps.cn/product/wpslinux#">wps官网下载安装包</a></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo dpkg -i wps-office_11.1.0.11711_amd64.deb
+</span></span></code></pre></div><p>安装好wps可能不能直接使用，还需要安装字体，不然进入时会报错
+最简单的方法就是去Wndows系统里，把<code>C:\windows\fonts</code> 整个打包放到Linux系统里的<code>/usr/share/fonts</code>目录内，最后刷新字体缓存</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo fc-cache
+</span></span></code></pre></div><blockquote>
+<p>给Linux系统添加其他字体，也是将ttf/otf字体文件放入这个文件夹</p>
+</blockquote>
+<h2 id="安装vmware-workstation">安装VMware Workstation</h2>
+<p><a href="https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html">官网下载安装包</a>
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208131339.png" alt="VMware Worklstation下载"></p>
+<p>运行安装资源文件包</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./VMware-Workstation-Full-17.5.0-22583795.x86_64.bundle
+</span></span></code></pre></div><p>在运行过程中可能会出现错误提示没有 linux-header，可以直接使用apt安装</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt install linux-header-6.6.9-amd4
+</span></span></code></pre></div><p>如果在apt里面没有需要的版本，则需要到<a href="https://mirrors.aliyun.com/kali/pool/main/l/linux/">国内镜像站</a>自行下载安装
+需要下载安装</p>
+<ul>
+<li>linux-compiler-gcc-xxx</li>
+<li>linux-kbuild-xxx</li>
+<li>linux-headers-xxx</li>
+</ul>
+<h2 id="安装typora">安装Typora</h2>
+<p><a href="http://120.27.210.48:51122/d/Common%20Files/Typora_Linux_0.11.18_amd64.deb?sign=dac0JJLq5aUo2Pgl9O4KUQOYJo7VuTfncGhDZzVZRBo=:0">Typora的Linux免费版本下载</a>
+<a href="http://120.27.210.48:51122/d/Common%20Files/Typora_theme.7z?sign=kjyniWF9TPbAuyFVU9VKTcLKEwa0HonlZnnomL4S1nQ=:0">几款Typora主题css文件</a></p>
+<h2 id="配置picgo">配置PicGo</h2>
+<p><a href="https://picgo.github.io/PicGo-Doc/zh/">官方下载PicGo</a>
+下载AppImage文件，同样放到<code>/opt/</code>目录，并按照<a href="##%E5%AE%89%E8%A3%85Clash">上面的方法</a>配置桌面图标
+PicGo配置Github图床，在github上新建仓库，并设置一个token
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208133922.png" alt="PicGo配置"></p>
+<p>要想使用==剪切板上传图片==（<strong>Typora、Obisidian自动上传图片服务</strong>），还需要在终端中安装Xclip程序</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt install xclip
+</span></span></code></pre></div><p>接着就可以在Typora和Obsidian中配置自动上传图片
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208134546.png" alt="Typora自动上传图片">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208134651.png" alt="Obsidian自动上传图片"></p>
+<h2 id="安装pycharm">安装PyCharm</h2>
+<p>安装PyCharm，在官网下载程序包，按照压缩包中的安装配置指南就可以成功安装
+也可以和上面的其他软件一样，先把文件目录移到<code>/opt</code>，然后配置桌面图标
+打开PyCharm可能会报有关==_JAVA_OPTIONS环境变量==的错误，实际上在kaili终端中输入<code>java --version</code> 也是有问题的，提示：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>picked up JAVA OPTIONS: -Dawt.useSystemAAFontSettings<span style="color:#666">=</span>on -Dswing.aatext<span style="color:#666">=</span><span style="color:#a2f">true</span>
+</span></span></code></pre></div><p><strong>解决办法：</strong>
+在<code>/etc/X11/Xsession.d/90kali-themes</code>与<code>/etc/environment.d/95kali-themes.conf</code>这两个文件中，将_JAVA_OPTIONS那一行语句删掉，然后重启电脑</p>
+<h2 id="安装ollydbg">安装ollydbg</h2>
+<p>ollydbg没有linux版本，所以需要借助wine进行安装，kali已经自带了wine，但是安装好后启动ollydbg的时候还是会报错，根据错误提示先补全软件和环境，再进行启动
+如果还是不能启动，则删除wine和ollydbg，重新安装后就正常了</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt remove --purge wine
+</span></span><span style="display:flex;"><span>sudo apt remove --purge ollydbg
+</span></span><span style="display:flex;"><span>sudo rm -tf ~/.wine  <span style="color:#080;font-style:italic"># 删除wine配置文件</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo apt install wine
+</span></span><span style="display:flex;"><span>sudo apt install ollydbg
+</span></span></code></pre></div><h2 id="其他可能需要的软件">其他可能需要的软件</h2>
+<ul>
+<li>Tabby（开源SSH连接工具）</li>
+<li>Remmina（多种协议远程桌面连接）</li>
+<li>XDM（Linux下替代IDM的下载工具）</li>
+<li>Obsidian（笔记软件）</li>
+<li>Zotero（文献管理工具）</li>
+<li>VsCode（代码编辑器）</li>
+<li>Dbeaver（数据库管理工具）</li>
+<li>Snipaste（截屏工具）</li>
+</ul>
+
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/12/windows10%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8wsa/">← prev</a>
+    
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2024/2/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">next →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2021</span> - <span>2024</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+    <span> 🍦 Theme </span>
+    <a class="link" href="https://github.com/queensferryme/hugo-theme-texify">TeXify</a>
+  </div>
+
+  <div class="footnote">
+    <span>Follow me on <a class=link href=https://github.com/Pi3-l22>GitHub</a> |
+<a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+
+</body>
+
+</html>

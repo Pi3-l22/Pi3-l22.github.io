@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="图数据库Neo4j使用教程">
+  
+
+  
+  <link rel="icon" href="https://pi3-l22.github.io/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://pi3-l22.github.io/post/2023/11/neo4j%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="Neo4j安装与使用">
+  <meta property="og:description" content="图数据库Neo4j使用教程">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-11-24T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-11-24T00:00:00+00:00">
+    <meta property="article:tag" content="Neo4j">
+    <meta property="article:tag" content="Python">
+
+
+  
+  <link rel="canonical" href="https://pi3-l22.github.io/post/2023/11/neo4j%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+
+  
+  
+  
+  <meta itemprop="name" content="Neo4j安装与使用">
+  <meta itemprop="description" content="图数据库Neo4j使用教程">
+  <meta itemprop="datePublished" content="2023-11-24T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2023-11-24T00:00:00+00:00">
+  <meta itemprop="wordCount" content="7594">
+  <meta itemprop="keywords" content="Neo4j,Python">
+
+  
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/content.css'>
+
+  
+  
+  <title>Neo4j安装与使用 - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://pi3-l22.github.io/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://pi3-l22.github.io/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>Neo4j安装与使用</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/neo4j'>#Neo4j</a>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/python'>#Python</a>
+    
+  </div>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装">安装</a></li>
+    <li><a href="#简单入门">简单入门</a></li>
+    <li><a href="#简单案例">简单案例</a></li>
+    <li><a href="#命令行操作总结">命令行操作总结</a>
+      <ul>
+        <li><a href="#创建一个节点">创建一个节点</a></li>
+        <li><a href="#创建多个节点">创建多个节点</a></li>
+        <li><a href="#建立关系">建立关系</a></li>
+        <li><a href="#查询某个节点">查询某个节点</a></li>
+        <li><a href="#查询某个标签的所有节点">查询某个标签的所有节点</a></li>
+        <li><a href="#查询某个标签的节点个数">查询某个标签的节点个数</a></li>
+        <li><a href="#查询两个节点之间的关系类型">查询两个节点之间的关系类型</a></li>
+        <li><a href="#查询某个节点所有的关系">查询某个节点所有的关系</a></li>
+        <li><a href="#查询某个节点所有的关系类型">查询某个节点所有的关系类型</a></li>
+        <li><a href="#删除某个节点">删除某个节点</a></li>
+        <li><a href="#删除某个标签的所有节点">删除某个标签的所有节点</a></li>
+        <li><a href="#删除所有节点">删除所有节点</a></li>
+        <li><a href="#删除两个节点之间的关系">删除两个节点之间的关系</a></li>
+        <li><a href="#删除某个节点的所有关系">删除某个节点的所有关系</a></li>
+        <li><a href="#删除某个标签的所有关系">删除某个标签的所有关系</a></li>
+        <li><a href="#增加节点的属性">增加节点的属性</a></li>
+        <li><a href="#删除节点的属性">删除节点的属性</a></li>
+        <li><a href="#查询某个节点有关的节点和关系">查询某个节点有关的节点和关系</a></li>
+        <li><a href="#删除某个节点有关的节点和关系">删除某个节点有关的节点和关系</a></li>
+      </ul>
+    </li>
+    <li><a href="#neo4j-server安装与使用">Neo4j Server安装与使用</a>
+      <ul>
+        <li><a href="#数据库本地管理">数据库本地管理</a></li>
+        <li><a href="#用户管理">用户管理</a></li>
+        <li><a href="#数据库的备份和恢复">数据库的备份和恢复</a></li>
+      </ul>
+    </li>
+    <li><a href="#在neo4j中批量创建节点和关系">在Neo4j中批量创建节点和关系</a>
+      <ul>
+        <li><a href="#在desktop中用csv文件导入批量创建节点">在desktop中用CSV文件导入批量创建节点</a></li>
+        <li><a href="#在desktop中用csv文件导入批量创建关系">在desktop中用CSV文件导入批量创建关系</a></li>
+        <li><a href="#在远程server中用csv文件导入批量创建节点和关系常用">在远程Server中用CSV文件导入批量创建节点和关系（常用）</a></li>
+      </ul>
+    </li>
+    <li><a href="#neo4j的python操作">Neo4j的Python操作</a>
+      <ul>
+        <li><a href="#在远程服务器上安装并创建neo4j">在远程服务器上安装并创建Neo4j</a></li>
+        <li><a href="#利用python读取excel数据创建节点">利用Python读取excel数据创建节点</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <h1 id="neo4j安装与使用">Neo4j安装与使用</h1>
+<p><a href="https://juejin.cn/s/neo4j%E8%8F%9C%E9%B8%9F%E6%95%99%E7%A8%8B">Neo4j菜鸟教程</a>
+<a href="https://www.w3cschool.cn/neo4j/">Neo4j教程</a>
+<a href="https://www.cnblogs.com/lijiong/p/15867307.html">Neo4j的命令行操作</a></p>
+<h2 id="安装">安装</h2>
+<p><a href="https://neo4j.com/download/">Neo4j官网下载地址</a>
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200925.png" alt=""></p>
+<p>在Windows上下载桌面版，在Linux服务器上下载服务器版
+下载好，一直下一步安装即可。</p>
+<h2 id="简单入门">简单入门</h2>
+<p>点击创建一个新的项目文件
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200939.png" alt=""></p>
+<p>添加一个新的图形数据库
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200951.png" alt=""></p>
+<p>启动数据库
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201003.png" alt=""></p>
+<p>点击右侧应用工具，打开Neo4j浏览器
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201003.png" alt=""></p>
+<p>成功链接到数据库，在最上面的命令行中，我们可以执行CQL语句
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201014.png" alt=""></p>
+<p>我们可以通过以下语句创建 <font color="#ed9ddf">杭州电子科技大学</font> 和 <font color="#ed9ddf">计算机学院</font> 节点
+标签分别为 <font color="#9bbb59">大学</font> 和 <font color="#9bbb59">学院</font></p>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">create(:&#34;大学&#34;{name:&#34;杭州电子科技大学&#34;})
+create(:&#34;学院&#34;{name:&#34;计算机学院&#34;})
+</code></pre><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201020.png" alt=""></p>
+<p>通过以下语句，来将这两个节点进行关系链接
+<font color="#548dd4">语法格式</font>为：链接两个节点p1 p2，创p1-&gt;p2的关系为 <strong class=chinese>院系</strong></p>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(p1:`大学`),(p2:`学院`) Create(p1)-[r:院系]-&gt;(p2)
+</code></pre><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201025.png" alt=""></p>
+<h2 id="简单案例">简单案例</h2>
+<pre tabindex="0"><code class="language-ad-summary" data-lang="ad-summary">创建一个简单的股票知识图谱，包括;
+1. 建立几只股票的节点
+2. 建立上海证券交易所和深圳证券交易所两个节点
+3. 建立省市地方名称的节点
+4. 建立股票和证券交易所关系
+5. 建立股票和省市名称关系
+</code></pre><ol>
+<li><font color="#ed9ddf">建立几只股票节点</font></li>
+</ol>
+<p>==创建一个节点的Cypher命令==
+<code>create(变量:标签{属性1:属性值1,属性2:属性值2}) return 变量</code>
+<code>create(Variable:Lable{key1:Value1,Key2:Value2}) return Variable</code></p>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">
+-- 创建一个股票节点
+create(n:Stock{name:&#39;安琪酵母&#39;,code:&#39;600298&#39;,launchidate:date(&#34;2000-08-18&#34;)})return n
+
+-- 可以一次创建多个股票节点
+create(n:Stock{name:&#39;招商银行&#39;,code:&#39;600036&#39;,launchidate:date(&#34;2002-04-09&#34;)}),(:Stock{name:&#39;中科创达&#39;,code:&#39;300496&#39;,launchidate:date(&#34;2015-12-08&#34;)}),(:Stock{name:&#39;化工科技&#39;,code:&#39;000988&#39;,launchidate:date(&#34;2000-06-18&#34;)}),(:Stock{name:&#39;国信证券&#39;,code:&#39;002736&#39;,launchidate:date(&#34;2014-12-29&#34;)})
+</code></pre><p>按照上方的步骤，创建一个新的股票图形数据库。
+打开图数据库，输入上方语句进行创建节点
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201040.png" alt=""></p>
+<ol start="2">
+<li><font color="#ed9ddf">建立上海证券交易所和深圳证券交易所两个节点</font></li>
+</ol>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">create(n:SecuritiesExchange{name:&#39;上海证券交易所&#39;}),(:SecuritiesExchange{name:&#39;深圳证券交易所&#39;}) return n
+</code></pre><ol start="3">
+<li><font color="#ed9ddf">建立省市地方名称的节点</font></li>
+</ol>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">create(n:Province{name:&#39;湖北&#39;}),(:Province{name:&#39;北京&#39;}),(:Province{name:&#39;广东&#39;}) return n
+</code></pre><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201053.png" alt=""></p>
+<ol start="4">
+<li><font color="#ed9ddf">建立股票和证券交易所关系</font></li>
+</ol>
+<p>创建股票节点‘安琪酵母’和证券交易所节点‘上海证券交易所’的关系  Exchange</p>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(a:Stock),(b:SecuritiesExhcange) where a.name=&#39;安琪酵母&#39; and b.name=&#39;上海证券交易所&#39; create(a)-[r:Exchange]-&gt;(b) return r
+</code></pre><p>同样用这个方法可创建其他股票节点和证券交易所节点的关系
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201108.png" alt=""></p>
+<ol start="5">
+<li><font color="#ed9ddf">建立股票和省市名称关系</font></li>
+</ol>
+<p>创建股票节点‘安琪酵母’和省市‘湖北’的关系  Area</p>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(a:Stock),(b:Province) where a.name = &#39;安琪酵母&#39; and b.name = &#39;湖北&#39; create (a)-[r:Area]-&gt;(b) return r
+</code></pre><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201108.png" alt=""></p>
+<h2 id="命令行操作总结">命令行操作总结</h2>
+<h3 id="创建一个节点">创建一个节点</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">create(n:Stock{name:&#39;安琪酵母&#39;,code:&#39;600298&#39;,launchDate:date(&#39;2000-08-18&#39;)}) return n
+</code></pre><h3 id="创建多个节点">创建多个节点</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">create(n:Stock{name:&#39;招商银行&#39;,code:&#39;600036&#39;,launchDate:date(&#39;2002-04-09&#39;)}),
+(:Stock{name:&#39;中科创达&#39;,code:&#39;300496&#39;,launchDate:date(&#39;2015-12-10&#39;)}),
+(:Stock{name:&#39;华工科技&#39;,code:&#39;000988&#39;,launchDate:date(&#39;2000-06-09&#39;)}),
+(:Stock{name:&#39;国信证券&#39;,code:&#39;002736&#39;,launchDate:date(&#39;2014-12-29&#39;)})
+</code></pre><pre tabindex="0"><code class="language-cypher" data-lang="cypher">create(n:SecuritiesExchange{name:&#39;上海证券交易所&#39;}),(:SecuritiesExchange{name:&#39;深圳证券交易所&#39;})
+</code></pre><pre tabindex="0"><code class="language-cypher" data-lang="cypher">create(n:Province{name:&#39;北京&#39;}),(:Province{name:&#39;湖北&#39;}),(:Province{name:&#39;广东&#39;})
+</code></pre><h3 id="建立关系">建立关系</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(a:Stock),(b:SecuritiesExchange) where a.name = &#39;安琪酵母&#39; and b.name = &#39;上海证券交易所&#39; create (a)-[r:Exchange]-&gt;(b) return r
+</code></pre><pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(a:Stock),(b:Province) where a.name = &#39;安琪酵母&#39; and b.name = &#39;湖北&#39; create (a)-[r:Area]-&gt;(b) return r
+</code></pre><h3 id="查询某个节点">查询某个节点</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(a:Stock) where a.name = &#39;安琪酵母&#39; return a
+</code></pre><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201121.png" alt=""></p>
+<h3 id="查询某个标签的所有节点">查询某个标签的所有节点</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(a:Stock) return a
+</code></pre><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201535.png" alt=""></p>
+<h3 id="查询某个标签的节点个数">查询某个标签的节点个数</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(a:Stock) return count(a)
+</code></pre><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201204.png" alt=""></p>
+<h3 id="查询两个节点之间的关系类型">查询两个节点之间的关系类型</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(:Stock{name:&#39;安琪酵母&#39;})-[r]-&gt;(:Province{name:&#39;湖北&#39;}) return type(r)
+</code></pre><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201757.png" alt=""></p>
+<h3 id="查询某个节点所有的关系">查询某个节点所有的关系</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match a = ()-[]-&gt;(:Province{name:&#39;湖北&#39;}) return a
+</code></pre><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201358.png" alt=""></p>
+<h3 id="查询某个节点所有的关系类型">查询某个节点所有的关系类型</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(:Stock{name:&#39;安琪酵母&#39;})-[r]-&gt;() return type(r)
+</code></pre><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201420.png" alt=""></p>
+<h3 id="删除某个节点">删除某个节点</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(a:Stock) where a.name = &#39;中科创达&#39; delete a
+</code></pre><blockquote>
+<p>[!attention]
+删除节点之前，必须删除和节点相关的所有关系，不然会报错</p>
+</blockquote>
+<h3 id="删除某个标签的所有节点">删除某个标签的所有节点</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(n:Stock) delete n
+</code></pre><h3 id="删除所有节点">删除所有节点</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(n) delete n
+</code></pre><h3 id="删除两个节点之间的关系">删除两个节点之间的关系</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(:Stock{name:&#39;安琪酵母&#39;})-[r]-&gt;(:Province{name:&#39;湖北&#39;}) delete r
+</code></pre><h3 id="删除某个节点的所有关系">删除某个节点的所有关系</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(:Stock{name:&#39;安琪酵母&#39;})-[r]-&gt;() delete r
+</code></pre><h3 id="删除某个标签的所有关系">删除某个标签的所有关系</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(:Stock)-[r]-&gt;() delete r
+</code></pre><h3 id="增加节点的属性">增加节点的属性</h3>
+<p>set子句</p>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(a:Stock) where a.name = &#39;安琪酵母&#39; set a.abbreviation = &#39;AQJM&#39; return a
+</code></pre><h3 id="删除节点的属性">删除节点的属性</h3>
+<p>remove子句</p>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(a:Stock) where a.name = &#39;安琪酵母&#39; remove a.abbreviation return a
+</code></pre><h3 id="查询某个节点有关的节点和关系">查询某个节点有关的节点和关系</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match (m)-[r]-(n:Stock{name:&#39;安琪酵母&#39;}) return m,r,n
+</code></pre><h3 id="删除某个节点有关的节点和关系">删除某个节点有关的节点和关系</h3>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">match (m)-[r]-(n:Stock{name:&#39;安琪酵母&#39;}) delete m,r,n
+</code></pre><h2 id="neo4j-server安装与使用">Neo4j Server安装与使用</h2>
+<p><a href="https://neo4j.com/download/">Neo4j官网下载地址</a>
+下载Neo4j community server版本，同时需要JDK环境</p>
+<pre tabindex="0"><code class="language-ad-note" data-lang="ad-note">Server 和 desktop版本的区别在于：
+desktop拥有良好的可视化，具有跟桌面应用程序一样的操作，可以方便管理多个数据库。
+而server则是大量使用命令行来执行CQL语句，同时也可以打开浏览器界面，与desktop的界面是一样的。
+</code></pre><p>添加Neo4j/bin为环境变量</p>
+<p><code>neo4j.bat console</code> Windows环境下，打开命令行界面，同时打开本地网络图形化界面
+<code>neo4j install-server</code> 安装服务</p>
+<h3 id="数据库本地管理">数据库本地管理</h3>
+<p>Neo4j安装成功后，会默认安装两个数据库，System和Neo4j
+在system中，可以进行数据库的管理，用户的管理，完成一些设置等等
+<code>neo4j start</code> 启动
+<code>neo4j stop</code> 关闭</p>
+<h3 id="用户管理">用户管理</h3>
+<p>在bin目录下，使用<code>cypher-shell</code>连接数据库执行<code>cypher</code>命令</p>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">cypher-shell -d neo4j[数据库名称]
+-- 需要输入用户名和密码，登录
+-- 进入数据库中之后，就可以执行CQL语句进行操作
+
+match(n) return n;  -- 查询数据库中所有节点
+:help  -- 查看当前数据库可以用的指令
+:use system  -- 使用system数据库
+
+show databases;  -- 查看所有数据库（只能在system下操作）
+
+:exit  -- 退出数据库命令行
+</code></pre><p>在system下，对于用户进行管理的操作
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201842.png" alt=""></p>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">-- 添加用户
+CALL dbm.security.createUser(name,password,requirePasswordChange密码改变);
+-- 示例
+CALL dbm.security.createUser(&#39;john&#39;,&#39;123456&#39;,true);
+
+-- 列出所有用户
+CALL dbms.security.listUsers();
+</code></pre><h3 id="数据库的备份和恢复">数据库的备份和恢复</h3>
+<p>Neo4j数据库的备份和恢复可以在线或者离线进行</p>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">neo4j-admin -h dump/load # 使用帮助
+neo4j stop  # 先停止服务
+
+1. 离线备份
+neo4j-admin dump --database=&lt;database&gt; --to=&lt;destination-path&gt;
+示例：
+neo4j-admin dump --database=neo4j --to=C:\\desktop\\neo4jdata
+
+2. 离线恢复
+neo4j-admin load --from=&lt;archive-path&gt; --databse=&lt;database&gt; [--force]存在覆盖
+示例：
+neo4j-admin load --from=C:\\desktop\\neo4jdata --databse=neo4j --force
+</code></pre><h2 id="在neo4j中批量创建节点和关系">在Neo4j中批量创建节点和关系</h2>
+<p><a href="https://cloud.tencent.com/developer/article/1387710">neo4j进阶操作（四）neo4j导入csv，使用load导入csv文件进入neo4j</a></p>
+<h3 id="在desktop中用csv文件导入批量创建节点">在desktop中用CSV文件导入批量创建节点</h3>
+<p>CSV文件中的数据，用于演示，实际上数据可以很多
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201901.png" alt=""></p>
+<p>把我们需要导入的CSV数据文件，拷贝到Neo4j的数据目录下
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201910.png" alt=""></p>
+<p>在数据目录下对应数据库的import目录下
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201920.png" alt=""></p>
+<p>在Neo4j Browser中执行导入命令</p>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">load CSV with headers from &#39;file:///Stocks.csv&#39; as line
+create (:Stock{code:line.code,name:line.name,id:line.id})
+</code></pre><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201939.png" alt=""></p>
+<p>查看节点，导入成功
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202011.png" alt=""></p>
+<pre tabindex="0"><code class="language-ad-warning" data-lang="ad-warning">如果导入的数据中出现中文乱码的问题，说明是CSV文件的编码问题，把CSV的编码格式改成UTF-8格式
+</code></pre><h3 id="在desktop中用csv文件导入批量创建关系">在desktop中用CSV文件导入批量创建关系</h3>
+<p>创建股票和证券交易所的关系，先建立CSV文件：（股票代码）（证券交易所id）
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202018.png" alt=""></p>
+<p>同样拷贝到import文件夹中</p>
+<p>在Neo4j Browser中执行导入命令</p>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">load CSV with headers from &#39;file:///segx.csv&#39; as line
+match (from:Stock{code:line.stock_code}),(to:SecuritiesExchange{id:line.exchange_id})
+merge (from)-[r:Exchange]-&gt;(to)
+</code></pre><pre tabindex="0"><code class="language-ad-tip" data-lang="ad-tip">这里一直显示(no changes, no records)
+原因在于，这里的交易所节点是之前创建的，在创建的时候并没有设置ID属性，所以在设置关系的时候，并不能以id的方式进行查找匹配节点。
+在交易所节点中，属性只有name一个，所以应该用name，或者在交易所节点中增加id属性。
+所以在添加关系的时候，应该检查每个节点属性是否匹配
+</code></pre><p>把上诉关系数据文件，改为以code和name进行索引，代码也改为：
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202024.png" alt=""></p>
+<pre tabindex="0"><code class="language-cypher" data-lang="cypher">load CSV with headers from &#39;file:///segx.csv&#39; as line
+match (from:Stock{code:line.code}),(to:SecuritiesExchange{name:line.name})
+merge (from)-[r:Exchange]-&gt;(to)
+</code></pre><pre tabindex="0"><code class="language-ad-warning" data-lang="ad-warning">这里还有一个坑点：
+用excel编辑CSV格式的文件是，在Windows下默认保存为Unicode格式，而在Neo4j导入数据的过程中是需要用到UTF-8的格式。所以需要用记事本打开，另存为UTF-8格式。
+
+如果不更改这个格式时，那么导入中文时会乱码，同时属性名可能不能匹配。上面显示(no changes, no records)也是有这样一个原因
+</code></pre><p>完成上面两个关键的步骤，终于可以进行导入
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202029.png" alt="">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202034.png" alt=""></p>
+<h3 id="在远程server中用csv文件导入批量创建节点和关系常用">在远程Server中用CSV文件导入批量创建节点和关系（常用）</h3>
+<p><a href="https://blog.csdn.net/haveanybody/article/details/90518235">Neo4j笔记（三）Neo4j批量导入数据_neo4j 批量导入数据-CSDN博客</a></p>
+<p>这里远程Server的load导入操作，与本地的desktop的load导入操作基本相同。
+远程Server的导入，可以利用Browser进行图形化界面，也可以利用命令行操作。可以利用load操作，也可以利用neo4j-import进行导入
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202048.png" alt=""></p>
+<p>远程启动Neo4j Server <code>neo4j start</code> <code>neo4j console</code>
+可以浏览器访问<code>http:本机ip:显示端口</code></p>
+<p>我们也可以用本地neo4j desktop 操作远程的neo4j server
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202054.png" alt=""></p>
+<p>输入服务的IP地址和端口
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202101.png" alt=""></p>
+<p>再输入用户名和密码，即可连接。接下里的导入操作，与desktop的操作是一摸一样的。
+这样就可以直接操作远程的数据库</p>
+<h2 id="neo4j的python操作">Neo4j的Python操作</h2>
+<h3 id="在远程服务器上安装并创建neo4j">在远程服务器上安装并创建Neo4j</h3>
+<p>对于Neo4j 4版本 需要有JDK11的环境，而对于Neo4j 5版本，需要有JDK17/21的环境
+先安装JDK11，再安装Neo4j，并配置环境变量。</p>
+<p><code>neo4j console</code> 启动服务（前台）
+<code>neo4j start</code> 启动服务（后台）
+<code>neo4j stop</code> 停止服务</p>
+<p>通过本地浏览器登录
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202109.png" alt="">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202114.png" alt=""></p>
+<p>接着我们可以使用本地的desktop进行远程的数据库连接
+输入数据库远程地址和端口号，输入数据库名称
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202122.png" alt=""></p>
+<p>输入用户名和密码，并登录连接
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202127.png" alt=""></p>
+<p>成功打开远程数据库，图形化界面
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202133.png" alt=""></p>
+<h3 id="利用python读取excel数据创建节点">利用Python读取excel数据创建节点</h3>
+<p>python导入：
+<a href="https://blog.csdn.net/weixin_38737326/article/details/119170899">Neo4j入门（二）批量插入节点、关系_neo4j批量创建关系-CSDN博客</a></p>
+<p><span style="background:#fff88f">1. 数据准备，在深圳证券交易所官网下载股票列表Excel文件</span></p>
+<p><a href="http://www.szse.cn/market/product/stock/list/index.html">http://www.szse.cn/market/product/stock/list/index.html</a>
+<img src="res/Pasted%20image%2020231106222659.png" alt=""></p>
+<p>当然也直接使用Python代码，进行下载，下载连接为：http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;CATALOGID=1110&amp;TABKEY=tab1&amp;random=0.410442009042401</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">urllib</span> <span style="color:#a2f;font-weight:bold">import</span> request
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 下载Excel文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">DownloadExcel</span>(url):
+</span></span><span style="display:flex;"><span>    down_path <span style="color:#666">=</span> <span style="color:#b44">&#39;A股列表.xlsx&#39;</span>
+</span></span><span style="display:flex;"><span>    request<span style="color:#666">.</span>urlretrieve(url, down_path)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>url <span style="color:#666">=</span> <span style="color:#b44">&#39;http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;CATALOGID=1110&amp;TABKEY=tab1&amp;random=0.410442009042401&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>DownloadExcel(url)
+</span></span></code></pre></div><p>得到一个A股列表Excel文件
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202144.png" alt=""></p>
+<p><span style="background:#fff88f">2. 用Python读取Excel文件数据，在Python中使用Cypher命令，在Neo4j中批量建立节点</span></p>
+<p><a href="https://pypi.org/project/py2neo/">py2neo · PyPI</a>
+<a href="https://zhuanlan.zhihu.com/p/81175725">py2neo基本用法</a>
+<a href="https://segmentfault.com/a/1190000040519140">python - 使用Py2neo在Neo4j中创建节点和关系</a>
+<a href="https://zhuanlan.zhihu.com/p/362709226">Python&ndash;pandas读取excel</a>
+<a href="https://zhuanlan.zhihu.com/p/363810440">Python读写Excel——Pandas</a></p>
+<p>接着编写Python代码，实现读取文件数据，并通过Cypher语句写入到数据库中去。这里使用远程Neo4j Server版本。
+这里我使用的是py2neo的第三方库，远程Neo4j版本为4.4.2</p>
+<pre tabindex="0"><code class="language-ad-warning" data-lang="ad-warning">需要注意的是：
+![](https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202200.png)
+</code></pre><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># from urllib import request</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 下载Excel文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># def DownloadExcel(url):</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">#     down_path = &#39;A股列表.xlsx&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">#     request.urlretrieve(url, down_path)</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># url = &#39;http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;CATALOGID=1110&amp;TABKEY=tab1&amp;random=0.410442009042401&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># DownloadExcel(url)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">time</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">pandas</span> <span style="color:#a2f;font-weight:bold">as</span> <span style="color:#00f;font-weight:bold">pd</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">py2neo</span> <span style="color:#a2f;font-weight:bold">import</span> Graph, Node, Relationship, NodeMatcher, RelationshipMatcher, Subgraph
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 读取Excel文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">ReadExcel</span>():
+</span></span><span style="display:flex;"><span>    read_path <span style="color:#666">=</span> <span style="color:#b44">&#39;A股列表.xlsx&#39;</span>
+</span></span><span style="display:flex;"><span>    df <span style="color:#666">=</span> pd<span style="color:#666">.</span>read_excel(io<span style="color:#666">=</span>read_path)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> df
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 连接Neo4j</span>
+</span></span><span style="display:flex;"><span>url <span style="color:#666">=</span> <span style="color:#b44">&#34;bolt://serverIP:port&#34;</span>
+</span></span><span style="display:flex;"><span>username <span style="color:#666">=</span> <span style="color:#b44">&#34;neo4j&#34;</span>
+</span></span><span style="display:flex;"><span>password <span style="color:#666">=</span> <span style="color:#b44">&#34;password&#34;</span>
+</span></span><span style="display:flex;"><span>graph <span style="color:#666">=</span> Graph(url, auth<span style="color:#666">=</span>(username,password))
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(<span style="color:#b44">&#34;neo4j info: </span><span style="color:#b68;font-weight:bold">{}</span><span style="color:#b44">&#34;</span><span style="color:#666">.</span>format(<span style="color:#a2f">str</span>(graph)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 创建节点</span>
+</span></span><span style="display:flex;"><span>s_time <span style="color:#666">=</span> time<span style="color:#666">.</span>time()
+</span></span><span style="display:flex;"><span>node_count <span style="color:#666">=</span> <span style="color:#666">0</span>
+</span></span><span style="display:flex;"><span>df <span style="color:#666">=</span> ReadExcel()
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#39;总数据量：</span><span style="color:#b68;font-weight:bold">{</span><span style="color:#a2f">len</span>(df)<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>)
+</span></span><span style="display:flex;"><span>label <span style="color:#666">=</span> <span style="color:#b44">&#39;A股&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> i <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#a2f">range</span>(<span style="color:#666">0</span>, <span style="color:#a2f">len</span>(df)):
+</span></span><span style="display:flex;"><span>    Plate <span style="color:#666">=</span> df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;板块&#39;</span>]
+</span></span><span style="display:flex;"><span>    FullName <span style="color:#666">=</span> df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;公司全称&#39;</span>]
+</span></span><span style="display:flex;"><span>    EnName <span style="color:#666">=</span> df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;英文名称&#39;</span>]
+</span></span><span style="display:flex;"><span>    Address <span style="color:#666">=</span> df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;注册地址&#39;</span>]
+</span></span><span style="display:flex;"><span>    Code <span style="color:#666">=</span> df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;A股代码&#39;</span>]
+</span></span><span style="display:flex;"><span>    ShortName <span style="color:#666">=</span> df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;A股简称&#39;</span>]
+</span></span><span style="display:flex;"><span>    Date <span style="color:#666">=</span> df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;A股上市日期&#39;</span>]
+</span></span><span style="display:flex;"><span>    Area <span style="color:#666">=</span> df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;地      区&#39;</span>]
+</span></span><span style="display:flex;"><span>    Province <span style="color:#666">=</span> df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;省    份&#39;</span>]
+</span></span><span style="display:flex;"><span>    City <span style="color:#666">=</span> df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;城     市&#39;</span>]
+</span></span><span style="display:flex;"><span>    Industry <span style="color:#666">=</span> df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;所属行业&#39;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># print(type(Plate))</span>
+</span></span><span style="display:flex;"><span>    Cypher <span style="color:#666">=</span> <span style="color:#b44">f</span><span style="color:#b44">&#34;merge(:</span><span style="color:#b68;font-weight:bold">{</span>label<span style="color:#b68;font-weight:bold">}</span><span style="color:#b62;font-weight:bold">{{</span><span style="color:#b44">Plate:&#39;</span><span style="color:#b68;font-weight:bold">{</span>Plate<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;,FullName:&#39;</span><span style="color:#b68;font-weight:bold">{</span>FullName<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;,EnName:&#39;</span><span style="color:#b68;font-weight:bold">{</span>EnName<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;,Address:&#39;</span><span style="color:#b68;font-weight:bold">{</span>Address<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;,Code:&#39;</span><span style="color:#b68;font-weight:bold">{</span>Code<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;,ShortName:&#39;</span><span style="color:#b68;font-weight:bold">{</span>ShortName<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;,Date:&#39;</span><span style="color:#b68;font-weight:bold">{</span>Date<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;,Area:&#39;</span><span style="color:#b68;font-weight:bold">{</span>Area<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;,Province:&#39;</span><span style="color:#b68;font-weight:bold">{</span>Province<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;,City:&#39;</span><span style="color:#b68;font-weight:bold">{</span>City<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;,Industry:&#39;</span><span style="color:#b68;font-weight:bold">{</span>Industry<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span><span style="color:#b62;font-weight:bold">}}</span><span style="color:#b44">)&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># node = Node(label, Plate=Plate, FullName=FullName, EnName=EnName, Address=Address, Code=Code, ShortName=ShortName, Date=Date, Area=Area, Province=Province, City=City, Industry=Industry)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># Graph.create(node)</span>
+</span></span><span style="display:flex;"><span>    graph<span style="color:#666">.</span>run(Cypher)
+</span></span><span style="display:flex;"><span>    node_count <span style="color:#666">=</span> <span style="color:#666">+</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(<span style="color:#b44">&#39;节点数量：&#39;</span> <span style="color:#666">+</span> node_count)
+</span></span><span style="display:flex;"><span>e_time <span style="color:#666">=</span> time<span style="color:#666">.</span>time()
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#39;创建节点耗时：</span><span style="color:#b68;font-weight:bold">{</span>e_time <span style="color:#666">-</span> s_time<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">s&#39;</span>)
+</span></span></code></pre></div><p>再次登上浏览器的图形化界面，发现已经创建成功
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202243.png" alt=""></p>
+<hr>
+<p><a href="https://github.com/Dreag/Py2neo-translate">Py2neo V4 中文文档</a> 官方链接已失效</p>
+<p>利用子图创建节点和关系</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">py2neo</span>  <span style="color:#a2f;font-weight:bold">import</span> Node,Relationship,Graph,Subgraph
+</span></span><span style="display:flex;"><span>graph <span style="color:#666">=</span> Graph(<span style="color:#b44">&#34;http://localhost:7474&#34;</span>,auth<span style="color:#666">=</span>(<span style="color:#b44">&#34;neo4j&#34;</span>,<span style="color:#b44">&#34;123456&#34;</span>))
+</span></span><span style="display:flex;"><span>a <span style="color:#666">=</span> Node(<span style="color:#b44">&#34;Person&#34;</span>, name<span style="color:#666">=</span><span style="color:#b44">&#34;Alice&#34;</span>)
+</span></span><span style="display:flex;"><span>b <span style="color:#666">=</span> Node(<span style="color:#b44">&#34;Person&#34;</span>, name<span style="color:#666">=</span><span style="color:#b44">&#34;Bob&#34;</span>)
+</span></span><span style="display:flex;"><span>c <span style="color:#666">=</span> Node(<span style="color:#b44">&#34;Person&#34;</span>, name<span style="color:#666">=</span><span style="color:#b44">&#34;Jim&#34;</span>)
+</span></span><span style="display:flex;"><span>d <span style="color:#666">=</span> Node(<span style="color:#b44">&#34;Person&#34;</span>, name<span style="color:#666">=</span><span style="color:#b44">&#34;Nacy&#34;</span>)
+</span></span><span style="display:flex;"><span>nodes<span style="color:#666">=</span>Subgraph([a,b,c,d])
+</span></span><span style="display:flex;"><span>graph<span style="color:#666">.</span>create(nodes)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a<span style="color:#666">=</span>graph<span style="color:#666">.</span>nodes<span style="color:#666">.</span><span style="color:#a2f;font-weight:bold">match</span>(<span style="color:#b44">&#34;Person&#34;</span>,name<span style="color:#666">=</span><span style="color:#b44">&#34;Alice&#34;</span>)<span style="color:#666">.</span>first()
+</span></span><span style="display:flex;"><span>b<span style="color:#666">=</span>graph<span style="color:#666">.</span>nodes<span style="color:#666">.</span><span style="color:#a2f;font-weight:bold">match</span>(<span style="color:#b44">&#34;Person&#34;</span>,name<span style="color:#666">=</span><span style="color:#b44">&#34;Bob&#34;</span>)<span style="color:#666">.</span>first()
+</span></span><span style="display:flex;"><span>c<span style="color:#666">=</span>graph<span style="color:#666">.</span>nodes<span style="color:#666">.</span><span style="color:#a2f;font-weight:bold">match</span>(<span style="color:#b44">&#34;Person&#34;</span>,name<span style="color:#666">=</span><span style="color:#b44">&#34;Jim&#34;</span>)<span style="color:#666">.</span>first()
+</span></span><span style="display:flex;"><span>d<span style="color:#666">=</span>graph<span style="color:#666">.</span>nodes<span style="color:#666">.</span><span style="color:#a2f;font-weight:bold">match</span>(<span style="color:#b44">&#34;Person&#34;</span>,name<span style="color:#666">=</span><span style="color:#b44">&#34;Nacy&#34;</span>)<span style="color:#666">.</span>first()
+</span></span><span style="display:flex;"><span>rel_a<span style="color:#666">=</span>Relationship(a,<span style="color:#b44">&#34;likes&#34;</span>,b)
+</span></span><span style="display:flex;"><span>rel_b<span style="color:#666">=</span>Relationship(b,<span style="color:#b44">&#34;likes&#34;</span>,a)
+</span></span><span style="display:flex;"><span>rel_c<span style="color:#666">=</span>Relationship(c,<span style="color:#b44">&#34;likes&#34;</span>,d)
+</span></span><span style="display:flex;"><span>rel_d<span style="color:#666">=</span>Relationship(d,<span style="color:#b44">&#34;likes&#34;</span>,c)
+</span></span><span style="display:flex;"><span>A<span style="color:#666">=</span>Subgraph(relationships<span style="color:#666">=</span>[rel_a,rel_b,rel_c,rel_d])   
+</span></span><span style="display:flex;"><span>graph<span style="color:#666">.</span>create(A)
+</span></span></code></pre></div><hr>
+<p><a href="https://blog.csdn.net/qiang12qiang12/article/details/127692314">Py2neo:一种快速导入百万数据到Neo4j的方式_python 导入neo4j 节点id-CSDN博客</a></p>
+<p>根据上方A股列表的数据，重新编写代码，创建实体节点和关系</p>
+<p>遇到的问题：</p>
+<ol>
+<li>创建节点的属性，必须是字符串类型的，不然会报错。DataFrame读出来的数据有可能会是int或者numint64类型，需要进行转换</li>
+<li>创建关系时进行节点的查找匹配十分耗时，所以可以采用子图的形式进行创建 (查询节点和关系很费时间)</li>
+<li>没有报错，但是创建不出来关系，就需要检查匹配条件是否正确，不正确的话匹配不到节点，就不能创建关系</li>
+</ol>
+<p>完整代码：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">time</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">pandas</span> <span style="color:#a2f;font-weight:bold">as</span> <span style="color:#00f;font-weight:bold">pd</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">py2neo</span> <span style="color:#a2f;font-weight:bold">import</span> Graph, Node, Relationship, NodeMatcher, RelationshipMatcher, Subgraph
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 读取Excel文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">ReadExcel</span>():
+</span></span><span style="display:flex;"><span>    read_path <span style="color:#666">=</span> <span style="color:#b44">&#39;A股列表.xlsx&#39;</span>
+</span></span><span style="display:flex;"><span>    df <span style="color:#666">=</span> pd<span style="color:#666">.</span>read_excel(io<span style="color:#666">=</span>read_path)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> df
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 连接Neo4j</span>
+</span></span><span style="display:flex;"><span>url <span style="color:#666">=</span> <span style="color:#b44">&#34;bolt://serverIP:port&#34;</span>
+</span></span><span style="display:flex;"><span>username <span style="color:#666">=</span> <span style="color:#b44">&#34;neo4j&#34;</span>
+</span></span><span style="display:flex;"><span>password <span style="color:#666">=</span> <span style="color:#b44">&#34;password&#34;</span>
+</span></span><span style="display:flex;"><span>graph <span style="color:#666">=</span> Graph(url, auth<span style="color:#666">=</span>(username,password))
+</span></span><span style="display:flex;"><span>nodes <span style="color:#666">=</span> NodeMatcher(graph)
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(<span style="color:#b44">&#34;neo4j info: </span><span style="color:#b68;font-weight:bold">{}</span><span style="color:#b44">&#34;</span><span style="color:#666">.</span>format(<span style="color:#a2f">str</span>(graph)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 清空数据库</span>
+</span></span><span style="display:flex;"><span>graph<span style="color:#666">.</span>delete_all()  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 数据处理</span>
+</span></span><span style="display:flex;"><span>s_time <span style="color:#666">=</span> time<span style="color:#666">.</span>time()
+</span></span><span style="display:flex;"><span>node_count <span style="color:#666">=</span> <span style="color:#666">0</span>
+</span></span><span style="display:flex;"><span>df <span style="color:#666">=</span> ReadExcel()
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#39;总数据量：</span><span style="color:#b68;font-weight:bold">{</span><span style="color:#a2f">len</span>(df)<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>)
+</span></span><span style="display:flex;"><span>label <span style="color:#666">=</span> <span style="color:#b44">&#39;A股&#39;</span>
+</span></span><span style="display:flex;"><span>a_list <span style="color:#666">=</span> []
+</span></span><span style="display:flex;"><span>plate_set <span style="color:#666">=</span> <span style="color:#a2f">set</span>({})  <span style="color:#080;font-style:italic"># 板块集合</span>
+</span></span><span style="display:flex;"><span>area_set <span style="color:#666">=</span> <span style="color:#a2f">set</span>({})  <span style="color:#080;font-style:italic"># 地区集合</span>
+</span></span><span style="display:flex;"><span>province_set <span style="color:#666">=</span> <span style="color:#a2f">set</span>({})  <span style="color:#080;font-style:italic"># 省份集合</span>
+</span></span><span style="display:flex;"><span>city_set <span style="color:#666">=</span> <span style="color:#a2f">set</span>({})  <span style="color:#080;font-style:italic"># 城市集合</span>
+</span></span><span style="display:flex;"><span>industry_set <span style="color:#666">=</span> <span style="color:#a2f">set</span>({})  <span style="color:#080;font-style:italic"># 行业集合</span>
+</span></span><span style="display:flex;"><span>relationships_list <span style="color:#666">=</span> []
+</span></span><span style="display:flex;"><span>nodes_list <span style="color:#666">=</span> []
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> i <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#a2f">range</span>(<span style="color:#666">0</span>, <span style="color:#a2f">len</span>(df)):
+</span></span><span style="display:flex;"><span>  <span style="color:#a2f">dict</span> <span style="color:#666">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#39;Plate&#39;</span>: <span style="color:#a2f">str</span>(df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;板块&#39;</span>]),      <span style="color:#080;font-style:italic"># 需要转成字符串，否则会报错</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#39;FullName&#39;</span>: <span style="color:#a2f">str</span>(df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;公司全称&#39;</span>]),
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#39;EnName&#39;</span>: <span style="color:#a2f">str</span>(df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;英文名称&#39;</span>]),
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#39;Address&#39;</span>: <span style="color:#a2f">str</span>(df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;注册地址&#39;</span>]),
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#39;Code&#39;</span>: <span style="color:#a2f">str</span>(df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;A股代码&#39;</span>]),
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#39;ShortName&#39;</span>: <span style="color:#a2f">str</span>(df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;A股简称&#39;</span>]),
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#39;Date&#39;</span>: <span style="color:#a2f">str</span>(df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;A股上市日期&#39;</span>]),
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#39;Area&#39;</span>: <span style="color:#a2f">str</span>(df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;地      区&#39;</span>]),
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#39;Province&#39;</span>: <span style="color:#a2f">str</span>(df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;省    份&#39;</span>]),
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#39;City&#39;</span>: <span style="color:#a2f">str</span>(df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;城     市&#39;</span>]),
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#39;Industry&#39;</span>: <span style="color:#a2f">str</span>(df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;所属行业&#39;</span>])
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  plate_set<span style="color:#666">.</span>add(<span style="color:#a2f">str</span>(df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;板块&#39;</span>]))
+</span></span><span style="display:flex;"><span>  area_set<span style="color:#666">.</span>add(<span style="color:#a2f">str</span>(df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;地      区&#39;</span>]))
+</span></span><span style="display:flex;"><span>  province_set<span style="color:#666">.</span>add(<span style="color:#a2f">str</span>(df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;省    份&#39;</span>]))
+</span></span><span style="display:flex;"><span>  city_set<span style="color:#666">.</span>add(<span style="color:#a2f">str</span>(df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;城     市&#39;</span>]))
+</span></span><span style="display:flex;"><span>  industry_set<span style="color:#666">.</span>add(<span style="color:#a2f">str</span>(df<span style="color:#666">.</span>iloc[i][<span style="color:#b44">&#39;所属行业&#39;</span>]))
+</span></span><span style="display:flex;"><span>  a_list<span style="color:#666">.</span>append(<span style="color:#a2f">dict</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>a_dict <span style="color:#666">=</span> {}
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 创建A股节点</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> i <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#a2f">range</span>(<span style="color:#666">0</span>, <span style="color:#a2f">len</span>(a_list)):
+</span></span><span style="display:flex;"><span>  node <span style="color:#666">=</span> Node(label, ShortName<span style="color:#666">=</span>a_list[i][<span style="color:#b44">&#39;ShortName&#39;</span>], FullName<span style="color:#666">=</span>a_list[i][<span style="color:#b44">&#39;FullName&#39;</span>], EnName<span style="color:#666">=</span>a_list[i][<span style="color:#b44">&#39;EnName&#39;</span>], Code<span style="color:#666">=</span>a_list[i][<span style="color:#b44">&#39;Code&#39;</span>], Address<span style="color:#666">=</span>a_list[i][<span style="color:#b44">&#39;Address&#39;</span>], Date<span style="color:#666">=</span>a_list[i][<span style="color:#b44">&#39;Date&#39;</span>], Plate<span style="color:#666">=</span>a_list[i][<span style="color:#b44">&#39;Plate&#39;</span>], Area<span style="color:#666">=</span>a_list[i][<span style="color:#b44">&#39;Area&#39;</span>], Province<span style="color:#666">=</span>a_list[i][<span style="color:#b44">&#39;Province&#39;</span>], City<span style="color:#666">=</span>a_list[i][<span style="color:#b44">&#39;City&#39;</span>], Industry<span style="color:#666">=</span>a_list[i][<span style="color:#b44">&#39;Industry&#39;</span>])
+</span></span><span style="display:flex;"><span>  graph<span style="color:#666">.</span>create(node)
+</span></span><span style="display:flex;"><span>  a_dict[<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span>a_list[i][<span style="color:#b44">&#34;Code&#34;</span>]<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>]<span style="color:#666">=</span>node
+</span></span><span style="display:flex;"><span>  node_count <span style="color:#666">=</span> <span style="color:#666">+</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>plate_dict <span style="color:#666">=</span> {}
+</span></span><span style="display:flex;"><span>area_dict <span style="color:#666">=</span> {}
+</span></span><span style="display:flex;"><span>province_dict <span style="color:#666">=</span> {}
+</span></span><span style="display:flex;"><span>city_dict <span style="color:#666">=</span> {}
+</span></span><span style="display:flex;"><span>industry_dict <span style="color:#666">=</span> {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 创建板块节点</span>
+</span></span><span style="display:flex;"><span>label <span style="color:#666">=</span> <span style="color:#b44">&#39;板块&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> plate <span style="color:#a2f;font-weight:bold">in</span> plate_set:
+</span></span><span style="display:flex;"><span>  node <span style="color:#666">=</span> Node(label, name<span style="color:#666">=</span>plate)
+</span></span><span style="display:flex;"><span>  graph<span style="color:#666">.</span>create(node)
+</span></span><span style="display:flex;"><span>  plate_dict[<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span>plate<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>]<span style="color:#666">=</span>node
+</span></span><span style="display:flex;"><span>  node_count <span style="color:#666">=</span> <span style="color:#666">+</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 创建地区节点</span>
+</span></span><span style="display:flex;"><span>label <span style="color:#666">=</span> <span style="color:#b44">&#39;地区&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> area <span style="color:#a2f;font-weight:bold">in</span> area_set:
+</span></span><span style="display:flex;"><span>  node <span style="color:#666">=</span> Node(label, name<span style="color:#666">=</span>area)
+</span></span><span style="display:flex;"><span>  graph<span style="color:#666">.</span>create(node)
+</span></span><span style="display:flex;"><span>  area_dict[<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span>area<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>]<span style="color:#666">=</span>node
+</span></span><span style="display:flex;"><span>  node_count <span style="color:#666">=</span> <span style="color:#666">+</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 创建省份节点</span>
+</span></span><span style="display:flex;"><span>label <span style="color:#666">=</span> <span style="color:#b44">&#39;省份&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> province <span style="color:#a2f;font-weight:bold">in</span> province_set:
+</span></span><span style="display:flex;"><span>  node <span style="color:#666">=</span> Node(label, name<span style="color:#666">=</span>province)
+</span></span><span style="display:flex;"><span>  graph<span style="color:#666">.</span>create(node)
+</span></span><span style="display:flex;"><span>  province_dict[<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span>province<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>]<span style="color:#666">=</span>node
+</span></span><span style="display:flex;"><span>  node_count <span style="color:#666">=</span> <span style="color:#666">+</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 创建城市节点</span>
+</span></span><span style="display:flex;"><span>label <span style="color:#666">=</span> <span style="color:#b44">&#39;城市&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> city <span style="color:#a2f;font-weight:bold">in</span> city_set:
+</span></span><span style="display:flex;"><span>  node <span style="color:#666">=</span> Node(label, name<span style="color:#666">=</span>city)
+</span></span><span style="display:flex;"><span>  graph<span style="color:#666">.</span>create(node)
+</span></span><span style="display:flex;"><span>  city_dict[<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span>city<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>]<span style="color:#666">=</span>node
+</span></span><span style="display:flex;"><span>  node_count <span style="color:#666">=</span> <span style="color:#666">+</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 创建行业节点</span>
+</span></span><span style="display:flex;"><span>label <span style="color:#666">=</span> <span style="color:#b44">&#39;行业&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> industry <span style="color:#a2f;font-weight:bold">in</span> industry_set:
+</span></span><span style="display:flex;"><span>  node <span style="color:#666">=</span> Node(label, name<span style="color:#666">=</span>industry)
+</span></span><span style="display:flex;"><span>  graph<span style="color:#666">.</span>create(node)
+</span></span><span style="display:flex;"><span>  industry_dict[<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span>industry<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>]<span style="color:#666">=</span>node
+</span></span><span style="display:flex;"><span>  node_count <span style="color:#666">=</span> <span style="color:#666">+</span> <span style="color:#666">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>relationships_list <span style="color:#666">=</span> [] 
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 创建关系</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> i <span style="color:#a2f;font-weight:bold">in</span> a_list:
+</span></span><span style="display:flex;"><span>  <span style="color:#080;font-style:italic"># A股-板块</span>
+</span></span><span style="display:flex;"><span>  node1 <span style="color:#666">=</span> a_dict[<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span>i[<span style="color:#b44">&#34;Code&#34;</span>]<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>]
+</span></span><span style="display:flex;"><span>  node2 <span style="color:#666">=</span> plate_dict[<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span>i[<span style="color:#b44">&#34;Plate&#34;</span>]<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>]
+</span></span><span style="display:flex;"><span>  relationships_list<span style="color:#666">.</span>append(Relationship(node1, <span style="color:#b44">&#39;板块&#39;</span>, node2))
+</span></span><span style="display:flex;"><span>  <span style="color:#080;font-style:italic"># A股-地区</span>
+</span></span><span style="display:flex;"><span>  node2 <span style="color:#666">=</span> area_dict[<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span>i[<span style="color:#b44">&#34;Area&#34;</span>]<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>]
+</span></span><span style="display:flex;"><span>  relationships_list<span style="color:#666">.</span>append(Relationship(node1, <span style="color:#b44">&#39;地区&#39;</span>, node2))
+</span></span><span style="display:flex;"><span>  <span style="color:#080;font-style:italic"># A股-省份</span>
+</span></span><span style="display:flex;"><span>  node2 <span style="color:#666">=</span> province_dict[<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span>i[<span style="color:#b44">&#34;Province&#34;</span>]<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>]
+</span></span><span style="display:flex;"><span>  relationships_list<span style="color:#666">.</span>append(Relationship(node1, <span style="color:#b44">&#39;省份&#39;</span>, node2))
+</span></span><span style="display:flex;"><span>  <span style="color:#080;font-style:italic"># A股-城市</span>
+</span></span><span style="display:flex;"><span>  node2 <span style="color:#666">=</span> city_dict[<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span>i[<span style="color:#b44">&#34;City&#34;</span>]<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>]
+</span></span><span style="display:flex;"><span>  relationships_list<span style="color:#666">.</span>append(Relationship(node1, <span style="color:#b44">&#39;城市&#39;</span>, node2))
+</span></span><span style="display:flex;"><span>  <span style="color:#080;font-style:italic"># A股-行业</span>
+</span></span><span style="display:flex;"><span>  node2 <span style="color:#666">=</span> industry_dict[<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span>i[<span style="color:#b44">&#34;Industry&#34;</span>]<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>]
+</span></span><span style="display:flex;"><span>  relationships_list<span style="color:#666">.</span>append(Relationship(node1, <span style="color:#b44">&#39;行业&#39;</span>, node2))
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>sub <span style="color:#666">=</span> Subgraph(relationships<span style="color:#666">=</span>relationships_list)  <span style="color:#080;font-style:italic"># 子图的形式创建关系</span>
+</span></span><span style="display:flex;"><span>tx_ <span style="color:#666">=</span> graph<span style="color:#666">.</span>begin()
+</span></span><span style="display:flex;"><span>tx_<span style="color:#666">.</span>create(sub)
+</span></span><span style="display:flex;"><span>graph<span style="color:#666">.</span>commit(tx_)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#39;节点数量：</span><span style="color:#b68;font-weight:bold">{</span>node_count<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span>)
+</span></span><span style="display:flex;"><span>e_time <span style="color:#666">=</span> time<span style="color:#666">.</span>time()
+</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#39;创建节点耗时：</span><span style="color:#b68;font-weight:bold">{</span>e_time <span style="color:#666">-</span> s_time<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">s&#39;</span>)
+</span></span></code></pre></div>
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/11/shell%E5%9F%BA%E7%A1%80/">← prev</a>
+    
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/11/linux%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">next →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2021</span> - <span>2024</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+    <span> 🍦 Theme </span>
+    <a class="link" href="https://github.com/queensferryme/hugo-theme-texify">TeXify</a>
+  </div>
+
+  <div class="footnote">
+    <span>Follow me on <a class=link href=https://github.com/Pi3-l22>GitHub</a> |
+<a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+
+</body>
+
+</html>

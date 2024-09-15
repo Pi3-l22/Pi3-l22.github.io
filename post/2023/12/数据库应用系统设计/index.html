@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="数据库实验之数据库应用系统设计">
+  
+
+  
+  <link rel="icon" href="https://pi3-l22.github.io/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://pi3-l22.github.io/post/2023/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="数据库应用系统设计实验">
+  <meta property="og:description" content="数据库实验之数据库应用系统设计">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-12-18T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-12-18T00:00:00+00:00">
+    <meta property="article:tag" content="T-SQL">
+    <meta property="article:tag" content="SQLServer">
+    <meta property="article:tag" content="SQL">
+
+
+  
+  <link rel="canonical" href="https://pi3-l22.github.io/post/2023/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
+
+  
+  
+  
+  <meta itemprop="name" content="数据库应用系统设计实验">
+  <meta itemprop="description" content="数据库实验之数据库应用系统设计">
+  <meta itemprop="datePublished" content="2023-12-18T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2023-12-18T00:00:00+00:00">
+  <meta itemprop="wordCount" content="2168">
+  <meta itemprop="keywords" content="T-SQL,SQLServer,SQL">
+
+  
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/content.css'>
+
+  
+  
+  <title>数据库应用系统设计实验 - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://pi3-l22.github.io/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://pi3-l22.github.io/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>数据库应用系统设计实验</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/t-sql'>#T-SQL</a>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/sqlserver'>#SQLServer</a>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/sql'>#SQL</a>
+    
+  </div>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#已有信息">已有信息</a></li>
+    <li><a href="#实验步骤">实验步骤</a></li>
+    <li><a href="#实验过程">实验过程</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <h1 id="数据库应用系统设计">数据库应用系统设计</h1>
+<p>1、实验目的
+  熟练掌握概念结构设计和逻辑结构设计步骤，建立和操作数据库。
+2、实验内容与要求
+（1）根据已有信息，设计概念模型
+（2）将概念模型转换为关系模型
+（3）创建数据表，填入信息
+（4）设计查询语句，完成查询任务。
+要求：给出完整的步骤和截图。
+3、实验环境
+Microsoft SQL Server (Express) + SQL Server Management Studio</p>
+<h2 id="已有信息">已有信息</h2>
+<p>设有一家百货商店，已知信息如下：
+1）每个职工的数据是职工号、姓名、地址和他所在的商品部。
+2）每一商品部的数据有：它的职工，经理和它经销的商品。
+3）每种经销的商品数据有：商品名、生产厂家、价格、型号（厂家定的）和内部商品代号（商店规定的）。
+4）每个生产厂家的数据有：厂名、地址、向商店提供的商品价格。</p>
+<h2 id="实验步骤">实验步骤</h2>
+<p>1）根据已知信息，设计该百货商店的概念模型 （给出E-R图）
+2）将概念模型转换为关系模型。（给出关系模型）
+3）详细列出设计了几张表，各个表所含的字段，以及字段采用的数据类型。有些字段要有约束（价格大于0等）。
+3）用SQL创建数据表，填入信息，每张表填入的信息不少于8条。（建表语句以及结果截图）
+4）用SQL语言进行以下数据查询操作：（查询语句以及结果截图）
+      a) 查询所有经理的姓名
+      b) 查询某商品部交涉的厂家列表。</p>
+<h2 id="实验过程">实验过程</h2>
+<p><strong>①</strong>    <strong>根据给出的信息，可以设计绘制出ER图</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000317.png" alt="ER图"></p>
+<p><strong>②</strong> <strong>将上面ER概念模型转换为关系模型</strong>
+职工（职工号，姓名，地址，所在部门）
+商品部（部门号，部门名称，经理）
+商品（商品代号，商品名，生产厂家，价格，型号，商品部）
+厂家（厂家代号，厂名，地址，提供价格）</p>
+<p><strong>③</strong> <strong>根据模型设计数据表，具有详细的字段名称、数据类型以及数据的约束</strong>
+共设计了4张表，分别是职工表、商品部表、商品表、厂家表</p>
+<p>职工表：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">字段名</th>
+          <th style="text-align: left">数据类型</th>
+          <th style="text-align: left">长度</th>
+          <th style="text-align: left">主键</th>
+          <th style="text-align: left">外键</th>
+          <th style="text-align: left">约束</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">职工号</td>
+          <td style="text-align: left">char</td>
+          <td style="text-align: left">10</td>
+          <td style="text-align: left">是</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">非空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">姓名</td>
+          <td style="text-align: left">varchar</td>
+          <td style="text-align: left">20</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">非空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">地址</td>
+          <td style="text-align: left">varchar</td>
+          <td style="text-align: left">50</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">非空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">所在部门</td>
+          <td style="text-align: left">char</td>
+          <td style="text-align: left">10</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">是</td>
+          <td style="text-align: left">非空，参照商品部表的部门号</td>
+      </tr>
+  </tbody>
+</table>
+<p>商品部表：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">字段名</th>
+          <th style="text-align: left">数据类型</th>
+          <th style="text-align: left">长度</th>
+          <th style="text-align: left">主键</th>
+          <th style="text-align: left">外键</th>
+          <th style="text-align: left">约束</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">部门号</td>
+          <td style="text-align: left">char</td>
+          <td style="text-align: left">10</td>
+          <td style="text-align: left">是</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">非空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">部门名称</td>
+          <td style="text-align: left">varchar</td>
+          <td style="text-align: left">20</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">非空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">经理</td>
+          <td style="text-align: left">varchar</td>
+          <td style="text-align: left">20</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">非空</td>
+      </tr>
+  </tbody>
+</table>
+<p>商品表：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">字段名</th>
+          <th style="text-align: left">数据类型</th>
+          <th style="text-align: left">长度</th>
+          <th style="text-align: left">主键</th>
+          <th style="text-align: left">外键</th>
+          <th style="text-align: left">约束</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">商品代号</td>
+          <td style="text-align: left">char</td>
+          <td style="text-align: left">10</td>
+          <td style="text-align: left">是</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">非空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">商品名</td>
+          <td style="text-align: left">varchar</td>
+          <td style="text-align: left">20</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">非空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">生产厂家</td>
+          <td style="text-align: left">char</td>
+          <td style="text-align: left">10</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">是</td>
+          <td style="text-align: left">非空，参照厂家表的厂家代号</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">价格</td>
+          <td style="text-align: left">decimal</td>
+          <td style="text-align: left">10,2</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">非空，大于0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">型号</td>
+          <td style="text-align: left">varchar</td>
+          <td style="text-align: left">20</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">非空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">部门号</td>
+          <td style="text-align: left">char</td>
+          <td style="text-align: left">10</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">是</td>
+          <td style="text-align: left">非空，参照商品部表的部门号</td>
+      </tr>
+  </tbody>
+</table>
+<p>厂家表：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">字段名</th>
+          <th style="text-align: left">数据类型</th>
+          <th style="text-align: left">长度</th>
+          <th style="text-align: left">主键</th>
+          <th style="text-align: left">外键</th>
+          <th style="text-align: left">约束</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">厂家代号</td>
+          <td style="text-align: left">char</td>
+          <td style="text-align: left">10</td>
+          <td style="text-align: left">是</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">非空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">厂名</td>
+          <td style="text-align: left">varchar</td>
+          <td style="text-align: left">20</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">非空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">地址</td>
+          <td style="text-align: left">varchar</td>
+          <td style="text-align: left">50</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">非空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">提供价格</td>
+          <td style="text-align: left">decimal</td>
+          <td style="text-align: left">10,2</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">否</td>
+          <td style="text-align: left">非空，大于0</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>④</strong> <strong>用SQL创建数据表，填入模拟的数据信息</strong></p>
+<ol>
+<li>职工表：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#080;font-style:italic">-- 创建职工表
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>employee<span style="color:#bbb"> </span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>emp_id<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">10</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">PRIMARY</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">KEY</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>emp_name<span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">20</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>emp_address<span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">50</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>dept_id<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">10</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">REFERENCES</span><span style="color:#bbb"> </span>department(dept_id)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>);<span style="color:#bbb">
+</span></span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000346.png" alt="职工表结构"></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#080;font-style:italic">-- 填入职工信息
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>employee<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;E001&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;张三&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;北京市朝阳区&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D001&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;E002&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;李四&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;上海市浦东新区&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D002&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;E003&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;王五&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;广州市天河区&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D003&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;E004&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;赵六&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;深圳市南山区&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D004&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;E005&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;孙七&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;杭州市西湖区&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D001&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;E006&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;周八&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;南京市鼓楼区&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D002&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;E007&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;吴九&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;成都市武侯区&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D003&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;E008&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;郑十&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;重庆市渝北区&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D004&#39;</span>);<span style="color:#bbb">
+</span></span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000403.png" alt="职工表数据"></p>
+<ol start="2">
+<li>商品部表</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#080;font-style:italic">-- 创建商品部表
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>department<span style="color:#bbb"> </span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>dept_id<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">10</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">PRIMARY</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">KEY</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>dept_name<span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">20</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>dept_manager<span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">20</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>);<span style="color:#bbb">
+</span></span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000431.png" alt="商品部表结构"></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#080;font-style:italic">-- 填入商品部信息
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>department<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;D001&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;服装部&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;张三&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;D002&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;电器部&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;李四&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;D003&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;食品部&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;王五&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;D004&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;化妆品部&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;赵六&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;D005&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;生鲜部&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;孙七&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;D006&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;家庭用品部&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;周八&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;D007&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;鞋帽部&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;吴九&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;D008&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;首饰部&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;郑十&#39;</span>);<span style="color:#bbb">
+</span></span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000524.png" alt="商品部表数据"></p>
+<ol start="3">
+<li>商品表：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#080;font-style:italic">-- 创建商品表
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>product<span style="color:#bbb"> </span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>prod_id<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">10</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">PRIMARY</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">KEY</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>prod_name<span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">20</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>prod_maker<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">10</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">REFERENCES</span><span style="color:#bbb"> </span>manufacturer(maker_id),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>prod_price<span style="color:#bbb"> </span><span style="color:#a2f">decimal</span>(<span style="color:#666">10</span>,<span style="color:#666">2</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">CHECK</span><span style="color:#bbb"> </span>(prod_price<span style="color:#bbb"> </span><span style="color:#666">&gt;</span><span style="color:#bbb"> </span><span style="color:#666">0</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>prod_model<span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">20</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>prod_dept<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">10</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">REFERENCES</span><span style="color:#bbb"> </span>department(dept_id)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>);<span style="color:#bbb">
+</span></span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000534.png" alt="商品表结构"></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#080;font-style:italic">-- 填入商品信息
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>product<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;P001&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;牛仔裤&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;M001&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">199</span>.<span style="color:#666">00</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;A001&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D001&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;P002&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;T恤&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;M005&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">99</span>.<span style="color:#666">00</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;A002&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D001&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;P003&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;电饭煲&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;M002&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">299</span>.<span style="color:#666">00</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;B001&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D002&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;P004&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;电水壶&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;M006&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">99</span>.<span style="color:#666">00</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;B002&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D002&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;P005&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;巧克力&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;M003&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">19</span>.<span style="color:#666">90</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;C001&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D003&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;P006&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;蛋糕&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;M007&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">39</span>.<span style="color:#666">90</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;C002&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D003&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;P007&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;口红&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;M004&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">299</span>.<span style="color:#666">00</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D001&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D004&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;P008&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;香水&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;M008&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">399</span>.<span style="color:#666">00</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D002&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;D004&#39;</span>);<span style="color:#bbb">
+</span></span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000540.png" alt="商品表数据"></p>
+<ol start="4">
+<li>厂家表：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#080;font-style:italic">-- 创建厂家表
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>manufacturer<span style="color:#bbb"> </span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>maker_id<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">10</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">PRIMARY</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">KEY</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>maker_name<span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">20</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>maker_address<span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">50</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>maker_price<span style="color:#bbb"> </span><span style="color:#a2f">decimal</span>(<span style="color:#666">10</span>,<span style="color:#666">2</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">CHECK</span><span style="color:#bbb"> </span>(maker_price<span style="color:#bbb"> </span><span style="color:#666">&gt;</span><span style="color:#bbb"> </span><span style="color:#666">0</span>)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>);<span style="color:#bbb">
+</span></span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000546.png" alt="厂家表结构"></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#080;font-style:italic">-- 填入厂家信息
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>manufacturer<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">VALUES</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;M001&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;优衣库&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;日本东京&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">150</span>.<span style="color:#666">00</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;M002&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;美的&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;广东佛山&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">200</span>.<span style="color:#666">00</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;M003&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;费列罗&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;意大利米兰&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">15</span>.<span style="color:#666">00</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;M004&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;迪奥&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;法国巴黎&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">180</span>.<span style="color:#666">00</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;M005&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;耐克&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;美国俄勒冈&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">90</span>.<span style="color:#666">00</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;M006&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;九阳&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;江苏常州&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">80</span>.<span style="color:#666">00</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;M007&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;好利来&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;中国北京&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">20</span>.<span style="color:#666">00</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>(<span style="color:#b44">&#39;M008&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;博柏利&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;英国伦敦&#39;</span>,<span style="color:#bbb"> </span><span style="color:#666">299</span>.<span style="color:#666">00</span>);<span style="color:#bbb">
+</span></span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000553.png" alt="厂家表数据"></p>
+<p>总体结构:
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000559.png" alt="总体结构"></p>
+<p><strong>⑤</strong> <strong>用SQL语言进行以下数据查询操作</strong>
+a) 查询所有经理的姓名</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#080;font-style:italic">-- a) 查询所有经理的姓名
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>dept_manager<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>department;<span style="color:#bbb">
+</span></span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000607.png" alt="查询结果"></p>
+<p>b) 查询某商品部交涉的厂家列表</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#080;font-style:italic">-- b) 查询某商品部交涉的厂家列表
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">-- 这里以D001服装部为例
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>maker_name<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>manufacturer<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>maker_id<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IN</span><span style="color:#bbb"> </span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>prod_maker<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>product<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>prod_id<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IN</span><span style="color:#bbb"> </span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>prod_id<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>product<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>prod_dept<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span><span style="color:#b44">&#39;D001&#39;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>);<span style="color:#bbb">
+</span></span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000615.png" alt="查询结果"></p>
+
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%BA%8C/">← prev</a>
+    
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/12/%E5%BE%AE%E4%BF%A1%E5%AE%9A%E6%97%B6%E5%8F%91%E9%80%81%E5%80%92%E6%95%B0%E6%97%A5/">next →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2021</span> - <span>2024</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+    <span> 🍦 Theme </span>
+    <a class="link" href="https://github.com/queensferryme/hugo-theme-texify">TeXify</a>
+  </div>
+
+  <div class="footnote">
+    <span>Follow me on <a class=link href=https://github.com/Pi3-l22>GitHub</a> |
+<a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+
+</body>
+
+</html>

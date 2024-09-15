@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kali on Pi3&#39;Notes</title>
+    <link>https://pi3-l22.github.io/tags/kali/</link>
+    <description>Recent content in Kali on Pi3&#39;Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
+    <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
+    <lastBuildDate>Sat, 10 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://pi3-l22.github.io/tags/kali/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kali Linux下使用VMware遇到的问题</title>
+      <link>https://pi3-l22.github.io/post/2024/2/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Sat, 10 Feb 2024 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://pi3-l22.github.io/post/2024/2/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      
+      <description>&lt;h1 id=&#34;kali-linux下使用vmware遇到的问题&#34;&gt;Kali Linux下使用VMware遇到的问题&lt;/h1&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;p&gt;到官网下载Linux的资源文件，运行按照提示下一步就可以完成安装
+在这个过程中有可能会提示缺少Linux-header文件，只需要在终端用apt下载对应版本的header就可以&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install linux-headers-6.6.9-amd64
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://pi3yyy.love/archives/33e9ac6f.html&#34;&gt;安装具体步骤参考文章中的安装VMware&lt;/a&gt;
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240211000531.png&#34; alt=&#34;VMware Workstation pro 17&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;问题出现&#34;&gt;问题出现&lt;/h2&gt;
+&lt;p&gt;刚开始使用虚拟机没有任何问题，但是在安装了虚拟机并运行之后，再重启电脑就会卡在Kali的logo界面
+刚开始还没在意，没有想到和VMware有关，但是随着使用虚拟机次数的增多，我渐渐发现每次只要开了虚拟机重启就会卡在logo界面，不能正常进入系统
+所以我在logo界面，使用ctrl+alt+f1，打开日志信息，发现居然是vmware.service不能正常启动导致的
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/95_1707580958_hd.jpeg&#34; alt=&#34;开机错误日志&#34;&gt;
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/96_1707580962_hd.jpeg&#34; alt=&#34;开机错误日志&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;问题解决&#34;&gt;问题解决&lt;/h2&gt;
+&lt;p&gt;我只能强制关机后再开机，进入系统开始解决问题，我上网搜索了很多一样的情况，他们都是不能正常启动vmnet服务或者是vmon服务，解决办法就是重新安装所有的VM模块，再手动编译安装vmnet和vmon模块&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080&#34;&gt;#!/bin/bash                                                 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b8860b&#34;&gt;VMWARE_VERSION&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;workstation-17.5.0 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#b8860b&#34;&gt;TMP_FOLDER&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;/tmp/patch-vmware
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rm -fdr &lt;span style=&#34;color:#b8860b&#34;&gt;$TMP_FOLDER&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p &lt;span style=&#34;color:#b8860b&#34;&gt;$TMP_FOLDER&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f&#34;&gt;cd&lt;/span&gt; &lt;span style=&#34;color:#b8860b&#34;&gt;$TMP_FOLDER&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/mkubecek/vmware-host-modules.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f&#34;&gt;cd&lt;/span&gt; &lt;span style=&#34;color:#b8860b&#34;&gt;$TMP_FOLDER&lt;/span&gt;/vmware-host-modules
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git checkout &lt;span style=&#34;color:#b8860b&#34;&gt;$VMWARE_VERSION&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git fetch
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo make install
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo ln -s /lib/x86_64-linux-gnu/libz.so.1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/usr/lib/vmware/lib/libz.so.1/libz.so.1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo /etc/init.d/vmware restart
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我也照做了，但是依旧不能解决问题，不论通过什么方法启动network服务，都不行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌──&lt;span style=&#34;color:#666&#34;&gt;(&lt;/span&gt;pi3㉿kali-l22&lt;span style=&#34;color:#666&#34;&gt;)&lt;/span&gt;-&lt;span style=&#34;color:#666&#34;&gt;[&lt;/span&gt;~&lt;span style=&#34;color:#666&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─$ service vmware status                 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;× vmware.service - LSB: This service starts and stops VMware services
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     Loaded: loaded &lt;span style=&#34;color:#666&#34;&gt;(&lt;/span&gt;/etc/init.d/vmware; generated&lt;span style=&#34;color:#666&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     Active: failed &lt;span style=&#34;color:#666&#34;&gt;(&lt;/span&gt;Result: exit-code&lt;span style=&#34;color:#666&#34;&gt;)&lt;/span&gt; since Sat 2024-02-10 23:10:37 CST; 29min ago
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       Docs: man:systemd-sysv-generator&lt;span style=&#34;color:#666&#34;&gt;(&lt;/span&gt;8&lt;span style=&#34;color:#666&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Process: &lt;span style=&#34;color:#666&#34;&gt;1734&lt;/span&gt; &lt;span style=&#34;color:#b8860b&#34;&gt;ExecStart&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;/etc/init.d/vmware start &lt;span style=&#34;color:#666&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#b8860b&#34;&gt;code&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;exited, &lt;span style=&#34;color:#b8860b&#34;&gt;status&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;1/FAILURE&lt;span style=&#34;color:#666&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      Tasks: &lt;span style=&#34;color:#666&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;(&lt;/span&gt;limit: 16495&lt;span style=&#34;color:#666&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     Memory: 5.4M &lt;span style=&#34;color:#666&#34;&gt;(&lt;/span&gt;peak: 14.6M&lt;span style=&#34;color:#666&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        CPU: 444ms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     CGroup: /system.slice/vmware.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;             └─1861 /usr/sbin/vmware-authdlauncher
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2月 &lt;span style=&#34;color:#666&#34;&gt;10&lt;/span&gt; 23:10:33 kali-l22 vmware&lt;span style=&#34;color:#666&#34;&gt;[&lt;/span&gt;1734&lt;span style=&#34;color:#666&#34;&gt;]&lt;/span&gt;:    Virtual machine monitor - &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2月 &lt;span style=&#34;color:#666&#34;&gt;10&lt;/span&gt; 23:10:33 kali-l22 vmware&lt;span style=&#34;color:#666&#34;&gt;[&lt;/span&gt;1734&lt;span style=&#34;color:#666&#34;&gt;]&lt;/span&gt;:    Virtual machine communication interface - &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2月 &lt;span style=&#34;color:#666&#34;&gt;10&lt;/span&gt; 23:10:33 kali-l22 vmware&lt;span style=&#34;color:#666&#34;&gt;[&lt;/span&gt;1734&lt;span style=&#34;color:#666&#34;&gt;]&lt;/span&gt;:    VM communication interface socket family - &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2月 &lt;span style=&#34;color:#666&#34;&gt;10&lt;/span&gt; 23:10:37 kali-l22 vmware&lt;span style=&#34;color:#666&#34;&gt;[&lt;/span&gt;1734&lt;span style=&#34;color:#666&#34;&gt;]&lt;/span&gt;:    Virtual ethernet - failed
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2月 &lt;span style=&#34;color:#666&#34;&gt;10&lt;/span&gt; 23:10:37 kali-l22 vmware&lt;span style=&#34;color:#666&#34;&gt;[&lt;/span&gt;1734&lt;span style=&#34;color:#666&#34;&gt;]&lt;/span&gt;:    VMware Authentication Daemon - &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2月 &lt;span style=&#34;color:#666&#34;&gt;10&lt;/span&gt; 23:10:37 kali-l22 systemd&lt;span style=&#34;color:#666&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#666&#34;&gt;]&lt;/span&gt;: vmware.service: Control process exited, &lt;span style=&#34;color:#b8860b&#34;&gt;code&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;exited, &lt;span style=&#34;color:#b8860b&#34;&gt;status&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;1/&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2月 &lt;span style=&#34;color:#666&#34;&gt;10&lt;/span&gt; 23:10:37 kali-l22 systemd&lt;span style=&#34;color:#666&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#666&#34;&gt;]&lt;/span&gt;: vmware.service: Failed with result &lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;exit-code&amp;#39;&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2月 &lt;span style=&#34;color:#666&#34;&gt;10&lt;/span&gt; 23:10:37 kali-l22 systemd&lt;span style=&#34;color:#666&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#666&#34;&gt;]&lt;/span&gt;: vmware.service: Unit process &lt;span style=&#34;color:#666&#34;&gt;1806&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;(&lt;/span&gt;vmware-authdlau&lt;span style=&#34;color:#666&#34;&gt;)&lt;/span&gt; remains ru&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2月 &lt;span style=&#34;color:#666&#34;&gt;10&lt;/span&gt; 23:10:37 kali-l22 systemd&lt;span style=&#34;color:#666&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#666&#34;&gt;]&lt;/span&gt;: vmware.service: Unit process &lt;span style=&#34;color:#666&#34;&gt;1807&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;(&lt;/span&gt;logger&lt;span style=&#34;color:#666&#34;&gt;)&lt;/span&gt; remains running aft&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2月 &lt;span style=&#34;color:#666&#34;&gt;10&lt;/span&gt; 23:10:37 kali-l22 systemd&lt;span style=&#34;color:#666&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#666&#34;&gt;]&lt;/span&gt;: Failed to start vmware.service - LSB: This service starts and &amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Virtual ethernet依旧是启动失败&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌──&lt;span style=&#34;color:#666&#34;&gt;(&lt;/span&gt;pi3㉿kali-l22&lt;span style=&#34;color:#666&#34;&gt;)&lt;/span&gt;-&lt;span style=&#34;color:#666&#34;&gt;[&lt;/span&gt;~&lt;span style=&#34;color:#666&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─$ sudo /etc/init.d/vmware restart
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Stopping VMware services:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   VMware Authentication Daemon                                        &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   Virtual machine monitor                                             &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Starting VMware services:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   Virtual machine monitor                                             &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   Virtual machine communication interface                             &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   VM communication interface socket family                            &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   Virtual ethernet                                                    failed
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   VMware Authentication Daemon                                        &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   Shared Memory Available                                             &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;所以我也重装了好几遍VMware，也装了17、16和15的版本，15版本甚至连Virtual machine monitor都启动失败
+最后在google上找了很多的问答，也都是差不多，最后只能求助AI，他告诉我：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;**Remove Lock Files**: 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;If network connections fail to initialize, check for a lock file/directory at &lt;span style=&#34;color:#b44&#34;&gt;`/etc/vmware/networking.lck/`&lt;/span&gt;. 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#008000;font-weight:bold&#34;&gt;Removing this directory and reconfiguring VMware Workstation might resolve the issue&lt;/span&gt;](&lt;span style=&#34;color:#b44&#34;&gt;https://forums.gentoo.org/viewtopic-t-955980-start-0.html&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我一看，在/etc/vmware还真有这样一个networking.lck文件，我直接删除了这个文件，然后重启服务，成功了！&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌──&lt;span style=&#34;color:#666&#34;&gt;(&lt;/span&gt;pi3㉿kali-l22&lt;span style=&#34;color:#666&#34;&gt;)&lt;/span&gt;-&lt;span style=&#34;color:#666&#34;&gt;[&lt;/span&gt;~&lt;span style=&#34;color:#666&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─$ sudo vmware-networks --status  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#666&#34;&gt;[&lt;/span&gt;sudo&lt;span style=&#34;color:#666&#34;&gt;]&lt;/span&gt; pi3 的密码：
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Bridge networking on vmnet0 is running
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;All the services configured on all the networks are running
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;.lck&lt;/strong&gt; 通常指的是 &lt;strong&gt;锁定文件&lt;/strong&gt;。这些文件用于防止多个进程同时访问或修改资源（例如文件或数据库）。当进程打开文件时，它可能会创建相应的锁定文件，以表示它正在主动使用该资源。其他进程在尝试修改相同资源之前可以检查此锁定文件。&lt;/li&gt;
+&lt;li&gt;例如：
+&lt;ul&gt;
+&lt;li&gt;在 &lt;strong&gt;VMware Workstation Pro&lt;/strong&gt; 中，缺少 &lt;strong&gt;/etc/vmware/networking&lt;/strong&gt; 文件可能会导致网络问题。一些用户报告找到了一个包含 &lt;strong&gt;/etc/vmware/networking.lck&lt;/strong&gt; 文件夹的 &lt;strong&gt;M44303.lck&lt;/strong&gt; 文件。如果您遇到网络问题，您可能需要重新创建所需的文件。&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;Adobe FrameMaker&lt;/strong&gt; 中，“网络上的锁定文件”功能会生成一个 &lt;strong&gt;.lck&lt;/strong&gt; 文件，以管理对FrameMaker文档的并发访问。这个功能有时既有帮助又有时会让人感到烦恼，具体取决于情况。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>Kali Linux的安装与配置</title>
+      <link>https://pi3-l22.github.io/post/2024/2/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Thu, 08 Feb 2024 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://pi3-l22.github.io/post/2024/2/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid>
+      
+      <description>&lt;h1 id=&#34;kali-linux的安装与配置&#34;&gt;Kali Linux的安装与配置&lt;/h1&gt;
+&lt;h2 id=&#34;快速安装&#34;&gt;快速安装&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.kali.org/&#34;&gt;官网&lt;/a&gt;下载Kali Linux镜像文件（ISO）
+虽然2023年推出来Kali Purple但是不太推荐安装，因为有一些库和依赖环境没有，安装一些软件程序会很麻烦
+比如安装了Remmina就没有RDP协议的远程桌面连接
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208104233.png&#34; alt=&#34;Kali官网下载ISO文件&#34;&gt;&lt;/p&gt;
+&lt;p&gt;使用&lt;a href=&#34;https://sourceforge.net/projects/win32diskimager/&#34;&gt;Win32DiskImager&lt;/a&gt;把ISO文件刻录进U盘
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208104838.png&#34; alt=&#34;Win32DiskImager下载&#34;&gt;&lt;/p&gt;
+&lt;p&gt;关闭电脑，使用U盘启动，进入Kali Linux安装界面，如果是安装双系统注意规划好磁盘分区，如果不是可以直接清空安装
+推荐把Swap分区改大点（默认1GB），16GB的物理内存可以分配8GB的Swap空间
+安装桌面环境可以根据喜好选择Xfce、Gnome、KDE&lt;/p&gt;
+&lt;h2 id=&#34;换源&#34;&gt;换源&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo vim /etc/apt/sources.list
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;把官方源注释掉，更改国内源&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;#中科大&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;#阿里云&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;#清华大学&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;#浙大&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;#东软大学&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;deb http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;deb-src http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;#重庆大学&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;deb http://http.kali.org/kali kali-rolling main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;deb-src http://http.kali.org/kali kali-rolling main non-free contrib
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;更新软件列表&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;apt-get update 更新索引
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;apt-get upgrade 更新软件
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;apt-get dist-upgrade 升级
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;apt-get clean 删除缓存包
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;apt-get autoclean 删除未安装的deb包
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;安装中文输入法&#34;&gt;安装中文输入法&lt;/h2&gt;
+&lt;p&gt;安装中文输入法，Kali Linux自带的Fcitx4，推荐安装使用Fcitx5输入法，Fcitx4会出现一些问题，并且Fcitx5界面好看更好用&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install fcitx5 &lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;&lt;/span&gt;fcitx5-chinese-addons &lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;&lt;/span&gt;fcitx5-frontend-gtk4 fcitx5-frontend-gtk3 fcitx5-frontend-gtk2 &lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;&lt;/span&gt;fcitx5-frontend-qt5
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;设置Fcitx5为默认输入法:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;im-config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将首选输入法设置为Fcitx5
+不用再安装其他输入法，Fcitx5就已经很好用了，且自定义程度高，根据自己情况设置
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208113424.png&#34; alt=&#34;Fcitx5配置界面&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如果在桌面环境（Xfce、Gnome）的设置或者应用面板，不能输入中文，可以安装Gnome扩展&lt;a href=&#34;https://extensions.gnome.org/extension/261/kimpanel/&#34;&gt;Input Method Panel&lt;/a&gt;解决&lt;/p&gt;
+&lt;h2 id=&#34;安装qq&#34;&gt;安装QQ&lt;/h2&gt;
+&lt;p&gt;QQ官网&lt;a href=&#34;https://im.qq.com/linuxqq/download.html&#34;&gt;Linux版本&lt;/a&gt;
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208121336.png&#34; alt=&#34;QQ·Linux版&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo dpkg -i linuxqqXXX.deb
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;安装微信&#34;&gt;安装微信&lt;/h2&gt;
+&lt;p&gt;wine版本的微信Bug有点多，这里还是使用&lt;a href=&#34;https://www.ubuntukylin.com/applications/106-cn.html?spm=a2c6h.12873639.article-detail.7.6da76897yhuHta&#34;&gt;优麒麟版本&lt;/a&gt;的，虽然简陋但是够用
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208122241.png&#34; alt=&#34;ukylin版本微信下载&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo dpkg -i weixin.deb
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;安装clash&#34;&gt;安装Clash&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/CHH3213/clash-for-windows-backup/releases/tag/v0.20.39&#34;&gt;Clash备份地址&lt;/a&gt;
+下载&lt;a href=&#34;https://github.com/CHH3213/clash-for-windows-backup/releases/tag/v0.20.39&#34;&gt;Clash.for.Windows-0.20.39-x64-linux.tar.gz&lt;/a&gt;，并解压&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar zxvf Clash.for.Windows-0.20.39-x64-linux.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;把解压后的文件夹移动到&lt;code&gt;/opt/&lt;/code&gt;目录（一般用来存放软件程序目录）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv Clash&lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;\ &lt;/span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;\ &lt;/span&gt;Windows-0.20.39-x64-linux /opt/Clash-GUI
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;运行文件夹中的&lt;code&gt;cfw&lt;/code&gt;程序就可以运行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./cfw
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208122944.png&#34; alt=&#34;Clash界面&#34;&gt;&lt;/p&gt;
+&lt;p&gt;为了方便寻找软件，可以在应用面板或者桌面添加应用图标
+创建&lt;code&gt;clash.desktop&lt;/code&gt;，输入以下内容：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-desktop&#34; data-lang=&#34;desktop&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;&#34;&gt;[Desktop Entry]  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;Name&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;clash for linux  &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;Icon&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;/opt/Clash-GUI/clash.png  &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;Exec&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;/opt/Clash-GUI/cfw  &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;Type&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;Application&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Name：显示的名称
+Icon：图标图片路径
+Exec：运行程序路径
+Type：应用类型&lt;/p&gt;
+&lt;p&gt;如果要在==应用面版==添加图标，就把clash.desktop移动到&lt;code&gt;/usr/share/applications&lt;/code&gt;和&lt;code&gt;~/.local/share/applications&lt;/code&gt;
+如果要在==桌面==添加图标，就把clash.desktop移动到桌面目录&lt;code&gt;~/Desktop&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;其他程序想要添加桌面图标也是相同的道理&lt;/p&gt;
+&lt;h2 id=&#34;安装wps&#34;&gt;安装WPS&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.wps.cn/product/wpslinux#&#34;&gt;wps官网下载安装包&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo dpkg -i wps-office_11.1.0.11711_amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装好wps可能不能直接使用，还需要安装字体，不然进入时会报错
+最简单的方法就是去Wndows系统里，把&lt;code&gt;C:\windows\fonts&lt;/code&gt; 整个打包放到Linux系统里的&lt;code&gt;/usr/share/fonts&lt;/code&gt;目录内，最后刷新字体缓存&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo fc-cache
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;给Linux系统添加其他字体，也是将ttf/otf字体文件放入这个文件夹&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;安装vmware-workstation&#34;&gt;安装VMware Workstation&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html&#34;&gt;官网下载安装包&lt;/a&gt;
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208131339.png&#34; alt=&#34;VMware Worklstation下载&#34;&gt;&lt;/p&gt;
+&lt;p&gt;运行安装资源文件包&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./VMware-Workstation-Full-17.5.0-22583795.x86_64.bundle
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在运行过程中可能会出现错误提示没有 linux-header，可以直接使用apt安装&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install linux-header-6.6.9-amd4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果在apt里面没有需要的版本，则需要到&lt;a href=&#34;https://mirrors.aliyun.com/kali/pool/main/l/linux/&#34;&gt;国内镜像站&lt;/a&gt;自行下载安装
+需要下载安装&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;linux-compiler-gcc-xxx&lt;/li&gt;
+&lt;li&gt;linux-kbuild-xxx&lt;/li&gt;
+&lt;li&gt;linux-headers-xxx&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;安装typora&#34;&gt;安装Typora&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;http://120.27.210.48:51122/d/Common%20Files/Typora_Linux_0.11.18_amd64.deb?sign=dac0JJLq5aUo2Pgl9O4KUQOYJo7VuTfncGhDZzVZRBo=:0&#34;&gt;Typora的Linux免费版本下载&lt;/a&gt;
+&lt;a href=&#34;http://120.27.210.48:51122/d/Common%20Files/Typora_theme.7z?sign=kjyniWF9TPbAuyFVU9VKTcLKEwa0HonlZnnomL4S1nQ=:0&#34;&gt;几款Typora主题css文件&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;配置picgo&#34;&gt;配置PicGo&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://picgo.github.io/PicGo-Doc/zh/&#34;&gt;官方下载PicGo&lt;/a&gt;
+下载AppImage文件，同样放到&lt;code&gt;/opt/&lt;/code&gt;目录，并按照&lt;a href=&#34;##%E5%AE%89%E8%A3%85Clash&#34;&gt;上面的方法&lt;/a&gt;配置桌面图标
+PicGo配置Github图床，在github上新建仓库，并设置一个token
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208133922.png&#34; alt=&#34;PicGo配置&#34;&gt;&lt;/p&gt;
+&lt;p&gt;要想使用==剪切板上传图片==（&lt;strong&gt;Typora、Obisidian自动上传图片服务&lt;/strong&gt;），还需要在终端中安装Xclip程序&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install xclip
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接着就可以在Typora和Obsidian中配置自动上传图片
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208134546.png&#34; alt=&#34;Typora自动上传图片&#34;&gt;
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208134651.png&#34; alt=&#34;Obsidian自动上传图片&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;安装pycharm&#34;&gt;安装PyCharm&lt;/h2&gt;
+&lt;p&gt;安装PyCharm，在官网下载程序包，按照压缩包中的安装配置指南就可以成功安装
+也可以和上面的其他软件一样，先把文件目录移到&lt;code&gt;/opt&lt;/code&gt;，然后配置桌面图标
+打开PyCharm可能会报有关==_JAVA_OPTIONS环境变量==的错误，实际上在kaili终端中输入&lt;code&gt;java --version&lt;/code&gt; 也是有问题的，提示：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;picked up JAVA OPTIONS: -Dawt.useSystemAAFontSettings&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;on -Dswing.aatext&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#a2f&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;解决办法：&lt;/strong&gt;
+在&lt;code&gt;/etc/X11/Xsession.d/90kali-themes&lt;/code&gt;与&lt;code&gt;/etc/environment.d/95kali-themes.conf&lt;/code&gt;这两个文件中，将_JAVA_OPTIONS那一行语句删掉，然后重启电脑&lt;/p&gt;
+&lt;h2 id=&#34;安装ollydbg&#34;&gt;安装ollydbg&lt;/h2&gt;
+&lt;p&gt;ollydbg没有linux版本，所以需要借助wine进行安装，kali已经自带了wine，但是安装好后启动ollydbg的时候还是会报错，根据错误提示先补全软件和环境，再进行启动
+如果还是不能启动，则删除wine和ollydbg，重新安装后就正常了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt remove --purge wine
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt remove --purge ollydbg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo rm -tf ~/.wine  &lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# 删除wine配置文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install wine
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install ollydbg
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;其他可能需要的软件&#34;&gt;其他可能需要的软件&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Tabby（开源SSH连接工具）&lt;/li&gt;
+&lt;li&gt;Remmina（多种协议远程桌面连接）&lt;/li&gt;
+&lt;li&gt;XDM（Linux下替代IDM的下载工具）&lt;/li&gt;
+&lt;li&gt;Obsidian（笔记软件）&lt;/li&gt;
+&lt;li&gt;Zotero（文献管理工具）&lt;/li&gt;
+&lt;li&gt;VsCode（代码编辑器）&lt;/li&gt;
+&lt;li&gt;Dbeaver（数据库管理工具）&lt;/li&gt;
+&lt;li&gt;Snipaste（截屏工具）&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>Netcat工具的简单使用</title>
+      <link>https://pi3-l22.github.io/post/2023/11/netcat%E5%B7%A5%E5%85%B7%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 27 Nov 2023 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://pi3-l22.github.io/post/2023/11/netcat%E5%B7%A5%E5%85%B7%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</guid>
+      
+      <description>&lt;p&gt;实验环境：&lt;/p&gt;
+&lt;p&gt;本机：192.168.161.1&lt;/p&gt;
+&lt;p&gt;Metasploitable：192.168.161.133&lt;/p&gt;
+&lt;p&gt;Kali：192.168.161.128&lt;/p&gt;
+&lt;h1 id=&#34;1-消息传递&#34;&gt;1. 消息传递&lt;/h1&gt;
+&lt;p&gt;Metasploitable启动nc监听端口9876&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212530.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;用Kali连接Metasploitable&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212536.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;输入消息，进行消息的传递&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212543.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212549.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;2-文件传输&#34;&gt;2. 文件传输&lt;/h1&gt;
+&lt;p&gt;在kali中编写一个文件test_file内容为下&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212555.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212606.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在msf上创建一个空文件nc，用于接收传递过来的文件内容&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212617.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;开启nc监听端口，9876&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212623.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在kali上用nc连接传递文件内容&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212629.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;最后在msf上查看文件内容，发现文件信息已传递&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212635.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;其文件传递的本质就是通过重定向符将文件的内容作为输入，在msf端将接收的数据重定向到文件&lt;/p&gt;
+&lt;h1 id=&#34;3-远程控制&#34;&gt;3. 远程控制&lt;/h1&gt;
+&lt;p&gt;实验环境：&lt;/p&gt;
+&lt;p&gt;攻击机：kali，靶机：Metasploitable&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;正向连接：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;靶机监听，攻击者主动连接靶机&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Msf启动一个监听，并返回一个shell&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212645.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Kali连接msf，连接得到一个msf的shell&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212651.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212655.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;-e 使用后面的进程替换掉当前进程，就是使用/bin/sh 执行命令&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;反向连接：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;攻击者监听，靶机主动连接&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;有时目标主机的防火墙可能不允许外部主机连接内部，所以反向连接比较常用，就是让内网主机主动发送 shell 给我们&lt;/p&gt;
+&lt;p&gt;Kali进行端口监听&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212703.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Msf进行nc连接，并发送一个shell&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212709.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Kali成功接收到msf的shell，并且能够远程执行&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212713.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;4-连接端口&#34;&gt;4. 连接端口&lt;/h1&gt;
+&lt;p&gt;Msf启动apache服务，运行在80端口&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212720.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Kali用nc连接msf的80端口，用get获取网页页面&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212726.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;5-端口扫描&#34;&gt;5. 端口扫描&lt;/h1&gt;
+&lt;p&gt;-v 显示详细&lt;/p&gt;
+&lt;p&gt;-z 表示连接立即关闭，用于扫描&lt;/p&gt;
+&lt;p&gt;如果是 udp 端口，再加上-u 参数&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212735.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;参考文献：
+&lt;a href=&#34;https://blog.csdn.net/Aluxian_/article/details/123355133&#34;&gt;看完这篇 教你玩转渗透测试靶机——Metasploitable2_落寞的魚丶的博客-CSDN博客&lt;/a&gt;&lt;/p&gt;
+</description>
+      
+    </item>
+    
+  </channel>
+</rss>

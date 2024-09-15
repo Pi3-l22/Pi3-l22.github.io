@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="Python爬虫之蓝奏云文件批量下载">
+  
+
+  
+  <link rel="icon" href="https://pi3-l22.github.io/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://pi3-l22.github.io/post/2023/09/python%E7%88%AC%E8%99%AB%E4%B9%8B%E8%93%9D%E5%A5%8F%E4%BA%91%E6%96%87%E4%BB%B6%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="Python爬虫之蓝奏云文件批量下载">
+  <meta property="og:description" content="Python爬虫之蓝奏云文件批量下载">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-09-07T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-09-07T00:00:00+00:00">
+    <meta property="article:tag" content="Python">
+
+
+  
+  <link rel="canonical" href="https://pi3-l22.github.io/post/2023/09/python%E7%88%AC%E8%99%AB%E4%B9%8B%E8%93%9D%E5%A5%8F%E4%BA%91%E6%96%87%E4%BB%B6%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD/">
+
+  
+  
+  
+  <meta itemprop="name" content="Python爬虫之蓝奏云文件批量下载">
+  <meta itemprop="description" content="Python爬虫之蓝奏云文件批量下载">
+  <meta itemprop="datePublished" content="2023-09-07T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2023-09-07T00:00:00+00:00">
+  <meta itemprop="wordCount" content="3143">
+  <meta itemprop="keywords" content="Python">
+
+  
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/content.css'>
+
+  
+  
+  <title>Python爬虫之蓝奏云文件批量下载 - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://pi3-l22.github.io/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://pi3-l22.github.io/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>Python爬虫之蓝奏云文件批量下载</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/python'>#Python</a>
+    
+  </div>
+  
+  
+  
+  
+  <article class="content">
+    
+    <h1 id="起源">起源</h1>
+<p>最近刚好入门了Python爬虫，在此之前系统完整的学了Python的基础入门知识，学习爬虫顺便也可以巩固之前学习的Python基础知识。</p>
+<p>学习Python爬虫，先去看了<a href="https://www.bilibili.com/video/BV1d54y1g7db/?spm_id_from=333.999.0.0&amp;vd_source=30a68d7597f750b905825950d4412d50">B站的介绍视频</a>，很短，只有4个小时，我也没有做笔记，就直接2个小时看完，学会了Python的request请求，网页的知识之前在HTML和CSS学习过了。所以感觉还是比较简单的，跟着视频做了<a href="L:%5CPython_file%5CPython%E5%AD%A6%E4%B9%A0%5C03_Python%E7%88%AC%E8%99%AB%5C%E7%88%AC%E5%8F%96%E8%B1%86%E7%93%A3TOP250.py"><strong>爬取豆瓣TOP250电影名的小项目</strong></a>。其他的就一点都没学过。</p>
+<p>接着我就遇到了一个问题，我想要批量下载B站UP主分享在蓝奏云上的文件，资源很丰富，文件资料很多，一个个下载就很慢很费劲，我就想着能不能用Python爬虫完成这个小项目
+<a href="https://github.com/Pi3-l22/lanzou_download">项目文件地址</a></p>
+<h1 id="过程">过程</h1>
+<p>我先把需要的5个链接和对应的密码，复制保存到本地的文本里。如何通过Python进行整理和格式化。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>MIUI解bl锁和刷机相关工具：  
+</span></span><span style="display:flex;"><span>https://wwvd.lanzoul.com/b030ok9yb  
+</span></span><span style="display:flex;"><span>密码:9cj9  
+</span></span><span style="display:flex;"><span>Root相关文件：  
+</span></span><span style="display:flex;"><span>https://wwvd.lanzoul.com/b030q0gef  
+</span></span><span style="display:flex;"><span>密码:hktq  
+</span></span><span style="display:flex;"><span>面具模块（持续更新ing）：  
+</span></span><span style="display:flex;"><span>https://wwvd.lanzoul.com/b030q3egd  
+</span></span><span style="display:flex;"><span>密码:hf8n  
+</span></span><span style="display:flex;"><span>lsp模块（持续更新ing）：  
+</span></span><span style="display:flex;"><span>https://wwvd.lanzoul.com/b0312jcmf  
+</span></span><span style="display:flex;"><span>密码:9d18  
+</span></span><span style="display:flex;"><span>各种优化软件（工具软件）：  
+</span></span><span style="display:flex;"><span>https://wwr.lanzoui.com/b030oka5i  
+</span></span><span style="display:flex;"><span>密码:fwjr
+</span></span></code></pre></div><p>提取其中的标题作为文件夹名，链接和密码，分别存在两个列表中，索引一一对应，方便后续的操作。并把这一步操作分装成一个函数。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 整理链接地址  </span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">get_url_data</span>():  
+</span></span><span style="display:flex;"><span>    fp <span style="color:#666">=</span> <span style="color:#a2f">open</span>(<span style="color:#b44">&#39;蓝奏云文件链接地址.txt&#39;</span>, <span style="color:#b44">&#39;r&#39;</span>, encoding<span style="color:#666">=</span><span style="color:#b44">&#39;utf-8&#39;</span>)  
+</span></span><span style="display:flex;"><span>    lines <span style="color:#666">=</span> fp<span style="color:#666">.</span>readlines()  
+</span></span><span style="display:flex;"><span>    fp<span style="color:#666">.</span>close()  
+</span></span><span style="display:flex;"><span>    url <span style="color:#666">=</span> []  
+</span></span><span style="display:flex;"><span>    password <span style="color:#666">=</span> []  
+</span></span><span style="display:flex;"><span>    dir_name <span style="color:#666">=</span> []  
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> line <span style="color:#a2f;font-weight:bold">in</span> lines:  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> line[<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;h&#39;</span>:  
+</span></span><span style="display:flex;"><span>            url<span style="color:#666">.</span>append(line<span style="color:#666">.</span>strip())  <span style="color:#080;font-style:italic"># 去除结尾换行符  </span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">elif</span> line<span style="color:#666">.</span>startswith(<span style="color:#b44">&#39;密码&#39;</span>):  
+</span></span><span style="display:flex;"><span>            password<span style="color:#666">.</span>append(line<span style="color:#666">.</span>strip()[<span style="color:#666">3</span>:])  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>:  
+</span></span><span style="display:flex;"><span>            dir_name<span style="color:#666">.</span>append(line<span style="color:#666">.</span>strip()[:<span style="color:#666">-</span><span style="color:#666">1</span>])  
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> url, password, dir_name
+</span></span></code></pre></div><p>接着就是变量这两个列表，分别访问对应的分享文件链接，这里需要注意的是，这里的分享链接，里面还有很多的文件。</p>
+<p>先用<code>request</code>请求链接，这里遇到了我第一个问题，就是我们应怎么把密码输入进去。查看源码，发现是一个输入框input接收密码，但是我是应该直接把密码写在这个文本框中还是直接get或者post请求。</p>
+<p>源码看着看着，我找到了答案。这里网页用了<code>ajax</code>的post请求，把一堆参数（我也不知道是什么）里面包含pwd，也就是我们输入的密码，一起提交上去。所以我的方向就是，用request的post方法进行请求。准备data和headers的过程中，我发现这个data里面的其他参数也变动的，每次请求都不一样，那我该怎么写这个参数。于是我又去看JavaScript的代码，发现里面竟然有这些参数，这些参数全部都是通过js代码中的ajax请求上去，参数的值也都写在上面，那么我的思路就是先请求当前这个网页，从网页中拿到js中的参数。</p>
+<p>但是在操作的过程中，我发现Python中的request根本请求不到js代码，只有js的链接地址，跟网页的元素查看器显示的不一样。上网搜索发现，request请求的是网页渲染之前的代码，当然不可能有js代码，这就是我遇到的第二个问题。</p>
+<p>这个问题我想的有点久，最后我想到的是，可以不可以通过获取script标签上面的div标签，在通过div的下一个兄弟标签来获取script标签，因为div标签是在网页渲染前就已经存在了，而且这样的方法在JavaScript的代码中经常会用到。</p>
+<p>于是我试着去操作一下，发现是真的可行的，==不过也不知道其中的原理是什么。== 拿到了script标签中的内容，接下来就是提取我们需要的信息，这里就是考察我对字符串的各种操作的熟悉程度，于是我的写法是这样的。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">get_key</span>(url: <span style="color:#a2f">str</span>):  
+</span></span><span style="display:flex;"><span>    response <span style="color:#666">=</span> requests<span style="color:#666">.</span>get(url<span style="color:#666">=</span>url, headers<span style="color:#666">=</span>headers)  
+</span></span><span style="display:flex;"><span>    soup <span style="color:#666">=</span> BeautifulSoup(response<span style="color:#666">.</span>text, <span style="color:#b44">&#39;html.parser&#39;</span>)  
+</span></span><span style="display:flex;"><span>    div <span style="color:#666">=</span> soup<span style="color:#666">.</span>find(<span style="color:#b44">&#39;div&#39;</span>, attrs<span style="color:#666">=</span>{<span style="color:#b44">&#39;class&#39;</span>: <span style="color:#b44">&#39;d&#39;</span>, <span style="color:#b44">&#39;id&#39;</span>: <span style="color:#b44">&#39;info&#39;</span>})  <span style="color:#080;font-style:italic"># 获取到div标签  </span>
+</span></span><span style="display:flex;"><span>    script <span style="color:#666">=</span> div<span style="color:#666">.</span>next_sibling<span style="color:#666">.</span>next_sibling  
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 获取下一个兄弟节点 即script  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># print(script)    </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># var ibf1fz = &#39;1693922274&#39;;    </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># var _hddhs = &#39;c5010165681fd1c5fd8be8a4bcf20906&#39;;     # 获取ibf1fz和_hddhs  </span>
+</span></span><span style="display:flex;"><span>    ibf1fz <span style="color:#666">=</span> script<span style="color:#666">.</span>string<span style="color:#666">.</span>split(<span style="color:#b44">&#39;;&#39;</span>)[<span style="color:#666">5</span>]<span style="color:#666">.</span>split(<span style="color:#b44">&#39;=&#39;</span>)[<span style="color:#666">1</span>][<span style="color:#666">2</span>:<span style="color:#666">-</span><span style="color:#666">1</span>]  
+</span></span><span style="display:flex;"><span>    hddhs <span style="color:#666">=</span> script<span style="color:#666">.</span>string<span style="color:#666">.</span>split(<span style="color:#b44">&#39;;&#39;</span>)[<span style="color:#666">6</span>]<span style="color:#666">.</span>split(<span style="color:#b44">&#39;=&#39;</span>)[<span style="color:#666">1</span>][<span style="color:#666">2</span>:<span style="color:#666">-</span><span style="color:#666">1</span>]  
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># fid: 4805955  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># uid: 2427876    # 获取fid和uid  </span>
+</span></span><span style="display:flex;"><span>    fid <span style="color:#666">=</span> script<span style="color:#666">.</span>string<span style="color:#666">.</span>split(<span style="color:#b44">&#39;,&#39;</span>)[<span style="color:#666">3</span>]<span style="color:#666">.</span>split(<span style="color:#b44">&#39;:&#39;</span>)[<span style="color:#666">1</span>]  
+</span></span><span style="display:flex;"><span>    uid <span style="color:#666">=</span> script<span style="color:#666">.</span>string<span style="color:#666">.</span>split(<span style="color:#b44">&#39;,&#39;</span>)[<span style="color:#666">4</span>]<span style="color:#666">.</span>split(<span style="color:#b44">&#39;:&#39;</span>)[<span style="color:#666">1</span>][<span style="color:#666">1</span>:<span style="color:#666">-</span><span style="color:#666">1</span>]  
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ibf1fz, hddhs, fid, uid
+</span></span></code></pre></div><p>利用拿到的这些参数，我就可以用post请求了，这里请求的源地址是<code>source_url = 'https://wwr.lanzoui.com/filemoreajax.php'</code>
+这样我就拿到了Ajax返回来的一整个json数据，我转成字典，发现这里面的数据全都是这个分享链接下的所有文件的信息，包括文件名、文件id（可以拼接成下载链接）等等信息。</p>
+<p>于是我又利用字典的知识，把整个json数据中的文件名和文件id分别存在各自的列表中，同样分装成函数，并返回这两个列表。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">get_download_id</span>(t: <span style="color:#a2f">str</span>, k: <span style="color:#a2f">str</span>, f: <span style="color:#a2f">str</span>, u: <span style="color:#a2f">str</span>, pwd: <span style="color:#a2f">str</span>):  
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 请求表单数据  </span>
+</span></span><span style="display:flex;"><span>    data <span style="color:#666">=</span> {  
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#39;lx&#39;</span>: <span style="color:#b44">&#39;2&#39;</span>,  
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#39;fid&#39;</span>: f,  
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#39;uid&#39;</span>: u,  
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#39;pg&#39;</span>: <span style="color:#b44">&#39;1&#39;</span>,  
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#39;rep&#39;</span>: <span style="color:#b44">&#39;0&#39;</span>,  
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#39;t&#39;</span>: t,  <span style="color:#080;font-style:italic"># 当前时间戳  </span>
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#39;k&#39;</span>: k,  <span style="color:#080;font-style:italic"># 感觉应该是32位md5加密后的密码 可以从网页源码中找到  </span>
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#39;up&#39;</span>: <span style="color:#b44">&#39;1&#39;</span>,  
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#39;ls&#39;</span>: <span style="color:#b44">&#39;1&#39;</span>,  
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#39;pwd&#39;</span>: pwd  
+</span></span><span style="display:flex;"><span>    }  
+</span></span><span style="display:flex;"><span>    response <span style="color:#666">=</span> requests<span style="color:#666">.</span>post(url<span style="color:#666">=</span>source_url, data<span style="color:#666">=</span>data, headers<span style="color:#666">=</span>headers)  
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># print(response.text)  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 返回数据为json格式，我们要提取里面id的值  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># print(response.json())  </span>
+</span></span><span style="display:flex;"><span>    download_id <span style="color:#666">=</span> []  
+</span></span><span style="display:flex;"><span>    file_name_all <span style="color:#666">=</span> []  
+</span></span><span style="display:flex;"><span>    download_id_lists <span style="color:#666">=</span> response<span style="color:#666">.</span>json()[<span style="color:#b44">&#39;text&#39;</span>]  
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> data_dict <span style="color:#a2f;font-weight:bold">in</span> download_id_lists:  
+</span></span><span style="display:flex;"><span>        download_id<span style="color:#666">.</span>append(data_dict[<span style="color:#b44">&#39;id&#39;</span>])  
+</span></span><span style="display:flex;"><span>        file_name_all<span style="color:#666">.</span>append(data_dict[<span style="color:#b44">&#39;name_all&#39;</span>])  
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> download_id, file_name_all
+</span></span></code></pre></div><p>接下来，就是根据拼接成的文件下载链接，进行下载。这里遇到了第三个问题。我们用浏览器访问下载链接，发现了这个页面又三个下载按钮，分别是联通下载、电信下载、普通下载，这三个标签套在同一个a标签中😄，然后这三个按钮又是属于另外一个HTML页面，通过链接显示在这个页面中，于是我直接请求那三个按钮的页面，进行操作。</p>
+<p>有趣的是，这里的下载按钮同样是用Ajax请求的，我同样按照上面的方法，先找到div标签，再用下一个兄弟的下一个兄弟获取到了script中的内容，这个内容里面有我所需要的data参数的值，同样字符串操作获得了值，并封装成函数返回这些参数。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">get_ajaxdata</span>(download_url: <span style="color:#a2f">str</span>):  
+</span></span><span style="display:flex;"><span>    response <span style="color:#666">=</span> requests<span style="color:#666">.</span>get(url<span style="color:#666">=</span>download_url, headers<span style="color:#666">=</span>headers)  
+</span></span><span style="display:flex;"><span>    soup <span style="color:#666">=</span> BeautifulSoup(response<span style="color:#666">.</span>text, <span style="color:#b44">&#39;html.parser&#39;</span>)  
+</span></span><span style="display:flex;"><span>    download_btn_url <span style="color:#666">=</span> lanzou_url <span style="color:#666">+</span> soup<span style="color:#666">.</span>find(<span style="color:#b44">&#39;iframe&#39;</span>, attrs<span style="color:#666">=</span>{<span style="color:#b44">&#39;class&#39;</span>: <span style="color:#b44">&#39;ifr2&#39;</span>})[<span style="color:#b44">&#39;src&#39;</span>]  
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># print(download_btn_url)  </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># TODO 用request请求返回浏览器渲染之前的网页源码，没有包含文件下载地址  </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># TODO 用selenium模拟浏览器请求，但是速度太慢了，而且还要安装chromedriver.exe  </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># TODO 可以直接请求 ajaxm.php 文件，里面返回了文件下载地址  </span>
+</span></span><span style="display:flex;"><span>    response <span style="color:#666">=</span> requests<span style="color:#666">.</span>get(url<span style="color:#666">=</span>download_btn_url, headers<span style="color:#666">=</span>headers, timeout<span style="color:#666">=</span><span style="color:#666">10000</span>)  
+</span></span><span style="display:flex;"><span>    response<span style="color:#666">.</span>encoding <span style="color:#666">=</span> <span style="color:#b44">&#39;utf-8&#39;</span>  <span style="color:#080;font-style:italic"># 防止中文乱码  </span>
+</span></span><span style="display:flex;"><span>    soup <span style="color:#666">=</span> BeautifulSoup(response<span style="color:#666">.</span>text, <span style="color:#b44">&#39;html.parser&#39;</span>)  
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># print(soup)  </span>
+</span></span><span style="display:flex;"><span>    script <span style="color:#666">=</span> soup<span style="color:#666">.</span>find(<span style="color:#b44">&#39;div&#39;</span>, attrs<span style="color:#666">=</span>{<span style="color:#b44">&#39;class&#39;</span>: <span style="color:#b44">&#39;load&#39;</span>})<span style="color:#666">.</span>nextSibling<span style="color:#666">.</span>nextSibling<span style="color:#666">.</span>nextSibling<span style="color:#666">.</span>nextSibling  
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># print(script)  </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># wsk_sign = &#39;c20230818&#39;;    </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># aihidcms = &#39;19Yt&#39;;    </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># iucccjdsd = &#39;&#39;;    </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># ws_sign = &#39;c20230818&#39;;    </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># sasign = &#39;sA2UHOV5vUGFSW1FuBjZTb1Y9V2EHbQMzBDZUZgZrVGZVYQBxASgDagdgC2sBbFxpAWsHMlM6VmADNQE0Sv2_c&#39;;    </span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># ajaxdata = &#39;?ctdf&#39;;    # 获取各个元素的值  </span>
+</span></span><span style="display:flex;"><span>    wsk_sign <span style="color:#666">=</span> script<span style="color:#666">.</span>string<span style="color:#666">.</span>split(<span style="color:#b44">&#39;;&#39;</span>)[<span style="color:#666">0</span>]<span style="color:#666">.</span>split(<span style="color:#b44">&#39;=&#39;</span>)[<span style="color:#666">1</span>][<span style="color:#666">2</span>:<span style="color:#666">-</span><span style="color:#666">1</span>]  
+</span></span><span style="display:flex;"><span>    aihidcms <span style="color:#666">=</span> script<span style="color:#666">.</span>string<span style="color:#666">.</span>split(<span style="color:#b44">&#39;;&#39;</span>)[<span style="color:#666">1</span>]<span style="color:#666">.</span>split(<span style="color:#b44">&#39;=&#39;</span>)[<span style="color:#666">1</span>][<span style="color:#666">2</span>:<span style="color:#666">-</span><span style="color:#666">1</span>]  
+</span></span><span style="display:flex;"><span>    iucccjdsd <span style="color:#666">=</span> script<span style="color:#666">.</span>string<span style="color:#666">.</span>split(<span style="color:#b44">&#39;;&#39;</span>)[<span style="color:#666">2</span>]<span style="color:#666">.</span>split(<span style="color:#b44">&#39;=&#39;</span>)[<span style="color:#666">1</span>][<span style="color:#666">2</span>:<span style="color:#666">-</span><span style="color:#666">1</span>]  
+</span></span><span style="display:flex;"><span>    ws_sign <span style="color:#666">=</span> script<span style="color:#666">.</span>string<span style="color:#666">.</span>split(<span style="color:#b44">&#39;;&#39;</span>)[<span style="color:#666">3</span>]<span style="color:#666">.</span>split(<span style="color:#b44">&#39;=&#39;</span>)[<span style="color:#666">1</span>][<span style="color:#666">2</span>:<span style="color:#666">-</span><span style="color:#666">1</span>]  
+</span></span><span style="display:flex;"><span>    sasign <span style="color:#666">=</span> script<span style="color:#666">.</span>string<span style="color:#666">.</span>split(<span style="color:#b44">&#39;;&#39;</span>)[<span style="color:#666">4</span>]<span style="color:#666">.</span>split(<span style="color:#b44">&#39;=&#39;</span>)[<span style="color:#666">1</span>][<span style="color:#666">2</span>:<span style="color:#666">-</span><span style="color:#666">1</span>]  
+</span></span><span style="display:flex;"><span>    ajaxdata <span style="color:#666">=</span> script<span style="color:#666">.</span>string<span style="color:#666">.</span>split(<span style="color:#b44">&#39;;&#39;</span>)[<span style="color:#666">5</span>]<span style="color:#666">.</span>split(<span style="color:#b44">&#39;=&#39;</span>)[<span style="color:#666">1</span>][<span style="color:#666">2</span>:<span style="color:#666">-</span><span style="color:#666">1</span>]  
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># print(wsk_sign, aihidcms, iucccjdsd, ws_sign, sasign, ajaxdata)  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> aihidcms, iucccjdsd, sasign, ajaxdata
+</span></span></code></pre></div><p>用上面得到的参数进行post请求，就可以得到Ajax返回的一个json数据，进行数据分析，这里我们就得到了文件下载的直链了，只要点击这个链接，浏览器就可以开始自动下载。</p>
+<p>接下来的事情就简单了，只要get请求这些链接，把返回值写入文件中。这里我用标题创建了文件夹，把每个文件命名为之前返回的文件名，这样一切就完美了。但是在这里我遇到了最困难的问题，也是卡的时间最久的一次。</p>
+<p>就是按照我的想法这样操作，根本行不通，下载下来的文件都是5kb，而且打不开，根本就不是我想要的文件。于是我开始分析，先把返回值打印出来，发现是一个html格式的文本，难怪不对。我当时就在想难道我这个链接不是文件的直链？但是浏览器一打开就可以下载，也不对啊。于是我认为是大文件没有分批下载，于是我把写入文件代码改成</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">with</span> <span style="color:#a2f">open</span>(dir_name <span style="color:#666">+</span> <span style="color:#b44">&#39;/&#39;</span> <span style="color:#666">+</span> file_name_all[<span style="color:#666">0</span>], <span style="color:#b44">&#39;wb&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> fp:  
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">for</span> chunk <span style="color:#a2f;font-weight:bold">in</span> response<span style="color:#666">.</span>iter_content(chunk_size<span style="color:#666">=</span><span style="color:#666">102400</span>):  
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">if</span> chunk:  
+</span></span><span style="display:flex;"><span>		fp<span style="color:#666">.</span>write(chunk)
+</span></span></code></pre></div><p>但是还是不行，之后我又尝试了很多方法，都不行，上网搜索了很多Python请求文件的方法，也都不行。最后我几乎都认定我得到的这个链接不是文件的直链，我用Firefox浏览器打开，跳出来一个页面，有一个下载按钮，于是我又开始像前面的操作一样分析代码，但是我又被卡住了，明明用正确的data却请求不到数据。</p>
+<p>最后我上网搜索到了别人写的蓝奏云下载的爬虫，我发现链接确实是直链，因为别人也是用这个链接下载的，唯一的不同就是，下载时的请求不同，还有写了一堆请求头。问题就这样解决了
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222211143.png" alt="请求头"></p>
+<p>最后根据网上的方法，我也成功把文件下载下来。</p>
+<h1 id="反思">反思</h1>
+<p>我这个程序，写的看起来就像屎山，以后再回来说不定就读不懂了。所以养成良好的编码习惯还是很有必要的。可以多参考别人写的好的代码格式，也可以看Python的编码规范。</p>
+<p>这里面的代码，还有很多的原理问题需要解决和思考</p>
+<ol>
+<li>最后问题的解决，原理到底是什么？</li>
+<li>Python请求链接下载文件的方法有多少种？</li>
+<li>获取script标签的操作肯定不是标准的写法，但是这样能成功的原理是什么？Python爬虫遇到这种情况，规范正确的解决方法是什么？</li>
+<li>……</li>
+</ol>
+<p>这样问题应该可以在我系统学习了Python爬虫之后得到解决。</p>
+
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://pi3-l22.github.io/post/markdown-syntax/">← prev</a>
+    
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/10/%E9%87%8F%E5%AD%90%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%96%B9%E6%B3%95%E5%8F%8A%E4%BA%91%E7%9B%98%E6%A1%8C%E9%9D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF/">next →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2021</span> - <span>2024</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+    <span> 🍦 Theme </span>
+    <a class="link" href="https://github.com/queensferryme/hugo-theme-texify">TeXify</a>
+  </div>
+
+  <div class="footnote">
+    <span>Follow me on <a class=link href=https://github.com/Pi3-l22>GitHub</a> |
+<a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+
+</body>
+
+</html>

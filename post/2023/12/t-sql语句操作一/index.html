@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="数据库实验之T-SQL语句操作(一)">
+  
+
+  
+  <link rel="icon" href="https://pi3-l22.github.io/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://pi3-l22.github.io/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%B8%80/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="T-SQL语句操作(一)">
+  <meta property="og:description" content="数据库实验之T-SQL语句操作(一)">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-11-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-11-26T00:00:00+00:00">
+    <meta property="article:tag" content="T-SQL">
+    <meta property="article:tag" content="MySQL">
+    <meta property="article:tag" content="SQLServer">
+    <meta property="article:tag" content="SQL">
+
+
+  
+  <link rel="canonical" href="https://pi3-l22.github.io/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%B8%80/">
+
+  
+  
+  
+  <meta itemprop="name" content="T-SQL语句操作(一)">
+  <meta itemprop="description" content="数据库实验之T-SQL语句操作(一)">
+  <meta itemprop="datePublished" content="2023-11-26T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2023-11-26T00:00:00+00:00">
+  <meta itemprop="wordCount" content="6739">
+  <meta itemprop="keywords" content="T-SQL,MySQL,SQLServer,SQL">
+
+  
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/content.css'>
+
+  
+  
+  <title>T-SQL语句操作(一) - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://pi3-l22.github.io/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://pi3-l22.github.io/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>T-SQL语句操作(一)</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/t-sql'>#T-SQL</a>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/mysql'>#MySQL</a>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/sqlserver'>#SQLServer</a>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/sql'>#SQL</a>
+    
+  </div>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本表的定义">基本表的定义</a>
+      <ul>
+        <li><a href="#定义数据表结构">定义数据表结构</a></li>
+      </ul>
+    </li>
+    <li><a href="#基本表结构的修改">基本表结构的修改</a>
+      <ul>
+        <li><a href="#修改数据表结构">修改数据表结构</a></li>
+        <li><a href="#删除基本表">删除基本表</a></li>
+      </ul>
+    </li>
+    <li><a href="#创建和管理索引">创建和管理索引</a>
+      <ul>
+        <li><a href="#利用create-index语句创建索引">利用CREATE INDEX语句创建索引</a></li>
+        <li><a href="#利用drop-index-语句删除索引">利用DROP INDEX 语句删除索引</a></li>
+      </ul>
+    </li>
+    <li><a href="#数据插入语句">数据插入语句</a>
+      <ul>
+        <li><a href="#利用insert语句添加记录">利用INSERT语句添加记录</a></li>
+      </ul>
+    </li>
+    <li><a href="#数据修改语句">数据修改语句</a>
+      <ul>
+        <li><a href="#利用update语句修改记录内容">利用UPDATE语句修改记录内容</a></li>
+      </ul>
+    </li>
+    <li><a href="#数据删除语句">数据删除语句</a>
+      <ul>
+        <li><a href="#利用delete语句删除记录">利用DELETE语句删除记录</a></li>
+      </ul>
+    </li>
+    <li><a href="#数据查询语句">数据查询语句</a>
+      <ul>
+        <li><a href="#单表查询查询内容和查询条件都在同一个表中">单表查询——查询内容和查询条件都在同一个表中</a></li>
+        <li><a href="#连接查询多表查询多数据源查询">连接查询——多表查询、多数据源查询</a></li>
+        <li><a href="#嵌套查询查询条件需要由另一个查询子查询结果确定">嵌套查询——查询条件需要由另一个查询（子查询）结果确定</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <h1 id="t-sql语句操作">T-SQL语句操作</h1>
+<p>T-SQL是标准SQL语言的扩展,是SQL Server的核心,在SQL的的基础上添加了变量,运算符,函数和流程控制等新内容
+SQL Server用于操作数据库的编程语言为Transaction-SQL，简称T-SQL。T-SQL与PL/SQL不同，并没有固定的程序结构。<br>
+T-SQL包括以下4个部分：</p>
+<ul>
+<li>DDL：定义和管理数据库及其对象，例如create、alter和drop等。</li>
+<li>DML：实现对数据库表各对象的操作，例如insert、update等。</li>
+<li>DCL：数据控制语言，实现对数据库进行安全管理和权限管理等控制，例如grant、revoke、deny等。</li>
+<li>附加的语言元素。T-SQL的附加语言元素，包括变量、运算符、函数、注释和流程控制语句等。</li>
+</ul>
+<h2 id="基本表的定义">基本表的定义</h2>
+<p>语句格式：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb">  </span><span style="color:#666">&lt;</span><span style="">表名</span><span style="color:#666">&gt;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">	</span><span style="">（</span><span style="color:#666">&lt;</span><span style="">列名</span><span style="color:#666">&gt;</span><span style="color:#bbb">  </span><span style="color:#666">&lt;</span><span style="">数据类型</span><span style="color:#666">&gt;</span><span style="color:#bbb">  </span><span style="color:#666">|</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span><span style="color:#666">&lt;</span><span style="">表达式</span><span style="color:#666">&gt;</span><span style="color:#bbb">  </span>[<span style="color:#666">&lt;</span><span style="">字段约束</span><span style="color:#666">&gt;</span>]<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">		</span>[,<span style="color:#bbb"> </span><span style="">……</span>]<span style="color:#bbb">                         
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>[<span style="color:#666">&lt;</span><span style="">记录约束</span><span style="color:#666">&gt;</span>])<span style="color:#bbb"> 
+</span></span></span></code></pre></div><p>字段约束</p>
+<ol>
+<li><code>[NOT NULL|NULL]</code>：不允许或允许字段值为空。</li>
+<li><code>[PRIMARY KEY [CLUSTERED|NON CLUSTERED]]</code>：定义主键和聚簇</li>
+<li><code>[REFERENCES &lt;参照表&gt; (&lt;对应字段&gt;)]</code>：定义外部键和被参照表。</li>
+<li><code>[DEFAULT &lt;默认值&gt;]</code>：定义字段的默认值。</li>
+<li><code>[CHECK(&lt;条件表达式&gt;)]</code>：定义字段应满足的条件表达式。</li>
+<li><code>[IDENTITY(&lt;初始值&gt;，&lt;步长&gt;)]</code>：定义字段初始值和步长值。</li>
+<li><code>[UNIQUE]</code> ：定义不允许重复值。</li>
+</ol>
+<p>记录约束
+格式：<code> CONSTRAINT &lt;约束名&gt; &lt;约束式&gt;</code>
+约束式有以下几种</p>
+<ol>
+<li><code>[PRIMARY KEY [CLUSTERED| NON CLUSTERED](〈列名组〉)]</code>：定义主键和聚簇索引</li>
+<li><code>[FOREIGN KEY(&lt;外码&gt;) REFERENCES &lt;参照表&gt; (&lt;对应列&gt;)]</code>：定义外部键和被参照表</li>
+<li><code>[CHECK(〈条件表达式〉)]</code>：定义记录应满足的条件。</li>
+<li><code>[UNIQUE(〈列名组〉)]</code>：定义不允许重复值的字段组。</li>
+</ol>
+<p><code>&lt;列名&gt; AS &lt;表达式&gt;</code>
+定义一个虚拟列，该列的值通过&lt;表达式&gt;计算而得，在表中不存放。
+例如：<code>age AS YEAR(GETDATE())-YEAR(birthday)</code></p>
+<h3 id="定义数据表结构">定义数据表结构</h3>
+<p>利用<code>CREATE TABLE</code>语句定义数据表结构
+在stuinfo1数据库定义下列数据表的结构：
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231126000524.png" alt="">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231126000531.png" alt="">
+<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231126000536.png" alt=""></p>
+<p>（1）定义学院表tab_institute</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>tab_institute(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>instno<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">4</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">PRIMARY</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">KEY</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>instname<span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">50</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>address<span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">50</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>)<span style="color:#bbb">
+</span></span></span></code></pre></div><p>（2）定义专业表tab_majoy</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>tab_majoy(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>majoyno<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">4</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">PRIMARY</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">KEY</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>majoyname<span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">50</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>instno<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">4</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">REFERENCES</span><span style="color:#bbb"> </span>tab_institute(instno))<span style="color:#bbb">
+</span></span></span></code></pre></div><p>（3）定义教师表tab_teacher</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>tab_teacher(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>tno<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">4</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">PRIMARY</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">KEY</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>tname<span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">50</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>tsex<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">2</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">CHECK</span>(tsex<span style="color:#666">=</span><span style="color:#b44">&#39;男&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">or</span><span style="color:#bbb"> </span>tsex<span style="color:#666">=</span><span style="color:#b44">&#39;女&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>title<span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">10</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>instno<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">4</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">REFERENCES</span><span style="color:#bbb"> </span>tab_institute(instno))<span style="color:#bbb">
+</span></span></span></code></pre></div><p>（4）定义课程表tab_course</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>tab_course(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>cno<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">4</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">PRIMARY</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">KEY</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>cname<span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">50</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>ctype<span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">10</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">CHECK</span>(ctype<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IN</span><span style="color:#bbb"> </span>(<span style="color:#b44">&#39;必修&#39;</span>,<span style="color:#b44">&#39;限选&#39;</span>,<span style="color:#b44">&#39;任选&#39;</span>)),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>credit<span style="color:#bbb"> </span>tinyint<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>term<span style="color:#bbb"> </span>tinyint<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>majoyno<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">4</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">REFERENCES</span><span style="color:#bbb"> </span>tab_majoy(majoyno))<span style="color:#bbb">
+</span></span></span></code></pre></div><p>（5）定义学生表tab_student</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>tab_student(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>sno<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">4</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">PRIMARY</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">KEY</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>sname<span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">50</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>ssex<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">2</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">CHECK</span>(ssex<span style="color:#666">=</span><span style="color:#b44">&#39;男&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">or</span><span style="color:#bbb"> </span>ssex<span style="color:#666">=</span><span style="color:#b44">&#39;女&#39;</span>),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>birthday<span style="color:#bbb"> </span>datetime<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>age<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">YEAR</span>(GETDATE())<span style="color:#666">-</span><span style="color:#a2f;font-weight:bold">YEAR</span>(birthday),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">class</span><span style="color:#bbb"> </span><span style="color:#a2f">varchar</span>(<span style="color:#666">10</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>grade<span style="color:#bbb"> </span>tinyint<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>majoyno<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">4</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">REFERENCES</span><span style="color:#bbb"> </span>tab_majoy(majoyno))<span style="color:#bbb">
+</span></span></span></code></pre></div><p>（6）定义选修（成绩）表tab_score</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>tab_score(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>sno<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">4</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>cno<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">4</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>tno<span style="color:#bbb"> </span><span style="color:#a2f">char</span>(<span style="color:#666">4</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NOT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>score<span style="color:#bbb"> </span><span style="color:#a2f">smallint</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">CONSTRAINT</span><span style="color:#bbb"> </span>PK_score_1<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">PRIMARY</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">KEY</span>(sno,cno,tno),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">		</span><span style="color:#a2f;font-weight:bold">CONSTRAINT</span><span style="color:#bbb"> </span>FK_score_student<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FOREIGN</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">KEY</span>(sno)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">REFERENCES</span><span style="color:#bbb"> </span>tab_student(sno),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">CONSTRAINT</span><span style="color:#bbb"> </span>FK_score_course<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FOREIGN</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">KEY</span>(cno)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">REFERENCES</span><span style="color:#bbb"> </span>tab_course(cno),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">CONSTRAINT</span><span style="color:#bbb"> </span>FK_score_teacher<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FOREIGN</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">KEY</span>(tno)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">REFERENCES</span><span style="color:#bbb"> </span>tab_teacher(tno))<span style="color:#bbb">
+</span></span></span></code></pre></div><h2 id="基本表结构的修改">基本表结构的修改</h2>
+<p>（1）修改字段的定义。
+<code>ALTER TABLE &lt;表名&gt; ALTER COLUMN &lt;列名&gt; &lt;新类型&gt; [NULL|NOT NULL] &lt;约束定义&gt;</code>
+（2）增加字段和表约束规则。
+<code>ALTER TABLE &lt;表名&gt; ADD &lt;列定义&gt;|[&lt;表约束定义&gt;]… </code>
+（3）删除字段或约束规则。
+<code> ALTER TABLE &lt;表名&gt; DROP [CONSTRAINT] &lt;约束名&gt;|COLUMN&lt;列名&gt;</code>
+（4）使约束有效或无效。
+<code> ALTER TABLE &lt;表名&gt; CHECK|NOCHECK} CONSTRAINT {ALL|&lt;约束名组&gt;</code></p>
+<h3 id="修改数据表结构">修改数据表结构</h3>
+<p>（1）在tab_institue表中加一个“院长”字段（dean,varchar(10),NULL）</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">alter</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">table</span><span style="color:#bbb"> </span>tab_institute<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">add</span><span style="color:#bbb"> </span>DEAN<span style="color:#bbb"> </span><span style="color:#a2f">VARCHAR</span>(<span style="color:#666">10</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic">-- 删除院长字段
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">alter</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">table</span><span style="color:#bbb"> </span>tab_institute<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">drop</span><span style="color:#bbb"> </span>DEAN<span style="color:#bbb"> 
+</span></span></span></code></pre></div><p>（2）在tab_score表中对成绩字段score加一个CHECK约束（-5<del>100），其中-1</del>-5分别代表五级制成绩“优秀、良好、正等、及格、不及格”，0~100代表百分制成绩</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">alter</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">table</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">add</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">check</span><span style="color:#bbb"> </span>(score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">between</span><span style="color:#bbb"> </span><span style="color:#666">-</span><span style="color:#666">5</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">and</span><span style="color:#bbb"> </span><span style="color:#666">100</span>)<span style="color:#bbb">
+</span></span></span></code></pre></div><p>（3）在tab_teacher表中对职称字段title加一个CHECK约束（助教，讲师，副教授，教授）</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">alter</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">table</span><span style="color:#bbb"> </span>tab_teacher<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">add</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">check</span><span style="color:#bbb"> </span>(title<span style="color:#666">=</span><span style="color:#b44">&#39;助教&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">or</span><span style="color:#bbb"> </span>title<span style="color:#666">=</span><span style="color:#b44">&#39;讲师&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">or</span><span style="color:#bbb"> </span>title<span style="color:#666">=</span><span style="color:#b44">&#39;副教授&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">or</span><span style="color:#bbb"> </span>title<span style="color:#666">=</span><span style="color:#b44">&#39;教授&#39;</span>)<span style="color:#bbb">
+</span></span></span></code></pre></div><h3 id="删除基本表">删除基本表</h3>
+<p><code>DROP TABLE &lt;表名&gt;</code></p>
+<h2 id="创建和管理索引">创建和管理索引</h2>
+<p>（1）创建索引
+<code>CREATE [UNIQUE] [CLUSTERED|NONCLUSTERED] INDEX &lt;索引名&gt;  ON  &lt;表名&gt;  (&lt;索引列组&gt;)</code>
+例如：<code>CREATE UNIQUE CLUSTERED INDEX index1 ON  tab_student (sname)</code>
+就可以为表tab_student的sname列创建了一个唯一的聚簇索引。
+又如：<code>CREATE INDEX index2 ON  tab_student (majoyno, class)</code>
+就可以为表tab_student创建了一个专业和班级的符合索引。
+（2）删除索引
+  <code>DROP INDEX &lt;表名&gt;.&lt;索引名&gt;</code></p>
+<h3 id="利用create-index语句创建索引">利用CREATE INDEX语句创建索引</h3>
+<p>（1）在tab_student表中创建一个“姓名”字段的非聚簇索引。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">create</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INDEX</span><span style="color:#bbb"> </span>index1<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ON</span><span style="color:#bbb"> </span>tab_student(sname)<span style="color:#bbb">
+</span></span></span></code></pre></div><p>（2）在tab_course表中创建一个“课程名”字段的唯一非聚簇索引。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">create</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">unique</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">index</span><span style="color:#bbb"> </span>index2<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">on</span><span style="color:#bbb"> </span>tab_course(cname)<span style="color:#bbb">
+</span></span></span></code></pre></div><p>（3）在tab_course表中创建一个“学分”和“学期”字段的复合非聚簇索引。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INDEX</span><span style="color:#bbb"> </span>idx_credit_semester<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ON</span><span style="color:#bbb"> </span>tab_course<span style="color:#bbb"> </span>(credit,<span style="color:#bbb"> </span>term)<span style="color:#bbb">
+</span></span></span></code></pre></div><h3 id="利用drop-index-语句删除索引">利用DROP INDEX 语句删除索引</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">drop</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">index</span><span style="color:#bbb"> </span>index2<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">on</span><span style="color:#bbb"> </span>tab_course<span style="color:#bbb">
+</span></span></span></code></pre></div><h2 id="数据插入语句">数据插入语句</h2>
+<p>(1) 使用常量插入单个记录（元组）。格式为：
+<code>INSERT INTO &lt;表名&gt;[(&lt;列名1&gt;[,&lt;列名2&gt;…)] VALUES (&lt;常量1&gt;[,&lt;常量2&gt;]…)</code>
+【例】插入一条学生记录 。     
+<code>INSERT INTO tab_student (sno,sname,ssex,birthday,class,grade ) VALUES (‘0101’，‘张三’，’男’，‘2000-1-1’，’1601’, 2016)</code></p>
+<p>(2) 在表中插入子查询的结果集。格式为：
+        <code>INSERT INTO &lt;表名&gt;[(&lt;列名1&gt;[,&lt;列名2&gt;…)] &lt;子查询&gt;</code>
+【例】求每个学生的平均成绩，并将结果存入数据库中。 
+<code>CREATE TABLE avg_score (sno CHAR(4)，avg_s SMALLINT)</code>
+<code>INSERT INTO avg_score SELECT sno，AVG (score) FROM tab_score GROUP BY sno</code></p>
+<h3 id="利用insert语句添加记录">利用INSERT语句添加记录</h3>
+<p>（1）在tab_course表中添加2个课程记录，记录内容如下：
+  C010，网络协议，任选，2，2，0201
+  C011，物联网，任选，2，2，0101</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">insert</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">into</span><span style="color:#bbb"> </span>tab_course<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">values</span><span style="color:#bbb"> </span>(<span style="color:#b44">&#39;C010&#39;</span>,<span style="color:#b44">&#39;网络协议&#39;</span>,<span style="color:#b44">&#39;任选&#39;</span>,<span style="color:#b44">&#39;2&#39;</span>,<span style="color:#b44">&#39;2&#39;</span>,<span style="color:#b44">&#39;0201&#39;</span>),(<span style="color:#b44">&#39;C011&#39;</span>,<span style="color:#b44">&#39;物联网&#39;</span>,<span style="color:#b44">&#39;任选&#39;</span>,<span style="color:#b44">&#39;2&#39;</span>,<span style="color:#b44">&#39;2&#39;</span>,<span style="color:#b44">&#39;0101&#39;</span>)<span style="color:#bbb">
+</span></span></span></code></pre></div><p>（2）在tab_score表中分别添加3个选修“网络协议”、“物联网”课程的成绩记录（学生可跨专业，任课教师分别为T005和T006，“网络协议”成绩为五级制 ，“物联网”成绩为百分制）</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span>(sno,<span style="color:#bbb"> </span>cno,<span style="color:#bbb"> </span>tno,<span style="color:#bbb"> </span>score)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">VALUES</span><span style="color:#bbb"> </span>(<span style="color:#b44">&#39;学生ID&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;网络协议课程ID&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;T005&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;-1&#39;</span>);<span style="color:#bbb">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">INTO</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span>(sno,<span style="color:#bbb"> </span>cno,<span style="color:#bbb"> </span>tno,<span style="color:#bbb"> </span>score)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">VALUES</span><span style="color:#bbb"> </span>(<span style="color:#b44">&#39;学生ID&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;物联网课程ID&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;T006&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;百分制成绩&#39;</span>);<span style="color:#bbb">
+</span></span></span></code></pre></div><h2 id="数据修改语句">数据修改语句</h2>
+<p>格式为：
+<code>UPDATE &lt;表名&gt;  SET  &lt;列名&gt;=&lt;表达式&gt;[,&lt;列名2&gt;=&lt;表达式2&gt;][，…n][WHERE &lt;条件&gt;]</code>
+【例】将成绩表中全部学生的成绩加上10分。   
+<code>UPDATE tab_score SET score=score+10</code>
+【例】将成绩表中的数据库课程的成绩加上10分。<br>
+<code>UPDATE tab_score SET score= score+10 WHERE cno= (SELECT cno  FROM tab_course WHERE cname= '数据库' )</code></p>
+<h3 id="利用update语句修改记录内容">利用UPDATE语句修改记录内容</h3>
+<p>（1）将tab_score表中 “网络协议” 成绩改成百分制，转换规则如下：
+优秀-95，良好-85，正等-75，及格-65，不及格-55
+如：<code>UPDATE tab_score SET score=95 where score= -1 AND cno=‘C010’</code></p>
+<p>（2）将tab_score表中 “物联网” 成绩改成五级制，转换规则如下：
+优秀：100-90，良好：89-80，正等：79-70，及格：69-60，不及格：59-0
+如：<code>UPDATE tab_score SET score=-1 WHERE score BETWEEN 90 AND 100 AND cno=‘C011’</code></p>
+<p>（3）将tab_score表中 “物联网” 成绩字段清空（值NULL）。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">UPDATE</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">SET</span><span style="color:#bbb"> </span>score<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">NULL</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>cno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IN</span><span style="color:#bbb"> </span>(<span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>cno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_course<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>cname<span style="color:#666">=</span><span style="color:#b44">&#39;物联网&#39;</span>)<span style="color:#bbb">
+</span></span></span></code></pre></div><h2 id="数据删除语句">数据删除语句</h2>
+<p>格式为：
+<code>DELETE [FROM] &lt;表名&gt;  [WHERE &lt;条件&gt;]</code>
+【例】将成绩表中的所有学生的成绩删除。<br>
+<code> DELETE FROM tab_score</code>
+【例】将成绩表中的课程号为C001成绩删除。<br>
+<code> DELETE FROM tab_score WHERE cno=‘C001’</code>
+【例】将成绩表中的网络工程专业所有学生的成绩删除。<br>
+<code>DELETE FROM tab_score  WHERE sno IN (SELECT sno  FROM tab_student WHERE majoyno=(SELECT majoyno  FROM tab_majoy WHERE majoyname= ‘网络工程’ ))</code></p>
+<h3 id="利用delete语句删除记录">利用DELETE语句删除记录</h3>
+<p>（1）将tab_score表中 “物联网” 成绩记录删除。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">DELETE</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>cno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IN</span><span style="color:#bbb"> </span>(<span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>cno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_course<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>cname<span style="color:#666">=</span><span style="color:#b44">&#39;物联网&#39;</span>)<span style="color:#bbb">
+</span></span></span></code></pre></div><h2 id="数据查询语句">数据查询语句</h2>
+<p>SELECT数据查询的语句格式：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#bbb">	</span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>[<span style="color:#666">&lt;</span><span style="">查询范围</span><span style="color:#666">&gt;</span>]<span style="color:#bbb"> </span><span style="color:#666">&lt;</span><span style="">查询列表</span><span style="color:#666">&gt;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span><span style="color:#666">&lt;</span><span style="">数据源</span><span style="color:#666">&gt;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">		</span>[<span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span><span style="color:#666">&lt;</span><span style="">条件表达式</span><span style="color:#666">&gt;</span>]<span style="color:#bbb"> </span>[<span style="color:#a2f;font-weight:bold">ORDER</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">BY</span><span style="color:#bbb"> </span><span style="color:#666">&lt;</span><span style="">排序列组</span><span style="color:#666">&gt;</span>]<span style="color:#bbb">
+</span></span></span></code></pre></div><p>其中：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>（1）&lt;查询范围&gt;::= [ALL | DISTINCT] [TOP n [PERCENT]]
+</span></span><span style="display:flex;"><span>（2）&lt;查询列表&gt;::= {* | &lt;列名1&gt; [[AS] &lt;别名1&gt;]} [,……n]
+</span></span><span style="display:flex;"><span>（3）&lt;数据源&gt;::= {\{&lt;表名1&gt;| &lt;视图名1&gt;} [[AS] &lt;别名1&gt;]} [,……n]
+</span></span><span style="display:flex;"><span>（4）&lt;条件表达式&gt;::=&lt;关系表达式&gt;|&lt;逻辑表达式&gt;
+</span></span><span style="display:flex;"><span>（5） &lt;排序列组&gt;::= {&lt;列名&gt; [ASC|DESC]} [, ……n]
+</span></span></code></pre></div><h3 id="单表查询查询内容和查询条件都在同一个表中">单表查询——查询内容和查询条件都在同一个表中</h3>
+<p>1）查询tab_student表所有学生的记录</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_student<span style="color:#bbb">
+</span></span></span></code></pre></div><p>2）查询tab_student表中前4个学生的记录</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>TOP<span style="color:#bbb"> </span><span style="color:#666">4</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_student;<span style="color:#bbb">
+</span></span></span></code></pre></div><p>3）查询tab_student表所有学生的学号和姓名</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>sname,sno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_student;<span style="color:#bbb">
+</span></span></span></code></pre></div><p>4）查询tab_student表专业号为“0101”的学生记录</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_student<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>majorno<span style="color:#666">=</span><span style="color:#b44">&#39;0101&#39;</span>;<span style="color:#bbb">
+</span></span></span></code></pre></div><p>5）查询tab_student表专业号为“0101”的学生记录，结果按年龄从小到大排序。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_student<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>majorno<span style="color:#666">=</span><span style="color:#b44">&#39;0101&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">order</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">by</span><span style="color:#bbb"> </span>grade<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ASC</span>;<span style="color:#bbb">
+</span></span></span></code></pre></div><p>6）查询tab_student表专业号为“0101”的学生的学号，姓名和年龄，并将列名改成中文。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>sno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span><span style="color:#b44">&#39;学号&#39;</span>,<span style="color:#bbb"> </span>sname<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span><span style="color:#b44">&#39;姓名&#39;</span>,<span style="color:#bbb"> </span>age<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span><span style="color:#b44">&#39;年龄&#39;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_student<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>majorno<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span><span style="color:#b44">&#39;0101&#39;</span>;<span style="color:#bbb">
+</span></span></span></code></pre></div><p>7）查询tab_couse表中含有“数据”的课程记录。（查询条件中LIKE与通配符的用法）</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_course<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>cname<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">like</span><span style="color:#bbb"> </span><span style="color:#b44">&#39;%数据%&#39;</span>;<span style="color:#bbb">
+</span></span></span></code></pre></div><blockquote>
+<p>百分号 <code>%</code>：用于匹配任意字符序列（包括空字符序列）。
+下划线 <code>_</code>：用于匹配任意单个字符。
+使用 LIKE 操作符结合通配符来进行模糊匹配</p>
+</blockquote>
+<p>8）查询tab_student表专业号为“0101”、“0102”的学生记录（查询条件中IN的用法）</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_student<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>majorno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IN</span><span style="color:#bbb"> </span>(<span style="color:#b44">&#39;0101&#39;</span>,<span style="color:#bbb"> </span><span style="color:#b44">&#39;0102&#39;</span>);<span style="color:#bbb">
+</span></span></span></code></pre></div><blockquote>
+<p><code>IN</code> 关键字用于指定一个值列表，以便在查询中匹配多个值</p>
+</blockquote>
+<p>9）查询tab_score表中成绩为空的记录（查询条件中IS NULL的用法）</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IS</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">NULL</span>;<span style="color:#bbb">
+</span></span></span></code></pre></div><p>10）查询tab_score表中成绩为80-89的记录（查询条件中BETWEEN的用法）</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">BETWEEN</span><span style="color:#bbb"> </span><span style="color:#666">80</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AND</span><span style="color:#bbb"> </span><span style="color:#666">89</span>;<span style="color:#bbb">
+</span></span></span></code></pre></div><h3 id="连接查询多表查询多数据源查询">连接查询——多表查询、多数据源查询</h3>
+<p>（1）通过WHERE子句表达连接条件
+连接条件的格式：<code>[&lt;表名1&gt;.]&lt;列名1&gt; &lt;比较运算符&gt; [&lt;表名2&gt;.]&lt;列名2&gt;</code>
+例1   查询每个学生的信息及他们所选课程的信息。
+格式1：列名用&lt;表名&gt;限定</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb">  </span>tab_student.<span style="color:#666">*</span>,<span style="color:#bbb"> </span>tab_score.<span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_student,<span style="color:#bbb"> </span>tab_score<span style="color:#bbb">  </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>tab_student.sno<span style="color:#666">=</span>tab_score.sno<span style="color:#bbb">
+</span></span></span></code></pre></div><p>格式2：列名用&lt;表别名&gt;限定</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb">  </span>a.<span style="color:#666">*</span>,<span style="color:#bbb"> </span>b.<span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_student<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb">  </span>a,<span style="color:#bbb"> </span>tab_score<span style="color:#bbb">  </span><span style="color:#a2f;font-weight:bold">AS</span><span style="color:#bbb"> </span>b<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>a.sno<span style="color:#666">=</span>b.sno<span style="color:#bbb">
+</span></span></span></code></pre></div><blockquote>
+<p>注意：有些版本只识别格式2，以下举例均采用格式2</p>
+</blockquote>
+<p>例2   查询每个学生的学号、姓名、选修的课程名和成绩。
+<code> SELECT a.sno,sname,cname,score FROM tab_student AS a,tab_course AS b, tab_score AS c WHERE a.sno=c.sno AND b.cno=c.cno</code>
+例3   查询选修“数据结构” 且成绩90分以上（含）学生的学号、姓名、成绩。
+<code>SELECT a.sno,sname,score FROM tab_student a,tab_course b,tab_score c WHERE a.sno=c.sno AND b.cno=c.cno AND cname=‘数据结构’ AND score&gt;=90 </code>
+例4   查询选修教师“张三”授课的学生学号、姓名、成绩。
+<code>SELECT a.sno,sname,score FROM tab_student a,tab_teacher b,tab_score c WHERE a.sno=c.sno AND b.tno=c.tno AND tname=‘张三’</code></p>
+<p>（2）通过FROM子句表示连接操作
+FROM子句的语句格式：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#bbb">     </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span><span style="color:#666">&lt;</span><span style="">表名</span><span style="color:#666">1</span><span style="color:#666">&gt;</span><span style="color:#bbb"> </span>[<span style="color:#a2f;font-weight:bold">INNER</span><span style="color:#bbb"> </span><span style="color:#666">|</span><span style="color:#bbb"> </span><span style="">{{</span><span style="color:#a2f;font-weight:bold">LEFT</span><span style="color:#bbb"> </span><span style="color:#666">|</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">RIGHT</span><span style="color:#bbb"> </span><span style="color:#666">|</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FULL</span><span style="">}</span><span style="color:#bbb"> </span>[<span style="color:#a2f;font-weight:bold">OUTER</span>]<span style="">}</span>]<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#a2f;font-weight:bold">JOIN</span><span style="color:#bbb"> </span><span style="color:#666">&lt;</span><span style="">表名</span><span style="color:#666">2</span><span style="color:#666">&gt;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">ON</span><span style="color:#bbb"> </span>[<span style="color:#666">&lt;</span><span style="">表名</span><span style="color:#666">1</span><span style="color:#666">&gt;</span>.]<span style="color:#666">&lt;</span><span style="">列名</span><span style="color:#666">1</span><span style="color:#666">&gt;</span><span style="color:#bbb"> </span><span style="color:#666">&lt;</span><span style="">比较运算符</span><span style="color:#666">&gt;</span><span style="color:#bbb"> </span>[<span style="color:#666">&lt;</span><span style="">表名</span><span style="color:#666">2</span><span style="color:#666">&gt;</span>.]<span style="color:#666">&lt;</span><span style="">列名</span><span style="color:#666">2</span><span style="color:#666">&gt;</span><span style="color:#bbb">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>其中 [INNER | {{LEFT | RIGHT | FULL} [OUTER]}]表示表1与表2的连接方式，默认值为INNER。
+</span></span><span style="display:flex;"><span>1）INNER（内连接）：查询结果中只有满足连接条件的记录。
+</span></span><span style="display:flex;"><span>2）LEFT [OUTER]（左连接）：查询结果中包含&lt;表1&gt;的所有记录，其中没有与&lt;表2&gt;匹配且又是&lt;表2&gt;字段的内容为NULL。
+</span></span><span style="display:flex;"><span>3）RIGHT [OUTER]（右连接）：查询结果中包含&lt;表2&gt;的所有记录，其中没有与&lt;表1&gt;匹配且又是&lt;表1&gt;字段的内容为NULL。
+</span></span><span style="display:flex;"><span>4）FULL [OUTER]（全连接）：查询结果中包含&lt;表1&gt; &lt;表2&gt;的所有记录，其中&lt;表1&gt; &lt;表2&gt;没有匹配且又是另一个表字段的内容为NULL。
+</span></span></code></pre></div><p>例1   查询每个学生的信息及他们所选课程的信息。
+<code>SELECT a.*, b.* FROM tab_student AS a INNER JOIN tab_score AS b ON a.sno=b.sno</code>
+例2   查询每个学生的学号、姓名、选修的课程名和成绩。
+<code>SELECT a.sno, sname, cname, score FROM tab_student AS a INNER JOIN tab_score AS b ON a.sno = b.sno INNER JOIN  tab_course AS c ON b.cno = c.cno</code>
+例3   查询选修“数据结构” 且成绩90分以上（含）学生的学号、姓名、成绩。
+<code>SELECT a.sno, sname, score FROM tab_student a JOIN tab_score b ON a.sno=b.sno	JOIN tab_course c ON b.cno=c.cno AND cname=‘数据结构’ AND score&gt;=90	</code>
+例4   查询选修教师“张三”授课的学生学号、姓名、成绩。
+<code> SELECT a.sno, sname, score FROM tab_student a JOIN tab_score b ON a.sno=c.sno JOIN tab_teacher c ON b.tno=c.tno AND tname=‘张三’</code></p>
+<p>连接查询的操作练习
+1）查询全校的教师的工号、姓名、所在学院名</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>a.tno,a.tname,b.instname<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_teacher<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">as</span><span style="color:#bbb"> </span>a,tab_institute<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">as</span><span style="color:#bbb"> </span>b<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>a.instno<span style="color:#666">=</span>b.instno<span style="color:#bbb">
+</span></span></span></code></pre></div><p>2）查询授课教师的工号、姓名、讲授课程名</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>a.tno,b.tname,a.cno,<span style="color:#a2f;font-weight:bold">c</span>.cname<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">as</span><span style="color:#bbb"> </span>a,tab_teacher<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">as</span><span style="color:#bbb"> </span>b,tab_course<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">c</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>a.tno<span style="color:#666">=</span>b.tno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">and</span><span style="color:#bbb"> </span>a.cno<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">c</span>.cno<span style="color:#bbb">
+</span></span></span></code></pre></div><p>3）查询 “数据结构”课程的学生的学号、姓名、课程名、成绩、任课教师名</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>a.sno,b.sname,<span style="color:#a2f;font-weight:bold">c</span>.cname,a.score,d.tname<span style="color:#bbb"> 
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">as</span><span style="color:#bbb"> </span>a,tab_student<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">as</span><span style="color:#bbb"> </span>b,tab_course<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">as</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">c</span>,tab_teacher<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">as</span><span style="color:#bbb"> </span>d<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>a.sno<span style="color:#666">=</span>b.sno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">and</span><span style="color:#bbb"> </span>a.cno<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">c</span>.cno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">and</span><span style="color:#bbb"> </span>a.tno<span style="color:#666">=</span>d.tno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">and</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">c</span>.cname<span style="color:#666">=</span><span style="color:#b44">&#39;数据结构&#39;</span><span style="color:#bbb">
+</span></span></span></code></pre></div><p>4）查询“计算机学院”所有学生的学号、姓名、课程名、成绩、任课教师名</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>s.sno,s.sname,<span style="color:#a2f;font-weight:bold">c</span>.cname,sc.score,t.tname<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_student<span style="color:#bbb"> </span>s<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">join</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span>sc<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">on</span><span style="color:#bbb"> </span>s.sno<span style="color:#666">=</span>sc.sno<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">join</span><span style="color:#bbb"> </span>tab_course<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">c</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">on</span><span style="color:#bbb"> </span>sc.cno<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">c</span>.cno<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">join</span><span style="color:#bbb"> </span>tab_teacher<span style="color:#bbb"> </span>t<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">on</span><span style="color:#bbb"> </span>sc.tno<span style="color:#666">=</span>t.tno<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">join</span><span style="color:#bbb"> </span>tab_major<span style="color:#bbb"> </span>m<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">on</span><span style="color:#bbb"> </span>s.majorno<span style="color:#666">=</span>m.majoyno<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">join</span><span style="color:#bbb"> </span>tab_institute<span style="color:#bbb"> </span>i<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">on</span><span style="color:#bbb"> </span>m.instno<span style="color:#666">=</span>i.instno<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>i.instname<span style="color:#666">=</span><span style="color:#b44">&#39;计算机学院&#39;</span><span style="color:#bbb">
+</span></span></span></code></pre></div><p>5）查询所有授课的“教授”的工号、姓名和授课课程名</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>sc.tno,t.tname,<span style="color:#a2f;font-weight:bold">c</span>.cname<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span>sc<span style="color:#bbb"> 
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">join</span><span style="color:#bbb"> </span>tab_teacher<span style="color:#bbb"> </span>t<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">on</span><span style="color:#bbb"> </span>sc.tno<span style="color:#666">=</span>t.tno<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">join</span><span style="color:#bbb"> </span>tab_course<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">c</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">on</span><span style="color:#bbb"> </span>sc.cno<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">c</span>.cno<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>t.title<span style="color:#666">=</span><span style="color:#b44">&#39;教授&#39;</span><span style="color:#bbb">
+</span></span></span></code></pre></div><h3 id="嵌套查询查询条件需要由另一个查询子查询结果确定">嵌套查询——查询条件需要由另一个查询（子查询）结果确定</h3>
+<p>（1） &lt;列名&gt; &lt;比较符&gt; (SELECT &lt;列名&gt; FROM …) 的用法（子查询结果只有1条记录）
+1）查询tab_student表中“网络工程”专业的学生的记录</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_student<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>majoyno<span style="color:#666">=</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>(<span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>majoyno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_majoy<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>majoyname<span style="color:#666">=</span><span style="">‘网络工程’</span>)<span style="color:#bbb">
+</span></span></span></code></pre></div><p>2）查询tab_score表中“C001”课程成绩低于平均分的学生记录</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>cno<span style="color:#666">=</span><span style="">‘</span>C001<span style="">’</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AND</span><span style="color:#bbb"> </span>score<span style="color:#bbb"> </span><span style="color:#666">&lt;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>(<span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AVG</span>(score)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>cno<span style="color:#666">=</span><span style="">‘</span>C001<span style="">’</span>)<span style="color:#bbb">
+</span></span></span></code></pre></div><p>（2） &lt;列名&gt; IN（SELECT &lt;列名&gt; FROM …）的用法（子查询结果有多条记录）
+如：查询tab_student表中计算机学院的学生的记录</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_student<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>majoyno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">IN</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>(<span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>majoyno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_majoy<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>instno<span style="color:#666">=</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">           </span>(<span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>instno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_institute<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>instname<span style="color:#666">=</span><span style="">‘计算机学院’</span>))<span style="color:#bbb">
+</span></span></span></code></pre></div><p>（3） &lt;列名&gt; &lt;比较符&gt;{ALL|ANY} (SELECT &lt;列名&gt; FROM …) 的用法（子查询结果有多条记录）
+例  求其他专业中比网络工程某一学生年龄小的学生。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb">  </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_student<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>birthday<span style="color:#bbb"> </span><span style="color:#666">&gt;</span><span style="color:#a2f;font-weight:bold">ANY</span><span style="color:#bbb"> </span>(<span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>birthday<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_student<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>majoyno<span style="color:#666">=</span>(<span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>majoyno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_majoy<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>majoyname<span style="color:#666">=</span><span style="color:#bbb"> </span><span style="">‘网络工程’</span>))<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">AND</span><span style="color:#bbb"> </span>majoyno<span style="color:#bbb"> </span><span style="color:#666">!=</span><span style="color:#bbb"> </span>(<span style="color:#a2f;font-weight:bold">SELECT</span><span style="color:#bbb"> </span>majoyno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">FROM</span><span style="color:#bbb"> </span>tab_majoy<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">WHERE</span><span style="color:#bbb"> </span>majoyname<span style="color:#666">=</span><span style="color:#bbb"> </span><span style="">‘网络工程’</span>)<span style="color:#bbb">
+</span></span></span></code></pre></div><p>嵌套查询的操作练习
+1）查询“计算机学院”的教师记录</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_teacher<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>instno<span style="color:#666">=</span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>instno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_institute<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>instname<span style="color:#666">=</span><span style="color:#b44">&#39;计算机学院&#39;</span>)<span style="color:#bbb">
+</span></span></span></code></pre></div><p>2）查询“计算机学院”的课程记录</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_course<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>majoyno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">in</span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>majoyno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_major<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>instno<span style="color:#666">=</span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>instno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_institute<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>instname<span style="color:#666">=</span><span style="color:#b44">&#39;计算机学院&#39;</span>))<span style="color:#bbb">
+</span></span></span></code></pre></div><p>3）查询讲授“数据库”课程的教师记录</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_teacher<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>tno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">in</span><span style="color:#bbb"> </span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>tno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>cno<span style="color:#666">=</span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>cno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_course<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>cname<span style="color:#666">=</span><span style="color:#b44">&#39;数据库&#39;</span>))<span style="color:#bbb">
+</span></span></span></code></pre></div><p>4）查询选修“数据结构”课程的学生记录</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span><span style="color:#666">*</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_student<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>sno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">in</span><span style="color:#bbb"> </span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>sno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>cno<span style="color:#666">=</span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>cno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_course<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>cname<span style="color:#666">=</span><span style="color:#b44">&#39;数据库&#39;</span>))<span style="color:#bbb">
+</span></span></span></code></pre></div><p>5）查询“C001”课程成绩第一名的学生的学号与姓名</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>sno,sname<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_student<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>sno<span style="color:#666">=</span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>TOP<span style="color:#bbb"> </span><span style="color:#666">1</span><span style="color:#bbb"> </span>sno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>cno<span style="color:#666">=</span><span style="color:#b44">&#39;C001&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">order</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">by</span><span style="color:#bbb"> </span>score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">DESC</span>)<span style="color:#bbb">
+</span></span></span></code></pre></div><blockquote>
+<p>这里和MySQL有点不同，T-SQL用的是 <code>TOP 1</code>来指定第一个，而不是<code>limit 1</code></p>
+</blockquote>
+<p>6）查询“C001”课程成绩高于“李四”的学生的学号与成绩</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>sno,score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>cno<span style="color:#666">=</span><span style="color:#b44">&#39;C001&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">and</span><span style="color:#bbb"> </span>score<span style="color:#bbb"> </span><span style="color:#666">&gt;</span><span style="color:#bbb"> </span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>cno<span style="color:#666">=</span><span style="color:#b44">&#39;C001&#39;</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">and</span><span style="color:#bbb"> </span>sno<span style="color:#666">=</span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>sno<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_student<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span>sname<span style="color:#666">=</span><span style="color:#b44">&#39;李四&#39;</span>))<span style="color:#bbb">
+</span></span></span></code></pre></div><p>7）查询所有授课的“教授”的工号、姓名和授课课程</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">select</span><span style="color:#bbb"> </span>sc.tno,t.tname,<span style="color:#a2f;font-weight:bold">c</span>.cname<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>tab_score<span style="color:#bbb"> </span>sc<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">join</span><span style="color:#bbb"> </span>tab_teacher<span style="color:#bbb"> </span>t<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">on</span><span style="color:#bbb"> </span>t.tno<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span>sc.tno<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#a2f;font-weight:bold">join</span><span style="color:#bbb"> </span>tab_course<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">c</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">on</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">c</span>.cno<span style="color:#bbb"> </span><span style="color:#666">=</span><span style="color:#bbb"> </span>sc.cno<span style="color:#bbb">
+</span></span></span></code></pre></div>
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/11/oh-my-posh-%E4%B8%BA-powershell-%E5%92%8C-wsl-%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E6%A0%B7%E5%BC%8F/">← prev</a>
+    
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/11/netcat%E5%B7%A5%E5%85%B7%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">next →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2021</span> - <span>2024</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+    <span> 🍦 Theme </span>
+    <a class="link" href="https://github.com/queensferryme/hugo-theme-texify">TeXify</a>
+  </div>
+
+  <div class="footnote">
+    <span>Follow me on <a class=link href=https://github.com/Pi3-l22>GitHub</a> |
+<a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+
+</body>
+
+</html>

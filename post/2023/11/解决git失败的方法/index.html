@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="
+Failed to connect to github.com port 443: Timed out
+
+因为连不上GitHub导致的。所以打开clash，并且使用全局模式&#43;TUN模式。
+如果还是不行，就将git代理设置为127.0.0.1:7890">
+  
+
+  
+  <link rel="icon" href="https://pi3-l22.github.io/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://pi3-l22.github.io/post/2023/11/%E8%A7%A3%E5%86%B3git%E5%A4%B1%E8%B4%A5%E7%9A%84%E6%96%B9%E6%B3%95/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="解决git失败的方法">
+  <meta property="og:description" content=" Failed to connect to github.com port 443: Timed out 因为连不上GitHub导致的。所以打开clash，并且使用全局模式&#43;TUN模式。 如果还是不行，就将git代理设置为127.0.0.1:7890">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-11-24T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-11-24T00:00:00+00:00">
+    <meta property="article:tag" content="Git">
+
+
+  
+  <link rel="canonical" href="https://pi3-l22.github.io/post/2023/11/%E8%A7%A3%E5%86%B3git%E5%A4%B1%E8%B4%A5%E7%9A%84%E6%96%B9%E6%B3%95/">
+
+  
+  
+  
+  <meta itemprop="name" content="解决git失败的方法">
+  <meta itemprop="description" content=" Failed to connect to github.com port 443: Timed out 因为连不上GitHub导致的。所以打开clash，并且使用全局模式&#43;TUN模式。 如果还是不行，就将git代理设置为127.0.0.1:7890">
+  <meta itemprop="datePublished" content="2023-11-24T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2023-11-24T00:00:00+00:00">
+  <meta itemprop="wordCount" content="116">
+  <meta itemprop="keywords" content="Git">
+
+  
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/content.css'>
+
+  
+  
+  <title>解决git失败的方法 - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://pi3-l22.github.io/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://pi3-l22.github.io/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>解决git失败的方法</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='https://pi3-l22.github.io/tags/git'>#git</a>
+    
+  </div>
+  
+  
+  
+  
+  <article class="content">
+    
+    <ol>
+<li>Failed to connect to github.com port 443: Timed out</li>
+</ol>
+<p>因为连不上GitHub导致的。所以打开clash，并且使用全局模式+TUN模式。
+如果还是不行，就将git代理设置为127.0.0.1:7890</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>//取消http代理
+</span></span><span style="display:flex;"><span>git config --global --unset http.proxy
+</span></span><span style="display:flex;"><span>//取消https代理 
+</span></span><span style="display:flex;"><span>git config --global --unset https.proxy
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git config --global http.proxy http://127.0.0.1:7890
+</span></span></code></pre></div>
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/11/wsl%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3/">← prev</a>
+    
+    
+    <a class="link" href="https://pi3-l22.github.io/post/2023/11/shell%E5%9F%BA%E7%A1%80/">next →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2021</span> - <span>2024</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+    <span> 🍦 Theme </span>
+    <a class="link" href="https://github.com/queensferryme/hugo-theme-texify">TeXify</a>
+  </div>
+
+  <div class="footnote">
+    <span>Follow me on <a class=link href=https://github.com/Pi3-l22>GitHub</a> |
+<a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+
+</body>
+
+</html>
