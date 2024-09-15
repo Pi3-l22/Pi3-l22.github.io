@@ -116,8 +116,8 @@ Type：应用类型&lt;/p&gt;
 &lt;p&gt;给Linux系统添加其他字体，也是将ttf/otf字体文件放入这个文件夹&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;安装vmware-workstation&#34;&gt;安装VMware Workstation&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html&#34;&gt;官网下载安装包&lt;/a&gt;
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208131339.png&#34; alt=&#34;VMware Worklstation下载&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html&#34;&gt;官网下载安装包&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208131339.png&#34; alt=&#34;VMware Worklstation下载&#34;&gt;&lt;/p&gt;
 &lt;p&gt;运行安装资源文件包&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./VMware-Workstation-Full-17.5.0-22583795.x86_64.bundle
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在运行过程中可能会出现错误提示没有 linux-header，可以直接使用apt安装&lt;/p&gt;
@@ -135,12 +135,12 @@ Type：应用类型&lt;/p&gt;
 &lt;h2 id=&#34;配置picgo&#34;&gt;配置PicGo&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://picgo.github.io/PicGo-Doc/zh/&#34;&gt;官方下载PicGo&lt;/a&gt;
 下载AppImage文件，同样放到&lt;code&gt;/opt/&lt;/code&gt;目录，并按照&lt;a href=&#34;##%E5%AE%89%E8%A3%85Clash&#34;&gt;上面的方法&lt;/a&gt;配置桌面图标
-PicGo配置Github图床，在github上新建仓库，并设置一个token
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208133922.png&#34; alt=&#34;PicGo配置&#34;&gt;&lt;/p&gt;
+PicGo配置Github图床，在github上新建仓库，并设置一个token&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208133922.png&#34; alt=&#34;PicGo配置&#34;&gt;&lt;/p&gt;
 &lt;p&gt;要想使用==剪切板上传图片==（&lt;strong&gt;Typora、Obisidian自动上传图片服务&lt;/strong&gt;），还需要在终端中安装Xclip程序&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install xclip
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接着就可以在Typora和Obsidian中配置自动上传图片
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208134546.png&#34; alt=&#34;Typora自动上传图片&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接着就可以在Typora和Obsidian中配置自动上传图片&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208134546.png&#34; alt=&#34;Typora自动上传图片&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208134651.png&#34; alt=&#34;Obsidian自动上传图片&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;安装pycharm&#34;&gt;安装PyCharm&lt;/h2&gt;
 &lt;p&gt;安装PyCharm，在官网下载程序包，按照压缩包中的安装配置指南就可以成功安装
@@ -183,13 +183,13 @@ PicGo配置Github图床，在github上新建仓库，并设置一个token
 &lt;p&gt;到官网下载Linux的资源文件，运行按照提示下一步就可以完成安装
 在这个过程中有可能会提示缺少Linux-header文件，只需要在终端用apt下载对应版本的header就可以&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install linux-headers-6.6.9-amd64
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://pi3yyy.love/archives/33e9ac6f.html&#34;&gt;安装具体步骤参考文章中的安装VMware&lt;/a&gt;
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240211000531.png&#34; alt=&#34;VMware Workstation pro 17&#34;&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://pi3yyy.love/archives/33e9ac6f.html&#34;&gt;安装具体步骤参考文章中的安装VMware&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240211000531.png&#34; alt=&#34;VMware Workstation pro 17&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;问题出现&#34;&gt;问题出现&lt;/h2&gt;
 &lt;p&gt;刚开始使用虚拟机没有任何问题，但是在安装了虚拟机并运行之后，再重启电脑就会卡在Kali的logo界面
 刚开始还没在意，没有想到和VMware有关，但是随着使用虚拟机次数的增多，我渐渐发现每次只要开了虚拟机重启就会卡在logo界面，不能正常进入系统
-所以我在logo界面，使用ctrl+alt+f1，打开日志信息，发现居然是vmware.service不能正常启动导致的
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/95_1707580958_hd.jpeg&#34; alt=&#34;开机错误日志&#34;&gt;
+所以我在logo界面，使用ctrl+alt+f1，打开日志信息，发现居然是vmware.service不能正常启动导致的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/95_1707580958_hd.jpeg&#34; alt=&#34;开机错误日志&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/96_1707580962_hd.jpeg&#34; alt=&#34;开机错误日志&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;问题解决&#34;&gt;问题解决&lt;/h2&gt;
 &lt;p&gt;我只能强制关机后再开机，进入系统开始解决问题，我上网搜索了很多一样的情况，他们都是不能正常启动vmnet服务或者是vmon服务，解决办法就是重新安装所有的VM模块，再手动编译安装vmnet和vmon模块&lt;/p&gt;
