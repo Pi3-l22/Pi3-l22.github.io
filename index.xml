@@ -10,6 +10,19 @@
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
     <lastBuildDate>Sun, 15 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://pi3-l22.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Home</title>
+      <link>https://pi3-l22.github.io/home/</link>
+      <pubDate>Sun, 15 Sep 2024 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://pi3-l22.github.io/home/</guid>
+      
+      <description>&lt;p&gt;这是一个主页
+test test&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
       <title>Kali Linux的安装与配置</title>
       <link>https://pi3-l22.github.io/post/2024/2/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Sun, 15 Sep 2024 00:00:00 +0000</pubDate>
@@ -2773,73 +2786,6 @@ f&amp;ndash;&amp;gt;e[客户端删除截屏文件,双方退出截屏流程]
 &lt;p&gt;不过后续还是需要将这个远控程序图标和名称改的更加合适一点，毕竟dll动态链接库怎么可能在后台运行&lt;/p&gt;
 &lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
 &lt;p&gt;整个项目或者说是程序，总体上比较简单，没有什么很难的点，在这个过程中用到最多的就是&lt;strong&gt;计算机网络&lt;/strong&gt;和&lt;strong&gt;网络编程&lt;/strong&gt;中的知识点，于此同时，最后部分也涉及到了Python&lt;strong&gt;异步编程&lt;/strong&gt;，&lt;strong&gt;多线程&lt;/strong&gt;，&lt;strong&gt;多进程&lt;/strong&gt;以及&lt;strong&gt;协程&lt;/strong&gt;的概念，完成这个程序也算是巩固和补充了这些方面的知识，弥补了一些不懂的地方，现在写下来也算是回顾总结学到的知识点。&lt;/p&gt;</description>
-      
-    </item>
-    
-    <item>
-      <title>Netcat工具的简单使用</title>
-      <link>https://pi3-l22.github.io/post/2023/11/netcat%E5%B7%A5%E5%85%B7%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Mon, 27 Nov 2023 00:00:00 +0000</pubDate>
-      <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/11/netcat%E5%B7%A5%E5%85%B7%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</guid>
-      
-      <description>&lt;p&gt;实验环境：&lt;/p&gt;
-&lt;p&gt;本机：192.168.161.1&lt;/p&gt;
-&lt;p&gt;Metasploitable：192.168.161.133&lt;/p&gt;
-&lt;p&gt;Kali：192.168.161.128&lt;/p&gt;
-&lt;h1 id=&#34;1-消息传递&#34;&gt;1. 消息传递&lt;/h1&gt;
-&lt;p&gt;Metasploitable启动nc监听端口9876&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212530.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;用Kali连接Metasploitable&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212536.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;输入消息，进行消息的传递&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212543.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212549.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h1 id=&#34;2-文件传输&#34;&gt;2. 文件传输&lt;/h1&gt;
-&lt;p&gt;在kali中编写一个文件test_file内容为下&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212555.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212606.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;在msf上创建一个空文件nc，用于接收传递过来的文件内容&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212617.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;开启nc监听端口，9876&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212623.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;在kali上用nc连接传递文件内容&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212629.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;最后在msf上查看文件内容，发现文件信息已传递&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212635.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;其文件传递的本质就是通过重定向符将文件的内容作为输入，在msf端将接收的数据重定向到文件&lt;/p&gt;
-&lt;h1 id=&#34;3-远程控制&#34;&gt;3. 远程控制&lt;/h1&gt;
-&lt;p&gt;实验环境：&lt;/p&gt;
-&lt;p&gt;攻击机：kali，靶机：Metasploitable&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;正向连接：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;靶机监听，攻击者主动连接靶机&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Msf启动一个监听，并返回一个shell&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212645.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Kali连接msf，连接得到一个msf的shell&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212651.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212655.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;-e 使用后面的进程替换掉当前进程，就是使用/bin/sh 执行命令&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;反向连接：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;攻击者监听，靶机主动连接&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;有时目标主机的防火墙可能不允许外部主机连接内部，所以反向连接比较常用，就是让内网主机主动发送 shell 给我们&lt;/p&gt;
-&lt;p&gt;Kali进行端口监听&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212703.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Msf进行nc连接，并发送一个shell&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212709.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Kali成功接收到msf的shell，并且能够远程执行&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212713.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h1 id=&#34;4-连接端口&#34;&gt;4. 连接端口&lt;/h1&gt;
-&lt;p&gt;Msf启动apache服务，运行在80端口&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212720.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Kali用nc连接msf的80端口，用get获取网页页面&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212726.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h1 id=&#34;5-端口扫描&#34;&gt;5. 端口扫描&lt;/h1&gt;
-&lt;p&gt;-v 显示详细&lt;/p&gt;
-&lt;p&gt;-z 表示连接立即关闭，用于扫描&lt;/p&gt;
-&lt;p&gt;如果是 udp 端口，再加上-u 参数&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212735.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;参考文献：
-&lt;a href=&#34;https://blog.csdn.net/Aluxian_/article/details/123355133&#34;&gt;看完这篇 教你玩转渗透测试靶机——Metasploitable2_落寞的魚丶的博客-CSDN博客&lt;/a&gt;&lt;/p&gt;</description>
       
     </item>
     
