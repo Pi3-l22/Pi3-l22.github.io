@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://texify.queensferry.me/sitemap.xml
+Sitemap: https://pi3-l22.github.io/sitemap.xml
