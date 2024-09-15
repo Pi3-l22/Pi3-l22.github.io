@@ -7,11 +7,12 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
-    <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster><atom:link href="https://pi3-l22.github.io/tags/web%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
+    <lastBuildDate>Fri, 24 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://pi3-l22.github.io/tags/web%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Web安全学习路线</title>
       <link>https://pi3-l22.github.io/post/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 24 Nov 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</guid>
       
@@ -84,8 +85,7 @@
 &lt;p&gt;&lt;a href=&#34;https://www.processon.com/view/link/62b1b2267d9c08073c671315&#34;&gt;网安学习路线&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/qq_45555226/article/details/105315239&#34;&gt;网络安全|web渗透 学习路线&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.mubu.com/doc/4fEhPJmMeWS&#34;&gt;WEB安全学习大纲&lt;/a&gt;&lt;/p&gt;
-&lt;iframe src=&#34;https://www.mubu.com/doc/4fEhPJmMeWS&#34; allow=&#34;fullscreen&#34; allowfullscreen=&#34;&#34; style=&#34;height: 100%; width: 100%; aspect-ratio: 4 / 3;&#34;&gt;&lt;/iframe&gt;
-</description>
+&lt;iframe src=&#34;https://www.mubu.com/doc/4fEhPJmMeWS&#34; allow=&#34;fullscreen&#34; allowfullscreen=&#34;&#34; style=&#34;height: 100%; width: 100%; aspect-ratio: 4 / 3;&#34;&gt;&lt;/iframe&gt;</description>
       
     </item>
     
