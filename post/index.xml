@@ -16,7 +16,8 @@
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2024/2/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
       
-      <description>&lt;h1 id=&#34;kali-linux下使用vmware遇到的问题&#34;&gt;Kali Linux下使用VMware遇到的问题&lt;/h1&gt;
+      <description>&lt;p&gt;在Kali Linux中使用VMware导致重启卡LOGO界面的问题与解决&lt;/p&gt;
+&lt;h1 id=&#34;kali-linux下使用vmware遇到的问题&#34;&gt;Kali Linux下使用VMware遇到的问题&lt;/h1&gt;
 &lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
 &lt;p&gt;到官网下载Linux的资源文件，运行按照提示下一步就可以完成安装
 在这个过程中有可能会提示缺少Linux-header文件，只需要在终端用apt下载对应版本的header就可以&lt;/p&gt;
@@ -102,8 +103,7 @@
 &lt;li&gt;在 &lt;strong&gt;Adobe FrameMaker&lt;/strong&gt; 中，“网络上的锁定文件”功能会生成一个 &lt;strong&gt;.lck&lt;/strong&gt; 文件，以管理对FrameMaker文档的并发访问。这个功能有时既有帮助又有时会让人感到烦恼，具体取决于情况。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;
-</description>
+&lt;/ul&gt;</description>
       
     </item>
     
@@ -114,7 +114,8 @@
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2024/2/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid>
       
-      <description>&lt;h1 id=&#34;kali-linux的安装与配置&#34;&gt;Kali Linux的安装与配置&lt;/h1&gt;
+      <description>&lt;p&gt;Kali Linux的安装与配置&lt;/p&gt;
+&lt;h1 id=&#34;kali-linux的安装与配置&#34;&gt;Kali Linux的安装与配置&lt;/h1&gt;
 &lt;h2 id=&#34;快速安装&#34;&gt;快速安装&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.kali.org/&#34;&gt;官网&lt;/a&gt;下载Kali Linux镜像文件（ISO）
 虽然2023年推出来Kali Purple但是不太推荐安装，因为有一些库和依赖环境没有，安装一些软件程序会很麻烦
@@ -266,8 +267,7 @@ PicGo配置Github图床，在github上新建仓库，并设置一个token
 &lt;li&gt;VsCode（代码编辑器）&lt;/li&gt;
 &lt;li&gt;Dbeaver（数据库管理工具）&lt;/li&gt;
 &lt;li&gt;Snipaste（截屏工具）&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+&lt;/ul&gt;</description>
       
     </item>
     
