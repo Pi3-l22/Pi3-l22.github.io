@@ -85,8 +85,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f&#34;&gt;eval&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;$(&lt;/span&gt;oh-my-posh init zsh --config ~/.cache/oh-my-posh/themes/1_shell.omp.json&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中，&lt;code&gt;--config&lt;/code&gt;后面填入，你的主题路径和主题名字，我的主题路径可能有所不同，需要更改为自己的
 退出文件，终端输入&lt;code&gt;exec zsh&lt;/code&gt;，主题就会立马应用。
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125174037.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-</description>
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125174037.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
       
     </item>
     
@@ -177,8 +176,7 @@ wget &lt;a href=&#34;https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs
           &lt;td style=&#34;text-align: left&#34;&gt;255.255.240.0&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
-&lt;/table&gt;
-</description>
+&lt;/table&gt;</description>
       
     </item>
     

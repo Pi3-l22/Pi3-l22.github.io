@@ -366,8 +366,7 @@ PicGo配置Github图床，在github上新建仓库，并设置一个token
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222230044.png&#34; alt=&#34;虚拟WIFI&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;卸载删除&#34;&gt;卸载删除&lt;/h2&gt;
 &lt;p&gt;只需要在Windows设置中卸载 &lt;em&gt;适用于Android的Windows子系统&lt;/em&gt; 程序，然后直接删除原先下载解压出来的文件夹即可
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222225018.png&#34; alt=&#34;卸载WSA&#34;&gt;&lt;/p&gt;
-</description>
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222225018.png&#34; alt=&#34;卸载WSA&#34;&gt;&lt;/p&gt;</description>
       
     </item>
     
@@ -2774,8 +2773,7 @@ f&amp;ndash;&amp;gt;e[客户端删除截屏文件,双方退出截屏流程]
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201230240.png&#34; alt=&#34;关闭云盘客户端后依旧在后台运行的远控程序&#34;&gt;&lt;/p&gt;
 &lt;p&gt;不过后续还是需要将这个远控程序图标和名称改的更加合适一点，毕竟dll动态链接库怎么可能在后台运行&lt;/p&gt;
 &lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
-&lt;p&gt;整个项目或者说是程序，总体上比较简单，没有什么很难的点，在这个过程中用到最多的就是&lt;strong&gt;计算机网络&lt;/strong&gt;和&lt;strong&gt;网络编程&lt;/strong&gt;中的知识点，于此同时，最后部分也涉及到了Python&lt;strong&gt;异步编程&lt;/strong&gt;，&lt;strong&gt;多线程&lt;/strong&gt;，&lt;strong&gt;多进程&lt;/strong&gt;以及&lt;strong&gt;协程&lt;/strong&gt;的概念，完成这个程序也算是巩固和补充了这些方面的知识，弥补了一些不懂的地方，现在写下来也算是回顾总结学到的知识点。&lt;/p&gt;
-</description>
+&lt;p&gt;整个项目或者说是程序，总体上比较简单，没有什么很难的点，在这个过程中用到最多的就是&lt;strong&gt;计算机网络&lt;/strong&gt;和&lt;strong&gt;网络编程&lt;/strong&gt;中的知识点，于此同时，最后部分也涉及到了Python&lt;strong&gt;异步编程&lt;/strong&gt;，&lt;strong&gt;多线程&lt;/strong&gt;，&lt;strong&gt;多进程&lt;/strong&gt;以及&lt;strong&gt;协程&lt;/strong&gt;的概念，完成这个程序也算是巩固和补充了这些方面的知识，弥补了一些不懂的地方，现在写下来也算是回顾总结学到的知识点。&lt;/p&gt;</description>
       
     </item>
     
@@ -2842,8 +2840,7 @@ f&amp;ndash;&amp;gt;e[客户端删除截屏文件,双方退出截屏流程]
 &lt;p&gt;如果是 udp 端口，再加上-u 参数&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212735.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;参考文献：
-&lt;a href=&#34;https://blog.csdn.net/Aluxian_/article/details/123355133&#34;&gt;看完这篇 教你玩转渗透测试靶机——Metasploitable2_落寞的魚丶的博客-CSDN博客&lt;/a&gt;&lt;/p&gt;
-</description>
+&lt;a href=&#34;https://blog.csdn.net/Aluxian_/article/details/123355133&#34;&gt;看完这篇 教你玩转渗透测试靶机——Metasploitable2_落寞的魚丶的博客-CSDN博客&lt;/a&gt;&lt;/p&gt;</description>
       
     </item>
     

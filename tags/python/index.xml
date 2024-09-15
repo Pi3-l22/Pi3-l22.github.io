@@ -1708,8 +1708,7 @@ f&amp;ndash;&amp;gt;e[客户端删除截屏文件,双方退出截屏流程]
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201230240.png&#34; alt=&#34;关闭云盘客户端后依旧在后台运行的远控程序&#34;&gt;&lt;/p&gt;
 &lt;p&gt;不过后续还是需要将这个远控程序图标和名称改的更加合适一点，毕竟dll动态链接库怎么可能在后台运行&lt;/p&gt;
 &lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
-&lt;p&gt;整个项目或者说是程序，总体上比较简单，没有什么很难的点，在这个过程中用到最多的就是&lt;strong&gt;计算机网络&lt;/strong&gt;和&lt;strong&gt;网络编程&lt;/strong&gt;中的知识点，于此同时，最后部分也涉及到了Python&lt;strong&gt;异步编程&lt;/strong&gt;，&lt;strong&gt;多线程&lt;/strong&gt;，&lt;strong&gt;多进程&lt;/strong&gt;以及&lt;strong&gt;协程&lt;/strong&gt;的概念，完成这个程序也算是巩固和补充了这些方面的知识，弥补了一些不懂的地方，现在写下来也算是回顾总结学到的知识点。&lt;/p&gt;
-</description>
+&lt;p&gt;整个项目或者说是程序，总体上比较简单，没有什么很难的点，在这个过程中用到最多的就是&lt;strong&gt;计算机网络&lt;/strong&gt;和&lt;strong&gt;网络编程&lt;/strong&gt;中的知识点，于此同时，最后部分也涉及到了Python&lt;strong&gt;异步编程&lt;/strong&gt;，&lt;strong&gt;多线程&lt;/strong&gt;，&lt;strong&gt;多进程&lt;/strong&gt;以及&lt;strong&gt;协程&lt;/strong&gt;的概念，完成这个程序也算是巩固和补充了这些方面的知识，弥补了一些不懂的地方，现在写下来也算是回顾总结学到的知识点。&lt;/p&gt;</description>
       
     </item>
     
@@ -2643,8 +2642,7 @@ merge (from)-[r:Exchange]-&amp;gt;(to)
 &lt;li&gt;部署简便&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231130232217.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-</description>
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231130232217.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
       
     </item>
     
@@ -2794,8 +2792,7 @@ merge (from)-[r:Exchange]-&amp;gt;(to)
 &lt;li&gt;获取script标签的操作肯定不是标准的写法，但是这样能成功的原理是什么？Python爬虫遇到这种情况，规范正确的解决方法是什么？&lt;/li&gt;
 &lt;li&gt;……&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;这样问题应该可以在我系统学习了Python爬虫之后得到解决。&lt;/p&gt;
-</description>
+&lt;p&gt;这样问题应该可以在我系统学习了Python爬虫之后得到解决。&lt;/p&gt;</description>
       
     </item>
     

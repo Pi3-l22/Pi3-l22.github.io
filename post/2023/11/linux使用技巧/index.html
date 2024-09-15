@@ -11,37 +11,7 @@
 
   
   
-  <meta name="description" content="Linux使用技巧
-tmux使用技巧
-# 窗口管理器 最重要的就是他能保存当前窗口的状态 之后还能连回来（包括ssh远程连接服务器）
-tmux # 创建一个新的会话
-tmux ls # 列出所有会话
-tmux attach/a -t 1（会话号） # 重新连接上会话
-tmux new-s name # 创建指定名称会话
-tmux kill-session/ses -t 1(会话号) # 关闭指定会话 
-
-ctrl-b # 为功能切换键
-[ #上下查看历史记录 q退出
-d # 把当前会话挂起在后台（退出tmux，但是没有关闭）
-s # 在tmux中列出所有的会话 --&gt;键可以展开看到窗口 树型递归显示
-w # 在tmux中列出所有的窗口 --&gt;键可以展开看到面板 树型递归显示
-c # 在当前会话下 创建一个新的窗口
-n # 切换为下一个的窗口
-p # 切换为前一个的窗口
-1 2 3 4…… # 直接输入数字切换指定的窗口
-&amp; # 关闭当前窗口 y:yes
-
-% # 把当前窗口分成左右两个面板
-&#34; # 把当前窗口分成上下两个面板
-方向键 # 在不同面板中切换
-q # 在当前窗口显示出面板的编号，并切换面板
-z # 把当前面板最大化/恢复
-x # 关闭当前的面板
-
-: # 输入指令模式
-new / new -s name # 新建一个会话
-…………
-Tmux Cheat Sheet &amp; Quick Reference">
+  <meta name="description" content="A personal notebook to record my studies and life">
   
 
   
@@ -83,7 +53,7 @@ Tmux Cheat Sheet &amp; Quick Reference">
   <meta property="og:url" content="https://pi3-l22.github.io/post/2023/11/linux%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
   <meta property="og:site_name" content="Pi3&#39;Notes">
   <meta property="og:title" content="Linux使用技巧">
-  <meta property="og:description" content="Linux使用技巧 tmux使用技巧 # 窗口管理器 最重要的就是他能保存当前窗口的状态 之后还能连回来（包括ssh远程连接服务器） tmux # 创建一个新的会话 tmux ls # 列出所有会话 tmux attach/a -t 1（会话号） # 重新连接上会话 tmux new-s name # 创建指定名称会话 tmux kill-session/ses -t 1(会话号) # 关闭指定会话 ctrl-b # 为功能切换键 [ #上下查看历史记录 q退出 d # 把当前会话挂起在后台（退出tmux，但是没有关闭） s # 在tmux中列出所有的会话 --&gt;键可以展开看到窗口 树型递归显示 w # 在tmux中列出所有的窗口 --&gt;键可以展开看到面板 树型递归显示 c # 在当前会话下 创建一个新的窗口 n # 切换为下一个的窗口 p # 切换为前一个的窗口 1 2 3 4…… # 直接输入数字切换指定的窗口 &amp; # 关闭当前窗口 y:yes % # 把当前窗口分成左右两个面板 &#34; # 把当前窗口分成上下两个面板 方向键 # 在不同面板中切换 q # 在当前窗口显示出面板的编号，并切换面板 z # 把当前面板最大化/恢复 x # 关闭当前的面板 : # 输入指令模式 new / new -s name # 新建一个会话 ………… Tmux Cheat Sheet &amp; Quick Reference">
+  <meta property="og:description" content="A personal notebook to record my studies and life">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -99,7 +69,7 @@ Tmux Cheat Sheet &amp; Quick Reference">
   
   
   <meta itemprop="name" content="Linux使用技巧">
-  <meta itemprop="description" content="Linux使用技巧 tmux使用技巧 # 窗口管理器 最重要的就是他能保存当前窗口的状态 之后还能连回来（包括ssh远程连接服务器） tmux # 创建一个新的会话 tmux ls # 列出所有会话 tmux attach/a -t 1（会话号） # 重新连接上会话 tmux new-s name # 创建指定名称会话 tmux kill-session/ses -t 1(会话号) # 关闭指定会话 ctrl-b # 为功能切换键 [ #上下查看历史记录 q退出 d # 把当前会话挂起在后台（退出tmux，但是没有关闭） s # 在tmux中列出所有的会话 --&gt;键可以展开看到窗口 树型递归显示 w # 在tmux中列出所有的窗口 --&gt;键可以展开看到面板 树型递归显示 c # 在当前会话下 创建一个新的窗口 n # 切换为下一个的窗口 p # 切换为前一个的窗口 1 2 3 4…… # 直接输入数字切换指定的窗口 &amp; # 关闭当前窗口 y:yes % # 把当前窗口分成左右两个面板 &#34; # 把当前窗口分成上下两个面板 方向键 # 在不同面板中切换 q # 在当前窗口显示出面板的编号，并切换面板 z # 把当前面板最大化/恢复 x # 关闭当前的面板 : # 输入指令模式 new / new -s name # 新建一个会话 ………… Tmux Cheat Sheet &amp; Quick Reference">
+  <meta itemprop="description" content="A personal notebook to record my studies and life">
   <meta itemprop="datePublished" content="2023-11-24T00:00:00+00:00">
   <meta itemprop="dateModified" content="2023-11-24T00:00:00+00:00">
   <meta itemprop="wordCount" content="5689">
@@ -651,7 +621,6 @@ bat 文件名
 <a href="https://link.zhihu.com/?target=https%3A//github.com/sharkdp/bat">https://link.zhihu.com/?target=https%3A//github.com/sharkdp/bat</a></p>
 <hr>
 <p><a href="https://www.runoob.com/linux/linux-tutorial.html">Linux教程</a></p>
-
     
   </article>
   <div class="paginator">

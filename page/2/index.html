@@ -138,10 +138,7 @@
     
     <div class="content">
       
-      <h1 id="t-sql语句操作">T-SQL语句操作</h1>
-<p>T-SQL是标准SQL语言的扩展,是SQL Server的核心,在SQL的的基础上添加了变量,运算符,函数和流程控制等新内容
-SQL Server用于操作数据库的编程语言为Transaction-SQL，简称T-SQL。T-SQL与PL/SQL不同，并没有固定的程序结构。<br>
-T-SQL包括以下4个部分：</p>
+      
       
     </div>
   </div>
@@ -165,13 +162,7 @@ T-SQL包括以下4个部分：</p>
     
     <div class="content">
       
-      <h1 id="oh-my-posh-为-powershell-和-wsl-配置终端样式">Oh My Posh 为 PowerShell 和 WSL 配置终端样式</h1>
-<p><a href="https://ohmyposh.dev/docs/">Oh My Posh官方文档</a>
-<a href="https://learn.microsoft.com/zh-cn/windows/terminal/tutorials/custom-prompt-setup">Microsoft文档</a></p>
-<h2 id="powershell配置">PowerShell配置</h2>
-<p>首先就是下载带图标的Nerd字体，下载地址：<a href="https://www.nerdfonts.com/">Nerd Fonts官方网址</a>
-下载并安装好图标字体，在Windows terminal终端上把Power Shell和WSL的字体都配置为这个图标字体
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125173959.png" alt=""></p>
+      
       
     </div>
   </div>
@@ -391,37 +382,7 @@ T-SQL包括以下4个部分：</p>
     
     <div class="content">
       
-      <h1 id="linux使用技巧">Linux使用技巧</h1>
-<h2 id="tmux使用技巧">tmux使用技巧</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 窗口管理器 最重要的就是他能保存当前窗口的状态 之后还能连回来（包括ssh远程连接服务器）</span>
-</span></span><span style="display:flex;"><span>tmux <span style="color:#080;font-style:italic"># 创建一个新的会话</span>
-</span></span><span style="display:flex;"><span>tmux ls <span style="color:#080;font-style:italic"># 列出所有会话</span>
-</span></span><span style="display:flex;"><span>tmux attach/a -t 1（会话号） <span style="color:#080;font-style:italic"># 重新连接上会话</span>
-</span></span><span style="display:flex;"><span>tmux new-s name <span style="color:#080;font-style:italic"># 创建指定名称会话</span>
-</span></span><span style="display:flex;"><span>tmux kill-session/ses -t 1<span style="color:#666">(</span>会话号<span style="color:#666">)</span> <span style="color:#080;font-style:italic"># 关闭指定会话 </span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>ctrl-b <span style="color:#080;font-style:italic"># 为功能切换键</span>
-</span></span><span style="display:flex;"><span><span style="color:#666">[</span> <span style="color:#080;font-style:italic">#上下查看历史记录 q退出</span>
-</span></span><span style="display:flex;"><span>d <span style="color:#080;font-style:italic"># 把当前会话挂起在后台（退出tmux，但是没有关闭）</span>
-</span></span><span style="display:flex;"><span>s <span style="color:#080;font-style:italic"># 在tmux中列出所有的会话 --&gt;键可以展开看到窗口 树型递归显示</span>
-</span></span><span style="display:flex;"><span>w <span style="color:#080;font-style:italic"># 在tmux中列出所有的窗口 --&gt;键可以展开看到面板 树型递归显示</span>
-</span></span><span style="display:flex;"><span>c <span style="color:#080;font-style:italic"># 在当前会话下 创建一个新的窗口</span>
-</span></span><span style="display:flex;"><span>n <span style="color:#080;font-style:italic"># 切换为下一个的窗口</span>
-</span></span><span style="display:flex;"><span>p <span style="color:#080;font-style:italic"># 切换为前一个的窗口</span>
-</span></span><span style="display:flex;"><span><span style="color:#666">1</span> <span style="color:#666">2</span> <span style="color:#666">3</span> 4…… <span style="color:#080;font-style:italic"># 直接输入数字切换指定的窗口</span>
-</span></span><span style="display:flex;"><span>&amp; <span style="color:#080;font-style:italic"># 关闭当前窗口 y:yes</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>% <span style="color:#080;font-style:italic"># 把当前窗口分成左右两个面板</span>
-</span></span><span style="display:flex;"><span><span style="color:#b44">&#34; # 把当前窗口分成上下两个面板
-</span></span></span><span style="display:flex;"><span><span style="color:#b44">方向键 # 在不同面板中切换
-</span></span></span><span style="display:flex;"><span><span style="color:#b44">q # 在当前窗口显示出面板的编号，并切换面板
-</span></span></span><span style="display:flex;"><span><span style="color:#b44">z # 把当前面板最大化/恢复
-</span></span></span><span style="display:flex;"><span><span style="color:#b44">x # 关闭当前的面板
-</span></span></span><span style="display:flex;"><span><span style="color:#b44">
-</span></span></span><span style="display:flex;"><span><span style="color:#b44">: # 输入指令模式
-</span></span></span><span style="display:flex;"><span><span style="color:#b44">new / new -s name # 新建一个会话
-</span></span></span><span style="display:flex;"><span><span style="color:#b44">…………
-</span></span></span></code></pre></div><p><a href="https://tmuxcheatsheet.com/">Tmux Cheat Sheet &amp; Quick Reference</a></p>
+      
       
     </div>
   </div>
@@ -443,20 +404,7 @@ T-SQL包括以下4个部分：</p>
     
     <div class="content">
       
-      <h1 id="neo4j安装与使用">Neo4j安装与使用</h1>
-<p><a href="https://juejin.cn/s/neo4j%E8%8F%9C%E9%B8%9F%E6%95%99%E7%A8%8B">Neo4j菜鸟教程</a>
-<a href="https://www.w3cschool.cn/neo4j/">Neo4j教程</a>
-<a href="https://www.cnblogs.com/lijiong/p/15867307.html">Neo4j的命令行操作</a></p>
-<h2 id="安装">安装</h2>
-<p><a href="https://neo4j.com/download/">Neo4j官网下载地址</a>
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200925.png" alt=""></p>
-<p>在Windows上下载桌面版，在Linux服务器上下载服务器版
-下载好，一直下一步安装即可。</p>
-<h2 id="简单入门">简单入门</h2>
-<p>点击创建一个新的项目文件
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200939.png" alt=""></p>
-<p>添加一个新的图形数据库
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200951.png" alt=""></p>
+      
       
     </div>
   </div>
@@ -478,10 +426,7 @@ T-SQL包括以下4个部分：</p>
     
     <div class="content">
       
-      <h1 id="shell基础">Shell基础</h1>
-<h2 id="简介">简介</h2>
-<p>Shell 是一个用 C 语言编写的程序，它是用户使用 Linux 的桥梁。Shell 既是一种命令语言，又是一种程序设计语言。</p>
-<p>Shell 是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。</p>
+      
       
     </div>
   </div>
@@ -501,11 +446,7 @@ T-SQL包括以下4个部分：</p>
     
     <div class="content">
       
-      <ol>
-<li>Failed to connect to github.com port 443: Timed out</li>
-</ol>
-<p>因为连不上GitHub导致的。所以打开clash，并且使用全局模式+TUN模式。
-如果还是不行，就将git代理设置为127.0.0.1:7890</p>
+      
       
     </div>
   </div>
@@ -527,14 +468,7 @@ T-SQL包括以下4个部分：</p>
     
     <div class="content">
       
-      <h1 id="wsl相关问题与解决">WSL相关问题与解决</h1>
-<h2 id="wsl进行内核模块编程">WSL进行内核模块编程</h2>
-<p><a href="https://blog.csdn.net/dubuhongchen/article/details/118460376">[第一节] WSL2 内核编译/安装内核头文件/驱动调试_wsl2编译和安装内核以支持驱动编译_landaliming的博客-CSDN博客</a></p>
-<ol>
-<li>
-<p>查看当前系统的内核版本号
-<code>uname -r</code>
-5.4.72-microsoft-standard-WSL2</p>
+      
       
     </div>
   </div>
@@ -558,9 +492,7 @@ T-SQL包括以下4个部分：</p>
     
     <div class="content">
       
-      <h1 id="起源">起源</h1>
-<p>在学校创新实践课程上，老师希望我们在这个课程上完成一个有关量子加密（量子随机数）的项目。</p>
-<p>经过一段时间的调研和思考，结合老师的建议，我还是决定做<strong class=chinese>基于本地量子加密的私人存储网盘</strong>这样一个量子密码的项目。</p>
+      
       
     </div>
   </div>
