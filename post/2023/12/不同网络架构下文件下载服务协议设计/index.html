@@ -11,17 +11,7 @@
 
   
   
-  <meta name="description" content="不同网络架构下的文件下载服务协议设计
-实验目的
-
-熟悉不同网络架构的特点。
-掌握不同网络架构下的文件下载服务协议设计。
-
-实验内容
-使用TCP协议设计一个文件下载服务协议，客户端发送要下载的文件路径给服务器，服务器将对应的文件内容送给客户端，客户端将文件存储到本地磁盘。注意，当文件不存在时给出提示。要求，服务的实现分别采用以下三种方法实现：
-(1)单线程，迭代服务器(依次服务每一个客户端)
-(2)多线程，并发服务器
-(3)异步方式 asyncio库">
+  <meta name="description" content="A personal notebook to record my studies and life">
   
 
   
@@ -63,7 +53,7 @@
   <meta property="og:url" content="https://pi3-l22.github.io/post/2023/12/%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/">
   <meta property="og:site_name" content="Pi3&#39;Notes">
   <meta property="og:title" content="不同网络架构下文件下载服务协议设计">
-  <meta property="og:description" content="不同网络架构下的文件下载服务协议设计 实验目的 熟悉不同网络架构的特点。 掌握不同网络架构下的文件下载服务协议设计。 实验内容 使用TCP协议设计一个文件下载服务协议，客户端发送要下载的文件路径给服务器，服务器将对应的文件内容送给客户端，客户端将文件存储到本地磁盘。注意，当文件不存在时给出提示。要求，服务的实现分别采用以下三种方法实现： (1)单线程，迭代服务器(依次服务每一个客户端) (2)多线程，并发服务器 (3)异步方式 asyncio库">
+  <meta property="og:description" content="A personal notebook to record my studies and life">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -81,10 +71,10 @@
   
   
   <meta itemprop="name" content="不同网络架构下文件下载服务协议设计">
-  <meta itemprop="description" content="不同网络架构下的文件下载服务协议设计 实验目的 熟悉不同网络架构的特点。 掌握不同网络架构下的文件下载服务协议设计。 实验内容 使用TCP协议设计一个文件下载服务协议，客户端发送要下载的文件路径给服务器，服务器将对应的文件内容送给客户端，客户端将文件存储到本地磁盘。注意，当文件不存在时给出提示。要求，服务的实现分别采用以下三种方法实现： (1)单线程，迭代服务器(依次服务每一个客户端) (2)多线程，并发服务器 (3)异步方式 asyncio库">
+  <meta itemprop="description" content="A personal notebook to record my studies and life">
   <meta itemprop="datePublished" content="2023-12-20T00:00:00+00:00">
   <meta itemprop="dateModified" content="2023-12-20T00:00:00+00:00">
-  <meta itemprop="wordCount" content="4633">
+  <meta itemprop="wordCount" content="4615">
   <meta itemprop="keywords" content="Python,Socket,TCP">
 
   
@@ -172,8 +162,7 @@
   
   <article class="content">
     
-    <h1 id="不同网络架构下的文件下载服务协议设计">不同网络架构下的文件下载服务协议设计</h1>
-<h2 id="实验目的">实验目的</h2>
+    <h2 id="实验目的">实验目的</h2>
 <ol>
 <li>熟悉不同网络架构的特点。</li>
 <li>掌握不同网络架构下的文件下载服务协议设计。</li>
@@ -756,7 +745,6 @@ import selectors  # selectors模块单线程异步轮询</p>
 由此引出了协程的概念，协程就是在切换任务的时候，是我们在编程可以指定的。单线程异步就用了这样的思想，asyncio是单进程并发库，不是多线程，也不是多进程，单纯是在一个进程里面异步（切来切去运行），切换的地方用await标记，能够切换的函数用async标记，从而避免程序自动判断切换。
 而对于select模型和poll模型的异步思想，是单线程轮询策略，核心就是在循环中，不断的select从任务列表取出可以读和写的fd对象，然后对其进行不同的处理，就是把所有的接收Socket数据和发送Socket数据都存在各自的列表队列里，之后循环每个队列中的每个对象，处理对应的事件操作。poll提供了register、modify、unregister、poll等方法，运行逻辑就是，如果是需要监测的事件，就将其register到poll对象中，然后通过poll方法不断取出就绪的fd，根据fd的事件类型(POLLIN, POLLOUT)对其进行不同的处理。
 总的来说，单线程、多线程、asyncio实现的异步都很简单，很快就能写出来，但是select和poll模型就相对来说比较困难，本身的实现格式比较复杂，同时我设计的协议也并不简单，所以利用select模型实现异步还是比较困难的，最后虽然通过简化协议流程实现了这个服务端代码但是实现的效果还是不理想，异步处理的单个事件还是太大了，不知道怎么细化，还是有很大的改进空间的。</p>
-
     
   </article>
   <div class="paginator">

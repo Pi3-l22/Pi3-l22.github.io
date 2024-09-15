@@ -17,7 +17,6 @@
       <guid>https://pi3-l22.github.io/post/2024/2/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
       
       <description>&lt;p&gt;在Kali Linux中使用VMware导致重启卡LOGO界面的问题与解决&lt;/p&gt;
-&lt;h1 id=&#34;kali-linux下使用vmware遇到的问题&#34;&gt;Kali Linux下使用VMware遇到的问题&lt;/h1&gt;
 &lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
 &lt;p&gt;到官网下载Linux的资源文件，运行按照提示下一步就可以完成安装
 在这个过程中有可能会提示缺少Linux-header文件，只需要在终端用apt下载对应版本的header就可以&lt;/p&gt;
@@ -115,7 +114,6 @@
       <guid>https://pi3-l22.github.io/post/2024/2/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid>
       
       <description>&lt;p&gt;Kali Linux的安装与配置&lt;/p&gt;
-&lt;h1 id=&#34;kali-linux的安装与配置&#34;&gt;Kali Linux的安装与配置&lt;/h1&gt;
 &lt;h2 id=&#34;快速安装&#34;&gt;快速安装&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.kali.org/&#34;&gt;官网&lt;/a&gt;下载Kali Linux镜像文件（ISO）
 虽然2023年推出来Kali Purple但是不太推荐安装，因为有一些库和依赖环境没有，安装一些软件程序会很麻烦
@@ -380,8 +378,7 @@ PicGo配置Github图床，在github上新建仓库，并设置一个token
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/12/%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/</guid>
       
-      <description>&lt;h1 id=&#34;不同网络架构下的文件下载服务协议设计&#34;&gt;不同网络架构下的文件下载服务协议设计&lt;/h1&gt;
-&lt;h2 id=&#34;实验目的&#34;&gt;实验目的&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;实验目的&#34;&gt;实验目的&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;熟悉不同网络架构的特点。&lt;/li&gt;
 &lt;li&gt;掌握不同网络架构下的文件下载服务协议设计。&lt;/li&gt;
@@ -963,8 +960,7 @@ import selectors  # selectors模块单线程异步轮询&lt;/p&gt;
 多线程的原理就是，在执行一个任务，当这个任务处于阻塞或者IO操作时，可以开启另外一个新的线程去执行另外有一个工作，提高执行效率。但是缺点就是整个线程的阻塞判断和线程切换都是程序自动判断，人为不能干预。
 由此引出了协程的概念，协程就是在切换任务的时候，是我们在编程可以指定的。单线程异步就用了这样的思想，asyncio是单进程并发库，不是多线程，也不是多进程，单纯是在一个进程里面异步（切来切去运行），切换的地方用await标记，能够切换的函数用async标记，从而避免程序自动判断切换。
 而对于select模型和poll模型的异步思想，是单线程轮询策略，核心就是在循环中，不断的select从任务列表取出可以读和写的fd对象，然后对其进行不同的处理，就是把所有的接收Socket数据和发送Socket数据都存在各自的列表队列里，之后循环每个队列中的每个对象，处理对应的事件操作。poll提供了register、modify、unregister、poll等方法，运行逻辑就是，如果是需要监测的事件，就将其register到poll对象中，然后通过poll方法不断取出就绪的fd，根据fd的事件类型(POLLIN, POLLOUT)对其进行不同的处理。
-总的来说，单线程、多线程、asyncio实现的异步都很简单，很快就能写出来，但是select和poll模型就相对来说比较困难，本身的实现格式比较复杂，同时我设计的协议也并不简单，所以利用select模型实现异步还是比较困难的，最后虽然通过简化协议流程实现了这个服务端代码但是实现的效果还是不理想，异步处理的单个事件还是太大了，不知道怎么细化，还是有很大的改进空间的。&lt;/p&gt;
-</description>
+总的来说，单线程、多线程、asyncio实现的异步都很简单，很快就能写出来，但是select和poll模型就相对来说比较困难，本身的实现格式比较复杂，同时我设计的协议也并不简单，所以利用select模型实现异步还是比较困难的，最后虽然通过简化协议流程实现了这个服务端代码但是实现的效果还是不理想，异步处理的单个事件还是太大了，不知道怎么细化，还是有很大的改进空间的。&lt;/p&gt;</description>
       
     </item>
     
@@ -1244,8 +1240,7 @@ import selectors  # selectors模块单线程异步轮询&lt;/p&gt;
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</guid>
       
-      <description>&lt;h1 id=&#34;数据库应用系统设计&#34;&gt;数据库应用系统设计&lt;/h1&gt;
-&lt;p&gt;1、实验目的
+      <description>&lt;p&gt;1、实验目的
   熟练掌握概念结构设计和逻辑结构设计步骤，建立和操作数据库。
 2、实验内容与要求
 （1）根据已有信息，设计概念模型
@@ -1583,8 +1578,7 @@ a) 查询所有经理的姓名&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;WHERE&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;prod_dept&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;D001&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;  &lt;/span&gt;)&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;);&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000615.png&#34; alt=&#34;查询结果&#34;&gt;&lt;/p&gt;
-</description>
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000615.png&#34; alt=&#34;查询结果&#34;&gt;&lt;/p&gt;</description>
       
     </item>
     
@@ -1949,8 +1943,7 @@ s020，王五，男，1999-8-9,  …”。
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/12/%E5%9F%BA%E4%BA%8Eudp%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%AE%A4/</guid>
       
-      <description>&lt;h1 id=&#34;基于udp的多人聊天室&#34;&gt;基于UDP的多人聊天室&lt;/h1&gt;
-&lt;p&gt;这是网络编程课程 实验1&lt;/p&gt;
+      <description>&lt;p&gt;这是网络编程课程 实验1&lt;/p&gt;
 &lt;h2 id=&#34;实验内容&#34;&gt;实验内容&lt;/h2&gt;
 &lt;p&gt;编写基于UDP的聊天室程序，实现多人聊天功能。自己设计应用协议，要求实现以下功能：&lt;/p&gt;
 &lt;ol&gt;
@@ -2347,8 +2340,7 @@ s020，王五，男，1999-8-9,  …”。
 但是，等到整个程序写完之后，在命令行中执行，我发现了一个问题，当我正在命令行输入消息时，终端上已经有部分文字，这时候对方发来消息，那么对方的消息就会从我当前的光标处打印出来，把我的语句断开，这对用户来说是个不好的体验。所以最后，我决定写一个图形化界面，将用户输入和公屏输出分开，这样体验和美观程度会大大提高。
 图像化界面选择了&lt;a href=&#34;https://flet.dev/docs/&#34;&gt;flet框架&lt;/a&gt;，它基于Google 的 Flutter实现，所以对我来说很快能上手，而不像pyqt5那样复杂。在编写图像化的过程中也遇到了很多问题，不过大部分是flet框架的问题，对于socket这一块的问题就是：因为UDP基于无连接，所以我发送出去的消息不知道对方有没有收到，当我的服务端没有开启时，客户端在登录时会向服务端发送请求同时转到阻塞等到回应，但是这个过程中没有提示，用户可能会多次点击登录或者注册，导致开启大量的UDP阻塞等待，等到服务端上线时，发送的消息会被这些阻塞等待给覆盖掉，导致影响后面的欢迎界面的输出。解决办法就是：设置一个阻塞等待超时，当等待超时，自动释放阻塞的线程，同时弹出警告框，告诉用户“当前服务器连接不上，稍后再试”，以免开启更多的线程，浪费资源同时影响后续输出。
 解决了上面这个问题，但是上面这个解决办法同样导致出现了接下来一个问题：需要一直阻塞等待服务端发送消息的功能，因为上面设置的超时时间而报错，所以解决办法也很简单就是在这个功能中，将超时时间设为None。
-总之，在这个实验中，我遇到了不少问题，随着一个个问题被解决，我也从中学到了很多。&lt;/p&gt;
-</description>
+总之，在这个实验中，我遇到了不少问题，随着一个个问题被解决，我也从中学到了很多。&lt;/p&gt;</description>
       
     </item>
     
