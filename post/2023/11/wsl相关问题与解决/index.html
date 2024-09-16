@@ -73,7 +73,7 @@
   <meta itemprop="description" content="A personal notebook to record my studies and life">
   <meta itemprop="datePublished" content="2023-11-21T00:00:00+00:00">
   <meta itemprop="dateModified" content="2023-11-21T00:00:00+00:00">
-  <meta itemprop="wordCount" content="846">
+  <meta itemprop="wordCount" content="784">
   <meta itemprop="keywords" content="WSL,Linux">
 
   
@@ -158,21 +158,19 @@
 <h2 id="wsl进行内核模块编程">WSL进行内核模块编程</h2>
 <p><a href="https://blog.csdn.net/dubuhongchen/article/details/118460376">[第一节] WSL2 内核编译/安装内核头文件/驱动调试_wsl2编译和安装内核以支持驱动编译_landaliming的博客-CSDN博客</a></p>
 <ol>
-<li>
-<p>查看当前系统的内核版本号
-<code>uname -r</code>
-5.4.72-microsoft-standard-WSL2</p>
-</li>
-<li>
-<p>下载内核源码
-去github下载对应的linux内核源码包
-wget <a href="https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs/tags/linux-msft-5.4.72.tar.gz">https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs/tags/linux-msft-5.4.72.tar.gz</a></p>
-</li>
-<li>
-<p>安装依赖库
-先安装如下库，如果编译报错，再安装缺失的库</p>
-</li>
+<li>查看当前系统的内核版本号</li>
 </ol>
+<p><code>uname -r</code></p>
+<p>5.4.72-microsoft-standard-WSL2</p>
+<ol start="2">
+<li>下载内核源码</li>
+</ol>
+<p>去github下载对应的linux内核源码包</p>
+<p>wget <a href="https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs/tags/linux-msft-5.4.72.tar.gz">https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs/tags/linux-msft-5.4.72.tar.gz</a></p>
+<ol start="3">
+<li>安装依赖库</li>
+</ol>
+<p>先安装如下库，如果编译报错，再安装缺失的库</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SHELL" data-lang="SHELL"><span style="display:flex;"><span>sudo apt-get install libelf-dev build-essential pkg-config
 </span></span><span style="display:flex;"><span>sudo apt-get install bison build-essential flex libssl-dev libelf-dev bc
 </span></span></code></pre></div><ol start="4">
@@ -183,14 +181,14 @@ wget <a href="https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs/tags/l
 </span></span><span style="display:flex;"><span>zcat /proc/config.gz &gt; .config
 </span></span><span style="display:flex;"><span>make -j <span style="color:#a2f;font-weight:bold">$(</span>nproc<span style="color:#a2f;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span>sudo make -j <span style="color:#a2f;font-weight:bold">$(</span>nproc<span style="color:#a2f;font-weight:bold">)</span> modules_install
-</span></span></code></pre></div><p>安装后会看到<code>/lib/modules/5.4.72-microsoft-standard-WSL2</code>目录下相关文件指到了源码所在的目录
-接着就可以进行内核的模块编程</p>
+</span></span></code></pre></div><p>安装后会看到 <code>/lib/modules/5.4.72-microsoft-standard-WSL2</code> 目录下相关文件指到了源码所在的目录</p>
+<p>接着就可以进行内核的模块编程</p>
 <h2 id="wsl安装新的内核">WSL安装新的内核</h2>
 <p><a href="https://blog.csdn.net/qq_40856284/article/details/106535962">为你的WSL 2编译一个最新的Linux内核吧！</a></p>
 <p>进入内核源码文件，增加系统调用例程 或者 更改内核源码之后，重新编译成新的内核并安装</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>make <span style="color:#b8860b">KCONFIG_CONFIG</span><span style="color:#666">=</span>Microsoft/config-wsl -j <span style="color:#666">16</span>
-</span></span></code></pre></div><p>编译完成后的内核镜像存放为<code>arch/x86/boot/bzImage</code>文件，将其重命名为<code>kernel</code>，并拷贝到win 10中
-在C:\user[用户名]目录下，增加WSL配置文件，<code>.wslconfig</code>，在文件中指定内核路径为新生成的内核（win10路径）</p>
+</span></span></code></pre></div><p>编译完成后的内核镜像存放为 <code>arch/x86/boot/bzImage</code> 文件，将其重命名为 <code>kernel</code>，并拷贝到win 10中</p>
+<p>在C:\user[用户名]目录下，增加WSL配置文件，<code>.wslconfig</code>，在文件中指定内核路径为新生成的内核（win10路径）</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#666">[</span>wsl2<span style="color:#666">]</span>
 </span></span><span style="display:flex;"><span><span style="color:#b8860b">kernel</span><span style="color:#666">=</span>D:<span style="color:#b62;font-weight:bold">\\</span>WSL<span style="color:#b62;font-weight:bold">\\</span>kali-linux<span style="color:#b62;font-weight:bold">\\</span>bzImage
 </span></span></code></pre></div><p>在CMD中执行：</p>
@@ -198,14 +196,14 @@ wget <a href="https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs/tags/l
 </span></span></code></pre></div><p>关闭WSL，并重新启动，检查内核版本，发现内核已更新。</p>
 <h2 id="wsl与主机进行局域网通信">WSL与主机进行局域网通信</h2>
 <p><a href="https://blog.csdn.net/weixin_43997331/article/details/122593312">【精选】同一局域网下windows主机和wsl子系统相互网络服务访问_局域网访问wsl-CSDN博客</a></p>
-<p>正常来说，WSL和主机之间的局域网通信，只能是单向的，主机可以ping通WSL，但是WSL却无法访问主机。
-接下来是解决的办法</p>
+<p>正常来说，WSL和主机之间的局域网通信，只能是单向的，主机可以ping通WSL，但是WSL却无法访问主机。</p>
+<p>接下来是解决的办法</p>
 <p>在WSL中，查询WSL的IP地址：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ip addr | grep eth0
-</span></span></code></pre></div><p>WSL的网卡是eth0
-<code>python -m http.server 8080</code>启动服务，在主机端是可以访问的</p>
-<p>接着就是在Windows中操作。
-以管理员打开powershell，输入指令：</p>
+</span></span></code></pre></div><p>WSL的网卡是eth0</p>
+<p><code>python -m http.server 8080</code>启动服务，在主机端是可以访问的</p>
+<p>接着就是在Windows中操作。</p>
+<p>以管理员打开powershell，输入指令：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#a2f">New-NetFirewallRule</span> -DisplayName <span style="color:#b44">&#34;WSL&#34;</span> -Direction Inbound -InterfaceAlias <span style="color:#b44">&#34;vEthernet (WSL)&#34;</span> -Action Allow
 </span></span></code></pre></div><p>同时在WSL中输入：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat /etc/resolv.conf | grep nameserver | awk <span style="color:#b44">&#39;{ print $2 }&#39;</span>

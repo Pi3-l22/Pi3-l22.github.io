@@ -32,31 +32,31 @@
 完成将服务器的文件remote_file下载到本地，命名为local_file&lt;/p&gt;
 &lt;h2 id=&#34;程序设计思路&#34;&gt;程序设计思路&lt;/h2&gt;
 &lt;h3 id=&#34;网络应用拓扑结构&#34;&gt;网络应用拓扑结构&lt;/h3&gt;
-&lt;p&gt;一对多的网络结构，即一台服务器对应多台客户端的星型拓扑结构
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192026.png&#34; alt=&#34;网络拓扑结构&#34;&gt;&lt;/p&gt;
+&lt;p&gt;一对多的网络结构，即一台服务器对应多台客户端的星型拓扑结构&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192026.png&#34; alt=&#34;网络拓扑结构&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;应用层协议设计&#34;&gt;应用层协议设计&lt;/h3&gt;
 &lt;p&gt;客户端连接到服务端，服务端监听到客户端的连接。&lt;/p&gt;
-&lt;p&gt;客户端 &amp;ndash;&amp;gt; 需要下载的文件路径 &amp;ndash;&amp;gt; 服务端
-客户端 &amp;lt;&amp;ndash; 文件是否存在 &amp;lt;&amp;ndash; 服务端&lt;/p&gt;
+&lt;p&gt;客户端 &amp;ndash;&amp;gt; 需要下载的文件路径 &amp;ndash;&amp;gt; 服务端&lt;/p&gt;
+&lt;p&gt;客户端 &amp;lt;&amp;ndash; 文件是否存在 &amp;lt;&amp;ndash; 服务端&lt;/p&gt;
 &lt;p&gt;不存在则双方退出协议，存在则继续&lt;/p&gt;
-&lt;p&gt;客户端 &amp;ndash;&amp;gt; 确认文件存在消息 &amp;ndash;&amp;gt; 服务端
-客户端 &amp;lt;&amp;ndash; 文件头部信息长度 &amp;lt;&amp;ndash; 服务端
-客户端 &amp;ndash;&amp;gt; 确认头部长度消息 &amp;ndash;&amp;gt; 服务端
-客户端 &amp;lt;&amp;ndash; 文件头部信息 &amp;lt;&amp;ndash; 服务端
-客户端 &amp;ndash;&amp;gt; 确认头部信息消息 &amp;ndash;&amp;gt; 服务端
-客户端 &amp;lt;&amp;ndash; 文件内容数据 &amp;lt;&amp;ndash; 服务端&lt;/p&gt;
+&lt;p&gt;客户端 &amp;ndash;&amp;gt; 确认文件存在消息 &amp;ndash;&amp;gt; 服务端&lt;/p&gt;
+&lt;p&gt;客户端 &amp;lt;&amp;ndash; 文件头部信息长度 &amp;lt;&amp;ndash; 服务端&lt;/p&gt;
+&lt;p&gt;客户端 &amp;ndash;&amp;gt; 确认头部长度消息 &amp;ndash;&amp;gt; 服务端&lt;/p&gt;
+&lt;p&gt;客户端 &amp;lt;&amp;ndash; 文件头部信息 &amp;lt;&amp;ndash; 服务端&lt;/p&gt;
+&lt;p&gt;客户端 &amp;ndash;&amp;gt; 确认头部信息消息 &amp;ndash;&amp;gt; 服务端&lt;/p&gt;
+&lt;p&gt;客户端 &amp;lt;&amp;ndash; 文件内容数据 &amp;lt;&amp;ndash; 服务端&lt;/p&gt;
 &lt;p&gt;双方退出协议部分&lt;/p&gt;
 &lt;h3 id=&#34;所选用的python库介绍&#34;&gt;所选用的Python库介绍&lt;/h3&gt;
-&lt;p&gt;import socket  # 套接字
-import sys  # 系统操作
-import zipfile  # 压缩文件
-import struct  # 字符串打包解包
-import json  # json序列化
-from tqdm import tqdm  # 进度条
-import threading  # 多线程
-import asyncio  # 异步IO
-import aiofiles  # 异步文件IO
-import selectors  # selectors模块单线程异步轮询&lt;/p&gt;
+&lt;p&gt;import socket  # 套接字&lt;/p&gt;
+&lt;p&gt;import sys  # 系统操作&lt;/p&gt;
+&lt;p&gt;import zipfile  # 压缩文件&lt;/p&gt;
+&lt;p&gt;import struct  # 字符串打包解包&lt;/p&gt;
+&lt;p&gt;import json  # json序列化&lt;/p&gt;
+&lt;p&gt;from tqdm import tqdm  # 进度条&lt;/p&gt;
+&lt;p&gt;import threading  # 多线程&lt;/p&gt;
+&lt;p&gt;import asyncio  # 异步IO&lt;/p&gt;
+&lt;p&gt;import aiofiles  # 异步文件IO&lt;/p&gt;
+&lt;p&gt;import selectors  # selectors模块单线程异步轮询&lt;/p&gt;
 &lt;h3 id=&#34;程序源代码&#34;&gt;程序源代码&lt;/h3&gt;
 &lt;h4 id=&#34;服务器端源码&#34;&gt;服务器端源码&lt;/h4&gt;
 &lt;p&gt;&lt;strong&gt;单线程服务端：&lt;/strong&gt;&lt;/p&gt;
@@ -562,43 +562,41 @@ import selectors  # selectors模块单线程异步轮询&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    main()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;程序测试方法及测试结果记录&#34;&gt;程序测试方法及测试结果记录&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;测试方法
-对于单线程的服务端，采用下载单个文件，检测下载过程中，客户端和服务端是否正常，并且能够处理异常情况
-对于多线程、异步的服务端，采用同时下载两个或者多个文件的形式，检测下载过程众怒给，客户端和服务端是否正常，并且能够处理多种的异常情况&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;测试流程
-单线程：&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;测试方法&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;对于单线程的服务端，采用下载单个文件，检测下载过程中，客户端和服务端是否正常，并且能够处理异常情况&lt;/p&gt;
+&lt;p&gt;对于多线程、异步的服务端，采用同时下载两个或者多个文件的形式，检测下载过程众怒给，客户端和服务端是否正常，并且能够处理多种的异常情况&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;测试流程&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;单线程：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192629.png&#34; alt=&#34;client端使用说明&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192635.png&#34; alt=&#34;server端使用说明&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192646.png&#34; alt=&#34;client端接收logo.png文件&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192653.png&#34; alt=&#34;server端显示的日志信息&#34;&gt;&lt;/p&gt;
-&lt;p&gt;多线程：
-客户端和服务端使用说明，同单线程的情况
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192700.png&#34; alt=&#34;client端接收file.zip大文件的过程&#34;&gt;&lt;/p&gt;
+&lt;p&gt;多线程：&lt;/p&gt;
+&lt;p&gt;客户端和服务端使用说明，同单线程的情况&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192700.png&#34; alt=&#34;client端接收file.zip大文件的过程&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192705.png&#34; alt=&#34;另一client端同时接收logo.png文件成功&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192709.png&#34; alt=&#34;server端显示的日志信息&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192714.png&#34; alt=&#34; client端接收大文件file.zip成功&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192718.png&#34; alt=&#34;全部client端接收文件成功后server端的日志信息&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Asyncio异步：
-客户端和服务端使用说明，同单线程的情况
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192730.png&#34; alt=&#34;client端接收file.zip文件过程&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Asyncio异步：&lt;/p&gt;
+&lt;p&gt;客户端和服务端使用说明，同单线程的情况&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192730.png&#34; alt=&#34;client端接收file.zip文件过程&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192734.png&#34; alt=&#34;另一client端同时接收logo.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192739.png&#34; alt=&#34;server端显示的日志信息&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;实验分析总结及心得&#34;&gt;实验分析总结及心得&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;实验过程中参考的文献：&lt;/strong&gt;
-&lt;a href=&#34;https://blog.csdn.net/FY_13781298928/article/details/133747112&#34;&gt;Python使用Asyncio开发TCP服务器简单案例-CSDN博客&lt;/a&gt;
-&lt;a href=&#34;https://juejin.cn/post/7120545649891737614&#34;&gt;asyncio实现异步socket server - 掘金 (juejin.cn)&lt;/a&gt;
-&lt;a href=&#34;https://www.birdpython.com/posts/1/88/&#34;&gt;异步网络模型 - 老鸟python (birdpython.com)&lt;/a&gt;
-&lt;a href=&#34;https://www.cnblogs.com/-wenli/p/11192394.html&#34;&gt;python异步编程&amp;ndash;回调模型(selectors模块) - -零 - 博客园 (cnblogs.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;实验过程中参考的文献：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/FY_13781298928/article/details/133747112&#34;&gt;Python使用Asyncio开发TCP服务器简单案例-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://juejin.cn/post/7120545649891737614&#34;&gt;asyncio实现异步socket server - 掘金 (juejin.cn)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.birdpython.com/posts/1/88/&#34;&gt;异步网络模型 - 老鸟python (birdpython.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/-wenli/p/11192394.html&#34;&gt;python异步编程&amp;ndash;回调模型(selectors模块) - -零 - 博客园 (cnblogs.com)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;总结一下：&lt;/strong&gt;
-多线程的原理就是，在执行一个任务，当这个任务处于阻塞或者IO操作时，可以开启另外一个新的线程去执行另外有一个工作，提高执行效率。但是缺点就是整个线程的阻塞判断和线程切换都是程序自动判断，人为不能干预。
-由此引出了协程的概念，协程就是在切换任务的时候，是我们在编程可以指定的。单线程异步就用了这样的思想，asyncio是单进程并发库，不是多线程，也不是多进程，单纯是在一个进程里面异步（切来切去运行），切换的地方用await标记，能够切换的函数用async标记，从而避免程序自动判断切换。
-而对于select模型和poll模型的异步思想，是单线程轮询策略，核心就是在循环中，不断的select从任务列表取出可以读和写的fd对象，然后对其进行不同的处理，就是把所有的接收Socket数据和发送Socket数据都存在各自的列表队列里，之后循环每个队列中的每个对象，处理对应的事件操作。poll提供了register、modify、unregister、poll等方法，运行逻辑就是，如果是需要监测的事件，就将其register到poll对象中，然后通过poll方法不断取出就绪的fd，根据fd的事件类型(POLLIN, POLLOUT)对其进行不同的处理。
-总的来说，单线程、多线程、asyncio实现的异步都很简单，很快就能写出来，但是select和poll模型就相对来说比较困难，本身的实现格式比较复杂，同时我设计的协议也并不简单，所以利用select模型实现异步还是比较困难的，最后虽然通过简化协议流程实现了这个服务端代码但是实现的效果还是不理想，异步处理的单个事件还是太大了，不知道怎么细化，还是有很大的改进空间的。&lt;/p&gt;</description>
+多线程的原理就是，在执行一个任务，当这个任务处于阻塞或者IO操作时，可以开启另外一个新的线程去执行另外有一个工作，提高执行效率。但是缺点就是整个线程的阻塞判断和线程切换都是程序自动判断，人为不能干预。&lt;/p&gt;
+&lt;p&gt;由此引出了协程的概念，协程就是在切换任务的时候，是我们在编程可以指定的。单线程异步就用了这样的思想，asyncio是单进程并发库，不是多线程，也不是多进程，单纯是在一个进程里面异步（切来切去运行），切换的地方用await标记，能够切换的函数用async标记，从而避免程序自动判断切换。&lt;/p&gt;
+&lt;p&gt;而对于select模型和poll模型的异步思想，是单线程轮询策略，核心就是在循环中，不断的select从任务列表取出可以读和写的fd对象，然后对其进行不同的处理，就是把所有的接收Socket数据和发送Socket数据都存在各自的列表队列里，之后循环每个队列中的每个对象，处理对应的事件操作。poll提供了register、modify、unregister、poll等方法，运行逻辑就是，如果是需要监测的事件，就将其register到poll对象中，然后通过poll方法不断取出就绪的fd，根据fd的事件类型(POLLIN, POLLOUT)对其进行不同的处理。&lt;/p&gt;
+&lt;p&gt;总的来说，单线程、多线程、asyncio实现的异步都很简单，很快就能写出来，但是select和poll模型就相对来说比较困难，本身的实现格式比较复杂，同时我设计的协议也并不简单，所以利用select模型实现异步还是比较困难的，最后虽然通过简化协议流程实现了这个服务端代码但是实现的效果还是不理想，异步处理的单个事件还是太大了，不知道怎么细化，还是有很大的改进空间的。&lt;/p&gt;</description>
       
     </item>
     

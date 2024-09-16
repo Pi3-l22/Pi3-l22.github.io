@@ -17,16 +17,16 @@
       <guid>https://pi3-l22.github.io/post/2024/2/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid>
       
       <description>&lt;h2 id=&#34;快速安装&#34;&gt;快速安装&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.kali.org/&#34;&gt;官网&lt;/a&gt;下载Kali Linux镜像文件（ISO）
-虽然2023年推出来
-Kali Purple但是不太推荐安装，因为有一些库和依赖环境没有，安装一些软件程序会很麻烦
-比如安装了Remmina就没有RDP协议的远程桌面连接&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.kali.org/&#34;&gt;官网&lt;/a&gt;下载Kali Linux镜像文件（ISO）&lt;/p&gt;
+&lt;p&gt;虽然2023年推出来&lt;/p&gt;
+&lt;p&gt;Kali Purple但是不太推荐安装，因为有一些库和依赖环境没有，安装一些软件程序会很麻烦&lt;/p&gt;
+&lt;p&gt;比如安装了Remmina就没有RDP协议的远程桌面连接&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208104233.png&#34; alt=&#34;Kali官网下载ISO文件&#34;&gt;&lt;/p&gt;
 &lt;p&gt;使用&lt;a href=&#34;https://sourceforge.net/projects/win32diskimager/&#34;&gt;Win32DiskImager&lt;/a&gt;把ISO文件刻录进U盘&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208104838.png&#34; alt=&#34;Win32DiskImager下载&#34;&gt;&lt;/p&gt;
-&lt;p&gt;关闭电脑，使用U盘启动，进入Kali Linux安装界面，如果是安装双系统注意规划好磁盘分区，如果不是可以直接清空安装
-推荐把Swap分区改大点（默认1GB），16GB的物理内存可以分配8GB的Swap空间
-安装桌面环境可以根据喜好选择Xfce、Gnome、KDE&lt;/p&gt;
+&lt;p&gt;关闭电脑，使用U盘启动，进入Kali Linux安装界面，如果是安装双系统注意规划好磁盘分区，如果不是可以直接清空安装&lt;/p&gt;
+&lt;p&gt;推荐把Swap分区改大点（默认1GB），16GB的物理内存可以分配8GB的Swap空间&lt;/p&gt;
+&lt;p&gt;安装桌面环境可以根据喜好选择Xfce、Gnome、KDE&lt;/p&gt;
 &lt;h2 id=&#34;换源&#34;&gt;换源&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo vim /etc/apt/sources.list
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;把官方源注释掉，更改国内源&lt;/p&gt;
@@ -71,8 +71,8 @@ Kali Purple但是不太推荐安装，因为有一些库和依赖环境没有，
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;&lt;/span&gt;fcitx5-frontend-qt5
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;设置Fcitx5为默认输入法:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;im-config
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将首选输入法设置为Fcitx5
-不用再安装其他输入法，Fcitx5就已经很好用了，且自定义程度高，根据自己情况设置&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将首选输入法设置为Fcitx5&lt;/p&gt;
+&lt;p&gt;不用再安装其他输入法，Fcitx5就已经很好用了，且自定义程度高，根据自己情况设置&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208113424.png&#34; alt=&#34;Fcitx5配置界面&#34;&gt;&lt;/p&gt;
 &lt;p&gt;如果在桌面环境（Xfce、Gnome）的设置或者应用面板，不能输入中文，可以安装Gnome扩展&lt;a href=&#34;https://extensions.gnome.org/extension/261/kimpanel/&#34;&gt;Input Method Panel&lt;/a&gt;解决&lt;/p&gt;
 &lt;h2 id=&#34;安装qq&#34;&gt;安装QQ&lt;/h2&gt;
@@ -84,33 +84,33 @@ Kali Purple但是不太推荐安装，因为有一些库和依赖环境没有，
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208122241.png&#34; alt=&#34;ukylin版本微信下载&#34;&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo dpkg -i weixin.deb
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;安装clash&#34;&gt;安装Clash&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/CHH3213/clash-for-windows-backup/releases/tag/v0.20.39&#34;&gt;Clash备份地址&lt;/a&gt;
-下载&lt;a href=&#34;https://github.com/CHH3213/clash-for-windows-backup/releases/tag/v0.20.39&#34;&gt;Clash.for.Windows-0.20.39-x64-linux.tar.gz&lt;/a&gt;，并解压&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/CHH3213/clash-for-windows-backup/releases/tag/v0.20.39&#34;&gt;Clash备份地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载 &lt;a href=&#34;https://github.com/CHH3213/clash-for-windows-backup/releases/tag/v0.20.39&#34;&gt;Clash.for.Windows-0.20.39-x64-linux.tar.gz&lt;/a&gt;，并解压&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar zxvf Clash.for.Windows-0.20.39-x64-linux.tar.gz
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;把解压后的文件夹移动到&lt;code&gt;/opt/&lt;/code&gt;目录（一般用来存放软件程序目录）&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;把解压后的文件夹移动到 &lt;code&gt;/opt/&lt;/code&gt; 目录（一般用来存放软件程序目录）&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv Clash&lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;\ &lt;/span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;\ &lt;/span&gt;Windows-0.20.39-x64-linux /opt/Clash-GUI
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;运行文件夹中的&lt;code&gt;cfw&lt;/code&gt;程序就可以运行&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;运行文件夹中的 &lt;code&gt;cfw&lt;/code&gt; 程序就可以运行&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./cfw
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208122944.png&#34; alt=&#34;Clash界面&#34;&gt;&lt;/p&gt;
-&lt;p&gt;为了方便寻找软件，可以在应用面板或者桌面添加应用图标
-创建&lt;code&gt;clash.desktop&lt;/code&gt;，输入以下内容：&lt;/p&gt;
+&lt;p&gt;为了方便寻找软件，可以在应用面板或者桌面添加应用图标&lt;/p&gt;
+&lt;p&gt;创建 &lt;code&gt;clash.desktop&lt;/code&gt;，输入以下内容：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-desktop&#34; data-lang=&#34;desktop&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;&#34;&gt;[Desktop Entry]  
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;Name&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;clash for linux  &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;Icon&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;/opt/Clash-GUI/clash.png  &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;Exec&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;/opt/Clash-GUI/cfw  &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;Type&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;Application&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Name：显示的名称
-Icon：图标图片路径
-Exec：运行程序路径
-Type：应用类型&lt;/p&gt;
-&lt;p&gt;如果要在==应用面版==添加图标，就把clash.desktop移动到&lt;code&gt;/usr/share/applications&lt;/code&gt;和&lt;code&gt;~/.local/share/applications&lt;/code&gt;
-如果要在==桌面==添加图标，就把clash.desktop移动到桌面目录&lt;code&gt;~/Desktop&lt;/code&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Name：显示的名称&lt;/p&gt;
+&lt;p&gt;Icon：图标图片路径&lt;/p&gt;
+&lt;p&gt;Exec：运行程序路径&lt;/p&gt;
+&lt;p&gt;Type：应用类型&lt;/p&gt;
+&lt;p&gt;如果要在==应用面版==添加图标，就把clash.desktop移动到 &lt;code&gt;/usr/share/applications&lt;/code&gt; 和 &lt;code&gt;~/.local/share/applications&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果要在==桌面==添加图标，就把clash.desktop移动到桌面目录&lt;code&gt;~/Desktop&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;其他程序想要添加桌面图标也是相同的道理&lt;/p&gt;
 &lt;h2 id=&#34;安装wps&#34;&gt;安装WPS&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.wps.cn/product/wpslinux#&#34;&gt;wps官网下载安装包&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo dpkg -i wps-office_11.1.0.11711_amd64.deb
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装好wps可能不能直接使用，还需要安装字体，不然进入时会报错
-最简单的方法就是去Wndows系统里，把&lt;code&gt;C:\windows\fonts&lt;/code&gt; 整个打包放到Linux系统里的&lt;code&gt;/usr/share/fonts&lt;/code&gt;目录内，最后刷新字体缓存&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装好wps可能不能直接使用，还需要安装字体，不然进入时会报错&lt;/p&gt;
+&lt;p&gt;最简单的方法就是去Wndows系统里，把 &lt;code&gt;C:\windows\fonts&lt;/code&gt; 整个打包放到Linux系统里的 &lt;code&gt;/usr/share/fonts&lt;/code&gt; 目录内，最后刷新字体缓存&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo fc-cache
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;给Linux系统添加其他字体，也是将ttf/otf字体文件放入这个文件夹&lt;/p&gt;
@@ -122,20 +122,20 @@ Type：应用类型&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./VMware-Workstation-Full-17.5.0-22583795.x86_64.bundle
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在运行过程中可能会出现错误提示没有 linux-header，可以直接使用apt安装&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install linux-header-6.6.9-amd4
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果在apt里面没有需要的版本，则需要到&lt;a href=&#34;https://mirrors.aliyun.com/kali/pool/main/l/linux/&#34;&gt;国内镜像站&lt;/a&gt;自行下载安装
-需要下载安装&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果在apt里面没有需要的版本，则需要到&lt;a href=&#34;https://mirrors.aliyun.com/kali/pool/main/l/linux/&#34;&gt;国内镜像站&lt;/a&gt;自行下载安装&lt;/p&gt;
+&lt;p&gt;需要下载安装&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;linux-compiler-gcc-xxx&lt;/li&gt;
 &lt;li&gt;linux-kbuild-xxx&lt;/li&gt;
 &lt;li&gt;linux-headers-xxx&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;安装typora&#34;&gt;安装Typora&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;http://120.27.210.48:51122/d/Common%20Files/Typora_Linux_0.11.18_amd64.deb?sign=dac0JJLq5aUo2Pgl9O4KUQOYJo7VuTfncGhDZzVZRBo=:0&#34;&gt;Typora的Linux免费版本下载&lt;/a&gt;
-&lt;a href=&#34;http://120.27.210.48:51122/d/Common%20Files/Typora_theme.7z?sign=kjyniWF9TPbAuyFVU9VKTcLKEwa0HonlZnnomL4S1nQ=:0&#34;&gt;几款Typora主题css文件&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://120.27.210.48:51122/d/Common%20Files/Typora_Linux_0.11.18_amd64.deb?sign=dac0JJLq5aUo2Pgl9O4KUQOYJo7VuTfncGhDZzVZRBo=:0&#34;&gt;Typora的Linux免费版本下载&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://120.27.210.48:51122/d/Common%20Files/Typora_theme.7z?sign=kjyniWF9TPbAuyFVU9VKTcLKEwa0HonlZnnomL4S1nQ=:0&#34;&gt;几款Typora主题css文件&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;配置picgo&#34;&gt;配置PicGo&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://picgo.github.io/PicGo-Doc/zh/&#34;&gt;官方下载PicGo&lt;/a&gt;
-下载AppImage文件，同样放到&lt;code&gt;/opt/&lt;/code&gt;目录，并按照&lt;a href=&#34;##%E5%AE%89%E8%A3%85Clash&#34;&gt;上面的方法&lt;/a&gt;配置桌面图标
-PicGo配置Github图床，在github上新建仓库，并设置一个token&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://picgo.github.io/PicGo-Doc/zh/&#34;&gt;官方下载PicGo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载AppImage文件，同样放到 &lt;code&gt;/opt/&lt;/code&gt; 目录，并按照&lt;a href=&#34;##%E5%AE%89%E8%A3%85Clash&#34;&gt;上面的方法&lt;/a&gt;配置桌面图标&lt;/p&gt;
+&lt;p&gt;PicGo配置Github图床，在github上新建仓库，并设置一个token&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208133922.png&#34; alt=&#34;PicGo配置&#34;&gt;&lt;/p&gt;
 &lt;p&gt;要想使用==剪切板上传图片==（&lt;strong&gt;Typora、Obisidian自动上传图片服务&lt;/strong&gt;），还需要在终端中安装Xclip程序&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install xclip
@@ -143,15 +143,15 @@ PicGo配置Github图床，在github上新建仓库，并设置一个token&lt;/p&
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208134546.png&#34; alt=&#34;Typora自动上传图片&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208134651.png&#34; alt=&#34;Obsidian自动上传图片&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;安装pycharm&#34;&gt;安装PyCharm&lt;/h2&gt;
-&lt;p&gt;安装PyCharm，在官网下载程序包，按照压缩包中的安装配置指南就可以成功安装
-也可以和上面的其他软件一样，先把文件目录移到&lt;code&gt;/opt&lt;/code&gt;，然后配置桌面图标
-打开PyCharm可能会报有关==_JAVA_OPTIONS环境变量==的错误，实际上在kaili终端中输入&lt;code&gt;java --version&lt;/code&gt; 也是有问题的，提示：&lt;/p&gt;
+&lt;p&gt;安装PyCharm，在官网下载程序包，按照压缩包中的安装配置指南就可以成功安装&lt;/p&gt;
+&lt;p&gt;也可以和上面的其他软件一样，先把文件目录移到 &lt;code&gt;/opt&lt;/code&gt;，然后配置桌面图标&lt;/p&gt;
+&lt;p&gt;打开PyCharm可能会报有关==_JAVA_OPTIONS环境变量==的错误，实际上在kaili终端中输入 &lt;code&gt;java --version&lt;/code&gt; 也是有问题的，提示：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;picked up JAVA OPTIONS: -Dawt.useSystemAAFontSettings&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;on -Dswing.aatext&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#a2f&#34;&gt;true&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;解决办法：&lt;/strong&gt;
-在&lt;code&gt;/etc/X11/Xsession.d/90kali-themes&lt;/code&gt;与&lt;code&gt;/etc/environment.d/95kali-themes.conf&lt;/code&gt;这两个文件中，将_JAVA_OPTIONS那一行语句删掉，然后重启电脑&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;解决办法：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;/etc/X11/Xsession.d/90kali-themes&lt;/code&gt; 与 &lt;code&gt;/etc/environment.d/95kali-themes.conf&lt;/code&gt; 这两个文件中，将_JAVA_OPTIONS那一行语句删掉，然后重启电脑&lt;/p&gt;
 &lt;h2 id=&#34;安装ollydbg&#34;&gt;安装ollydbg&lt;/h2&gt;
-&lt;p&gt;ollydbg没有linux版本，所以需要借助wine进行安装，kali已经自带了wine，但是安装好后启动ollydbg的时候还是会报错，根据错误提示先补全软件和环境，再进行启动
-如果还是不能启动，则删除wine和ollydbg，重新安装后就正常了&lt;/p&gt;
+&lt;p&gt;ollydbg没有linux版本，所以需要借助wine进行安装，kali已经自带了wine，但是安装好后启动ollydbg的时候还是会报错，根据错误提示先补全软件和环境，再进行启动&lt;/p&gt;
+&lt;p&gt;如果还是不能启动，则删除wine和ollydbg，重新安装后就正常了&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt remove --purge wine
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt remove --purge ollydbg
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo rm -tf ~/.wine  &lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# 删除wine配置文件&lt;/span&gt;
@@ -180,15 +180,15 @@ PicGo配置Github图床，在github上新建仓库，并设置一个token&lt;/p&
       <guid>https://pi3-l22.github.io/post/2024/2/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
       
       <description>&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
-&lt;p&gt;到官网下载Linux的资源文件，运行按照提示下一步就可以完成安装
-在这个过程中有可能会提示缺少Linux-header文件，只需要在终端用apt下载对应版本的header就可以&lt;/p&gt;
+&lt;p&gt;到官网下载Linux的资源文件，运行按照提示下一步就可以完成安装&lt;/p&gt;
+&lt;p&gt;在这个过程中有可能会提示缺少Linux-header文件，只需要在终端用apt下载对应版本的header就可以&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install linux-headers-6.6.9-amd64
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://pi3yyy.love/archives/33e9ac6f.html&#34;&gt;安装具体步骤参考文章中的安装VMware&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240211000531.png&#34; alt=&#34;VMware Workstation pro 17&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;问题出现&#34;&gt;问题出现&lt;/h2&gt;
-&lt;p&gt;刚开始使用虚拟机没有任何问题，但是在安装了虚拟机并运行之后，再重启电脑就会卡在Kali的logo界面
-刚开始还没在意，没有想到和VMware有关，但是随着使用虚拟机次数的增多，我渐渐发现每次只要开了虚拟机重启就会卡在logo界面，不能正常进入系统
-所以我在logo界面，使用ctrl+alt+f1，打开日志信息，发现居然是vmware.service不能正常启动导致的&lt;/p&gt;
+&lt;p&gt;刚开始使用虚拟机没有任何问题，但是在安装了虚拟机并运行之后，再重启电脑就会卡在Kali的logo界面&lt;/p&gt;
+&lt;p&gt;刚开始还没在意，没有想到和VMware有关，但是随着使用虚拟机次数的增多，我渐渐发现每次只要开了虚拟机重启就会卡在logo界面，不能正常进入系统&lt;/p&gt;
+&lt;p&gt;所以我在logo界面，使用ctrl+alt+f1，打开日志信息，发现居然是vmware.service不能正常启动导致的&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/95_1707580958_hd.jpeg&#34; alt=&#34;开机错误日志&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/96_1707580962_hd.jpeg&#34; alt=&#34;开机错误日志&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;问题解决&#34;&gt;问题解决&lt;/h2&gt;
@@ -245,8 +245,8 @@ PicGo配置Github图床，在github上新建仓库，并设置一个token&lt;/p&
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   Virtual ethernet                                                    failed
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   VMware Authentication Daemon                                        &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   Shared Memory Available                                             &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;所以我也重装了好几遍VMware，也装了17、16和15的版本，15版本甚至连Virtual machine monitor都启动失败
-最后在google上找了很多的问答，也都是差不多，最后只能求助AI，他告诉我：&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;所以我也重装了好几遍VMware，也装了17、16和15的版本，15版本甚至连Virtual machine monitor都启动失败&lt;/p&gt;
+&lt;p&gt;最后在google上找了很多的问答，也都是差不多，最后只能求助AI，他告诉我：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;**Remove Lock Files**: 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;If network connections fail to initialize, check for a lock file/directory at &lt;span style=&#34;color:#b44&#34;&gt;`/etc/vmware/networking.lck/`&lt;/span&gt;. 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#008000;font-weight:bold&#34;&gt;Removing this directory and reconfiguring VMware Workstation might resolve the issue&lt;/span&gt;](&lt;span style=&#34;color:#b44&#34;&gt;https://forums.gentoo.org/viewtopic-t-955980-start-0.html&lt;/span&gt;)
@@ -343,74 +343,76 @@ PicGo配置Github图床，在github上新建仓库，并设置一个token&lt;/p&
       <guid>https://pi3-l22.github.io/post/2023/11/oh-my-posh-%E4%B8%BA-powershell-%E5%92%8C-wsl-%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E6%A0%B7%E5%BC%8F/</guid>
       
       <description>&lt;h1 id=&#34;oh-my-posh-为-powershell-和-wsl-配置终端样式&#34;&gt;Oh My Posh 为 PowerShell 和 WSL 配置终端样式&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://ohmyposh.dev/docs/&#34;&gt;Oh My Posh官方文档&lt;/a&gt;
-&lt;a href=&#34;https://learn.microsoft.com/zh-cn/windows/terminal/tutorials/custom-prompt-setup&#34;&gt;Microsoft文档&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://ohmyposh.dev/docs/&#34;&gt;Oh My Posh官方文档&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://learn.microsoft.com/zh-cn/windows/terminal/tutorials/custom-prompt-setup&#34;&gt;Microsoft文档&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;powershell配置&#34;&gt;PowerShell配置&lt;/h2&gt;
-&lt;p&gt;首先就是下载带图标的Nerd字体，下载地址：&lt;a href=&#34;https://www.nerdfonts.com/&#34;&gt;Nerd Fonts官方网址&lt;/a&gt;
-下载并安装好图标字体，在Windows terminal终端上把Power Shell和WSL的字体都配置为这个图标字体
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125173959.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;首先就是下载带图标的Nerd字体，下载地址：&lt;a href=&#34;https://www.nerdfonts.com/&#34;&gt;Nerd Fonts官方网址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载并安装好图标字体，在Windows terminal终端上把Power Shell和WSL的字体都配置为这个图标字体&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125173959.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;根据官方文档，下载oh-my-posh，在PowerShell中输入以下命令&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;winget install JanDeDobbeleer.OhMyPosh -s winget
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样会下载下面的两个文件
-&lt;code&gt;oh-my-posh.exe&lt;/code&gt; - Windows 可执行文件
-&lt;code&gt;themes&lt;/code&gt; - 最新的 Oh My Posh 主题
-下载的默认路径为：&lt;code&gt;C:\Users\用户名\AppData\Local\Programs\oh-my-posh&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;这里需要配置oh-my-posh和themes的可执行文件，以便后续不会出错
-在环境变量的path值中添加路径：&lt;code&gt;C:\Users\用户名\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe&lt;/code&gt;
-&lt;em&gt;（这一步可不做）&lt;/em&gt; 在环境变量中增加一个字段POSH_THEMES_PATH，值为：&lt;code&gt;C:\Users\86135\AppData\Local\Programs\oh-my-posh\themes&lt;/code&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样会下载下面的两个文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;oh-my-posh.exe&lt;/code&gt; - Windows 可执行文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;themes&lt;/code&gt; - 最新的 Oh My Posh 主题&lt;/p&gt;
+&lt;p&gt;下载的默认路径为：&lt;code&gt;C:\Users\用户名\AppData\Local\Programs\oh-my-posh&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这里需要配置oh-my-posh和themes的可执行文件，以便后续不会出错&lt;/p&gt;
+&lt;p&gt;在环境变量的path值中添加路径：&lt;code&gt;C:\Users\用户名\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;（这一步可不做）&lt;/em&gt; 在环境变量中增加一个字段POSH_THEMES_PATH，值为：&lt;code&gt;C:\Users\86135\AppData\Local\Programs\oh-my-posh\themes&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;在PowerShell终端中输入：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;notepad &lt;span style=&#34;color:#b8860b&#34;&gt;$PROFILE&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;如果这一步报错，文件不存在则需要先创建配置文件
-执行&lt;code&gt;New-Item -Path $PROFILE -Type File -Force&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果这一步报错，文件不存在则需要先创建配置文件&lt;/p&gt;
+&lt;p&gt;执行&lt;code&gt;New-Item -Path $PROFILE -Type File -Force&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;在打开的记事本中，填入&lt;code&gt;oh-my-posh init pwsh | Invoke-Expression&lt;/code&gt;
-接着输入&lt;code&gt;. $PROFILE&lt;/code&gt;重新加载配置&lt;/p&gt;
+&lt;p&gt;在打开的记事本中，填入 &lt;code&gt;oh-my-posh init pwsh | Invoke-Expression&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;接着输入 &lt;code&gt;. $PROFILE&lt;/code&gt; 重新加载配置&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;如果这一步，报错，红字显示找不到oh-my-posh的命令
-那么说明前面的环境变量没有配置好&lt;/p&gt;
+&lt;p&gt;如果这一步，报错，红字显示找不到oh-my-posh的命令&lt;/p&gt;
+&lt;p&gt;那么说明前面的环境变量没有配置好&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;接着重新启动终端，就发现已经应用了默认主题
-如果需要更改主题，则只需要到&lt;a href=&#34;https://ohmyposh.dev/docs/themes&#34;&gt;官方文档主题&lt;/a&gt;中，挑选好主题，记下主题名字
+&lt;p&gt;接着重新启动终端，就发现已经应用了默认主题&lt;/p&gt;
+&lt;p&gt;如果需要更改主题，则只需要到&lt;a href=&#34;https://ohmyposh.dev/docs/themes&#34;&gt;官方文档主题&lt;/a&gt;中，挑选好主题，记下主题名字
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125174014.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;同样在PowerShell终端中输入：&lt;code&gt;notepad $PROFILE&lt;/code&gt;打开配置文件
-修改之前输入的&lt;code&gt;oh-my-posh init pwsh | Invoke-Expression&lt;/code&gt;
-改为：&lt;/p&gt;
+&lt;p&gt;同样在PowerShell终端中输入：&lt;code&gt;notepad $PROFILE&lt;/code&gt; 打开配置文件&lt;/p&gt;
+&lt;p&gt;修改之前输入的 &lt;code&gt;oh-my-posh init pwsh | Invoke-Expression&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;改为：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;oh-my-posh init pwsh --config &lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;`C:\Users\用户名\AppData\Local\Programs\oh-my-posh\themes\1_shell.omp.json&amp;#39;&lt;/span&gt; | Invoke-Expression
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里的主题路径应该根据自己的情况更改，&lt;code&gt;1_shell.omp.json&lt;/code&gt;是主题文件
-如果在上面的步骤中，你已经配置了主题文件夹的环境变量，则可以：&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里的主题路径应该根据自己的情况更改，&lt;code&gt;1_shell.omp.json&lt;/code&gt; 是主题文件&lt;/p&gt;
+&lt;p&gt;如果在上面的步骤中，你已经配置了主题文件夹的环境变量，则可以：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;oh-my-posh init pwsh --config &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#b8860b&#34;&gt;$env&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;:POSH_THEMES_PATH/1_shell.omp.json&amp;#34;&lt;/span&gt; | Invoke-Expression
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;重新启动终端，就可以应用。&lt;/p&gt;
 &lt;h2 id=&#34;wsl配置&#34;&gt;WSL配置&lt;/h2&gt;
-&lt;p&gt;WSL的配置和PowerShell的十分相似，但是需要注意的是，WSL下可能有好多种类的Shell，配置的时候，需要先查看自己的WSL是什么类型的shell
-查看方法，输入以下命令：&lt;/p&gt;
+&lt;p&gt;WSL的配置和PowerShell的十分相似，但是需要注意的是，WSL下可能有好多种类的Shell，配置的时候，需要先查看自己的WSL是什么类型的shell&lt;/p&gt;
+&lt;p&gt;查看方法，输入以下命令：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#b8860b&#34;&gt;$SHELL&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果是&lt;code&gt;bash&lt;/code&gt;就在官方文档Linux教程中找对应的方法，我这里以&lt;code&gt;zsh&lt;/code&gt;为例。&lt;/p&gt;
 &lt;p&gt;同样的，在配置之前，需要先给WSL的终端文字更改为Nerd带图标的字体，否则图标不能生效&lt;/p&gt;
 &lt;p&gt;下载oh-my-posh，输入以下命令：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -s https://ohmyposh.dev/install.sh | bash -s -- -d /bin
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;这里可能会报错
-&lt;code&gt;-d&lt;/code&gt; 后面指定的是下载的位置，最好是下载到根目录下的&lt;code&gt;/bin&lt;/code&gt;文件，因为这样就不需要配置环境变量，可以在任意位置执行&lt;code&gt;oh-my-posh&lt;/code&gt;的命令，避免了之后很多的报错
-因此，如果你在普通用户下可能需要加上&lt;code&gt;sudo&lt;/code&gt;
-或者你可以先下载到其他位置，之后把可执行文件复制到&lt;code&gt;/bin&lt;/code&gt;目录下，这一步同样需要root权限&lt;/p&gt;
+&lt;p&gt;这里可能会报错&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-d&lt;/code&gt; 后面指定的是下载的位置，最好是下载到根目录下的 &lt;code&gt;/bin&lt;/code&gt; 文件，因为这样就不需要配置环境变量，可以在任意位置执行 &lt;code&gt;oh-my-posh&lt;/code&gt; 的命令，避免了之后&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;因此，如果你在普通用户下可能需要加上&lt;code&gt;sudo&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;或者你可以先下载到其他位置，之后把可执行文件复制到&lt;code&gt;/bin&lt;/code&gt;目录下，这一步同样需要root权限&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;接着，输入以下命令&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;oh-my-posh get shell
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果返回了你当前的shell，说明下载成功，如果返回‘找不到命令’，可能没有下载到正确的位置
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125174023.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;输入命令，打开shell的配置文件，这里演示的是zsh，所以打开&lt;code&gt;~/.zshrc&lt;/code&gt;
-如果你是bash，那么打开的就是&lt;code&gt;~/.bashrc&lt;/code&gt;，配置命令也要改为bash&lt;/p&gt;
+&lt;p&gt;输入命令，打开shell的配置文件，这里演示的是zsh，所以打开 &lt;code&gt;~/.zshrc&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果你是bash，那么打开的就是&lt;code&gt;~/.bashrc&lt;/code&gt;，配置命令也要改为bash&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo vim ~/.zshrc
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;添加以下配置到文件中&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f&#34;&gt;eval&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;$(&lt;/span&gt;oh-my-posh init zsh&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;退出文件，终端输入&lt;code&gt;exec zsh&lt;/code&gt;，更新配置，也可以输入&lt;code&gt;source ~/.zshrc&lt;/code&gt;，两者是一样的&lt;/p&gt;
 &lt;p&gt;（这一步不一定）重新启动终端，可以发现oh-my-posh已经应用成功&lt;/p&gt;
-&lt;p&gt;更改主题，和PowerShell是类似的
-同样打开配置文件&lt;code&gt;~/.zshrc&lt;/code&gt;，将原先输入的配置改为：&lt;/p&gt;
+&lt;p&gt;更改主题，和PowerShell是类似的&lt;/p&gt;
+&lt;p&gt;同样打开配置文件&lt;code&gt;~/.zshrc&lt;/code&gt;，将原先输入的配置改为：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f&#34;&gt;eval&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;$(&lt;/span&gt;oh-my-posh init zsh --config ~/.cache/oh-my-posh/themes/1_shell.omp.json&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中，&lt;code&gt;--config&lt;/code&gt;后面填入，你的主题路径和主题名字，我的主题路径可能有所不同，需要更改为自己的
-退出文件，终端输入&lt;code&gt;exec zsh&lt;/code&gt;，主题就会立马应用。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中，&lt;code&gt;--config&lt;/code&gt; 后面填入，你的主题路径和主题名字，我的主题路径可能有所不同，需要更改为自己的&lt;/p&gt;
+&lt;p&gt;退出文件，终端输入&lt;code&gt;exec zsh&lt;/code&gt;，主题就会立马应用。
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125174037.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
       
     </item>
@@ -859,23 +861,23 @@ var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着�
 &lt;hr&gt;
 &lt;h2 id=&#34;好用的命令行工具&#34;&gt;好用的命令行工具&lt;/h2&gt;
 &lt;h3 id=&#34;dustdu&#34;&gt;dust(du)&lt;/h3&gt;
-&lt;p&gt;能代替du，一目了然展示目录和文件大小的工具
-&lt;a href=&#34;https://link.zhihu.com/?target=https%3A//github.com/bootandy/dust&#34;&gt;https://link.zhihu.com/?target=https%3A//github.com/bootandy/dust&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;能代替du，一目了然展示目录和文件大小的工具&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://link.zhihu.com/?target=https%3A//github.com/bootandy/dust&#34;&gt;https://link.zhihu.com/?target=https%3A//github.com/bootandy/dust&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;dufdf&#34;&gt;duf(df)&lt;/h3&gt;
-&lt;p&gt;代替df，通过彩色表格展示磁盘使用情况的工具
-&lt;a href=&#34;https://link.zhihu.com/?target=https%3A//github.com/muesli/duf&#34;&gt;https://link.zhihu.com/?target=https%3A//github.com/muesli/duf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;代替df，通过彩色表格展示磁盘使用情况的工具&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://link.zhihu.com/?target=https%3A//github.com/muesli/duf&#34;&gt;https://link.zhihu.com/?target=https%3A//github.com/muesli/duf&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;exals&#34;&gt;exa(ls)&lt;/h3&gt;
-&lt;p&gt;更加人性化的显示目录下的文件的工具。通过不同颜色展示来区别文件类型，还支持梳妆的方式展示文件层级
-exa -l
-&lt;a href=&#34;https://link.zhihu.com/?target=https%3A//github.com/ogham/exa&#34;&gt;https://link.zhihu.com/?target=https%3A//github.com/ogham/exa&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;更加人性化的显示目录下的文件的工具。通过不同颜色展示来区别文件类型，还支持梳妆的方式展示文件层级&lt;/p&gt;
+&lt;p&gt;exa -l&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://link.zhihu.com/?target=https%3A//github.com/ogham/exa&#34;&gt;https://link.zhihu.com/?target=https%3A//github.com/ogham/exa&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;zoxidecd&#34;&gt;zoxide(cd)&lt;/h3&gt;
-&lt;p&gt;更聪明的cd命令，能够记住最常使用的目录，目录跳转更加方便
-z 目录
-&lt;a href=&#34;https://link.zhihu.com/?target=https%3A//github.com/ajeetdsouza/zoxide&#34;&gt;https://link.zhihu.com/?target=https%3A//github.com/ajeetdsouza/zoxide&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;更聪明的cd命令，能够记住最常使用的目录，目录跳转更加方便&lt;/p&gt;
+&lt;p&gt;z 目录&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://link.zhihu.com/?target=https%3A//github.com/ajeetdsouza/zoxide&#34;&gt;https://link.zhihu.com/?target=https%3A//github.com/ajeetdsouza/zoxide&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;batcat&#34;&gt;bat(cat)&lt;/h3&gt;
-&lt;p&gt;查看文件内容，默认自带翻页、行号和高亮
-bat 文件名
-&lt;a href=&#34;https://link.zhihu.com/?target=https%3A//github.com/sharkdp/bat&#34;&gt;https://link.zhihu.com/?target=https%3A//github.com/sharkdp/bat&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;查看文件内容，默认自带翻页、行号和高亮&lt;/p&gt;
+&lt;p&gt;bat 文件名&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://link.zhihu.com/?target=https%3A//github.com/sharkdp/bat&#34;&gt;https://link.zhihu.com/?target=https%3A//github.com/sharkdp/bat&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.runoob.com/linux/linux-tutorial.html&#34;&gt;Linux教程&lt;/a&gt;&lt;/p&gt;</description>
       
@@ -2699,21 +2701,19 @@ bat 文件名
 &lt;h2 id=&#34;wsl进行内核模块编程&#34;&gt;WSL进行内核模块编程&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/dubuhongchen/article/details/118460376&#34;&gt;[第一节] WSL2 内核编译/安装内核头文件/驱动调试_wsl2编译和安装内核以支持驱动编译_landaliming的博客-CSDN博客&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;查看当前系统的内核版本号
-&lt;code&gt;uname -r&lt;/code&gt;
-5.4.72-microsoft-standard-WSL2&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;下载内核源码
-去github下载对应的linux内核源码包
-wget &lt;a href=&#34;https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs/tags/linux-msft-5.4.72.tar.gz&#34;&gt;https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs/tags/linux-msft-5.4.72.tar.gz&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;安装依赖库
-先安装如下库，如果编译报错，再安装缺失的库&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;查看当前系统的内核版本号&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;uname -r&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;5.4.72-microsoft-standard-WSL2&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;下载内核源码&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;去github下载对应的linux内核源码包&lt;/p&gt;
+&lt;p&gt;wget &lt;a href=&#34;https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs/tags/linux-msft-5.4.72.tar.gz&#34;&gt;https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs/tags/linux-msft-5.4.72.tar.gz&lt;/a&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;安装依赖库&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;先安装如下库，如果编译报错，再安装缺失的库&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-SHELL&#34; data-lang=&#34;SHELL&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt-get install libelf-dev build-essential pkg-config
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt-get install bison build-essential flex libssl-dev libelf-dev bc
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
@@ -2724,14 +2724,14 @@ wget &lt;a href=&#34;https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;zcat /proc/config.gz &amp;gt; .config
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make -j &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;$(&lt;/span&gt;nproc&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo make -j &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;$(&lt;/span&gt;nproc&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;)&lt;/span&gt; modules_install
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装后会看到&lt;code&gt;/lib/modules/5.4.72-microsoft-standard-WSL2&lt;/code&gt;目录下相关文件指到了源码所在的目录
-接着就可以进行内核的模块编程&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装后会看到 &lt;code&gt;/lib/modules/5.4.72-microsoft-standard-WSL2&lt;/code&gt; 目录下相关文件指到了源码所在的目录&lt;/p&gt;
+&lt;p&gt;接着就可以进行内核的模块编程&lt;/p&gt;
 &lt;h2 id=&#34;wsl安装新的内核&#34;&gt;WSL安装新的内核&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/qq_40856284/article/details/106535962&#34;&gt;为你的WSL 2编译一个最新的Linux内核吧！&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;进入内核源码文件，增加系统调用例程 或者 更改内核源码之后，重新编译成新的内核并安装&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make &lt;span style=&#34;color:#b8860b&#34;&gt;KCONFIG_CONFIG&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;Microsoft/config-wsl -j &lt;span style=&#34;color:#666&#34;&gt;16&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译完成后的内核镜像存放为&lt;code&gt;arch/x86/boot/bzImage&lt;/code&gt;文件，将其重命名为&lt;code&gt;kernel&lt;/code&gt;，并拷贝到win 10中
-在C:\user[用户名]目录下，增加WSL配置文件，&lt;code&gt;.wslconfig&lt;/code&gt;，在文件中指定内核路径为新生成的内核（win10路径）&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编译完成后的内核镜像存放为 &lt;code&gt;arch/x86/boot/bzImage&lt;/code&gt; 文件，将其重命名为 &lt;code&gt;kernel&lt;/code&gt;，并拷贝到win 10中&lt;/p&gt;
+&lt;p&gt;在C:\user[用户名]目录下，增加WSL配置文件，&lt;code&gt;.wslconfig&lt;/code&gt;，在文件中指定内核路径为新生成的内核（win10路径）&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#666&#34;&gt;[&lt;/span&gt;wsl2&lt;span style=&#34;color:#666&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#b8860b&#34;&gt;kernel&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;D:&lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;\\&lt;/span&gt;WSL&lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;\\&lt;/span&gt;kali-linux&lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;\\&lt;/span&gt;bzImage
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在CMD中执行：&lt;/p&gt;
@@ -2739,14 +2739,14 @@ wget &lt;a href=&#34;https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;关闭WSL，并重新启动，检查内核版本，发现内核已更新。&lt;/p&gt;
 &lt;h2 id=&#34;wsl与主机进行局域网通信&#34;&gt;WSL与主机进行局域网通信&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/weixin_43997331/article/details/122593312&#34;&gt;【精选】同一局域网下windows主机和wsl子系统相互网络服务访问_局域网访问wsl-CSDN博客&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;正常来说，WSL和主机之间的局域网通信，只能是单向的，主机可以ping通WSL，但是WSL却无法访问主机。
-接下来是解决的办法&lt;/p&gt;
+&lt;p&gt;正常来说，WSL和主机之间的局域网通信，只能是单向的，主机可以ping通WSL，但是WSL却无法访问主机。&lt;/p&gt;
+&lt;p&gt;接下来是解决的办法&lt;/p&gt;
 &lt;p&gt;在WSL中，查询WSL的IP地址：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ip addr | grep eth0
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;WSL的网卡是eth0
-&lt;code&gt;python -m http.server 8080&lt;/code&gt;启动服务，在主机端是可以访问的&lt;/p&gt;
-&lt;p&gt;接着就是在Windows中操作。
-以管理员打开powershell，输入指令：&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;WSL的网卡是eth0&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;python -m http.server 8080&lt;/code&gt;启动服务，在主机端是可以访问的&lt;/p&gt;
+&lt;p&gt;接着就是在Windows中操作。&lt;/p&gt;
+&lt;p&gt;以管理员打开powershell，输入指令：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f&#34;&gt;New-NetFirewallRule&lt;/span&gt; -DisplayName &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;WSL&amp;#34;&lt;/span&gt; -Direction Inbound -InterfaceAlias &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;vEthernet (WSL)&amp;#34;&lt;/span&gt; -Action Allow
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;同时在WSL中输入：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat /etc/resolv.conf | grep nameserver | awk &lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;{ print $2 }&amp;#39;&lt;/span&gt;

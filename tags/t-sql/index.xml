@@ -17,40 +17,41 @@
       <guid>https://pi3-l22.github.io/post/2023/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</guid>
       
       <description>&lt;h1 id=&#34;数据库应用系统设计&#34;&gt;数据库应用系统设计&lt;/h1&gt;
-&lt;p&gt;1、实验目的
-  熟练掌握概念结构设计和逻辑结构设计步骤，建立和操作数据库。
-2、实验内容与要求
-（1）根据已有信息，设计概念模型
-（2）将概念模型转换为关系模型
-（3）创建数据表，填入信息
-（4）设计查询语句，完成查询任务。
-要求：给出完整的步骤和截图。
-3、实验环境
-Microsoft SQL Server (Express) + SQL Server Management Studio&lt;/p&gt;
+&lt;p&gt;1、实验目的&lt;/p&gt;
+&lt;p&gt;  熟练掌握概念结构设计和逻辑结构设计步骤，建立和操作数据库。
+ 
+2、实验内容与要求&lt;/p&gt;
+&lt;p&gt;（1）根据已有信息，设计概念模型&lt;/p&gt;
+&lt;p&gt;（2）将概念模型转换为关系模型&lt;/p&gt;
+&lt;p&gt;（3）创建数据表，填入信息&lt;/p&gt;
+&lt;p&gt;（4）设计查询语句，完成查询任务。&lt;/p&gt;
+&lt;p&gt;要求：给出完整的步骤和截图。&lt;/p&gt;
+&lt;p&gt;3、实验环境&lt;/p&gt;
+&lt;p&gt;Microsoft SQL Server (Express) + SQL Server Management Studio&lt;/p&gt;
 &lt;h2 id=&#34;已有信息&#34;&gt;已有信息&lt;/h2&gt;
-&lt;p&gt;设有一家百货商店，已知信息如下：
-1）每个职工的数据是职工号、姓名、地址和他所在的商品部。
-2）每一商品部的数据有：它的职工，经理和它经销的商品。
-3）每种经销的商品数据有：商品名、生产厂家、价格、型号（厂家定的）和内部商品代号（商店规定的）。
-4）每个生产厂家的数据有：厂名、地址、向商店提供的商品价格。&lt;/p&gt;
+&lt;p&gt;设有一家百货商店，已知信息如下：&lt;/p&gt;
+&lt;p&gt;1）每个职工的数据是职工号、姓名、地址和他所在的商品部。&lt;/p&gt;
+&lt;p&gt;2）每一商品部的数据有：它的职工，经理和它经销的商品。&lt;/p&gt;
+&lt;p&gt;3）每种经销的商品数据有：商品名、生产厂家、价格、型号（厂家定的）和内部商品代号（商店规定的）。&lt;/p&gt;
+&lt;p&gt;4）每个生产厂家的数据有：厂名、地址、向商店提供的商品价格。&lt;/p&gt;
 &lt;h2 id=&#34;实验步骤&#34;&gt;实验步骤&lt;/h2&gt;
-&lt;p&gt;1）根据已知信息，设计该百货商店的概念模型 （给出E-R图）
-2）将概念模型转换为关系模型。（给出关系模型）
-3）详细列出设计了几张表，各个表所含的字段，以及字段采用的数据类型。有些字段要有约束（价格大于0等）。
-3）用SQL创建数据表，填入信息，每张表填入的信息不少于8条。（建表语句以及结果截图）
-4）用SQL语言进行以下数据查询操作：（查询语句以及结果截图）
-      a) 查询所有经理的姓名
-      b) 查询某商品部交涉的厂家列表。&lt;/p&gt;
+&lt;p&gt;1）根据已知信息，设计该百货商店的概念模型 （给出E-R图）&lt;/p&gt;
+&lt;p&gt;2）将概念模型转换为关系模型。（给出关系模型）&lt;/p&gt;
+&lt;p&gt;3）详细列出设计了几张表，各个表所含的字段，以及字段采用的数据类型。有些字段要有约束（价格大于0等）。&lt;/p&gt;
+&lt;p&gt;3）用SQL创建数据表，填入信息，每张表填入的信息不少于8条。（建表语句以及结果截图）&lt;/p&gt;
+&lt;p&gt;4）用SQL语言进行以下数据查询操作：（查询语句以及结果截图）&lt;/p&gt;
+&lt;p&gt;a) 查询所有经理的姓名&lt;/p&gt;
+&lt;p&gt;b) 查询某商品部交涉的厂家列表。&lt;/p&gt;
 &lt;h2 id=&#34;实验过程&#34;&gt;实验过程&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;①&lt;/strong&gt;    &lt;strong&gt;根据给出的信息，可以设计绘制出ER图&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000317.png&#34; alt=&#34;ER图&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;②&lt;/strong&gt; &lt;strong&gt;将上面ER概念模型转换为关系模型&lt;/strong&gt;
-职工（职工号，姓名，地址，所在部门）
-商品部（部门号，部门名称，经理）
-商品（商品代号，商品名，生产厂家，价格，型号，商品部）
-厂家（厂家代号，厂名，地址，提供价格）&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;③&lt;/strong&gt; &lt;strong&gt;根据模型设计数据表，具有详细的字段名称、数据类型以及数据的约束&lt;/strong&gt;
-共设计了4张表，分别是职工表、商品部表、商品表、厂家表&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;②&lt;/strong&gt; &lt;strong&gt;将上面ER概念模型转换为关系模型&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;职工（职工号，姓名，地址，所在部门）&lt;/p&gt;
+&lt;p&gt;商品部（部门号，部门名称，经理）&lt;/p&gt;
+&lt;p&gt;商品（商品代号，商品名，生产厂家，价格，型号，商品部）&lt;/p&gt;
+&lt;p&gt;厂家（厂家代号，厂名，地址，提供价格）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;③&lt;/strong&gt; &lt;strong&gt;根据模型设计数据表，具有详细的字段名称、数据类型以及数据的约束&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;共设计了4张表，分别是职工表、商品部表、商品表、厂家表&lt;/p&gt;
 &lt;p&gt;职工表：&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
@@ -339,8 +340,8 @@ Microsoft SQL Server (Express) + SQL Server Management Studio&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000553.png&#34; alt=&#34;厂家表数据&#34;&gt;&lt;/p&gt;
 &lt;p&gt;总体结构:
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000559.png&#34; alt=&#34;总体结构&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;⑤&lt;/strong&gt; &lt;strong&gt;用SQL语言进行以下数据查询操作&lt;/strong&gt;
-a) 查询所有经理的姓名&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;⑤&lt;/strong&gt; &lt;strong&gt;用SQL语言进行以下数据查询操作&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;a) 查询所有经理的姓名&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;-- a) 查询所有经理的姓名
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;SELECT&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;dept_manager&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;FROM&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;department;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000607.png&#34; alt=&#34;查询结果&#34;&gt;&lt;/p&gt;

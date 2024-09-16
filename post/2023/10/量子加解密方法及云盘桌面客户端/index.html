@@ -385,8 +385,8 @@
 </span></span><span style="display:flex;"><span>  
 </span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#b44">&#39;__main__&#39;</span>:  
 </span></span><span style="display:flex;"><span>    main()
-</span></span></code></pre></div><p>其实写到这里，基本上的功能已经能够实现了，但是在测试的过程中发现，对于小文件加解密和上传下载的速度很快，但是文件稍微大一点，例如5mb的图片，整个过程就十分缓慢。
-分析过程发现，文件卡在==正在加密中==的阶段，再仔细分析，确定就是文件写入的速度太慢，包括Key、加密后的文件的写入。</p>
+</span></span></code></pre></div><p>其实写到这里，基本上的功能已经能够实现了，但是在测试的过程中发现，对于小文件加解密和上传下载的速度很快，但是文件稍微大一点，例如5mb的图片，整个过程就十分缓慢。</p>
+<p>分析过程发现，文件卡在==正在加密中==的阶段，再仔细分析，确定就是文件写入的速度太慢，包括Key、加密后的文件的写入。</p>
 <pre tabindex="0"><code class="language-ad-warning" data-lang="ad-warning">由于一次一密的加密形式，导致了当需要加密的文件很大时，key的长度也随之增加到很大，如果使用wt、rt的形式进行写和读，整个IO操作就会十分缓慢，这是整个程序最大的弊端。不过好在key和加密后的文件都是int类型的整数，我们完全可以转换成二进制的形式进行存储，而对于wb、rb二进制形式的读写，IO操作就会快得多，所以这是修改的方法
 </code></pre><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">encrypt</span>(content):  
 </span></span><span style="display:flex;"><span>    key_int <span style="color:#666">=</span> random_key(<span style="color:#a2f">len</span>(content))  <span style="color:#080;font-style:italic"># 调用生成大随机数  </span>
@@ -469,8 +469,8 @@
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231130232227.png" alt=""></p>
 <p>目前已经实现了文件的加密和上传功能，接下来还需要实现文件的下载和解密功能，在这个过程中还需要联系云端网盘程序，也许之后会将这个网盘程序换成自己搭建的云端存储。</p>
 <hr>
-<p>2023年11月8日 21点31分<br>
-更新日志：</p>
+<p>2023年11月8日 21点31分</p>
+<p>更新日志：</p>
 <ol>
 <li>增加了自动搜索key的功能，不用手动输入密钥位置（密钥存储在固定密钥库）</li>
 <li>更改了key、datalength、加密文件等文件的命名方式：<code>文件名称[创建时间戳].文件类型</code><br>
@@ -515,8 +515,8 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">&#34;密钥文件大小不正确！&#34;</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>
 </span></span></code></pre></div><hr>
-<p>2023年11月16日 19点00分<br>
-更新说明：</p>
+<p>2023年11月16日 19点00分</p>
+<p>更新说明：</p>
 <ol>
 <li>完成桌面端应用程序开发</li>
 <li>修复单选框不能横向滚动</li>

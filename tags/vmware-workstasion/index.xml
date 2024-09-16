@@ -17,15 +17,15 @@
       <guid>https://pi3-l22.github.io/post/2024/2/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
       
       <description>&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
-&lt;p&gt;到官网下载Linux的资源文件，运行按照提示下一步就可以完成安装
-在这个过程中有可能会提示缺少Linux-header文件，只需要在终端用apt下载对应版本的header就可以&lt;/p&gt;
+&lt;p&gt;到官网下载Linux的资源文件，运行按照提示下一步就可以完成安装&lt;/p&gt;
+&lt;p&gt;在这个过程中有可能会提示缺少Linux-header文件，只需要在终端用apt下载对应版本的header就可以&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install linux-headers-6.6.9-amd64
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://pi3yyy.love/archives/33e9ac6f.html&#34;&gt;安装具体步骤参考文章中的安装VMware&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240211000531.png&#34; alt=&#34;VMware Workstation pro 17&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;问题出现&#34;&gt;问题出现&lt;/h2&gt;
-&lt;p&gt;刚开始使用虚拟机没有任何问题，但是在安装了虚拟机并运行之后，再重启电脑就会卡在Kali的logo界面
-刚开始还没在意，没有想到和VMware有关，但是随着使用虚拟机次数的增多，我渐渐发现每次只要开了虚拟机重启就会卡在logo界面，不能正常进入系统
-所以我在logo界面，使用ctrl+alt+f1，打开日志信息，发现居然是vmware.service不能正常启动导致的&lt;/p&gt;
+&lt;p&gt;刚开始使用虚拟机没有任何问题，但是在安装了虚拟机并运行之后，再重启电脑就会卡在Kali的logo界面&lt;/p&gt;
+&lt;p&gt;刚开始还没在意，没有想到和VMware有关，但是随着使用虚拟机次数的增多，我渐渐发现每次只要开了虚拟机重启就会卡在logo界面，不能正常进入系统&lt;/p&gt;
+&lt;p&gt;所以我在logo界面，使用ctrl+alt+f1，打开日志信息，发现居然是vmware.service不能正常启动导致的&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/95_1707580958_hd.jpeg&#34; alt=&#34;开机错误日志&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/96_1707580962_hd.jpeg&#34; alt=&#34;开机错误日志&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;问题解决&#34;&gt;问题解决&lt;/h2&gt;
@@ -82,8 +82,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   Virtual ethernet                                                    failed
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   VMware Authentication Daemon                                        &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   Shared Memory Available                                             &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;所以我也重装了好几遍VMware，也装了17、16和15的版本，15版本甚至连Virtual machine monitor都启动失败
-最后在google上找了很多的问答，也都是差不多，最后只能求助AI，他告诉我：&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;所以我也重装了好几遍VMware，也装了17、16和15的版本，15版本甚至连Virtual machine monitor都启动失败&lt;/p&gt;
+&lt;p&gt;最后在google上找了很多的问答，也都是差不多，最后只能求助AI，他告诉我：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;**Remove Lock Files**: 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;If network connections fail to initialize, check for a lock file/directory at &lt;span style=&#34;color:#b44&#34;&gt;`/etc/vmware/networking.lck/`&lt;/span&gt;. 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#008000;font-weight:bold&#34;&gt;Removing this directory and reconfiguring VMware Workstation might resolve the issue&lt;/span&gt;](&lt;span style=&#34;color:#b44&#34;&gt;https://forums.gentoo.org/viewtopic-t-955980-start-0.html&lt;/span&gt;)

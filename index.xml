@@ -30,16 +30,16 @@ test test&lt;/p&gt;
       <guid>https://pi3-l22.github.io/post/2024/2/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid>
       
       <description>&lt;h2 id=&#34;快速安装&#34;&gt;快速安装&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.kali.org/&#34;&gt;官网&lt;/a&gt;下载Kali Linux镜像文件（ISO）
-虽然2023年推出来
-Kali Purple但是不太推荐安装，因为有一些库和依赖环境没有，安装一些软件程序会很麻烦
-比如安装了Remmina就没有RDP协议的远程桌面连接&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.kali.org/&#34;&gt;官网&lt;/a&gt;下载Kali Linux镜像文件（ISO）&lt;/p&gt;
+&lt;p&gt;虽然2023年推出来&lt;/p&gt;
+&lt;p&gt;Kali Purple但是不太推荐安装，因为有一些库和依赖环境没有，安装一些软件程序会很麻烦&lt;/p&gt;
+&lt;p&gt;比如安装了Remmina就没有RDP协议的远程桌面连接&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208104233.png&#34; alt=&#34;Kali官网下载ISO文件&#34;&gt;&lt;/p&gt;
 &lt;p&gt;使用&lt;a href=&#34;https://sourceforge.net/projects/win32diskimager/&#34;&gt;Win32DiskImager&lt;/a&gt;把ISO文件刻录进U盘&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208104838.png&#34; alt=&#34;Win32DiskImager下载&#34;&gt;&lt;/p&gt;
-&lt;p&gt;关闭电脑，使用U盘启动，进入Kali Linux安装界面，如果是安装双系统注意规划好磁盘分区，如果不是可以直接清空安装
-推荐把Swap分区改大点（默认1GB），16GB的物理内存可以分配8GB的Swap空间
-安装桌面环境可以根据喜好选择Xfce、Gnome、KDE&lt;/p&gt;
+&lt;p&gt;关闭电脑，使用U盘启动，进入Kali Linux安装界面，如果是安装双系统注意规划好磁盘分区，如果不是可以直接清空安装&lt;/p&gt;
+&lt;p&gt;推荐把Swap分区改大点（默认1GB），16GB的物理内存可以分配8GB的Swap空间&lt;/p&gt;
+&lt;p&gt;安装桌面环境可以根据喜好选择Xfce、Gnome、KDE&lt;/p&gt;
 &lt;h2 id=&#34;换源&#34;&gt;换源&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo vim /etc/apt/sources.list
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;把官方源注释掉，更改国内源&lt;/p&gt;
@@ -84,8 +84,8 @@ Kali Purple但是不太推荐安装，因为有一些库和依赖环境没有，
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;&lt;/span&gt;fcitx5-frontend-qt5
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;设置Fcitx5为默认输入法:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;im-config
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将首选输入法设置为Fcitx5
-不用再安装其他输入法，Fcitx5就已经很好用了，且自定义程度高，根据自己情况设置&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将首选输入法设置为Fcitx5&lt;/p&gt;
+&lt;p&gt;不用再安装其他输入法，Fcitx5就已经很好用了，且自定义程度高，根据自己情况设置&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208113424.png&#34; alt=&#34;Fcitx5配置界面&#34;&gt;&lt;/p&gt;
 &lt;p&gt;如果在桌面环境（Xfce、Gnome）的设置或者应用面板，不能输入中文，可以安装Gnome扩展&lt;a href=&#34;https://extensions.gnome.org/extension/261/kimpanel/&#34;&gt;Input Method Panel&lt;/a&gt;解决&lt;/p&gt;
 &lt;h2 id=&#34;安装qq&#34;&gt;安装QQ&lt;/h2&gt;
@@ -97,33 +97,33 @@ Kali Purple但是不太推荐安装，因为有一些库和依赖环境没有，
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208122241.png&#34; alt=&#34;ukylin版本微信下载&#34;&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo dpkg -i weixin.deb
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;安装clash&#34;&gt;安装Clash&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/CHH3213/clash-for-windows-backup/releases/tag/v0.20.39&#34;&gt;Clash备份地址&lt;/a&gt;
-下载&lt;a href=&#34;https://github.com/CHH3213/clash-for-windows-backup/releases/tag/v0.20.39&#34;&gt;Clash.for.Windows-0.20.39-x64-linux.tar.gz&lt;/a&gt;，并解压&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/CHH3213/clash-for-windows-backup/releases/tag/v0.20.39&#34;&gt;Clash备份地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载 &lt;a href=&#34;https://github.com/CHH3213/clash-for-windows-backup/releases/tag/v0.20.39&#34;&gt;Clash.for.Windows-0.20.39-x64-linux.tar.gz&lt;/a&gt;，并解压&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar zxvf Clash.for.Windows-0.20.39-x64-linux.tar.gz
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;把解压后的文件夹移动到&lt;code&gt;/opt/&lt;/code&gt;目录（一般用来存放软件程序目录）&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;把解压后的文件夹移动到 &lt;code&gt;/opt/&lt;/code&gt; 目录（一般用来存放软件程序目录）&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv Clash&lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;\ &lt;/span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;\ &lt;/span&gt;Windows-0.20.39-x64-linux /opt/Clash-GUI
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;运行文件夹中的&lt;code&gt;cfw&lt;/code&gt;程序就可以运行&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;运行文件夹中的 &lt;code&gt;cfw&lt;/code&gt; 程序就可以运行&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./cfw
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208122944.png&#34; alt=&#34;Clash界面&#34;&gt;&lt;/p&gt;
-&lt;p&gt;为了方便寻找软件，可以在应用面板或者桌面添加应用图标
-创建&lt;code&gt;clash.desktop&lt;/code&gt;，输入以下内容：&lt;/p&gt;
+&lt;p&gt;为了方便寻找软件，可以在应用面板或者桌面添加应用图标&lt;/p&gt;
+&lt;p&gt;创建 &lt;code&gt;clash.desktop&lt;/code&gt;，输入以下内容：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-desktop&#34; data-lang=&#34;desktop&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;&#34;&gt;[Desktop Entry]  
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;Name&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;clash for linux  &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;Icon&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;/opt/Clash-GUI/clash.png  &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;Exec&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;/opt/Clash-GUI/cfw  &lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;Type&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;Application&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Name：显示的名称
-Icon：图标图片路径
-Exec：运行程序路径
-Type：应用类型&lt;/p&gt;
-&lt;p&gt;如果要在==应用面版==添加图标，就把clash.desktop移动到&lt;code&gt;/usr/share/applications&lt;/code&gt;和&lt;code&gt;~/.local/share/applications&lt;/code&gt;
-如果要在==桌面==添加图标，就把clash.desktop移动到桌面目录&lt;code&gt;~/Desktop&lt;/code&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Name：显示的名称&lt;/p&gt;
+&lt;p&gt;Icon：图标图片路径&lt;/p&gt;
+&lt;p&gt;Exec：运行程序路径&lt;/p&gt;
+&lt;p&gt;Type：应用类型&lt;/p&gt;
+&lt;p&gt;如果要在==应用面版==添加图标，就把clash.desktop移动到 &lt;code&gt;/usr/share/applications&lt;/code&gt; 和 &lt;code&gt;~/.local/share/applications&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果要在==桌面==添加图标，就把clash.desktop移动到桌面目录&lt;code&gt;~/Desktop&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;其他程序想要添加桌面图标也是相同的道理&lt;/p&gt;
 &lt;h2 id=&#34;安装wps&#34;&gt;安装WPS&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.wps.cn/product/wpslinux#&#34;&gt;wps官网下载安装包&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo dpkg -i wps-office_11.1.0.11711_amd64.deb
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装好wps可能不能直接使用，还需要安装字体，不然进入时会报错
-最简单的方法就是去Wndows系统里，把&lt;code&gt;C:\windows\fonts&lt;/code&gt; 整个打包放到Linux系统里的&lt;code&gt;/usr/share/fonts&lt;/code&gt;目录内，最后刷新字体缓存&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装好wps可能不能直接使用，还需要安装字体，不然进入时会报错&lt;/p&gt;
+&lt;p&gt;最简单的方法就是去Wndows系统里，把 &lt;code&gt;C:\windows\fonts&lt;/code&gt; 整个打包放到Linux系统里的 &lt;code&gt;/usr/share/fonts&lt;/code&gt; 目录内，最后刷新字体缓存&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo fc-cache
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;给Linux系统添加其他字体，也是将ttf/otf字体文件放入这个文件夹&lt;/p&gt;
@@ -135,20 +135,20 @@ Type：应用类型&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./VMware-Workstation-Full-17.5.0-22583795.x86_64.bundle
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在运行过程中可能会出现错误提示没有 linux-header，可以直接使用apt安装&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install linux-header-6.6.9-amd4
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果在apt里面没有需要的版本，则需要到&lt;a href=&#34;https://mirrors.aliyun.com/kali/pool/main/l/linux/&#34;&gt;国内镜像站&lt;/a&gt;自行下载安装
-需要下载安装&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果在apt里面没有需要的版本，则需要到&lt;a href=&#34;https://mirrors.aliyun.com/kali/pool/main/l/linux/&#34;&gt;国内镜像站&lt;/a&gt;自行下载安装&lt;/p&gt;
+&lt;p&gt;需要下载安装&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;linux-compiler-gcc-xxx&lt;/li&gt;
 &lt;li&gt;linux-kbuild-xxx&lt;/li&gt;
 &lt;li&gt;linux-headers-xxx&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;安装typora&#34;&gt;安装Typora&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;http://120.27.210.48:51122/d/Common%20Files/Typora_Linux_0.11.18_amd64.deb?sign=dac0JJLq5aUo2Pgl9O4KUQOYJo7VuTfncGhDZzVZRBo=:0&#34;&gt;Typora的Linux免费版本下载&lt;/a&gt;
-&lt;a href=&#34;http://120.27.210.48:51122/d/Common%20Files/Typora_theme.7z?sign=kjyniWF9TPbAuyFVU9VKTcLKEwa0HonlZnnomL4S1nQ=:0&#34;&gt;几款Typora主题css文件&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://120.27.210.48:51122/d/Common%20Files/Typora_Linux_0.11.18_amd64.deb?sign=dac0JJLq5aUo2Pgl9O4KUQOYJo7VuTfncGhDZzVZRBo=:0&#34;&gt;Typora的Linux免费版本下载&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://120.27.210.48:51122/d/Common%20Files/Typora_theme.7z?sign=kjyniWF9TPbAuyFVU9VKTcLKEwa0HonlZnnomL4S1nQ=:0&#34;&gt;几款Typora主题css文件&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;配置picgo&#34;&gt;配置PicGo&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://picgo.github.io/PicGo-Doc/zh/&#34;&gt;官方下载PicGo&lt;/a&gt;
-下载AppImage文件，同样放到&lt;code&gt;/opt/&lt;/code&gt;目录，并按照&lt;a href=&#34;##%E5%AE%89%E8%A3%85Clash&#34;&gt;上面的方法&lt;/a&gt;配置桌面图标
-PicGo配置Github图床，在github上新建仓库，并设置一个token&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://picgo.github.io/PicGo-Doc/zh/&#34;&gt;官方下载PicGo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载AppImage文件，同样放到 &lt;code&gt;/opt/&lt;/code&gt; 目录，并按照&lt;a href=&#34;##%E5%AE%89%E8%A3%85Clash&#34;&gt;上面的方法&lt;/a&gt;配置桌面图标&lt;/p&gt;
+&lt;p&gt;PicGo配置Github图床，在github上新建仓库，并设置一个token&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208133922.png&#34; alt=&#34;PicGo配置&#34;&gt;&lt;/p&gt;
 &lt;p&gt;要想使用==剪切板上传图片==（&lt;strong&gt;Typora、Obisidian自动上传图片服务&lt;/strong&gt;），还需要在终端中安装Xclip程序&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install xclip
@@ -156,15 +156,15 @@ PicGo配置Github图床，在github上新建仓库，并设置一个token&lt;/p&
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208134546.png&#34; alt=&#34;Typora自动上传图片&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240208134651.png&#34; alt=&#34;Obsidian自动上传图片&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;安装pycharm&#34;&gt;安装PyCharm&lt;/h2&gt;
-&lt;p&gt;安装PyCharm，在官网下载程序包，按照压缩包中的安装配置指南就可以成功安装
-也可以和上面的其他软件一样，先把文件目录移到&lt;code&gt;/opt&lt;/code&gt;，然后配置桌面图标
-打开PyCharm可能会报有关==_JAVA_OPTIONS环境变量==的错误，实际上在kaili终端中输入&lt;code&gt;java --version&lt;/code&gt; 也是有问题的，提示：&lt;/p&gt;
+&lt;p&gt;安装PyCharm，在官网下载程序包，按照压缩包中的安装配置指南就可以成功安装&lt;/p&gt;
+&lt;p&gt;也可以和上面的其他软件一样，先把文件目录移到 &lt;code&gt;/opt&lt;/code&gt;，然后配置桌面图标&lt;/p&gt;
+&lt;p&gt;打开PyCharm可能会报有关==_JAVA_OPTIONS环境变量==的错误，实际上在kaili终端中输入 &lt;code&gt;java --version&lt;/code&gt; 也是有问题的，提示：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;picked up JAVA OPTIONS: -Dawt.useSystemAAFontSettings&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;on -Dswing.aatext&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#a2f&#34;&gt;true&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;解决办法：&lt;/strong&gt;
-在&lt;code&gt;/etc/X11/Xsession.d/90kali-themes&lt;/code&gt;与&lt;code&gt;/etc/environment.d/95kali-themes.conf&lt;/code&gt;这两个文件中，将_JAVA_OPTIONS那一行语句删掉，然后重启电脑&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;解决办法：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;/etc/X11/Xsession.d/90kali-themes&lt;/code&gt; 与 &lt;code&gt;/etc/environment.d/95kali-themes.conf&lt;/code&gt; 这两个文件中，将_JAVA_OPTIONS那一行语句删掉，然后重启电脑&lt;/p&gt;
 &lt;h2 id=&#34;安装ollydbg&#34;&gt;安装ollydbg&lt;/h2&gt;
-&lt;p&gt;ollydbg没有linux版本，所以需要借助wine进行安装，kali已经自带了wine，但是安装好后启动ollydbg的时候还是会报错，根据错误提示先补全软件和环境，再进行启动
-如果还是不能启动，则删除wine和ollydbg，重新安装后就正常了&lt;/p&gt;
+&lt;p&gt;ollydbg没有linux版本，所以需要借助wine进行安装，kali已经自带了wine，但是安装好后启动ollydbg的时候还是会报错，根据错误提示先补全软件和环境，再进行启动&lt;/p&gt;
+&lt;p&gt;如果还是不能启动，则删除wine和ollydbg，重新安装后就正常了&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt remove --purge wine
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt remove --purge ollydbg
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo rm -tf ~/.wine  &lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# 删除wine配置文件&lt;/span&gt;
@@ -193,15 +193,15 @@ PicGo配置Github图床，在github上新建仓库，并设置一个token&lt;/p&
       <guid>https://pi3-l22.github.io/post/2024/2/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
       
       <description>&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
-&lt;p&gt;到官网下载Linux的资源文件，运行按照提示下一步就可以完成安装
-在这个过程中有可能会提示缺少Linux-header文件，只需要在终端用apt下载对应版本的header就可以&lt;/p&gt;
+&lt;p&gt;到官网下载Linux的资源文件，运行按照提示下一步就可以完成安装&lt;/p&gt;
+&lt;p&gt;在这个过程中有可能会提示缺少Linux-header文件，只需要在终端用apt下载对应版本的header就可以&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install linux-headers-6.6.9-amd64
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://pi3yyy.love/archives/33e9ac6f.html&#34;&gt;安装具体步骤参考文章中的安装VMware&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240211000531.png&#34; alt=&#34;VMware Workstation pro 17&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;问题出现&#34;&gt;问题出现&lt;/h2&gt;
-&lt;p&gt;刚开始使用虚拟机没有任何问题，但是在安装了虚拟机并运行之后，再重启电脑就会卡在Kali的logo界面
-刚开始还没在意，没有想到和VMware有关，但是随着使用虚拟机次数的增多，我渐渐发现每次只要开了虚拟机重启就会卡在logo界面，不能正常进入系统
-所以我在logo界面，使用ctrl+alt+f1，打开日志信息，发现居然是vmware.service不能正常启动导致的&lt;/p&gt;
+&lt;p&gt;刚开始使用虚拟机没有任何问题，但是在安装了虚拟机并运行之后，再重启电脑就会卡在Kali的logo界面&lt;/p&gt;
+&lt;p&gt;刚开始还没在意，没有想到和VMware有关，但是随着使用虚拟机次数的增多，我渐渐发现每次只要开了虚拟机重启就会卡在logo界面，不能正常进入系统&lt;/p&gt;
+&lt;p&gt;所以我在logo界面，使用ctrl+alt+f1，打开日志信息，发现居然是vmware.service不能正常启动导致的&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/95_1707580958_hd.jpeg&#34; alt=&#34;开机错误日志&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/96_1707580962_hd.jpeg&#34; alt=&#34;开机错误日志&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;问题解决&#34;&gt;问题解决&lt;/h2&gt;
@@ -258,8 +258,8 @@ PicGo配置Github图床，在github上新建仓库，并设置一个token&lt;/p&
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   Virtual ethernet                                                    failed
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   VMware Authentication Daemon                                        &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   Shared Memory Available                                             &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;done&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;所以我也重装了好几遍VMware，也装了17、16和15的版本，15版本甚至连Virtual machine monitor都启动失败
-最后在google上找了很多的问答，也都是差不多，最后只能求助AI，他告诉我：&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;所以我也重装了好几遍VMware，也装了17、16和15的版本，15版本甚至连Virtual machine monitor都启动失败&lt;/p&gt;
+&lt;p&gt;最后在google上找了很多的问答，也都是差不多，最后只能求助AI，他告诉我：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;**Remove Lock Files**: 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;If network connections fail to initialize, check for a lock file/directory at &lt;span style=&#34;color:#b44&#34;&gt;`/etc/vmware/networking.lck/`&lt;/span&gt;. 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#008000;font-weight:bold&#34;&gt;Removing this directory and reconfiguring VMware Workstation might resolve the issue&lt;/span&gt;](&lt;span style=&#34;color:#b44&#34;&gt;https://forums.gentoo.org/viewtopic-t-955980-start-0.html&lt;/span&gt;)
@@ -289,30 +289,30 @@ PicGo配置Github图床，在github上新建仓库，并设置一个token&lt;/p&
       <guid>https://pi3-l22.github.io/post/2023/12/windows10%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8wsa/</guid>
       
       <description>&lt;h1 id=&#34;windows10下安装使用wsa&#34;&gt;Windows10下安装使用WSA&lt;/h1&gt;
-&lt;p&gt;如何在Windows10中使用带有Magisk的安卓子系统
-需要系统版本高于Windows10 22H2
-&lt;a href=&#34;https://learn.microsoft.com/zh-cn/windows/android/wsa/&#34;&gt;适用于 Android™️ 的 Windows 子系统 | Microsoft Learn&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如何在Windows10中使用带有Magisk的安卓子系统&lt;/p&gt;
+&lt;p&gt;需要系统版本高于Windows10 22H2&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://learn.microsoft.com/zh-cn/windows/android/wsa/&#34;&gt;适用于 Android™️ 的 Windows 子系统 | Microsoft Learn&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;下载安装&#34;&gt;下载安装&lt;/h2&gt;
-&lt;p&gt;首先在Github上找到&lt;a href=&#34;https://github.com/MustardChef/WSABuilds/releases&#34;&gt;MustardChef/WSABuilds&lt;/a&gt;，下载相应的安装包，Magisk和KernelSU都可以
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212033.png&#34; alt=&#34;WSA不同版本的安装包&#34;&gt;&lt;/p&gt;
-&lt;p&gt;下载解压完成之后进入文件夹，运行&lt;code&gt;run.bat&lt;/code&gt;就可以进行安装。安装过程中会自动启动安卓子系统，同时可以修补Magisk镜像
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212306.png&#34; alt=&#34;运行run.bat&#34;&gt;
+&lt;p&gt;首先在Github上找到 &lt;a href=&#34;https://github.com/MustardChef/WSABuilds/releases&#34;&gt;MustardChef/WSABuilds&lt;/a&gt;，下载相应的安装包，Magisk和KernelSU都可以&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212033.png&#34; alt=&#34;WSA不同版本的安装包&#34;&gt;&lt;/p&gt;
+&lt;p&gt;下载解压完成之后进入文件夹，运行 &lt;code&gt;run.bat&lt;/code&gt; 就可以进行安装。安装过程中会自动启动安卓子系统，同时可以修补Magisk镜像&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212306.png&#34; alt=&#34;运行run.bat&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212736.png&#34; alt=&#34;启动WSA&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212433.png&#34; alt=&#34;WSA界面&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222214229.png&#34; alt=&#34;Magisk&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;使用adb命令&#34;&gt;使用ADB命令&lt;/h2&gt;
-&lt;p&gt;安装完成之后，还需要打开系统的开发者选项，方便用adb命令连接和操作安卓子系统
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212637.png&#34; alt=&#34;打开开发者选项&#34;&gt;
+&lt;p&gt;安装完成之后，还需要打开系统的开发者选项，方便用adb命令连接和操作安卓子系统&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212637.png&#34; alt=&#34;打开开发者选项&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212805.png&#34; alt=&#34;确保开发者选项已经打开&#34;&gt;&lt;/p&gt;
-&lt;p&gt;打开开发者选择就可以使用电脑上的ADB进行连接操作
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212957.png&#34; alt=&#34;adb连接&#34;&gt;
+&lt;p&gt;打开开发者选择就可以使用电脑上的ADB进行连接操作&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222212957.png&#34; alt=&#34;adb连接&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/2023-12-22_20-54-15.png&#34; alt=&#34;弹出连接窗口&#34;&gt;&lt;/p&gt;
-&lt;p&gt;连接时如果出现，不能连接的情况，需要重启电脑或者多试几次
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222213301.png&#34; alt=&#34;连接不上的情况&#34;&gt;&lt;/p&gt;
-&lt;p&gt;连接上就可以使用ADB命令操作手机，安装APP，传输文件等功能，当然也可以使用微软商店中的WSA工具箱等软件，更加方便管理安卓子系统
-&lt;a href=&#34;https://blog.csdn.net/lb245557472/article/details/84068519&#34;&gt;ADB 操作命令详解及用法大全&lt;/a&gt;
-如：
-查看所有应用&lt;/p&gt;
+&lt;p&gt;连接时如果出现，不能连接的情况，需要重启电脑或者多试几次&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222213301.png&#34; alt=&#34;连接不上的情况&#34;&gt;&lt;/p&gt;
+&lt;p&gt;连接上就可以使用ADB命令操作手机，安装APP，传输文件等功能，当然也可以使用微软商店中的WSA工具箱等软件，更加方便管理安卓子系统&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/lb245557472/article/details/84068519&#34;&gt;ADB 操作命令详解及用法大全&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如：&lt;/p&gt;
+&lt;p&gt;查看所有应用&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb shell pm list packages
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;查看第三方应用&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb shell pm list packages &lt;span style=&#34;color:#666&#34;&gt;-3&lt;/span&gt;
@@ -346,26 +346,26 @@ PicGo配置Github图床，在github上新建仓库，并设置一个token&lt;/p&
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;都是Linux上的命令前加上adb shell
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;安装应用程序&#34;&gt;安装应用程序&lt;/h2&gt;
-&lt;p&gt;我们可以使用文件操作命令为WSA安装应用程序
-比如我电脑桌面上有一个apk安装包，可以先将文件上传至手机目录&lt;/p&gt;
+&lt;p&gt;我们可以使用文件操作命令为WSA安装应用程序&lt;/p&gt;
+&lt;p&gt;比如我电脑桌面上有一个apk安装包，可以先将文件上传至手机目录&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb push C:\desktop\kuan.apk /storage/emulated/&lt;span style=&#34;color:#666&#34;&gt;0&lt;/span&gt;/Download
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222214717.png&#34; alt=&#34;上传文件&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后在WSA中对应的文件夹中就可以看见apk安装包
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222214810.png&#34; alt=&#34;上传成功的安装包&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后在WSA中对应的文件夹中就可以看见apk安装包&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222214810.png&#34; alt=&#34;上传成功的安装包&#34;&gt;&lt;/p&gt;
 &lt;p&gt;接着点击就可以安装，或者也可以使用ADB命令进行安装&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb install /storage/emulated/&lt;span style=&#34;color:#666&#34;&gt;0&lt;/span&gt;/Download/kuan.apk
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222215038.png&#34; alt=&#34;安装APP&#34;&gt;
-可以直接在电脑桌面打开手机应用程序
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222220529.png&#34; alt=&#34;桌面的APP&#34;&gt;&lt;/p&gt;
+可以直接在电脑桌面打开手机应用程序&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222220529.png&#34; alt=&#34;桌面的APP&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;配置网络&#34;&gt;配置网络&lt;/h2&gt;
-&lt;p&gt;WSA一开始好像是无网络不能上网的，所以还需要配置一下网络环境
-同样使用ADB命令完成&lt;/p&gt;
+&lt;p&gt;WSA一开始好像是无网络不能上网的，所以还需要配置一下网络环境&lt;/p&gt;
+&lt;p&gt;同样使用ADB命令完成&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adb shell settings put global http_proxy &lt;span style=&#34;color:#666&#34;&gt;172.24&lt;/span&gt;.128.&lt;span style=&#34;color:#666&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;12345&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;IP是在电脑终端输入&lt;code&gt;ipconfig&lt;/code&gt;找到本机在WSL中的IP
-端口是本机的代理端口
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222224919.png&#34; alt=&#34;查看本机在WSL中的IP&#34;&gt;
-这样之后就可以上网，并且已经挂上代理
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222225110.png&#34; alt=&#34;Google商店&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;IP是在电脑终端输入 &lt;code&gt;ipconfig&lt;/code&gt; 找到本机在WSL中的IP&lt;/p&gt;
+&lt;p&gt;端口是本机的代理端口&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222224919.png&#34; alt=&#34;查看本机在WSL中的IP&#34;&gt;
+这样之后就可以上网，并且已经挂上代理&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222225110.png&#34; alt=&#34;Google商店&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222230453.png&#34; alt=&#34;酷安&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;在配置网络的时候，可能遇到WSA获取不到IP的情况
@@ -374,11 +374,11 @@ PicGo配置Github图床，在github上新建仓库，并设置一个token&lt;/p&
 如果上面都已完成，还是不能获取到IP
 最好的办法就是卸载删除后重新安装&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;正常情况，在WSA的网络设置中，可以看见一个虚拟WIFI
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222230044.png&#34; alt=&#34;虚拟WIFI&#34;&gt;&lt;/p&gt;
+&lt;p&gt;正常情况，在WSA的网络设置中，可以看见一个虚拟WIFI&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222230044.png&#34; alt=&#34;虚拟WIFI&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;卸载删除&#34;&gt;卸载删除&lt;/h2&gt;
-&lt;p&gt;只需要在Windows设置中卸载 &lt;em&gt;适用于Android的Windows子系统&lt;/em&gt; 程序，然后直接删除原先下载解压出来的文件夹即可
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222225018.png&#34; alt=&#34;卸载WSA&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;只需要在Windows设置中卸载 &lt;em&gt;适用于Android的Windows子系统&lt;/em&gt; 程序，然后直接删除原先下载解压出来的文件夹即可&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222225018.png&#34; alt=&#34;卸载WSA&#34;&gt;&lt;/p&gt;</description>
       
     </item>
     
@@ -405,31 +405,31 @@ PicGo配置Github图床，在github上新建仓库，并设置一个token&lt;/p&
 完成将服务器的文件remote_file下载到本地，命名为local_file&lt;/p&gt;
 &lt;h2 id=&#34;程序设计思路&#34;&gt;程序设计思路&lt;/h2&gt;
 &lt;h3 id=&#34;网络应用拓扑结构&#34;&gt;网络应用拓扑结构&lt;/h3&gt;
-&lt;p&gt;一对多的网络结构，即一台服务器对应多台客户端的星型拓扑结构
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192026.png&#34; alt=&#34;网络拓扑结构&#34;&gt;&lt;/p&gt;
+&lt;p&gt;一对多的网络结构，即一台服务器对应多台客户端的星型拓扑结构&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192026.png&#34; alt=&#34;网络拓扑结构&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;应用层协议设计&#34;&gt;应用层协议设计&lt;/h3&gt;
 &lt;p&gt;客户端连接到服务端，服务端监听到客户端的连接。&lt;/p&gt;
-&lt;p&gt;客户端 &amp;ndash;&amp;gt; 需要下载的文件路径 &amp;ndash;&amp;gt; 服务端
-客户端 &amp;lt;&amp;ndash; 文件是否存在 &amp;lt;&amp;ndash; 服务端&lt;/p&gt;
+&lt;p&gt;客户端 &amp;ndash;&amp;gt; 需要下载的文件路径 &amp;ndash;&amp;gt; 服务端&lt;/p&gt;
+&lt;p&gt;客户端 &amp;lt;&amp;ndash; 文件是否存在 &amp;lt;&amp;ndash; 服务端&lt;/p&gt;
 &lt;p&gt;不存在则双方退出协议，存在则继续&lt;/p&gt;
-&lt;p&gt;客户端 &amp;ndash;&amp;gt; 确认文件存在消息 &amp;ndash;&amp;gt; 服务端
-客户端 &amp;lt;&amp;ndash; 文件头部信息长度 &amp;lt;&amp;ndash; 服务端
-客户端 &amp;ndash;&amp;gt; 确认头部长度消息 &amp;ndash;&amp;gt; 服务端
-客户端 &amp;lt;&amp;ndash; 文件头部信息 &amp;lt;&amp;ndash; 服务端
-客户端 &amp;ndash;&amp;gt; 确认头部信息消息 &amp;ndash;&amp;gt; 服务端
-客户端 &amp;lt;&amp;ndash; 文件内容数据 &amp;lt;&amp;ndash; 服务端&lt;/p&gt;
+&lt;p&gt;客户端 &amp;ndash;&amp;gt; 确认文件存在消息 &amp;ndash;&amp;gt; 服务端&lt;/p&gt;
+&lt;p&gt;客户端 &amp;lt;&amp;ndash; 文件头部信息长度 &amp;lt;&amp;ndash; 服务端&lt;/p&gt;
+&lt;p&gt;客户端 &amp;ndash;&amp;gt; 确认头部长度消息 &amp;ndash;&amp;gt; 服务端&lt;/p&gt;
+&lt;p&gt;客户端 &amp;lt;&amp;ndash; 文件头部信息 &amp;lt;&amp;ndash; 服务端&lt;/p&gt;
+&lt;p&gt;客户端 &amp;ndash;&amp;gt; 确认头部信息消息 &amp;ndash;&amp;gt; 服务端&lt;/p&gt;
+&lt;p&gt;客户端 &amp;lt;&amp;ndash; 文件内容数据 &amp;lt;&amp;ndash; 服务端&lt;/p&gt;
 &lt;p&gt;双方退出协议部分&lt;/p&gt;
 &lt;h3 id=&#34;所选用的python库介绍&#34;&gt;所选用的Python库介绍&lt;/h3&gt;
-&lt;p&gt;import socket  # 套接字
-import sys  # 系统操作
-import zipfile  # 压缩文件
-import struct  # 字符串打包解包
-import json  # json序列化
-from tqdm import tqdm  # 进度条
-import threading  # 多线程
-import asyncio  # 异步IO
-import aiofiles  # 异步文件IO
-import selectors  # selectors模块单线程异步轮询&lt;/p&gt;
+&lt;p&gt;import socket  # 套接字&lt;/p&gt;
+&lt;p&gt;import sys  # 系统操作&lt;/p&gt;
+&lt;p&gt;import zipfile  # 压缩文件&lt;/p&gt;
+&lt;p&gt;import struct  # 字符串打包解包&lt;/p&gt;
+&lt;p&gt;import json  # json序列化&lt;/p&gt;
+&lt;p&gt;from tqdm import tqdm  # 进度条&lt;/p&gt;
+&lt;p&gt;import threading  # 多线程&lt;/p&gt;
+&lt;p&gt;import asyncio  # 异步IO&lt;/p&gt;
+&lt;p&gt;import aiofiles  # 异步文件IO&lt;/p&gt;
+&lt;p&gt;import selectors  # selectors模块单线程异步轮询&lt;/p&gt;
 &lt;h3 id=&#34;程序源代码&#34;&gt;程序源代码&lt;/h3&gt;
 &lt;h4 id=&#34;服务器端源码&#34;&gt;服务器端源码&lt;/h4&gt;
 &lt;p&gt;&lt;strong&gt;单线程服务端：&lt;/strong&gt;&lt;/p&gt;
@@ -935,43 +935,41 @@ import selectors  # selectors模块单线程异步轮询&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    main()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;程序测试方法及测试结果记录&#34;&gt;程序测试方法及测试结果记录&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;测试方法
-对于单线程的服务端，采用下载单个文件，检测下载过程中，客户端和服务端是否正常，并且能够处理异常情况
-对于多线程、异步的服务端，采用同时下载两个或者多个文件的形式，检测下载过程众怒给，客户端和服务端是否正常，并且能够处理多种的异常情况&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;测试流程
-单线程：&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;测试方法&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;对于单线程的服务端，采用下载单个文件，检测下载过程中，客户端和服务端是否正常，并且能够处理异常情况&lt;/p&gt;
+&lt;p&gt;对于多线程、异步的服务端，采用同时下载两个或者多个文件的形式，检测下载过程众怒给，客户端和服务端是否正常，并且能够处理多种的异常情况&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;测试流程&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;单线程：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192629.png&#34; alt=&#34;client端使用说明&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192635.png&#34; alt=&#34;server端使用说明&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192646.png&#34; alt=&#34;client端接收logo.png文件&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192653.png&#34; alt=&#34;server端显示的日志信息&#34;&gt;&lt;/p&gt;
-&lt;p&gt;多线程：
-客户端和服务端使用说明，同单线程的情况
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192700.png&#34; alt=&#34;client端接收file.zip大文件的过程&#34;&gt;&lt;/p&gt;
+&lt;p&gt;多线程：&lt;/p&gt;
+&lt;p&gt;客户端和服务端使用说明，同单线程的情况&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192700.png&#34; alt=&#34;client端接收file.zip大文件的过程&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192705.png&#34; alt=&#34;另一client端同时接收logo.png文件成功&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192709.png&#34; alt=&#34;server端显示的日志信息&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192714.png&#34; alt=&#34; client端接收大文件file.zip成功&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192718.png&#34; alt=&#34;全部client端接收文件成功后server端的日志信息&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Asyncio异步：
-客户端和服务端使用说明，同单线程的情况
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192730.png&#34; alt=&#34;client端接收file.zip文件过程&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Asyncio异步：&lt;/p&gt;
+&lt;p&gt;客户端和服务端使用说明，同单线程的情况&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192730.png&#34; alt=&#34;client端接收file.zip文件过程&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192734.png&#34; alt=&#34;另一client端同时接收logo.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220192739.png&#34; alt=&#34;server端显示的日志信息&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;实验分析总结及心得&#34;&gt;实验分析总结及心得&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;实验过程中参考的文献：&lt;/strong&gt;
-&lt;a href=&#34;https://blog.csdn.net/FY_13781298928/article/details/133747112&#34;&gt;Python使用Asyncio开发TCP服务器简单案例-CSDN博客&lt;/a&gt;
-&lt;a href=&#34;https://juejin.cn/post/7120545649891737614&#34;&gt;asyncio实现异步socket server - 掘金 (juejin.cn)&lt;/a&gt;
-&lt;a href=&#34;https://www.birdpython.com/posts/1/88/&#34;&gt;异步网络模型 - 老鸟python (birdpython.com)&lt;/a&gt;
-&lt;a href=&#34;https://www.cnblogs.com/-wenli/p/11192394.html&#34;&gt;python异步编程&amp;ndash;回调模型(selectors模块) - -零 - 博客园 (cnblogs.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;实验过程中参考的文献：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/FY_13781298928/article/details/133747112&#34;&gt;Python使用Asyncio开发TCP服务器简单案例-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://juejin.cn/post/7120545649891737614&#34;&gt;asyncio实现异步socket server - 掘金 (juejin.cn)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.birdpython.com/posts/1/88/&#34;&gt;异步网络模型 - 老鸟python (birdpython.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/-wenli/p/11192394.html&#34;&gt;python异步编程&amp;ndash;回调模型(selectors模块) - -零 - 博客园 (cnblogs.com)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;总结一下：&lt;/strong&gt;
-多线程的原理就是，在执行一个任务，当这个任务处于阻塞或者IO操作时，可以开启另外一个新的线程去执行另外有一个工作，提高执行效率。但是缺点就是整个线程的阻塞判断和线程切换都是程序自动判断，人为不能干预。
-由此引出了协程的概念，协程就是在切换任务的时候，是我们在编程可以指定的。单线程异步就用了这样的思想，asyncio是单进程并发库，不是多线程，也不是多进程，单纯是在一个进程里面异步（切来切去运行），切换的地方用await标记，能够切换的函数用async标记，从而避免程序自动判断切换。
-而对于select模型和poll模型的异步思想，是单线程轮询策略，核心就是在循环中，不断的select从任务列表取出可以读和写的fd对象，然后对其进行不同的处理，就是把所有的接收Socket数据和发送Socket数据都存在各自的列表队列里，之后循环每个队列中的每个对象，处理对应的事件操作。poll提供了register、modify、unregister、poll等方法，运行逻辑就是，如果是需要监测的事件，就将其register到poll对象中，然后通过poll方法不断取出就绪的fd，根据fd的事件类型(POLLIN, POLLOUT)对其进行不同的处理。
-总的来说，单线程、多线程、asyncio实现的异步都很简单，很快就能写出来，但是select和poll模型就相对来说比较困难，本身的实现格式比较复杂，同时我设计的协议也并不简单，所以利用select模型实现异步还是比较困难的，最后虽然通过简化协议流程实现了这个服务端代码但是实现的效果还是不理想，异步处理的单个事件还是太大了，不知道怎么细化，还是有很大的改进空间的。&lt;/p&gt;</description>
+多线程的原理就是，在执行一个任务，当这个任务处于阻塞或者IO操作时，可以开启另外一个新的线程去执行另外有一个工作，提高执行效率。但是缺点就是整个线程的阻塞判断和线程切换都是程序自动判断，人为不能干预。&lt;/p&gt;
+&lt;p&gt;由此引出了协程的概念，协程就是在切换任务的时候，是我们在编程可以指定的。单线程异步就用了这样的思想，asyncio是单进程并发库，不是多线程，也不是多进程，单纯是在一个进程里面异步（切来切去运行），切换的地方用await标记，能够切换的函数用async标记，从而避免程序自动判断切换。&lt;/p&gt;
+&lt;p&gt;而对于select模型和poll模型的异步思想，是单线程轮询策略，核心就是在循环中，不断的select从任务列表取出可以读和写的fd对象，然后对其进行不同的处理，就是把所有的接收Socket数据和发送Socket数据都存在各自的列表队列里，之后循环每个队列中的每个对象，处理对应的事件操作。poll提供了register、modify、unregister、poll等方法，运行逻辑就是，如果是需要监测的事件，就将其register到poll对象中，然后通过poll方法不断取出就绪的fd，根据fd的事件类型(POLLIN, POLLOUT)对其进行不同的处理。&lt;/p&gt;
+&lt;p&gt;总的来说，单线程、多线程、asyncio实现的异步都很简单，很快就能写出来，但是select和poll模型就相对来说比较困难，本身的实现格式比较复杂，同时我设计的协议也并不简单，所以利用select模型实现异步还是比较困难的，最后虽然通过简化协议流程实现了这个服务端代码但是实现的效果还是不理想，异步处理的单个事件还是太大了，不知道怎么细化，还是有很大的改进空间的。&lt;/p&gt;</description>
       
     </item>
     
@@ -983,8 +981,8 @@ import selectors  # selectors模块单线程异步轮询&lt;/p&gt;
       <guid>https://pi3-l22.github.io/post/2023/12/%E5%BE%AE%E4%BF%A1%E5%AE%9A%E6%97%B6%E5%8F%91%E9%80%81%E5%80%92%E6%95%B0%E6%97%A5/</guid>
       
       <description>&lt;h1 id=&#34;微信定时发送倒数日&#34;&gt;微信定时发送倒数日&lt;/h1&gt;
-&lt;p&gt;微信定时发送倒数日是基于Github项目&lt;a href=&#34;https://github.com/lich0821/WeChatFerry&#34;&gt;WeChatFerry&lt;/a&gt;实现的
-这个项目实现的功能：&lt;/p&gt;
+&lt;p&gt;微信定时发送倒数日是基于Github项目 &lt;a href=&#34;https://github.com/lich0821/WeChatFerry&#34;&gt;WeChatFerry&lt;/a&gt; 实现的&lt;/p&gt;
+&lt;p&gt;这个项目实现的功能：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;检查登录状态&lt;/li&gt;
 &lt;li&gt;获取登录账号的 wxid&lt;/li&gt;
@@ -1038,8 +1036,8 @@ import selectors  # selectors模块单线程异步轮询&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;对于Python客户端：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# 安装Python库&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pip install --upgrade wcfhttp
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/lich0821/WeChatFerry/blob/master/clients/python/wcferry/client.py&#34;&gt;接口信息&lt;/a&gt;
-&lt;a href=&#34;https://github.com/lich0821/WeChatFerry/blob/master/clients/python/test.py&#34;&gt;示例程序&lt;/a&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/lich0821/WeChatFerry/blob/master/clients/python/wcferry/client.py&#34;&gt;接口信息&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/lich0821/WeChatFerry/blob/master/clients/python/test.py&#34;&gt;示例程序&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;实现过程&#34;&gt;实现过程&lt;/h2&gt;
 &lt;h3 id=&#34;保存联系人列表&#34;&gt;保存联系人列表&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#00a000&#34;&gt;save_contacts&lt;/span&gt;(wcf):
@@ -1233,13 +1231,13 @@ import selectors  # selectors模块单线程异步轮询&lt;/p&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231221091214.png&#34; alt=&#34;$set命令&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231221091240.png&#34; alt=&#34;定时提醒效果&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;增加讯飞星火大模型&#34;&gt;增加讯飞星火大模型&lt;/h3&gt;
-&lt;p&gt;在上面的基础上，也可以接入一些AI大模型或者一些智能聊天的机器人
-我这里使用讯飞星火V3.0模型接口，个人认证和免费体验一年，200万token
-&lt;a href=&#34;https://xinghuo.xfyun.cn/?ch=blzc_WjOjQX&amp;amp;ref=ainavtool.com&#34;&gt;讯飞星火认知大模型&lt;/a&gt;
-&lt;a href=&#34;https://www.xfyun.cn/doc/spark/Web.html&#34;&gt;星火认知大模型Web API文档&lt;/a&gt;
-参考Web API的文档
-实现的结果：
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20231222210352.jpg&#34; alt=&#34;讯飞星火模型&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;在上面的基础上，也可以接入一些AI大模型或者一些智能聊天的机器人&lt;/p&gt;
+&lt;p&gt;我这里使用讯飞星火V3.0模型接口，个人认证和免费体验一年，200万token&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://xinghuo.xfyun.cn/?ch=blzc_WjOjQX&amp;amp;ref=ainavtool.com&#34;&gt;讯飞星火认知大模型&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.xfyun.cn/doc/spark/Web.html&#34;&gt;星火认知大模型Web API文档&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;参考Web API的文档&lt;/p&gt;
+&lt;p&gt;实现的结果：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20231222210352.jpg&#34; alt=&#34;讯飞星火模型&#34;&gt;&lt;/p&gt;</description>
       
     </item>
     
@@ -1251,40 +1249,41 @@ import selectors  # selectors模块单线程异步轮询&lt;/p&gt;
       <guid>https://pi3-l22.github.io/post/2023/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</guid>
       
       <description>&lt;h1 id=&#34;数据库应用系统设计&#34;&gt;数据库应用系统设计&lt;/h1&gt;
-&lt;p&gt;1、实验目的
-  熟练掌握概念结构设计和逻辑结构设计步骤，建立和操作数据库。
-2、实验内容与要求
-（1）根据已有信息，设计概念模型
-（2）将概念模型转换为关系模型
-（3）创建数据表，填入信息
-（4）设计查询语句，完成查询任务。
-要求：给出完整的步骤和截图。
-3、实验环境
-Microsoft SQL Server (Express) + SQL Server Management Studio&lt;/p&gt;
+&lt;p&gt;1、实验目的&lt;/p&gt;
+&lt;p&gt;  熟练掌握概念结构设计和逻辑结构设计步骤，建立和操作数据库。
+ 
+2、实验内容与要求&lt;/p&gt;
+&lt;p&gt;（1）根据已有信息，设计概念模型&lt;/p&gt;
+&lt;p&gt;（2）将概念模型转换为关系模型&lt;/p&gt;
+&lt;p&gt;（3）创建数据表，填入信息&lt;/p&gt;
+&lt;p&gt;（4）设计查询语句，完成查询任务。&lt;/p&gt;
+&lt;p&gt;要求：给出完整的步骤和截图。&lt;/p&gt;
+&lt;p&gt;3、实验环境&lt;/p&gt;
+&lt;p&gt;Microsoft SQL Server (Express) + SQL Server Management Studio&lt;/p&gt;
 &lt;h2 id=&#34;已有信息&#34;&gt;已有信息&lt;/h2&gt;
-&lt;p&gt;设有一家百货商店，已知信息如下：
-1）每个职工的数据是职工号、姓名、地址和他所在的商品部。
-2）每一商品部的数据有：它的职工，经理和它经销的商品。
-3）每种经销的商品数据有：商品名、生产厂家、价格、型号（厂家定的）和内部商品代号（商店规定的）。
-4）每个生产厂家的数据有：厂名、地址、向商店提供的商品价格。&lt;/p&gt;
+&lt;p&gt;设有一家百货商店，已知信息如下：&lt;/p&gt;
+&lt;p&gt;1）每个职工的数据是职工号、姓名、地址和他所在的商品部。&lt;/p&gt;
+&lt;p&gt;2）每一商品部的数据有：它的职工，经理和它经销的商品。&lt;/p&gt;
+&lt;p&gt;3）每种经销的商品数据有：商品名、生产厂家、价格、型号（厂家定的）和内部商品代号（商店规定的）。&lt;/p&gt;
+&lt;p&gt;4）每个生产厂家的数据有：厂名、地址、向商店提供的商品价格。&lt;/p&gt;
 &lt;h2 id=&#34;实验步骤&#34;&gt;实验步骤&lt;/h2&gt;
-&lt;p&gt;1）根据已知信息，设计该百货商店的概念模型 （给出E-R图）
-2）将概念模型转换为关系模型。（给出关系模型）
-3）详细列出设计了几张表，各个表所含的字段，以及字段采用的数据类型。有些字段要有约束（价格大于0等）。
-3）用SQL创建数据表，填入信息，每张表填入的信息不少于8条。（建表语句以及结果截图）
-4）用SQL语言进行以下数据查询操作：（查询语句以及结果截图）
-      a) 查询所有经理的姓名
-      b) 查询某商品部交涉的厂家列表。&lt;/p&gt;
+&lt;p&gt;1）根据已知信息，设计该百货商店的概念模型 （给出E-R图）&lt;/p&gt;
+&lt;p&gt;2）将概念模型转换为关系模型。（给出关系模型）&lt;/p&gt;
+&lt;p&gt;3）详细列出设计了几张表，各个表所含的字段，以及字段采用的数据类型。有些字段要有约束（价格大于0等）。&lt;/p&gt;
+&lt;p&gt;3）用SQL创建数据表，填入信息，每张表填入的信息不少于8条。（建表语句以及结果截图）&lt;/p&gt;
+&lt;p&gt;4）用SQL语言进行以下数据查询操作：（查询语句以及结果截图）&lt;/p&gt;
+&lt;p&gt;a) 查询所有经理的姓名&lt;/p&gt;
+&lt;p&gt;b) 查询某商品部交涉的厂家列表。&lt;/p&gt;
 &lt;h2 id=&#34;实验过程&#34;&gt;实验过程&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;①&lt;/strong&gt;    &lt;strong&gt;根据给出的信息，可以设计绘制出ER图&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000317.png&#34; alt=&#34;ER图&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;②&lt;/strong&gt; &lt;strong&gt;将上面ER概念模型转换为关系模型&lt;/strong&gt;
-职工（职工号，姓名，地址，所在部门）
-商品部（部门号，部门名称，经理）
-商品（商品代号，商品名，生产厂家，价格，型号，商品部）
-厂家（厂家代号，厂名，地址，提供价格）&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;③&lt;/strong&gt; &lt;strong&gt;根据模型设计数据表，具有详细的字段名称、数据类型以及数据的约束&lt;/strong&gt;
-共设计了4张表，分别是职工表、商品部表、商品表、厂家表&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;②&lt;/strong&gt; &lt;strong&gt;将上面ER概念模型转换为关系模型&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;职工（职工号，姓名，地址，所在部门）&lt;/p&gt;
+&lt;p&gt;商品部（部门号，部门名称，经理）&lt;/p&gt;
+&lt;p&gt;商品（商品代号，商品名，生产厂家，价格，型号，商品部）&lt;/p&gt;
+&lt;p&gt;厂家（厂家代号，厂名，地址，提供价格）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;③&lt;/strong&gt; &lt;strong&gt;根据模型设计数据表，具有详细的字段名称、数据类型以及数据的约束&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;共设计了4张表，分别是职工表、商品部表、商品表、厂家表&lt;/p&gt;
 &lt;p&gt;职工表：&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
@@ -1573,8 +1572,8 @@ Microsoft SQL Server (Express) + SQL Server Management Studio&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000553.png&#34; alt=&#34;厂家表数据&#34;&gt;&lt;/p&gt;
 &lt;p&gt;总体结构:
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000559.png&#34; alt=&#34;总体结构&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;⑤&lt;/strong&gt; &lt;strong&gt;用SQL语言进行以下数据查询操作&lt;/strong&gt;
-a) 查询所有经理的姓名&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;⑤&lt;/strong&gt; &lt;strong&gt;用SQL语言进行以下数据查询操作&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;a) 查询所有经理的姓名&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;-- a) 查询所有经理的姓名
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;SELECT&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;dept_manager&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;FROM&lt;/span&gt;&lt;span style=&#34;color:#bbb&#34;&gt; &lt;/span&gt;department;&lt;span style=&#34;color:#bbb&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231218000607.png&#34; alt=&#34;查询结果&#34;&gt;&lt;/p&gt;
@@ -1965,8 +1964,8 @@ s020，王五，男，1999-8-9,  …”。
 &lt;/ol&gt;
 &lt;h2 id=&#34;程序设计思路&#34;&gt;程序设计思路&lt;/h2&gt;
 &lt;h3 id=&#34;网络结构拓扑图&#34;&gt;网络结构拓扑图&lt;/h3&gt;
-&lt;p&gt;一对多的网络结构，即一台服务器对应多台客户端的星型拓扑结构
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231031.png&#34; alt=&#34;网络结构拓扑图&#34;&gt;&lt;/p&gt;
+&lt;p&gt;一对多的网络结构，即一台服务器对应多台客户端的星型拓扑结构&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231031.png&#34; alt=&#34;网络结构拓扑图&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;使用的python库&#34;&gt;使用的Python库&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;socket套接字库&lt;/li&gt;
@@ -1974,11 +1973,11 @@ s020，王五，男，1999-8-9,  …”。
 &lt;li&gt;&lt;a href=&#34;https://flet.dev/docs/&#34;&gt;flet第三方库&lt;/a&gt;，用于实现图形化界面&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;具体设计流程&#34;&gt;具体设计流程&lt;/h3&gt;
-&lt;p&gt;首先我们应该先知道，UDP和TCP的区别是什么。UDP是无连接的，发送出去的数据不论对方是否收到，都不管，而TCP是面向连接的，每次通信都需要确保对方已经接收到才能进行下一步，也就多了很多协议设计的难度以及需要很多的异常判断。
-在此之前，我已经写过一个关于socket的项目，是基于TCP的：&lt;a href=&#34;Python%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E7%A8%8B%E5%BA%8F.md&#34;&gt;Python远程控制程序&lt;/a&gt;，相比较之前这个项目，此次的程序设计就显得简单多了，毕竟是基于UDP的。&lt;/p&gt;
+&lt;p&gt;首先我们应该先知道，UDP和TCP的区别是什么。UDP是无连接的，发送出去的数据不论对方是否收到，都不管，而TCP是面向连接的，每次通信都需要确保对方已经接收到才能进行下一步，也就多了很多协议设计的难度以及需要很多的异常判断。&lt;/p&gt;
+&lt;p&gt;在此之前，我已经写过一个关于socket的项目，是基于TCP的：&lt;a href=&#34;Python%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E7%A8%8B%E5%BA%8F.md&#34;&gt;Python远程控制程序&lt;/a&gt;，相比较之前这个项目，此次的程序设计就显得简单多了，毕竟是基于UDP的。&lt;/p&gt;
 &lt;h4 id=&#34;最简单的udp连接&#34;&gt;最简单的UDP连接&lt;/h4&gt;
-&lt;p&gt;首先先写一个最简单的UDP连接程序，作为整个程序的基础
-&lt;strong&gt;client端&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;首先先写一个最简单的UDP连接程序，作为整个程序的基础&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;client端&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;IP &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;POST &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;7777&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;SERVER_ADDR &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; (IP, POST)
@@ -2012,9 +2011,9 @@ s020，王五，男，1999-8-9,  …”。
 &lt;li&gt;注册&lt;/li&gt;
 &lt;li&gt;公聊&lt;/li&gt;
 &lt;li&gt;私聊&lt;/li&gt;
-&lt;li&gt;退出
-在client端中，我们需要将用户输入的消息，根据相应的操作进行封装成固定的格式，以便server端根据收到的数据，了解需要进行什么操作，经过操作后返回对应的数据&lt;/li&gt;
+&lt;li&gt;退出&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;在client端中，我们需要将用户输入的消息，根据相应的操作进行封装成固定的格式，以便server端根据收到的数据，了解需要进行什么操作，经过操作后返回对应的数据&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;注册操作的封装格式：REGISTER {username} {password}&lt;/li&gt;
 &lt;li&gt;登录操作的封装格式：LOGIN {username} {password}&lt;/li&gt;
@@ -2160,9 +2159,9 @@ s020，王五，男，1999-8-9,  …”。
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        private_chat(message, to_username, address)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;写完这些，其实整个实验就算是完成了，但是在测试的过程中还是发现了一些问题：用户输入信息的交互不好，因为是在命令行中进行操作，所以有些时候会和对方输出的信息重叠，受到干扰，体验不好，所以决定在接下来要写个图形化界面&lt;/p&gt;
 &lt;h4 id=&#34;图形化界面编写&#34;&gt;图形化界面编写&lt;/h4&gt;
-&lt;p&gt;对于python图形化界面的编写，其实有很多的方式，如python的标准库Tkinter、QT系列的pyqt5和pyside6、还有Flutter系的flet、…………
-在此之前，我也利用flet编写过python的图形化界面项目：&lt;a href=&#34;%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E6%9C%AC%E5%9C%B0%E9%87%8F%E5%AD%90%E6%96%87%E4%BB%B6%E5%8A%A0%E8%A7%A3%E5%AF%86.md&#34;&gt;基于Python的本地量子文件加密&lt;/a&gt;，所以这次我还是使用flet进行编写
-不管是之前的项目，还是这次的程序，编写图形化界面，我全部都是参考官方的文档，写的很详细，给予了我很大的帮助，里面还有很多的例子，帮助我理解，所以这次的编写也算是有点入门了&lt;/p&gt;
+&lt;p&gt;对于python图形化界面的编写，其实有很多的方式，如python的标准库Tkinter、QT系列的pyqt5和pyside6、还有Flutter系的flet、…………&lt;/p&gt;
+&lt;p&gt;在此之前，我也利用flet编写过python的图形化界面项目：&lt;a href=&#34;%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E6%9C%AC%E5%9C%B0%E9%87%8F%E5%AD%90%E6%96%87%E4%BB%B6%E5%8A%A0%E8%A7%A3%E5%AF%86.md&#34;&gt;基于Python的本地量子文件加密&lt;/a&gt;，所以这次我还是使用flet进行编写&lt;/p&gt;
+&lt;p&gt;不管是之前的项目，还是这次的程序，编写图形化界面，我全部都是参考官方的文档，写的很详细，给予了我很大的帮助，里面还有很多的例子，帮助我理解，所以这次的编写也算是有点入门了&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;登录页面代码框架：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#00a000&#34;&gt;login_page&lt;/span&gt;(page:ft&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;page):
@@ -2346,11 +2345,11 @@ s020，王五，男，1999-8-9,  …”。
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231210.png&#34; alt=&#34;私聊功能&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231221.png&#34; alt=&#34;退出聊天室功能&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;总结与心得&#34;&gt;总结与心得&lt;/h2&gt;
-&lt;p&gt;总的来说，写一个基于UDP协议的多人聊天室这个实验还是很简单的，因为UDP是无连接的，不像TCP一样要考虑很多的问题，如丢包、失去连接等，UDP只管发送和接收，不用关心信息是否送达，所以少了很多“握手”的过程，简单不少。
-但是，等到整个程序写完之后，在命令行中执行，我发现了一个问题，当我正在命令行输入消息时，终端上已经有部分文字，这时候对方发来消息，那么对方的消息就会从我当前的光标处打印出来，把我的语句断开，这对用户来说是个不好的体验。所以最后，我决定写一个图形化界面，将用户输入和公屏输出分开，这样体验和美观程度会大大提高。
-图像化界面选择了&lt;a href=&#34;https://flet.dev/docs/&#34;&gt;flet框架&lt;/a&gt;，它基于Google 的 Flutter实现，所以对我来说很快能上手，而不像pyqt5那样复杂。在编写图像化的过程中也遇到了很多问题，不过大部分是flet框架的问题，对于socket这一块的问题就是：因为UDP基于无连接，所以我发送出去的消息不知道对方有没有收到，当我的服务端没有开启时，客户端在登录时会向服务端发送请求同时转到阻塞等到回应，但是这个过程中没有提示，用户可能会多次点击登录或者注册，导致开启大量的UDP阻塞等待，等到服务端上线时，发送的消息会被这些阻塞等待给覆盖掉，导致影响后面的欢迎界面的输出。解决办法就是：设置一个阻塞等待超时，当等待超时，自动释放阻塞的线程，同时弹出警告框，告诉用户“当前服务器连接不上，稍后再试”，以免开启更多的线程，浪费资源同时影响后续输出。
-解决了上面这个问题，但是上面这个解决办法同样导致出现了接下来一个问题：需要一直阻塞等待服务端发送消息的功能，因为上面设置的超时时间而报错，所以解决办法也很简单就是在这个功能中，将超时时间设为None。
-总之，在这个实验中，我遇到了不少问题，随着一个个问题被解决，我也从中学到了很多。&lt;/p&gt;</description>
+&lt;p&gt;总的来说，写一个基于UDP协议的多人聊天室这个实验还是很简单的，因为UDP是无连接的，不像TCP一样要考虑很多的问题，如丢包、失去连接等，UDP只管发送和接收，不用关心信息是否送达，所以少了很多“握手”的过程，简单不少。&lt;/p&gt;
+&lt;p&gt;但是，等到整个程序写完之后，在命令行中执行，我发现了一个问题，当我正在命令行输入消息时，终端上已经有部分文字，这时候对方发来消息，那么对方的消息就会从我当前的光标处打印出来，把我的语句断开，这对用户来说是个不好的体验。所以最后，我决定写一个图形化界面，将用户输入和公屏输出分开，这样体验和美观程度会大大提高。&lt;/p&gt;
+&lt;p&gt;图像化界面选择了 &lt;a href=&#34;https://flet.dev/docs/&#34;&gt;flet框架&lt;/a&gt;，它基于Google 的 Flutter实现，所以对我来说很快能上手，而不像pyqt5那样复杂。在编写图像化的过程中也遇到了很多问题，不过大部分是flet框架的问题，对于socket这一块的问题就是：因为UDP基于无连接，所以我发送出去的消息不知道对方有没有收到，当我的服务端没有开启时，客户端在登录时会向服务端发送请求同时转到阻塞等到回应，但是这个过程中没有提示，用户可能会多次点击登录或者注册，导致开启大量的UDP阻塞等待，等到服务端上线时，发送的消息会被这些阻塞等待给覆盖掉，导致影响后面的欢迎界面的输出。解决办法就是：设置一个阻塞等待超时，当等待超时，自动释放阻塞的线程，同时弹出警告框，告诉用户“当前服务器连接不上，稍后再试”，以免开启更多的线程，浪费资源同时影响后续输出。&lt;/p&gt;
+&lt;p&gt;解决了上面这个问题，但是上面这个解决办法同样导致出现了接下来一个问题：需要一直阻塞等待服务端发送消息的功能，因为上面设置的超时时间而报错，所以解决办法也很简单就是在这个功能中，将超时时间设为None。&lt;/p&gt;
+&lt;p&gt;总之，在这个实验中，我遇到了不少问题，随着一个个问题被解决，我也从中学到了很多。&lt;/p&gt;</description>
       
     </item>
     
@@ -2374,13 +2373,13 @@ s020，王五，男，1999-8-9,  …”。
 &lt;li&gt;远程文件下载&lt;/li&gt;
 &lt;li&gt;获取远程主机截屏&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;在学习网络安全技术的过程中，了解到了计算机病毒、蠕虫和木马等知识，这其中木马应该是最好实现的一个，于是便想到写一个木马
-在众多木马的类型中，结合学习到的网络编程知识，于是便有了这一个基于Socket实现的远程控制程序
-在后续，可以将这个远控程序写入其他客户端程序中（比如之前的量子加密网盘项目），只要对方打开了桌面程序，就能远程连接&lt;/p&gt;
+&lt;p&gt;在学习网络安全技术的过程中，了解到了计算机病毒、蠕虫和木马等知识，这其中木马应该是最好实现的一个，于是便想到写一个木马&lt;/p&gt;
+&lt;p&gt;在众多木马的类型中，结合学习到的网络编程知识，于是便有了这一个基于Socket实现的远程控制程序&lt;/p&gt;
+&lt;p&gt;在后续，可以将这个远控程序写入其他客户端程序中（比如之前的量子加密网盘项目），只要对方打开了桌面程序，就能远程连接&lt;/p&gt;
 &lt;h2 id=&#34;实现过程&#34;&gt;实现过程&lt;/h2&gt;
 &lt;h3 id=&#34;最简单的socket程序&#34;&gt;最简单的Socket程序&lt;/h3&gt;
-&lt;p&gt;首先，整个程序的框架就是基于Socket的TCP传输，先写一个最简单的Socket程序
-&lt;strong&gt;Server端：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;首先，整个程序的框架就是基于Socket的TCP传输，先写一个最简单的Socket程序&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Server端：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#00f;font-weight:bold&#34;&gt;socket&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;socket_server &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; socket&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;socket()
@@ -2413,37 +2412,37 @@ s020，王五，男，1999-8-9,  …”。
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a2f&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;服务端回复的消息：&amp;#39;&lt;/span&gt;, recv_data&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;decode(&lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;UTF-8&amp;#39;&lt;/span&gt;))
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;socker_client&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;close()
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以上是最简单的一个Socket程序，实现了两台主机之间相互传递文字信息。
-但是在这个程序中，同样存在很多的问题，比如：&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以上是最简单的一个Socket程序，实现了两台主机之间相互传递文字信息。&lt;/p&gt;
+&lt;p&gt;但是在这个程序中，同样存在很多的问题，比如：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;传输的消息可能会超过1024&lt;/li&gt;
 &lt;li&gt;没有任何异常抛出机制，在Socket通信的过程中，一定会存在丢包、失去连接、超时等问题&lt;/li&gt;
-&lt;li&gt;…………
-这些问题如果只是在上面这样一个简单程序中，基本不会有问题，但是一旦程序实现的功能多了，代码量大了，这些问题都至关重要，都需要在后续的代码中注意，不然找bug会很痛苦😢&lt;/li&gt;
+&lt;li&gt;…………&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;这些问题如果只是在上面这样一个简单程序中，基本不会有问题，但是一旦程序实现的功能多了，代码量大了，这些问题都至关重要，都需要在后续的代码中注意，不然找bug会很痛苦😢&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;需要强调的是，在此程序中，我将服务端作为主动执行端，客户端作为被动执行端，也就是服务端发送指令，客户端根据指令进行操作并返回服务端
-对于木马程序，同样可以理解为，服务端为攻击操纵者，客户端为攻击受害者
-后续的介绍中，都是以此为基础&lt;/p&gt;
+&lt;p&gt;需要强调的是，在此程序中，我将服务端作为主动执行端，客户端作为被动执行端，也就是服务端发送指令，客户端根据指令进行操作并返回服务端&lt;/p&gt;
+&lt;p&gt;对于木马程序，同样可以理解为，服务端为攻击操纵者，客户端为攻击受害者&lt;/p&gt;
+&lt;p&gt;后续的介绍中，都是以此为基础&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;远程命令执行&#34;&gt;远程命令执行&lt;/h3&gt;
-&lt;p&gt;学会上面最简单的socket程序之后，接下来就是思考，怎么实现远程的命令执行
-在这里我们可以使用Python中的os模块，os模块提供的就是各种 Python 程序与操作系统进行交互的接口。通过使用os模块，一方面可以方便地与操作系统进行交互，另一方面页可以极大增强代码的可移植性
-Python中的os模块，理论上支持Windows、Linux和Mac OS系统，所以使用os模块，也可以增大我们编写的这个程序的使用范围
-所以远程命令执行的整体流程和框架为：
-{% mermaid %}
-graph TB
-a(服务端等待客户端连接)&amp;ndash;&amp;gt;b(客户端连接上服务端)
-b&amp;ndash;&amp;gt;c(服务端接收到连接并发送指令)
-c&amp;ndash;&amp;gt;d(客户端解析指令并调用OS模块执行)
-{% endmermaid %}&lt;/p&gt;
-&lt;p&gt;使用os模块进行命令也十分简单，只需要使用&lt;code&gt;os.system(&#39;命令&#39;)&lt;/code&gt;或者&lt;code&gt;os.popen(&#39;命令&#39;)&lt;/code&gt;就可以实现，
-但是但是，这里不能使用&lt;code&gt;os.system&lt;/code&gt;，比如我们执行&lt;code&gt;dir&lt;/code&gt;命令，需要返回文件夹内的内容，&lt;font color=&#34;#00b0f0&#34;&gt;它不能返回命令执行后的内容&lt;/font&gt;，而&lt;code&gt;os.popen&lt;/code&gt;可以&lt;/p&gt;
+&lt;p&gt;学会上面最简单的socket程序之后，接下来就是思考，怎么实现远程的命令执行&lt;/p&gt;
+&lt;p&gt;在这里我们可以使用Python中的os模块，os模块提供的就是各种 Python 程序与操作系统进行交互的接口。通过使用os模块，一方面可以方便地与操作系统进行交互，另一方面页可以极大增强代码的可移植性&lt;/p&gt;
+&lt;p&gt;Python中的os模块，理论上支持Windows、Linux和Mac OS系统，所以使用os模块，也可以增大我们编写的这个程序的使用范围&lt;/p&gt;
+&lt;p&gt;所以远程命令执行的整体流程和框架为：&lt;/p&gt;
+&lt;p&gt;{% mermaid %}&lt;/p&gt;
+&lt;p&gt;graph TB&lt;/p&gt;
+&lt;p&gt;a(服务端等待客户端连接)&amp;ndash;&amp;gt;b(客户端连接上服务端)&lt;/p&gt;
+&lt;p&gt;b&amp;ndash;&amp;gt;c(服务端接收到连接并发送指令)&lt;/p&gt;
+&lt;p&gt;c&amp;ndash;&amp;gt;d(客户端解析指令并调用OS模块执行)&lt;/p&gt;
+&lt;p&gt;{% endmermaid %}&lt;/p&gt;
+&lt;p&gt;使用os模块进行命令也十分简单，只需要使用 &lt;code&gt;os.system(&#39;命令&#39;)&lt;/code&gt; 或者 &lt;code&gt;os.popen(&#39;命令&#39;)&lt;/code&gt; 就可以实现.&lt;/p&gt;
+&lt;p&gt;但是，这里不能使用&lt;code&gt;os.system&lt;/code&gt;，比如我们执行&lt;code&gt;dir&lt;/code&gt;命令，需要返回文件夹内的内容，&lt;font color=&#34;#00b0f0&#34;&gt;它不能返回命令执行后的内容&lt;/font&gt;，而&lt;code&gt;os.popen&lt;/code&gt;可以&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;补充：
-python中&lt;code&gt;os.system&lt;/code&gt;、&lt;code&gt;os.popen&lt;/code&gt;、&lt;code&gt;subprocess.popen&lt;/code&gt;都是可以实现系统命令的执行
-但是他们之间也存在区别，&lt;a href=&#34;https://blog.csdn.net/bcfdsagbfcisbg/article/details/78134172&#34;&gt;参考文章&lt;/a&gt;
-总结一下：&lt;/p&gt;
+&lt;p&gt;补充：&lt;/p&gt;
+&lt;p&gt;python中&lt;code&gt;os.system&lt;/code&gt;、&lt;code&gt;os.popen&lt;/code&gt;、&lt;code&gt;subprocess.popen&lt;/code&gt;都是可以实现系统命令的执行
+但是他们之间也存在区别，&lt;a href=&#34;https://blog.csdn.net/bcfdsagbfcisbg/article/details/78134172&#34;&gt;参考文章&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;总结一下：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;os.system&lt;/code&gt;直接调用标准C的system() 函数，仅仅在一个子终端运行系统命令，而不能获取命令执行后的返回信息&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;os.popen&lt;/code&gt;不仅执行命令而且返回执行后的信息对象(常用于需要获取执行命令后的返回信息)，是通过一个管道文件将结果返回。返回的是 file read 的对象，对其进行读取&lt;code&gt;read&lt;/code&gt;的操作可以看到执行的输出&lt;/li&gt;
@@ -2451,8 +2450,8 @@ python中&lt;code&gt;os.system&lt;/code&gt;、&lt;code&gt;os.popen&lt;/code&gt;�
 &lt;li&gt;&lt;code&gt;commands&lt;/code&gt;可以获取返回值和命令的输出结果&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;所以在这个功能实现中，我选择使用&lt;code&gt;os.popen&lt;/code&gt;方法来实现命令执行，使用&lt;code&gt;read&lt;/code&gt;方法读取返回的内容
-&lt;strong&gt;Client端执行命令函数:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;所以在这个功能实现中，我选择使用 &lt;code&gt;os.popen&lt;/code&gt; 方法来实现命令执行，使用 &lt;code&gt;read&lt;/code&gt; 方法读取返回的内容&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Client端执行命令函数:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#00a000&#34;&gt;run_cmd&lt;/span&gt;(socker_client, cmd):  
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    pwd &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; os&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;getcwd()  
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;if&lt;/span&gt; cmd&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;startswith(&lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;cd&amp;#39;&lt;/span&gt;):  
@@ -2475,32 +2474,32 @@ python中&lt;code&gt;os.system&lt;/code&gt;、&lt;code&gt;os.popen&lt;/code&gt;�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;命令执行成功&amp;#39;&lt;/span&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# 把命令回显结果发送给服务端  &lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    socker_client&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;send(result&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;encode(&lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;UTF-8&amp;#39;&lt;/span&gt;))
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;从上面这个函数实现代码中可以看到，我特意对&lt;code&gt;cd&lt;/code&gt;切换目录命令做了单独的判断
-这是因为在Python程序中直接执行&lt;code&gt;cd&lt;/code&gt;切换目录是不起作用的，还是会返回当前程序运行的目录位置，所以需要使用&lt;code&gt;os.chdir&lt;/code&gt;方法对当前Python程序运行的目录进行切换
-除此之外的其他命令则没有进行单独的判断，直接交给&lt;code&gt;popen&lt;/code&gt;执行，并用&lt;code&gt;read&lt;/code&gt;方法读取返回信息&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;从上面这个函数实现代码中可以看到，我特意对 &lt;code&gt;cd&lt;/code&gt; 切换目录命令做了单独的判断&lt;/p&gt;
+&lt;p&gt;这是因为在Python程序中直接执行 &lt;code&gt;cd&lt;/code&gt; 切换目录是不起作用的，还是会返回当前程序运行的目录位置，所以需要使用 &lt;code&gt;os.chdir&lt;/code&gt; 方法对当前Python程序运行的目录进行切换&lt;/p&gt;
+&lt;p&gt;除此之外的其他命令则没有进行单独的判断，直接交给 &lt;code&gt;popen&lt;/code&gt; 执行，并用 &lt;code&gt;read&lt;/code&gt; 方法读取返回信息&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;值得注意的是，&lt;code&gt;popen&lt;/code&gt;在执行其他命令会有意想不到的返回值，可能会不返回值，并且一直阻塞，需要根据实际情况单独判断&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214229.png&#34; alt=&#34;远程执行命令&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;远程下载文件&#34;&gt;远程下载文件&lt;/h3&gt;
-&lt;p&gt;远程下载文件，需要的是服务端和客户端紧密配合，并且保证通信过程中的同步
-所谓同步，一定是&lt;strong&gt;一收一发&lt;/strong&gt;的形式，不论是客户端还是服务端，一旦有一端出现了连续两次的发送或者接收，在实际的执行过程中，一定会出现死锁的现象，也就是双方都在等待对方发送消息，双方一直阻塞。
-远程下载文件的整体流程和框架：
-{% mermaid %}
-graph TB
-a[服务端发送下载文件指令并指定文件名称]&amp;ndash;&amp;gt;b[客户端接收下载文件指令]
-b&amp;ndash;&amp;gt;c[客户端搜索文件是否存在]
-c&amp;ndash;&amp;gt;|存在|d[客户端读取文件数据并发送头部信息]
-c&amp;ndash;&amp;gt;|不存在|e[客户端向服务端发送不存在指令]
-d&amp;ndash;&amp;gt;f[服务端接收头部信息发送确认信息]
-e&amp;ndash;&amp;gt;h[双方退出下载文件流程]
-f&amp;ndash;&amp;gt;f1[客户端接收确认信息并发送文件数据]
-f1&amp;ndash;&amp;gt;f2[服务端接收文件数据并写入本地文件]
-{% endmermaid %}&lt;/p&gt;
-&lt;p&gt;这其中有一步是发送和确认文件的头部信息，这是为了告诉服务端所要接收的文件的文件大小和名称，以便写入文件。
-当然这一步是可以省略的，服务端可以根据输入的指令信息得知文件的名称
-在此程序中，使用&lt;code&gt;get 文件名称&lt;/code&gt;的方式告诉双方，我需要进行下载文件的流程
-&lt;strong&gt;Server端get函数：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;远程下载文件，需要的是服务端和客户端紧密配合，并且保证通信过程中的同步&lt;/p&gt;
+&lt;p&gt;所谓同步，一定是&lt;strong&gt;一收一发&lt;/strong&gt;的形式，不论是客户端还是服务端，一旦有一端出现了连续两次的发送或者接收，在实际的执行过程中，一定会出现死锁的现象，也就是双方都在等待对方发送消息，双方一直阻塞。&lt;/p&gt;
+&lt;p&gt;远程下载文件的整体流程和框架：&lt;/p&gt;
+&lt;p&gt;{% mermaid %}&lt;/p&gt;
+&lt;p&gt;graph TB&lt;/p&gt;
+&lt;p&gt;a[服务端发送下载文件指令并指定文件名称]&amp;ndash;&amp;gt;b[客户端接收下载文件指令]&lt;/p&gt;
+&lt;p&gt;b&amp;ndash;&amp;gt;c[客户端搜索文件是否存在]&lt;/p&gt;
+&lt;p&gt;c&amp;ndash;&amp;gt;|存在|d[客户端读取文件数据并发送头部信息]&lt;/p&gt;
+&lt;p&gt;c&amp;ndash;&amp;gt;|不存在|e[客户端向服务端发送不存在指令]&lt;/p&gt;
+&lt;p&gt;d&amp;ndash;&amp;gt;f[服务端接收头部信息发送确认信息]&lt;/p&gt;
+&lt;p&gt;e&amp;ndash;&amp;gt;h[双方退出下载文件流程]&lt;/p&gt;
+&lt;p&gt;f&amp;ndash;&amp;gt;f1[客户端接收确认信息并发送文件数据]&lt;/p&gt;
+&lt;p&gt;f1&amp;ndash;&amp;gt;f2[服务端接收文件数据并写入本地文件]&lt;/p&gt;
+&lt;p&gt;{% endmermaid %}&lt;/p&gt;
+&lt;p&gt;这其中有一步是发送和确认文件的头部信息，这是为了告诉服务端所要接收的文件的文件大小和名称，以便写入文件。&lt;/p&gt;
+&lt;p&gt;当然这一步是可以省略的，服务端可以根据输入的指令信息得知文件的名称&lt;/p&gt;
+&lt;p&gt;在此程序中，使用 &lt;code&gt;get 文件名称&lt;/code&gt; 的方式告诉双方，我需要进行下载文件的流程&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Server端get函数：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#00a000&#34;&gt;get_file&lt;/span&gt;(conn):  
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# 文件不存在的情况  &lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    rev &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; conn&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;recv(&lt;span style=&#34;color:#666&#34;&gt;1024&lt;/span&gt;)  
@@ -2571,29 +2570,29 @@ f1&amp;ndash;&amp;gt;f2[服务端接收文件数据并写入本地文件]
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        conn&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;send(&lt;span style=&#34;color:#b44&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;file_not_exist&amp;#39;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214251.png&#34; alt=&#34;下载文件&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;远程上传文件&#34;&gt;远程上传文件&lt;/h3&gt;
-&lt;p&gt;在这一部分，整体的流程和上面的远程文件下载基本一致，就是将上方服务端和客户端的流程对调
-这里就不过多介绍，代码是一样的
-在此程序中使用&lt;code&gt;put 文件名称&lt;/code&gt;的形式，告诉双方我需要进入上传文件的流程
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214303.png&#34; alt=&#34;上传文件&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在这一部分，整体的流程和上面的远程文件下载基本一致，就是将上方服务端和客户端的流程对调&lt;/p&gt;
+&lt;p&gt;这里就不过多介绍，代码是一样的&lt;/p&gt;
+&lt;p&gt;在此程序中使用 &lt;code&gt;put 文件名称&lt;/code&gt; 的形式，告诉双方我需要进入上传文件的流程&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214303.png&#34; alt=&#34;上传文件&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;远程获取屏幕截图&#34;&gt;远程获取屏幕截图&lt;/h3&gt;
-&lt;p&gt;Python获取屏幕截图的方式很多，比如PIL中的ImageGrab模块、windows API、PyQt、pyautogui等等
-&lt;a href=&#34;https://blog.csdn.net/c_lanxiaofang/article/details/126412158&#34;&gt;参考文章&lt;/a&gt;
-在此程序中使用了PIL中的ImageGrab模块，原因就是操作十分简单，缺点是效率较低，但是对于我们这个程序来说，几乎感觉不出差别
-ImageGrab模块只需要两条命令就能搞定全屏截图，十分方便&lt;/p&gt;
+&lt;p&gt;Python获取屏幕截图的方式很多，比如PIL中的ImageGrab模块、windows API、PyQt、pyautogui等等&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/c_lanxiaofang/article/details/126412158&#34;&gt;参考文章&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在此程序中使用了PIL中的ImageGrab模块，原因就是操作十分简单，缺点是效率较低，但是对于我们这个程序来说，几乎感觉不出差别&lt;/p&gt;
+&lt;p&gt;ImageGrab模块只需要两条命令就能搞定全屏截图，十分方便&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;im &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; ImageGrab&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;grab()
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;im&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;save(file_name)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;远程获取屏幕截图的整体流程和框架：
-{% mermaid %}
-graph TB
-a[服务端发送截屏指令并进入截屏流程]&amp;ndash;&amp;gt;b[客户端接收截屏指令并进入截屏流程]
-b&amp;ndash;&amp;gt;c[服务端发送&amp;rsquo;start&amp;rsquo;指令]
-c&amp;ndash;&amp;gt;d[客户端端接收&amp;rsquo;start&amp;rsquo;指令并截屏保存文件]
-d&amp;ndash;&amp;gt;f[进入get下载文件流程]
-c&amp;ndash;&amp;gt;f
-f&amp;ndash;&amp;gt;e[客户端删除截屏文件,双方退出截屏流程]
-{% endmermaid %}&lt;/p&gt;
-&lt;p&gt;在此程序中，使用&lt;code&gt;screen&lt;/code&gt;的方式告诉双方，我需要进行截屏的流程
-&lt;strong&gt;Server端screen函数：&lt;/strong&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;远程获取屏幕截图的整体流程和框架：&lt;/p&gt;
+&lt;p&gt;{% mermaid %}&lt;/p&gt;
+&lt;p&gt;graph TB&lt;/p&gt;
+&lt;p&gt;a[服务端发送截屏指令并进入截屏流程]&amp;ndash;&amp;gt;b[客户端接收截屏指令并进入截屏流程]&lt;/p&gt;
+&lt;p&gt;b&amp;ndash;&amp;gt;c[服务端发送&amp;rsquo;start&amp;rsquo;指令]&lt;/p&gt;
+&lt;p&gt;c&amp;ndash;&amp;gt;d[客户端端接收&amp;rsquo;start&amp;rsquo;指令并截屏保存文件]&lt;/p&gt;
+&lt;p&gt;d&amp;ndash;&amp;gt;f[进入get下载文件流程]&lt;/p&gt;
+&lt;p&gt;c&amp;ndash;&amp;gt;f&lt;/p&gt;
+&lt;p&gt;f&amp;ndash;&amp;gt;e[客户端删除截屏文件,双方退出截屏流程]&lt;/p&gt;
+&lt;p&gt;{% endmermaid %}&lt;/p&gt;
+&lt;p&gt;在此程序中，使用 &lt;code&gt;screen&lt;/code&gt; 的方式告诉双方，我需要进行截屏的流程&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Server端screen函数：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#00a000&#34;&gt;screen_shot&lt;/span&gt;(conn):  
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    rev &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; conn&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;recv(&lt;span style=&#34;color:#666&#34;&gt;1024&lt;/span&gt;)  
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;if&lt;/span&gt; rev &lt;span style=&#34;color:#666&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;screen&amp;#39;&lt;/span&gt;:  
@@ -2618,10 +2617,10 @@ f&amp;ndash;&amp;gt;e[客户端删除截屏文件,双方退出截屏流程]
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214314.png&#34; alt=&#34;截屏&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214330.png&#34; alt=&#34;截取的图片拉取到本地&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;获取微信数据&#34;&gt;获取微信数据&lt;/h3&gt;
-&lt;p&gt;这里功能是基于Github开源项目：&lt;a href=&#34;https://github.com/xaoyaoo/PyWxDump&#34;&gt;PyWxDump&lt;/a&gt;
-其提供了一系列获取微信数据信息、聊天记录等Python接口
-利用这个python项目，可以很容易获取到微信数据
-如 获取微信基本信息：&lt;/p&gt;
+&lt;p&gt;这里功能是基于Github开源项目：&lt;a href=&#34;https://github.com/xaoyaoo/PyWxDump&#34;&gt;PyWxDump&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;其提供了一系列获取微信数据信息、聊天记录等Python接口&lt;/p&gt;
+&lt;p&gt;利用这个python项目，可以很容易获取到微信数据&lt;/p&gt;
+&lt;p&gt;如获取微信基本信息：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#00a000&#34;&gt;get_wechat_info&lt;/span&gt;(conn):
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# 读取文件中的json数据&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color:#a2f&#34;&gt;open&lt;/span&gt;(&lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;version_list.json&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;r&amp;#39;&lt;/span&gt;, encoding&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;UTF-8&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;as&lt;/span&gt; f:
@@ -2745,10 +2744,10 @@ f&amp;ndash;&amp;gt;e[客户端删除截屏文件,双方退出截屏流程]
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214405.png&#34; alt=&#34;在浏览器中查看聊天记录&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;木马程序&#34;&gt;木马程序&lt;/h2&gt;
 &lt;h3 id=&#34;peppa-pig&#34;&gt;peppa-pig&lt;/h3&gt;
-&lt;p&gt;完成上面的几个功能就已经具备简单远控木马的特征了，接着就是需要将这个程序隐藏起来，让对方察觉不到这个程序的存在
-我的思路是将这个远程控制的程序隐藏在其他应用中，并且以多线程或者多进程的方式异步的运行这个程序，并且在对方关闭应用之后，这个远程程序依旧能在后台运行
-首先我找到一个利用海龟绘图绘制小猪佩奇的程序，程序是&lt;a href=&#34;https://github.com/jackfrued/Python-100-Days&#34;&gt;Python-100-Days&lt;/a&gt;这个项目中，接着我将远控程序引入，以多线程的方式启动，最后将整个程序&lt;a href=&#34;https://blog.csdn.net/weixin_43804047/article/details/119704965&#34;&gt;打包成exe可执行程序&lt;/a&gt;
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201203844.png&#34; alt=&#34;绘制小猪佩奇程序&#34;&gt;
+&lt;p&gt;完成上面的几个功能就已经具备简单远控木马的特征了，接着就是需要将这个程序隐藏起来，让对方察觉不到这个程序的存在&lt;/p&gt;
+&lt;p&gt;我的思路是将这个远程控制的程序隐藏在其他应用中，并且以多线程或者多进程的方式异步的运行这个程序，并且在对方关闭应用之后，这个远程程序依旧能在后台运行&lt;/p&gt;
+&lt;p&gt;首先我找到一个利用海龟绘图绘制小猪佩奇的程序，程序是 &lt;a href=&#34;https://github.com/jackfrued/Python-100-Days&#34;&gt;Python-100-Days&lt;/a&gt; 这个项目中，接着我将远控程序引入，以多线程的方式启动，最后将整个程序&lt;a href=&#34;https://blog.csdn.net/weixin_43804047/article/details/119704965&#34;&gt;打包成exe可执行程序&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201203844.png&#34; alt=&#34;绘制小猪佩奇程序&#34;&gt;
 添加多线程代码：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#666&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:  
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# 多线程  &lt;/span&gt;
@@ -2763,13 +2762,13 @@ f&amp;ndash;&amp;gt;e[客户端删除截屏文件,双方退出截屏流程]
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;需要加入资源时&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pyinstaller &lt;span style=&#34;color:#666&#34;&gt;-F&lt;/span&gt; -w -n pig -i .\icon.ico --add-data=&lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;.\assets\version_list.json;.&amp;#34;&lt;/span&gt; .\peppa_pig.py
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201203909.png&#34; alt=&#34;打包成exe文件&#34;&gt;
-对方点击运行这个程序之后，远程控制程序同时以线程的形式进行运行，当对象关闭绘图框时，远控程序的线程还是会在后台继续运行，对方只要不打开任务管理器时难以察觉到的
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201203930.png&#34; alt=&#34;在后台运行的pig.exe&#34;&gt;&lt;/p&gt;
+对方点击运行这个程序之后，远程控制程序同时以线程的形式进行运行，当对象关闭绘图框时，远控程序的线程还是会在后台继续运行，对方只要不打开任务管理器时难以察觉到的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201203930.png&#34; alt=&#34;在后台运行的pig.exe&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;量子加密网盘客户端&#34;&gt;量子加密网盘客户端&lt;/h3&gt;
-&lt;p&gt;结合之前写的一个&lt;a href=&#34;https://pi3yyy.love/archives/7c353064.html&#34;&gt;量子加密网盘客户端&lt;/a&gt;的项目，我也将木马引入
-这次的引入方式同上面的有所不同，由于上面以多线程的方式引入，而在Windows任务管理器中只会显示进程，所以还是pig.exe的程序正在运行，对方容易察觉到
-这个我们换个思路，先将远控程序打包成exe可执行文件，替换其图标为动态链接库的图标，并且将名字设置为很长的一串。
-接着在量子加密网盘客户端程序中，以&lt;font color=&#34;#00b0f0&#34;&gt;多进程&lt;/font&gt;的方式执行这个远控exe程序，最后将量子加密网盘客户端打包成exe文件，将远控程序藏在打包后的依赖文件夹中&lt;/p&gt;
+&lt;p&gt;结合之前写的一个&lt;a href=&#34;https://pi3yyy.love/archives/7c353064.html&#34;&gt;量子加密网盘客户端&lt;/a&gt;的项目，我也将木马引入&lt;/p&gt;
+&lt;p&gt;这次的引入方式同上面的有所不同，由于上面以多线程的方式引入，而在Windows任务管理器中只会显示进程，所以还是pig.exe的程序正在运行，对方容易察觉到&lt;/p&gt;
+&lt;p&gt;这个我们换个思路，先将远控程序打包成exe可执行文件，替换其图标为动态链接库的图标，并且将名字设置为很长的一串。&lt;/p&gt;
+&lt;p&gt;接着在量子加密网盘客户端程序中，以&lt;font color=&#34;#00b0f0&#34;&gt;多进程&lt;/font&gt;的方式执行这个远控exe程序，最后将量子加密网盘客户端打包成exe文件，将远控程序藏在打包后的依赖文件夹中&lt;/p&gt;
 &lt;p&gt;添加多进程代码&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#666&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:  
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# 多进程&lt;/span&gt;
@@ -2778,9 +2777,9 @@ f&amp;ndash;&amp;gt;e[客户端删除截屏文件,双方退出截屏流程]
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    run()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;使用pyinstaller进行打包&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pyinstaller -D -w -n QE_Network_Drive -i icon.ico flet_GUI.py
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在这个过程中，我尝试了很多的办法，都会出现一个问题：在Pycharm下运行没有问题，但是打包后运行exe程序，整个电脑直接卡死，内存爆满，最后直接重启。
-解决办法就是&lt;a href=&#34;https://blog.csdn.net/Owen_goodman/article/details/115521388&#34;&gt;使用multiprocessing.freeze_support()&lt;/a&gt;
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201225942.png&#34; alt=&#34;打包之后文件结构&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在这个过程中，我尝试了很多的办法，都会出现一个问题：在Pycharm下运行没有问题，但是打包后运行exe程序，整个电脑直接卡死，内存爆满，最后直接重启。&lt;/p&gt;
+&lt;p&gt;解决办法就是&lt;a href=&#34;https://blog.csdn.net/Owen_goodman/article/details/115521388&#34;&gt;使用multiprocessing.freeze_support()&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201225942.png&#34; alt=&#34;打包之后文件结构&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201230034.png&#34; alt=&#34;隐藏在依赖文件中的远控程序&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201230240.png&#34; alt=&#34;关闭云盘客户端后依旧在后台运行的远控程序&#34;&gt;&lt;/p&gt;
 &lt;p&gt;不过后续还是需要将这个远控程序图标和名称改的更加合适一点，毕竟dll动态链接库怎么可能在后台运行&lt;/p&gt;

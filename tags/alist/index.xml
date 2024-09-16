@@ -257,8 +257,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#666&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:  
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    main()
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其实写到这里，基本上的功能已经能够实现了，但是在测试的过程中发现，对于小文件加解密和上传下载的速度很快，但是文件稍微大一点，例如5mb的图片，整个过程就十分缓慢。
-分析过程发现，文件卡在==正在加密中==的阶段，再仔细分析，确定就是文件写入的速度太慢，包括Key、加密后的文件的写入。&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其实写到这里，基本上的功能已经能够实现了，但是在测试的过程中发现，对于小文件加解密和上传下载的速度很快，但是文件稍微大一点，例如5mb的图片，整个过程就十分缓慢。&lt;/p&gt;
+&lt;p&gt;分析过程发现，文件卡在==正在加密中==的阶段，再仔细分析，确定就是文件写入的速度太慢，包括Key、加密后的文件的写入。&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-ad-warning&#34; data-lang=&#34;ad-warning&#34;&gt;由于一次一密的加密形式，导致了当需要加密的文件很大时，key的长度也随之增加到很大，如果使用wt、rt的形式进行写和读，整个IO操作就会十分缓慢，这是整个程序最大的弊端。不过好在key和加密后的文件都是int类型的整数，我们完全可以转换成二进制的形式进行存储，而对于wb、rb二进制形式的读写，IO操作就会快得多，所以这是修改的方法
 &lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#00a000&#34;&gt;encrypt&lt;/span&gt;(content):  
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    key_int &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; random_key(&lt;span style=&#34;color:#a2f&#34;&gt;len&lt;/span&gt;(content))  &lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# 调用生成大随机数  &lt;/span&gt;
@@ -341,8 +341,8 @@
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231130232227.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;目前已经实现了文件的加密和上传功能，接下来还需要实现文件的下载和解密功能，在这个过程中还需要联系云端网盘程序，也许之后会将这个网盘程序换成自己搭建的云端存储。&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;2023年11月8日 21点31分&lt;br&gt;
-更新日志：&lt;/p&gt;
+&lt;p&gt;2023年11月8日 21点31分&lt;/p&gt;
+&lt;p&gt;更新日志：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;增加了自动搜索key的功能，不用手动输入密钥位置（密钥存储在固定密钥库）&lt;/li&gt;
 &lt;li&gt;更改了key、datalength、加密文件等文件的命名方式：&lt;code&gt;文件名称[创建时间戳].文件类型&lt;/code&gt;&lt;br&gt;
@@ -387,8 +387,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a2f&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;密钥文件大小不正确！&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;0&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
-&lt;p&gt;2023年11月16日 19点00分&lt;br&gt;
-更新说明：&lt;/p&gt;
+&lt;p&gt;2023年11月16日 19点00分&lt;/p&gt;
+&lt;p&gt;更新说明：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;完成桌面端应用程序开发&lt;/li&gt;
 &lt;li&gt;修复单选框不能横向滚动&lt;/li&gt;

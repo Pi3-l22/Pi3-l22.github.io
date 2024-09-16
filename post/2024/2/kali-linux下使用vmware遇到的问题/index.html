@@ -158,15 +158,15 @@
   <article class="content">
     
     <h2 id="安装">安装</h2>
-<p>到官网下载Linux的资源文件，运行按照提示下一步就可以完成安装
-在这个过程中有可能会提示缺少Linux-header文件，只需要在终端用apt下载对应版本的header就可以</p>
+<p>到官网下载Linux的资源文件，运行按照提示下一步就可以完成安装</p>
+<p>在这个过程中有可能会提示缺少Linux-header文件，只需要在终端用apt下载对应版本的header就可以</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt install linux-headers-6.6.9-amd64
 </span></span></code></pre></div><p><a href="https://pi3yyy.love/archives/33e9ac6f.html">安装具体步骤参考文章中的安装VMware</a></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240211000531.png" alt="VMware Workstation pro 17"></p>
 <h2 id="问题出现">问题出现</h2>
-<p>刚开始使用虚拟机没有任何问题，但是在安装了虚拟机并运行之后，再重启电脑就会卡在Kali的logo界面
-刚开始还没在意，没有想到和VMware有关，但是随着使用虚拟机次数的增多，我渐渐发现每次只要开了虚拟机重启就会卡在logo界面，不能正常进入系统
-所以我在logo界面，使用ctrl+alt+f1，打开日志信息，发现居然是vmware.service不能正常启动导致的</p>
+<p>刚开始使用虚拟机没有任何问题，但是在安装了虚拟机并运行之后，再重启电脑就会卡在Kali的logo界面</p>
+<p>刚开始还没在意，没有想到和VMware有关，但是随着使用虚拟机次数的增多，我渐渐发现每次只要开了虚拟机重启就会卡在logo界面，不能正常进入系统</p>
+<p>所以我在logo界面，使用ctrl+alt+f1，打开日志信息，发现居然是vmware.service不能正常启动导致的</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/95_1707580958_hd.jpeg" alt="开机错误日志">
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/96_1707580962_hd.jpeg" alt="开机错误日志"></p>
 <h2 id="问题解决">问题解决</h2>
@@ -223,8 +223,8 @@
 </span></span><span style="display:flex;"><span>   Virtual ethernet                                                    failed
 </span></span><span style="display:flex;"><span>   VMware Authentication Daemon                                        <span style="color:#a2f;font-weight:bold">done</span>
 </span></span><span style="display:flex;"><span>   Shared Memory Available                                             <span style="color:#a2f;font-weight:bold">done</span>
-</span></span></code></pre></div><p>所以我也重装了好几遍VMware，也装了17、16和15的版本，15版本甚至连Virtual machine monitor都启动失败
-最后在google上找了很多的问答，也都是差不多，最后只能求助AI，他告诉我：</p>
+</span></span></code></pre></div><p>所以我也重装了好几遍VMware，也装了17、16和15的版本，15版本甚至连Virtual machine monitor都启动失败</p>
+<p>最后在google上找了很多的问答，也都是差不多，最后只能求助AI，他告诉我：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>**Remove Lock Files**: 
 </span></span><span style="display:flex;"><span>If network connections fail to initialize, check for a lock file/directory at <span style="color:#b44">`/etc/vmware/networking.lck/`</span>. 
 </span></span><span style="display:flex;"><span>[<span style="color:#008000;font-weight:bold">Removing this directory and reconfiguring VMware Workstation might resolve the issue</span>](<span style="color:#b44">https://forums.gentoo.org/viewtopic-t-955980-start-0.html</span>)

@@ -73,7 +73,7 @@
   <meta itemprop="description" content="图数据库Neo4j使用教程">
   <meta itemprop="datePublished" content="2023-11-24T00:00:00+00:00">
   <meta itemprop="dateModified" content="2023-11-24T00:00:00+00:00">
-  <meta itemprop="wordCount" content="7594">
+  <meta itemprop="wordCount" content="7477">
   <meta itemprop="keywords" content="Neo4j,Python">
 
   
@@ -198,32 +198,32 @@
   <article class="content">
     
     <h1 id="neo4j安装与使用">Neo4j安装与使用</h1>
-<p><a href="https://juejin.cn/s/neo4j%E8%8F%9C%E9%B8%9F%E6%95%99%E7%A8%8B">Neo4j菜鸟教程</a>
-<a href="https://www.w3cschool.cn/neo4j/">Neo4j教程</a>
-<a href="https://www.cnblogs.com/lijiong/p/15867307.html">Neo4j的命令行操作</a></p>
+<p><a href="https://juejin.cn/s/neo4j%E8%8F%9C%E9%B8%9F%E6%95%99%E7%A8%8B">Neo4j菜鸟教程</a></p>
+<p><a href="https://www.w3cschool.cn/neo4j/">Neo4j教程</a></p>
+<p><a href="https://www.cnblogs.com/lijiong/p/15867307.html">Neo4j的命令行操作</a></p>
 <h2 id="安装">安装</h2>
-<p><a href="https://neo4j.com/download/">Neo4j官网下载地址</a>
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200925.png" alt=""></p>
-<p>在Windows上下载桌面版，在Linux服务器上下载服务器版
-下载好，一直下一步安装即可。</p>
+<p><a href="https://neo4j.com/download/">Neo4j官网下载地址</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200925.png" alt=""></p>
+<p>在Windows上下载桌面版，在Linux服务器上下载服务器版</p>
+<p>下载好，一直下一步安装即可。</p>
 <h2 id="简单入门">简单入门</h2>
-<p>点击创建一个新的项目文件
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200939.png" alt=""></p>
-<p>添加一个新的图形数据库
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200951.png" alt=""></p>
-<p>启动数据库
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201003.png" alt=""></p>
-<p>点击右侧应用工具，打开Neo4j浏览器
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201003.png" alt=""></p>
+<p>点击创建一个新的项目文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200939.png" alt=""></p>
+<p>添加一个新的图形数据库</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200951.png" alt=""></p>
+<p>启动数据库</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201003.png" alt=""></p>
+<p>点击右侧应用工具，打开Neo4j浏览器</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201003.png" alt=""></p>
 <p>成功链接到数据库，在最上面的命令行中，我们可以执行CQL语句
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201014.png" alt=""></p>
-<p>我们可以通过以下语句创建 <font color="#ed9ddf">杭州电子科技大学</font> 和 <font color="#ed9ddf">计算机学院</font> 节点
-标签分别为 <font color="#9bbb59">大学</font> 和 <font color="#9bbb59">学院</font></p>
+<p>我们可以通过以下语句创建 <font color="#ed9ddf">杭州电子科技大学</font> 和 <font color="#ed9ddf">计算机学院</font> 节点</p>
+<p>标签分别为 <font color="#9bbb59">大学</font> 和 <font color="#9bbb59">学院</font></p>
 <pre tabindex="0"><code class="language-cypher" data-lang="cypher">create(:&#34;大学&#34;{name:&#34;杭州电子科技大学&#34;})
 create(:&#34;学院&#34;{name:&#34;计算机学院&#34;})
 </code></pre><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201020.png" alt=""></p>
-<p>通过以下语句，来将这两个节点进行关系链接
-<font color="#548dd4">语法格式</font>为：链接两个节点p1 p2，创p1-&gt;p2的关系为 <strong class=chinese>院系</strong></p>
+<p>通过以下语句，来将这两个节点进行关系链接</p>
+<p><font color="#548dd4">语法格式</font>为：链接两个节点p1 p2，创p1-&gt;p2的关系为 <strong class=chinese>院系</strong></p>
 <pre tabindex="0"><code class="language-cypher" data-lang="cypher">match(p1:`大学`),(p2:`学院`) Create(p1)-[r:院系]-&gt;(p2)
 </code></pre><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201025.png" alt=""></p>
 <h2 id="简单案例">简单案例</h2>
@@ -236,17 +236,17 @@ create(:&#34;学院&#34;{name:&#34;计算机学院&#34;})
 </code></pre><ol>
 <li><font color="#ed9ddf">建立几只股票节点</font></li>
 </ol>
-<p>==创建一个节点的Cypher命令==
-<code>create(变量:标签{属性1:属性值1,属性2:属性值2}) return 变量</code>
-<code>create(Variable:Lable{key1:Value1,Key2:Value2}) return Variable</code></p>
+<p>==创建一个节点的Cypher命令==</p>
+<p><code>create(变量:标签{属性1:属性值1,属性2:属性值2}) return 变量</code></p>
+<p><code>create(Variable:Lable{key1:Value1,Key2:Value2}) return Variable</code></p>
 <pre tabindex="0"><code class="language-cypher" data-lang="cypher">
 -- 创建一个股票节点
 create(n:Stock{name:&#39;安琪酵母&#39;,code:&#39;600298&#39;,launchidate:date(&#34;2000-08-18&#34;)})return n
 
 -- 可以一次创建多个股票节点
 create(n:Stock{name:&#39;招商银行&#39;,code:&#39;600036&#39;,launchidate:date(&#34;2002-04-09&#34;)}),(:Stock{name:&#39;中科创达&#39;,code:&#39;300496&#39;,launchidate:date(&#34;2015-12-08&#34;)}),(:Stock{name:&#39;化工科技&#39;,code:&#39;000988&#39;,launchidate:date(&#34;2000-06-18&#34;)}),(:Stock{name:&#39;国信证券&#39;,code:&#39;002736&#39;,launchidate:date(&#34;2014-12-29&#34;)})
-</code></pre><p>按照上方的步骤，创建一个新的股票图形数据库。
-打开图数据库，输入上方语句进行创建节点
+</code></pre><p>按照上方的步骤，创建一个新的股票图形数据库。</p>
+<p>打开图数据库，输入上方语句进行创建节点
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201040.png" alt=""></p>
 <ol start="2">
 <li><font color="#ed9ddf">建立上海证券交易所和深圳证券交易所两个节点</font></li>
@@ -328,19 +328,19 @@ create(n:Stock{name:&#39;招商银行&#39;,code:&#39;600036&#39;,launchidate:dat
 </code></pre><h3 id="删除某个节点有关的节点和关系">删除某个节点有关的节点和关系</h3>
 <pre tabindex="0"><code class="language-cypher" data-lang="cypher">match (m)-[r]-(n:Stock{name:&#39;安琪酵母&#39;}) delete m,r,n
 </code></pre><h2 id="neo4j-server安装与使用">Neo4j Server安装与使用</h2>
-<p><a href="https://neo4j.com/download/">Neo4j官网下载地址</a>
-下载Neo4j community server版本，同时需要JDK环境</p>
+<p><a href="https://neo4j.com/download/">Neo4j官网下载地址</a></p>
+<p>下载Neo4j community server版本，同时需要JDK环境</p>
 <pre tabindex="0"><code class="language-ad-note" data-lang="ad-note">Server 和 desktop版本的区别在于：
 desktop拥有良好的可视化，具有跟桌面应用程序一样的操作，可以方便管理多个数据库。
 而server则是大量使用命令行来执行CQL语句，同时也可以打开浏览器界面，与desktop的界面是一样的。
 </code></pre><p>添加Neo4j/bin为环境变量</p>
-<p><code>neo4j.bat console</code> Windows环境下，打开命令行界面，同时打开本地网络图形化界面
-<code>neo4j install-server</code> 安装服务</p>
+<p><code>neo4j.bat console</code> Windows环境下，打开命令行界面，同时打开本地网络图形化界面</p>
+<p><code>neo4j install-server</code> 安装服务</p>
 <h3 id="数据库本地管理">数据库本地管理</h3>
-<p>Neo4j安装成功后，会默认安装两个数据库，System和Neo4j
-在system中，可以进行数据库的管理，用户的管理，完成一些设置等等
-<code>neo4j start</code> 启动
-<code>neo4j stop</code> 关闭</p>
+<p>Neo4j安装成功后，会默认安装两个数据库，System和Neo4j</p>
+<p>在system中，可以进行数据库的管理，用户的管理，完成一些设置等等</p>
+<p><code>neo4j start</code> 启动</p>
+<p><code>neo4j stop</code> 关闭</p>
 <h3 id="用户管理">用户管理</h3>
 <p>在bin目录下，使用<code>cypher-shell</code>连接数据库执行<code>cypher</code>命令</p>
 <pre tabindex="0"><code class="language-cypher" data-lang="cypher">cypher-shell -d neo4j[数据库名称]
@@ -380,8 +380,8 @@ neo4j-admin load --from=C:\\desktop\\neo4jdata --databse=neo4j --force
 </code></pre><h2 id="在neo4j中批量创建节点和关系">在Neo4j中批量创建节点和关系</h2>
 <p><a href="https://cloud.tencent.com/developer/article/1387710">neo4j进阶操作（四）neo4j导入csv，使用load导入csv文件进入neo4j</a></p>
 <h3 id="在desktop中用csv文件导入批量创建节点">在desktop中用CSV文件导入批量创建节点</h3>
-<p>CSV文件中的数据，用于演示，实际上数据可以很多
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201901.png" alt=""></p>
+<p>CSV文件中的数据，用于演示，实际上数据可以很多</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201901.png" alt=""></p>
 <p>把我们需要导入的CSV数据文件，拷贝到Neo4j的数据目录下
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201910.png" alt=""></p>
 <p>在数据目录下对应数据库的import目录下
@@ -419,41 +419,42 @@ merge (from)-[r:Exchange]-&gt;(to)
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202034.png" alt=""></p>
 <h3 id="在远程server中用csv文件导入批量创建节点和关系常用">在远程Server中用CSV文件导入批量创建节点和关系（常用）</h3>
 <p><a href="https://blog.csdn.net/haveanybody/article/details/90518235">Neo4j笔记（三）Neo4j批量导入数据_neo4j 批量导入数据-CSDN博客</a></p>
-<p>这里远程Server的load导入操作，与本地的desktop的load导入操作基本相同。
-远程Server的导入，可以利用Browser进行图形化界面，也可以利用命令行操作。可以利用load操作，也可以利用neo4j-import进行导入
+<p>这里远程Server的load导入操作，与本地的desktop的load导入操作基本相同。</p>
+<p>远程Server的导入，可以利用Browser进行图形化界面，也可以利用命令行操作。可以利用load操作，也可以利用neo4j-import进行导入
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202048.png" alt=""></p>
-<p>远程启动Neo4j Server <code>neo4j start</code> <code>neo4j console</code>
-可以浏览器访问<code>http:本机ip:显示端口</code></p>
+<p>远程启动Neo4j Server <code>neo4j start</code> <code>neo4j console</code></p>
+<p>可以浏览器访问<code>http:本机ip:显示端口</code></p>
 <p>我们也可以用本地neo4j desktop 操作远程的neo4j server
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202054.png" alt=""></p>
 <p>输入服务的IP地址和端口
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202101.png" alt=""></p>
-<p>再输入用户名和密码，即可连接。接下里的导入操作，与desktop的操作是一摸一样的。
-这样就可以直接操作远程的数据库</p>
+<p>再输入用户名和密码，即可连接。接下里的导入操作，与desktop的操作是一摸一样的。</p>
+<p>这样就可以直接操作远程的数据库</p>
 <h2 id="neo4j的python操作">Neo4j的Python操作</h2>
 <h3 id="在远程服务器上安装并创建neo4j">在远程服务器上安装并创建Neo4j</h3>
 <p>对于Neo4j 4版本 需要有JDK11的环境，而对于Neo4j 5版本，需要有JDK17/21的环境
 先安装JDK11，再安装Neo4j，并配置环境变量。</p>
-<p><code>neo4j console</code> 启动服务（前台）
-<code>neo4j start</code> 启动服务（后台）
-<code>neo4j stop</code> 停止服务</p>
+<p><code>neo4j console</code> 启动服务（前台）</p>
+<p><code>neo4j start</code> 启动服务（后台）</p>
+<p><code>neo4j stop</code> 停止服务</p>
 <p>通过本地浏览器登录
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202109.png" alt="">
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202114.png" alt=""></p>
-<p>接着我们可以使用本地的desktop进行远程的数据库连接
-输入数据库远程地址和端口号，输入数据库名称
+<p>接着我们可以使用本地的desktop进行远程的数据库连接</p>
+<p>输入数据库远程地址和端口号，输入数据库名称
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202122.png" alt=""></p>
 <p>输入用户名和密码，并登录连接
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202127.png" alt=""></p>
 <p>成功打开远程数据库，图形化界面
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202133.png" alt=""></p>
 <h3 id="利用python读取excel数据创建节点">利用Python读取excel数据创建节点</h3>
-<p>python导入：
-<a href="https://blog.csdn.net/weixin_38737326/article/details/119170899">Neo4j入门（二）批量插入节点、关系_neo4j批量创建关系-CSDN博客</a></p>
+<p>python导入：</p>
+<p><a href="https://blog.csdn.net/weixin_38737326/article/details/119170899">Neo4j入门（二）批量插入节点、关系_neo4j批量创建关系-CSDN博客</a></p>
 <p><span style="background:#fff88f">1. 数据准备，在深圳证券交易所官网下载股票列表Excel文件</span></p>
 <p><a href="http://www.szse.cn/market/product/stock/list/index.html">http://www.szse.cn/market/product/stock/list/index.html</a>
 <img src="res/Pasted%20image%2020231106222659.png" alt=""></p>
-<p>当然也直接使用Python代码，进行下载，下载连接为：http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;CATALOGID=1110&amp;TABKEY=tab1&amp;random=0.410442009042401</p>
+<p>当然也直接使用Python代码，进行下载，下载连接为：</p>
+<p><a href="http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;CATALOGID=1110&amp;TABKEY=tab1&amp;random=0.410442009042401">http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;CATALOGID=1110&amp;TABKEY=tab1&amp;random=0.410442009042401</a></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">urllib</span> <span style="color:#a2f;font-weight:bold">import</span> request
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 下载Excel文件</span>
@@ -467,13 +468,13 @@ merge (from)-[r:Exchange]-&gt;(to)
 </span></span></code></pre></div><p>得到一个A股列表Excel文件
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202144.png" alt=""></p>
 <p><span style="background:#fff88f">2. 用Python读取Excel文件数据，在Python中使用Cypher命令，在Neo4j中批量建立节点</span></p>
-<p><a href="https://pypi.org/project/py2neo/">py2neo · PyPI</a>
-<a href="https://zhuanlan.zhihu.com/p/81175725">py2neo基本用法</a>
-<a href="https://segmentfault.com/a/1190000040519140">python - 使用Py2neo在Neo4j中创建节点和关系</a>
-<a href="https://zhuanlan.zhihu.com/p/362709226">Python&ndash;pandas读取excel</a>
-<a href="https://zhuanlan.zhihu.com/p/363810440">Python读写Excel——Pandas</a></p>
-<p>接着编写Python代码，实现读取文件数据，并通过Cypher语句写入到数据库中去。这里使用远程Neo4j Server版本。
-这里我使用的是py2neo的第三方库，远程Neo4j版本为4.4.2</p>
+<p><a href="https://pypi.org/project/py2neo/">py2neo · PyPI</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/81175725">py2neo基本用法</a></p>
+<p><a href="https://segmentfault.com/a/1190000040519140">python - 使用Py2neo在Neo4j中创建节点和关系</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/362709226">Python&ndash;pandas读取excel</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/363810440">Python读写Excel——Pandas</a></p>
+<p>接着编写Python代码，实现读取文件数据，并通过Cypher语句写入到数据库中去。这里使用远程Neo4j Server版本。</p>
+<p>这里我使用的是py2neo的第三方库，远程Neo4j版本为4.4.2</p>
 <pre tabindex="0"><code class="language-ad-warning" data-lang="ad-warning">需要注意的是：
 ![](https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202200.png)
 </code></pre><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># from urllib import request</span>

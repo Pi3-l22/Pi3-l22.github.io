@@ -72,7 +72,7 @@
   <meta itemprop="description" content="利用httpcanary抓千变语音包，再用开源转码器实现最好音质转码微信语音包，利用微x模块发送。">
   <meta itemprop="datePublished" content="2023-10-02T00:00:00+00:00">
   <meta itemprop="dateModified" content="2023-10-02T00:00:00+00:00">
-  <meta itemprop="wordCount" content="521">
+  <meta itemprop="wordCount" content="443">
   <meta itemprop="keywords" content="Android">
 
   
@@ -153,19 +153,19 @@
     <h1 id="推送手机微信语音包">推送手机微信语音包</h1>
 <p>利用httpcanary抓千变语音包，再用开源转码器实现最好音质转码微信语音包，利用微x模块发送。</p>
 <h2 id="测试环境">测试环境</h2>
-<p>千变语音包8.1.4 swin.com.iapp
-微信play版 8.0.33
-微x模块 2.41</p>
+<p>千变语音包8.1.4 swin.com.iapp</p>
+<p>微信play版 8.0.33</p>
+<p>微x模块 2.41</p>
 <h2 id="操作过程">操作过程</h2>
-<p>千变语音包非会员每天下载有限制，可以用http canary抓包获取音频。
-打开小黄鸟，进入千变语音包，点击音频播放，找到有音频的数据包，预览可以下载音频。
+<p>千变语音包非会员每天下载有限制，可以用http canary抓包获取音频。</p>
+<p>打开小黄鸟，进入千变语音包，点击音频播放，找到有音频的数据包，预览可以下载音频。
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/0faed221bf354763eced656933c0b2e.jpg" alt="抓包音频">
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/249a9d8934fded24a0f395a7703281b.jpg" alt="保存音频"></p>
-<p>配合自动下载音频插件，更方便，不用手动点击保存，自动保存在<code>/storage/emulated/0/HttpCanary/plugins/AudioDownloader/</code>路径下
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/dfbbce2e6e8640496fbf7356308a3b0.jpg" alt="自动下载保存插件">
+<p>配合自动下载音频插件，更方便，不用手动点击保存，自动保存在 <code>/storage/emulated/0/HttpCanary/plugins/AudioDownloader/</code> 路径下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/dfbbce2e6e8640496fbf7356308a3b0.jpg" alt="自动下载保存插件">
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/dcfd5dc39fd4186106c00f70455d677.jpg" alt="自动保存在本地"></p>
-<p>把音频文件上传到电脑，手机数据线连上电脑，打开adb，利用GitHub上开源项目<a href="https://github.com/foyoux/weixin-wxposed-silk-voice">weixin-wxposed-silk-voice</a>
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/a5f62d9412721323ce363584fe3b0f9.jpg" alt="项目主页"></p>
+<p>把音频文件上传到电脑，手机数据线连上电脑，打开adb，利用GitHub上开源项目 <a href="https://github.com/foyoux/weixin-wxposed-silk-voice">weixin-wxposed-silk-voice</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/a5f62d9412721323ce363584fe3b0f9.jpg" alt="项目主页"></p>
 <p>需要确认，手机用数据线连接电脑，并且有adb环境（adb最好添加进环境变量）
 查看adb版本</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>adb -version
@@ -176,9 +176,9 @@
 <p>安装Github项目</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>pip install -U <span style="color:#a2f">foyou-wilk</span>
 </span></span></code></pre></div><blockquote>
-<p>需要注意，该项目有依赖库：<code>av</code>和<code>pilk</code>
-需要执行<code>pip install av</code>和<code>pip install pilk</code>
-或者下载源码的requirements.txt，执行<code>pip install -r requirements.txt</code></p>
+<p>需要注意，该项目有依赖库：<code>av</code>和<code>pilk</code></p>
+<p>需要执行<code>pip install av</code>和<code>pip install pilk</code></p>
+<p>或者下载源码的requirements.txt，执行<code>pip install -r requirements.txt</code></p>
 </blockquote>
 <p>检查是否安装成功</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>wilk -v

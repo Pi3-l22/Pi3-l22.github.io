@@ -17,32 +17,32 @@
       <guid>https://pi3-l22.github.io/post/2023/11/neo4j%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</guid>
       
       <description>&lt;h1 id=&#34;neo4j安装与使用&#34;&gt;Neo4j安装与使用&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://juejin.cn/s/neo4j%E8%8F%9C%E9%B8%9F%E6%95%99%E7%A8%8B&#34;&gt;Neo4j菜鸟教程&lt;/a&gt;
-&lt;a href=&#34;https://www.w3cschool.cn/neo4j/&#34;&gt;Neo4j教程&lt;/a&gt;
-&lt;a href=&#34;https://www.cnblogs.com/lijiong/p/15867307.html&#34;&gt;Neo4j的命令行操作&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://juejin.cn/s/neo4j%E8%8F%9C%E9%B8%9F%E6%95%99%E7%A8%8B&#34;&gt;Neo4j菜鸟教程&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.w3cschool.cn/neo4j/&#34;&gt;Neo4j教程&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/lijiong/p/15867307.html&#34;&gt;Neo4j的命令行操作&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://neo4j.com/download/&#34;&gt;Neo4j官网下载地址&lt;/a&gt;
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200925.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;在Windows上下载桌面版，在Linux服务器上下载服务器版
-下载好，一直下一步安装即可。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://neo4j.com/download/&#34;&gt;Neo4j官网下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200925.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在Windows上下载桌面版，在Linux服务器上下载服务器版&lt;/p&gt;
+&lt;p&gt;下载好，一直下一步安装即可。&lt;/p&gt;
 &lt;h2 id=&#34;简单入门&#34;&gt;简单入门&lt;/h2&gt;
-&lt;p&gt;点击创建一个新的项目文件
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200939.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;添加一个新的图形数据库
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200951.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;启动数据库
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201003.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;点击右侧应用工具，打开Neo4j浏览器
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201003.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;点击创建一个新的项目文件&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200939.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;添加一个新的图形数据库&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200951.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;启动数据库&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201003.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;点击右侧应用工具，打开Neo4j浏览器&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201003.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;成功链接到数据库，在最上面的命令行中，我们可以执行CQL语句
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201014.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;我们可以通过以下语句创建 &lt;font color=&#34;#ed9ddf&#34;&gt;杭州电子科技大学&lt;/font&gt; 和 &lt;font color=&#34;#ed9ddf&#34;&gt;计算机学院&lt;/font&gt; 节点
-标签分别为 &lt;font color=&#34;#9bbb59&#34;&gt;大学&lt;/font&gt; 和 &lt;font color=&#34;#9bbb59&#34;&gt;学院&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;我们可以通过以下语句创建 &lt;font color=&#34;#ed9ddf&#34;&gt;杭州电子科技大学&lt;/font&gt; 和 &lt;font color=&#34;#ed9ddf&#34;&gt;计算机学院&lt;/font&gt; 节点&lt;/p&gt;
+&lt;p&gt;标签分别为 &lt;font color=&#34;#9bbb59&#34;&gt;大学&lt;/font&gt; 和 &lt;font color=&#34;#9bbb59&#34;&gt;学院&lt;/font&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cypher&#34; data-lang=&#34;cypher&#34;&gt;create(:&amp;#34;大学&amp;#34;{name:&amp;#34;杭州电子科技大学&amp;#34;})
 create(:&amp;#34;学院&amp;#34;{name:&amp;#34;计算机学院&amp;#34;})
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201020.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;通过以下语句，来将这两个节点进行关系链接
-&lt;font color=&#34;#548dd4&#34;&gt;语法格式&lt;/font&gt;为：链接两个节点p1 p2，创p1-&amp;gt;p2的关系为 &lt;strong&gt;院系&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;通过以下语句，来将这两个节点进行关系链接&lt;/p&gt;
+&lt;p&gt;&lt;font color=&#34;#548dd4&#34;&gt;语法格式&lt;/font&gt;为：链接两个节点p1 p2，创p1-&amp;gt;p2的关系为 &lt;strong&gt;院系&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cypher&#34; data-lang=&#34;cypher&#34;&gt;match(p1:`大学`),(p2:`学院`) Create(p1)-[r:院系]-&amp;gt;(p2)
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201025.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;简单案例&#34;&gt;简单案例&lt;/h2&gt;
@@ -55,17 +55,17 @@ create(:&amp;#34;学院&amp;#34;{name:&amp;#34;计算机学院&amp;#34;})
 &lt;/code&gt;&lt;/pre&gt;&lt;ol&gt;
 &lt;li&gt;&lt;font color=&#34;#ed9ddf&#34;&gt;建立几只股票节点&lt;/font&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;==创建一个节点的Cypher命令==
-&lt;code&gt;create(变量:标签{属性1:属性值1,属性2:属性值2}) return 变量&lt;/code&gt;
-&lt;code&gt;create(Variable:Lable{key1:Value1,Key2:Value2}) return Variable&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;==创建一个节点的Cypher命令==&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;create(变量:标签{属性1:属性值1,属性2:属性值2}) return 变量&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;create(Variable:Lable{key1:Value1,Key2:Value2}) return Variable&lt;/code&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cypher&#34; data-lang=&#34;cypher&#34;&gt;
 -- 创建一个股票节点
 create(n:Stock{name:&amp;#39;安琪酵母&amp;#39;,code:&amp;#39;600298&amp;#39;,launchidate:date(&amp;#34;2000-08-18&amp;#34;)})return n
 
 -- 可以一次创建多个股票节点
 create(n:Stock{name:&amp;#39;招商银行&amp;#39;,code:&amp;#39;600036&amp;#39;,launchidate:date(&amp;#34;2002-04-09&amp;#34;)}),(:Stock{name:&amp;#39;中科创达&amp;#39;,code:&amp;#39;300496&amp;#39;,launchidate:date(&amp;#34;2015-12-08&amp;#34;)}),(:Stock{name:&amp;#39;化工科技&amp;#39;,code:&amp;#39;000988&amp;#39;,launchidate:date(&amp;#34;2000-06-18&amp;#34;)}),(:Stock{name:&amp;#39;国信证券&amp;#39;,code:&amp;#39;002736&amp;#39;,launchidate:date(&amp;#34;2014-12-29&amp;#34;)})
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;按照上方的步骤，创建一个新的股票图形数据库。
-打开图数据库，输入上方语句进行创建节点
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;按照上方的步骤，创建一个新的股票图形数据库。&lt;/p&gt;
+&lt;p&gt;打开图数据库，输入上方语句进行创建节点
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201040.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;&lt;font color=&#34;#ed9ddf&#34;&gt;建立上海证券交易所和深圳证券交易所两个节点&lt;/font&gt;&lt;/li&gt;
@@ -147,19 +147,19 @@ create(n:Stock{name:&amp;#39;招商银行&amp;#39;,code:&amp;#39;600036&amp;#39;
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;删除某个节点有关的节点和关系&#34;&gt;删除某个节点有关的节点和关系&lt;/h3&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cypher&#34; data-lang=&#34;cypher&#34;&gt;match (m)-[r]-(n:Stock{name:&amp;#39;安琪酵母&amp;#39;}) delete m,r,n
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;neo4j-server安装与使用&#34;&gt;Neo4j Server安装与使用&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://neo4j.com/download/&#34;&gt;Neo4j官网下载地址&lt;/a&gt;
-下载Neo4j community server版本，同时需要JDK环境&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://neo4j.com/download/&#34;&gt;Neo4j官网下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载Neo4j community server版本，同时需要JDK环境&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-ad-note&#34; data-lang=&#34;ad-note&#34;&gt;Server 和 desktop版本的区别在于：
 desktop拥有良好的可视化，具有跟桌面应用程序一样的操作，可以方便管理多个数据库。
 而server则是大量使用命令行来执行CQL语句，同时也可以打开浏览器界面，与desktop的界面是一样的。
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;添加Neo4j/bin为环境变量&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;neo4j.bat console&lt;/code&gt; Windows环境下，打开命令行界面，同时打开本地网络图形化界面
-&lt;code&gt;neo4j install-server&lt;/code&gt; 安装服务&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;neo4j.bat console&lt;/code&gt; Windows环境下，打开命令行界面，同时打开本地网络图形化界面&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;neo4j install-server&lt;/code&gt; 安装服务&lt;/p&gt;
 &lt;h3 id=&#34;数据库本地管理&#34;&gt;数据库本地管理&lt;/h3&gt;
-&lt;p&gt;Neo4j安装成功后，会默认安装两个数据库，System和Neo4j
-在system中，可以进行数据库的管理，用户的管理，完成一些设置等等
-&lt;code&gt;neo4j start&lt;/code&gt; 启动
-&lt;code&gt;neo4j stop&lt;/code&gt; 关闭&lt;/p&gt;
+&lt;p&gt;Neo4j安装成功后，会默认安装两个数据库，System和Neo4j&lt;/p&gt;
+&lt;p&gt;在system中，可以进行数据库的管理，用户的管理，完成一些设置等等&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;neo4j start&lt;/code&gt; 启动&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;neo4j stop&lt;/code&gt; 关闭&lt;/p&gt;
 &lt;h3 id=&#34;用户管理&#34;&gt;用户管理&lt;/h3&gt;
 &lt;p&gt;在bin目录下，使用&lt;code&gt;cypher-shell&lt;/code&gt;连接数据库执行&lt;code&gt;cypher&lt;/code&gt;命令&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-cypher&#34; data-lang=&#34;cypher&#34;&gt;cypher-shell -d neo4j[数据库名称]
@@ -199,8 +199,8 @@ neo4j-admin load --from=C:\\desktop\\neo4jdata --databse=neo4j --force
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;在neo4j中批量创建节点和关系&#34;&gt;在Neo4j中批量创建节点和关系&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://cloud.tencent.com/developer/article/1387710&#34;&gt;neo4j进阶操作（四）neo4j导入csv，使用load导入csv文件进入neo4j&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;在desktop中用csv文件导入批量创建节点&#34;&gt;在desktop中用CSV文件导入批量创建节点&lt;/h3&gt;
-&lt;p&gt;CSV文件中的数据，用于演示，实际上数据可以很多
-&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201901.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;CSV文件中的数据，用于演示，实际上数据可以很多&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201901.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;把我们需要导入的CSV数据文件，拷贝到Neo4j的数据目录下
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201910.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;在数据目录下对应数据库的import目录下
@@ -238,41 +238,42 @@ merge (from)-[r:Exchange]-&amp;gt;(to)
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202034.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;在远程server中用csv文件导入批量创建节点和关系常用&#34;&gt;在远程Server中用CSV文件导入批量创建节点和关系（常用）&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/haveanybody/article/details/90518235&#34;&gt;Neo4j笔记（三）Neo4j批量导入数据_neo4j 批量导入数据-CSDN博客&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;这里远程Server的load导入操作，与本地的desktop的load导入操作基本相同。
-远程Server的导入，可以利用Browser进行图形化界面，也可以利用命令行操作。可以利用load操作，也可以利用neo4j-import进行导入
+&lt;p&gt;这里远程Server的load导入操作，与本地的desktop的load导入操作基本相同。&lt;/p&gt;
+&lt;p&gt;远程Server的导入，可以利用Browser进行图形化界面，也可以利用命令行操作。可以利用load操作，也可以利用neo4j-import进行导入
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202048.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;远程启动Neo4j Server &lt;code&gt;neo4j start&lt;/code&gt; &lt;code&gt;neo4j console&lt;/code&gt;
-可以浏览器访问&lt;code&gt;http:本机ip:显示端口&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;远程启动Neo4j Server &lt;code&gt;neo4j start&lt;/code&gt; &lt;code&gt;neo4j console&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;可以浏览器访问&lt;code&gt;http:本机ip:显示端口&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;我们也可以用本地neo4j desktop 操作远程的neo4j server
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202054.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;输入服务的IP地址和端口
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202101.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;再输入用户名和密码，即可连接。接下里的导入操作，与desktop的操作是一摸一样的。
-这样就可以直接操作远程的数据库&lt;/p&gt;
+&lt;p&gt;再输入用户名和密码，即可连接。接下里的导入操作，与desktop的操作是一摸一样的。&lt;/p&gt;
+&lt;p&gt;这样就可以直接操作远程的数据库&lt;/p&gt;
 &lt;h2 id=&#34;neo4j的python操作&#34;&gt;Neo4j的Python操作&lt;/h2&gt;
 &lt;h3 id=&#34;在远程服务器上安装并创建neo4j&#34;&gt;在远程服务器上安装并创建Neo4j&lt;/h3&gt;
 &lt;p&gt;对于Neo4j 4版本 需要有JDK11的环境，而对于Neo4j 5版本，需要有JDK17/21的环境
 先安装JDK11，再安装Neo4j，并配置环境变量。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;neo4j console&lt;/code&gt; 启动服务（前台）
-&lt;code&gt;neo4j start&lt;/code&gt; 启动服务（后台）
-&lt;code&gt;neo4j stop&lt;/code&gt; 停止服务&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;neo4j console&lt;/code&gt; 启动服务（前台）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;neo4j start&lt;/code&gt; 启动服务（后台）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;neo4j stop&lt;/code&gt; 停止服务&lt;/p&gt;
 &lt;p&gt;通过本地浏览器登录
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202109.png&#34; alt=&#34;&#34;&gt;
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202114.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接着我们可以使用本地的desktop进行远程的数据库连接
-输入数据库远程地址和端口号，输入数据库名称
+&lt;p&gt;接着我们可以使用本地的desktop进行远程的数据库连接&lt;/p&gt;
+&lt;p&gt;输入数据库远程地址和端口号，输入数据库名称
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202122.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;输入用户名和密码，并登录连接
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202127.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;成功打开远程数据库，图形化界面
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202133.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;利用python读取excel数据创建节点&#34;&gt;利用Python读取excel数据创建节点&lt;/h3&gt;
-&lt;p&gt;python导入：
-&lt;a href=&#34;https://blog.csdn.net/weixin_38737326/article/details/119170899&#34;&gt;Neo4j入门（二）批量插入节点、关系_neo4j批量创建关系-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;python导入：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/weixin_38737326/article/details/119170899&#34;&gt;Neo4j入门（二）批量插入节点、关系_neo4j批量创建关系-CSDN博客&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span style=&#34;background:#fff88f&#34;&gt;1. 数据准备，在深圳证券交易所官网下载股票列表Excel文件&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://www.szse.cn/market/product/stock/list/index.html&#34;&gt;http://www.szse.cn/market/product/stock/list/index.html&lt;/a&gt;
 &lt;img src=&#34;res/Pasted%20image%2020231106222659.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;当然也直接使用Python代码，进行下载，下载连接为：http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;amp;CATALOGID=1110&amp;amp;TABKEY=tab1&amp;amp;random=0.410442009042401&lt;/p&gt;
+&lt;p&gt;当然也直接使用Python代码，进行下载，下载连接为：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;amp;CATALOGID=1110&amp;amp;TABKEY=tab1&amp;amp;random=0.410442009042401&#34;&gt;http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;amp;CATALOGID=1110&amp;amp;TABKEY=tab1&amp;amp;random=0.410442009042401&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-Python&#34; data-lang=&#34;Python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#00f;font-weight:bold&#34;&gt;urllib&lt;/span&gt; &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;import&lt;/span&gt; request
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# 下载Excel文件&lt;/span&gt;
@@ -286,13 +287,13 @@ merge (from)-[r:Exchange]-&amp;gt;(to)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;得到一个A股列表Excel文件
 &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202144.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span style=&#34;background:#fff88f&#34;&gt;2. 用Python读取Excel文件数据，在Python中使用Cypher命令，在Neo4j中批量建立节点&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://pypi.org/project/py2neo/&#34;&gt;py2neo · PyPI&lt;/a&gt;
-&lt;a href=&#34;https://zhuanlan.zhihu.com/p/81175725&#34;&gt;py2neo基本用法&lt;/a&gt;
-&lt;a href=&#34;https://segmentfault.com/a/1190000040519140&#34;&gt;python - 使用Py2neo在Neo4j中创建节点和关系&lt;/a&gt;
-&lt;a href=&#34;https://zhuanlan.zhihu.com/p/362709226&#34;&gt;Python&amp;ndash;pandas读取excel&lt;/a&gt;
-&lt;a href=&#34;https://zhuanlan.zhihu.com/p/363810440&#34;&gt;Python读写Excel——Pandas&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;接着编写Python代码，实现读取文件数据，并通过Cypher语句写入到数据库中去。这里使用远程Neo4j Server版本。
-这里我使用的是py2neo的第三方库，远程Neo4j版本为4.4.2&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://pypi.org/project/py2neo/&#34;&gt;py2neo · PyPI&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/81175725&#34;&gt;py2neo基本用法&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://segmentfault.com/a/1190000040519140&#34;&gt;python - 使用Py2neo在Neo4j中创建节点和关系&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/362709226&#34;&gt;Python&amp;ndash;pandas读取excel&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/363810440&#34;&gt;Python读写Excel——Pandas&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;接着编写Python代码，实现读取文件数据，并通过Cypher语句写入到数据库中去。这里使用远程Neo4j Server版本。&lt;/p&gt;
+&lt;p&gt;这里我使用的是py2neo的第三方库，远程Neo4j版本为4.4.2&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-ad-warning&#34; data-lang=&#34;ad-warning&#34;&gt;需要注意的是：
 ![](https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202200.png)
 &lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# from urllib import request&lt;/span&gt;
