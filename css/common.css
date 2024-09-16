@@ -64,6 +64,54 @@
     src: url('../font/lmroman-normal.woff');
 }
 
+@font-face {
+    font-display: swap;
+    font-family: 'Songti';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../font/FmlSong-Regular.woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Songti';
+    font-style: italic;
+    font-weight: normal;
+    src: url('../font/FmlSong-Italic.woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Songti';
+    font-style: italic;
+    font-weight: bold;
+    src: url('../font/FmlSong-BlackItalic.woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Songti';
+    font-style: normal;
+    font-weight: bold;
+    src: url('../font/FmlSong-Black.woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Fangsong';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../font/STFANGSO.woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 't1xtt';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../font/t1xtt.ttf');
+}
+
 /* global */
 
 * {
@@ -87,7 +135,7 @@ time {
     background-color: #FAFAFA;
     display: flex;
     flex-direction: column;
-    font-family: 'Latin Modern Roman', 'Times New Roman', serif;
+    font-family: 'Latin Modern Roman', 'Songti', 'Times New Roman', serif;
     min-height: 100vh;
     overflow-wrap: break-word;
     padding: 1rem;
