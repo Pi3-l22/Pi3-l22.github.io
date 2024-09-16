@@ -44,13 +44,13 @@
 }
 
 .content blockquote {
-    border-left: black 2px solid;
+    border-left: #bf003f 2px solid;
     font-style: italic;
     padding: 1rem 0 1rem 2rem;
 }
 
 .content code {
-    background-color: #F5F5F5;
+    background-color: #f8f8f8;
     border-radius: .2rem;
     color: #AA0000;
     font-family: 'Latin Modern Mono', 'Fangsong', Courier, monospace;
@@ -104,7 +104,7 @@
 }
 
 .content pre code {
-    padding: 0;
+    padding: 0.2rem;
 }
 
 .content strong.chinese {
@@ -132,4 +132,8 @@
 
 .content ol, .content ul {
     margin-left: 1.5rem;
+}
+
+.content a {
+    color: #ec028d;
 }
