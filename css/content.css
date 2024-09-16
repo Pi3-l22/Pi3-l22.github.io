@@ -16,7 +16,7 @@
 
 .content a {
     color: #ec028d;
-    text-decoration: underline;
+    text-decoration: underline !important;
 }
 
 .content a.footnote-ref::before {
@@ -123,6 +123,8 @@
 .content table {
     display: block;
     overflow-x: auto;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .content td, .content th {
@@ -137,4 +139,5 @@
 
 .content ol, .content ul {
     margin-left: 1.5rem;
+    margin-bottom: .5rem;
 }
