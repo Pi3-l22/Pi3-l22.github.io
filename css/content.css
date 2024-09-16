@@ -141,5 +141,5 @@
 .content p img {
 /* 页面居中 */
     display: block;
-    margin: 0 auto;
+    margin: 0 auto !important;
 }
