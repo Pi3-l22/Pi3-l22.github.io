@@ -50,7 +50,7 @@
 }
 
 .content code {
-    background-color: #f8f8f8;
+    background-color: #F5F5F5;
     border-radius: .2rem;
     color: #AA0000;
     font-family: 'Latin Modern Mono', 'Fangsong', Courier, monospace;
@@ -104,7 +104,7 @@
 }
 
 .content pre code {
-    padding: 0.2rem;
+    padding: 0;
 }
 
 .content strong.chinese {
@@ -136,4 +136,10 @@
 
 .content a {
     color: #ec028d;
+}
+
+.content p img {
+/* 页面居中 */
+    display: block;
+    margin: 0 auto;
 }
