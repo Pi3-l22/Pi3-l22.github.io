@@ -18,6 +18,10 @@
       
       <description>&lt;p&gt;这是一个主页
 test test&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;测试测试这是一个测试
+Test test test this is a test&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
       
     </item>
