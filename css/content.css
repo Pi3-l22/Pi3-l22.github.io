@@ -15,7 +15,7 @@
 }
 
 .content a {
-    color: #AA0000;
+    color: #ec028d;
     text-decoration: underline;
 }
 
@@ -88,6 +88,7 @@
 
 .content img {
     max-width: 100%;
+    margin: 0 auto !important;
 }
 
 .content p {
@@ -107,13 +108,13 @@
     padding: 0;
 }
 
-/* .content strong.chinese {
+.content strong.chinese {
     font-weight: bold;
-    text-emphasis-style: dot;
+    /* text-emphasis-style: dot;
     text-emphasis-position: under;
     -webkit-text-emphasis-style: dot;
-    -webkit-text-emphasis-position: under;
-} */
+    -webkit-text-emphasis-position: under; */
+}
 
 .content em{
     color: #ec028d;
@@ -136,15 +137,4 @@
 
 .content ol, .content ul {
     margin-left: 1.5rem;
-}
-
-.content a {
-    color: #ec028d;
-    text-decoration: underline;
-}
-
-.content p img {
-/* 页面居中 */
-    display: block;
-    margin: 0 auto !important;
 }
