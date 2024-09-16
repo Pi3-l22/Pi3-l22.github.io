@@ -107,12 +107,16 @@
     padding: 0;
 }
 
-.content strong.chinese {
-    font-weight: normal;
+/* .content strong.chinese {
+    font-weight: bold;
     text-emphasis-style: dot;
     text-emphasis-position: under;
     -webkit-text-emphasis-style: dot;
     -webkit-text-emphasis-position: under;
+} */
+
+.content em{
+    color: #ec028d;
 }
 
 .content table {
@@ -136,6 +140,7 @@
 
 .content a {
     color: #ec028d;
+    text-decoration: underline;
 }
 
 .content p img {
