@@ -5,5 +5,6 @@ description:
 tags:
   -
 draft: true
+slug: my-first-post
 ---
 <!--more-->
