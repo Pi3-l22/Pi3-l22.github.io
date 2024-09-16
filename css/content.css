@@ -137,6 +137,7 @@
 .content th {
     background-color: #575C61;
     color: #FAFAFA;
+    text-align: center;
 }
 
 .content ol, .content ul {
