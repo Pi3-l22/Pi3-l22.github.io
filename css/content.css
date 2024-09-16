@@ -138,6 +138,9 @@
     color: #FAFAFA;
     text-align: center !important;
 }
+.content thead{
+    text-align: center !important;
+}
 
 .content ol, .content ul {
     margin-left: 1.5rem;
