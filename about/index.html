@@ -11,7 +11,20 @@
 
   
   
-  <meta name="description" content="Hugo, the world&#39;s fastest framework for building websites">
+  <meta name="description" content="
+
+    
+
+
+    
+        
+        
+            
+                滕王高阁临江渚，佩玉鸣鸾罢歌舞。
+                画栋朝飞南浦云，珠帘暮卷西山雨。
+                闲云潭影日悠悠，物换星移几度秋。
+                阁中帝子今何在？槛外长江空自流。
+            ">
   
 
   
@@ -53,11 +66,14 @@
   <meta property="og:url" content="https://pi3-l22.github.io/about/">
   <meta property="og:site_name" content="Pi3&#39;Notes">
   <meta property="og:title" content="About">
-  <meta property="og:description" content="Hugo, the world&#39;s fastest framework for building websites">
+  <meta property="og:description" content=" 滕王高阁临江渚，佩玉鸣鸾罢歌舞。
+画栋朝飞南浦云，珠帘暮卷西山雨。
+闲云潭影日悠悠，物换星移几度秋。
+阁中帝子今何在？槛外长江空自流。">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
-    <meta property="article:published_time" content="2019-02-28T00:00:00+00:00">
-    <meta property="article:modified_time" content="2019-02-28T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-09-19T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-09-19T00:00:00+00:00">
 
 
   
@@ -67,9 +83,13 @@
   
   
   <meta itemprop="name" content="About">
-  <meta itemprop="description" content="Hugo, the world&#39;s fastest framework for building websites">
-  <meta itemprop="datePublished" content="2019-02-28T00:00:00+00:00">
-  <meta itemprop="dateModified" content="2019-02-28T00:00:00+00:00">
+  <meta itemprop="description" content=" 滕王高阁临江渚，佩玉鸣鸾罢歌舞。
+画栋朝飞南浦云，珠帘暮卷西山雨。
+闲云潭影日悠悠，物换星移几度秋。
+阁中帝子今何在？槛外长江空自流。">
+  <meta itemprop="datePublished" content="2024-09-19T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2024-09-19T00:00:00+00:00">
+  <meta itemprop="wordCount" content="68">
 
   
   <link media="screen" rel="stylesheet" href='https://pi3-l22.github.io/css/common.css'>
@@ -120,7 +140,53 @@
 <main id="main" class="post">
   
   <article class="content">
-    <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi31123.png" alt="pi31123"></p>
+    <html>
+<head>
+    <style>
+        .container {
+            display: flex; /* 使用Flexbox布局 */
+            align-items: center; /* 垂直居中 */
+            justify-content: center; /* 水平居中 */
+        }
+        .poet{
+            /*wirting-mode实现竖直排版*/
+            writing-mode: vertical-rl;
+        }
+        .poet h1{
+			margin-top: 4em;
+        }
+        .poet p:not(.author){
+            letter-spacing: 1em;
+            line-height:1.5em;
+            margin: 2em;
+        }
+        .poet .author{
+			text-align: right;
+        }
+        img {
+            /* max-width: 50%; 限制图片最大宽度为容器宽度 */
+            /* max-height: 50%; 限制图片最大高度为容器高度 */
+            margin-right: 2px; /* 图片与文字的固定间隔 */
+            height: 450px; /* 图片高度自适应 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/1726495749030.jpg" alt="滕王阁">
+        <div class="poet">
+            <p>
+                滕王高阁临江渚，佩玉鸣鸾罢歌舞。<br>
+                画栋朝飞南浦云，珠帘暮卷西山雨。<br>
+                闲云潭影日悠悠，物换星移几度秋。<br>
+                阁中帝子今何在？槛外长江空自流。<br>
+            </p>
+			<p class="author">——<strong>王勃</strong></p>
+        </div>
+    </div>
+</body>
+</html>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi31123.png" alt="pi31123"></p>
 
   </article>
   
