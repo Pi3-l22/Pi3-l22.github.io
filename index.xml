@@ -16,53 +16,67 @@
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/about/</guid>
       
-      <description>&lt;html&gt;
+      <description>&lt;html lang=&#34;zh-CN&#34;&gt;
 &lt;head&gt;
     &lt;style&gt;
         .container {
-            display: flex; /* 使用Flexbox布局 */
-            align-items: center; /* 垂直居中 */
-            justify-content: center; /* 水平居中 */
+            display: flex;
+            border: 2px solid #aa0000;
+            padding: 20px 20px 0px 20px;
         }
-        .poet{
-            /*wirting-mode实现竖直排版*/
+        .image {
+            margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .image img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .caption {
+            font-size: 0.8rem;
+            color: #6c6c6c;
+            text-align: center;
+        }
+        .poetry {
             writing-mode: vertical-rl;
+            text-align: center;
+            font-size: 1.6rem;
+            line-height: 4rem;
+            letter-spacing: .5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: &#39;KingHwa_OldSong&#39;
         }
-        .poet h1{
-			margin-top: 4em;
+        .poetry span{
+            color: #aa0000;
+            font-weight: bold;
         }
-        .poet p:not(.author){
-            letter-spacing: 1em;
-            line-height:1.5em;
-            margin: 2em;
-        }
-        .poet .author{
-			text-align: right;
-        }
-        img {
-            /* max-width: 50%; 限制图片最大宽度为容器宽度 */
-            /* max-height: 50%; 限制图片最大高度为容器高度 */
-            margin-right: 2px; /* 图片与文字的固定间隔 */
-            height: 450px; /* 图片高度自适应 */
+        .content div{
+            margin-bottom: 0;
         }
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;div class=&#34;container&#34;&gt;
-        &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/1726495749030.jpg&#34; alt=&#34;滕王阁&#34;&gt;
-        &lt;div class=&#34;poet&#34;&gt;
+        &lt;div class=&#34;image&#34;&gt;
+            &lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/1726495749030.jpg&#34; alt=&#34;滕王阁&#34;&gt;
+            &lt;div class=&#34;caption&#34;&gt;📷2023.1.25 📍中国江西省南昌市滕王阁&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;poetry&#34;&gt;
             &lt;p&gt;
-                滕王高阁临江渚，佩玉鸣鸾罢歌舞。&lt;br&gt;
+                &lt;span&gt;滕&lt;/span&gt;王高阁临江渚，佩玉鸣鸾罢歌舞。&lt;br&gt;
                 画栋朝飞南浦云，珠帘暮卷西山雨。&lt;br&gt;
                 闲云潭影日悠悠，物换星移几度秋。&lt;br&gt;
                 阁中帝子今何在？槛外长江空自流。&lt;br&gt;
             &lt;/p&gt;
-			&lt;p class=&#34;author&#34;&gt;——&lt;strong&gt;王勃&lt;/strong&gt;&lt;/p&gt;
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/pi31123.png&#34; alt=&#34;pi31123&#34;&gt;&lt;/p&gt;
 </description>
       
     </item>
