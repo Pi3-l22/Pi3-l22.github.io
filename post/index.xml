@@ -3891,8 +3891,7 @@ detriment / harm for&amp;hellip;&lt;/p&gt;
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/12/windows10%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8wsa/</guid>
       
-      <description>&lt;h1 id=&#34;windows10下安装使用wsa&#34;&gt;Windows10下安装使用WSA&lt;/h1&gt;
-&lt;p&gt;如何在Windows10中使用带有Magisk的安卓子系统&lt;/p&gt;
+      <description>&lt;p&gt;如何在Windows10中使用带有Magisk的安卓子系统&lt;/p&gt;
 &lt;p&gt;需要系统版本高于Windows10 22H2&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://learn.microsoft.com/zh-cn/windows/android/wsa/&#34;&gt;适用于 Android™️ 的 Windows 子系统 | Microsoft Learn&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;下载安装&#34;&gt;下载安装&lt;/h2&gt;
@@ -4583,8 +4582,7 @@ detriment / harm for&amp;hellip;&lt;/p&gt;
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/12/%E5%BE%AE%E4%BF%A1%E5%AE%9A%E6%97%B6%E5%8F%91%E9%80%81%E5%80%92%E6%95%B0%E6%97%A5/</guid>
       
-      <description>&lt;h1 id=&#34;微信定时发送倒数日&#34;&gt;微信定时发送倒数日&lt;/h1&gt;
-&lt;p&gt;微信定时发送倒数日是基于Github项目 &lt;a href=&#34;https://github.com/lich0821/WeChatFerry&#34;&gt;WeChatFerry&lt;/a&gt; 实现的&lt;/p&gt;
+      <description>&lt;p&gt;微信定时发送倒数日是基于Github项目 &lt;a href=&#34;https://github.com/lich0821/WeChatFerry&#34;&gt;WeChatFerry&lt;/a&gt; 实现的&lt;/p&gt;
 &lt;p&gt;这个项目实现的功能：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;检查登录状态&lt;/li&gt;
@@ -4851,8 +4849,7 @@ detriment / harm for&amp;hellip;&lt;/p&gt;
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</guid>
       
-      <description>&lt;h1 id=&#34;数据库应用系统设计&#34;&gt;数据库应用系统设计&lt;/h1&gt;
-&lt;p&gt;1、实验目的&lt;/p&gt;
+      <description>&lt;p&gt;1、实验目的&lt;/p&gt;
 &lt;p&gt;  熟练掌握概念结构设计和逻辑结构设计步骤，建立和操作数据库。
  
 2、实验内容与要求&lt;/p&gt;
@@ -5202,8 +5199,7 @@ detriment / harm for&amp;hellip;&lt;/p&gt;
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%BA%8C/</guid>
       
-      <description>&lt;h1 id=&#34;t-sql语句操作二&#34;&gt;T-SQL语句操作(二)&lt;/h1&gt;
-&lt;p&gt;1、实验目的
+      <description>&lt;p&gt;1、实验目的
   熟练掌握T-SQL的统计功能与视图、关系图、触发器和存储过程的使用
 2、实验内容与要求
 （1）SELECT语句的数据统计功能

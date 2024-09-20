@@ -607,8 +607,7 @@
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/12/%E5%BE%AE%E4%BF%A1%E5%AE%9A%E6%97%B6%E5%8F%91%E9%80%81%E5%80%92%E6%95%B0%E6%97%A5/</guid>
       
-      <description>&lt;h1 id=&#34;微信定时发送倒数日&#34;&gt;微信定时发送倒数日&lt;/h1&gt;
-&lt;p&gt;微信定时发送倒数日是基于Github项目 &lt;a href=&#34;https://github.com/lich0821/WeChatFerry&#34;&gt;WeChatFerry&lt;/a&gt; 实现的&lt;/p&gt;
+      <description>&lt;p&gt;微信定时发送倒数日是基于Github项目 &lt;a href=&#34;https://github.com/lich0821/WeChatFerry&#34;&gt;WeChatFerry&lt;/a&gt; 实现的&lt;/p&gt;
 &lt;p&gt;这个项目实现的功能：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;检查登录状态&lt;/li&gt;
@@ -1282,8 +1281,7 @@
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/11/%E5%9F%BA%E4%BA%8Esocket%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E7%A8%8B%E5%BA%8F/</guid>
       
-      <description>&lt;h1 id=&#34;python远程控制程序&#34;&gt;Python远程控制程序&lt;/h1&gt;
-&lt;blockquote&gt;
+      <description>&lt;blockquote&gt;
 &lt;p&gt;一个基于Python Socket 实现远程控制程序
 可以用作远控木马&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1717,8 +1715,7 @@
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/11/neo4j%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</guid>
       
-      <description>&lt;h1 id=&#34;neo4j安装与使用&#34;&gt;Neo4j安装与使用&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://juejin.cn/s/neo4j%E8%8F%9C%E9%B8%9F%E6%95%99%E7%A8%8B&#34;&gt;Neo4j菜鸟教程&lt;/a&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;https://juejin.cn/s/neo4j%E8%8F%9C%E9%B8%9F%E6%95%99%E7%A8%8B&#34;&gt;Neo4j菜鸟教程&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.w3cschool.cn/neo4j/&#34;&gt;Neo4j教程&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/lijiong/p/15867307.html&#34;&gt;Neo4j的命令行操作&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
@@ -2242,12 +2239,12 @@ merge (from)-[r:Exchange]-&amp;gt;(to)
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/10/%E9%87%8F%E5%AD%90%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%96%B9%E6%B3%95%E5%8F%8A%E4%BA%91%E7%9B%98%E6%A1%8C%E9%9D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF/</guid>
       
-      <description>&lt;h1 id=&#34;起源&#34;&gt;起源&lt;/h1&gt;
+      <description>&lt;h2 id=&#34;起源&#34;&gt;起源&lt;/h2&gt;
 &lt;p&gt;在学校创新实践课程上，老师希望我们在这个课程上完成一个有关量子加密（量子随机数）的项目。&lt;/p&gt;
 &lt;p&gt;经过一段时间的调研和思考，结合老师的建议，我还是决定做&lt;strong&gt;基于本地量子加密的私人存储网盘&lt;/strong&gt;这样一个量子密码的项目。&lt;/p&gt;
 &lt;p&gt;整个项目需要实现的功能就是，首先对一个文件进行加密，加密的方式是，通过生成一个与文件字节数一致的量子随机数（物理量子随机数生成器件）作为加密的KEY密钥，随后与文件进行异或加密，生成加密过后的文件，并上传网盘，而KEY密钥则是存储在本地。我这里使用的网盘是百度网盘，当然也可以是阿里云盘等等现成的网盘。当然后续的改进过程中，我还会尝试运用云服务云存储，自己搭建一个网盘，同时写出一个网盘客户端，打通加密文件和网盘上传下载的功能。&lt;/p&gt;
 &lt;p&gt;对于这个项目，我认为安全性是最大的特点。因为对于一次一密的逐bit异或运算，虽然是最简单的形式，但是在量子随机数和本地密钥存储的条件下，这样的方案似乎是不可能被破解的。由于是私人网盘，所以最关键的密钥是不需要考虑密钥分发中怎么保证安全不会泄露这个问题的。不过在后续，如果需要增加利用网盘进行文件的分享还是需要设计这个问题的解决，这也是后续需要考虑的问题。&lt;/p&gt;
-&lt;h1 id=&#34;设计过程&#34;&gt;设计过程&lt;/h1&gt;
+&lt;h2 id=&#34;设计过程&#34;&gt;设计过程&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;需要注意的是，这里的量子随机数生成是利用Python的随机数生成进行模拟，两者有本质的区别，程序生成的是伪随机数，而量子随机数生成器件是利用物理光学器件生成真随机数&lt;/p&gt;
 &lt;/blockquote&gt;

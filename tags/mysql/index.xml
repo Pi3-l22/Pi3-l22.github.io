@@ -16,8 +16,7 @@
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%B8%80/</guid>
       
-      <description>&lt;h1 id=&#34;t-sql语句操作&#34;&gt;T-SQL语句操作&lt;/h1&gt;
-&lt;p&gt;T-SQL是标准SQL语言的扩展,是SQL Server的核心,在SQL的的基础上添加了变量,运算符,函数和流程控制等新内容
+      <description>&lt;p&gt;T-SQL是标准SQL语言的扩展,是SQL Server的核心,在SQL的的基础上添加了变量,运算符,函数和流程控制等新内容
 SQL Server用于操作数据库的编程语言为Transaction-SQL，简称T-SQL。T-SQL与PL/SQL不同，并没有固定的程序结构。&lt;br&gt;
 T-SQL包括以下4个部分：&lt;/p&gt;
 &lt;ul&gt;

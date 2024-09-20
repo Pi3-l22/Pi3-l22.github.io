@@ -73,7 +73,7 @@
   <meta itemprop="description" content="A personal notebook to record my studies and life">
   <meta itemprop="datePublished" content="2023-11-27T00:00:00+00:00">
   <meta itemprop="dateModified" content="2023-11-27T00:00:00+00:00">
-  <meta itemprop="wordCount" content="689">
+  <meta itemprop="wordCount" content="694">
   <meta itemprop="keywords" content="Linux,Kali">
 
   
@@ -138,6 +138,21 @@
   
   
   
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1--消息传递">1 . 消息传递</a></li>
+    <li><a href="#2--文件传输">2 . 文件传输</a></li>
+    <li><a href="#3--远程控制">3 . 远程控制</a></li>
+    <li><a href="#4--连接端口">4 . 连接端口</a></li>
+    <li><a href="#5--端口扫描">5 . 端口扫描</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
   
   <article class="content">
     
@@ -145,7 +160,7 @@
 <p>本机：192.168.161.1</p>
 <p>Metasploitable：192.168.161.133</p>
 <p>Kali：192.168.161.128</p>
-<h1 id="1-消息传递">1. 消息传递</h1>
+<h2 id="1--消息传递">1 . 消息传递</h2>
 <p>Metasploitable启动nc监听端口9876</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212530.png" alt=""></p>
 <p>用Kali连接Metasploitable</p>
@@ -153,7 +168,7 @@
 <p>输入消息，进行消息的传递</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212543.png" alt=""></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212549.png" alt=""></p>
-<h1 id="2-文件传输">2. 文件传输</h1>
+<h2 id="2--文件传输">2 . 文件传输</h2>
 <p>在kali中编写一个文件test_file内容为下</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212555.png" alt=""></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212606.png" alt=""></p>
@@ -166,7 +181,7 @@
 <p>最后在msf上查看文件内容，发现文件信息已传递</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212635.png" alt=""></p>
 <p>其文件传递的本质就是通过重定向符将文件的内容作为输入，在msf端将接收的数据重定向到文件</p>
-<h1 id="3-远程控制">3. 远程控制</h1>
+<h2 id="3--远程控制">3 . 远程控制</h2>
 <p>实验环境：</p>
 <p>攻击机：kali，靶机：Metasploitable</p>
 <p><strong>正向连接：</strong></p>
@@ -186,12 +201,12 @@
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212709.png" alt=""></p>
 <p>Kali成功接收到msf的shell，并且能够远程执行</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212713.png" alt=""></p>
-<h1 id="4-连接端口">4. 连接端口</h1>
+<h2 id="4--连接端口">4 . 连接端口</h2>
 <p>Msf启动apache服务，运行在80端口</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212720.png" alt=""></p>
 <p>Kali用nc连接msf的80端口，用get获取网页页面</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212726.png" alt=""></p>
-<h1 id="5-端口扫描">5. 端口扫描</h1>
+<h2 id="5--端口扫描">5 . 端口扫描</h2>
 <p>-v 显示详细</p>
 <p>-z 表示连接立即关闭，用于扫描</p>
 <p>如果是 udp 端口，再加上-u 参数</p>

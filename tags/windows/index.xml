@@ -16,8 +16,7 @@
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/12/windows10%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8wsa/</guid>
       
-      <description>&lt;h1 id=&#34;windows10下安装使用wsa&#34;&gt;Windows10下安装使用WSA&lt;/h1&gt;
-&lt;p&gt;如何在Windows10中使用带有Magisk的安卓子系统&lt;/p&gt;
+      <description>&lt;p&gt;如何在Windows10中使用带有Magisk的安卓子系统&lt;/p&gt;
 &lt;p&gt;需要系统版本高于Windows10 22H2&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://learn.microsoft.com/zh-cn/windows/android/wsa/&#34;&gt;适用于 Android™️ 的 Windows 子系统 | Microsoft Learn&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;下载安装&#34;&gt;下载安装&lt;/h2&gt;

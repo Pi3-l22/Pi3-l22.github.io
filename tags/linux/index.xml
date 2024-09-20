@@ -279,7 +279,7 @@
 &lt;p&gt;本机：192.168.161.1&lt;/p&gt;
 &lt;p&gt;Metasploitable：192.168.161.133&lt;/p&gt;
 &lt;p&gt;Kali：192.168.161.128&lt;/p&gt;
-&lt;h1 id=&#34;1-消息传递&#34;&gt;1. 消息传递&lt;/h1&gt;
+&lt;h2 id=&#34;1--消息传递&#34;&gt;1 . 消息传递&lt;/h2&gt;
 &lt;p&gt;Metasploitable启动nc监听端口9876&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212530.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;用Kali连接Metasploitable&lt;/p&gt;
@@ -287,7 +287,7 @@
 &lt;p&gt;输入消息，进行消息的传递&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212543.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212549.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h1 id=&#34;2-文件传输&#34;&gt;2. 文件传输&lt;/h1&gt;
+&lt;h2 id=&#34;2--文件传输&#34;&gt;2 . 文件传输&lt;/h2&gt;
 &lt;p&gt;在kali中编写一个文件test_file内容为下&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212555.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212606.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
@@ -300,7 +300,7 @@
 &lt;p&gt;最后在msf上查看文件内容，发现文件信息已传递&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212635.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;其文件传递的本质就是通过重定向符将文件的内容作为输入，在msf端将接收的数据重定向到文件&lt;/p&gt;
-&lt;h1 id=&#34;3-远程控制&#34;&gt;3. 远程控制&lt;/h1&gt;
+&lt;h2 id=&#34;3--远程控制&#34;&gt;3 . 远程控制&lt;/h2&gt;
 &lt;p&gt;实验环境：&lt;/p&gt;
 &lt;p&gt;攻击机：kali，靶机：Metasploitable&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;正向连接：&lt;/strong&gt;&lt;/p&gt;
@@ -320,12 +320,12 @@
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212709.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Kali成功接收到msf的shell，并且能够远程执行&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212713.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h1 id=&#34;4-连接端口&#34;&gt;4. 连接端口&lt;/h1&gt;
+&lt;h2 id=&#34;4--连接端口&#34;&gt;4 . 连接端口&lt;/h2&gt;
 &lt;p&gt;Msf启动apache服务，运行在80端口&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212720.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Kali用nc连接msf的80端口，用get获取网页页面&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231127212726.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h1 id=&#34;5-端口扫描&#34;&gt;5. 端口扫描&lt;/h1&gt;
+&lt;h2 id=&#34;5--端口扫描&#34;&gt;5 . 端口扫描&lt;/h2&gt;
 &lt;p&gt;-v 显示详细&lt;/p&gt;
 &lt;p&gt;-z 表示连接立即关闭，用于扫描&lt;/p&gt;
 &lt;p&gt;如果是 udp 端口，再加上-u 参数&lt;/p&gt;
@@ -342,8 +342,7 @@
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/11/oh-my-posh-%E4%B8%BA-powershell-%E5%92%8C-wsl-%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E6%A0%B7%E5%BC%8F/</guid>
       
-      <description>&lt;h1 id=&#34;oh-my-posh-为-powershell-和-wsl-配置终端样式&#34;&gt;Oh My Posh 为 PowerShell 和 WSL 配置终端样式&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://ohmyposh.dev/docs/&#34;&gt;Oh My Posh官方文档&lt;/a&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;https://ohmyposh.dev/docs/&#34;&gt;Oh My Posh官方文档&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://learn.microsoft.com/zh-cn/windows/terminal/tutorials/custom-prompt-setup&#34;&gt;Microsoft文档&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;powershell配置&#34;&gt;PowerShell配置&lt;/h2&gt;
 &lt;p&gt;首先就是下载带图标的Nerd字体，下载地址：&lt;a href=&#34;https://www.nerdfonts.com/&#34;&gt;Nerd Fonts官方网址&lt;/a&gt;&lt;/p&gt;
@@ -424,8 +423,7 @@
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/11/linux%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</guid>
       
-      <description>&lt;h1 id=&#34;linux使用技巧&#34;&gt;Linux使用技巧&lt;/h1&gt;
-&lt;h2 id=&#34;tmux使用技巧&#34;&gt;tmux使用技巧&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;tmux使用技巧&#34;&gt;tmux使用技巧&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# 窗口管理器 最重要的就是他能保存当前窗口的状态 之后还能连回来（包括ssh远程连接服务器）&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tmux &lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# 创建一个新的会话&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tmux ls &lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# 列出所有会话&lt;/span&gt;
@@ -890,8 +888,7 @@ var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着�
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/11/shell%E5%9F%BA%E7%A1%80/</guid>
       
-      <description>&lt;h1 id=&#34;shell基础&#34;&gt;Shell基础&lt;/h1&gt;
-&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
 &lt;p&gt;Shell 是一个用 C 语言编写的程序，它是用户使用 Linux 的桥梁。Shell 既是一种命令语言，又是一种程序设计语言。&lt;/p&gt;
 &lt;p&gt;Shell 是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。&lt;/p&gt;
 &lt;p&gt;Shell 脚本（shell script），是一种为 shell 编写的脚本程序。&lt;/p&gt;
@@ -2697,8 +2694,7 @@ var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着�
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/11/wsl%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3/</guid>
       
-      <description>&lt;h1 id=&#34;wsl相关问题与解决&#34;&gt;WSL相关问题与解决&lt;/h1&gt;
-&lt;h2 id=&#34;wsl进行内核模块编程&#34;&gt;WSL进行内核模块编程&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;wsl进行内核模块编程&#34;&gt;WSL进行内核模块编程&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/dubuhongchen/article/details/118460376&#34;&gt;[第一节] WSL2 内核编译/安装内核头文件/驱动调试_wsl2编译和安装内核以支持驱动编译_landaliming的博客-CSDN博客&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;查看当前系统的内核版本号&lt;/li&gt;

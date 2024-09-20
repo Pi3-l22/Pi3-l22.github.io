@@ -16,8 +16,7 @@
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://pi3-l22.github.io/post/2023/11/shell%E5%9F%BA%E7%A1%80/</guid>
       
-      <description>&lt;h1 id=&#34;shell基础&#34;&gt;Shell基础&lt;/h1&gt;
-&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
 &lt;p&gt;Shell 是一个用 C 语言编写的程序，它是用户使用 Linux 的桥梁。Shell 既是一种命令语言，又是一种程序设计语言。&lt;/p&gt;
 &lt;p&gt;Shell 是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。&lt;/p&gt;
 &lt;p&gt;Shell 脚本（shell script），是一种为 shell 编写的脚本程序。&lt;/p&gt;
