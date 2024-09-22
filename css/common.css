@@ -70,7 +70,7 @@
     font-family: 'Songti';
     font-style: normal;
     font-weight: normal;
-    src: url('../font/FmlSong-Regular.woff2');
+    src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/FmlSong-Regular.woff');
 }
 
 @font-face {
@@ -78,7 +78,7 @@
     font-family: 'Songti';
     font-style: italic;
     font-weight: normal;
-    src: url('../font/FmlSong-Italic.woff2');
+    src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/FmlSong-Italic.woff');
 }
 
 @font-face {
@@ -86,7 +86,7 @@
     font-family: 'Songti';
     font-style: italic;
     font-weight: bold;
-    src: url('../font/FmlSong-BlackItalic.woff2');
+    src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/FmlSong-BlackItalic.woff');
 }
 
 @font-face {
@@ -94,7 +94,7 @@
     font-family: 'Songti';
     font-style: normal;
     font-weight: bold;
-    src: url('../font/FmlSong-Black.woff2');
+    src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/FmlSong-Black.woff');
 }
 
 @font-face {
@@ -102,7 +102,7 @@
     font-family: 'Fangsong';
     font-style: normal;
     font-weight: normal;
-    src: url('../font/STFANGSO.woff');
+    src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/STFANGSO.woff');
 }
 
 @font-face {
