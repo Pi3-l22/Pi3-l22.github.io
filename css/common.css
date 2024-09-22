@@ -70,7 +70,7 @@
     font-family: 'Songti';
     font-style: normal;
     font-weight: normal;
-    src: url('../font/FmlSong-Regular.woff');
+    src: url('../font/FmlSong-Regular.woff2');
 }
 
 @font-face {
@@ -78,7 +78,7 @@
     font-family: 'Songti';
     font-style: italic;
     font-weight: normal;
-    src: url('../font/FmlSong-Italic.woff');
+    src: url('../font/FmlSong-Italic.woff2');
 }
 
 @font-face {
@@ -86,7 +86,7 @@
     font-family: 'Songti';
     font-style: italic;
     font-weight: bold;
-    src: url('../font/FmlSong-BlackItalic.woff');
+    src: url('../font/FmlSong-BlackItalic.woff2');
 }
 
 @font-face {
@@ -94,7 +94,7 @@
     font-family: 'Songti';
     font-style: normal;
     font-weight: bold;
-    src: url('../font/FmlSong-Black.woff');
+    src: url('../font/FmlSong-Black.woff2');
 }
 
 @font-face {
