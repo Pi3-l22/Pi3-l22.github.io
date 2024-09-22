@@ -219,6 +219,24 @@ time {
     width: calc(100% - 2rem);
 }
 
+#main.post{
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    /* 边框阴影 */
+    box-shadow: 0 0 20px 10px #cccccc;
+    margin: 2rem 0;
+    /* 自定义尺寸 */
+    max-width: 850px;
+    width: calc(100% - 1rem);
+    padding: 2rem 3rem;
+    /* A4纸尺寸 */
+    /* max-width: 21cm;
+    padding: 1.8cm 2cm 1.2cm 2cm;
+    width: 100%; */
+}
+
 /* footer */
 
 #footer {

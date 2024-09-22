@@ -47,6 +47,7 @@
     border-left: #bf003f 2px solid;
     font-style: italic;
     padding: 1rem 0 1rem 2rem;
+    margin: 1rem auto;
 }
 
 .content code {
@@ -96,7 +97,7 @@
 
 .content p {
     text-align: justify;
-    /* font-size: 1.1rem; */
+    font-size: 1rem;
 }
 
 .content pre {
@@ -159,6 +160,15 @@
     background-color: #e4a1a1;
 }
 
+.content hr{
+    border: none;
+    border-top: 2px solid #cbcbcb;
+    margin: 1.5rem auto;
+    width: 100%;
+}
+
+
+/* 标题自动编号 */
 .content {
     counter-reset: h2;
 }
