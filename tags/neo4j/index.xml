@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Neo4j on Pi3&#39;Notes</title>
-    <link>https://pi3-l22.github.io/tags/neo4j/</link>
+    <link>https://blog.pi3.fun/tags/neo4j/</link>
     <description>Recent content in Neo4j on Pi3&#39;Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
-    <lastBuildDate>Fri, 24 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://pi3-l22.github.io/tags/neo4j/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/tags/neo4j/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Neo4j安装与使用</title>
-      <link>https://pi3-l22.github.io/post/2023/11/neo4j%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</link>
+      <link>https://blog.pi3.fun/post/2023/11/neo4j%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Fri, 24 Nov 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/11/neo4j%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https://blog.pi3.fun/post/2023/11/neo4j%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</guid>
       
       <description>&lt;p&gt;&lt;a href=&#34;https://juejin.cn/s/neo4j%E8%8F%9C%E9%B8%9F%E6%95%99%E7%A8%8B&#34;&gt;Neo4j菜鸟教程&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.w3cschool.cn/neo4j/&#34;&gt;Neo4j教程&lt;/a&gt;&lt;/p&gt;

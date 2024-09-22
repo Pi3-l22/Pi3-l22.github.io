@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Pi3&#39;Notes</title>
-    <link>https://pi3-l22.github.io/tags/</link>
+    <link>https://blog.pi3.fun/tags/</link>
     <description>Recent content in Tags on Pi3&#39;Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
-    <lastBuildDate>Fri, 20 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://pi3-l22.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 20 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>English Learning</title>
-      <link>https://pi3-l22.github.io/tags/english-learning/</link>
+      <link>https://blog.pi3.fun/tags/english-learning/</link>
       <pubDate>Fri, 20 Sep 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/tags/english-learning/</guid>
+      <guid>https://blog.pi3.fun/tags/english-learning/</guid>
       
       <description></description>
       
@@ -22,10 +22,10 @@
     
     <item>
       <title>Index</title>
-      <link>https://pi3-l22.github.io/tags/index/</link>
+      <link>https://blog.pi3.fun/tags/index/</link>
       <pubDate>Fri, 20 Sep 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/tags/index/</guid>
+      <guid>https://blog.pi3.fun/tags/index/</guid>
       
       <description></description>
       
@@ -33,10 +33,10 @@
     
     <item>
       <title>Kaoyan</title>
-      <link>https://pi3-l22.github.io/tags/kaoyan/</link>
+      <link>https://blog.pi3.fun/tags/kaoyan/</link>
       <pubDate>Fri, 20 Sep 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/tags/kaoyan/</guid>
+      <guid>https://blog.pi3.fun/tags/kaoyan/</guid>
       
       <description></description>
       
@@ -44,10 +44,10 @@
     
     <item>
       <title>Kali</title>
-      <link>https://pi3-l22.github.io/tags/kali/</link>
+      <link>https://blog.pi3.fun/tags/kali/</link>
       <pubDate>Sun, 15 Sep 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/tags/kali/</guid>
+      <guid>https://blog.pi3.fun/tags/kali/</guid>
       
       <description></description>
       
@@ -55,10 +55,10 @@
     
     <item>
       <title>Linux</title>
-      <link>https://pi3-l22.github.io/tags/linux/</link>
+      <link>https://blog.pi3.fun/tags/linux/</link>
       <pubDate>Sun, 15 Sep 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/tags/linux/</guid>
+      <guid>https://blog.pi3.fun/tags/linux/</guid>
       
       <description></description>
       
@@ -66,10 +66,10 @@
     
     <item>
       <title>VMware Workstasion</title>
-      <link>https://pi3-l22.github.io/tags/vmware-workstasion/</link>
+      <link>https://blog.pi3.fun/tags/vmware-workstasion/</link>
       <pubDate>Sat, 10 Feb 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/tags/vmware-workstasion/</guid>
+      <guid>https://blog.pi3.fun/tags/vmware-workstasion/</guid>
       
       <description></description>
       
@@ -77,10 +77,10 @@
     
     <item>
       <title>Windows</title>
-      <link>https://pi3-l22.github.io/tags/windows/</link>
+      <link>https://blog.pi3.fun/tags/windows/</link>
       <pubDate>Fri, 22 Dec 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/tags/windows/</guid>
+      <guid>https://blog.pi3.fun/tags/windows/</guid>
       
       <description></description>
       
@@ -88,10 +88,10 @@
     
     <item>
       <title>WSA</title>
-      <link>https://pi3-l22.github.io/tags/wsa/</link>
+      <link>https://blog.pi3.fun/tags/wsa/</link>
       <pubDate>Fri, 22 Dec 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/tags/wsa/</guid>
+      <guid>https://blog.pi3.fun/tags/wsa/</guid>
       
       <description></description>
       
@@ -99,10 +99,10 @@
     
     <item>
       <title>Python</title>
-      <link>https://pi3-l22.github.io/tags/python/</link>
+      <link>https://blog.pi3.fun/tags/python/</link>
       <pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/tags/python/</guid>
+      <guid>https://blog.pi3.fun/tags/python/</guid>
       
       <description></description>
       
@@ -110,10 +110,10 @@
     
     <item>
       <title>Socket</title>
-      <link>https://pi3-l22.github.io/tags/socket/</link>
+      <link>https://blog.pi3.fun/tags/socket/</link>
       <pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/tags/socket/</guid>
+      <guid>https://blog.pi3.fun/tags/socket/</guid>
       
       <description></description>
       

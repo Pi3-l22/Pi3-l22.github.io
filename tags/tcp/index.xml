@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TCP on Pi3&#39;Notes</title>
-    <link>https://pi3-l22.github.io/tags/tcp/</link>
+    <link>https://blog.pi3.fun/tags/tcp/</link>
     <description>Recent content in TCP on Pi3&#39;Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
-    <lastBuildDate>Wed, 20 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://pi3-l22.github.io/tags/tcp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/tags/tcp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>不同网络架构下文件下载服务协议设计</title>
-      <link>https://pi3-l22.github.io/post/2023/12/%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/</link>
+      <link>https://blog.pi3.fun/post/2023/12/%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/</link>
       <pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/12/%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/</guid>
+      <guid>https://blog.pi3.fun/post/2023/12/%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/</guid>
       
       <description>&lt;h2 id=&#34;实验目的&#34;&gt;实验目的&lt;/h2&gt;
 &lt;ol&gt;

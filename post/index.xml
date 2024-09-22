@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Pi3&#39;Notes</title>
-    <link>https://pi3-l22.github.io/post/</link>
+    <link>https://blog.pi3.fun/post/</link>
     <description>Recent content in Posts on Pi3&#39;Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
-    <lastBuildDate>Fri, 20 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://pi3-l22.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 20 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>英语写作方法论笔记</title>
-      <link>https://pi3-l22.github.io/post/2024/09/%E5%86%99%E4%BD%9C%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</link>
+      <link>https://blog.pi3.fun/post/2024/09/%E5%86%99%E4%BD%9C%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Fri, 20 Sep 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2024/09/%E5%86%99%E4%BD%9C%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://blog.pi3.fun/post/2024/09/%E5%86%99%E4%BD%9C%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</guid>
       
       <description>&lt;p&gt;颉斌斌2025考研英语写作方法论讲稿笔记&lt;/p&gt;
 &lt;h2 id=&#34;语言亮点设计&#34;&gt;语言亮点设计&lt;/h2&gt;
@@ -2566,10 +2566,10 @@ detriment / harm for&amp;hellip;&lt;/p&gt;
     
     <item>
       <title>英语三小门方法论笔记</title>
-      <link>https://pi3-l22.github.io/post/2024/09/%E4%B8%89%E5%B0%8F%E9%97%A8%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</link>
+      <link>https://blog.pi3.fun/post/2024/09/%E4%B8%89%E5%B0%8F%E9%97%A8%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Mon, 16 Sep 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2024/09/%E4%B8%89%E5%B0%8F%E9%97%A8%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://blog.pi3.fun/post/2024/09/%E4%B8%89%E5%B0%8F%E9%97%A8%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</guid>
       
       <description>&lt;p&gt;颉斌斌2025考研英语三小门应试宝笔记&lt;/p&gt;
 &lt;h2 id=&#34;完形&#34;&gt;完形&lt;/h2&gt;
@@ -2929,10 +2929,10 @@ detriment / harm for&amp;hellip;&lt;/p&gt;
     
     <item>
       <title>英语阅读方法论笔记</title>
-      <link>https://pi3-l22.github.io/post/2024/09/%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</link>
+      <link>https://blog.pi3.fun/post/2024/09/%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Mon, 16 Sep 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2024/09/%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://blog.pi3.fun/post/2024/09/%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</guid>
       
       <description>&lt;p&gt;颉斌斌2025考研英语阅读应试宝笔记&lt;/p&gt;
 &lt;h2 id=&#34;阅读题基本方法&#34;&gt;阅读题基本方法&lt;/h2&gt;
@@ -3627,10 +3627,10 @@ detriment / harm for&amp;hellip;&lt;/p&gt;
     
     <item>
       <title>Kali Linux的安装与配置</title>
-      <link>https://pi3-l22.github.io/post/2024/02/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</link>
+      <link>https://blog.pi3.fun/post/2024/02/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Sun, 15 Sep 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2024/02/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid>
+      <guid>https://blog.pi3.fun/post/2024/02/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid>
       
       <description>&lt;h2 id=&#34;快速安装&#34;&gt;快速安装&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.kali.org/&#34;&gt;官网&lt;/a&gt;下载Kali Linux镜像文件（ISO）&lt;/p&gt;
@@ -3790,10 +3790,10 @@ detriment / harm for&amp;hellip;&lt;/p&gt;
     
     <item>
       <title>Kali Linux下使用VMware遇到的问题</title>
-      <link>https://pi3-l22.github.io/post/2024/02/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <link>https://blog.pi3.fun/post/2024/02/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</link>
       <pubDate>Sat, 10 Feb 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2024/02/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <guid>https://blog.pi3.fun/post/2024/02/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
       
       <description>&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
 &lt;p&gt;到官网下载Linux的资源文件，运行按照提示下一步就可以完成安装&lt;/p&gt;
@@ -3886,10 +3886,10 @@ detriment / harm for&amp;hellip;&lt;/p&gt;
     
     <item>
       <title>Windows10下安装使用WSA</title>
-      <link>https://pi3-l22.github.io/post/2023/12/windows10%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8wsa/</link>
+      <link>https://blog.pi3.fun/post/2023/12/windows10%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8wsa/</link>
       <pubDate>Fri, 22 Dec 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/12/windows10%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8wsa/</guid>
+      <guid>https://blog.pi3.fun/post/2023/12/windows10%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8wsa/</guid>
       
       <description>&lt;p&gt;如何在Windows10中使用带有Magisk的安卓子系统&lt;/p&gt;
 &lt;p&gt;需要系统版本高于Windows10 22H2&lt;/p&gt;
@@ -3986,10 +3986,10 @@ detriment / harm for&amp;hellip;&lt;/p&gt;
     
     <item>
       <title>不同网络架构下文件下载服务协议设计</title>
-      <link>https://pi3-l22.github.io/post/2023/12/%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/</link>
+      <link>https://blog.pi3.fun/post/2023/12/%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/</link>
       <pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/12/%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/</guid>
+      <guid>https://blog.pi3.fun/post/2023/12/%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/</guid>
       
       <description>&lt;h2 id=&#34;实验目的&#34;&gt;实验目的&lt;/h2&gt;
 &lt;ol&gt;
@@ -4577,10 +4577,10 @@ detriment / harm for&amp;hellip;&lt;/p&gt;
     
     <item>
       <title>微信定时发送倒数日</title>
-      <link>https://pi3-l22.github.io/post/2023/12/%E5%BE%AE%E4%BF%A1%E5%AE%9A%E6%97%B6%E5%8F%91%E9%80%81%E5%80%92%E6%95%B0%E6%97%A5/</link>
+      <link>https://blog.pi3.fun/post/2023/12/%E5%BE%AE%E4%BF%A1%E5%AE%9A%E6%97%B6%E5%8F%91%E9%80%81%E5%80%92%E6%95%B0%E6%97%A5/</link>
       <pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/12/%E5%BE%AE%E4%BF%A1%E5%AE%9A%E6%97%B6%E5%8F%91%E9%80%81%E5%80%92%E6%95%B0%E6%97%A5/</guid>
+      <guid>https://blog.pi3.fun/post/2023/12/%E5%BE%AE%E4%BF%A1%E5%AE%9A%E6%97%B6%E5%8F%91%E9%80%81%E5%80%92%E6%95%B0%E6%97%A5/</guid>
       
       <description>&lt;p&gt;微信定时发送倒数日是基于Github项目 &lt;a href=&#34;https://github.com/lich0821/WeChatFerry&#34;&gt;WeChatFerry&lt;/a&gt; 实现的&lt;/p&gt;
 &lt;p&gt;这个项目实现的功能：&lt;/p&gt;
@@ -4844,10 +4844,10 @@ detriment / harm for&amp;hellip;&lt;/p&gt;
     
     <item>
       <title>数据库应用系统设计实验</title>
-      <link>https://pi3-l22.github.io/post/2023/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</link>
+      <link>https://blog.pi3.fun/post/2023/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</link>
       <pubDate>Mon, 18 Dec 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</guid>
+      <guid>https://blog.pi3.fun/post/2023/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</guid>
       
       <description>&lt;p&gt;1、实验目的&lt;/p&gt;
 &lt;p&gt;  熟练掌握概念结构设计和逻辑结构设计步骤，建立和操作数据库。
@@ -5194,10 +5194,10 @@ detriment / harm for&amp;hellip;&lt;/p&gt;
     
     <item>
       <title>T-SQL语句操作(二)</title>
-      <link>https://pi3-l22.github.io/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%BA%8C/</link>
+      <link>https://blog.pi3.fun/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%BA%8C/</link>
       <pubDate>Sun, 17 Dec 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%BA%8C/</guid>
+      <guid>https://blog.pi3.fun/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%BA%8C/</guid>
       
       <description>&lt;p&gt;1、实验目的
   熟练掌握T-SQL的统计功能与视图、关系图、触发器和存储过程的使用

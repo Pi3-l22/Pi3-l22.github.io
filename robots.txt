@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://pi3-l22.github.io/sitemap.xml
+Sitemap: https://blog.pi3.fun/sitemap.xml

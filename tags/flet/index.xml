@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Flet on Pi3&#39;Notes</title>
-    <link>https://pi3-l22.github.io/tags/flet/</link>
+    <link>https://blog.pi3.fun/tags/flet/</link>
     <description>Recent content in Flet on Pi3&#39;Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
-    <lastBuildDate>Thu, 07 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://pi3-l22.github.io/tags/flet/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/tags/flet/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>基于UDP的多人在线聊天室</title>
-      <link>https://pi3-l22.github.io/post/2023/12/%E5%9F%BA%E4%BA%8Eudp%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%AE%A4/</link>
+      <link>https://blog.pi3.fun/post/2023/12/%E5%9F%BA%E4%BA%8Eudp%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%AE%A4/</link>
       <pubDate>Thu, 07 Dec 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/12/%E5%9F%BA%E4%BA%8Eudp%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%AE%A4/</guid>
+      <guid>https://blog.pi3.fun/post/2023/12/%E5%9F%BA%E4%BA%8Eudp%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%AE%A4/</guid>
       
       <description>&lt;h2 id=&#34;实验内容&#34;&gt;实验内容&lt;/h2&gt;
 &lt;p&gt;编写基于UDP的聊天室程序，实现多人聊天功能。自己设计应用协议，要求实现以下功能：&lt;/p&gt;
@@ -418,10 +418,10 @@
     
     <item>
       <title>量子加解密方法及云盘桌面客户端</title>
-      <link>https://pi3-l22.github.io/post/2023/10/%E9%87%8F%E5%AD%90%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%96%B9%E6%B3%95%E5%8F%8A%E4%BA%91%E7%9B%98%E6%A1%8C%E9%9D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF/</link>
+      <link>https://blog.pi3.fun/post/2023/10/%E9%87%8F%E5%AD%90%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%96%B9%E6%B3%95%E5%8F%8A%E4%BA%91%E7%9B%98%E6%A1%8C%E9%9D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF/</link>
       <pubDate>Sun, 29 Oct 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/10/%E9%87%8F%E5%AD%90%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%96%B9%E6%B3%95%E5%8F%8A%E4%BA%91%E7%9B%98%E6%A1%8C%E9%9D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF/</guid>
+      <guid>https://blog.pi3.fun/post/2023/10/%E9%87%8F%E5%AD%90%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%96%B9%E6%B3%95%E5%8F%8A%E4%BA%91%E7%9B%98%E6%A1%8C%E9%9D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF/</guid>
       
       <description>&lt;h2 id=&#34;起源&#34;&gt;起源&lt;/h2&gt;
 &lt;p&gt;在学校创新实践课程上，老师希望我们在这个课程上完成一个有关量子加密（量子随机数）的项目。&lt;/p&gt;

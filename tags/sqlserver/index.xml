@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SQLServer on Pi3&#39;Notes</title>
-    <link>https://pi3-l22.github.io/tags/sqlserver/</link>
+    <link>https://blog.pi3.fun/tags/sqlserver/</link>
     <description>Recent content in SQLServer on Pi3&#39;Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
-    <lastBuildDate>Mon, 18 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://pi3-l22.github.io/tags/sqlserver/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/tags/sqlserver/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>数据库应用系统设计实验</title>
-      <link>https://pi3-l22.github.io/post/2023/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</link>
+      <link>https://blog.pi3.fun/post/2023/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</link>
       <pubDate>Mon, 18 Dec 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</guid>
+      <guid>https://blog.pi3.fun/post/2023/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</guid>
       
       <description>&lt;p&gt;1、实验目的&lt;/p&gt;
 &lt;p&gt;  熟练掌握概念结构设计和逻辑结构设计步骤，建立和操作数据库。
@@ -361,10 +361,10 @@
     
     <item>
       <title>T-SQL语句操作(二)</title>
-      <link>https://pi3-l22.github.io/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%BA%8C/</link>
+      <link>https://blog.pi3.fun/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%BA%8C/</link>
       <pubDate>Sun, 17 Dec 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%BA%8C/</guid>
+      <guid>https://blog.pi3.fun/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%BA%8C/</guid>
       
       <description>&lt;p&gt;1、实验目的
   熟练掌握T-SQL的统计功能与视图、关系图、触发器和存储过程的使用
@@ -714,10 +714,10 @@ s020，王五，男，1999-8-9,  …”。
     
     <item>
       <title>T-SQL语句操作(一)</title>
-      <link>https://pi3-l22.github.io/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%B8%80/</link>
+      <link>https://blog.pi3.fun/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%B8%80/</link>
       <pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%B8%80/</guid>
+      <guid>https://blog.pi3.fun/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%B8%80/</guid>
       
       <description>&lt;p&gt;T-SQL是标准SQL语言的扩展,是SQL Server的核心,在SQL的的基础上添加了变量,运算符,函数和流程控制等新内容
 SQL Server用于操作数据库的编程语言为Transaction-SQL，简称T-SQL。T-SQL与PL/SQL不同，并没有固定的程序结构。&lt;br&gt;

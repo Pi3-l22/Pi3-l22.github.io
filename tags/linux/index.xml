@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on Pi3&#39;Notes</title>
-    <link>https://pi3-l22.github.io/tags/linux/</link>
+    <link>https://blog.pi3.fun/tags/linux/</link>
     <description>Recent content in Linux on Pi3&#39;Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
-    <lastBuildDate>Sun, 15 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://pi3-l22.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kali Linux的安装与配置</title>
-      <link>https://pi3-l22.github.io/post/2024/02/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</link>
+      <link>https://blog.pi3.fun/post/2024/02/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Sun, 15 Sep 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2024/02/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid>
+      <guid>https://blog.pi3.fun/post/2024/02/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid>
       
       <description>&lt;h2 id=&#34;快速安装&#34;&gt;快速安装&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.kali.org/&#34;&gt;官网&lt;/a&gt;下载Kali Linux镜像文件（ISO）&lt;/p&gt;
@@ -174,10 +174,10 @@
     
     <item>
       <title>Kali Linux下使用VMware遇到的问题</title>
-      <link>https://pi3-l22.github.io/post/2024/02/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <link>https://blog.pi3.fun/post/2024/02/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</link>
       <pubDate>Sat, 10 Feb 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2024/02/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <guid>https://blog.pi3.fun/post/2024/02/kali-linux%E4%B8%8B%E4%BD%BF%E7%94%A8vmware%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
       
       <description>&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
 &lt;p&gt;到官网下载Linux的资源文件，运行按照提示下一步就可以完成安装&lt;/p&gt;
@@ -270,10 +270,10 @@
     
     <item>
       <title>Netcat工具的简单使用</title>
-      <link>https://pi3-l22.github.io/post/2023/11/netcat%E5%B7%A5%E5%85%B7%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</link>
+      <link>https://blog.pi3.fun/post/2023/11/netcat%E5%B7%A5%E5%85%B7%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Mon, 27 Nov 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/11/netcat%E5%B7%A5%E5%85%B7%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https://blog.pi3.fun/post/2023/11/netcat%E5%B7%A5%E5%85%B7%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</guid>
       
       <description>&lt;p&gt;实验环境：&lt;/p&gt;
 &lt;p&gt;本机：192.168.161.1&lt;/p&gt;
@@ -337,10 +337,10 @@
     
     <item>
       <title>Oh My Posh 配置教程</title>
-      <link>https://pi3-l22.github.io/post/2023/11/oh-my-posh-%E4%B8%BA-powershell-%E5%92%8C-wsl-%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E6%A0%B7%E5%BC%8F/</link>
+      <link>https://blog.pi3.fun/post/2023/11/oh-my-posh-%E4%B8%BA-powershell-%E5%92%8C-wsl-%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E6%A0%B7%E5%BC%8F/</link>
       <pubDate>Sat, 25 Nov 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/11/oh-my-posh-%E4%B8%BA-powershell-%E5%92%8C-wsl-%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E6%A0%B7%E5%BC%8F/</guid>
+      <guid>https://blog.pi3.fun/post/2023/11/oh-my-posh-%E4%B8%BA-powershell-%E5%92%8C-wsl-%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E6%A0%B7%E5%BC%8F/</guid>
       
       <description>&lt;p&gt;&lt;a href=&#34;https://ohmyposh.dev/docs/&#34;&gt;Oh My Posh官方文档&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://learn.microsoft.com/zh-cn/windows/terminal/tutorials/custom-prompt-setup&#34;&gt;Microsoft文档&lt;/a&gt;&lt;/p&gt;
@@ -418,10 +418,10 @@
     
     <item>
       <title>Linux使用技巧</title>
-      <link>https://pi3-l22.github.io/post/2023/11/linux%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</link>
+      <link>https://blog.pi3.fun/post/2023/11/linux%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</link>
       <pubDate>Fri, 24 Nov 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/11/linux%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</guid>
+      <guid>https://blog.pi3.fun/post/2023/11/linux%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</guid>
       
       <description>&lt;h2 id=&#34;tmux使用技巧&#34;&gt;tmux使用技巧&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# 窗口管理器 最重要的就是他能保存当前窗口的状态 之后还能连回来（包括ssh远程连接服务器）&lt;/span&gt;
@@ -883,10 +883,10 @@ var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着�
     
     <item>
       <title>Shell基础</title>
-      <link>https://pi3-l22.github.io/post/2023/11/shell%E5%9F%BA%E7%A1%80/</link>
+      <link>https://blog.pi3.fun/post/2023/11/shell%E5%9F%BA%E7%A1%80/</link>
       <pubDate>Fri, 24 Nov 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/11/shell%E5%9F%BA%E7%A1%80/</guid>
+      <guid>https://blog.pi3.fun/post/2023/11/shell%E5%9F%BA%E7%A1%80/</guid>
       
       <description>&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
 &lt;p&gt;Shell 是一个用 C 语言编写的程序，它是用户使用 Linux 的桥梁。Shell 既是一种命令语言，又是一种程序设计语言。&lt;/p&gt;
@@ -2689,10 +2689,10 @@ var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着�
     
     <item>
       <title>WSL相关问题与解决</title>
-      <link>https://pi3-l22.github.io/post/2023/11/wsl%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3/</link>
+      <link>https://blog.pi3.fun/post/2023/11/wsl%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3/</link>
       <pubDate>Tue, 21 Nov 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://pi3-l22.github.io/post/2023/11/wsl%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3/</guid>
+      <guid>https://blog.pi3.fun/post/2023/11/wsl%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3/</guid>
       
       <description>&lt;h2 id=&#34;wsl进行内核模块编程&#34;&gt;WSL进行内核模块编程&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/dubuhongchen/article/details/118460376&#34;&gt;[第一节] WSL2 内核编译/安装内核头文件/驱动调试_wsl2编译和安装内核以支持驱动编译_landaliming的博客-CSDN博客&lt;/a&gt;&lt;/p&gt;
