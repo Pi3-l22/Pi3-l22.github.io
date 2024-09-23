@@ -229,7 +229,7 @@ time {
     margin: 2rem 0;
     /* 自定义尺寸 */
     max-width: 850px;
-    width: calc(100% - 1rem);
+    width: 100%;
     padding: 2rem 3rem;
     /* A4纸尺寸 */
     /* max-width: 21cm;
