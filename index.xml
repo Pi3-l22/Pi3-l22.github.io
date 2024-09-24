@@ -34,7 +34,7 @@
         text-align: center;
         font-size: 0.8rem;
         margin-top: 0;
-        margin-bottom: 0;
+        margin-bottom: 0 !important;
     }
 &lt;/style&gt;
 &lt;pre class=&#34;ascii-art&#34;&gt;
