@@ -27,13 +27,13 @@
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://blog.pi3.fun/about/</guid>
       
-      <description>&lt;h1 id=&#34;hi-there-&#34;&gt;Hi there 👋&lt;/h1&gt;
-&lt;style&gt;
+      <description>&lt;style&gt;
     .ascii-art {
         font-family: Consolas !important;
         white-space: pre;
         text-align: center;
         font-size: 0.8rem;
+        margin-top: 0;
     }
 &lt;/style&gt;
 &lt;pre class=&#34;ascii-art&#34;&gt;
@@ -72,7 +72,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;me &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; Student()
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;me&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;say_hi()
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/挥手(128 x 128).gif&#34; style=&#34;width: 100px; margin-left: 0 !important;&#34;&gt;</description>
       
     </item>
     
