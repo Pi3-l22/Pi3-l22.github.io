@@ -101,12 +101,17 @@
 }
 
 .content pre {
-    background-color: #F5F5F5;
-    border-radius: .2rem;
-    font-family: 'Latin Modern Mono', 'Fangsong', Courier, monospace;
+    background-color: #F5F5F5; /* 由于使用代码样式 使得背景不起作用 */
+    border-radius: .5rem;
+    font-family: 't1xtt', 'Latin Modern Mono', 'Fangsong', Courier, monospace;
     margin-top: .5rem;
     overflow-x: auto;
     padding: .5rem;
+}
+
+/* 设置代码框背景 */
+.content .highlight pre{
+    background-color: #F5F5F5 !important;
 }
 
 .content pre code {
