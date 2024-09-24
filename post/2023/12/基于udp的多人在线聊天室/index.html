@@ -193,31 +193,31 @@
 <h4 id="最简单的udp连接">最简单的UDP连接</h4>
 <p>首先先写一个最简单的UDP连接程序，作为整个程序的基础</p>
 <p><strong>client端</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>IP <span style="color:#666">=</span> <span style="color:#b44">&#39;localhost&#39;</span>
-</span></span><span style="display:flex;"><span>POST <span style="color:#666">=</span> <span style="color:#666">7777</span>
-</span></span><span style="display:flex;"><span>SERVER_ADDR <span style="color:#666">=</span> (IP, POST)
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 创建一个UDP的socket</span>
-</span></span><span style="display:flex;"><span>client <span style="color:#666">=</span> socket<span style="color:#666">.</span>socket(socket<span style="color:#666">.</span>AF_INET, socket<span style="color:#666">.</span>SOCK_DGRAM)
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 发送消息</span>
-</span></span><span style="display:flex;"><span>message <span style="color:#666">=</span> <span style="color:#a2f">input</span>()
-</span></span><span style="display:flex;"><span>client<span style="color:#666">.</span>sendto(message<span style="color:#666">.</span>encode(), SERVER_ADDR)
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 接收消息</span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># while True:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># data, server = client.recvfrom(1024)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># print(data.decode())</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000">IP</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#39;localhost&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">POST</span> <span style="color:#000">=</span> <span style="color:#1c01ce">7777</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">SERVER_ADDR</span> <span style="color:#000">=</span> (<span style="color:#000">IP</span>, <span style="color:#000">POST</span>)
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 创建一个UDP的socket</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">client</span> <span style="color:#000">=</span> <span style="color:#000">socket</span><span style="color:#000">.</span><span style="color:#000">socket</span>(<span style="color:#000">socket</span><span style="color:#000">.</span><span style="color:#000">AF_INET</span>, <span style="color:#000">socket</span><span style="color:#000">.</span><span style="color:#000">SOCK_DGRAM</span>)
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 发送消息</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">message</span> <span style="color:#000">=</span> <span style="color:#a90d91">input</span>()
+</span></span><span style="display:flex;"><span><span style="color:#000">client</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#000">message</span><span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">SERVER_ADDR</span>)
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 接收消息</span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># while True:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#177500"># data, server = client.recvfrom(1024)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#177500"># print(data.decode())</span>
 </span></span></code></pre></div><p><strong>server端</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>IP <span style="color:#666">=</span> <span style="color:#b44">&#39;localhost&#39;</span>
-</span></span><span style="display:flex;"><span>POST <span style="color:#666">=</span> <span style="color:#666">7777</span>
-</span></span><span style="display:flex;"><span>SERVER_ADDR <span style="color:#666">=</span> (IP, POST)
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 创建一个UDP的socket</span>
-</span></span><span style="display:flex;"><span>server <span style="color:#666">=</span> socket<span style="color:#666">.</span>socket(socket<span style="color:#666">.</span>AF_INET, socket<span style="color:#666">.</span>SOCK_DGRAM)
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 监听本机端口</span>
-</span></span><span style="display:flex;"><span>server<span style="color:#666">.</span>bind(SERVER_ADDR)
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 接收消息</span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span> <span style="color:#a2f;font-weight:bold">True</span>:
-</span></span><span style="display:flex;"><span>    data, address <span style="color:#666">=</span> server<span style="color:#666">.</span>recvfrom(BUFFER)
-</span></span><span style="display:flex;"><span>    message <span style="color:#666">=</span> data<span style="color:#666">.</span>decode()
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(message)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000">IP</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#39;localhost&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">POST</span> <span style="color:#000">=</span> <span style="color:#1c01ce">7777</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">SERVER_ADDR</span> <span style="color:#000">=</span> (<span style="color:#000">IP</span>, <span style="color:#000">POST</span>)
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 创建一个UDP的socket</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">server</span> <span style="color:#000">=</span> <span style="color:#000">socket</span><span style="color:#000">.</span><span style="color:#000">socket</span>(<span style="color:#000">socket</span><span style="color:#000">.</span><span style="color:#000">AF_INET</span>, <span style="color:#000">socket</span><span style="color:#000">.</span><span style="color:#000">SOCK_DGRAM</span>)
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 监听本机端口</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">server</span><span style="color:#000">.</span><span style="color:#000">bind</span>(<span style="color:#000">SERVER_ADDR</span>)
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 接收消息</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">while</span> <span style="color:#a90d91">True</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000">data</span>, <span style="color:#000">address</span> <span style="color:#000">=</span> <span style="color:#000">server</span><span style="color:#000">.</span><span style="color:#000">recvfrom</span>(<span style="color:#000">BUFFER</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#000">message</span> <span style="color:#000">=</span> <span style="color:#000">data</span><span style="color:#000">.</span><span style="color:#000">decode</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">print</span>(<span style="color:#000">message</span>)
 </span></span></code></pre></div><p>这样就完成一个最简单的UDP连接程序，实现了client发送消息，server接收消息</p>
 <h4 id="相应功能的实现">相应功能的实现</h4>
 <p>接下里就是在上面程序的基础上加上对应的功能，本次程序需要实现：</p>
@@ -237,141 +237,141 @@
 <li>退出操作的封装格式：EXIT {username}</li>
 </ul>
 <p><strong>client端功能实现</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 注册</span>
-</span></span><span style="display:flex;"><span>username <span style="color:#666">=</span> <span style="color:#a2f">input</span>(<span style="color:#b44">&#34;[*] 输入用户名: &#34;</span>)
-</span></span><span style="display:flex;"><span>password <span style="color:#666">=</span> <span style="color:#a2f">input</span>(<span style="color:#b44">&#34;[*] 输入密码: &#34;</span>)
-</span></span><span style="display:flex;"><span>registration_message <span style="color:#666">=</span> <span style="color:#b44">f</span><span style="color:#b44">&#34;REGISTER </span><span style="color:#b68;font-weight:bold">{</span>username<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> </span><span style="color:#b68;font-weight:bold">{</span>password<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#34;</span>
-</span></span><span style="display:flex;"><span>client<span style="color:#666">.</span>sendto(registration_message<span style="color:#666">.</span>encode(), SERVER_ADDR)
-</span></span><span style="display:flex;"><span>response, add <span style="color:#666">=</span> client<span style="color:#666">.</span>recvfrom(BUFFER)
-</span></span><span style="display:flex;"><span><span style="color:#a2f">print</span>(response<span style="color:#666">.</span>decode())
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 注册</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">username</span> <span style="color:#000">=</span> <span style="color:#a90d91">input</span>(<span style="color:#c41a16">&#34;[*] 输入用户名: &#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000">password</span> <span style="color:#000">=</span> <span style="color:#a90d91">input</span>(<span style="color:#c41a16">&#34;[*] 输入密码: &#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000">registration_message</span> <span style="color:#000">=</span> <span style="color:#c41a16">f</span><span style="color:#c41a16">&#34;REGISTER </span><span style="color:#c41a16">{</span><span style="color:#000">username</span><span style="color:#c41a16">}</span><span style="color:#c41a16"> </span><span style="color:#c41a16">{</span><span style="color:#000">password</span><span style="color:#c41a16">}</span><span style="color:#c41a16">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">client</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#000">registration_message</span><span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">SERVER_ADDR</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000">response</span>, <span style="color:#000">add</span> <span style="color:#000">=</span> <span style="color:#000">client</span><span style="color:#000">.</span><span style="color:#000">recvfrom</span>(<span style="color:#000">BUFFER</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">print</span>(<span style="color:#000">response</span><span style="color:#000">.</span><span style="color:#000">decode</span>())
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 登录</span>
-</span></span><span style="display:flex;"><span>username <span style="color:#666">=</span> <span style="color:#a2f">input</span>(<span style="color:#b44">&#34;[*] 输入用户名: &#34;</span>)
-</span></span><span style="display:flex;"><span>password <span style="color:#666">=</span> <span style="color:#a2f">input</span>(<span style="color:#b44">&#34;[*] 输入密码: &#34;</span>)
-</span></span><span style="display:flex;"><span>login_message <span style="color:#666">=</span> <span style="color:#b44">f</span><span style="color:#b44">&#34;LOGIN </span><span style="color:#b68;font-weight:bold">{</span>username<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> </span><span style="color:#b68;font-weight:bold">{</span>password<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#34;</span>
-</span></span><span style="display:flex;"><span>client<span style="color:#666">.</span>sendto(login_message<span style="color:#666">.</span>encode(), SERVER_ADDR)
-</span></span><span style="display:flex;"><span>response, add <span style="color:#666">=</span> client<span style="color:#666">.</span>recvfrom(<span style="color:#666">1024</span>)
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> response<span style="color:#666">.</span>decode() <span style="color:#666">==</span> <span style="color:#b44">&#34;Login successful&#34;</span>:
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># print(f&#34;[+] 欢迎 {username} 加入聊天室&#34;)</span>
-</span></span><span style="display:flex;"><span>	rev, add <span style="color:#666">=</span> client<span style="color:#666">.</span>recvfrom(<span style="color:#666">1024</span>)
-</span></span><span style="display:flex;"><span>	online_users <span style="color:#666">=</span> <span style="color:#a2f">list</span>(rev<span style="color:#666">.</span>decode()<span style="color:#666">.</span>replace(<span style="color:#b44">&#34;[&#34;</span>, <span style="color:#b44">&#34;&#34;</span>)<span style="color:#666">.</span>replace(<span style="color:#b44">&#34;]&#34;</span>, <span style="color:#b44">&#34;&#34;</span>)<span style="color:#666">.</span>replace(<span style="color:#b44">&#34;&#39;&#34;</span>, <span style="color:#b44">&#34;&#34;</span>)<span style="color:#666">.</span>split(<span style="color:#b44">&#34;, &#34;</span>))
-</span></span><span style="display:flex;"><span>	<span style="color:#a2f">print</span>(<span style="color:#b44">&#34;[*] 当前在线用户: &#34;</span>, end<span style="color:#666">=</span><span style="color:#b44">&#39;&#39;</span>)
-</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">for</span> user <span style="color:#a2f;font-weight:bold">in</span> online_users:
-</span></span><span style="display:flex;"><span>		<span style="color:#a2f">print</span>(user, end<span style="color:#666">=</span><span style="color:#b44">&#39; &#39;</span>)
-</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">break</span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">else</span>:
-</span></span><span style="display:flex;"><span>	<span style="color:#a2f">print</span>(response<span style="color:#666">.</span>decode())
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 登录</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">username</span> <span style="color:#000">=</span> <span style="color:#a90d91">input</span>(<span style="color:#c41a16">&#34;[*] 输入用户名: &#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000">password</span> <span style="color:#000">=</span> <span style="color:#a90d91">input</span>(<span style="color:#c41a16">&#34;[*] 输入密码: &#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000">login_message</span> <span style="color:#000">=</span> <span style="color:#c41a16">f</span><span style="color:#c41a16">&#34;LOGIN </span><span style="color:#c41a16">{</span><span style="color:#000">username</span><span style="color:#c41a16">}</span><span style="color:#c41a16"> </span><span style="color:#c41a16">{</span><span style="color:#000">password</span><span style="color:#c41a16">}</span><span style="color:#c41a16">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">client</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#000">login_message</span><span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">SERVER_ADDR</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000">response</span>, <span style="color:#000">add</span> <span style="color:#000">=</span> <span style="color:#000">client</span><span style="color:#000">.</span><span style="color:#000">recvfrom</span>(<span style="color:#1c01ce">1024</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">if</span> <span style="color:#000">response</span><span style="color:#000">.</span><span style="color:#000">decode</span>() <span style="color:#000">==</span> <span style="color:#c41a16">&#34;Login successful&#34;</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># print(f&#34;[+] 欢迎 {username} 加入聊天室&#34;)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">rev</span>, <span style="color:#000">add</span> <span style="color:#000">=</span> <span style="color:#000">client</span><span style="color:#000">.</span><span style="color:#000">recvfrom</span>(<span style="color:#1c01ce">1024</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#000">online_users</span> <span style="color:#000">=</span> <span style="color:#a90d91">list</span>(<span style="color:#000">rev</span><span style="color:#000">.</span><span style="color:#000">decode</span>()<span style="color:#000">.</span><span style="color:#000">replace</span>(<span style="color:#c41a16">&#34;[&#34;</span>, <span style="color:#c41a16">&#34;&#34;</span>)<span style="color:#000">.</span><span style="color:#000">replace</span>(<span style="color:#c41a16">&#34;]&#34;</span>, <span style="color:#c41a16">&#34;&#34;</span>)<span style="color:#000">.</span><span style="color:#000">replace</span>(<span style="color:#c41a16">&#34;&#39;&#34;</span>, <span style="color:#c41a16">&#34;&#34;</span>)<span style="color:#000">.</span><span style="color:#000">split</span>(<span style="color:#c41a16">&#34;, &#34;</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#a90d91">print</span>(<span style="color:#c41a16">&#34;[*] 当前在线用户: &#34;</span>, <span style="color:#000">end</span><span style="color:#000">=</span><span style="color:#c41a16">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a90d91">for</span> <span style="color:#000">user</span> <span style="color:#000">in</span> <span style="color:#000">online_users</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#a90d91">print</span>(<span style="color:#000">user</span>, <span style="color:#000">end</span><span style="color:#000">=</span><span style="color:#c41a16">&#39; &#39;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a90d91">break</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">else</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#a90d91">print</span>(<span style="color:#000">response</span><span style="color:#000">.</span><span style="color:#000">decode</span>())
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 公聊、私聊、退出</span>
-</span></span><span style="display:flex;"><span>message <span style="color:#666">=</span> <span style="color:#a2f">input</span>()
-</span></span><span style="display:flex;"><span>client<span style="color:#666">.</span>sendto(message<span style="color:#666">.</span>encode(), SERVER_ADDR)
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> message <span style="color:#666">==</span> <span style="color:#b44">&#34;exit&#34;</span>:
-</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">break</span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">elif</span> message<span style="color:#666">.</span>startswith(<span style="color:#b44">&#34;@&#34;</span>):
-</span></span><span style="display:flex;"><span>	to_address <span style="color:#666">=</span> message<span style="color:#666">.</span>split(<span style="color:#b44">&#34; &#34;</span>)[<span style="color:#666">0</span>]<span style="color:#666">.</span>replace(<span style="color:#b44">&#34;@&#34;</span>, <span style="color:#b44">&#34;&#34;</span>)
-</span></span><span style="display:flex;"><span>	private_message <span style="color:#666">=</span> message<span style="color:#666">.</span>split(<span style="color:#b44">&#34; &#34;</span>)[<span style="color:#666">1</span>]
-</span></span><span style="display:flex;"><span>	private_message <span style="color:#666">=</span> <span style="color:#b44">f</span><span style="color:#b44">&#34;PRIVATE </span><span style="color:#b68;font-weight:bold">{</span>to_address<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> </span><span style="color:#b68;font-weight:bold">{</span>private_message<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#34;</span>
-</span></span><span style="display:flex;"><span>	client<span style="color:#666">.</span>sendto(private_message<span style="color:#666">.</span>encode(), SERVER_ADDR)
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">else</span>:
-</span></span><span style="display:flex;"><span>	public_message <span style="color:#666">=</span> <span style="color:#b44">f</span><span style="color:#b44">&#34;PUBLIC </span><span style="color:#b68;font-weight:bold">{</span>message<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#34;</span>
-</span></span><span style="display:flex;"><span>	client<span style="color:#666">.</span>sendto(public_message<span style="color:#666">.</span>encode(), SERVER_ADDR)
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 公聊、私聊、退出</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">message</span> <span style="color:#000">=</span> <span style="color:#a90d91">input</span>()
+</span></span><span style="display:flex;"><span><span style="color:#000">client</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#000">message</span><span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">SERVER_ADDR</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">if</span> <span style="color:#000">message</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#34;exit&#34;</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#a90d91">break</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">elif</span> <span style="color:#000">message</span><span style="color:#000">.</span><span style="color:#000">startswith</span>(<span style="color:#c41a16">&#34;@&#34;</span>):
+</span></span><span style="display:flex;"><span>	<span style="color:#000">to_address</span> <span style="color:#000">=</span> <span style="color:#000">message</span><span style="color:#000">.</span><span style="color:#000">split</span>(<span style="color:#c41a16">&#34; &#34;</span>)[<span style="color:#1c01ce">0</span>]<span style="color:#000">.</span><span style="color:#000">replace</span>(<span style="color:#c41a16">&#34;@&#34;</span>, <span style="color:#c41a16">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#000">private_message</span> <span style="color:#000">=</span> <span style="color:#000">message</span><span style="color:#000">.</span><span style="color:#000">split</span>(<span style="color:#c41a16">&#34; &#34;</span>)[<span style="color:#1c01ce">1</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#000">private_message</span> <span style="color:#000">=</span> <span style="color:#c41a16">f</span><span style="color:#c41a16">&#34;PRIVATE </span><span style="color:#c41a16">{</span><span style="color:#000">to_address</span><span style="color:#c41a16">}</span><span style="color:#c41a16"> </span><span style="color:#c41a16">{</span><span style="color:#000">private_message</span><span style="color:#c41a16">}</span><span style="color:#c41a16">&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">client</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#000">private_message</span><span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">SERVER_ADDR</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">else</span>:
+</span></span><span style="display:flex;"><span>	<span style="color:#000">public_message</span> <span style="color:#000">=</span> <span style="color:#c41a16">f</span><span style="color:#c41a16">&#34;PUBLIC </span><span style="color:#c41a16">{</span><span style="color:#000">message</span><span style="color:#c41a16">}</span><span style="color:#c41a16">&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">client</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#000">public_message</span><span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">SERVER_ADDR</span>)
 </span></span></code></pre></div><p><strong>server端功能实现</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 记录注册过的用户信息字典</span>
-</span></span><span style="display:flex;"><span>user_dict <span style="color:#666">=</span> {}  <span style="color:#080;font-style:italic"># {username: password}</span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 记录在线用户信息字典</span>
-</span></span><span style="display:flex;"><span>online_user <span style="color:#666">=</span> {}  <span style="color:#080;font-style:italic"># {username: (ip, port)}</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 记录注册过的用户信息字典</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">user_dict</span> <span style="color:#000">=</span> {}  <span style="color:#177500"># {username: password}</span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 记录在线用户信息字典</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">online_user</span> <span style="color:#000">=</span> {}  <span style="color:#177500"># {username: (ip, port)}</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 初始化用户信息</span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">init_users</span>():
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">with</span> <span style="color:#a2f">open</span>(<span style="color:#b44">&#39;users.txt&#39;</span>, <span style="color:#b44">&#39;r&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f:
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> line <span style="color:#a2f;font-weight:bold">in</span> f<span style="color:#666">.</span>readlines():
-</span></span><span style="display:flex;"><span>            username <span style="color:#666">=</span> line<span style="color:#666">.</span>split(<span style="color:#b44">&#39;,&#39;</span>)[<span style="color:#666">0</span>]
-</span></span><span style="display:flex;"><span>            password <span style="color:#666">=</span> line<span style="color:#666">.</span>split(<span style="color:#b44">&#39;,&#39;</span>)[<span style="color:#666">1</span>]<span style="color:#666">.</span>replace(<span style="color:#b44">&#39;</span><span style="color:#b62;font-weight:bold">\n</span><span style="color:#b44">&#39;</span>, <span style="color:#b44">&#39;&#39;</span>)
-</span></span><span style="display:flex;"><span>            user_dict[username] <span style="color:#666">=</span> password
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f">print</span>(<span style="color:#b44">f</span><span style="color:#b44">&#39;[+] 注册用户信息加载成功&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 初始化用户信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">init_users</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">with</span> <span style="color:#a90d91">open</span>(<span style="color:#c41a16">&#39;users.txt&#39;</span>, <span style="color:#c41a16">&#39;r&#39;</span>) <span style="color:#a90d91">as</span> <span style="color:#000">f</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">for</span> <span style="color:#000">line</span> <span style="color:#000">in</span> <span style="color:#000">f</span><span style="color:#000">.</span><span style="color:#000">readlines</span>():
+</span></span><span style="display:flex;"><span>            <span style="color:#000">username</span> <span style="color:#000">=</span> <span style="color:#000">line</span><span style="color:#000">.</span><span style="color:#000">split</span>(<span style="color:#c41a16">&#39;,&#39;</span>)[<span style="color:#1c01ce">0</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#000">password</span> <span style="color:#000">=</span> <span style="color:#000">line</span><span style="color:#000">.</span><span style="color:#000">split</span>(<span style="color:#c41a16">&#39;,&#39;</span>)[<span style="color:#1c01ce">1</span>]<span style="color:#000">.</span><span style="color:#000">replace</span>(<span style="color:#c41a16">&#39;</span><span style="color:#c41a16">\n</span><span style="color:#c41a16">&#39;</span>, <span style="color:#c41a16">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#000">user_dict</span>[<span style="color:#000">username</span>] <span style="color:#000">=</span> <span style="color:#000">password</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">print</span>(<span style="color:#c41a16">f</span><span style="color:#c41a16">&#39;[+] 注册用户信息加载成功&#39;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 保存注册用户信息</span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">save_users</span>():
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">with</span> <span style="color:#a2f">open</span>(<span style="color:#b44">&#39;users.txt&#39;</span>, <span style="color:#b44">&#39;w&#39;</span>) <span style="color:#a2f;font-weight:bold">as</span> f:
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> username <span style="color:#a2f;font-weight:bold">in</span> user_dict<span style="color:#666">.</span>keys():
-</span></span><span style="display:flex;"><span>            password <span style="color:#666">=</span> user_dict[username]
-</span></span><span style="display:flex;"><span>            f<span style="color:#666">.</span>write(<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b68;font-weight:bold">{</span>username<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">,</span><span style="color:#b68;font-weight:bold">{</span>password<span style="color:#b68;font-weight:bold">}</span><span style="color:#b62;font-weight:bold">\n</span><span style="color:#b44">&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 保存注册用户信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">save_users</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">with</span> <span style="color:#a90d91">open</span>(<span style="color:#c41a16">&#39;users.txt&#39;</span>, <span style="color:#c41a16">&#39;w&#39;</span>) <span style="color:#a90d91">as</span> <span style="color:#000">f</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">for</span> <span style="color:#000">username</span> <span style="color:#000">in</span> <span style="color:#000">user_dict</span><span style="color:#000">.</span><span style="color:#000">keys</span>():
+</span></span><span style="display:flex;"><span>            <span style="color:#000">password</span> <span style="color:#000">=</span> <span style="color:#000">user_dict</span>[<span style="color:#000">username</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#000">f</span><span style="color:#000">.</span><span style="color:#000">write</span>(<span style="color:#c41a16">f</span><span style="color:#c41a16">&#39;</span><span style="color:#c41a16">{</span><span style="color:#000">username</span><span style="color:#c41a16">}</span><span style="color:#c41a16">,</span><span style="color:#c41a16">{</span><span style="color:#000">password</span><span style="color:#c41a16">}</span><span style="color:#c41a16">\n</span><span style="color:#c41a16">&#39;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 列出在线用户</span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">list_online_users</span>(address):
-</span></span><span style="display:flex;"><span>    users <span style="color:#666">=</span> []
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> username <span style="color:#a2f;font-weight:bold">in</span> online_user<span style="color:#666">.</span>keys():
-</span></span><span style="display:flex;"><span>        users<span style="color:#666">.</span>append(username)
-</span></span><span style="display:flex;"><span>    server<span style="color:#666">.</span>sendto(<span style="color:#a2f">str</span>(users)<span style="color:#666">.</span>encode(), address)
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 列出在线用户</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">list_online_users</span>(<span style="color:#000">address</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">users</span> <span style="color:#000">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">for</span> <span style="color:#000">username</span> <span style="color:#000">in</span> <span style="color:#000">online_user</span><span style="color:#000">.</span><span style="color:#000">keys</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#000">users</span><span style="color:#000">.</span><span style="color:#000">append</span>(<span style="color:#000">username</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#000">server</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#a90d91">str</span>(<span style="color:#000">users</span>)<span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">address</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 注册</span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">register</span>(username, password, address):
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> username <span style="color:#a2f;font-weight:bold">in</span> user_dict<span style="color:#666">.</span>keys():
-</span></span><span style="display:flex;"><span>        server<span style="color:#666">.</span>sendto(<span style="color:#b44">&#34;[-] 用户名已存在&#34;</span><span style="color:#666">.</span>encode(), address)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>:
-</span></span><span style="display:flex;"><span>        user_dict[username] <span style="color:#666">=</span> password
-</span></span><span style="display:flex;"><span>        save_users()
-</span></span><span style="display:flex;"><span>        server<span style="color:#666">.</span>sendto(<span style="color:#b44">&#34;[+] 注册成功&#34;</span><span style="color:#666">.</span>encode(), address)
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 注册</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">register</span>(<span style="color:#000">username</span>, <span style="color:#000">password</span>, <span style="color:#000">address</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">if</span> <span style="color:#000">username</span> <span style="color:#000">in</span> <span style="color:#000">user_dict</span><span style="color:#000">.</span><span style="color:#000">keys</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#000">server</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#c41a16">&#34;[-] 用户名已存在&#34;</span><span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">address</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#000">user_dict</span>[<span style="color:#000">username</span>] <span style="color:#000">=</span> <span style="color:#000">password</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">save_users</span>()
+</span></span><span style="display:flex;"><span>        <span style="color:#000">server</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#c41a16">&#34;[+] 注册成功&#34;</span><span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">address</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 登录</span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">login</span>(username, password, address):
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> username <span style="color:#a2f;font-weight:bold">not</span> <span style="color:#a2f;font-weight:bold">in</span> user_dict<span style="color:#666">.</span>keys():
-</span></span><span style="display:flex;"><span>        server<span style="color:#666">.</span>sendto(<span style="color:#b44">&#34;[-] 用户名不存在&#34;</span><span style="color:#666">.</span>encode(), address)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">elif</span> user_dict[username] <span style="color:#666">!=</span> password:
-</span></span><span style="display:flex;"><span>        server<span style="color:#666">.</span>sendto(<span style="color:#b44">&#34;[-] 密码错误&#34;</span><span style="color:#666">.</span>encode(), address)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>:
-</span></span><span style="display:flex;"><span>        server<span style="color:#666">.</span>sendto(<span style="color:#b44">&#34;Login successful&#34;</span><span style="color:#666">.</span>encode(), address)
-</span></span><span style="display:flex;"><span>        online_user[username] <span style="color:#666">=</span> address
-</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># 发送在线用户列表</span>
-</span></span><span style="display:flex;"><span>        list_online_users(address)
-</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># 发送上线通知</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> online <span style="color:#a2f;font-weight:bold">in</span> online_user<span style="color:#666">.</span>keys():
-</span></span><span style="display:flex;"><span>            server<span style="color:#666">.</span>sendto(<span style="color:#b44">f</span><span style="color:#b44">&#39;</span><span style="color:#b62;font-weight:bold">\n</span><span style="color:#b44">[+] 欢迎 </span><span style="color:#b68;font-weight:bold">{</span>username<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44"> 加入聊天室&#39;</span><span style="color:#666">.</span>encode(), online_user[online])
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 登录</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">login</span>(<span style="color:#000">username</span>, <span style="color:#000">password</span>, <span style="color:#000">address</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">if</span> <span style="color:#000">username</span> <span style="color:#000">not</span> <span style="color:#000">in</span> <span style="color:#000">user_dict</span><span style="color:#000">.</span><span style="color:#000">keys</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#000">server</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#c41a16">&#34;[-] 用户名不存在&#34;</span><span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">address</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">elif</span> <span style="color:#000">user_dict</span>[<span style="color:#000">username</span>] <span style="color:#000">!=</span> <span style="color:#000">password</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#000">server</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#c41a16">&#34;[-] 密码错误&#34;</span><span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">address</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#000">server</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#c41a16">&#34;Login successful&#34;</span><span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">address</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#000">online_user</span>[<span style="color:#000">username</span>] <span style="color:#000">=</span> <span style="color:#000">address</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#177500"># 发送在线用户列表</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">list_online_users</span>(<span style="color:#000">address</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#177500"># 发送上线通知</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">for</span> <span style="color:#000">online</span> <span style="color:#000">in</span> <span style="color:#000">online_user</span><span style="color:#000">.</span><span style="color:#000">keys</span>():
+</span></span><span style="display:flex;"><span>            <span style="color:#000">server</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#c41a16">f</span><span style="color:#c41a16">&#39;</span><span style="color:#c41a16">\n</span><span style="color:#c41a16">[+] 欢迎 </span><span style="color:#c41a16">{</span><span style="color:#000">username</span><span style="color:#c41a16">}</span><span style="color:#c41a16"> 加入聊天室&#39;</span><span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">online_user</span>[<span style="color:#000">online</span>])
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 公聊</span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">public_chat</span>(message, address):
-</span></span><span style="display:flex;"><span>    from_username <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 通过address获取username</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> username <span style="color:#a2f;font-weight:bold">in</span> online_user<span style="color:#666">.</span>keys():
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> online_user[username] <span style="color:#666">==</span> address:
-</span></span><span style="display:flex;"><span>            from_username <span style="color:#666">=</span> username
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">break</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> username <span style="color:#a2f;font-weight:bold">in</span> online_user<span style="color:#666">.</span>keys():
-</span></span><span style="display:flex;"><span>        server<span style="color:#666">.</span>sendto(<span style="color:#b44">f</span><span style="color:#b44">&#39;[+] </span><span style="color:#b68;font-weight:bold">{</span>from_username<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">: </span><span style="color:#b68;font-weight:bold">{</span>message<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span><span style="color:#666">.</span>encode(), online_user[username])
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 公聊</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">public_chat</span>(<span style="color:#000">message</span>, <span style="color:#000">address</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">from_username</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#177500"># 通过address获取username</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">for</span> <span style="color:#000">username</span> <span style="color:#000">in</span> <span style="color:#000">online_user</span><span style="color:#000">.</span><span style="color:#000">keys</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">if</span> <span style="color:#000">online_user</span>[<span style="color:#000">username</span>] <span style="color:#000">==</span> <span style="color:#000">address</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#000">from_username</span> <span style="color:#000">=</span> <span style="color:#000">username</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a90d91">break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">for</span> <span style="color:#000">username</span> <span style="color:#000">in</span> <span style="color:#000">online_user</span><span style="color:#000">.</span><span style="color:#000">keys</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#000">server</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#c41a16">f</span><span style="color:#c41a16">&#39;[+] </span><span style="color:#c41a16">{</span><span style="color:#000">from_username</span><span style="color:#c41a16">}</span><span style="color:#c41a16">: </span><span style="color:#c41a16">{</span><span style="color:#000">message</span><span style="color:#c41a16">}</span><span style="color:#c41a16">&#39;</span><span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">online_user</span>[<span style="color:#000">username</span>])
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 私聊</span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">private_chat</span>(message, to_username, address):
-</span></span><span style="display:flex;"><span>    from_username <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 通过address获取username</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> username <span style="color:#a2f;font-weight:bold">in</span> online_user<span style="color:#666">.</span>keys():
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> online_user[username] <span style="color:#666">==</span> address:
-</span></span><span style="display:flex;"><span>            from_username <span style="color:#666">=</span> username
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">break</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> to_username <span style="color:#a2f;font-weight:bold">not</span> <span style="color:#a2f;font-weight:bold">in</span> online_user<span style="color:#666">.</span>keys():
-</span></span><span style="display:flex;"><span>        server<span style="color:#666">.</span>sendto(<span style="color:#b44">&#34;[-] 用户不在线&#34;</span><span style="color:#666">.</span>encode(), address)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>:
-</span></span><span style="display:flex;"><span>        to_address <span style="color:#666">=</span> online_user[to_username]
-</span></span><span style="display:flex;"><span>        server<span style="color:#666">.</span>sendto(<span style="color:#b44">f</span><span style="color:#b44">&#39;[@] </span><span style="color:#b68;font-weight:bold">{</span>from_username<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">: </span><span style="color:#b68;font-weight:bold">{</span>message<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span><span style="color:#666">.</span>encode(), to_address)
-</span></span><span style="display:flex;"><span>        server<span style="color:#666">.</span>sendto(<span style="color:#b44">f</span><span style="color:#b44">&#39;[@] </span><span style="color:#b68;font-weight:bold">{</span>from_username<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">: </span><span style="color:#b68;font-weight:bold">{</span>message<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;</span><span style="color:#666">.</span>encode(), address)
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 私聊</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">private_chat</span>(<span style="color:#000">message</span>, <span style="color:#000">to_username</span>, <span style="color:#000">address</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">from_username</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#177500"># 通过address获取username</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">for</span> <span style="color:#000">username</span> <span style="color:#000">in</span> <span style="color:#000">online_user</span><span style="color:#000">.</span><span style="color:#000">keys</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">if</span> <span style="color:#000">online_user</span>[<span style="color:#000">username</span>] <span style="color:#000">==</span> <span style="color:#000">address</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#000">from_username</span> <span style="color:#000">=</span> <span style="color:#000">username</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a90d91">break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">if</span> <span style="color:#000">to_username</span> <span style="color:#000">not</span> <span style="color:#000">in</span> <span style="color:#000">online_user</span><span style="color:#000">.</span><span style="color:#000">keys</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#000">server</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#c41a16">&#34;[-] 用户不在线&#34;</span><span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">address</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#000">to_address</span> <span style="color:#000">=</span> <span style="color:#000">online_user</span>[<span style="color:#000">to_username</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#000">server</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#c41a16">f</span><span style="color:#c41a16">&#39;[@] </span><span style="color:#c41a16">{</span><span style="color:#000">from_username</span><span style="color:#c41a16">}</span><span style="color:#c41a16">: </span><span style="color:#c41a16">{</span><span style="color:#000">message</span><span style="color:#c41a16">}</span><span style="color:#c41a16">&#39;</span><span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">to_address</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#000">server</span><span style="color:#000">.</span><span style="color:#000">sendto</span>(<span style="color:#c41a16">f</span><span style="color:#c41a16">&#39;[@] </span><span style="color:#c41a16">{</span><span style="color:#000">from_username</span><span style="color:#c41a16">}</span><span style="color:#c41a16">: </span><span style="color:#c41a16">{</span><span style="color:#000">message</span><span style="color:#c41a16">}</span><span style="color:#c41a16">&#39;</span><span style="color:#000">.</span><span style="color:#000">encode</span>(), <span style="color:#000">address</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"># 根据选项分别进入对应的函数</span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">menu</span>(data, address):
-</span></span><span style="display:flex;"><span>    command <span style="color:#666">=</span> data<span style="color:#666">.</span>split()[<span style="color:#666">0</span>]
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> command <span style="color:#666">==</span> <span style="color:#b44">&#34;REGISTER&#34;</span>:
-</span></span><span style="display:flex;"><span>        username <span style="color:#666">=</span> data<span style="color:#666">.</span>split()[<span style="color:#666">1</span>]
-</span></span><span style="display:flex;"><span>        password <span style="color:#666">=</span> data<span style="color:#666">.</span>split()[<span style="color:#666">2</span>]
-</span></span><span style="display:flex;"><span>        register(username, password, address)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">elif</span> command <span style="color:#666">==</span> <span style="color:#b44">&#34;LOGIN&#34;</span>:
-</span></span><span style="display:flex;"><span>        username <span style="color:#666">=</span> data<span style="color:#666">.</span>split()[<span style="color:#666">1</span>]
-</span></span><span style="display:flex;"><span>        password <span style="color:#666">=</span> data<span style="color:#666">.</span>split()[<span style="color:#666">2</span>]
-</span></span><span style="display:flex;"><span>        login(username, password, address)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">elif</span> command <span style="color:#666">==</span> <span style="color:#b44">&#34;PUBLIC&#34;</span>:
-</span></span><span style="display:flex;"><span>        message <span style="color:#666">=</span> data<span style="color:#666">.</span>split()[<span style="color:#666">1</span>]
-</span></span><span style="display:flex;"><span>        public_chat(message, address)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">elif</span> command <span style="color:#666">==</span> <span style="color:#b44">&#34;PRIVATE&#34;</span>:
-</span></span><span style="display:flex;"><span>        to_username <span style="color:#666">=</span> data<span style="color:#666">.</span>split()[<span style="color:#666">1</span>]
-</span></span><span style="display:flex;"><span>        message <span style="color:#666">=</span> data<span style="color:#666">.</span>split()[<span style="color:#666">2</span>]
-</span></span><span style="display:flex;"><span>        private_chat(message, to_username, address)
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 根据选项分别进入对应的函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">menu</span>(<span style="color:#000">data</span>, <span style="color:#000">address</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">command</span> <span style="color:#000">=</span> <span style="color:#000">data</span><span style="color:#000">.</span><span style="color:#000">split</span>()[<span style="color:#1c01ce">0</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">if</span> <span style="color:#000">command</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#34;REGISTER&#34;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#000">username</span> <span style="color:#000">=</span> <span style="color:#000">data</span><span style="color:#000">.</span><span style="color:#000">split</span>()[<span style="color:#1c01ce">1</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#000">password</span> <span style="color:#000">=</span> <span style="color:#000">data</span><span style="color:#000">.</span><span style="color:#000">split</span>()[<span style="color:#1c01ce">2</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#000">register</span>(<span style="color:#000">username</span>, <span style="color:#000">password</span>, <span style="color:#000">address</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">elif</span> <span style="color:#000">command</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#34;LOGIN&#34;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#000">username</span> <span style="color:#000">=</span> <span style="color:#000">data</span><span style="color:#000">.</span><span style="color:#000">split</span>()[<span style="color:#1c01ce">1</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#000">password</span> <span style="color:#000">=</span> <span style="color:#000">data</span><span style="color:#000">.</span><span style="color:#000">split</span>()[<span style="color:#1c01ce">2</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#000">login</span>(<span style="color:#000">username</span>, <span style="color:#000">password</span>, <span style="color:#000">address</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">elif</span> <span style="color:#000">command</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#34;PUBLIC&#34;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#000">message</span> <span style="color:#000">=</span> <span style="color:#000">data</span><span style="color:#000">.</span><span style="color:#000">split</span>()[<span style="color:#1c01ce">1</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#000">public_chat</span>(<span style="color:#000">message</span>, <span style="color:#000">address</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">elif</span> <span style="color:#000">command</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#34;PRIVATE&#34;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#000">to_username</span> <span style="color:#000">=</span> <span style="color:#000">data</span><span style="color:#000">.</span><span style="color:#000">split</span>()[<span style="color:#1c01ce">1</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#000">message</span> <span style="color:#000">=</span> <span style="color:#000">data</span><span style="color:#000">.</span><span style="color:#000">split</span>()[<span style="color:#1c01ce">2</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#000">private_chat</span>(<span style="color:#000">message</span>, <span style="color:#000">to_username</span>, <span style="color:#000">address</span>)
 </span></span></code></pre></div><p>写完这些，其实整个实验就算是完成了，但是在测试的过程中还是发现了一些问题：用户输入信息的交互不好，因为是在命令行中进行操作，所以有些时候会和对方输出的信息重叠，受到干扰，体验不好，所以决定在接下来要写个图形化界面</p>
 <h4 id="图形化界面编写">图形化界面编写</h4>
 <p>对于python图形化界面的编写，其实有很多的方式，如python的标准库Tkinter、QT系列的pyqt5和pyside6、还有Flutter系的flet、…………</p>
@@ -379,178 +379,178 @@
 <p>不管是之前的项目，还是这次的程序，编写图形化界面，我全部都是参考官方的文档，写的很详细，给予了我很大的帮助，里面还有很多的例子，帮助我理解，所以这次的编写也算是有点入门了</p>
 <hr>
 <p><strong>登录页面代码框架：</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">login_page</span>(page:ft<span style="color:#666">.</span>page):
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 初始化设置</span>
-</span></span><span style="display:flex;"><span>	page<span style="color:#666">.</span>title <span style="color:#666">=</span> <span style="color:#b44">&#34;多人在线聊天室&#34;</span>  
-</span></span><span style="display:flex;"><span>	page<span style="color:#666">.</span>window_bgcolor <span style="color:#666">=</span> ft<span style="color:#666">.</span>colors<span style="color:#666">.</span>TRANSPARENT  
-</span></span><span style="display:flex;"><span>	page<span style="color:#666">.</span>bgcolor <span style="color:#666">=</span> <span style="color:#b44">&#34;#E1F7FB&#34;</span>
-</span></span><span style="display:flex;"><span>	page<span style="color:#666">.</span>window_width <span style="color:#666">=</span> <span style="color:#666">500</span>  
-</span></span><span style="display:flex;"><span>	page<span style="color:#666">.</span>window_height <span style="color:#666">=</span> <span style="color:#666">360</span>  
-</span></span><span style="display:flex;"><span>	page<span style="color:#666">.</span>window_min_width <span style="color:#666">=</span> <span style="color:#666">500</span>  
-</span></span><span style="display:flex;"><span>	page<span style="color:#666">.</span>window_min_height <span style="color:#666">=</span> <span style="color:#666">360</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># ……………………</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 登录按钮点击事件  </span>
-</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">btn_login_click</span>(e):  
-</span></span><span style="display:flex;"><span>	    <span style="color:#a2f;font-weight:bold">pass</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">login_page</span>(<span style="color:#000">page</span>:<span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">page</span>):
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 初始化设置</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">title</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;多人在线聊天室&#34;</span>  
+</span></span><span style="display:flex;"><span>	<span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">window_bgcolor</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">colors</span><span style="color:#000">.</span><span style="color:#000">TRANSPARENT</span>  
+</span></span><span style="display:flex;"><span>	<span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">bgcolor</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;#E1F7FB&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">window_width</span> <span style="color:#000">=</span> <span style="color:#1c01ce">500</span>  
+</span></span><span style="display:flex;"><span>	<span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">window_height</span> <span style="color:#000">=</span> <span style="color:#1c01ce">360</span>  
+</span></span><span style="display:flex;"><span>	<span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">window_min_width</span> <span style="color:#000">=</span> <span style="color:#1c01ce">500</span>  
+</span></span><span style="display:flex;"><span>	<span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">window_min_height</span> <span style="color:#000">=</span> <span style="color:#1c01ce">360</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># ……………………</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 登录按钮点击事件  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a90d91">def</span> <span style="color:#000">btn_login_click</span>(<span style="color:#000">e</span>):  
+</span></span><span style="display:flex;"><span>	    <span style="color:#a90d91">pass</span>
 </span></span><span style="display:flex;"><span>	    
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 注册按钮点击事件  </span>
-</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">btn_register_click</span>(e):  
-</span></span><span style="display:flex;"><span>	    <span style="color:#a2f;font-weight:bold">pass</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 注册按钮点击事件  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a90d91">def</span> <span style="color:#000">btn_register_click</span>(<span style="color:#000">e</span>):  
+</span></span><span style="display:flex;"><span>	    <span style="color:#a90d91">pass</span>
 </span></span><span style="display:flex;"><span>	    
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 错误弹窗</span>
-</span></span><span style="display:flex;"><span>	login_error_dlg <span style="color:#666">=</span> ft<span style="color:#666">.</span>AlertDialog(  
-</span></span><span style="display:flex;"><span>    title<span style="color:#666">=</span>ft<span style="color:#666">.</span>Text(  
-</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#34;用户名或密码错误！</span><span style="color:#b62;font-weight:bold">\n\n</span><span style="color:#b44">请检查后重新输入！&#34;</span>),  
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 错误弹窗</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">login_error_dlg</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">AlertDialog</span>(  
+</span></span><span style="display:flex;"><span>    <span style="color:#000">title</span><span style="color:#000">=</span><span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">Text</span>(  
+</span></span><span style="display:flex;"><span>        <span style="color:#c41a16">&#34;用户名或密码错误！</span><span style="color:#c41a16">\n\n</span><span style="color:#c41a16">请检查后重新输入！&#34;</span>),  
 </span></span><span style="display:flex;"><span>	)  
-</span></span><span style="display:flex;"><span>	login_success_dlg <span style="color:#666">=</span> ft<span style="color:#666">.</span>AlertDialog(  
-</span></span><span style="display:flex;"><span>	    title<span style="color:#666">=</span>ft<span style="color:#666">.</span>Text(  
-</span></span><span style="display:flex;"><span>	        <span style="color:#b44">&#34;登录成功！</span><span style="color:#b62;font-weight:bold">\n\n</span><span style="color:#b44">欢迎进入聊天室！&#34;</span>),  
+</span></span><span style="display:flex;"><span>	<span style="color:#000">login_success_dlg</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">AlertDialog</span>(  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">title</span><span style="color:#000">=</span><span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">Text</span>(  
+</span></span><span style="display:flex;"><span>	        <span style="color:#c41a16">&#34;登录成功！</span><span style="color:#c41a16">\n\n</span><span style="color:#c41a16">欢迎进入聊天室！&#34;</span>),  
 </span></span><span style="display:flex;"><span>	)  
-</span></span><span style="display:flex;"><span>	register_error_dlg <span style="color:#666">=</span> ft<span style="color:#666">.</span>AlertDialog(  
-</span></span><span style="display:flex;"><span>	    title<span style="color:#666">=</span>ft<span style="color:#666">.</span>Text(  
-</span></span><span style="display:flex;"><span>	        <span style="color:#b44">&#34;注册失败！</span><span style="color:#b62;font-weight:bold">\n\n</span><span style="color:#b44">用户名已存在！&#34;</span>),  
+</span></span><span style="display:flex;"><span>	<span style="color:#000">register_error_dlg</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">AlertDialog</span>(  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">title</span><span style="color:#000">=</span><span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">Text</span>(  
+</span></span><span style="display:flex;"><span>	        <span style="color:#c41a16">&#34;注册失败！</span><span style="color:#c41a16">\n\n</span><span style="color:#c41a16">用户名已存在！&#34;</span>),  
 </span></span><span style="display:flex;"><span>	)  
-</span></span><span style="display:flex;"><span>	register_success_dlg <span style="color:#666">=</span> ft<span style="color:#666">.</span>AlertDialog(  
-</span></span><span style="display:flex;"><span>	    title<span style="color:#666">=</span>ft<span style="color:#666">.</span>Text(  
-</span></span><span style="display:flex;"><span>	        <span style="color:#b44">&#34;注册成功！</span><span style="color:#b62;font-weight:bold">\n\n</span><span style="color:#b44">请登录！&#34;</span>),  
+</span></span><span style="display:flex;"><span>	<span style="color:#000">register_success_dlg</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">AlertDialog</span>(  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">title</span><span style="color:#000">=</span><span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">Text</span>(  
+</span></span><span style="display:flex;"><span>	        <span style="color:#c41a16">&#34;注册成功！</span><span style="color:#c41a16">\n\n</span><span style="color:#c41a16">请登录！&#34;</span>),  
 </span></span><span style="display:flex;"><span>	)  
-</span></span><span style="display:flex;"><span>	login_empty_dlg <span style="color:#666">=</span> ft<span style="color:#666">.</span>AlertDialog(  
-</span></span><span style="display:flex;"><span>	    title<span style="color:#666">=</span>ft<span style="color:#666">.</span>Text(  
-</span></span><span style="display:flex;"><span>	        <span style="color:#b44">&#34;用户名或密码为空！</span><span style="color:#b62;font-weight:bold">\n\n</span><span style="color:#b44">请检查后重新输入！&#34;</span>)  
+</span></span><span style="display:flex;"><span>	<span style="color:#000">login_empty_dlg</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">AlertDialog</span>(  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">title</span><span style="color:#000">=</span><span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">Text</span>(  
+</span></span><span style="display:flex;"><span>	        <span style="color:#c41a16">&#34;用户名或密码为空！</span><span style="color:#c41a16">\n\n</span><span style="color:#c41a16">请检查后重新输入！&#34;</span>)  
 </span></span><span style="display:flex;"><span>	)  
-</span></span><span style="display:flex;"><span>	server_error_dlg <span style="color:#666">=</span> ft<span style="color:#666">.</span>AlertDialog(  
-</span></span><span style="display:flex;"><span>	    title<span style="color:#666">=</span>ft<span style="color:#666">.</span>Text(  
-</span></span><span style="display:flex;"><span>	        <span style="color:#b44">&#34;服务器错误！</span><span style="color:#b62;font-weight:bold">\n\n</span><span style="color:#b44">请稍后尝试！&#34;</span>)  
+</span></span><span style="display:flex;"><span>	<span style="color:#000">server_error_dlg</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">AlertDialog</span>(  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">title</span><span style="color:#000">=</span><span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">Text</span>(  
+</span></span><span style="display:flex;"><span>	        <span style="color:#c41a16">&#34;服务器错误！</span><span style="color:#c41a16">\n\n</span><span style="color:#c41a16">请稍后尝试！&#34;</span>)  
 </span></span><span style="display:flex;"><span>	)
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 标题</span>
-</span></span><span style="display:flex;"><span>	title <span style="color:#666">=</span> ft<span style="color:#666">.</span>Stack(
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># ………………</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 标题</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">title</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">Stack</span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># ………………</span>
 </span></span><span style="display:flex;"><span>	)
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 密码输入框</span>
-</span></span><span style="display:flex;"><span>	password_box <span style="color:#666">=</span> ft<span style="color:#666">.</span>TextField(  
-</span></span><span style="display:flex;"><span>    label<span style="color:#666">=</span><span style="color:#b44">&#34;密码&#34;</span>,  
-</span></span><span style="display:flex;"><span>    hint_text<span style="color:#666">=</span><span style="color:#b44">&#34;请输入你的密码&#34;</span>,  
-</span></span><span style="display:flex;"><span>    max_lines<span style="color:#666">=</span><span style="color:#666">1</span>,  
-</span></span><span style="display:flex;"><span>    width<span style="color:#666">=</span><span style="color:#666">350</span>,  
-</span></span><span style="display:flex;"><span>    height<span style="color:#666">=</span><span style="color:#666">55</span>,  
-</span></span><span style="display:flex;"><span>    password<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>,  
-</span></span><span style="display:flex;"><span>    can_reveal_password<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>,  
-</span></span><span style="display:flex;"><span>    keyboard_type<span style="color:#666">=</span>ft<span style="color:#666">.</span>KeyboardType<span style="color:#666">.</span>VISIBLE_PASSWORD,  
-</span></span><span style="display:flex;"><span>    shift_enter<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>,  
-</span></span><span style="display:flex;"><span>    on_submit<span style="color:#666">=</span>btn_login_click  
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 密码输入框</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">password_box</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">TextField</span>(  
+</span></span><span style="display:flex;"><span>    <span style="color:#000">label</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;密码&#34;</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#000">hint_text</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;请输入你的密码&#34;</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#000">max_lines</span><span style="color:#000">=</span><span style="color:#1c01ce">1</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#000">width</span><span style="color:#000">=</span><span style="color:#1c01ce">350</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#000">height</span><span style="color:#000">=</span><span style="color:#1c01ce">55</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#000">password</span><span style="color:#000">=</span><span style="color:#a90d91">True</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#000">can_reveal_password</span><span style="color:#000">=</span><span style="color:#a90d91">True</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#000">keyboard_type</span><span style="color:#000">=</span><span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">KeyboardType</span><span style="color:#000">.</span><span style="color:#000">VISIBLE_PASSWORD</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#000">shift_enter</span><span style="color:#000">=</span><span style="color:#a90d91">True</span>,  
+</span></span><span style="display:flex;"><span>    <span style="color:#000">on_submit</span><span style="color:#000">=</span><span style="color:#000">btn_login_click</span>  
 </span></span><span style="display:flex;"><span>	)  
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 用户名输入框</span>
-</span></span><span style="display:flex;"><span>	username_box <span style="color:#666">=</span> ft<span style="color:#666">.</span>TextField(  
-</span></span><span style="display:flex;"><span>	    label<span style="color:#666">=</span><span style="color:#b44">&#34;用户名&#34;</span>,  
-</span></span><span style="display:flex;"><span>	    hint_text<span style="color:#666">=</span><span style="color:#b44">&#34;请输入你的用户名&#34;</span>,  
-</span></span><span style="display:flex;"><span>	    max_lines<span style="color:#666">=</span><span style="color:#666">1</span>,  
-</span></span><span style="display:flex;"><span>	    width<span style="color:#666">=</span><span style="color:#666">350</span>,  
-</span></span><span style="display:flex;"><span>	    height<span style="color:#666">=</span><span style="color:#666">55</span>,  
-</span></span><span style="display:flex;"><span>	    autofocus<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>,  
-</span></span><span style="display:flex;"><span>	    shift_enter<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>,  
-</span></span><span style="display:flex;"><span>	    on_submit<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">lambda</span> e: password_box<span style="color:#666">.</span>focus(),  
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 用户名输入框</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">username_box</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">TextField</span>(  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">label</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;用户名&#34;</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">hint_text</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;请输入你的用户名&#34;</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">max_lines</span><span style="color:#000">=</span><span style="color:#1c01ce">1</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">width</span><span style="color:#000">=</span><span style="color:#1c01ce">350</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">height</span><span style="color:#000">=</span><span style="color:#1c01ce">55</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">autofocus</span><span style="color:#000">=</span><span style="color:#a90d91">True</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">shift_enter</span><span style="color:#000">=</span><span style="color:#a90d91">True</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">on_submit</span><span style="color:#000">=</span><span style="color:#a90d91">lambda</span> <span style="color:#000">e</span>: <span style="color:#000">password_box</span><span style="color:#000">.</span><span style="color:#000">focus</span>(),  
 </span></span><span style="display:flex;"><span>	)  
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 登录按钮 </span>
-</span></span><span style="display:flex;"><span>	btn_login <span style="color:#666">=</span> ft<span style="color:#666">.</span>ElevatedButton(  
-</span></span><span style="display:flex;"><span>	    text<span style="color:#666">=</span><span style="color:#b44">&#34;登录&#34;</span>,  
-</span></span><span style="display:flex;"><span>	    width<span style="color:#666">=</span><span style="color:#666">150</span>,  
-</span></span><span style="display:flex;"><span>	    height<span style="color:#666">=</span><span style="color:#666">50</span>,  
-</span></span><span style="display:flex;"><span>	    animate_size<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>,  
-</span></span><span style="display:flex;"><span>	    on_click<span style="color:#666">=</span>btn_login_click,  
-</span></span><span style="display:flex;"><span>	    icon<span style="color:#666">=</span>ft<span style="color:#666">.</span>icons<span style="color:#666">.</span>LOGIN,  
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 登录按钮 </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">btn_login</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">ElevatedButton</span>(  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">text</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;登录&#34;</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">width</span><span style="color:#000">=</span><span style="color:#1c01ce">150</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">height</span><span style="color:#000">=</span><span style="color:#1c01ce">50</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">animate_size</span><span style="color:#000">=</span><span style="color:#a90d91">True</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">on_click</span><span style="color:#000">=</span><span style="color:#000">btn_login_click</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">icon</span><span style="color:#000">=</span><span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">icons</span><span style="color:#000">.</span><span style="color:#000">LOGIN</span>,  
 </span></span><span style="display:flex;"><span>	)  
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 注册按钮</span>
-</span></span><span style="display:flex;"><span>	btn_register <span style="color:#666">=</span> ft<span style="color:#666">.</span>ElevatedButton(  
-</span></span><span style="display:flex;"><span>	    text<span style="color:#666">=</span><span style="color:#b44">&#34;注册&#34;</span>,  
-</span></span><span style="display:flex;"><span>	    width<span style="color:#666">=</span><span style="color:#666">150</span>,  
-</span></span><span style="display:flex;"><span>	    height<span style="color:#666">=</span><span style="color:#666">50</span>,  
-</span></span><span style="display:flex;"><span>	    animate_size<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>,  
-</span></span><span style="display:flex;"><span>	    on_click<span style="color:#666">=</span>btn_register_click,  
-</span></span><span style="display:flex;"><span>	    icon<span style="color:#666">=</span>ft<span style="color:#666">.</span>icons<span style="color:#666">.</span>CREATE_OUTLINED,  
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 注册按钮</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">btn_register</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">ElevatedButton</span>(  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">text</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;注册&#34;</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">width</span><span style="color:#000">=</span><span style="color:#1c01ce">150</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">height</span><span style="color:#000">=</span><span style="color:#1c01ce">50</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">animate_size</span><span style="color:#000">=</span><span style="color:#a90d91">True</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">on_click</span><span style="color:#000">=</span><span style="color:#000">btn_register_click</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">icon</span><span style="color:#000">=</span><span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">icons</span><span style="color:#000">.</span><span style="color:#000">CREATE_OUTLINED</span>,  
 </span></span><span style="display:flex;"><span>	)
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 添加页面布局</span>
-</span></span><span style="display:flex;"><span>	page<span style="color:#666">.</span>add(
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># ……………………</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 添加页面布局</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">add</span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># ……………………</span>
 </span></span><span style="display:flex;"><span>	)
 </span></span></code></pre></div><p><strong>主页面代码框架：</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">main_page</span>(page: ft<span style="color:#666">.</span>Page):
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 页面配置初始化</span>
-</span></span><span style="display:flex;"><span>	page<span style="color:#666">.</span>clean()  
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># page.vertical_alignment = ft.MainAxisAlignment.START  # 垂直居中  </span>
-</span></span><span style="display:flex;"><span>	page<span style="color:#666">.</span>horizontal_alignment <span style="color:#666">=</span> <span style="color:#b44">&#34;stretch&#34;</span>  
-</span></span><span style="display:flex;"><span>	page<span style="color:#666">.</span>window_max_height <span style="color:#666">=</span> <span style="color:#666">600</span>  
-</span></span><span style="display:flex;"><span>	page<span style="color:#666">.</span>window_max_width <span style="color:#666">=</span> <span style="color:#666">800</span>  
-</span></span><span style="display:flex;"><span>	page<span style="color:#666">.</span>window_width <span style="color:#666">=</span> <span style="color:#666">800</span>  
-</span></span><span style="display:flex;"><span>	page<span style="color:#666">.</span>window_height <span style="color:#666">=</span> <span style="color:#666">600</span>  
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 拦截本机窗口关闭信号 配合关闭窗口默认退出聊天  </span>
-</span></span><span style="display:flex;"><span>	page<span style="color:#666">.</span>window_prevent_close <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">True</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">main_page</span>(<span style="color:#000">page</span>: <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">Page</span>):
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 页面配置初始化</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">clean</span>()  
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># page.vertical_alignment = ft.MainAxisAlignment.START  # 垂直居中  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">horizontal_alignment</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;stretch&#34;</span>  
+</span></span><span style="display:flex;"><span>	<span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">window_max_height</span> <span style="color:#000">=</span> <span style="color:#1c01ce">600</span>  
+</span></span><span style="display:flex;"><span>	<span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">window_max_width</span> <span style="color:#000">=</span> <span style="color:#1c01ce">800</span>  
+</span></span><span style="display:flex;"><span>	<span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">window_width</span> <span style="color:#000">=</span> <span style="color:#1c01ce">800</span>  
+</span></span><span style="display:flex;"><span>	<span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">window_height</span> <span style="color:#000">=</span> <span style="color:#1c01ce">600</span>  
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 拦截本机窗口关闭信号 配合关闭窗口默认退出聊天  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">window_prevent_close</span> <span style="color:#000">=</span> <span style="color:#a90d91">True</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 接收消息</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">receive_message</span>():
-</span></span><span style="display:flex;"><span>		<span style="color:#a2f;font-weight:bold">pass</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 接收消息</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a90d91">def</span> <span style="color:#000">receive_message</span>():
+</span></span><span style="display:flex;"><span>		<span style="color:#a90d91">pass</span>
 </span></span><span style="display:flex;"><span>		
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 更新聊天框  </span>
-</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">update_chat</span>(message):
-</span></span><span style="display:flex;"><span>		<span style="color:#a2f;font-weight:bold">pass</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 聊天内容列表  </span>
-</span></span><span style="display:flex;"><span>	chat <span style="color:#666">=</span> ft<span style="color:#666">.</span>ListView(  
-</span></span><span style="display:flex;"><span>	    width<span style="color:#666">=</span><span style="color:#666">400</span>,  
-</span></span><span style="display:flex;"><span>	    height<span style="color:#666">=</span><span style="color:#666">400</span>,  
-</span></span><span style="display:flex;"><span>	    expand<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>,  
-</span></span><span style="display:flex;"><span>	    spacing<span style="color:#666">=</span><span style="color:#666">10</span>,  
-</span></span><span style="display:flex;"><span>	    auto_scroll<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>,  
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 更新聊天框  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a90d91">def</span> <span style="color:#000">update_chat</span>(<span style="color:#000">message</span>):
+</span></span><span style="display:flex;"><span>		<span style="color:#a90d91">pass</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 聊天内容列表  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">chat</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">ListView</span>(  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">width</span><span style="color:#000">=</span><span style="color:#1c01ce">400</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">height</span><span style="color:#000">=</span><span style="color:#1c01ce">400</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">expand</span><span style="color:#000">=</span><span style="color:#a90d91">True</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">spacing</span><span style="color:#000">=</span><span style="color:#1c01ce">10</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">auto_scroll</span><span style="color:#000">=</span><span style="color:#a90d91">True</span>,  
 </span></span><span style="display:flex;"><span>	)
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 发送消息事件  </span>
-</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">send_message_click</span>(e):
-</span></span><span style="display:flex;"><span>		<span style="color:#a2f;font-weight:bold">pass</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 发送消息事件  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a90d91">def</span> <span style="color:#000">send_message_click</span>(<span style="color:#000">e</span>):
+</span></span><span style="display:flex;"><span>		<span style="color:#a90d91">pass</span>
 </span></span><span style="display:flex;"><span>		
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 发送消息按钮  </span>
-</span></span><span style="display:flex;"><span>	btn_send <span style="color:#666">=</span> ft<span style="color:#666">.</span>ElevatedButton(  
-</span></span><span style="display:flex;"><span>	    text<span style="color:#666">=</span><span style="color:#b44">&#34;发送&#34;</span>,  
-</span></span><span style="display:flex;"><span>	    width<span style="color:#666">=</span><span style="color:#666">120</span>,  
-</span></span><span style="display:flex;"><span>	    height<span style="color:#666">=</span><span style="color:#666">50</span>,  
-</span></span><span style="display:flex;"><span>	    animate_size<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>,  
-</span></span><span style="display:flex;"><span>	    on_click<span style="color:#666">=</span>send_message_click,  
-</span></span><span style="display:flex;"><span>	    icon<span style="color:#666">=</span>ft<span style="color:#666">.</span>icons<span style="color:#666">.</span>SEND,  
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 发送消息按钮  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">btn_send</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">ElevatedButton</span>(  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">text</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;发送&#34;</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">width</span><span style="color:#000">=</span><span style="color:#1c01ce">120</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">height</span><span style="color:#000">=</span><span style="color:#1c01ce">50</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">animate_size</span><span style="color:#000">=</span><span style="color:#a90d91">True</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">on_click</span><span style="color:#000">=</span><span style="color:#000">send_message_click</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">icon</span><span style="color:#000">=</span><span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">icons</span><span style="color:#000">.</span><span style="color:#000">SEND</span>,  
 </span></span><span style="display:flex;"><span>	)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 输入框  </span>
-</span></span><span style="display:flex;"><span>	new_message <span style="color:#666">=</span> ft<span style="color:#666">.</span>TextField(  
-</span></span><span style="display:flex;"><span>	    label<span style="color:#666">=</span><span style="color:#b44">&#34;Message&#34;</span>,  
-</span></span><span style="display:flex;"><span>	    hint_text<span style="color:#666">=</span><span style="color:#b44">&#34;输入聊天消息&#34;</span>,  
-</span></span><span style="display:flex;"><span>	    max_lines<span style="color:#666">=</span><span style="color:#666">1</span>,  
-</span></span><span style="display:flex;"><span>	    width<span style="color:#666">=</span><span style="color:#666">500</span>,  
-</span></span><span style="display:flex;"><span>	    height<span style="color:#666">=</span><span style="color:#666">60</span>,  
-</span></span><span style="display:flex;"><span>	    autofocus<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>,  
-</span></span><span style="display:flex;"><span>	    shift_enter<span style="color:#666">=</span><span style="color:#a2f;font-weight:bold">True</span>,  
-</span></span><span style="display:flex;"><span>	    on_submit<span style="color:#666">=</span>send_message_click,  
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 输入框  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">new_message</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">TextField</span>(  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">label</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;Message&#34;</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">hint_text</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;输入聊天消息&#34;</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">max_lines</span><span style="color:#000">=</span><span style="color:#1c01ce">1</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">width</span><span style="color:#000">=</span><span style="color:#1c01ce">500</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">height</span><span style="color:#000">=</span><span style="color:#1c01ce">60</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">autofocus</span><span style="color:#000">=</span><span style="color:#a90d91">True</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">shift_enter</span><span style="color:#000">=</span><span style="color:#a90d91">True</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">on_submit</span><span style="color:#000">=</span><span style="color:#000">send_message_click</span>,  
 </span></span><span style="display:flex;"><span>	)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 当前用户头像  </span>
-</span></span><span style="display:flex;"><span>	user_avatar <span style="color:#666">=</span> ft<span style="color:#666">.</span>CircleAvatar(  
-</span></span><span style="display:flex;"><span>	    content<span style="color:#666">=</span>ft<span style="color:#666">.</span>Text(ct<span style="color:#666">.</span>now_username, size<span style="color:#666">=</span><span style="color:#666">14</span>, weight<span style="color:#666">=</span>ft<span style="color:#666">.</span>FontWeight<span style="color:#666">.</span>BOLD),  
-</span></span><span style="display:flex;"><span>	    width<span style="color:#666">=</span><span style="color:#666">60</span>,  
-</span></span><span style="display:flex;"><span>	    height<span style="color:#666">=</span><span style="color:#666">60</span>,  
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 当前用户头像  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">user_avatar</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">CircleAvatar</span>(  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">content</span><span style="color:#000">=</span><span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">Text</span>(<span style="color:#000">ct</span><span style="color:#000">.</span><span style="color:#000">now_username</span>, <span style="color:#000">size</span><span style="color:#000">=</span><span style="color:#1c01ce">14</span>, <span style="color:#000">weight</span><span style="color:#000">=</span><span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">FontWeight</span><span style="color:#000">.</span><span style="color:#000">BOLD</span>),  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">width</span><span style="color:#000">=</span><span style="color:#1c01ce">60</span>,  
+</span></span><span style="display:flex;"><span>	    <span style="color:#000">height</span><span style="color:#000">=</span><span style="color:#1c01ce">60</span>,  
 </span></span><span style="display:flex;"><span>	)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 添加页面布局</span>
-</span></span><span style="display:flex;"><span>	page<span style="color:#666">.</span>add(
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># ………………</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 添加页面布局</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">add</span>(
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># ………………</span>
 </span></span><span style="display:flex;"><span>	)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#080;font-style:italic"># 窗口关闭默认退出聊天室  </span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">close_window</span>(e):  
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> e<span style="color:#666">.</span>data <span style="color:#666">==</span> <span style="color:#b44">&#39;close&#39;</span>:  
-</span></span><span style="display:flex;"><span>            ct<span style="color:#666">.</span>send_message(<span style="color:#b44">&#39;exit&#39;</span>)  
-</span></span><span style="display:flex;"><span>            page<span style="color:#666">.</span>window_destroy() <span style="color:#080;font-style:italic"># 真正退出窗口  </span>
+</span></span><span style="display:flex;"><span>	<span style="color:#177500"># 窗口关闭默认退出聊天室  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">def</span> <span style="color:#000">close_window</span>(<span style="color:#000">e</span>):  
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">if</span> <span style="color:#000">e</span><span style="color:#000">.</span><span style="color:#000">data</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#39;close&#39;</span>:  
+</span></span><span style="display:flex;"><span>            <span style="color:#000">ct</span><span style="color:#000">.</span><span style="color:#000">send_message</span>(<span style="color:#c41a16">&#39;exit&#39;</span>)  
+</span></span><span style="display:flex;"><span>            <span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">window_destroy</span>() <span style="color:#177500"># 真正退出窗口  </span>
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>    page<span style="color:#666">.</span>on_window_event <span style="color:#666">=</span> close_window  
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># 开启接收消息线程  </span>
-</span></span><span style="display:flex;"><span>    receive_thread <span style="color:#666">=</span> threading<span style="color:#666">.</span>Thread(target<span style="color:#666">=</span>receive_message)  
-</span></span><span style="display:flex;"><span>    receive_thread<span style="color:#666">.</span>start()  
+</span></span><span style="display:flex;"><span>    <span style="color:#000">page</span><span style="color:#000">.</span><span style="color:#000">on_window_event</span> <span style="color:#000">=</span> <span style="color:#000">close_window</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#177500"># 开启接收消息线程  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">receive_thread</span> <span style="color:#000">=</span> <span style="color:#000">threading</span><span style="color:#000">.</span><span style="color:#000">Thread</span>(<span style="color:#000">target</span><span style="color:#000">=</span><span style="color:#000">receive_message</span>)  
+</span></span><span style="display:flex;"><span>    <span style="color:#000">receive_thread</span><span style="color:#000">.</span><span style="color:#000">start</span>()  
 </span></span><span style="display:flex;"><span>  
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>ft<span style="color:#666">.</span>app(target<span style="color:#666">=</span>login_page, assets_dir<span style="color:#666">=</span><span style="color:#b44">&#34;assets&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">app</span>(<span style="color:#000">target</span><span style="color:#000">=</span><span style="color:#000">login_page</span>, <span style="color:#000">assets_dir</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;assets&#34;</span>)
 </span></span></code></pre></div><h2 id="成果展示">成果展示</h2>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231109.png" alt="服务端启动">
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231123.png" alt="登录界面">

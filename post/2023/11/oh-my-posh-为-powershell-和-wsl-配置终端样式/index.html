@@ -164,7 +164,7 @@
 <p>下载并安装好图标字体，在Windows terminal终端上把Power Shell和WSL的字体都配置为这个图标字体</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125173959.png" alt=""></p>
 <p>根据官方文档，下载oh-my-posh，在PowerShell中输入以下命令</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>winget install JanDeDobbeleer.OhMyPosh -s winget
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#000">winget</span> <span style="color:#000">install</span> <span style="color:#000">JanDeDobbeleer</span>.<span style="color:#000">OhMyPosh</span> <span style="color:#000">-s</span> <span style="color:#000">winget</span>
 </span></span></code></pre></div><p>这样会下载下面的两个文件</p>
 <p><code>oh-my-posh.exe</code> - Windows 可执行文件</p>
 <p><code>themes</code> - 最新的 Oh My Posh 主题</p>
@@ -173,7 +173,7 @@
 <p>在环境变量的path值中添加路径：<code>C:\Users\用户名\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe</code></p>
 <p><em>（这一步可不做）</em> 在环境变量中增加一个字段POSH_THEMES_PATH，值为：<code>C:\Users\86135\AppData\Local\Programs\oh-my-posh\themes</code></p>
 <p>在PowerShell终端中输入：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>notepad <span style="color:#b8860b">$PROFILE</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#000">notepad</span> <span style="color:#000">$PROFILE</span>
 </span></span></code></pre></div><blockquote>
 <p>如果这一步报错，文件不存在则需要先创建配置文件</p>
 <p>执行<code>New-Item -Path $PROFILE -Type File -Force</code></p>
@@ -190,19 +190,19 @@
 <p>同样在PowerShell终端中输入：<code>notepad $PROFILE</code> 打开配置文件</p>
 <p>修改之前输入的 <code>oh-my-posh init pwsh | Invoke-Expression</code></p>
 <p>改为：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>oh-my-posh init pwsh --config <span style="color:#b44">&#39;`C:\Users\用户名\AppData\Local\Programs\oh-my-posh\themes\1_shell.omp.json&#39;</span> | Invoke-Expression
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>oh-my-posh init pwsh --config <span style="color:#c41a16">&#39;`C:\Users\用户名\AppData\Local\Programs\oh-my-posh\themes\1_shell.omp.json&#39;</span> | Invoke-Expression
 </span></span></code></pre></div><p>这里的主题路径应该根据自己的情况更改，<code>1_shell.omp.json</code> 是主题文件</p>
 <p>如果在上面的步骤中，你已经配置了主题文件夹的环境变量，则可以：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>oh-my-posh init pwsh --config <span style="color:#b44">&#34;</span><span style="color:#b8860b">$env</span><span style="color:#b44">:POSH_THEMES_PATH/1_shell.omp.json&#34;</span> | Invoke-Expression
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>oh-my-posh init pwsh --config <span style="color:#c41a16">&#34;</span><span style="color:#000">$env</span><span style="color:#c41a16">:POSH_THEMES_PATH/1_shell.omp.json&#34;</span> | Invoke-Expression
 </span></span></code></pre></div><p>重新启动终端，就可以应用。</p>
 <h2 id="wsl配置">WSL配置</h2>
 <p>WSL的配置和PowerShell的十分相似，但是需要注意的是，WSL下可能有好多种类的Shell，配置的时候，需要先查看自己的WSL是什么类型的shell</p>
 <p>查看方法，输入以下命令：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#a2f">echo</span> <span style="color:#b8860b">$SHELL</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#a90d91">echo</span> <span style="color:#000">$SHELL</span>
 </span></span></code></pre></div><p>如果是<code>bash</code>就在官方文档Linux教程中找对应的方法，我这里以<code>zsh</code>为例。</p>
 <p>同样的，在配置之前，需要先给WSL的终端文字更改为Nerd带图标的字体，否则图标不能生效</p>
 <p>下载oh-my-posh，输入以下命令：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>curl -s https://ohmyposh.dev/install.sh | bash -s -- -d /bin
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>curl -s https://ohmyposh.dev/install.sh | bash -s -- -d /bin
 </span></span></code></pre></div><blockquote>
 <p>这里可能会报错</p>
 <p><code>-d</code> 后面指定的是下载的位置，最好是下载到根目录下的 <code>/bin</code> 文件，因为这样就不需要配置环境变量，可以在任意位置执行 <code>oh-my-posh</code> 的命令，避免了之后</p>
@@ -212,19 +212,19 @@
 <p>或者你可以先下载到其他位置，之后把可执行文件复制到<code>/bin</code>目录下，这一步同样需要root权限</p>
 </blockquote>
 <p>接着，输入以下命令</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>oh-my-posh get shell
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>oh-my-posh get shell
 </span></span></code></pre></div><p>如果返回了你当前的shell，说明下载成功，如果返回‘找不到命令’，可能没有下载到正确的位置
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125174023.png" alt=""></p>
 <p>输入命令，打开shell的配置文件，这里演示的是zsh，所以打开 <code>~/.zshrc</code></p>
 <p>如果你是bash，那么打开的就是<code>~/.bashrc</code>，配置命令也要改为bash</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo vim ~/.zshrc
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo vim ~/.zshrc
 </span></span></code></pre></div><p>添加以下配置到文件中</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#a2f">eval</span> <span style="color:#b44">&#34;</span><span style="color:#a2f;font-weight:bold">$(</span>oh-my-posh init zsh<span style="color:#a2f;font-weight:bold">)</span><span style="color:#b44">&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#a90d91">eval</span> <span style="color:#c41a16">&#34;</span><span style="color:#a90d91">$(</span>oh-my-posh init zsh<span style="color:#a90d91">)</span><span style="color:#c41a16">&#34;</span>
 </span></span></code></pre></div><p>退出文件，终端输入<code>exec zsh</code>，更新配置，也可以输入<code>source ~/.zshrc</code>，两者是一样的</p>
 <p>（这一步不一定）重新启动终端，可以发现oh-my-posh已经应用成功</p>
 <p>更改主题，和PowerShell是类似的</p>
 <p>同样打开配置文件<code>~/.zshrc</code>，将原先输入的配置改为：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#a2f">eval</span> <span style="color:#b44">&#34;</span><span style="color:#a2f;font-weight:bold">$(</span>oh-my-posh init zsh --config ~/.cache/oh-my-posh/themes/1_shell.omp.json<span style="color:#a2f;font-weight:bold">)</span><span style="color:#b44">&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#a90d91">eval</span> <span style="color:#c41a16">&#34;</span><span style="color:#a90d91">$(</span>oh-my-posh init zsh --config ~/.cache/oh-my-posh/themes/1_shell.omp.json<span style="color:#a90d91">)</span><span style="color:#c41a16">&#34;</span>
 </span></span></code></pre></div><p>其中，<code>--config</code> 后面填入，你的主题路径和主题名字，我的主题路径可能有所不同，需要更改为自己的</p>
 <p>退出文件，终端输入<code>exec zsh</code>，主题就会立马应用。
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231125174037.png" alt=""></p>

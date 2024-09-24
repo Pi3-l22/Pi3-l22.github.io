@@ -168,23 +168,23 @@
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/a5f62d9412721323ce363584fe3b0f9.jpg" alt="项目主页"></p>
 <p>需要确认，手机用数据线连接电脑，并且有adb环境（adb最好添加进环境变量）
 查看adb版本</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>adb -version
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#000">adb</span> <span style="color:#000">-version</span>
 </span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220230534.png" alt="查看adb版本"></p>
 <p>列出连接的设备</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>adb devices -l
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#000">adb</span> <span style="color:#000">devices</span> <span style="color:#000">-l</span>
 </span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220230450.png" alt="列出连接的设备"></p>
 <p>安装Github项目</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>pip install -U <span style="color:#a2f">foyou-wilk</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#000">pip</span> <span style="color:#000">install</span> <span style="color:#000">-U</span> <span style="color:#a90d91">foyou-wilk</span>
 </span></span></code></pre></div><blockquote>
 <p>需要注意，该项目有依赖库：<code>av</code>和<code>pilk</code></p>
 <p>需要执行<code>pip install av</code>和<code>pip install pilk</code></p>
 <p>或者下载源码的requirements.txt，执行<code>pip install -r requirements.txt</code></p>
 </blockquote>
 <p>检查是否安装成功</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>wilk -v
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#000">wilk</span> <span style="color:#000">-v</span>
 </span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231220230919.png" alt="wilk -v"></p>
 <p>推送文件至手机</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>wilk &lt;媒体文件1&gt; &lt;媒体文件2&gt; ...
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#000">wilk</span> &lt;<span style="color:#000">媒体文件1</span>&gt; &lt;<span style="color:#000">媒体文件2</span>&gt; ...
 </span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/003990e368e357a1ae134bccaff44c0.jpg" alt="推送文件">
 直接把音频文件发送到微x模块的语音包。
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/c5ae37d06d90180db62a762cc3432df.jpg" alt="微信上的语音包"></p>
