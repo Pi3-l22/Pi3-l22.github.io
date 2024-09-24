@@ -27,7 +27,44 @@
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://blog.pi3.fun/about/</guid>
       
-      <description>&lt;p&gt;test test about&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;hi-there-&#34;&gt;Hi there 👋&lt;/h1&gt;
+&lt;style&gt;
+    .ascii-art {
+        font-family: Consolas !important;
+        white-space: pre;
+        text-align: center;
+        font-size: 0.8rem;
+    }
+&lt;/style&gt;
+&lt;pre class=&#34;ascii-art&#34;&gt;
+    ██╗     █████╗ ███╗   ███╗    ██████╗ ██╗██████╗ 
+    ██║    ██╔══██╗████╗ ████║    ██╔══██╗██║╚════██╗
+    ██║    ███████║██╔████╔██║    ██████╔╝██║ █████╔╝
+    ██║    ██╔══██║██║╚██╔╝██║    ██╔═══╝ ██║ ╚═══██╗
+    ██║    ██║  ██║██║ ╚═╝ ██║    ██║     ██║██████╔╝
+    ╚═╝    ╚═╝  ╚═╝╚═╝     ╚═╝    ╚═╝     ╚═╝╚═════╝ 
+&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;#!/usr/bin/python&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#00f&#34;&gt;Student&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;def&lt;/span&gt; __init__(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;name &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;Liu Chao&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;nickname &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;Pi3&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;role &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;Undergraduate Student&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;major &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;Cyberspace Security&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;language &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;zh_CN&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;location &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;HangZhou China&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#00a000&#34;&gt;say_hi&lt;/span&gt;(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#a2f&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;Thanks for stopping by and I hope you get some interesting stuff here.&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;me &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; Student()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;me&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;say_hi()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
       
     </item>
     
