@@ -131,7 +131,7 @@
 }
 
 .content table {
-    /* display: block; */
+    display: block;
     overflow-x: auto;
     width: 100%;
     /* 居中 */
