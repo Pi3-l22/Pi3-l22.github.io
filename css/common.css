@@ -216,15 +216,16 @@ time {
 }
 
 #header > h1 {
+    font-size: 2.5rem;
     text-align: center;
     margin-bottom: 1rem!important;
 }
 
-@media screen and (min-width: 768px) {
+/* @media screen and (min-width: 768px) {
     #header > h1 {
         font-size: 2.8rem;
     }
-}
+} */
 
 #header > nav {
     display: flex;
@@ -275,7 +276,6 @@ time {
     * {
         font-size: 14px;
     }
-    
     #main.post{
         box-shadow: none;
         padding: .5rem .5rem;
