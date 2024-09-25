@@ -92,7 +92,7 @@
 .content img {
     display: block;
     max-width: 100%;
-    margin: 0 auto !important;
+    margin: .5rem auto !important;
 }
 
 .content p {
