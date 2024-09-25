@@ -278,7 +278,7 @@ time {
     #main.post{
         box-shadow: none;
         padding: .5rem .5rem;
-        margin: 0;
+        margin: 0 0 2rem 0;
     }
     #header > h1 a{
         font-size: 2.5rem !important;
