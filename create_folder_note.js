@@ -27,7 +27,6 @@ title: ${noteName}
 date: ${window.moment().format("YYYY-MM-DD")}
 description: 
 tags: []
-draft: true
 slug: 
 ---
 
