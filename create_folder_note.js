@@ -34,8 +34,8 @@ slug:
 <!--more-->`;
 
         const file = await app.vault.create(notePath, fileContent);
-        const leaf = app.workspace.getLeaf();
-        await leaf.openFile(file);
+        // const leaf = app.workspace.getLeaf();
+        // await leaf.openFile(file);
     } catch (error) {
         new Notice(`Error: ${error.message}`, 5000);
     }
