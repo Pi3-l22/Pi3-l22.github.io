@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="Obsidian自动创建文件夹和笔记">
+  
+
+  
+  <link rel="icon" href="https://blog.pi3.fun/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://blog.pi3.fun/post/2024/09/obsidian%E4%B8%ADquickadd%E6%8F%92%E4%BB%B6%E7%9A%84%E5%A6%99%E7%94%A8/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="Obsidian中QuickAdd的妙用">
+  <meta property="og:description" content="Obsidian自动创建文件夹和笔记">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-09-28T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-09-28T00:00:00+00:00">
+    <meta property="article:tag" content="Obsidian">
+
+
+  
+  <link rel="canonical" href="https://blog.pi3.fun/post/2024/09/obsidian%E4%B8%ADquickadd%E6%8F%92%E4%BB%B6%E7%9A%84%E5%A6%99%E7%94%A8/">
+
+  
+  
+  
+  <meta itemprop="name" content="Obsidian中QuickAdd的妙用">
+  <meta itemprop="description" content="Obsidian自动创建文件夹和笔记">
+  <meta itemprop="datePublished" content="2024-09-28T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2024-09-28T00:00:00+00:00">
+  <meta itemprop="wordCount" content="1133">
+  <meta itemprop="keywords" content="Obsidian">
+
+  
+  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/content.css'>
+
+  
+  
+  <title>Obsidian中QuickAdd的妙用 - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://blog.pi3.fun/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://blog.pi3.fun/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">主页</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/articles/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>Obsidian中QuickAdd的妙用</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='https://blog.pi3.fun/tags/obsidian'>#Obsidian</a>
+    
+  </div>
+  
+  
+  
+  
+  <article class="content">
+    
+    <p>最近在研究 Obsidian 中怎么合理的组织笔记和附件，我认为最佳的方式就是一篇笔记一个文件夹，在这个文件夹中有一个 assets 目录专门存放图片等附件。</p>
+<p>然而，以这样的方式进行文件管理的话，当我新创建一篇笔记时，我需要先创建一个文件夹再在其中创建一篇笔记。正如 assets 文件夹可以通过 Obsidian 的设置，在图片粘贴的时候自动创建，那么我新建笔记的这个步骤能不能也自动创建？</p>
+<p>在新建一篇笔记时，我通常习惯使用固定的模板，配合 Obsidian 内置模板变量十分方便，当然也可以使用 QuickAdd 插件，功能更加全面。当然在 Obsidian 中有一个创建目录的指令，虽然 QuickAdd 也可以调用，但是却不能输入自定义名称。我的需求是：</p>
+<blockquote>
+<p>按下 QuickAdd 快捷键后，出现一个输入框，然后输入文件夹名称和笔记名称，比如 <em>test</em> 然后按下确定键后，会创建一个文件夹和一篇 md 笔记，文件名都是 <em>test</em> 并且笔记在文件夹里面。</p>
+</blockquote>
+<p>网上检索一番，发现这样的需求大概还是要用 JavaScript 脚本来实现，其他没有很好的办法。QuickAdd 中的 Macros 可以执行用户自定义脚本，于是我去翻阅 [QuickAdd 官方文档](<a href="https://quickadd.obsidian.guide/docs/">Getting Started | QuickAdd (obsidian.guide)</a>)和 <a href="https://luhaifeng666.github.io/obsidian-plugin-docs-zh/">Obsidian 开发者文档</a>, 折腾了一会，写出了一个 js 脚本，利用 QuickAdd，基本上能实现需要的效果。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#000">module</span>.<span style="color:#000">exports</span> <span style="color:#000">=</span> <span style="color:#a90d91">async</span> (<span style="color:#000">params</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">const</span> { <span style="color:#000">inputPrompt</span> } <span style="color:#000">=</span> <span style="color:#000">params</span>.<span style="color:#000">quickAddApi</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">const</span> <span style="color:#000">app</span> <span style="color:#000">=</span> <span style="color:#000">params</span>.<span style="color:#000">app</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#177500">// 获取用户输入的文件夹和笔记名称
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>    <span style="color:#a90d91">const</span> <span style="color:#000">folderAndNoteName</span> <span style="color:#000">=</span> <span style="color:#a90d91">await</span> <span style="color:#000">inputPrompt</span>(<span style="color:#c41a16">&#34;Enter folder and note name:&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">if</span> (<span style="color:#000">!</span><span style="color:#000">folderAndNoteName</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">new</span> <span style="color:#000">Notice</span>(<span style="color:#c41a16">&#34;No input provided.&#34;</span>, <span style="color:#1c01ce">5000</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 创建文件夹
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#a90d91">const</span> <span style="color:#000">folderPath</span> <span style="color:#000">=</span> <span style="color:#000">folderAndNoteName</span>.<span style="color:#000">replace</span>(<span style="color:#c41a16">/[/\\]/g</span>, <span style="color:#c41a16">&#39;&#39;</span>); <span style="color:#177500">// 确保路径有效
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#000">app</span>.<span style="color:#000">vault</span>.<span style="color:#000">adapter</span>.<span style="color:#000">mkdir</span>(<span style="color:#000">folderPath</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 获取当前日期
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#a90d91">const</span> <span style="color:#000">date</span> <span style="color:#000">=</span> <span style="color:#a90d91">window</span>.<span style="color:#000">moment</span>().<span style="color:#000">format</span>(<span style="color:#c41a16">&#34;YYYY-MM-DD&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">time</span> <span style="color:#000">=</span> <span style="color:#a90d91">window</span>.<span style="color:#000">moment</span>().<span style="color:#000">format</span>(<span style="color:#c41a16">&#34;HH:mm:ss&#34;</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 创建笔记文件
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#a90d91">const</span> <span style="color:#000">filePath</span> <span style="color:#000">=</span> <span style="color:#000">folderPath</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#39;/&#39;</span> <span style="color:#000">+</span> <span style="color:#000">folderAndNoteName</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#39;.md&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">fileContent</span> <span style="color:#000">=</span> <span style="color:#c41a16">`---
+</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">title: </span><span style="color:#c41a16">${</span><span style="color:#000">folderAndNoteName</span><span style="color:#c41a16">}</span><span style="color:#c41a16">
+</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">date: </span><span style="color:#c41a16">${</span><span style="color:#000">date</span><span style="color:#c41a16">}</span><span style="color:#c41a16">
+</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">time: </span><span style="color:#c41a16">${</span><span style="color:#000">time</span><span style="color:#c41a16">}</span><span style="color:#c41a16">
+</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">tags: []
+</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">---`</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">file</span> <span style="color:#000">=</span> <span style="color:#a90d91">await</span> <span style="color:#000">app</span>.<span style="color:#000">vault</span>.<span style="color:#000">create</span>(<span style="color:#000">filePath</span>, <span style="color:#000">fileContent</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#177500">// if (file) {
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//     // 打开笔记文件
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//     const leaf = app.workspace.getLeaf(false);
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//     if (leaf) {
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//         leaf.openFile(file);
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//         new Notice(`Folder and note &#39;${folderAndNoteName}&#39; created successfully.`, 5000);
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//     } else {
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//         new Notice(&#34;No active leaf to open the file.&#34;, 5000);
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//     }
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">// } else {
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//     new Notice(&#34;Failed to create note.&#34;, 5000);
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">// }
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>    } <span style="color:#a90d91">catch</span> (<span style="color:#000">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">new</span> <span style="color:#000">Notice</span>(<span style="color:#c41a16">`Error: </span><span style="color:#c41a16">${</span><span style="color:#000">error</span><span style="color:#c41a16">}</span><span style="color:#c41a16">`</span>, <span style="color:#1c01ce">5000</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>这其中遇到最大的困难就是，这两个文档写的太难用了，想要的功能需要找很久，还不一定是我想的那样。最后打开新建笔记这一步，一直实现不了，<code>app.vault.create(filePath, fileContent);</code> 这个函数能够成功创建文件并写入内容，但是即使是成功了也返回 NULL ，以及 <code>leaf.openFile(file);</code> 这个函数一直不能打开文件，也不知道是不是因为接口和函数写错了，这让我百思不得其解，总之一直没有搞定。</p>
+<p>随后，我也将这个脚本进行修改，整合进我的 hugo 博客文章撰写的工作流之中。利用这个脚本根据日期创建对应的文件夹如/content/post/2024/09/，在文件夹中创建新的模板笔记，利用 Obsidian 的 Git 插件实现定时推送到 GitHub 仓库，再通过 GitHub Action 构建出 HTML 文件，部署在 Github Page 上。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Javascript" data-lang="Javascript"><span style="display:flex;"><span><span style="color:#000">module</span>.<span style="color:#000">exports</span> <span style="color:#000">=</span> <span style="color:#a90d91">async</span> (<span style="color:#000">params</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">const</span> { <span style="color:#000">inputPrompt</span> } <span style="color:#000">=</span> <span style="color:#000">params</span>.<span style="color:#000">quickAddApi</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">const</span> <span style="color:#000">app</span> <span style="color:#000">=</span> <span style="color:#000">params</span>.<span style="color:#000">app</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">const</span> <span style="color:#000">noteName</span> <span style="color:#000">=</span> <span style="color:#a90d91">await</span> <span style="color:#000">inputPrompt</span>(<span style="color:#c41a16">&#34;Enter note name:&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">if</span> (<span style="color:#000">!</span><span style="color:#000">noteName</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">new</span> <span style="color:#000">Notice</span>(<span style="color:#c41a16">&#34;No input provided.&#34;</span>, <span style="color:#1c01ce">5000</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">year</span> <span style="color:#000">=</span> <span style="color:#a90d91">window</span>.<span style="color:#000">moment</span>().<span style="color:#000">format</span>(<span style="color:#c41a16">&#34;YYYY&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">month</span> <span style="color:#000">=</span> <span style="color:#a90d91">window</span>.<span style="color:#000">moment</span>().<span style="color:#000">format</span>(<span style="color:#c41a16">&#34;MM&#34;</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">basePath</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#39;./content/post&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">yearPath</span> <span style="color:#000">=</span> <span style="color:#c41a16">`</span><span style="color:#c41a16">${</span><span style="color:#000">basePath</span><span style="color:#c41a16">}</span><span style="color:#c41a16">/</span><span style="color:#c41a16">${</span><span style="color:#000">year</span><span style="color:#c41a16">}</span><span style="color:#c41a16">`</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">monthPath</span> <span style="color:#000">=</span> <span style="color:#c41a16">`</span><span style="color:#c41a16">${</span><span style="color:#000">yearPath</span><span style="color:#c41a16">}</span><span style="color:#c41a16">/</span><span style="color:#c41a16">${</span><span style="color:#000">month</span><span style="color:#c41a16">}</span><span style="color:#c41a16">`</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">notePath</span> <span style="color:#000">=</span> <span style="color:#c41a16">`</span><span style="color:#c41a16">${</span><span style="color:#000">monthPath</span><span style="color:#c41a16">}</span><span style="color:#c41a16">/</span><span style="color:#c41a16">${</span><span style="color:#000">noteName</span><span style="color:#c41a16">}</span><span style="color:#c41a16">.md`</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 创建文件夹结构
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#a90d91">await</span> <span style="color:#000">ensureDirectoryExists</span>(<span style="color:#000">app</span>.<span style="color:#000">vault</span>.<span style="color:#000">adapter</span>, <span style="color:#000">yearPath</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">await</span> <span style="color:#000">ensureDirectoryExists</span>(<span style="color:#000">app</span>.<span style="color:#000">vault</span>.<span style="color:#000">adapter</span>, <span style="color:#000">monthPath</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 创建笔记文件内容
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#a90d91">const</span> <span style="color:#000">fileContent</span> <span style="color:#000">=</span> <span style="color:#c41a16">`---
+</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">title: </span><span style="color:#c41a16">${</span><span style="color:#000">noteName</span><span style="color:#c41a16">}</span><span style="color:#c41a16">
+</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">date: </span><span style="color:#c41a16">${</span><span style="color:#a90d91">window</span>.<span style="color:#000">moment</span>().<span style="color:#000">format</span>(<span style="color:#c41a16">&#34;YYYY-MM-DD&#34;</span>)<span style="color:#c41a16">}</span><span style="color:#c41a16">
+</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">description: 
+</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">tags: []
+</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">slug: 
+</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">---
+</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">
+</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">&lt;!--more--&gt;`</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">file</span> <span style="color:#000">=</span> <span style="color:#a90d91">await</span> <span style="color:#000">app</span>.<span style="color:#000">vault</span>.<span style="color:#000">create</span>(<span style="color:#000">notePath</span>, <span style="color:#000">fileContent</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#177500">// const leaf = app.workspace.getLeaf();
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">// await leaf.openFile(file);
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>    } <span style="color:#a90d91">catch</span> (<span style="color:#000">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">new</span> <span style="color:#000">Notice</span>(<span style="color:#c41a16">`Error: </span><span style="color:#c41a16">${</span><span style="color:#000">error</span>.<span style="color:#000">message</span><span style="color:#c41a16">}</span><span style="color:#c41a16">`</span>, <span style="color:#1c01ce">5000</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500">// 确保目录存在
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span><span style="color:#a90d91">async</span> <span style="color:#a90d91">function</span> <span style="color:#000">ensureDirectoryExists</span>(<span style="color:#000">adapter</span>, <span style="color:#000">path</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">await</span> <span style="color:#000">adapter</span>.<span style="color:#000">exists</span>(<span style="color:#000">path</span>) <span style="color:#000">||</span> <span style="color:#a90d91">await</span> <span style="color:#000">adapter</span>.<span style="color:#000">mkdir</span>(<span style="color:#000">path</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#a90d91">catch</span> (<span style="color:#000">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">throw</span> <span style="color:#a90d91">new</span> <span style="color:#a90d91">Error</span>(<span style="color:#c41a16">`Failed to create directory </span><span style="color:#c41a16">${</span><span style="color:#000">path</span><span style="color:#c41a16">}</span><span style="color:#c41a16">: </span><span style="color:#c41a16">${</span><span style="color:#000">error</span>.<span style="color:#000">message</span><span style="color:#c41a16">}</span><span style="color:#c41a16">`</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928155919.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928160014.png" alt="image.png"></p>
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://blog.pi3.fun/post/2024/09/%E5%86%99%E4%BD%9C%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/">← prev</a>
+    
+    
+    <a></a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+      <script src="https://giscus.app/client.js"
+        data-repo="Pi3-l22/Pi3-notes-giscus"
+        data-repo-id="R_kgDOM4Xgbg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOM4Xgbs4Ci3nv"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_protanopia"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2021</span> - <span>2024</span>
+    <span> 🍦 By LiuChao</span>
+  </div>
+
+  
+
+  <div class="footnote">
+    <span>Follow me on <a class=link href=https://github.com/Pi3-l22 Target=_ blank>GitHub</a> | <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+
+</body>
+
+</html>
