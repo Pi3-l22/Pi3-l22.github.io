@@ -73,7 +73,7 @@
   <meta itemprop="description" content="Obsidian自动创建文件夹和笔记">
   <meta itemprop="datePublished" content="2024-09-28T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-09-28T00:00:00+00:00">
-  <meta itemprop="wordCount" content="1133">
+  <meta itemprop="wordCount" content="1104">
   <meta itemprop="keywords" content="Obsidian">
 
   
@@ -145,7 +145,7 @@
 <blockquote>
 <p>按下 QuickAdd 快捷键后，出现一个输入框，然后输入文件夹名称和笔记名称，比如 <em>test</em> 然后按下确定键后，会创建一个文件夹和一篇 md 笔记，文件名都是 <em>test</em> 并且笔记在文件夹里面。</p>
 </blockquote>
-<p>网上检索一番，发现这样的需求大概还是要用 JavaScript 脚本来实现，其他没有很好的办法。QuickAdd 中的 Macros 可以执行用户自定义脚本，于是我去翻阅 [QuickAdd 官方文档](<a href="https://quickadd.obsidian.guide/docs/">Getting Started | QuickAdd (obsidian.guide)</a>)和 <a href="https://luhaifeng666.github.io/obsidian-plugin-docs-zh/">Obsidian 开发者文档</a>, 折腾了一会，写出了一个 js 脚本，利用 QuickAdd，基本上能实现需要的效果。</p>
+<p>网上检索一番，发现这样的需求大概还是要用 JavaScript 脚本来实现，其他没有很好的办法。QuickAdd 中的 Macros 可以执行用户自定义脚本，于是我去翻阅 <a href="https://quickadd.obsidian.guide/docs/">QuickAdd 官方文档</a>和 <a href="https://luhaifeng666.github.io/obsidian-plugin-docs-zh/">Obsidian 开发者文档</a>, 折腾了一会，写出了一个 js 脚本，利用 QuickAdd，基本上能实现需要的效果。</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#000">module</span>.<span style="color:#000">exports</span> <span style="color:#000">=</span> <span style="color:#a90d91">async</span> (<span style="color:#000">params</span>) =&gt; {
 </span></span><span style="display:flex;"><span>    <span style="color:#a90d91">const</span> { <span style="color:#000">inputPrompt</span> } <span style="color:#000">=</span> <span style="color:#000">params</span>.<span style="color:#000">quickAddApi</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a90d91">const</span> <span style="color:#000">app</span> <span style="color:#000">=</span> <span style="color:#000">params</span>.<span style="color:#000">app</span>;
@@ -193,7 +193,7 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><p>这其中遇到最大的困难就是，这两个文档写的太难用了，想要的功能需要找很久，还不一定是我想的那样。最后打开新建笔记这一步，一直实现不了，<code>app.vault.create(filePath, fileContent);</code> 这个函数能够成功创建文件并写入内容，但是即使是成功了也返回 NULL ，以及 <code>leaf.openFile(file);</code> 这个函数一直不能打开文件，也不知道是不是因为接口和函数写错了，这让我百思不得其解，总之一直没有搞定。</p>
-<p>随后，我也将这个脚本进行修改，整合进我的 hugo 博客文章撰写的工作流之中。利用这个脚本根据日期创建对应的文件夹如/content/post/2024/09/，在文件夹中创建新的模板笔记，利用 Obsidian 的 Git 插件实现定时推送到 GitHub 仓库，再通过 GitHub Action 构建出 HTML 文件，部署在 Github Page 上。</p>
+<p>随后，我也将这个脚本进行修改，整合进我的 Hugo 博客文章撰写的工作流之中。利用这个脚本根据日期创建对应的文件夹如 <code>/content/post/2024/09/</code>，在文件夹中创建新的模板笔记，利用 Obsidian 的 Git 插件实现定时推送到 GitHub 仓库，再通过 GitHub Action 构建出 HTML 文件，部署在 Github Page 上。</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Javascript" data-lang="Javascript"><span style="display:flex;"><span><span style="color:#000">module</span>.<span style="color:#000">exports</span> <span style="color:#000">=</span> <span style="color:#a90d91">async</span> (<span style="color:#000">params</span>) =&gt; {
 </span></span><span style="display:flex;"><span>    <span style="color:#a90d91">const</span> { <span style="color:#000">inputPrompt</span> } <span style="color:#000">=</span> <span style="color:#000">params</span>.<span style="color:#000">quickAddApi</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a90d91">const</span> <span style="color:#000">app</span> <span style="color:#000">=</span> <span style="color:#000">params</span>.<span style="color:#000">app</span>;
@@ -250,7 +250,7 @@
   </article>
   <div class="paginator">
     
-    <a class="link" href="https://blog.pi3.fun/post/2024/09/%E5%86%99%E4%BD%9C%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/">← prev</a>
+    <a class="link" href="https://blog.pi3.fun/post/2024/09/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">← prev</a>
     
     
     <a></a>

@@ -21,6 +21,17 @@
     </item>
     
     <item>
+      <title>密码管理器系统设计与实现</title>
+      <link>https://blog.pi3.fun/post/2024/09/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Wed, 25 Sep 2024 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://blog.pi3.fun/post/2024/09/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/</guid>
+      
+      <description>&lt;p&gt;这是一个大学的课程设计项目。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
       <title>英语写作方法论笔记</title>
       <link>https://blog.pi3.fun/post/2024/09/%E5%86%99%E4%BD%9C%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Fri, 20 Sep 2024 00:00:00 +0000</pubDate>
@@ -114,7 +125,7 @@
     <item>
       <title>Kali Linux的安装与配置</title>
       <link>https://blog.pi3.fun/post/2024/02/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Sun, 15 Sep 2024 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 15 Feb 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://blog.pi3.fun/post/2024/02/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid>
       
@@ -150,17 +161,6 @@
       <pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://blog.pi3.fun/post/2023/12/%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/</guid>
-      
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>微信定时发送倒数日</title>
-      <link>https://blog.pi3.fun/post/2023/12/%E5%BE%AE%E4%BF%A1%E5%AE%9A%E6%97%B6%E5%8F%91%E9%80%81%E5%80%92%E6%95%B0%E6%97%A5/</link>
-      <pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate>
-      <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://blog.pi3.fun/post/2023/12/%E5%BE%AE%E4%BF%A1%E5%AE%9A%E6%97%B6%E5%8F%91%E9%80%81%E5%80%92%E6%95%B0%E6%97%A5/</guid>
       
       <description></description>
       
