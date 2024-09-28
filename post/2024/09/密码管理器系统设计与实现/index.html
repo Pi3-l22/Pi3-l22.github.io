@@ -74,7 +74,7 @@
   <meta itemprop="description" content="密码管理器系统设计与实现">
   <meta itemprop="datePublished" content="2024-09-25T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-09-25T00:00:00+00:00">
-  <meta itemprop="wordCount" content="1112">
+  <meta itemprop="wordCount" content="4515">
   <meta itemprop="keywords" content="Python,Flet">
 
   
@@ -158,7 +158,19 @@
         <li><a href="#性能需求">性能需求</a></li>
       </ul>
     </li>
-    <li><a href="#可用性需求">可用性需求</a></li>
+    <li><a href="#可用性需求">可用性需求</a>
+      <ul>
+        <li><a href="#概要设计">概要设计</a></li>
+        <li><a href="#数据结构设计">数据结构设计</a></li>
+      </ul>
+    </li>
+    <li><a href="#详细设计">详细设计</a>
+      <ul>
+        <li><a href="#图形界面模块设计">图形界面模块设计</a></li>
+        <li><a href="#数据加密模块设计">数据加密模块设计</a></li>
+        <li><a href="#数据库模块设计">数据库模块设计</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
   </details>
@@ -243,10 +255,444 @@
 </ol>
 <h2 id="可用性需求">可用性需求</h2>
 <ol>
-<li>多平台支持：至少在一种平台上实现基本功能，如网页、小程序、浏览器插件、iOS、Android、Windows 等。</li>
-<li>用户界面：提供直观、易用的用户界面，确保用户能够轻松管理和使用密码库。</li>
-<li>软件稳定：提供稳定的服务，确保高可用性，减少系统故障和停机时间。</li>
+<li><strong class=chinese>多平台支持</strong>：至少在一种平台上实现基本功能，如网页、小程序、浏览器插件、iOS、Android、Windows 等。</li>
+<li><strong class=chinese>用户界面</strong>：提供直观、易用的用户界面，确保用户能够轻松管理和使用密码库。</li>
+<li><strong class=chinese>软件稳定</strong>：提供稳定的服务，确保高可用性，减少系统故障和停机时间。</li>
 </ol>
+<h3 id="概要设计">概要设计</h3>
+<h4 id="项目部署图">项目部署图</h4>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928173204.png" alt="image.png"></p>
+<h4 id="系统架构图">系统架构图</h4>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928173319.png" alt="image.png"></p>
+<h4 id="工作流程">工作流程</h4>
+<ol>
+<li>用户通过入口页面发起登录或注册请求。</li>
+<li>经过数据加密验证模块验证用户信息，与数据库交互进行身份验证。</li>
+<li>认证成功后，用户进入主界面可以管理密码，包括添加、查询和删除密码信息。同时还支持强密码生成，批量导入导出密码以及切换明暗主题的功能。</li>
+<li>密码信息在数据加密模块通过用户自行选择的加密方式进行加密，加密后的密码信息存储在数据库中。</li>
+<li>用户查询密码时，服务从数据库中检索并解密密码信息，返回给前端页面。</li>
+</ol>
+<h3 id="数据结构设计">数据结构设计</h3>
+<h4 id="关键数据结构">关键数据结构</h4>
+<ol>
+<li>全局系统变量</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 全局主题变量</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">BGCOLOR</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#39;#f0f0f0&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">THEME</span> <span style="color:#000">=</span> <span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">ThemeMode</span><span style="color:#000">.</span><span style="color:#000">LIGHT</span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 状态码</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">OK</span> <span style="color:#000">=</span> <span style="color:#1c01ce">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">ERROR</span> <span style="color:#000">=</span> <span style="color:#000">-</span><span style="color:#1c01ce">1</span>
+</span></span></code></pre></div><ol start="2">
+<li>登录页面类</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a90d91">class</span> <span style="color:#3f6e75">LoginPage</span>(<span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">Column</span>)
+</span></span></code></pre></div><ol start="3">
+<li>注册页面类</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a90d91">class</span> <span style="color:#3f6e75">RegisterPage</span>(<span style="color:#000">ft</span><span style="color:#000">.</span><span style="color:#000">Column</span>)
+</span></span></code></pre></div><ol start="4">
+<li>添加密码信息弹窗类</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a90d91">class</span> <span style="color:#3f6e75">AddPwdDialog</span> (<span style="color:#000">ft</span><span style="color:#000">.</span> <span style="color:#000">AlertDialog</span>)
+</span></span></code></pre></div><ol start="5">
+<li>密码信息类</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a90d91">class</span> <span style="color:#3f6e75">PwdRow</span> (<span style="color:#000">ft</span><span style="color:#000">.</span> <span style="color:#000">DataRow</span>)
+</span></span></code></pre></div><ol start="6">
+<li>主页面类</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a90d91">class</span> <span style="color:#3f6e75">MainPage</span> (<span style="color:#000">ft</span><span style="color:#000">.</span> <span style="color:#000">Column</span>)
+</span></span></code></pre></div><ol start="7">
+<li>页面配置</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">main_page</span> (<span style="color:#000">page</span>: {<span style="color:#000">clean</span>, <span style="color:#000">window</span>, <span style="color:#000">add</span>, <span style="color:#000">update</span>, <span style="color:#000">on_disconnect</span>},
+</span></span><span style="display:flex;"><span>	<span style="color:#000">current_user</span>: <span style="color:#000">Any</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#000">current_key</span>: <span style="color:#000">Any</span>) <span style="color:#000">-&gt;</span> <span style="color:#a90d91">None</span>
+</span></span></code></pre></div><h4 id="数据库设计-">数据库设计 ：</h4>
+<ol>
+<li>用户表设计</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#000">username</span> <span style="color:#a90d91">VARCHAR</span> (<span style="color:#1c01ce">255</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span> <span style="color:#a90d91">PRIMARY</span> <span style="color:#a90d91">KEY</span>,
+</span></span><span style="display:flex;"><span><span style="color:#000">password_hash</span> <span style="color:#a90d91">VARCHAR</span> (<span style="color:#1c01ce">255</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span>,
+</span></span><span style="display:flex;"><span><span style="color:#000">created_at</span> <span style="color:#a90d91">TIMESTAMP</span> <span style="color:#a90d91">DEFAULT</span> <span style="color:#a90d91">CURRENT_TIMESTAMP</span>
+</span></span></code></pre></div><ol start="2">
+<li>密码信息表设计</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#000">username</span> <span style="color:#a90d91">VARCHAR</span> (<span style="color:#1c01ce">255</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span>,
+</span></span><span style="display:flex;"><span><span style="color:#000">website_name</span> <span style="color:#a90d91">VARCHAR</span> (<span style="color:#1c01ce">150</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span>,
+</span></span><span style="display:flex;"><span><span style="color:#000">website</span> <span style="color:#a90d91">VARCHAR</span> (<span style="color:#1c01ce">150</span>),
+</span></span><span style="display:flex;"><span><span style="color:#000">account</span> <span style="color:#a90d91">VARCHAR</span> (<span style="color:#1c01ce">150</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span>,
+</span></span><span style="display:flex;"><span><span style="color:#000">password_encrypted</span> <span style="color:#a90d91">VARCHAR</span> (<span style="color:#1c01ce">255</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span>,
+</span></span><span style="display:flex;"><span><span style="color:#000">encrypted_method</span> <span style="color:#a90d91">VARCHAR</span> (<span style="color:#1c01ce">50</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span>,
+</span></span><span style="display:flex;"><span><span style="color:#000">note</span> <span style="color:#a90d91">TEXT</span>,
+</span></span><span style="display:flex;"><span><span style="color:#000">created_at</span> <span style="color:#a90d91">TIMESTAMP</span> <span style="color:#a90d91">DEFAULT</span> <span style="color:#a90d91">CURRENT_TIMESTAMP</span>,
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">PRIMARY</span> <span style="color:#a90d91">KEY</span> (<span style="color:#000">username</span>, <span style="color:#000">website_name</span>, <span style="color:#000">account</span>),
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">FOREIGN</span> <span style="color:#a90d91">KEY</span> (<span style="color:#000">username</span>) <span style="color:#a90d91">REFERENCES</span> <span style="color:#a90d91">user</span> (<span style="color:#000">username</span>)
+</span></span></code></pre></div><h2 id="详细设计">详细设计</h2>
+<h3 id="图形界面模块设计">图形界面模块设计</h3>
+<h4 id="模块概述">模块概述</h4>
+<p>在这一部分，主要是详细描述密码管理器应用程序的图形用户界面（GUI）设计，包括模块内详细算法设计、伪代码、流程图和详细接口。</p>
+<p>我们设计这个图形化界面的原则是用户友好的，界面简洁直观，易于新用户学习和使用。</p>
+<h4 id="伪代码">伪代码</h4>
+<ol>
+<li>登录页面类</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 登录页面类</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">LoginPage</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">初始化</span><span style="color:#000">：</span><span style="color:#000">设置标题</span><span style="color:#000">、</span><span style="color:#000">用户名和密码输入框</span><span style="color:#000">、</span><span style="color:#000">登录和注册按钮</span><span style="color:#000">、</span><span style="color:#000">错误弹窗</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">登录按钮点击事件</span><span style="color:#000">：</span><span style="color:#000">检查用户名和密码</span><span style="color:#000">，</span><span style="color:#000">验证成功后进入主页面</span><span style="color:#000">，</span><span style="color:#000">失败则显示错误弹窗</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">注册按钮点击事件</span><span style="color:#000">：</span><span style="color:#000">跳转到注册页面</span>
+</span></span></code></pre></div><ol start="2">
+<li>注册页面类</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 注册页面类</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">RegisterPage</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">初始化</span><span style="color:#000">：</span><span style="color:#000">设置标题</span><span style="color:#000">、</span><span style="color:#000">用户名和密码输入框</span><span style="color:#000">、</span><span style="color:#000">验证码</span><span style="color:#000">、</span><span style="color:#000">注册和取消按钮</span><span style="color:#000">、</span><span style="color:#000">各种错误弹窗和成功弹窗</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">注册按钮点击事件</span><span style="color:#000">：</span><span style="color:#000">验证输入信息和验证码</span><span style="color:#000">，</span><span style="color:#000">成功后添加用户到数据库并跳转到登录页面</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">取消按钮点击事件</span><span style="color:#000">：</span><span style="color:#000">返回到主页面</span>
+</span></span></code></pre></div><ol start="3">
+<li>添加密码信息弹窗类</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 添加密码信息弹窗类</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">AddPwdDialog</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">初始化</span><span style="color:#000">：</span><span style="color:#000">设置标题</span><span style="color:#000">、</span><span style="color:#000">密码信息输入框</span><span style="color:#000">、</span><span style="color:#000">保存和取消按钮</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">随机生成密码</span><span style="color:#000">：</span><span style="color:#000">生成一个强密码</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">保存按钮点击事件</span><span style="color:#000">：</span><span style="color:#000">验证输入信息</span><span style="color:#000">，</span><span style="color:#000">加密密码后保存到数据库</span><span style="color:#000">，</span><span style="color:#000">更新密码列表</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">取消按钮点击事件</span><span style="color:#000">：</span><span style="color:#000">关闭弹窗</span>
+</span></span></code></pre></div><ol start="4">
+<li>密码信息类</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 密码信息类</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">PwdRow</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">初始化</span><span style="color:#000">：</span><span style="color:#000">设置密码信息的显示</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">删除按钮点击事件</span><span style="color:#000">：</span><span style="color:#000">显示删除确认弹窗</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">删除确认弹窗确定按钮</span><span style="color:#000">：</span><span style="color:#000">从数据库和界面上删除密码信息</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">删除确认弹窗取消按钮</span><span style="color:#000">：</span><span style="color:#000">关闭删除确认弹窗</span>
+</span></span></code></pre></div><ol start="5">
+<li>主页面类</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 主页面类</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">MainPage</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">初始化</span><span style="color:#000">：</span><span style="color:#000">设置添加密码按钮</span><span style="color:#000">、</span><span style="color:#000">搜索框</span><span style="color:#000">、</span><span style="color:#000">批量导入导出按钮</span><span style="color:#000">、</span><span style="color:#000">密码信息表</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">添加密码按钮点击事件</span><span style="color:#000">：</span><span style="color:#000">打开添加密码信息弹窗</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">搜索框提交事件</span><span style="color:#000">：</span><span style="color:#000">根据关键词搜索密码信息并更新列表</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">删除密码表格信息</span><span style="color:#000">：</span><span style="color:#000">从数据库和界面上删除密码信息</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">复制单元格内容</span><span style="color:#000">：</span><span style="color:#000">复制选中的单元格内容到剪贴板</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">导出密码点击事件</span><span style="color:#000">：</span><span style="color:#000">打开导出密码信息弹窗</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">导入密码点击事件</span><span style="color:#000">：</span><span style="color:#000">打开导入密码信息弹窗</span>
+</span></span></code></pre></div><ol start="6">
+<li>切换明暗主题函数</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 切换明暗主题函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">change_theme</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">切换应用程序的主题模式和背景颜色</span>
+</span></span></code></pre></div><ol start="7">
+<li>主页面函数</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 主页面函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">main_page</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">设置页面属性</span><span style="color:#000">，</span><span style="color:#000">如大小</span><span style="color:#000">、</span><span style="color:#000">位置</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">添加主页面对象到页面</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">更新页面</span>
+</span></span></code></pre></div><ol start="8">
+<li>注册页面函数</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 注册页面函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Register_page</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">设置页面属性</span><span style="color:#000">，</span><span style="color:#000">如大小</span><span style="color:#000">、</span><span style="color:#000">位置</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">添加注册页面对象到页面</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">更新页面</span>
+</span></span></code></pre></div><ol start="9">
+<li>登录页面函数</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 登录页面函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">main</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">设置页面属性</span><span style="color:#000">，</span><span style="color:#000">如大小</span><span style="color:#000">、</span><span style="color:#000">位置</span><span style="color:#000">、</span><span style="color:#000">标题</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">添加登录页面对象到页面</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">更新页面</span>
+</span></span></code></pre></div><h4 id="流程图">流程图</h4>
+<p>登录逻辑流程图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928174407.png" alt="image.png"></p>
+<p>注册逻辑流程图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928174434.png" alt="image.png"></p>
+<p>添加密码信息流程图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928174447.png" alt="image.png"></p>
+<p>删除密码信息流程图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928174505.png" alt="image.png"></p>
+<p>导入数据流程图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928174517.png" alt="image.png"></p>
+<p>导出数据流程图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928174528.png" alt="image.png"></p>
+<h3 id="数据加密模块设计">数据加密模块设计</h3>
+<h4 id="模块概述-1">模块概述</h4>
+<p>密码模块是密码管理器的核心部分，负责加密、解密、生成和验证密码。该模块确保用户数据的安全性和隐私性。</p>
+<p>本项目的密码模块支持多种加密算法，同时还集成由国密算法，并且实现了哈希函数以及密钥派生函数，使得整个系统具有十分高的安全性。</p>
+<p>支持的密码算法：AES-256、ChaCha20、Xchacha20、SM4-ECB。</p>
+<p>支持的哈希和派生算法：SHA-256、SHA3-256、PBKDF2。</p>
+<p>后续还会支持更多的密码学算法，以进一步加强软件的安全性。</p>
+<p>在这个模块中我们把用户登录软件的密钥作为整个密码存储库的主密钥，所有的密码信息都是靠这个主密钥进行加解密，这样使用户在使用我们软件的时候对于后端的数据加解密操作是无感的，因为他登录进软件后，不需要再次输入加解密的密钥，这也符合我们软件的设计原则：用户友好的。</p>
+<p>为了解决整个密码库都使用同一个主密钥使得安全性不高的问题，我们进行了如下的设计：</p>
+<ol>
+<li>用户的主密钥使用SHA3-256哈希处理后放入数据库中，保护主密钥。</li>
+<li>用于加密密码信息的密钥是通过主密钥使用PBKDF2密钥派生函数，以加盐的SHA-256作为其中的哈希函数，迭代10000轮后生成的。</li>
+<li>在本项目支持的密码算法中，AES-256、ChaCha20和Xchacha20在实际过程中会混合进随机数，相当于每次加密都使用不同的密钥，因此即使是使用相同明文加密多次，每次生成的密文都会不同，通过这种方式，我们软件实现了接近一次一密(One-time Pad)的加密方式，使得整个系统的安全性大幅提升。</li>
+</ol>
+<p>用户可以自定义选择密码信息使用的加密算法。但我们更推荐AES-256、ChaCha20和Xchacha20作为加密算法。</p>
+<h4 id="伪代码-1">伪代码</h4>
+<ol>
+<li>SHA 3-256</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 使用 SHA 3-256 哈希算法对数据进行哈希</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">sha</span> <span style="color:#1c01ce">3_256</span> (<span style="color:#000">data</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">return</span> <span style="color:#000">data</span> <span style="color:#000">的</span> <span style="color:#000">SHA</span> <span style="color:#1c01ce">3</span><span style="color:#000">-</span><span style="color:#1c01ce">256</span> <span style="color:#000">哈希值</span>
+</span></span></code></pre></div><ol start="2">
+<li>PKBDF 2</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 使用 PBKDF 2 算法和 SHA 256 哈希函数生成密钥</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">pbkdf</span> <span style="color:#1c01ce">2</span> (<span style="color:#000">data</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">salt</span> <span style="color:#000">=</span> <span style="color:#000">固定的盐值</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">return</span> <span style="color:#000">data</span> <span style="color:#000">使用</span> <span style="color:#000">SHA</span> <span style="color:#1c01ce">256</span> <span style="color:#000">和</span> <span style="color:#000">salt</span> <span style="color:#000">进行</span> <span style="color:#000">PBKDF</span> <span style="color:#1c01ce">2</span> <span style="color:#000">迭代</span> <span style="color:#1c01ce">10000</span> <span style="color:#000">次的哈希值</span>
+</span></span></code></pre></div><ol start="3">
+<li>AES-256</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 使用 AES-256 算法加密数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">aes_encrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">key</span> <span style="color:#000">=</span> <span style="color:#000">将</span> <span style="color:#000">key</span> <span style="color:#000">转换为字节</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">cipher</span> <span style="color:#000">=</span> <span style="color:#000">创建</span> <span style="color:#000">AES</span> <span style="color:#000">加密器</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">nonce</span> <span style="color:#000">=</span> <span style="color:#000">cipher</span> <span style="color:#000">的随机数</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">ciphertext</span>, <span style="color:#000">tag</span> <span style="color:#000">=</span> <span style="color:#000">cipher</span> <span style="color:#000">加密</span> <span style="color:#000">data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">return</span> <span style="color:#000">nonce</span> <span style="color:#000">+</span> <span style="color:#000">tag</span> <span style="color:#000">+</span> <span style="color:#000">ciphertext</span> <span style="color:#000">的十六进制字符串</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 使用 AES-256 算法解密数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">aes_decrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">key</span> <span style="color:#000">=</span> <span style="color:#000">将</span> <span style="color:#000">key</span> <span style="color:#000">转换为字节</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">nonce</span> <span style="color:#000">=</span> <span style="color:#000">从</span> <span style="color:#000">data</span> <span style="color:#000">中提取</span> <span style="color:#000">nonce</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">tag</span> <span style="color:#000">=</span> <span style="color:#000">从</span> <span style="color:#000">data</span> <span style="color:#000">中提取</span> <span style="color:#000">tag</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">ciphertext</span> <span style="color:#000">=</span> <span style="color:#000">从</span> <span style="color:#000">data</span> <span style="color:#000">中提取</span> <span style="color:#000">ciphertext</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">cipher</span> <span style="color:#000">=</span> <span style="color:#000">创建</span> <span style="color:#000">AES</span> <span style="color:#000">解密器</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">return</span> <span style="color:#000">cipher</span> <span style="color:#000">解密</span> <span style="color:#000">ciphertext</span> <span style="color:#000">并验证</span> <span style="color:#000">tag</span> <span style="color:#000">得到的原始数据</span>
+</span></span></code></pre></div><ol start="4">
+<li>ChaCha 20</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 使用 ChaCha 20 算法加密数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">chacha</span> <span style="color:#1c01ce">20</span><span style="color:#000">_encrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">key</span> <span style="color:#000">=</span> <span style="color:#000">将</span> <span style="color:#000">key</span> <span style="color:#000">转换为字节</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">nonce</span> <span style="color:#000">=</span> <span style="color:#000">生成</span> <span style="color:#1c01ce">12</span> <span style="color:#000">字节随机数</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">cipher</span> <span style="color:#000">=</span> <span style="color:#000">创建</span> <span style="color:#000">ChaCha</span> <span style="color:#1c01ce">20</span> <span style="color:#000">加密器</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">ciphertext</span> <span style="color:#000">=</span> <span style="color:#000">cipher</span> <span style="color:#000">加密</span> <span style="color:#000">data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">return</span> <span style="color:#000">nonce</span> <span style="color:#000">+</span> <span style="color:#000">ciphertext</span> <span style="color:#000">的十六进制字符串</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 使用 ChaCha 20 算法解密数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">chacha</span> <span style="color:#1c01ce">20</span><span style="color:#000">_decrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">key</span> <span style="color:#000">=</span> <span style="color:#000">将</span> <span style="color:#000">key</span> <span style="color:#000">转换为字节</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">nonce</span> <span style="color:#000">=</span> <span style="color:#000">从</span> <span style="color:#000">data</span> <span style="color:#000">中提取</span> <span style="color:#000">nonce</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">ciphertext</span> <span style="color:#000">=</span> <span style="color:#000">从</span> <span style="color:#000">data</span> <span style="color:#000">中提取</span> <span style="color:#000">ciphertext</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">cipher</span> <span style="color:#000">=</span> <span style="color:#000">创建</span> <span style="color:#000">ChaCha</span> <span style="color:#1c01ce">20</span> <span style="color:#000">解密器</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">return</span> <span style="color:#000">cipher</span> <span style="color:#000">解密</span> <span style="color:#000">ciphertext</span> <span style="color:#000">得到的原始数据</span>
+</span></span></code></pre></div><ol start="5">
+<li>Xchacha 20</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 使用 XChaCha 20 算法加密数据（与 ChaCha 20 类似，但使用 24 字节的 nonce）</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">xchacha</span> <span style="color:#1c01ce">20</span><span style="color:#000">_encrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">...</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 使用 XChaCha 20 算法解密数据（与 ChaCha 20 类似，但使用 24 字节的 nonce）</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">xchacha</span> <span style="color:#1c01ce">20</span><span style="color:#000">_decrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">...</span>
+</span></span></code></pre></div><ol start="6">
+<li>SM 4-ECB</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 使用 SM 4 算法加密数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">sm</span> <span style="color:#1c01ce">4</span><span style="color:#000">_encrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">如果</span> <span style="color:#000">key</span> <span style="color:#000">超过</span> <span style="color:#1c01ce">16</span> <span style="color:#000">字节</span><span style="color:#000">，</span><span style="color:#000">则截断</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">return</span> <span style="color:#000">使用</span> <span style="color:#000">ECB</span> <span style="color:#000">模式加密</span> <span style="color:#000">data</span> <span style="color:#000">得到的十六进制字符串</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 使用 SM 4 算法解密数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">sm</span> <span style="color:#1c01ce">4</span><span style="color:#000">_decrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">如果</span> <span style="color:#000">key</span> <span style="color:#000">超过</span> <span style="color:#1c01ce">16</span> <span style="color:#000">字节</span><span style="color:#000">，</span><span style="color:#000">则截断</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">return</span> <span style="color:#000">使用</span> <span style="color:#000">ECB</span> <span style="color:#000">模式解密</span> <span style="color:#000">data</span> <span style="color:#000">得到的原始数据</span>
+</span></span></code></pre></div><ol start="7">
+<li>随机生成强密码</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 随机生成强密码</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">random_password</span> (<span style="color:#000">length</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">alphabet</span> <span style="color:#000">=</span> <span style="color:#000">字母</span><span style="color:#000">+</span><span style="color:#000">数字</span><span style="color:#000">+</span><span style="color:#000">特殊字符</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">return</span> <span style="color:#000">随机选择</span> <span style="color:#000">alphabet</span> <span style="color:#000">中的字符生成指定长度的密码</span>
+</span></span></code></pre></div><ol start="8">
+<li>导入数据</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 从 JSON 文件导入密码信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">import_password_from_json</span> (<span style="color:#000">username</span>, <span style="color:#000">file_path</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">尝试从</span> <span style="color:#000">JSON</span> <span style="color:#000">文件读取数据并过滤出</span> <span style="color:#000">username</span> <span style="color:#000">匹配的数据</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 从 CSV 文件导入密码信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">import_password_from_csv</span> (<span style="color:#000">username</span>, <span style="color:#000">file_path</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">尝试从</span> <span style="color:#000">CSV</span> <span style="color:#000">文件读取数据并过滤出</span> <span style="color:#000">username</span> <span style="color:#000">匹配的数据</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 从 TXT 文件导入密码信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">import_password_from_txt</span> (<span style="color:#000">username</span>, <span style="color:#000">file_path</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">尝试从</span> <span style="color:#000">TXT</span> <span style="color:#000">文件读取数据并过滤出</span> <span style="color:#000">username</span> <span style="color:#000">匹配的数据</span>
+</span></span></code></pre></div><ol start="9">
+<li>导出数据</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 将密码信息导出为 JSON 格式</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">export_password_to_json</span> (<span style="color:#000">data</span>, <span style="color:#000">username</span>, <span style="color:#000">key</span>, <span style="color:#000">dir_path</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">key</span> <span style="color:#000">=</span> <span style="color:#000">使用</span> <span style="color:#000">PBKDF</span> <span style="color:#1c01ce">2</span> <span style="color:#000">算法生成密钥</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">尝试将</span> <span style="color:#000">data</span> <span style="color:#000">转换为</span> <span style="color:#000">JSON</span> <span style="color:#000">格式并保存到文件</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 将密码信息导出为 CSV 格式</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">export_password_to_csv</span> (<span style="color:#000">data</span>, <span style="color:#000">username</span>, <span style="color:#000">key</span>, <span style="color:#000">dir_path</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">key</span> <span style="color:#000">=</span> <span style="color:#000">使用</span> <span style="color:#000">PBKDF</span> <span style="color:#1c01ce">2</span> <span style="color:#000">算法生成密钥</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">尝试将</span> <span style="color:#000">data</span> <span style="color:#000">转换为</span> <span style="color:#000">CSV</span> <span style="color:#000">格式并保存到文件</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 将密码信息导出为 TXT 格式</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">export_password_to_txt</span> (<span style="color:#000">data</span>, <span style="color:#000">username</span>, <span style="color:#000">key</span>, <span style="color:#000">dir_path</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#000">key</span> <span style="color:#000">=</span> <span style="color:#000">使用</span> <span style="color:#000">PBKDF</span> <span style="color:#1c01ce">2</span> <span style="color:#000">算法生成密钥</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">尝试将</span> <span style="color:#000">data</span> <span style="color:#000">转换为</span> <span style="color:#000">TXT</span> <span style="color:#000">格式并保存到文件</span>
+</span></span></code></pre></div><h4 id="流程图-1">流程图</h4>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928175129.png" alt="image.png"></p>
+<h4 id="详细接口">详细接口</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 数据加密接口</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">data_encrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>, <span style="color:#000">algorithm</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">if</span> <span style="color:#000">algorithm</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#39;AES-256&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#000">aes_encrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">elif</span> <span style="color:#000">algorithm</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#39;ChaCha 20&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#000">chacha</span> <span style="color:#1c01ce">20</span><span style="color:#000">_encrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">elif</span> <span style="color:#000">algorithm</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#39;XChaCha 20&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#000">xchacha</span> <span style="color:#1c01ce">20</span><span style="color:#000">_encrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">elif</span> <span style="color:#000">algorithm</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#39;SM 4-ECB&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#000">sm</span> <span style="color:#1c01ce">4</span><span style="color:#000">_encrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#a90d91">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 数据解密接口</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">data_decrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>, <span style="color:#000">algorithm</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">if</span> <span style="color:#000">algorithm</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#39;AES-256&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#000">aes_decrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">elif</span> <span style="color:#000">algorithm</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#39;ChaCha 20&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#000">chacha</span> <span style="color:#1c01ce">20</span><span style="color:#000">_decrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">elif</span> <span style="color:#000">algorithm</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#39;XChaCha 20&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#000">xchacha</span> <span style="color:#1c01ce">20</span><span style="color:#000">_decrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">elif</span> <span style="color:#000">algorithm</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#39;SM 4-ECB&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#000">sm</span> <span style="color:#1c01ce">4</span><span style="color:#000">_decrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#a90d91">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 导出数据接口</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">export_password</span> (<span style="color:#000">data</span>: <span style="color:#a90d91">list</span>, <span style="color:#000">username</span>, <span style="color:#000">key</span>, <span style="color:#000">dir_path</span>, <span style="color:#000">export_format</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">if</span> <span style="color:#000">export_format</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#39;JSON&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#000">export_password_to_json</span> (<span style="color:#000">data</span>, <span style="color:#000">username</span>, <span style="color:#000">key</span>, <span style="color:#000">dir_path</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">elif</span> <span style="color:#000">export_format</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#39;CSV&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#000">export_password_to_csv</span> (<span style="color:#000">data</span>, <span style="color:#000">username</span>, <span style="color:#000">key</span>, <span style="color:#000">dir_path</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">elif</span> <span style="color:#000">export_format</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#39;TXT&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#000">export_password_to_txt</span> (<span style="color:#000">data</span>, <span style="color:#000">username</span>, <span style="color:#000">key</span>, <span style="color:#000">dir_path</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#000">ERROR</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 导入数据接口</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">import_password</span> (<span style="color:#000">username</span>, <span style="color:#000">file_path</span>, <span style="color:#000">import_format</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">if</span> <span style="color:#000">import_format</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#39;JSON&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#000">import_password_from_json</span> (<span style="color:#000">username</span>, <span style="color:#000">file_path</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">elif</span> <span style="color:#000">import_format</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#39;CSV&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#000">import_password_from_csv</span> (<span style="color:#000">username</span>, <span style="color:#000">file_path</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">elif</span> <span style="color:#000">import_format</span> <span style="color:#000">==</span> <span style="color:#c41a16">&#39;TXT&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#000">import_password_from_txt</span> (<span style="color:#000">username</span>, <span style="color:#000">file_path</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span> <span style="color:#000">ERROR</span>
+</span></span></code></pre></div><h3 id="数据库模块设计">数据库模块设计</h3>
+<h4 id="模块概述-2">模块概述</h4>
+<p>数据库模块负责安全存储用户的敏感信息，用户名、密码信息。在本项目中，数据库模块的操作较少，相较数据加密模块来说更为简单，但是为了实现跨平台的多端同步，我们将数据库部署在远程服务器上，因此需要注意数据库的本身的防护，设置强密码，开启权限控制，提高数据库的安全性。而在数据库之内，由于数据都是加密处理过后的，因此数据都比较安全，数据库模块设计的重点在于数据库表的设计，以及数据库的操作。</p>
+<p>用户表</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">字段</th>
+          <th style="text-align: left">类型</th>
+          <th style="text-align: left">说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">username</td>
+          <td style="text-align: left">varchar(255)</td>
+          <td style="text-align: left">主键，不能为空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">password_hash</td>
+          <td style="text-align: left">varchar(255)</td>
+          <td style="text-align: left">不能为空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">created_at</td>
+          <td style="text-align: left">datetime</td>
+          <td style="text-align: left">自动填入当前时间</td>
+      </tr>
+  </tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#000">username</span> <span style="color:#a90d91">VARCHAR</span>(<span style="color:#1c01ce">255</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span> <span style="color:#a90d91">PRIMARY</span> <span style="color:#a90d91">KEY</span>,
+</span></span><span style="display:flex;"><span><span style="color:#000">password_hash</span> <span style="color:#a90d91">VARCHAR</span>(<span style="color:#1c01ce">255</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span>,
+</span></span><span style="display:flex;"><span><span style="color:#000">created_at</span> <span style="color:#a90d91">TIMESTAMP</span> <span style="color:#a90d91">DEFAULT</span> <span style="color:#a90d91">CURRENT_TIMESTAMP</span>
+</span></span></code></pre></div><p>密码表</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">字段</th>
+          <th style="text-align: left">类型</th>
+          <th style="text-align: left">说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">username</td>
+          <td style="text-align: left">varchar(255)</td>
+          <td style="text-align: left">外键连接用户表，不能为空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">website_name</td>
+          <td style="text-align: left">varchar(255)</td>
+          <td style="text-align: left">不能为空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">website</td>
+          <td style="text-align: left">varchar(255)</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">account</td>
+          <td style="text-align: left">varchar(255)</td>
+          <td style="text-align: left">不能为空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">password_encrypted</td>
+          <td style="text-align: left">varchar(255)</td>
+          <td style="text-align: left">不能为空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">encrypted_method</td>
+          <td style="text-align: left">varchar(50)</td>
+          <td style="text-align: left">不能为空</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">note</td>
+          <td style="text-align: left">text</td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">created_at</td>
+          <td style="text-align: left">datetime</td>
+          <td style="text-align: left">自动填入当前时间</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">(username, website_name, account)为主键</td>
+          <td style="text-align: left"></td>
+          <td style="text-align: left"></td>
+      </tr>
+  </tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#000">username</span> <span style="color:#a90d91">VARCHAR</span>(<span style="color:#1c01ce">255</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span>,
+</span></span><span style="display:flex;"><span><span style="color:#000">website_name</span> <span style="color:#a90d91">VARCHAR</span>(<span style="color:#1c01ce">255</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span>,
+</span></span><span style="display:flex;"><span><span style="color:#000">website</span> <span style="color:#a90d91">VARCHAR</span>(<span style="color:#1c01ce">255</span>),
+</span></span><span style="display:flex;"><span><span style="color:#000">account</span> <span style="color:#a90d91">VARCHAR</span>(<span style="color:#1c01ce">255</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span>,
+</span></span><span style="display:flex;"><span><span style="color:#000">password_encrypted</span> <span style="color:#a90d91">VARCHAR</span>(<span style="color:#1c01ce">255</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span>,
+</span></span><span style="display:flex;"><span><span style="color:#000">encrypted_method</span> <span style="color:#a90d91">VARCHAR</span>(<span style="color:#1c01ce">50</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span>,
+</span></span><span style="display:flex;"><span><span style="color:#000">note</span> <span style="color:#a90d91">TEXT</span>,
+</span></span><span style="display:flex;"><span><span style="color:#000">created_at</span> <span style="color:#a90d91">TIMESTAMP</span> <span style="color:#a90d91">DEFAULT</span> <span style="color:#a90d91">CURRENT_TIMESTAMP</span>,
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">PRIMARY</span> <span style="color:#a90d91">KEY</span> (<span style="color:#000">username</span>, <span style="color:#000">website_name</span>, <span style="color:#000">account</span>),
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">FOREIGN</span> <span style="color:#a90d91">KEY</span> (<span style="color:#000">username</span>) <span style="color:#a90d91">REFERENCES</span> <span style="color:#a90d91">user</span>(<span style="color:#000">username</span>)
+</span></span></code></pre></div><h4 id="详细接口-1">详细接口</h4>
     
   </article>
   <div class="paginator">
