@@ -8,7 +8,18 @@
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
-    <lastBuildDate>Sat, 28 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 29 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2025保研记录</title>
+      <link>https://blog.pi3.fun/post/2024/09/2025%E4%BF%9D%E7%A0%94%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Sun, 29 Sep 2024 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://blog.pi3.fun/post/2024/09/2025%E4%BF%9D%E7%A0%94%E8%AE%B0%E5%BD%95/</guid>
+      
+      <description>&lt;p&gt;2024 年 9 月 29 日 10 点 26 分，我接受了信工所的待录取通知，这也标志着我的保研之旅结束了，现在也该回过头来记录一下这段波澜不惊的经历。&lt;/p&gt;</description>
+      
+    </item>
+    
     <item>
       <title>Obsidian中QuickAdd插件的妙用</title>
       <link>https://blog.pi3.fun/post/2024/09/obsidian%E4%B8%ADquickadd%E6%8F%92%E4%BB%B6%E7%9A%84%E5%A6%99%E7%94%A8/</link>
@@ -150,17 +161,6 @@
       <pubDate>Fri, 22 Dec 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://blog.pi3.fun/post/2023/12/windows10%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8wsa/</guid>
-      
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>不同网络架构下文件下载服务协议设计</title>
-      <link>https://blog.pi3.fun/post/2023/12/%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/</link>
-      <pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate>
-      <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://blog.pi3.fun/post/2023/12/%E4%B8%8D%E5%90%8C%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E4%B8%8B%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1/</guid>
       
       <description></description>
       
