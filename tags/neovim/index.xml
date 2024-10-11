@@ -16,8 +16,8 @@
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://blog.pi3.fun/post/2024/10/neovim/</guid>
       
-      <description>&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1vcWXe4Evf/?spm_id_from=333.788&amp;amp;vd_source=30a68d7597f750b905825950d4412d50&#34;&gt;从零开始构建个性化PDE：打造属于你的高效开发环境&lt;/a&gt; 视频教程&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/zhangddjs/pde-tutorial&#34;&gt;zhangddjs/pde-tutorial (github.com)&lt;/a&gt; 视频配套题目仓库&lt;/p&gt;
+      <description>&lt;p&gt;视频教程： &lt;a href=&#34;https://www.bilibili.com/video/BV1vcWXe4Evf/?spm_id_from=333.788&amp;amp;vd_source=30a68d7597f750b905825950d4412d50&#34;&gt;从零开始构建个性化PDE：打造属于你的高效开发环境&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;习题仓库： &lt;a href=&#34;https://github.com/zhangddjs/pde-tutorial&#34;&gt;zhangddjs/pde-tutorial (github.com)&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
 &lt;h3 id=&#34;安装neovim&#34;&gt;安装Neovim&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&#34;https://neovim.io/&#34;&gt;Home - Neovim&lt;/a&gt; | &lt;a href=&#34;https://github.com/Neovim/Neovim/blob/master/INSTALL.md&#34;&gt;Neovim/Neovim (github.com)&lt;/a&gt;&lt;/p&gt;
