@@ -11,10 +11,10 @@
     <lastBuildDate>Fri, 11 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/tags/neovim/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Neovim 配置与学习</title>
-      <link>https://blog.pi3.fun/post/2024/10/neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/</link>
+      <link>https://blog.pi3.fun/post/2024/10/neovim/</link>
       <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://blog.pi3.fun/post/2024/10/neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/</guid>
+      <guid>https://blog.pi3.fun/post/2024/10/neovim/</guid>
       
       <description>&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1vcWXe4Evf/?spm_id_from=333.788&amp;amp;vd_source=30a68d7597f750b905825950d4412d50&#34;&gt;从零开始构建个性化PDE：打造属于你的高效开发环境&lt;/a&gt; 视频教程&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/zhangddjs/pde-tutorial&#34;&gt;zhangddjs/pde-tutorial (github.com)&lt;/a&gt; 视频配套题目仓库&lt;/p&gt;
