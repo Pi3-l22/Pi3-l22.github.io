@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="Mode &amp; Register
+Normal Mode
+navigation (motion)
+j,k,l,h
+w,b,e
+f,t
+^,0,$
+gg, G, 200G, &lt;C-u&gt;, &lt;C-d&gt;
+undo, redo
+u, &lt;C-r&gt;
+undo unit:
+
+a content operation
+a change between leave normal mode and reenter normal mode;
+
+operator-pending mode
+operator &#43; motion = action
+d{motion}, y{motion}, c{motion} &hellip;
+yank
+yy, yj, yh
+yt,, yf,
+yaw, yiw, y2w, y2aw, 2yaw
+content operation
+update
+d{motion}, c{motion}, x, r, R, gR
+indent
+&gt;{motion}, &lt;{motion}
+switch case
+gu{motion}, gU{motion}, ~">
+  
+
+  
+  <link rel="icon" href="https://blog.pi3.fun/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://blog.pi3.fun/post/2024/10/assets/neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/keynotes_en/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="Pi3&#39;Notes">
+  <meta property="og:description" content="Mode &amp; Register Normal Mode navigation (motion) j,k,l,h w,b,e f,t ^,0,$ gg, G, 200G, &lt;C-u&gt;, &lt;C-d&gt;
+undo, redo u, &lt;C-r&gt;
+undo unit:
+a content operation a change between leave normal mode and reenter normal mode; operator-pending mode operator &#43; motion = action
+d{motion}, y{motion}, c{motion} …
+yank yy, yj, yh yt,, yf, yaw, yiw, y2w, y2aw, 2yaw
+content operation update d{motion}, c{motion}, x, r, R, gR
+indent &gt;{motion}, &lt;{motion}
+switch case gu{motion}, gU{motion}, ~">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+
+
+  
+  <link rel="canonical" href="https://blog.pi3.fun/post/2024/10/assets/neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/keynotes_en/">
+
+  
+  
+  
+  <meta itemprop="name" content="Pi3&#39;Notes">
+  <meta itemprop="description" content="Mode &amp; Register Normal Mode navigation (motion) j,k,l,h w,b,e f,t ^,0,$ gg, G, 200G, &lt;C-u&gt;, &lt;C-d&gt;
+undo, redo u, &lt;C-r&gt;
+undo unit:
+a content operation a change between leave normal mode and reenter normal mode; operator-pending mode operator &#43; motion = action
+d{motion}, y{motion}, c{motion} …
+yank yy, yj, yh yt,, yf, yaw, yiw, y2w, y2aw, 2yaw
+content operation update d{motion}, c{motion}, x, r, R, gR
+indent &gt;{motion}, &lt;{motion}
+switch case gu{motion}, gU{motion}, ~">
+  <meta itemprop="wordCount" content="241">
+
+  
+  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/content.css'>
+
+  
+  
+  <title> - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://blog.pi3.fun/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://blog.pi3.fun/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">主页</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/articles/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1></h1>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#normal-mode">Normal Mode</a>
+      <ul>
+        <li><a href="#navigation-motion">navigation (motion)</a></li>
+        <li><a href="#undo-redo">undo, redo</a></li>
+        <li><a href="#operator-pending-mode">operator-pending mode</a></li>
+        <li><a href="#yank">yank</a></li>
+        <li><a href="#content-operation">content operation</a></li>
+      </ul>
+    </li>
+    <li><a href="#insert-mode">Insert Mode</a></li>
+    <li><a href="#visual-mode">Visual Mode</a></li>
+    <li><a href="#ex-mode">Ex Mode</a>
+      <ul>
+        <li><a href="#how-to-trigger">how to trigger</a></li>
+        <li><a href="#commands">commands</a></li>
+      </ul>
+    </li>
+    <li><a href="#register">Register</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <h1 id="mode--register">Mode &amp; Register</h1>
+<h2 id="normal-mode">Normal Mode</h2>
+<h3 id="navigation-motion">navigation (motion)</h3>
+<p><code>j</code>,<code>k</code>,<code>l</code>,<code>h</code>
+<code>w</code>,<code>b</code>,<code>e</code>
+<code>f</code>,<code>t</code>
+<code>^</code>,<code>0</code>,<code>$</code>
+<code>gg</code>, <code>G</code>, <code>200G</code>, <code>&lt;C-u&gt;</code>, <code>&lt;C-d&gt;</code></p>
+<h3 id="undo-redo">undo, redo</h3>
+<p><code>u</code>, <code>&lt;C-r&gt;</code></p>
+<p>undo unit:</p>
+<ol>
+<li>a content operation</li>
+<li>a change between leave normal mode and reenter normal mode;</li>
+</ol>
+<h3 id="operator-pending-mode">operator-pending mode</h3>
+<p><strong>operator + motion = action</strong></p>
+<p><code>d{motion}</code>, <code>y{motion}</code>, <code>c{motion}</code> &hellip;</p>
+<h3 id="yank">yank</h3>
+<p><code>yy</code>, <code>yj</code>, <code>yh</code>
+<code>yt,</code>, <code>yf,</code>
+<code>yaw</code>, <code>yiw</code>, <code>y2w</code>, <code>y2aw</code>, <code>2yaw</code></p>
+<h3 id="content-operation">content operation</h3>
+<h4 id="update">update</h4>
+<p><code>d{motion}</code>, <code>c{motion}</code>, <code>x</code>, <code>r</code>, <code>R</code>, <code>gR</code></p>
+<h4 id="indent">indent</h4>
+<p><code>&gt;{motion}</code>, <code>&lt;{motion}</code></p>
+<h4 id="switch-case">switch case</h4>
+<p><code>gu{motion}</code>, <code>gU{motion}</code>, <code>~</code></p>
+<h4 id="number">number</h4>
+<p><code>&lt;C-a&gt;</code>, <code>78&lt;C-x&gt;</code></p>
+<h2 id="insert-mode">Insert Mode</h2>
+<p><code>&lt;C-w&gt;</code> delete a word
+<code>&lt;C-u&gt;</code> delete cpntent before cursor
+<code>&lt;C-a&gt;</code> navigate to start of line (need config)
+<code>&lt;C-e&gt;</code> navigate to end of line (need config)</p>
+<p><code>&lt;C-r&gt;</code> paste register, 0, =.
+<code>&lt;C-o&gt;</code> enter insert-normal mode</p>
+<h2 id="visual-mode">Visual Mode</h2>
+<p><code>o</code> switch edge
+<code>gv</code> reselect
+<code>viw</code> select a word
+<code>V</code> select lines
+<code>&lt;C-v&gt;</code> block select, <code>A</code> or <code>I</code> add or remove content simultaneously for selected lines
+<code>&lt;C-g&gt;</code> enter select mode.</p>
+<h2 id="ex-mode">Ex Mode</h2>
+<h3 id="how-to-trigger">how to trigger</h3>
+<p><code>:</code>, <code>/</code>, <code>?</code> under normal mode or visual mode, <code>&lt;C-r&gt;=</code> under insert mode.
+<code>q:</code> under normal mode or <code>&lt;C-f&gt;</code> under Ex-mode to trigger history,</p>
+<h3 id="commands">commands</h3>
+<p><code>w</code> save, <code>q</code> quit, <code>q!</code> compulsory quit,  <code>wq</code> save and quit
+<code>!ls</code> shell command ls, <code>r!date</code> insert current date, <code>r! date &quot;+\%s&quot;</code> insert timestamp</p>
+<h2 id="register">Register</h2>
+<p><code>&quot;&quot;</code> Unnamed register
+<code>&quot;0</code> Yank register
+<code>&quot;a</code> - <code>&quot;z</code> Named registers
+<code>&quot;=</code> Expression register
+&hellip;</p>
+<p><code>&lt;C-r&gt;{register}</code> insert register&rsquo;s content under insert mode
+<code>&quot;0p</code> paste yank register&rsquo;s content
+<code>&quot;&quot;p</code> same with <code>p</code>
+<code>&quot;adaw</code> delete a word and store into named register a</p>
+
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://blog.pi3.fun/post/2024/10/assets/neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/practice_cn/">← prev</a>
+    
+    
+    <a class="link" href="https://blog.pi3.fun/post/2024/10/assets/neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/keynotes_cn/">next →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+      <script src="https://giscus.app/client.js"
+        data-repo="Pi3-l22/Pi3-l22.github.io"
+        data-repo-id="R_kgDOMx7kWw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMx7kW84CjHMe"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_tritanopia"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span style="display: flex;align-items: center;">© 2021 - 2024<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/rainbow.gif" width=20>By LiuChao</span>
+  </div>
+  
+  
+
+  
+
+  <div class="footnote">
+    <span><a class=link href=/index.xml><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/RSS.svg" width=12></a>  |  <a class=link href=https://github.com/Pi3-l22 Target=_ blank><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/GitHub.svg" width=40></a>  |  <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/Cc_by-nc-nd.svg.png" width=48></a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-WE6L6RF96W"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-WE6L6RF96W');
+        }
+      </script>
+
+</body>
+
+</html>

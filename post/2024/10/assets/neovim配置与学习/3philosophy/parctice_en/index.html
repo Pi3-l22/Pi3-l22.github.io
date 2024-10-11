@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="Practice
+Reminder
+
+Do not use the mouse while doing the exercises.
+Try to follow the Neovim Philosophy to solve the problems.
+
+Exercises
+We have a text file named text:
+
+Postpone the 3 dates in practice1 by 3 days.
+Append the current line number to the end of each line in practice2.
+Add spaces before and after each plus sign in practice3.
+Add parentheses around every thisisalongword in practice4, like this: (thisisalongword).
+Add parentheses around each word in practice5.
+Correct the last 4 words of the 5th line in practice6.
+
+Thinking Exercise
+If you try to follow the Neovim Philosophy to solve the above exercises, you&rsquo;ll notice that for some exercises, even the powerful dot command can&rsquo;t fully achieve ideal repetition. Is there any way to optimize the approach?">
+  
+
+  
+  <link rel="icon" href="https://blog.pi3.fun/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://blog.pi3.fun/post/2024/10/assets/neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/3philosophy/parctice_en/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="Pi3&#39;Notes">
+  <meta property="og:description" content="Practice Reminder Do not use the mouse while doing the exercises. Try to follow the Neovim Philosophy to solve the problems. Exercises We have a text file named text:
+Postpone the 3 dates in practice1 by 3 days. Append the current line number to the end of each line in practice2. Add spaces before and after each plus sign in practice3. Add parentheses around every thisisalongword in practice4, like this: (thisisalongword). Add parentheses around each word in practice5. Correct the last 4 words of the 5th line in practice6. Thinking Exercise If you try to follow the Neovim Philosophy to solve the above exercises, you’ll notice that for some exercises, even the powerful dot command can’t fully achieve ideal repetition. Is there any way to optimize the approach?">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+
+
+  
+  <link rel="canonical" href="https://blog.pi3.fun/post/2024/10/assets/neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/3philosophy/parctice_en/">
+
+  
+  
+  
+  <meta itemprop="name" content="Pi3&#39;Notes">
+  <meta itemprop="description" content="Practice Reminder Do not use the mouse while doing the exercises. Try to follow the Neovim Philosophy to solve the problems. Exercises We have a text file named text:
+Postpone the 3 dates in practice1 by 3 days. Append the current line number to the end of each line in practice2. Add spaces before and after each plus sign in practice3. Add parentheses around every thisisalongword in practice4, like this: (thisisalongword). Add parentheses around each word in practice5. Correct the last 4 words of the 5th line in practice6. Thinking Exercise If you try to follow the Neovim Philosophy to solve the above exercises, you’ll notice that for some exercises, even the powerful dot command can’t fully achieve ideal repetition. Is there any way to optimize the approach?">
+  <meta itemprop="wordCount" content="128">
+
+  
+  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/content.css'>
+
+  
+  
+  <title> - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://blog.pi3.fun/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://blog.pi3.fun/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">主页</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/articles/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1></h1>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#reminder">Reminder</a></li>
+    <li><a href="#exercises">Exercises</a></li>
+    <li><a href="#thinking-exercise">Thinking Exercise</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <h1 id="practice">Practice</h1>
+<h2 id="reminder">Reminder</h2>
+<ol>
+<li>Do not use the mouse while doing the exercises.</li>
+<li>Try to follow the Neovim Philosophy to solve the problems.</li>
+</ol>
+<h2 id="exercises">Exercises</h2>
+<p>We have a text file named <code>text</code>:</p>
+<ol>
+<li>Postpone the 3 dates in <strong>practice1</strong> by 3 days.</li>
+<li>Append the current line number to the end of each line in <strong>practice2</strong>.</li>
+<li>Add spaces before and after each plus sign in <strong>practice3</strong>.</li>
+<li>Add parentheses around every <strong>thisisalongword</strong> in <strong>practice4</strong>, like this: <code>(thisisalongword)</code>.</li>
+<li>Add parentheses around each word in <strong>practice5</strong>.</li>
+<li>Correct the last 4 words of the 5th line in <strong>practice6</strong>.</li>
+</ol>
+<h2 id="thinking-exercise">Thinking Exercise</h2>
+<p>If you try to follow the Neovim Philosophy to solve the above exercises, you&rsquo;ll notice that for some exercises, even the powerful dot command can&rsquo;t fully achieve ideal repetition. Is there any way to optimize the approach?</p>
+
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://blog.pi3.fun/post/2024/10/assets/neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/3philosophy/practice_cn/">← prev</a>
+    
+    
+    <a class="link" href="https://blog.pi3.fun/post/2024/10/assets/neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/3philosophy/keynotes_en/">next →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+      <script src="https://giscus.app/client.js"
+        data-repo="Pi3-l22/Pi3-l22.github.io"
+        data-repo-id="R_kgDOMx7kWw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMx7kW84CjHMe"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_tritanopia"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span style="display: flex;align-items: center;">© 2021 - 2024<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/rainbow.gif" width=20>By LiuChao</span>
+  </div>
+  
+  
+
+  
+
+  <div class="footnote">
+    <span><a class=link href=/index.xml><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/RSS.svg" width=12></a>  |  <a class=link href=https://github.com/Pi3-l22 Target=_ blank><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/GitHub.svg" width=40></a>  |  <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/Cc_by-nc-nd.svg.png" width=48></a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-WE6L6RF96W"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-WE6L6RF96W');
+        }
+      </script>
+
+</body>
+
+</html>

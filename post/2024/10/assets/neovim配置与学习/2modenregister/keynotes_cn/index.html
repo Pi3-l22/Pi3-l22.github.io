@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="模式与寄存器
+普通模式
+浏览与跳转 (motion)
+j，k，l，h
+w，b，e
+f，t
+^，0，$
+gg，G，200G，&lt;C-u&gt;，&lt;C-d&gt;
+撤销，重做
+u，&lt;C-r&gt;">
+  
+
+  
+  <link rel="icon" href="https://blog.pi3.fun/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://blog.pi3.fun/post/2024/10/assets/neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/keynotes_cn/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="Pi3&#39;Notes">
+  <meta property="og:description" content="模式与寄存器 普通模式 浏览与跳转 (motion) j，k，l，h w，b，e f，t ^，0，$ gg，G，200G，&lt;C-u&gt;，&lt;C-d&gt;
+撤销，重做 u，&lt;C-r&gt;">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+
+
+  
+  <link rel="canonical" href="https://blog.pi3.fun/post/2024/10/assets/neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/keynotes_cn/">
+
+  
+  
+  
+  <meta itemprop="name" content="Pi3&#39;Notes">
+  <meta itemprop="description" content="模式与寄存器 普通模式 浏览与跳转 (motion) j，k，l，h w，b，e f，t ^，0，$ gg，G，200G，&lt;C-u&gt;，&lt;C-d&gt;
+撤销，重做 u，&lt;C-r&gt;">
+  <meta itemprop="wordCount" content="665">
+
+  
+  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/content.css'>
+
+  
+  
+  <title> - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://blog.pi3.fun/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://blog.pi3.fun/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">主页</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/articles/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1></h1>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#普通模式">普通模式</a>
+      <ul>
+        <li><a href="#浏览与跳转-motion">浏览与跳转 (motion)</a></li>
+        <li><a href="#撤销重做">撤销，重做</a></li>
+        <li><a href="#操作符待决模式">操作符待决模式</a></li>
+        <li><a href="#复制-yank">复制 (yank)</a></li>
+        <li><a href="#内容编辑">内容编辑</a></li>
+      </ul>
+    </li>
+    <li><a href="#插入模式">插入模式</a></li>
+    <li><a href="#可视模式">可视模式</a></li>
+    <li><a href="#命令行模式">命令行模式</a>
+      <ul>
+        <li><a href="#如何触发">如何触发</a></li>
+        <li><a href="#常用命令">常用命令</a></li>
+      </ul>
+    </li>
+    <li><a href="#寄存器">寄存器</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <h1 id="模式与寄存器">模式与寄存器</h1>
+<h2 id="普通模式">普通模式</h2>
+<h3 id="浏览与跳转-motion">浏览与跳转 (motion)</h3>
+<p><code>j</code>，<code>k</code>，<code>l</code>，<code>h</code>
+<code>w</code>，<code>b</code>，<code>e</code>
+<code>f</code>，<code>t</code>
+<code>^</code>，<code>0</code>，<code>$</code>
+<code>gg</code>，<code>G</code>，<code>200G</code>，<code>&lt;C-u&gt;</code>，<code>&lt;C-d&gt;</code></p>
+<h3 id="撤销重做">撤销，重做</h3>
+<p><code>u</code>，<code>&lt;C-r&gt;</code></p>
+<p>撤销单元：</p>
+<ol>
+<li>一个内容操作</li>
+<li>一次离开普通模式并重新进入普通模式期间产生的变化</li>
+</ol>
+<h3 id="操作符待决模式">操作符待决模式</h3>
+<p><strong>操作符 + 动作指令 = 操作</strong></p>
+<p><code>d{motion}</code>，<code>y{motion}</code>，<code>c{motion}</code></p>
+<h3 id="复制-yank">复制 (yank)</h3>
+<p><code>yy</code>，<code>yj</code>，<code>yh</code>
+<code>yt,</code>，<code>yf,</code>
+<code>yaw</code>，<code>yiw</code>，<code>y2w</code>，<code>y2aw</code>，<code>2yaw</code></p>
+<h3 id="内容编辑">内容编辑</h3>
+<h4 id="更新">更新</h4>
+<p><code>d{motion}</code>，<code>c{motion}</code>，<code>x</code>，<code>r</code>，<code>R</code>，<code>gR</code></p>
+<h4 id="缩进">缩进</h4>
+<p><code>&gt;{motion}</code>，<code>&lt;{motion}</code></p>
+<h4 id="切换大小写">切换大小写</h4>
+<p><code>gu{motion}</code>，<code>gU{motion}</code>，<code>~</code></p>
+<h4 id="数字操作">数字操作</h4>
+<p><code>&lt;C-a&gt;</code>，<code>78&lt;C-x&gt;</code></p>
+<h2 id="插入模式">插入模式</h2>
+<p><code>&lt;C-w&gt;</code> 删除一个单词
+<code>&lt;C-u&gt;</code> 删除光标前的内容
+<code>&lt;C-a&gt;</code> 移动到行首（需要配置）
+<code>&lt;C-e&gt;</code> 移动到行尾（需要配置）</p>
+<p><code>&lt;C-r&gt;</code> 粘贴寄存器的内容，0，=。
+<code>&lt;C-o&gt;</code> 进入插入-普通模式</p>
+<h2 id="可视模式">可视模式</h2>
+<p><code>o</code> 切换选择边界
+<code>gv</code> 重新选择
+<code>viw</code> 选择一个单词
+<code>V</code> 选择多行
+<code>&lt;C-v&gt;</code> 块选择，<code>A</code> 或 <code>I</code> 为选中的多行同时增减内容
+<code>&lt;C-g&gt;</code> 进入选择模式</p>
+<h2 id="命令行模式">命令行模式</h2>
+<h3 id="如何触发">如何触发</h3>
+<p>在普通模式或可视模式下 <code>:</code>，<code>/</code>，<code>?</code>，在插入模式下 <code>&lt;C-r&gt;=</code>。
+在普通模式下在<code>q:</code> 或在命令行模式下<code>&lt;C-f&gt;</code>调出历史记录。</p>
+<h3 id="常用命令">常用命令</h3>
+<p><code>w</code> 保存，<code>q</code> 退出，<code>q!</code> 强制退出，<code>wq</code> 保存并退出
+<code>!ls</code> 执行 shell 命令 ls，<code>r!date</code> 插入当前日期，<code>r! date &quot;+\%s&quot;</code> 插入时间戳</p>
+<h2 id="寄存器">寄存器</h2>
+<p><code>&quot;&quot;</code> 无名寄存器
+<code>&quot;0</code> 复制寄存器
+<code>&quot;a</code> - <code>&quot;z</code> 有名寄存器
+<code>&quot;=</code> 表达式寄存器
+&hellip;</p>
+<p><code>&lt;C-r&gt;{register}</code> 在插入模式下插入寄存器的内容
+<code>&quot;0p</code> 粘贴复制寄存器的内容
+<code>&quot;&quot;p</code> 等价于 <code>p</code>
+<code>&quot;adaw</code> 删除一个单词并存储到有名寄存器 a</p>
+
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://blog.pi3.fun/post/2024/10/assets/neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/keynotes_en/">← prev</a>
+    
+    
+    <a class="link" href="https://blog.pi3.fun/post/2024/09/2025%E4%BF%9D%E7%A0%94%E6%80%BB%E7%BB%93/">next →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+      <script src="https://giscus.app/client.js"
+        data-repo="Pi3-l22/Pi3-l22.github.io"
+        data-repo-id="R_kgDOMx7kWw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMx7kW84CjHMe"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_tritanopia"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span style="display: flex;align-items: center;">© 2021 - 2024<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/rainbow.gif" width=20>By LiuChao</span>
+  </div>
+  
+  
+
+  
+
+  <div class="footnote">
+    <span><a class=link href=/index.xml><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/RSS.svg" width=12></a>  |  <a class=link href=https://github.com/Pi3-l22 Target=_ blank><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/GitHub.svg" width=40></a>  |  <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/Cc_by-nc-nd.svg.png" width=48></a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-WE6L6RF96W"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-WE6L6RF96W');
+        }
+      </script>
+
+</body>
+
+</html>
