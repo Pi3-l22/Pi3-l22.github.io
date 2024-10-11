@@ -16,8 +16,261 @@
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://blog.pi3.fun/post/2024/10/neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/</guid>
       
-      <description>&lt;p&gt;&lt;a href=&#34;../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/keynotes_cn.md&#34;&gt;keynotes_cn&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;../../../../assets/Neovim配置与学习/2modenregister/keynotes_cn.md&#34; target=&#34;_blank&#34;&gt;keynotes_cn_a&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1vcWXe4Evf/?spm_id_from=333.788&amp;amp;vd_source=30a68d7597f750b905825950d4412d50&#34;&gt;从零开始构建个性化PDE：打造属于你的高效开发环境&lt;/a&gt; 视频教程&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/zhangddjs/pde-tutorial&#34;&gt;zhangddjs/pde-tutorial (github.com)&lt;/a&gt; 视频配套题目仓库&lt;/p&gt;
+&lt;h3 id=&#34;安装neovim&#34;&gt;安装Neovim&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://neovim.io/&#34;&gt;Home - Neovim&lt;/a&gt; | &lt;a href=&#34;https://github.com/Neovim/Neovim/blob/master/INSTALL.md&#34;&gt;Neovim/Neovim (github.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;打开 Neovim 官网或者 GitHub 主页，根据指引下载对应操作系统的最新版。可以下载安装包进行安装，也可以使用命令行进行安装。&lt;/p&gt;
+&lt;p&gt;安装完成后，将 Neovim 添加进系统的环境变量中。&lt;/p&gt;
+&lt;p&gt;在命令行中输入 &lt;code&gt;nvim&lt;/code&gt; ，出现欢迎界面说明 Neovim 安装成功。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180326.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;配置-lazyvim&#34;&gt;配置 LazyVim&lt;/h3&gt;
+&lt;p&gt;LazyVim 是一个 Neovim 的一键 Setup 方案，它内置了一些基础的插件，配置了人性化的快捷键。同时 LazyVim 也是一个 Neovim 的包管理器，可以快捷方便地管理 Neovim 的各种插件。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.lazyvim.org/&#34;&gt;🚀 Getting Started | LazyVim&lt;/a&gt; | &lt;a href=&#34;https://github.com/LazyVim/LazyVim&#34;&gt;LazyVim(github.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;打开 LazyVim 官网或者 GitHub 主页，进行 LazyVim 的安装。&lt;/p&gt;
+&lt;p&gt;在安装之前，LazyVim 还需要一些依赖配置，如 Neovim、Git、&lt;a href=&#34;https://www.nerdfonts.com/&#34;&gt;Nerd Font&lt;/a&gt; 字符字体、C 语言编译器以及一个支持真颜色的终端等。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180413.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;安装好各种所需要的依赖环境，就可以进行 LazyVim 的安装&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Linux 环境&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#177500&#34;&gt;# required&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv ~/.config/nvim&lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;,.bak&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#177500&#34;&gt;# optional but recommended&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv ~/.local/share/nvim&lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;,.bak&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv ~/.local/state/nvim&lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;,.bak&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mv ~/.cache/nvim&lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;,.bak&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#177500&#34;&gt;# Clone the starter&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/LazyVim/starter ~/.config/nvim
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#177500&#34;&gt;# Remove the `.git` folder, so you can add it to your own repo later&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rm -rf ~/.config/nvim/.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#177500&#34;&gt;# Start Neovim!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nvim
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Windows 环境&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Windows 下 Neovim 的配置文件应该存放在 &lt;code&gt;C:\Users\YOUR_USERNAME\AppData\Local\nvim&lt;/code&gt; 中，如果该目录下不存在 &lt;code&gt;nvim&lt;/code&gt; 文件夹，新建一个 &lt;code&gt;nvim&lt;/code&gt; 文件夹即可。&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;nvim&lt;/code&gt; 文件夹中执行克隆仓库命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/LazyVim/starter
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将其中的 &lt;code&gt;lua&lt;/code&gt; 文件夹和 &lt;code&gt;init.lua&lt;/code&gt; 移到 &lt;code&gt;nvim&lt;/code&gt; 根目录中，其余文件删除即可。目录结构为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nvim
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│  init.lua
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;│
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─lua
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │      autocmds.lua
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │      keymaps.lua
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │      lazy.lua
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │      options.lua
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    └─plugins
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            example.lua
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;重新打开 Neovim 会出现 LazyVim 的初始化界面，在初始化界面会自动下载一些基本插件，等待插件下载完成。如果因为网络问题导致插件下载失败，可以尝试重启 Neovim，或者按下字母 &lt;code&gt;I&lt;/code&gt; 重新安装。完成后按 &lt;code&gt;q&lt;/code&gt; 来到 LazyVim 的欢迎界面。如果出现图标乱码，请安装 &lt;a href=&#34;https://www.nerdfonts.com/&#34;&gt;Nerd 字体&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180442.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;输入 &lt;code&gt;:&lt;/code&gt; 打开命令行，输入 &lt;code&gt;LazyHealth&lt;/code&gt; 检查插件是否工作正常。使用 &lt;code&gt;Ctrl + u / d&lt;/code&gt; 可以上下快速浏览。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180453.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可以看到有一些 &lt;code&gt;ERROR&lt;/code&gt; 出现，比如 &lt;code&gt;Grugfar&lt;/code&gt; ，这是因为没有安装 &lt;code&gt;live grep&lt;/code&gt; ，后续会安装。&lt;/p&gt;
+&lt;p&gt;为了方便后续在 Windows 环境下使用 Neovim，可以在终端中新建一个 Neovim 配置，方便之后一键打开，也可以设置打开终端默认使用 Neovim。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180505.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;mode--register&#34;&gt;Mode &amp;amp; Register&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Neovim 的四大编辑模式与寄存器&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;mode-模式&#34;&gt;Mode 模式&lt;/h3&gt;
+&lt;p&gt;Neovim 共有四大模式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Normal Mode&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Insert Mode&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Visual Mode&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Ex Mode&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180518.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;其中 &lt;strong&gt;Normal Mode&lt;/strong&gt; 是默认模式，光标为方块状显示在文本区，此时按下 &lt;code&gt;i&lt;/code&gt; 等键进入 &lt;strong&gt;Insert Mode&lt;/strong&gt;。在 &lt;strong&gt;Insert Mode&lt;/strong&gt; 中光标为竖线，界面左下角会显示 &lt;code&gt;Insert&lt;/code&gt; 字样。输入完文本后，按下 &lt;code&gt;ESC&lt;/code&gt; 键可以返回 &lt;strong&gt;Normal Mode&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;接下来可以按下 &lt;code&gt;v&lt;/code&gt; 键进入 &lt;strong&gt;Visual Mode&lt;/strong&gt;，等同于在记事本中框选一段文本的模式，此时可针对选中的文本进行删除拷贝等操作，操作完成后会自动返回 &lt;strong&gt;Normal Mode&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;最后，按下 &lt;code&gt;:&lt;/code&gt; 键就会进入 Ex Mode，光标会移动到左下角位置，此时可以输入批处理命令或者是保存退出查找替换等操作。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Normal Mode&lt;/strong&gt; 提供的关键键和操作很多，我们不需要全部记住。其中最常用的功能包括文档的浏览跳转、复制粘贴、撤销重做等。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;实际操作演示&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;进入命令行使用 &lt;code&gt;nvim mode.md&lt;/code&gt; 创建 &lt;code&gt;mode.md&lt;/code&gt; 文件，默认打开文件进入 Normal Mode 。&lt;/p&gt;
+&lt;p&gt;按下 &lt;code&gt;i&lt;/code&gt; 键进入 Insert Mode，可以在文本区输入文本。除此之外，还有多种方式从 Normal Mode 进入 Insert Mode，如按下 &lt;code&gt;o&lt;/code&gt; 键，在光标下方另起一行进入 Insert Mode，按下 &lt;code&gt;O&lt;/code&gt; 键，在光标上方另起一行进入 Insert Mode，可通过 &lt;code&gt;Open&lt;/code&gt; 单词首字母辅助记忆。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180533.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;insert-mode-操作&#34;&gt;Insert Mode 操作&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Insert Mode 中的常用快捷键&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;←↓↑→方向键：控制光标移动&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl + ↑←↓→方向键&lt;/code&gt; ：快速移动光标，即按单词移动&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BS&lt;/code&gt; 退格键：删除字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl + w&lt;/code&gt; ：删除单词&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl + u&lt;/code&gt; ：删除光标前的所有当前行的字符&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;normal-mode-操作&#34;&gt;Normal Mode 操作&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;从 Normal Mode 到 Insert Mode 的主要快捷键&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;o&lt;/code&gt;：在光标&lt;strong&gt;下方&lt;/strong&gt;另起一行进入 Insert Mode，&lt;code&gt;open&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;O&lt;/code&gt;：在光标&lt;strong&gt;上方&lt;/strong&gt;另起一行进入 Insert Mode，&lt;code&gt;open&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;a&lt;/code&gt;：在光标处字母的&lt;strong&gt;右侧&lt;/strong&gt;进入 Insert Mode，&lt;code&gt;append&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;A&lt;/code&gt;：在光标处所在行&lt;strong&gt;行尾&lt;/strong&gt;进入 Insert Mode，&lt;code&gt;append&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;i&lt;/code&gt;：在光标处字母的&lt;strong&gt;左侧&lt;/strong&gt;进入 Insert Mode&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;I&lt;/code&gt;：在光标处所在行&lt;strong&gt;行首&lt;/strong&gt;进入 Insert Mode&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Normal Mode 中的光标移动快捷键&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;h j k l&lt;/code&gt;：代替方向键实现光标的&lt;strong&gt;左下上右&lt;/strong&gt;←↓↑→&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;w b&lt;/code&gt;：按&lt;strong&gt;下一个&lt;/strong&gt;和&lt;strong&gt;上一个&lt;/strong&gt;单词&lt;strong&gt;词首&lt;/strong&gt;快速移动光标，&lt;code&gt;word before&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;e&lt;/code&gt;：按&lt;strong&gt;下一个&lt;/strong&gt;单词&lt;strong&gt;词尾&lt;/strong&gt;快速移动光标，&lt;code&gt;end&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;数字 + 以上三种操作&lt;/code&gt;：如向上移动 2 行按 &lt;code&gt;2k&lt;/code&gt;，向右移动 5 个单词按 &lt;code&gt;5w&lt;/code&gt;，向左移动 10 个字符按 &lt;code&gt;10h&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0&lt;/code&gt;：“硬”行首，即光标跳转到&lt;strong&gt;行首第 1 列&lt;/strong&gt;，无论第 1 列有无字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;^&lt;/code&gt;：“软”行首，即光标跳转到&lt;strong&gt;行首首字符&lt;/strong&gt;，不一定是第 1 列&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$&lt;/code&gt;：光标跳转到&lt;strong&gt;行尾&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;f + 字符&lt;/code&gt;：对光标&lt;strong&gt;后&lt;/strong&gt;的所有字符进行查找，有多个字符可使用 &lt;code&gt;, ;&lt;/code&gt; 进行&lt;strong&gt;前后&lt;/strong&gt;光标快速跳转，&lt;code&gt;find&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;F + 字符&lt;/code&gt;：对光标&lt;strong&gt;前&lt;/strong&gt;的所有字符进行查找，有多个字符可使用 &lt;code&gt;, ;&lt;/code&gt; 进行&lt;strong&gt;前后&lt;/strong&gt;光标快速跳转，&lt;code&gt;find&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;t + 字符 / T + 字符&lt;/code&gt;：与 &lt;code&gt;f&lt;/code&gt; 功能类似，找到指定字符的前一个字符，&lt;code&gt;till&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Normal Mode 中的复制粘贴快捷键&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;y + 快捷键&lt;/code&gt;：复制字符，根据操作符的不同，复制字符的范围不同，&lt;code&gt;yank&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Y&lt;/code&gt;：复制从光标处到所处行末尾的字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;yy&lt;/code&gt;：复制光标所处当前行的所有字符，可组合数字向下复制多行，如 &lt;code&gt;6yy&lt;/code&gt; 向下复制 6 行字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;p&lt;/code&gt;：在光标所处行的下方新开一行粘贴复制的内容，可组合数字复制多次，如 &lt;code&gt;100p&lt;/code&gt; 可粘贴 100 次&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;P&lt;/code&gt;：在光标所处行前粘贴复制的内容，可组合数字复制多次，如 &lt;code&gt;100p&lt;/code&gt; 可粘贴 100 次&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;补充&lt;/strong&gt;：Operator-pending Mode 操作符待处理模式。在 Normal Mode 下仅仅按下 &lt;code&gt;y&lt;/code&gt; 键是不能进行字符的复制操作，此时只是进入了 Operator-pending Mode 中，想要完成复制操作，还需要按下其他有效按键，&lt;code&gt;y + ? = combo&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;Operator-pending Mode 操作符待处理模式的常用 &lt;code&gt;combo&lt;/code&gt; 包括以上介绍的 Insert Mode 中的所有快捷键组合，&lt;code&gt;y + j/k/h/l/w/b/e/f/t/0/^/$/G/gg…… = combo&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;比如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;y + l&lt;/code&gt;：复制光标后的一个字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;y + k&lt;/code&gt;：复制光标当前行和上一行字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;y + w / y + e&lt;/code&gt;：复制光标所处位置到单词末尾的字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;y + aw / y + iw&lt;/code&gt;：复制光标所处位置的单词，&lt;code&gt;iw&lt;/code&gt; 不会包含周边的空格，而 &lt;code&gt;aw&lt;/code&gt; 会包含单词末尾的空格&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;y + 2w / y + 2e&lt;/code&gt;：复制光标所处位置到第 2 个单词末尾的字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;y + 2aw / 2y + aw&lt;/code&gt;：复制光标所处位置往后的 2 个单词，会包含末尾的空格&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;y + 3j / 4yy&lt;/code&gt;：复制包含光标所在行的下方 4 行字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;y + 10l&lt;/code&gt;：复制光标右侧的 10 个字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;y + t + ,&lt;/code&gt;：复制光标后方到第一个 &lt;code&gt;,&lt;/code&gt; 字符前的所有字符，不包含 &lt;code&gt;,&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;y + f + ,&lt;/code&gt;：复制光标后方到第一个 &lt;code&gt;,&lt;/code&gt; 字符前的所有字符，包含 &lt;code&gt;,&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;y + $ / Y&lt;/code&gt;：复制从光标处到所处行末尾的字符&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;总结来说，&lt;code&gt;y + 光标移动快捷键&lt;/code&gt; 实现光标移动到哪就复制到哪。这种操作模式就是 operator + motion = action 操作符+动作指令=操作，这也是 vim 强大的地方。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Normal Mode 中的阅读浏览快捷键&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;G&lt;/code&gt;：跳转到文本末尾&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gg&lt;/code&gt;：跳转到文本开头&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;行号 + G&lt;/code&gt;：跳转到指定行号，可配合 &lt;code&gt;数字 + 方向键hjkl&lt;/code&gt; 快速相对跳转&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl + u&lt;/code&gt;：向上跳转半个屏幕，&lt;code&gt;up&lt;/code&gt;，十分接近鼠标滚动效果&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl + d&lt;/code&gt;：向下跳转半个屏幕，&lt;code&gt;down&lt;/code&gt;，十分接近鼠标滚动效果&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl + f&lt;/code&gt;：向上跳转整个屏幕，&lt;code&gt;font&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl + b&lt;/code&gt;：向下跳转整个屏幕，&lt;code&gt;back&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Normal Mode 中的文本编辑快捷键&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;d&lt;/code&gt;：删除字符 &lt;code&gt;delete&lt;/code&gt;，与 &lt;code&gt;y&lt;/code&gt; 复制相同，可以和多种光标移动快捷键组成 &lt;code&gt;combo&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;d + aw / d + iw&lt;/code&gt;：删除光标所处位置的单词，&lt;code&gt;iw&lt;/code&gt; 不会包含周边的空格，而 &lt;code&gt;aw&lt;/code&gt; 会包含单词末尾的空格&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;以上所有对于 &lt;code&gt;y&lt;/code&gt; 的组合操作都可以用于 &lt;code&gt;d&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;D&lt;/code&gt;：删除从光标处到所处行末尾的字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dd&lt;/code&gt;：删除光标所处当前行的所有字符，可组合数字向下复制多行，如 &lt;code&gt;6dd&lt;/code&gt; 向下删除 6 行字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;c&lt;/code&gt;：修改字符 &lt;code&gt;change&lt;/code&gt;，与 &lt;code&gt;d&lt;/code&gt; 删除类似，区别在于使用 &lt;code&gt;c&lt;/code&gt; 键删除字符后会直接进入 Insert Mode，可少按一次 &lt;code&gt;i&lt;/code&gt; 键&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;r&lt;/code&gt;：替换当前光标所在的字符， &lt;code&gt;replace&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;R&lt;/code&gt;：进入替换模式，可以像 Insert Mode 一样编辑文本，但是会替换当前光标所在的字符，&lt;code&gt;replace&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;gt;&amp;gt; / &amp;lt;&amp;lt;&lt;/code&gt;：向右缩进或向左缩进，可以在前面加上数字，指定缩进的距离，如 &lt;code&gt;4&amp;gt;&amp;gt;&lt;/code&gt; 向右缩进 4 格&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;g + u / g + U&lt;/code&gt;：转成为小写或大写字符，与 &lt;code&gt;y&lt;/code&gt; 复制相同，可以和多种光标移动快捷键组成 &lt;code&gt;combo&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;g + u + aw / g + u + iw&lt;/code&gt;：将光标所处位置的单词全部变为小写字符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;g + U + aw / g + U + iw&lt;/code&gt;：将光标所处位置的单词全部变为大写字符&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;以上所有对于 &lt;code&gt;y&lt;/code&gt; 的组合操作都可以用于 &lt;code&gt;gu / gU&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;~&lt;/code&gt;：切换大小写字符，不能组合 &lt;code&gt;combo&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;x&lt;/code&gt;：删除光标所处的单个字符&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Normal Mode 中的撤销重做快捷键&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;u&lt;/code&gt;：撤销之前的操作，&lt;code&gt;undo&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;撤销以每个文本操作为一个单元，比如 &lt;code&gt;d + aw&lt;/code&gt;、&lt;code&gt;p&lt;/code&gt; 等等&lt;/li&gt;
+&lt;li&gt;从离开 Normal Mode 到重新进入 Normal Mode 之间的操作也作为一个撤销单元，比如在 Insert Mode 中进行文本编辑的操作&lt;/li&gt;
+&lt;li&gt;因此，我们可以通过特定的操作来控制撤销的范围，比如在 Insert Mode 中需要换行输入文本，此时使用 &lt;code&gt;Esc&lt;/code&gt; 退出 Insert Mode 再利用 &lt;code&gt;o&lt;/code&gt; 键新起一行来代替换行操作，可以缩小撤销的范围&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl + r&lt;/code&gt;：重做之前的撤销操作，&lt;code&gt;redo&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;visual-mode-操作&#34;&gt;Visual Mode 操作&lt;/h4&gt;
+&lt;p&gt;在 Normal Mode 中按下 &lt;code&gt;v&lt;/code&gt; 键可以进入 Visual Mode。进入之后可以像在 Normal Mode 中一样移动光标或者像 Operator-pending Mode 输入动作指令，从而调整选择范围。调整好选取之后可以之间按下操作符进行文本操作，如&lt;strong&gt;Normal Mode 中的部分文本编辑快捷键&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;除此之外，在 Normal Mode 中还可以按下 &lt;code&gt;V&lt;/code&gt; 键进入 V-LINE 模式，即面向行的 Visual Mode。按 &lt;code&gt;Ctrl + v&lt;/code&gt; 进入 V-BLOCK 模式，即面向列块的 Visual Mode，确定好选区之后可以按下 &lt;code&gt;i&lt;/code&gt; 键，批量给每一行批量添加文本。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Visual Mode 中的常用快捷键&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;v&lt;/code&gt;：从 Normal Mode 进入 Visual Mode&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;V&lt;/code&gt;：从 Normal Mode 进入面向行的 Visual Mode，V-LINE 模式&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl + v&lt;/code&gt;：从 Normal Mode 进入面向列块的 Visual Mode，V-BLOCK 模式&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;o&lt;/code&gt;：切换选区的移动端，即选区开头和末尾切换&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;←↓↑→ / hjkl&lt;/code&gt;：左下上右移动光标选择选区&lt;/li&gt;
+&lt;li&gt;常用的文本编辑操作符
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;d&lt;/code&gt;：删除选区内容&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;c&lt;/code&gt;：删除选区内容并进入 Insert Mode&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;y&lt;/code&gt;：复制选区内容，操作完成后会返回 Normal Mode，此时按下 &lt;code&gt;g + v&lt;/code&gt; 可以返回刚才的选区&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;p&lt;/code&gt;：粘贴并覆盖选区内容&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;……&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;ex-mode-操作&#34;&gt;Ex Mode 操作&lt;/h4&gt;
+&lt;p&gt;在 Normal Mode 中可以按下 &lt;code&gt;:&lt;/code&gt; 进入 Ex Mode，然后可以输入命令并按 &lt;code&gt;Enter&lt;/code&gt; 执行。&lt;/p&gt;
+&lt;p&gt;按下 &lt;code&gt;:q&lt;/code&gt; 可以打开 Ex 命令历史，在命令历史中，可以像 Normal Mode 中编辑文本一样编辑 Ex 命令。将光标移动到想执行的命令上，按 &lt;code&gt;Enter&lt;/code&gt; 可直接执行。&lt;/p&gt;
+&lt;p&gt;也可以按下 &lt;code&gt;/&lt;/code&gt; 或 &lt;code&gt;?&lt;/code&gt; 进入 Ex Mode ，调出查找提示符，此时输入任何文本都会进行全文匹配，按下 &lt;code&gt;Enter&lt;/code&gt; 开始跳转，按下 &lt;code&gt;n&lt;/code&gt; 键跳转到下一个匹配项，按下 &lt;code&gt;N&lt;/code&gt; 键跳转到上一个匹配项。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Ex Mode 中的常用命令&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;:&lt;/code&gt;：从 Normal Mode 进入 Ex Mode&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:q&lt;/code&gt;：打开 Ex 命令历史&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/&lt;/code&gt; 或 &lt;code&gt;?&lt;/code&gt;：从 Normal Mode 进入 Ex Mode 并调出查找提示符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;q&lt;/code&gt;：退出指令，&lt;code&gt;quit&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;q!&lt;/code&gt;：强制退出指令&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;w&lt;/code&gt;：保存指令，&lt;code&gt;write&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;wq&lt;/code&gt;：保存并退出&lt;/li&gt;
+&lt;li&gt;Shell 命令，用 &lt;code&gt;!&lt;/code&gt; 开头，以下为 Linux 命令
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;!ls&lt;/code&gt;：列出当前目录&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;!pwd&lt;/code&gt;：列出当前路径&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%!sort -r&lt;/code&gt;：排序操作&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;r!date&lt;/code&gt;：打印时间操作&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;r!date &amp;quot;+\%s&amp;quot;&lt;/code&gt;：打印时间戳操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;……&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;register-寄存器&#34;&gt;Register 寄存器&lt;/h3&gt;
+&lt;p&gt;寄存器主要用于临时储存剪切和复制的文本，最常用的有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;无名寄存器 Unnamed register，用 &lt;code&gt;&amp;quot;&lt;/code&gt; 表示&lt;/li&gt;
+&lt;li&gt;有名寄存器 Named register，用 &lt;code&gt;a - z&lt;/code&gt; 表示&lt;/li&gt;
+&lt;li&gt;复制寄存器 Yank register，用 &lt;code&gt;0&lt;/code&gt; 表示&lt;/li&gt;
+&lt;li&gt;表达式寄存器 Expression register，用 &lt;code&gt;=&lt;/code&gt; 表示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;寄存器的规则&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;调用寄存器前需要按下 &lt;code&gt;&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;无名寄存器&lt;/strong&gt;：当我们使用 &lt;strong&gt;&lt;code&gt;c&lt;/code&gt; 修改&lt;/strong&gt;或 &lt;strong&gt;&lt;code&gt;d&lt;/code&gt; 删除&lt;/strong&gt;一段内容时，被取缔的内容会自动存放到&lt;strong&gt;无名寄存器&lt;/strong&gt;中，按下 &lt;code&gt;&amp;quot;&lt;/code&gt; 可查看，使用 &lt;code&gt;p&lt;/code&gt; 进行粘贴时，会默认粘贴无名寄存器中最新的内容。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在使用 &lt;code&gt;y&lt;/code&gt; 复制一段内容时，复制的内容不仅会存放到&lt;strong&gt;无名寄存器&lt;/strong&gt;，也会存放在&lt;strong&gt;复制寄存器&lt;/strong&gt;中&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;有名寄存器&lt;/strong&gt;： &lt;code&gt;a - z&lt;/code&gt; 一共 26 个，不会自动存储文本，如果想使用有名寄存器，可以在输入操作符之前加上双引号 &lt;code&gt;&amp;quot;&lt;/code&gt; 和 &lt;code&gt;a - z&lt;/code&gt; 之一的有名寄存器代号，如 &lt;code&gt;&amp;quot;a + yy&lt;/code&gt; 会复制当前行内容并存放到 &lt;code&gt;a&lt;/code&gt; 寄存器中，同样按下 &lt;code&gt;&amp;quot;a + p&lt;/code&gt; 会将 &lt;code&gt;a&lt;/code&gt; 寄存器中的内容粘贴到文本中&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;复制寄存器&lt;/strong&gt;：最常用的寄存器是&lt;strong&gt;复制寄存器&lt;/strong&gt;&lt;code&gt;:0&lt;/code&gt;，当我们进入 Visual Mode 进行多次粘贴时，会发现第二次粘贴的文本是第一次粘贴时被取缔的文本，原因是第一次粘贴时&lt;strong&gt;无名寄存器&lt;/strong&gt;中存的是我们最初复制的内容，但粘贴完成后&lt;strong&gt;无名寄存器&lt;/strong&gt;里的文本也会被覆盖的文本取缔，即 &lt;code&gt;p&lt;/code&gt; 粘贴操作也会覆盖无名寄存器，内容为粘贴时被覆盖的文本。这时候我们需要使用 &lt;code&gt;:0&lt;/code&gt; 即&lt;strong&gt;复制寄存器&lt;/strong&gt;，才可以继续粘贴我们复制的文本。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;表达式寄存器&lt;/strong&gt;：进入 Ex Mode，用于简单表达式的计算，或者调用一些函数，如 &lt;code&gt;strftime(&amp;quot;%Y&amp;quot;)&lt;/code&gt; 会将年份打印在光标处并进入 Insert Mode。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在 Insert Mode 下也可以使用寄存器，按下 &lt;code&gt;Ctrl + r + 寄存器符号&lt;/code&gt; 即可，如 &lt;code&gt;Ctrl + r + 0&lt;/code&gt; 可以粘贴 Normal Mode 下复制的文本，&lt;code&gt;Ctrl + r + =&lt;/code&gt; 可唤起表达式寄存器。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;配套练习&#34;&gt;配套练习&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/keynotes_cn.md&#34;&gt;keynotes_cn&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/practice_cn.md&#34;&gt;practice_cn&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/text&#34;&gt;text&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/text2&#34;&gt;text2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
       
     </item>
     

@@ -74,7 +74,7 @@
   <meta itemprop="description" content="Neovim 配置与学习">
   <meta itemprop="datePublished" content="2024-10-11T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-10-11T00:00:00+00:00">
-  <meta itemprop="wordCount" content="2">
+  <meta itemprop="wordCount" content="4606">
   <meta itemprop="keywords" content="技术,Neovim">
 
   
@@ -139,11 +139,287 @@
   
   
   
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#安装neovim">安装Neovim</a></li>
+        <li><a href="#配置-lazyvim">配置 LazyVim</a></li>
+      </ul>
+    </li>
+    <li><a href="#mode--register">Mode &amp; Register</a>
+      <ul>
+        <li><a href="#mode-模式">Mode 模式</a></li>
+        <li><a href="#register-寄存器">Register 寄存器</a></li>
+        <li><a href="#配套练习">配套练习</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+  </details>
+  
   
   <article class="content">
     
-    <p><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/keynotes_cn.md">keynotes_cn</a></p>
-<p><a href="../../../../assets/Neovim配置与学习/2modenregister/keynotes_cn.md" target="_blank">keynotes_cn_a</a></p>
+    <p><a href="https://www.bilibili.com/video/BV1vcWXe4Evf/?spm_id_from=333.788&amp;vd_source=30a68d7597f750b905825950d4412d50">从零开始构建个性化PDE：打造属于你的高效开发环境</a> 视频教程</p>
+<p><a href="https://github.com/zhangddjs/pde-tutorial">zhangddjs/pde-tutorial (github.com)</a> 视频配套题目仓库</p>
+<h3 id="安装neovim">安装Neovim</h3>
+<p><a href="https://neovim.io/">Home - Neovim</a> | <a href="https://github.com/Neovim/Neovim/blob/master/INSTALL.md">Neovim/Neovim (github.com)</a></p>
+<p>打开 Neovim 官网或者 GitHub 主页，根据指引下载对应操作系统的最新版。可以下载安装包进行安装，也可以使用命令行进行安装。</p>
+<p>安装完成后，将 Neovim 添加进系统的环境变量中。</p>
+<p>在命令行中输入 <code>nvim</code> ，出现欢迎界面说明 Neovim 安装成功。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180326.png" alt="image.png"></p>
+<h3 id="配置-lazyvim">配置 LazyVim</h3>
+<p>LazyVim 是一个 Neovim 的一键 Setup 方案，它内置了一些基础的插件，配置了人性化的快捷键。同时 LazyVim 也是一个 Neovim 的包管理器，可以快捷方便地管理 Neovim 的各种插件。</p>
+<p><a href="https://www.lazyvim.org/">🚀 Getting Started | LazyVim</a> | <a href="https://github.com/LazyVim/LazyVim">LazyVim(github.com)</a></p>
+<p>打开 LazyVim 官网或者 GitHub 主页，进行 LazyVim 的安装。</p>
+<p>在安装之前，LazyVim 还需要一些依赖配置，如 Neovim、Git、<a href="https://www.nerdfonts.com/">Nerd Font</a> 字符字体、C 语言编译器以及一个支持真颜色的终端等。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180413.png" alt="image.png"></p>
+<p>安装好各种所需要的依赖环境，就可以进行 LazyVim 的安装</p>
+<ul>
+<li><strong>Linux 环境</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># required</span>
+</span></span><span style="display:flex;"><span>mv ~/.config/nvim<span style="color:#000">{</span>,.bak<span style="color:#000">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># optional but recommended</span>
+</span></span><span style="display:flex;"><span>mv ~/.local/share/nvim<span style="color:#000">{</span>,.bak<span style="color:#000">}</span>
+</span></span><span style="display:flex;"><span>mv ~/.local/state/nvim<span style="color:#000">{</span>,.bak<span style="color:#000">}</span>
+</span></span><span style="display:flex;"><span>mv ~/.cache/nvim<span style="color:#000">{</span>,.bak<span style="color:#000">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># Clone the starter</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/LazyVim/starter ~/.config/nvim
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># Remove the `.git` folder, so you can add it to your own repo later</span>
+</span></span><span style="display:flex;"><span>rm -rf ~/.config/nvim/.git
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># Start Neovim!</span>
+</span></span><span style="display:flex;"><span>nvim
+</span></span></code></pre></div><ul>
+<li><strong>Windows 环境</strong></li>
+</ul>
+<p>Windows 下 Neovim 的配置文件应该存放在 <code>C:\Users\YOUR_USERNAME\AppData\Local\nvim</code> 中，如果该目录下不存在 <code>nvim</code> 文件夹，新建一个 <code>nvim</code> 文件夹即可。</p>
+<p>在 <code>nvim</code> 文件夹中执行克隆仓库命令：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone https://github.com/LazyVim/starter
+</span></span></code></pre></div><p>将其中的 <code>lua</code> 文件夹和 <code>init.lua</code> 移到 <code>nvim</code> 根目录中，其余文件删除即可。目录结构为：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nvim
+</span></span><span style="display:flex;"><span>│  init.lua
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>└─lua
+</span></span><span style="display:flex;"><span>    ├─config
+</span></span><span style="display:flex;"><span>    │      autocmds.lua
+</span></span><span style="display:flex;"><span>    │      keymaps.lua
+</span></span><span style="display:flex;"><span>    │      lazy.lua
+</span></span><span style="display:flex;"><span>    │      options.lua
+</span></span><span style="display:flex;"><span>    │
+</span></span><span style="display:flex;"><span>    └─plugins
+</span></span><span style="display:flex;"><span>            example.lua
+</span></span></code></pre></div><p>重新打开 Neovim 会出现 LazyVim 的初始化界面，在初始化界面会自动下载一些基本插件，等待插件下载完成。如果因为网络问题导致插件下载失败，可以尝试重启 Neovim，或者按下字母 <code>I</code> 重新安装。完成后按 <code>q</code> 来到 LazyVim 的欢迎界面。如果出现图标乱码，请安装 <a href="https://www.nerdfonts.com/">Nerd 字体</a>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180442.png" alt="image.png"></p>
+<p>输入 <code>:</code> 打开命令行，输入 <code>LazyHealth</code> 检查插件是否工作正常。使用 <code>Ctrl + u / d</code> 可以上下快速浏览。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180453.png" alt="image.png"></p>
+<p>可以看到有一些 <code>ERROR</code> 出现，比如 <code>Grugfar</code> ，这是因为没有安装 <code>live grep</code> ，后续会安装。</p>
+<p>为了方便后续在 Windows 环境下使用 Neovim，可以在终端中新建一个 Neovim 配置，方便之后一键打开，也可以设置打开终端默认使用 Neovim。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180505.png" alt="image.png"></p>
+<h2 id="mode--register">Mode &amp; Register</h2>
+<blockquote>
+<p>Neovim 的四大编辑模式与寄存器</p>
+</blockquote>
+<h3 id="mode-模式">Mode 模式</h3>
+<p>Neovim 共有四大模式：</p>
+<ol>
+<li><em>Normal Mode</em></li>
+<li><em>Insert Mode</em></li>
+<li><em>Visual Mode</em></li>
+<li><em>Ex Mode</em></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180518.png" alt="image.png"></p>
+<p>其中 <strong>Normal Mode</strong> 是默认模式，光标为方块状显示在文本区，此时按下 <code>i</code> 等键进入 <strong>Insert Mode</strong>。在 <strong>Insert Mode</strong> 中光标为竖线，界面左下角会显示 <code>Insert</code> 字样。输入完文本后，按下 <code>ESC</code> 键可以返回 <strong>Normal Mode</strong>。</p>
+<p>接下来可以按下 <code>v</code> 键进入 <strong>Visual Mode</strong>，等同于在记事本中框选一段文本的模式，此时可针对选中的文本进行删除拷贝等操作，操作完成后会自动返回 <strong>Normal Mode</strong>。</p>
+<p>最后，按下 <code>:</code> 键就会进入 Ex Mode，光标会移动到左下角位置，此时可以输入批处理命令或者是保存退出查找替换等操作。</p>
+<p><strong>Normal Mode</strong> 提供的关键键和操作很多，我们不需要全部记住。其中最常用的功能包括文档的浏览跳转、复制粘贴、撤销重做等。</p>
+<hr>
+<p><strong class=chinese>实际操作演示</strong>：</p>
+<p>进入命令行使用 <code>nvim mode.md</code> 创建 <code>mode.md</code> 文件，默认打开文件进入 Normal Mode 。</p>
+<p>按下 <code>i</code> 键进入 Insert Mode，可以在文本区输入文本。除此之外，还有多种方式从 Normal Mode 进入 Insert Mode，如按下 <code>o</code> 键，在光标下方另起一行进入 Insert Mode，按下 <code>O</code> 键，在光标上方另起一行进入 Insert Mode，可通过 <code>Open</code> 单词首字母辅助记忆。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180533.png" alt="image.png"></p>
+<h4 id="insert-mode-操作">Insert Mode 操作</h4>
+<p><strong>Insert Mode 中的常用快捷键</strong>：</p>
+<ul>
+<li>←↓↑→方向键：控制光标移动</li>
+<li><code>Ctrl + ↑←↓→方向键</code> ：快速移动光标，即按单词移动</li>
+<li><code>BS</code> 退格键：删除字符</li>
+<li><code>Ctrl + w</code> ：删除单词</li>
+<li><code>Ctrl + u</code> ：删除光标前的所有当前行的字符</li>
+</ul>
+<h4 id="normal-mode-操作">Normal Mode 操作</h4>
+<p><strong>从 Normal Mode 到 Insert Mode 的主要快捷键</strong>：</p>
+<ul>
+<li><code>o</code>：在光标<strong class=chinese>下方</strong>另起一行进入 Insert Mode，<code>open</code></li>
+<li><code>O</code>：在光标<strong class=chinese>上方</strong>另起一行进入 Insert Mode，<code>open</code></li>
+<li><code>a</code>：在光标处字母的<strong class=chinese>右侧</strong>进入 Insert Mode，<code>append</code></li>
+<li><code>A</code>：在光标处所在行<strong class=chinese>行尾</strong>进入 Insert Mode，<code>append</code></li>
+<li><code>i</code>：在光标处字母的<strong class=chinese>左侧</strong>进入 Insert Mode</li>
+<li><code>I</code>：在光标处所在行<strong class=chinese>行首</strong>进入 Insert Mode</li>
+</ul>
+<p><strong>Normal Mode 中的光标移动快捷键</strong>：</p>
+<ul>
+<li><code>h j k l</code>：代替方向键实现光标的<strong class=chinese>左下上右</strong>←↓↑→</li>
+<li><code>w b</code>：按<strong class=chinese>下一个</strong>和<strong class=chinese>上一个</strong>单词<strong class=chinese>词首</strong>快速移动光标，<code>word before</code></li>
+<li><code>e</code>：按<strong class=chinese>下一个</strong>单词<strong class=chinese>词尾</strong>快速移动光标，<code>end</code></li>
+<li><code>数字 + 以上三种操作</code>：如向上移动 2 行按 <code>2k</code>，向右移动 5 个单词按 <code>5w</code>，向左移动 10 个字符按 <code>10h</code></li>
+<li><code>0</code>：“硬”行首，即光标跳转到<strong>行首第 1 列</strong>，无论第 1 列有无字符</li>
+<li><code>^</code>：“软”行首，即光标跳转到<strong class=chinese>行首首字符</strong>，不一定是第 1 列</li>
+<li><code>$</code>：光标跳转到<strong class=chinese>行尾</strong></li>
+<li><code>f + 字符</code>：对光标<strong class=chinese>后</strong>的所有字符进行查找，有多个字符可使用 <code>, ;</code> 进行<strong class=chinese>前后</strong>光标快速跳转，<code>find</code></li>
+<li><code>F + 字符</code>：对光标<strong class=chinese>前</strong>的所有字符进行查找，有多个字符可使用 <code>, ;</code> 进行<strong class=chinese>前后</strong>光标快速跳转，<code>find</code></li>
+<li><code>t + 字符 / T + 字符</code>：与 <code>f</code> 功能类似，找到指定字符的前一个字符，<code>till</code></li>
+</ul>
+<p><strong>Normal Mode 中的复制粘贴快捷键</strong>：</p>
+<ul>
+<li><code>y + 快捷键</code>：复制字符，根据操作符的不同，复制字符的范围不同，<code>yank</code></li>
+<li><code>Y</code>：复制从光标处到所处行末尾的字符</li>
+<li><code>yy</code>：复制光标所处当前行的所有字符，可组合数字向下复制多行，如 <code>6yy</code> 向下复制 6 行字符</li>
+<li><code>p</code>：在光标所处行的下方新开一行粘贴复制的内容，可组合数字复制多次，如 <code>100p</code> 可粘贴 100 次</li>
+<li><code>P</code>：在光标所处行前粘贴复制的内容，可组合数字复制多次，如 <code>100p</code> 可粘贴 100 次</li>
+</ul>
+<p><strong class=chinese>补充</strong>：Operator-pending Mode 操作符待处理模式。在 Normal Mode 下仅仅按下 <code>y</code> 键是不能进行字符的复制操作，此时只是进入了 Operator-pending Mode 中，想要完成复制操作，还需要按下其他有效按键，<code>y + ? = combo</code>。</p>
+<p>Operator-pending Mode 操作符待处理模式的常用 <code>combo</code> 包括以上介绍的 Insert Mode 中的所有快捷键组合，<code>y + j/k/h/l/w/b/e/f/t/0/^/$/G/gg…… = combo</code></p>
+<p>比如：</p>
+<ul>
+<li><code>y + l</code>：复制光标后的一个字符</li>
+<li><code>y + k</code>：复制光标当前行和上一行字符</li>
+<li><code>y + w / y + e</code>：复制光标所处位置到单词末尾的字符</li>
+<li><code>y + aw / y + iw</code>：复制光标所处位置的单词，<code>iw</code> 不会包含周边的空格，而 <code>aw</code> 会包含单词末尾的空格</li>
+<li><code>y + 2w / y + 2e</code>：复制光标所处位置到第 2 个单词末尾的字符</li>
+<li><code>y + 2aw / 2y + aw</code>：复制光标所处位置往后的 2 个单词，会包含末尾的空格</li>
+<li><code>y + 3j / 4yy</code>：复制包含光标所在行的下方 4 行字符</li>
+<li><code>y + 10l</code>：复制光标右侧的 10 个字符</li>
+<li><code>y + t + ,</code>：复制光标后方到第一个 <code>,</code> 字符前的所有字符，不包含 <code>,</code></li>
+<li><code>y + f + ,</code>：复制光标后方到第一个 <code>,</code> 字符前的所有字符，包含 <code>,</code></li>
+<li><code>y + $ / Y</code>：复制从光标处到所处行末尾的字符</li>
+</ul>
+<p>总结来说，<code>y + 光标移动快捷键</code> 实现光标移动到哪就复制到哪。这种操作模式就是 operator + motion = action 操作符+动作指令=操作，这也是 vim 强大的地方。</p>
+<p><strong>Normal Mode 中的阅读浏览快捷键</strong>：</p>
+<ul>
+<li><code>G</code>：跳转到文本末尾</li>
+<li><code>gg</code>：跳转到文本开头</li>
+<li><code>行号 + G</code>：跳转到指定行号，可配合 <code>数字 + 方向键hjkl</code> 快速相对跳转</li>
+<li><code>Ctrl + u</code>：向上跳转半个屏幕，<code>up</code>，十分接近鼠标滚动效果</li>
+<li><code>Ctrl + d</code>：向下跳转半个屏幕，<code>down</code>，十分接近鼠标滚动效果</li>
+<li><code>Ctrl + f</code>：向上跳转整个屏幕，<code>font</code></li>
+<li><code>Ctrl + b</code>：向下跳转整个屏幕，<code>back</code></li>
+</ul>
+<p><strong>Normal Mode 中的文本编辑快捷键</strong>：</p>
+<ul>
+<li><code>d</code>：删除字符 <code>delete</code>，与 <code>y</code> 复制相同，可以和多种光标移动快捷键组成 <code>combo</code>
+<ul>
+<li><code>d + aw / d + iw</code>：删除光标所处位置的单词，<code>iw</code> 不会包含周边的空格，而 <code>aw</code> 会包含单词末尾的空格</li>
+<li><strong>以上所有对于 <code>y</code> 的组合操作都可以用于 <code>d</code></strong></li>
+</ul>
+</li>
+<li><code>D</code>：删除从光标处到所处行末尾的字符</li>
+<li><code>dd</code>：删除光标所处当前行的所有字符，可组合数字向下复制多行，如 <code>6dd</code> 向下删除 6 行字符</li>
+<li><code>c</code>：修改字符 <code>change</code>，与 <code>d</code> 删除类似，区别在于使用 <code>c</code> 键删除字符后会直接进入 Insert Mode，可少按一次 <code>i</code> 键</li>
+<li><code>r</code>：替换当前光标所在的字符， <code>replace</code></li>
+<li><code>R</code>：进入替换模式，可以像 Insert Mode 一样编辑文本，但是会替换当前光标所在的字符，<code>replace</code></li>
+<li><code>&gt;&gt; / &lt;&lt;</code>：向右缩进或向左缩进，可以在前面加上数字，指定缩进的距离，如 <code>4&gt;&gt;</code> 向右缩进 4 格</li>
+<li><code>g + u / g + U</code>：转成为小写或大写字符，与 <code>y</code> 复制相同，可以和多种光标移动快捷键组成 <code>combo</code>
+<ul>
+<li><code>g + u + aw / g + u + iw</code>：将光标所处位置的单词全部变为小写字符</li>
+<li><code>g + U + aw / g + U + iw</code>：将光标所处位置的单词全部变为大写字符</li>
+<li><strong>以上所有对于 <code>y</code> 的组合操作都可以用于 <code>gu / gU</code></strong></li>
+</ul>
+</li>
+<li><code>~</code>：切换大小写字符，不能组合 <code>combo</code></li>
+<li><code>x</code>：删除光标所处的单个字符</li>
+</ul>
+<p><strong>Normal Mode 中的撤销重做快捷键</strong>：</p>
+<ul>
+<li><code>u</code>：撤销之前的操作，<code>undo</code>
+<ul>
+<li>撤销以每个文本操作为一个单元，比如 <code>d + aw</code>、<code>p</code> 等等</li>
+<li>从离开 Normal Mode 到重新进入 Normal Mode 之间的操作也作为一个撤销单元，比如在 Insert Mode 中进行文本编辑的操作</li>
+<li>因此，我们可以通过特定的操作来控制撤销的范围，比如在 Insert Mode 中需要换行输入文本，此时使用 <code>Esc</code> 退出 Insert Mode 再利用 <code>o</code> 键新起一行来代替换行操作，可以缩小撤销的范围</li>
+</ul>
+</li>
+<li><code>Ctrl + r</code>：重做之前的撤销操作，<code>redo</code></li>
+</ul>
+<h4 id="visual-mode-操作">Visual Mode 操作</h4>
+<p>在 Normal Mode 中按下 <code>v</code> 键可以进入 Visual Mode。进入之后可以像在 Normal Mode 中一样移动光标或者像 Operator-pending Mode 输入动作指令，从而调整选择范围。调整好选取之后可以之间按下操作符进行文本操作，如<strong>Normal Mode 中的部分文本编辑快捷键</strong>。</p>
+<p>除此之外，在 Normal Mode 中还可以按下 <code>V</code> 键进入 V-LINE 模式，即面向行的 Visual Mode。按 <code>Ctrl + v</code> 进入 V-BLOCK 模式，即面向列块的 Visual Mode，确定好选区之后可以按下 <code>i</code> 键，批量给每一行批量添加文本。</p>
+<p><strong>Visual Mode 中的常用快捷键</strong>：</p>
+<ul>
+<li><code>v</code>：从 Normal Mode 进入 Visual Mode</li>
+<li><code>V</code>：从 Normal Mode 进入面向行的 Visual Mode，V-LINE 模式</li>
+<li><code>Ctrl + v</code>：从 Normal Mode 进入面向列块的 Visual Mode，V-BLOCK 模式</li>
+<li><code>o</code>：切换选区的移动端，即选区开头和末尾切换</li>
+<li><code>←↓↑→ / hjkl</code>：左下上右移动光标选择选区</li>
+<li>常用的文本编辑操作符
+<ul>
+<li><code>d</code>：删除选区内容</li>
+<li><code>c</code>：删除选区内容并进入 Insert Mode</li>
+<li><code>y</code>：复制选区内容，操作完成后会返回 Normal Mode，此时按下 <code>g + v</code> 可以返回刚才的选区</li>
+<li><code>p</code>：粘贴并覆盖选区内容</li>
+</ul>
+</li>
+<li>……</li>
+</ul>
+<h4 id="ex-mode-操作">Ex Mode 操作</h4>
+<p>在 Normal Mode 中可以按下 <code>:</code> 进入 Ex Mode，然后可以输入命令并按 <code>Enter</code> 执行。</p>
+<p>按下 <code>:q</code> 可以打开 Ex 命令历史，在命令历史中，可以像 Normal Mode 中编辑文本一样编辑 Ex 命令。将光标移动到想执行的命令上，按 <code>Enter</code> 可直接执行。</p>
+<p>也可以按下 <code>/</code> 或 <code>?</code> 进入 Ex Mode ，调出查找提示符，此时输入任何文本都会进行全文匹配，按下 <code>Enter</code> 开始跳转，按下 <code>n</code> 键跳转到下一个匹配项，按下 <code>N</code> 键跳转到上一个匹配项。</p>
+<p><strong>Ex Mode 中的常用命令</strong>：</p>
+<ul>
+<li><code>:</code>：从 Normal Mode 进入 Ex Mode</li>
+<li><code>:q</code>：打开 Ex 命令历史</li>
+<li><code>/</code> 或 <code>?</code>：从 Normal Mode 进入 Ex Mode 并调出查找提示符</li>
+<li><code>q</code>：退出指令，<code>quit</code></li>
+<li><code>q!</code>：强制退出指令</li>
+<li><code>w</code>：保存指令，<code>write</code></li>
+<li><code>wq</code>：保存并退出</li>
+<li>Shell 命令，用 <code>!</code> 开头，以下为 Linux 命令
+<ul>
+<li><code>!ls</code>：列出当前目录</li>
+<li><code>!pwd</code>：列出当前路径</li>
+<li><code>%!sort -r</code>：排序操作</li>
+<li><code>r!date</code>：打印时间操作</li>
+<li><code>r!date &quot;+\%s&quot;</code>：打印时间戳操作</li>
+</ul>
+</li>
+<li>……</li>
+</ul>
+<h3 id="register-寄存器">Register 寄存器</h3>
+<p>寄存器主要用于临时储存剪切和复制的文本，最常用的有：</p>
+<ul>
+<li>无名寄存器 Unnamed register，用 <code>&quot;</code> 表示</li>
+<li>有名寄存器 Named register，用 <code>a - z</code> 表示</li>
+<li>复制寄存器 Yank register，用 <code>0</code> 表示</li>
+<li>表达式寄存器 Expression register，用 <code>=</code> 表示</li>
+</ul>
+<p><strong class=chinese>寄存器的规则</strong>：</p>
+<p>调用寄存器前需要按下 <code>&quot;</code></p>
+<p><strong class=chinese>无名寄存器</strong>：当我们使用 <strong><code>c</code> 修改</strong>或 <strong><code>d</code> 删除</strong>一段内容时，被取缔的内容会自动存放到<strong class=chinese>无名寄存器</strong>中，按下 <code>&quot;</code> 可查看，使用 <code>p</code> 进行粘贴时，会默认粘贴无名寄存器中最新的内容。</p>
+<blockquote>
+<p>在使用 <code>y</code> 复制一段内容时，复制的内容不仅会存放到<strong class=chinese>无名寄存器</strong>，也会存放在<strong class=chinese>复制寄存器</strong>中</p>
+</blockquote>
+<p><strong class=chinese>有名寄存器</strong>： <code>a - z</code> 一共 26 个，不会自动存储文本，如果想使用有名寄存器，可以在输入操作符之前加上双引号 <code>&quot;</code> 和 <code>a - z</code> 之一的有名寄存器代号，如 <code>&quot;a + yy</code> 会复制当前行内容并存放到 <code>a</code> 寄存器中，同样按下 <code>&quot;a + p</code> 会将 <code>a</code> 寄存器中的内容粘贴到文本中</p>
+<p><strong class=chinese>复制寄存器</strong>：最常用的寄存器是<strong class=chinese>复制寄存器</strong><code>:0</code>，当我们进入 Visual Mode 进行多次粘贴时，会发现第二次粘贴的文本是第一次粘贴时被取缔的文本，原因是第一次粘贴时<strong class=chinese>无名寄存器</strong>中存的是我们最初复制的内容，但粘贴完成后<strong class=chinese>无名寄存器</strong>里的文本也会被覆盖的文本取缔，即 <code>p</code> 粘贴操作也会覆盖无名寄存器，内容为粘贴时被覆盖的文本。这时候我们需要使用 <code>:0</code> 即<strong class=chinese>复制寄存器</strong>，才可以继续粘贴我们复制的文本。</p>
+<p><strong class=chinese>表达式寄存器</strong>：进入 Ex Mode，用于简单表达式的计算，或者调用一些函数，如 <code>strftime(&quot;%Y&quot;)</code> 会将年份打印在光标处并进入 Insert Mode。</p>
+<blockquote>
+<p>在 Insert Mode 下也可以使用寄存器，按下 <code>Ctrl + r + 寄存器符号</code> 即可，如 <code>Ctrl + r + 0</code> 可以粘贴 Normal Mode 下复制的文本，<code>Ctrl + r + =</code> 可唤起表达式寄存器。</p>
+</blockquote>
+<h3 id="配套练习">配套练习</h3>
+<ul>
+<li><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/keynotes_cn.md">keynotes_cn</a></li>
+<li><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/practice_cn.md">practice_cn</a></li>
+<li><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/text">text</a></li>
+<li><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/text2">text2</a></li>
+</ul>
     
   </article>
   <div class="paginator">
