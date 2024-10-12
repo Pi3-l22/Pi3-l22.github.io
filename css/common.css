@@ -150,6 +150,11 @@
     src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/consolaz.ttf');
 }
 
+/* 3D */
+@font-face {
+    font-family: Royalacid;
+    src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/Royalacid.ttf');
+}
 
 /* global */
 
@@ -216,9 +221,10 @@ time {
 }
 
 #header > h1 {
-    font-size: 2.8rem;
+    font-size: 3.5rem;
     text-align: center;
     margin-bottom: 1rem !important;
+    font-family: Royalacid;
 }
 
 /* @media screen and (min-width: 768px) {
@@ -282,7 +288,7 @@ time {
         margin: 0 0 2rem 0;
     }
     #header > h1 a{
-        font-size: 2.5rem !important;
+        font-size: 2.8rem !important;
     }
     #main.post > h1 {
         font-size: 2rem;
