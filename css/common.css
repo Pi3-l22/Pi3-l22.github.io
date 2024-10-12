@@ -155,6 +155,14 @@
     font-family: Royalacid;
     src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/Royalacid.ttf');
 }
+@font-face {
+    font-family: ttpckey;
+    src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/ttpckey.ttf');
+}
+@font-face {
+    font-family: HangedLetters;
+    src: url(https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/Hanged_Letters.ttf);
+}
 
 /* global */
 
@@ -221,10 +229,12 @@ time {
 }
 
 #header > h1 {
-    font-size: 3.5rem;
+    /* font-size: 3.5rem; Royalacid ttpckey*/
+    font-size: 4rem;
     text-align: center;
     margin-bottom: 1rem !important;
-    font-family: Royalacid;
+    font-family: HangedLetters;
+    font-weight: normal !important;
 }
 
 /* @media screen and (min-width: 768px) {
@@ -288,7 +298,8 @@ time {
         margin: 0 0 2rem 0;
     }
     #header > h1 a{
-        font-size: 2.8rem !important;
+        /* font-size: 3rem !important; */
+        font-size: 4rem !important;
     }
     #main.post > h1 {
         font-size: 2rem;
