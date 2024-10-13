@@ -2,12 +2,32 @@
   
   <url>
     <loc>https://blog.pi3.fun/</loc>
-    <lastmod>2024-10-11</lastmod>
+    <lastmod>2024-10-13</lastmod>
   </url>
   
   <url>
     <loc>https://blog.pi3.fun/tags/index/</loc>
-    <lastmod>2024-10-11</lastmod>
+    <lastmod>2024-10-13</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pi3.fun/post/</loc>
+    <lastmod>2024-10-13</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pi3.fun/tags/</loc>
+    <lastmod>2024-10-13</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pi3.fun/post/2024/10/test/</loc>
+    <lastmod>2024-10-13</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pi3.fun/tags/%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2024-10-13</lastmod>
   </url>
   
   <url>
@@ -17,16 +37,6 @@
   
   <url>
     <loc>https://blog.pi3.fun/post/2024/10/neovim/</loc>
-    <lastmod>2024-10-11</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.pi3.fun/post/</loc>
-    <lastmod>2024-10-11</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.pi3.fun/tags/</loc>
     <lastmod>2024-10-11</lastmod>
   </url>
   
@@ -92,11 +102,6 @@
   
   <url>
     <loc>https://blog.pi3.fun/tags/kaoyan/</loc>
-    <lastmod>2024-09-20</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.pi3.fun/tags/%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2024-09-20</lastmod>
   </url>
   
