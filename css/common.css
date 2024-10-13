@@ -156,8 +156,8 @@
     src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/Royalacid.ttf');
 }
 @font-face {
-    font-family: ttpckey;
-    src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/ttpckey.ttf');
+    font-family: dimis;
+    src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/dimis.ttf');
 }
 @font-face {
     font-family: HangedLetters;
@@ -230,10 +230,10 @@ time {
 
 #header > h1 {
     /* font-size: 3.5rem; Royalacid ttpckey*/
-    font-size: 4rem;
+    font-size: 3.5rem;
     text-align: center;
     margin-bottom: 1rem !important;
-    font-family: HangedLetters;
+    font-family: dimis;
     font-weight: normal !important;
 }
 
@@ -299,7 +299,7 @@ time {
     }
     #header > h1 a{
         /* font-size: 3rem !important; */
-        font-size: 4rem !important;
+        font-size: 3rem !important;
     }
     #main.post > h1 {
         font-size: 2rem;
