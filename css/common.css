@@ -287,6 +287,10 @@ time {
     width: 100%; */
 }
 
+#main .post .order {
+    color: #AA0000;
+}
+
 /* 适配手机端 */
 @media screen and (max-width: 850px) {
     * {
