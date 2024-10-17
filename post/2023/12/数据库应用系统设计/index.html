@@ -195,199 +195,199 @@
 <p>共设计了4张表，分别是职工表、商品部表、商品表、厂家表</p>
 <p>职工表：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: left">字段名</th>
-          <th style="text-align: left">数据类型</th>
-          <th style="text-align: left">长度</th>
-          <th style="text-align: left">主键</th>
-          <th style="text-align: left">外键</th>
-          <th style="text-align: left">约束</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">职工号</td>
-          <td style="text-align: left">char</td>
-          <td style="text-align: left">10</td>
-          <td style="text-align: left">是</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">非空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">姓名</td>
-          <td style="text-align: left">varchar</td>
-          <td style="text-align: left">20</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">非空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">地址</td>
-          <td style="text-align: left">varchar</td>
-          <td style="text-align: left">50</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">非空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">所在部门</td>
-          <td style="text-align: left">char</td>
-          <td style="text-align: left">10</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">是</td>
-          <td style="text-align: left">非空，参照商品部表的部门号</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>长度</th>
+<th>主键</th>
+<th>外键</th>
+<th>约束</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>职工号</td>
+<td>char</td>
+<td>10</td>
+<td>是</td>
+<td>否</td>
+<td>非空</td>
+</tr>
+<tr>
+<td>姓名</td>
+<td>varchar</td>
+<td>20</td>
+<td>否</td>
+<td>否</td>
+<td>非空</td>
+</tr>
+<tr>
+<td>地址</td>
+<td>varchar</td>
+<td>50</td>
+<td>否</td>
+<td>否</td>
+<td>非空</td>
+</tr>
+<tr>
+<td>所在部门</td>
+<td>char</td>
+<td>10</td>
+<td>否</td>
+<td>是</td>
+<td>非空，参照商品部表的部门号</td>
+</tr>
+</tbody>
 </table>
 <p>商品部表：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: left">字段名</th>
-          <th style="text-align: left">数据类型</th>
-          <th style="text-align: left">长度</th>
-          <th style="text-align: left">主键</th>
-          <th style="text-align: left">外键</th>
-          <th style="text-align: left">约束</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">部门号</td>
-          <td style="text-align: left">char</td>
-          <td style="text-align: left">10</td>
-          <td style="text-align: left">是</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">非空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">部门名称</td>
-          <td style="text-align: left">varchar</td>
-          <td style="text-align: left">20</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">非空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">经理</td>
-          <td style="text-align: left">varchar</td>
-          <td style="text-align: left">20</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">非空</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th style="text-align:left">字段名</th>
+<th style="text-align:left">数据类型</th>
+<th style="text-align:left">长度</th>
+<th style="text-align:left">主键</th>
+<th style="text-align:left">外键</th>
+<th style="text-align:left">约束</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">部门号</td>
+<td style="text-align:left">char</td>
+<td style="text-align:left">10</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">非空</td>
+</tr>
+<tr>
+<td style="text-align:left">部门名称</td>
+<td style="text-align:left">varchar</td>
+<td style="text-align:left">20</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">非空</td>
+</tr>
+<tr>
+<td style="text-align:left">经理</td>
+<td style="text-align:left">varchar</td>
+<td style="text-align:left">20</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">非空</td>
+</tr>
+</tbody>
 </table>
 <p>商品表：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: left">字段名</th>
-          <th style="text-align: left">数据类型</th>
-          <th style="text-align: left">长度</th>
-          <th style="text-align: left">主键</th>
-          <th style="text-align: left">外键</th>
-          <th style="text-align: left">约束</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">商品代号</td>
-          <td style="text-align: left">char</td>
-          <td style="text-align: left">10</td>
-          <td style="text-align: left">是</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">非空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">商品名</td>
-          <td style="text-align: left">varchar</td>
-          <td style="text-align: left">20</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">非空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">生产厂家</td>
-          <td style="text-align: left">char</td>
-          <td style="text-align: left">10</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">是</td>
-          <td style="text-align: left">非空，参照厂家表的厂家代号</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">价格</td>
-          <td style="text-align: left">decimal</td>
-          <td style="text-align: left">10,2</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">非空，大于0</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">型号</td>
-          <td style="text-align: left">varchar</td>
-          <td style="text-align: left">20</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">非空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">部门号</td>
-          <td style="text-align: left">char</td>
-          <td style="text-align: left">10</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">是</td>
-          <td style="text-align: left">非空，参照商品部表的部门号</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>长度</th>
+<th>主键</th>
+<th>外键</th>
+<th>约束</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>商品代号</td>
+<td>char</td>
+<td>10</td>
+<td>是</td>
+<td>否</td>
+<td>非空</td>
+</tr>
+<tr>
+<td>商品名</td>
+<td>varchar</td>
+<td>20</td>
+<td>否</td>
+<td>否</td>
+<td>非空</td>
+</tr>
+<tr>
+<td>生产厂家</td>
+<td>char</td>
+<td>10</td>
+<td>否</td>
+<td>是</td>
+<td>非空，参照厂家表的厂家代号</td>
+</tr>
+<tr>
+<td>价格</td>
+<td>decimal</td>
+<td>10,2</td>
+<td>否</td>
+<td>否</td>
+<td>非空，大于0</td>
+</tr>
+<tr>
+<td>型号</td>
+<td>varchar</td>
+<td>20</td>
+<td>否</td>
+<td>否</td>
+<td>非空</td>
+</tr>
+<tr>
+<td>部门号</td>
+<td>char</td>
+<td>10</td>
+<td>否</td>
+<td>是</td>
+<td>非空，参照商品部表的部门号</td>
+</tr>
+</tbody>
 </table>
 <p>厂家表：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: left">字段名</th>
-          <th style="text-align: left">数据类型</th>
-          <th style="text-align: left">长度</th>
-          <th style="text-align: left">主键</th>
-          <th style="text-align: left">外键</th>
-          <th style="text-align: left">约束</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">厂家代号</td>
-          <td style="text-align: left">char</td>
-          <td style="text-align: left">10</td>
-          <td style="text-align: left">是</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">非空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">厂名</td>
-          <td style="text-align: left">varchar</td>
-          <td style="text-align: left">20</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">非空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">地址</td>
-          <td style="text-align: left">varchar</td>
-          <td style="text-align: left">50</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">非空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">提供价格</td>
-          <td style="text-align: left">decimal</td>
-          <td style="text-align: left">10,2</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">否</td>
-          <td style="text-align: left">非空，大于0</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>长度</th>
+<th>主键</th>
+<th>外键</th>
+<th>约束</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>厂家代号</td>
+<td>char</td>
+<td>10</td>
+<td>是</td>
+<td>否</td>
+<td>非空</td>
+</tr>
+<tr>
+<td>厂名</td>
+<td>varchar</td>
+<td>20</td>
+<td>否</td>
+<td>否</td>
+<td>非空</td>
+</tr>
+<tr>
+<td>地址</td>
+<td>varchar</td>
+<td>50</td>
+<td>否</td>
+<td>否</td>
+<td>非空</td>
+</tr>
+<tr>
+<td>提供价格</td>
+<td>decimal</td>
+<td>10,2</td>
+<td>否</td>
+<td>否</td>
+<td>非空，大于0</td>
+</tr>
+</tbody>
 </table>
 <p><strong>④</strong> <strong>用SQL创建数据表，填入模拟的数据信息</strong></p>
 <ol>
@@ -562,6 +562,8 @@
 
   
   
+  
+    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-WE6L6RF96W"></script>
       <script>
         var doNotTrack = false;
@@ -576,6 +578,10 @@
           gtag('config', 'G-WE6L6RF96W');
         }
       </script>
+    
+  
+
+
 
 </body>
 

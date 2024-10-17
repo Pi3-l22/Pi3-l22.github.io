@@ -206,42 +206,42 @@
 </ul>
 <h3 id="术语">术语</h3>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: left"><strong>术语/缩略词</strong></th>
-          <th style="text-align: left"><strong class=chinese>解释</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">One-time Pad (OTP)</td>
-          <td style="text-align: left">一次性密码本，一种理论上不可破解的加密算法</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">AES-256</td>
-          <td style="text-align: left">高级加密标准，256位密钥</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">ChaCha20</td>
-          <td style="text-align: left">一种高效安全的流加密算法，256位密钥</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">Xchacha20</td>
-          <td style="text-align: left">ChaCha20的一个变种，增加了密钥流的安全性</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">SM4</td>
-          <td style="text-align: left">一种高安全性和高效率的国密对称加密算法</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">PBKDF2</td>
-          <td style="text-align: left">生成加密密钥的密码派生函数，多轮迭代哈希实现</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">ECB</td>
-          <td style="text-align: left">一种块加密模式，每个块的加密都是独立的</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th><strong>术语/缩略词</strong></th>
+<th><strong class=chinese>解释</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One-time Pad (OTP)</td>
+<td>一次性密码本，一种理论上不可破解的加密算法</td>
+</tr>
+<tr>
+<td>AES-256</td>
+<td>高级加密标准，256位密钥</td>
+</tr>
+<tr>
+<td>ChaCha20</td>
+<td>一种高效安全的流加密算法，256位密钥</td>
+</tr>
+<tr>
+<td>Xchacha20</td>
+<td>ChaCha20的一个变种，增加了密钥流的安全性</td>
+</tr>
+<tr>
+<td>SM4</td>
+<td>一种高安全性和高效率的国密对称加密算法</td>
+</tr>
+<tr>
+<td>PBKDF2</td>
+<td>生成加密密钥的密码派生函数，多轮迭代哈希实现</td>
+</tr>
+<tr>
+<td>ECB</td>
+<td>一种块加密模式，每个块的加密都是独立的</td>
+</tr>
+</tbody>
 </table>
 <h2 id="项目任务需求">项目任务需求</h2>
 <h3 id="安全性需求">安全性需求</h3>
@@ -611,90 +611,90 @@
 <p>数据库模块负责安全存储用户的敏感信息，用户名、密码信息。在本项目中，数据库模块的操作较少，相较数据加密模块来说更为简单，但是为了实现跨平台的多端同步，我们将数据库部署在远程服务器上，因此需要注意数据库的本身的防护，设置强密码，开启权限控制，提高数据库的安全性。而在数据库之内，由于数据都是加密处理过后的，因此数据都比较安全，数据库模块设计的重点在于数据库表的设计，以及数据库的操作。</p>
 <p>用户表</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: left">字段</th>
-          <th style="text-align: left">类型</th>
-          <th style="text-align: left">说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">username</td>
-          <td style="text-align: left">varchar(255)</td>
-          <td style="text-align: left">主键，不能为空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">password_hash</td>
-          <td style="text-align: left">varchar(255)</td>
-          <td style="text-align: left">不能为空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">created_at</td>
-          <td style="text-align: left">datetime</td>
-          <td style="text-align: left">自动填入当前时间</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>username</td>
+<td>varchar(255)</td>
+<td>主键，不能为空</td>
+</tr>
+<tr>
+<td>password_hash</td>
+<td>varchar(255)</td>
+<td>不能为空</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td>自动填入当前时间</td>
+</tr>
+</tbody>
 </table>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#000">username</span> <span style="color:#a90d91">VARCHAR</span>(<span style="color:#1c01ce">255</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span> <span style="color:#a90d91">PRIMARY</span> <span style="color:#a90d91">KEY</span>,
 </span></span><span style="display:flex;"><span><span style="color:#000">password_hash</span> <span style="color:#a90d91">VARCHAR</span>(<span style="color:#1c01ce">255</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span>,
 </span></span><span style="display:flex;"><span><span style="color:#000">created_at</span> <span style="color:#a90d91">TIMESTAMP</span> <span style="color:#a90d91">DEFAULT</span> <span style="color:#a90d91">CURRENT_TIMESTAMP</span>
 </span></span></code></pre></div><p>密码表</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: left">字段</th>
-          <th style="text-align: left">类型</th>
-          <th style="text-align: left">说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">username</td>
-          <td style="text-align: left">varchar(255)</td>
-          <td style="text-align: left">外键连接用户表，不能为空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">website_name</td>
-          <td style="text-align: left">varchar(255)</td>
-          <td style="text-align: left">不能为空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">website</td>
-          <td style="text-align: left">varchar(255)</td>
-          <td style="text-align: left"></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">account</td>
-          <td style="text-align: left">varchar(255)</td>
-          <td style="text-align: left">不能为空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">password_encrypted</td>
-          <td style="text-align: left">varchar(255)</td>
-          <td style="text-align: left">不能为空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">encrypted_method</td>
-          <td style="text-align: left">varchar(50)</td>
-          <td style="text-align: left">不能为空</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">note</td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left"></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">created_at</td>
-          <td style="text-align: left">datetime</td>
-          <td style="text-align: left">自动填入当前时间</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">(username, website_name, account)为主键</td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>username</td>
+<td>varchar(255)</td>
+<td>外键连接用户表，不能为空</td>
+</tr>
+<tr>
+<td>website_name</td>
+<td>varchar(255)</td>
+<td>不能为空</td>
+</tr>
+<tr>
+<td>website</td>
+<td>varchar(255)</td>
+<td></td>
+</tr>
+<tr>
+<td>account</td>
+<td>varchar(255)</td>
+<td>不能为空</td>
+</tr>
+<tr>
+<td>password_encrypted</td>
+<td>varchar(255)</td>
+<td>不能为空</td>
+</tr>
+<tr>
+<td>encrypted_method</td>
+<td>varchar(50)</td>
+<td>不能为空</td>
+</tr>
+<tr>
+<td>note</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>datetime</td>
+<td>自动填入当前时间</td>
+</tr>
+<tr>
+<td>(username, website_name, account)为主键</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
 </table>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#000">username</span> <span style="color:#a90d91">VARCHAR</span>(<span style="color:#1c01ce">255</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span>,
 </span></span><span style="display:flex;"><span><span style="color:#000">website_name</span> <span style="color:#a90d91">VARCHAR</span>(<span style="color:#1c01ce">255</span>) <span style="color:#a90d91">NOT</span> <span style="color:#a90d91">NULL</span>,
@@ -1083,6 +1083,8 @@
 
   
   
+  
+    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-WE6L6RF96W"></script>
       <script>
         var doNotTrack = false;
@@ -1097,6 +1099,10 @@
           gtag('config', 'G-WE6L6RF96W');
         }
       </script>
+    
+  
+
+
 
 </body>
 
