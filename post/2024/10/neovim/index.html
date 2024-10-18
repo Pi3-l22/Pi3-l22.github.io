@@ -74,7 +74,7 @@
   <meta itemprop="description" content="Neovim 配置与学习">
   <meta itemprop="datePublished" content="2024-10-11T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-10-11T00:00:00+00:00">
-  <meta itemprop="wordCount" content="4605">
+  <meta itemprop="wordCount" content="7108">
   <meta itemprop="keywords" content="技术,Neovim">
 
   
@@ -155,7 +155,14 @@
       <ul>
         <li><a href="#mode-模式">Mode 模式</a></li>
         <li><a href="#register-寄存器">Register 寄存器</a></li>
-        <li><a href="#配套练习">配套练习</a></li>
+        <li><a href="#练习题">练习题</a></li>
+      </ul>
+    </li>
+    <li><a href="#philosophy">Philosophy</a>
+      <ul>
+        <li><a href="#修改的定义">修改的定义</a></li>
+        <li><a href="#可重复修改的技巧">可重复修改的技巧</a></li>
+        <li><a href="#练习题-1">练习题</a></li>
       </ul>
     </li>
   </ul>
@@ -414,12 +421,138 @@
 <blockquote>
 <p>在 Insert Mode 下也可以使用寄存器，按下 <code>Ctrl + r + 寄存器符号</code> 即可，如 <code>Ctrl + r + 0</code> 可以粘贴 Normal Mode 下复制的文本，<code>Ctrl + r + =</code> 可唤起表达式寄存器。</p>
 </blockquote>
-<h3 id="配套练习">配套练习</h3>
+<h3 id="练习题">练习题</h3>
 <ul>
-<li><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/keynotes_cn.md">keynotes_cn</a></li>
-<li><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/practice_cn.md">practice_cn</a></li>
+<li><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/keynotes_cn.md">总结笔记</a></li>
+<li><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/practice_cn.md">练习说明</a></li>
 <li><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/text">text</a></li>
 <li><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/text2">text2</a></li>
+</ul>
+<h4 id="习题一">习题一</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># 克隆仓库</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/zhangddjs/pde-tutorial.git
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 切换到习题目录</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">cd</span> pde-tutorial/neovim/2modenregister/
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 打开练习说明</span>
+</span></span><span style="display:flex;"><span>neovim practice_cn.md
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 使用垂直分屏</span>
+</span></span><span style="display:flex;"><span>:vs
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 左右分屏切换</span>
+</span></span><span style="display:flex;"><span><span style="color:#c41a16">`</span>Ctrl + h<span style="color:#c41a16">`</span> <span style="color:#c41a16">`</span>Ctrl + l<span style="color:#c41a16">`</span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 打开text文件</span>
+</span></span><span style="display:flex;"><span>:e text
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>1. r + i + n
+</span></span><span style="display:flex;"><span>2. diw + 5j + ve + p + 5k + p
+</span></span><span style="display:flex;"><span>3. dl + e + p
+</span></span><span style="display:flex;"><span>4. r7  /  v + l + c + <span style="color:#1c01ce">8</span>
+</span></span><span style="display:flex;"><span>5. gu + iw
+</span></span><span style="display:flex;"><span>6. yiw + ve + p
+</span></span><span style="display:flex;"><span>7. d3j / 4dd
+</span></span><span style="display:flex;"><span>8. line<span style="color:#000">(</span><span style="color:#c41a16">&#39;.&#39;</span><span style="color:#000">)</span> + G + p
+</span></span></code></pre></div><p><strong class=chinese>讲解</strong>：</p>
+<ol>
+<li><code>xp</code> ：使用 <code>x</code> 删除 n，再使用 <code>p</code> 把 n 粘贴到 i 后面</li>
+<li><code>dd + 光标移动 + p</code>：使用 <code>dd</code> 删除第 5 行，<code>4j</code> 将光标移动到第 9 行，<code>p</code> 粘贴到第 9 行。再用同样操作将原来第 10 行删除并粘贴到第 5 行。
+<ol>
+<li>使用 <code>V</code> 进入面向行的 Visual Mode 直接进行替换。</li>
+<li>进入 Ex Mode，使用 <code>m10</code> 可以将第 5 行移动到第 10 行，使用 <code>m4</code> 将原先第 10 行移动到第 5 行</li>
+</ol>
+</li>
+<li><code>x + e + p</code>：将开头的 6 删除，将光标移动到词尾并粘贴
+<ol>
+<li>使用 <code>v + e + d + P</code>，进入 Visual Mode 将 line 字符删除并粘贴到开头</li>
+<li>使用 <code>x</code> 删除开头的 6，使用 <code>A</code> 从末尾进入 Insert Mode，按下 <code>Ctrl + r + &quot;</code> 使用无名寄存器粘贴 6 到末尾</li>
+</ol>
+</li>
+<li>第 7 行使用 <code>x</code>：删除 - 号，也可以使用 <code>14 + Ctrl + a</code>，让末尾数字 -7 与 14 相加，得到 7；第 8 行也是类似操作 <code>92 + Ctrl + x</code> 让末尾数字与 92 相减</li>
+<li><code>guaw</code>：转化单词变为小写
+<ol>
+<li>使用 <code>V</code> 进入 Visua Mode，按下 <code>~</code> 整行转化大小写</li>
+</ol>
+</li>
+<li><code>ye + v + iq + &quot;0 + p</code>：复制 line，<code>v</code> 进入 Visual Mode 使用 <code>iq</code> 选择引号中的字符，使用 <code>&quot;0 + p</code> 复制寄存器中的内容粘贴替换，使用 <code>vib</code> 选中括号内的字符，同样使用 <code>&quot;0 + p</code> 复制寄存器中的内容粘贴替换，也可以使用 <code>vi{</code> 和 <code>vi&lt;</code> 来选择指定括号内的字符，使用复制寄存器粘贴</li>
+<li><code>V + 3j + d</code>：使用 Visual Mode 选择 4 行并删除
+<ol>
+<li><code>4dd</code>：在 11 行删除 4 行</li>
+<li><code>:11,14d</code>：在 Ex Mode 中使用命令删除</li>
+</ol>
+</li>
+<li><code>G + A + Ctrl + R + = + line('.')</code>：跳转到最后一行从末尾进入 Insert Mode，使用表达式寄存器，使用 <code>line('.')</code> 获取当前行行号并粘贴</li>
+</ol>
+<h4 id="思考题">思考题</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># 创建水平分屏</span>
+</span></span><span style="display:flex;"><span>:split
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 编辑text2</span>
+</span></span><span style="display:flex;"><span>e text2
+</span></span></code></pre></div><p><strong class=chinese>讲解</strong>：</p>
+<p>按照直觉，我们应该进入 Visual Mode 进行批量编辑，但是无论是面向行还是面向列块的 Visual Mode 都不能满足题目要求。<code>Ctrl + v</code> 进入面向列块的模式，选中所有行按下 <code>A</code> 进入 Insert Mode，这时候的光标会按照最长那一行的末尾对齐排列，并不符合要求。</p>
+<p>技巧，在 <code>Ctrl + v</code> 进入面向列块的 Visual Mode 中，可以按下 <code>$</code> 指选择的每一行都截止到行尾，此时 <code>A</code> 进入 Insert Mode 输入的字符就会出现在每一行的结尾。</p>
+<h2 id="philosophy">Philosophy</h2>
+<blockquote>
+<p>Neovim 的使用哲学：使修改可重复</p>
+<p>Neovim 中的“瑞士军刀” ：<code>.</code> 键的使用</p>
+</blockquote>
+<p>在平时我们处理文本时经常会遇到一些重复性的工作，例如多次删除/添加相同字符，重复执行相同的操作等，在传统的文本编辑器中，这需要手动重复操作，没有很好的办法，然而在 Neovim 中则提供了一种高效的解决方案—— <code>Dot .</code> 键。</p>
+<p>Dot <code>.</code> 键可以重复上一次的操作，成倍提升效率，也使操作更加流畅。</p>
+<h3 id="修改的定义">修改的定义</h3>
+<p>Dot 键的官方描述是重复上一次<strong class=chinese>修改</strong> <code>Repeat last change</code>，需要注意的是 Neovim 中定义的<strong class=chinese>修改单位</strong>是什么。</p>
+<p>正如在 <a href="#Mode%20&amp;%20Register">Mode &amp; Register</a> 中提到的操作符待处理模式 <code>Operator + Motion = Action</code> 的公式，在 <strong>Normal Mode</strong> 下，大部分的文本编辑操作，如 <code>daw yep</code> 等都算作是<strong class=chinese>一次修改</strong>，因此可以使用 Dot <code>.</code> 键进行重复。同样的，每次重复和修改操作都可以用 <code>u</code> 进行撤销。</p>
+<p>然而，在 <strong>Insert Mode</strong> 下修改的定义有所不同，只有在<strong>进入 Insert Mode 开始到退出 Insert Mode</strong> 中的所有操作才算作是<strong class=chinese>一次修改</strong>，并且在 Insert Mode 编辑文本的过程中<strong class=chinese>移动了光标</strong>，修改的状态也会被<strong class=chinese>重置</strong>，即只有最后一次<strong class=chinese>光标移动之后</strong>的操作才算作<strong class=chinese>一次修改</strong>。</p>
+<p>虽然以上的 Dot 键介绍很简单，在这只是开始。针对同一个文本操作，Neovim 可以通过多种不同的快捷键组合方式来实现，虽然这极具灵活性，但也要求我们在组合快捷键时掌握一些技巧，来充分实现<strong class=chinese>修改的可重复</strong>，真正发挥 Dot 键的威力，这便是 Neovim 的使用哲学</p>
+<h3 id="可重复修改的技巧">可重复修改的技巧</h3>
+<ol>
+<li><strong>技巧 1</strong>：<strong>减少无关移动 <code>Reduce Unnecessary Movements</code></strong></li>
+</ol>
+<p>回忆上一节的<a href="#%E6%80%9D%E8%80%83%E9%A2%98">思考题</a>，我们需要给不同长短的各行末尾添加 <code>ok</code> 字符。</p>
+<p>一种可行的方法是使用 <code>$</code> 到行尾，再按 <code>a</code> 插入 <code>ok</code>，然后使用 <code>j$.</code> 重复操作，但是这种方式仍显低效，因为每行都需要重复按 <code>$</code></p>
+<p>但是如果使用的是 <code>A</code> 而不是 <code>$a</code>，就可以将移动操作记录到 <code>.</code> 中，使用 <code>.</code> 就可以重复操作，接下来就可以使用 <code>j.</code> 让每行末尾都添加相同的字符。这是因为 <code>A</code> 同时移动光标并进入 Insert Mode，这并不会重置 Neovim 定义的一次修改操作。</p>
+<p>下面是常用<strong class=chinese>可重复快捷键</strong>的替换：</p>
+<ul>
+<li><code>$a ---&gt; A</code> 行尾插入</li>
+<li><code>^i ---&gt; I</code> 行首插入</li>
+<li><code>ko ---&gt; O</code> 向上新开一行插入</li>
+<li><code>d$a / Da ---&gt; C</code> 删除光标后字符到行尾并插入</li>
+<li>……</li>
+</ul>
+<ol start="2">
+<li><strong>技巧 2</strong>：<strong>善用 <code>a</code> 和 <code>i</code>  <code>Use a and i Wisely</code></strong></li>
+</ol>
+<p>当我们光标在一个单词末尾，想删除这个单词时，可以使用 <code>dbx</code> 或者 <code>bdw</code>，虽然这两种操作都起作用但是却无法使用 <code>.</code> 键重复，因为在 <code>dbx</code> 中实际上有两个修改行为，<code>.</code> 只记录了最后一个 <code>x</code> 的修改行为，按下 <code>.</code> 只能删除单个字符。同样 <code>bdw</code> 中，开头的 <code>b</code> 只是单纯移动了光标，不能算作是一个修改，因此 <code>.</code> 键只记录了 <code>dw</code>，故只能删除单词在光标之后的部分。</p>
+<p>为了实现操作的完整可重复性，这里推荐使用 <code>diw</code> 或者 <code>daw</code>，这样不论光标在单词的哪个位置都可以删除整个单词，并且可以使用 <code>.</code> 键重复。</p>
+<p>类似的操作还有：</p>
+<ul>
+<li><code>diq</code>：删除引号内的字符 <code>delete inside quote</code></li>
+<li><code>dab</code>： 删除括号周围（包括 <code>()[]{}</code> 括号）的字符 <code>delete around block</code></li>
+<li>……</li>
+</ul>
+<ol start="3">
+<li><strong>技巧 3</strong>：<strong>只在必要时使用可视命令 <code>Use Visual Mode Only When Necessary</code></strong></li>
+</ol>
+<p>我们在删除当前单词时，除了通过 <code>diw / daw</code>，还可以使用 <code>vawd</code>，但是这是使用 <code>.</code> 键在另一个单词上重复操作，效果往往不如预期，这是因为 <code>.</code> 在重复 Visual Mode 中的操作时会按照上次<strong class=chinese>高亮文本的长度</strong>产生作用，因此对不同长度的单词只能删除固定长度的字符。</p>
+<blockquote>
+<p>因此 <code>.</code> 键只有在处理<strong>面向行的 Visual Mode</strong> 时效果才更加</p>
+</blockquote>
+<p>所以在一般情况下，能用操作符完成的命令，就避免使用可视模式下的命令，如：</p>
+<ul>
+<li><code>vawd ---&gt; daw</code>：删除单词</li>
+<li><code>viwc ---&gt; ciw</code>：删除单词并进入 Insert Mode</li>
+<li><code>viqc ---&gt; ciq</code>：删除引号内的字符并进入 Insert Mode</li>
+</ul>
+<ol start="4">
+<li><strong>技巧 4</strong>：<strong>以退为进 <code>Step Back to Move Forward</code></strong></li>
+</ol>
+<p>如果我们要给当前行的每个空格前后加上字母 <code>a</code>，进入插入模式后，在坐标插入 <code>a</code> 后避免不了要将光标移动到另一边，光标一旦移动，操作就变得不可重复。</p>
+<p>这时可以借助“以退为进”的技巧，进入插入模式后，我们先删除空格，再输入 <code>a a</code>，这样就可以完成一个可重复的操作，接下来只需要 <code>f .;.;.;……</code> 就可以完成后续空格周围添加 <code>a</code> 的操作。</p>
+<ol start="5">
+<li><strong>技巧 5</strong>：<strong>让移动可重复 <code>Make Movements Repeatable</code></strong></li>
+</ol>
+<p>回顾前几个技巧可以发现，一个理想的 Dot 操作通常伴随着可重复的移动指令，比如 <code>j.j.j.j.</code> <code>w.w.w.w.</code> <code>;.;.;.;.</code> 等。除此之外，还可以在单词上按下 <code>*</code> 进入单词匹配模式，按下 <code>*</code> 或 <code>n</code> 在相同单词之间跳转，同样可以和 Dot 键组合成 <code>*.*.*.*.</code> 或者 <code>n.n.n.n.</code>。</p>
+<p>像以上这种，一次按键用于移动，另一次按键执行的编辑模式，也被称为“<strong>Dot 范式</strong>” <code>. pardigm</code></p>
+<h3 id="练习题-1">练习题</h3>
+<ul>
+<li><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/3philosophy/keynotes_cn.md">总结笔记</a></li>
+<li><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/3philosophy/practice_cn.md">练习说明</a></li>
+<li><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/3philosophy/text">text</a></li>
 </ul>
     
   </article>
