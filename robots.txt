@@ -1,2 +1,3 @@
 User-agent: *
-Sitemap: https://blog.pi3.fun/sitemap.xml
+# Sitemap: https://blog.pi3.fun/sitemap.xml
+Allow: /
