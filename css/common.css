@@ -118,7 +118,7 @@
     src: url('../font/t1xtt.ttf');
 }
 
-@font-face {
+/* @font-face {
     font-display: swap;
     font-family: 'consolas';
     font-style: normal;
@@ -148,7 +148,7 @@
     font-style: italic;
     font-weight: bold;
     src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/consolaz.ttf');
-}
+} */
 
 /* 3D */
 @font-face {
