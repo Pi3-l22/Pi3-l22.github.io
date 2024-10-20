@@ -118,7 +118,7 @@
     src: url('../font/t1xtt.ttf');
 }
 
-/* @font-face {
+@font-face {
     font-display: swap;
     font-family: 'consolas';
     font-style: normal;
@@ -126,7 +126,7 @@
     src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/consola.ttf');
 }
 
-@font-face {
+/* @font-face {
     font-display: swap;
     font-family: 'consolas';
     font-style: normal;
@@ -152,16 +152,8 @@
 
 /* 3D */
 @font-face {
-    font-family: Royalacid;
-    src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/Royalacid.ttf');
-}
-@font-face {
     font-family: dimis;
     src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/dimis.ttf');
-}
-@font-face {
-    font-family: HangedLetters;
-    src: url(https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/Hanged_Letters.ttf);
 }
 
 /* global */
