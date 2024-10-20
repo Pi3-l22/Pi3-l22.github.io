@@ -2,12 +2,37 @@
   
   <url>
     <loc>https://blog.pi3.fun/</loc>
-    <lastmod>2024-10-11</lastmod>
+    <lastmod>2024-10-20</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pi3.fun/tags/html/</loc>
+    <lastmod>2024-10-20</lastmod>
   </url>
   
   <url>
     <loc>https://blog.pi3.fun/tags/index/</loc>
-    <lastmod>2024-10-11</lastmod>
+    <lastmod>2024-10-20</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pi3.fun/post/</loc>
+    <lastmod>2024-10-20</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pi3.fun/tags/</loc>
+    <lastmod>2024-10-20</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pi3.fun/tags/%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2024-10-20</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.pi3.fun/post/2024/10/%E5%9C%A8html%E4%B8%AD%E6%8F%92%E5%85%A5pdf/</loc>
+    <lastmod>2024-10-20</lastmod>
   </url>
   
   <url>
@@ -17,21 +42,6 @@
   
   <url>
     <loc>https://blog.pi3.fun/post/2024/10/neovim/</loc>
-    <lastmod>2024-10-11</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.pi3.fun/post/</loc>
-    <lastmod>2024-10-11</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.pi3.fun/tags/</loc>
-    <lastmod>2024-10-11</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.pi3.fun/tags/%E6%8A%80%E6%9C%AF/</loc>
     <lastmod>2024-10-11</lastmod>
   </url>
   

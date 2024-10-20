@@ -8,13 +8,35 @@
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
-    <lastBuildDate>Fri, 11 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 20 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HTML</title>
+      <link>https://blog.pi3.fun/tags/html/</link>
+      <pubDate>Sun, 20 Oct 2024 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://blog.pi3.fun/tags/html/</guid>
+      
+      <description></description>
+      
+    </item>
+    
     <item>
       <title>Index</title>
       <link>https://blog.pi3.fun/tags/index/</link>
-      <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 20 Oct 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://blog.pi3.fun/tags/index/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>技术</title>
+      <link>https://blog.pi3.fun/tags/%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Sun, 20 Oct 2024 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://blog.pi3.fun/tags/%E6%8A%80%E6%9C%AF/</guid>
       
       <description></description>
       
@@ -26,17 +48,6 @@
       <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://blog.pi3.fun/tags/neovim/</guid>
-      
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>技术</title>
-      <link>https://blog.pi3.fun/tags/%E6%8A%80%E6%9C%AF/</link>
-      <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
-      <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://blog.pi3.fun/tags/%E6%8A%80%E6%9C%AF/</guid>
       
       <description></description>
       
@@ -103,17 +114,6 @@
       <pubDate>Wed, 25 Sep 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>https://blog.pi3.fun/tags/python/</guid>
-      
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>English</title>
-      <link>https://blog.pi3.fun/tags/english/</link>
-      <pubDate>Fri, 20 Sep 2024 00:00:00 +0000</pubDate>
-      <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://blog.pi3.fun/tags/english/</guid>
       
       <description></description>
       

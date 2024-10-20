@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="在HTML中插入PDF的多种方式">
+  
+
+  
+  <link rel="icon" href="https://blog.pi3.fun/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="https://blog.pi3.fun/post/2024/10/%E5%9C%A8html%E4%B8%AD%E6%8F%92%E5%85%A5pdf/">
+  <meta property="og:site_name" content="Pi3&#39;Notes">
+  <meta property="og:title" content="在HTML中插入PDF">
+  <meta property="og:description" content="在HTML中插入PDF的多种方式">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-10-20T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-10-20T00:00:00+00:00">
+    <meta property="article:tag" content="技术">
+    <meta property="article:tag" content="HTML">
+
+
+  
+  <link rel="canonical" href="https://blog.pi3.fun/post/2024/10/%E5%9C%A8html%E4%B8%AD%E6%8F%92%E5%85%A5pdf/">
+
+  
+  
+  
+  <meta itemprop="name" content="在HTML中插入PDF">
+  <meta itemprop="description" content="在HTML中插入PDF的多种方式">
+  <meta itemprop="datePublished" content="2024-10-20T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2024-10-20T00:00:00+00:00">
+  <meta itemprop="wordCount" content="760">
+  <meta itemprop="keywords" content="技术,HTML">
+
+  
+  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/content.css'>
+
+  
+  
+  <title>在HTML中插入PDF - Pi3&#39;Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='https://blog.pi3.fun/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://blog.pi3.fun/">Pi3&#39;Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">主页</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/articles/">文章</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>在HTML中插入PDF</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='https://blog.pi3.fun/tags/%E6%8A%80%E6%9C%AF'>#技术</a>
+    
+    <a class="link" href='https://blog.pi3.fun/tags/html'>#HTML</a>
+    
+  </div>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#iframe-标签">iframe 标签</a></li>
+    <li><a href="#embed-标签">embed 标签</a></li>
+    <li><a href="#object-标签">object 标签</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <p>在 HTML 中插入 PDF 有多种方式：iframe、embed、object 等</p>
+<h2 id="iframe-标签">iframe 标签</h2>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/iframe">iframe | MDN</a></p>
+<p>优点：兼容性好，几乎所有浏览器都支持 iframe 标签，属性多，支持回退方案</p>
+<p>缺点：需要指定头信息：<code>Content-Type: application/pdf</code>，否则浏览器会自动下载文件</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#000">iframe</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#836c28">src</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;./test.pdf&#34;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#836c28">title</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;iframe Example 1&#34;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#836c28">width</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;400&#34;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#836c28">height</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;300&#34;</span> 
+</span></span><span style="display:flex;"><span>   <span style="color:#836c28">allow</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;fullscreen&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>   你的浏览器不支持PDF展示，请&lt;<span style="color:#000">a</span> <span style="color:#836c28">href</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;./test.pdf&#34;</span>&gt;下载PDF&lt;/<span style="color:#000">a</span>&gt;后查看
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#000">iframe</span>&gt;
+</span></span></code></pre></div><p>需要注意的是，iframe 中的 <code>width</code> 和 <code>height</code> 属性只能指定像素大小，不能指定视口宽高。如果需要指定可以通过 <code>style</code> 属性来指定 <code>css</code> ，如：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#000">iframe</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#836c28">src</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;./test.pdf&#34;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#836c28">style</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;width:100%;height:100vh;border:none;&#34;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#836c28">allow</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;fullscreen&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#000">iframe</span>&gt;
+</span></span></code></pre></div><blockquote>
+<p>虽然 iframe 标签浏览器兼容性好，并且属性很多、方便自定义，但是需要注意其中的很多属性，不同的浏览器支持情况并不一样。</p>
+</blockquote>
+<h2 id="embed-标签">embed 标签</h2>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/embed">embed | MDN</a></p>
+<p>优点：标签自闭合，编写简单</p>
+<p>缺点：兼容性不好，有些浏览器需要插件的支持；标签自闭合，不提供回退方案</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#000">embed</span> <span style="color:#836c28">src</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;./test.pdf&#34;</span> <span style="color:#836c28">type</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;application/pdf&#34;</span> <span style="color:#836c28">width</span><span style="color:#000">=</span><span style="color:#c41a16">640</span> <span style="color:#836c28">height</span><span style="color:#000">=</span><span style="color:#c41a16">480&#34;</span>&gt;
+</span></span></code></pre></div><p>不同于 iframe 标签，embed 标签可以指定展示文件的类型，如 PDF 可以写 <code>type=&quot;application/pdf&quot;</code> 来防止浏览器自动下载</p>
+<p>同样的 embed 中的 <code>width</code> 和 <code>height</code> 属性都是指定像素大小，要使用视口高度可以使用 <code>style</code> 属性：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#000">embed</span> <span style="color:#836c28">src</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;./test.pdf&#34;</span> <span style="color:#836c28">type</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;application/pdf&#34;</span> <span style="color:#836c28">style</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;width:100%;height:100vh;&#34;</span>&gt;
+</span></span></code></pre></div><h2 id="object-标签">object 标签</h2>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/object">object | MDN</a></p>
+<p>优点：浏览器兼容性好，属性多，支持多种类型文件，提供回退方案</p>
+<p>缺点：语法属性复杂</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#000">object</span> 
+</span></span><span style="display:flex;"><span>   <span style="color:#836c28">data</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;./test.pdf&#34;</span> 
+</span></span><span style="display:flex;"><span>   <span style="color:#836c28">type</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;application/pdf&#34;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#836c28">width</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;400&#34;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#836c28">height</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;300&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>   你的浏览器不支持PDF展示，请&lt;<span style="color:#000">a</span> <span style="color:#836c28">href</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;./test.pdf&#34;</span>&gt;下载PDF&lt;/<span style="color:#000">a</span>&gt;后查看
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#000">object</span>&gt;
+</span></span></code></pre></div><p>与 embed 类似，指定展示文件的类型，如 PDF 可以写 <code>type=&quot;application/pdf&quot;</code> 来防止浏览器自动下载</p>
+<p>同样可以使用 <code>style</code> 属性来指定 <code>css</code>，而不是使用 <code>width</code> 和 <code>height</code> 来指定像素宽高</p>
+<h2 id="总结">总结</h2>
+<ul>
+<li><strong>使用 <code>&lt;iframe&gt;</code></strong>：当需要嵌入完整的网页或需要一个独立网页元素时。</li>
+<li><strong>使用 <code>&lt;embed&gt;</code></strong>：当需要快速嵌入多媒体内容，并且需要简洁的语法时。</li>
+<li><strong>使用 <code>&lt;object&gt;</code></strong>：当需要嵌入多种类型的内容，并且希望提供备用内容时。</li>
+</ul>
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://blog.pi3.fun/post/2024/10/neovim/">← prev</a>
+    
+    
+    <a></a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+      <script src="https://giscus.app/client.js"
+        data-repo="Pi3-l22/Pi3-l22.github.io"
+        data-repo-id="R_kgDOMx7kWw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMx7kW84CjHMe"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_tritanopia"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span style="display: flex;align-items: center;">© 2021 - 2024<img src="https://p.sda1.dev/19/68796ec343c7a7eecbe99de4a9df6c66/rainbow.gif" width=20>By LiuChao</span>
+  </div>
+  
+  
+
+  
+
+  <div class="footnote">
+    <span><a class=link href=/index.xml><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/RSS.svg" width=12></a>  |  <a class=link href=https://github.com/Pi3-l22 Target=_ blank><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/GitHub.svg" width=40></a>  |  <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/Cc_by-nc-nd.svg.png" width=48></a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-WE6L6RF96W"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-WE6L6RF96W');
+        }
+      </script>
+    
+  
+
+
+
+</body>
+
+</html>
