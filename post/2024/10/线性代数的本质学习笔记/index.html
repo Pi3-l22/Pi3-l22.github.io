@@ -26,28 +26,34 @@
   
   
   
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
 <script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      processEscapes: true,
-      processEnvironments: true,
-    },
-    options: {
-      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
-        }
-  };
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
 </script>
-<script async defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script"></script>
 
 
   
 
   
-  <meta property="og:url" content="https://blog.pi3.fun/post/2024/10/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8%E7%AC%94%E8%AE%B0/">
+  <meta property="og:url" content="https://blog.pi3.fun/post/2024/10/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
   <meta property="og:site_name" content="Pi3&#39;s Notes">
-  <meta property="og:title" content="《线性代数的本质》笔记">
+  <meta property="og:title" content="《线性代数的本质》学习笔记">
   <meta property="og:description" content="视频课程：线性代数的本质——3Blue1Brown">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
@@ -59,12 +65,12 @@
 
 
   
-  <link rel="canonical" href="https://blog.pi3.fun/post/2024/10/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8%E7%AC%94%E8%AE%B0/">
+  <link rel="canonical" href="https://blog.pi3.fun/post/2024/10/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
   
   
   
-  <meta itemprop="name" content="《线性代数的本质》笔记">
+  <meta itemprop="name" content="《线性代数的本质》学习笔记">
   <meta itemprop="description" content="视频课程：线性代数的本质——3Blue1Brown">
   <meta itemprop="datePublished" content="2024-10-21T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-10-21T00:00:00+00:00">
@@ -77,7 +83,7 @@
 
   
   
-  <title>《线性代数的本质》笔记 - Pi3&#39;s Notes</title>
+  <title>《线性代数的本质》学习笔记 - Pi3&#39;s Notes</title>
   
 
   
@@ -120,7 +126,7 @@
 <main id="main" class="post">
   
   
-  <h1>《线性代数的本质》笔记</h1>
+  <h1>《线性代数的本质》学习笔记</h1>
   
   <div>
     <b>Keywords: </b>
