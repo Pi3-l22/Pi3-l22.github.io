@@ -41,7 +41,7 @@
     src: url('../font/lmroman-bold.woff');
 }
 
-/* @font-face {
+@font-face {
     font-display: swap;
     font-family: 'Latin Modern Roman';
     font-style: italic;
@@ -55,7 +55,7 @@
     font-style: italic;
     font-weight: normal;
     src: url('../font/lmroman-italic.woff');
-} */
+}
 
 @font-face {
     font-display: swap;
