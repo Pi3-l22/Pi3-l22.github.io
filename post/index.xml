@@ -8,7 +8,18 @@
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
-    <lastBuildDate>Sun, 20 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>《线性代数的本质》笔记</title>
+      <link>https://blog.pi3.fun/post/2024/10/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Mon, 21 Oct 2024 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>https://blog.pi3.fun/post/2024/10/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8%E7%AC%94%E8%AE%B0/</guid>
+      
+      <description>&lt;p&gt;视频课程：&lt;a href=&#34;https://www.bilibili.com/video/BV1ib411t7YR/&#34;&gt;线性代数的本质——3Blue1Brown&lt;/a&gt;&lt;/p&gt;</description>
+      
+    </item>
+    
     <item>
       <title>在HTML中插入PDF</title>
       <link>https://blog.pi3.fun/post/2024/10/%E5%9C%A8html%E4%B8%AD%E6%8F%92%E5%85%A5pdf/</link>
@@ -106,17 +117,6 @@
       <guid>https://blog.pi3.fun/post/2024/09/%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</guid>
       
       <description>&lt;p&gt;颉斌斌2025考研英语阅读应试宝笔记&lt;/p&gt;</description>
-      
-    </item>
-    
-    <item>
-      <title>Kali Linux的安装与配置</title>
-      <link>https://blog.pi3.fun/post/2024/02/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Thu, 15 Feb 2024 00:00:00 +0000</pubDate>
-      <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://blog.pi3.fun/post/2024/02/kali-linux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid>
-      
-      <description></description>
       
     </item>
     
