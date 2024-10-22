@@ -346,6 +346,11 @@
   </url>
   
   <url>
+    <loc>https://blog.pi3.fun/album/</loc>
+    <lastmod>0001-01-01</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.pi3.fun/articles/</loc>
     <lastmod>0001-01-01</lastmod>
   </url>
