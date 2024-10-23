@@ -74,7 +74,7 @@
   <meta itemprop="description" content="Neovim 配置与学习">
   <meta itemprop="datePublished" content="2024-10-11T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-10-11T00:00:00+00:00">
-  <meta itemprop="wordCount" content="7108">
+  <meta itemprop="wordCount" content="7960">
   <meta itemprop="keywords" content="技术,Neovim">
 
   
@@ -554,6 +554,49 @@
 <li><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/3philosophy/practice_cn.md">练习说明</a></li>
 <li><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/3philosophy/text">text</a></li>
 </ul>
+<p><strong>practice 1</strong>：</p>
+<ol>
+<li>方法一：使用 <code>Ctrl + v</code> 加上方向键选中日期，按下 <code>3 Ctrl a</code></li>
+<li>方法二：使用 Dot 键，在第一行的日期上执行 <code>3 Ctrl a</code> 后，按两次 <code>j.</code></li>
+</ol>
+<blockquote>
+<p><code>3 Ctrl a</code> 是给当前数字加上 3；<code>3 Ctrl x</code> 是给当前数字减去 3</p>
+<p>这样的操作在上一节中的练习题也有涉及</p>
+</blockquote>
+<p><strong>practice 2</strong>：</p>
+<ol>
+<li>方法一（<strong class=chinese>错误</strong>）：使用 <code>Ctrl v jj $</code> 选中三行末尾，使用 <code>Ctrl R = line('.')</code> 条件表达式寄存器，但是这样三行的行号都是 7，因此不对</li>
+<li>方法二（<strong class=chinese>错误</strong>）：在第一行使用 <code>A Ctrl R = line('.')</code> 插入行号后，通过 Dot 键 <code>j.j.</code> 但是依旧是都是 7，效果不理想</li>
+<li>方法三：常规方法，只能一行行手动输入行号</li>
+</ol>
+<p><strong>practice 3</strong>：</p>
+<ol>
+<li>方法一：以退为进的技巧，使用 <code>f +</code> 搜索加号，<code>a</code> 进入插入模式删除加号，输入 <code>空格+空格</code>，利用 Dot 键 <code>;.;.;.</code></li>
+</ol>
+<p><strong>practice 4</strong>：</p>
+<ol>
+<li>方法一：光标在长单词上，使用 <code>ciw</code> 删除单词并进入 Insert Mode ，输入 <code>(</code> 会自动补全右括号，调用无名寄存器并粘贴删除的单词 <code>Ctrl R &quot;</code> ，接着进入 Normal Mode 中使用 Dot 键 <code>*.*.*.</code> 或 <code>n.n.n.</code> 匹配相同的字符串并替换。</li>
+</ol>
+<p><strong>practice 5</strong>：</p>
+<ol>
+<li>方法一（<strong class=chinese>错误</strong>）：参考 practice 4 中的方法，使用 <code>ciw</code> 删除单词并进入插入模式，输入左右括号，再调用无名寄存器粘贴单词，最后使用 <code>w</code> 来到下一个单词按下 Dot 键 <code>.</code> 重复操作。这时会发现粘贴的依然是第一个单词，效果并不理想。</li>
+<li>方法二：手动添加左右括号</li>
+</ol>
+<blockquote>
+<p>结合 <strong>practice 2 和 5</strong> 的经验，我们发现 <strong>Dot 键</strong>并不会记录 Insert Mode 下的<strong class=chinese>寄存器命令</strong>，只会记录其<strong class=chinese>执行结果</strong></p>
+</blockquote>
+<p><strong>practice 6</strong>：</p>
+<ol>
+<li>方法一（<strong class=chinese>错误</strong>）：与上一节中的练习类似。先复制单词 <code>yiw</code>，使用 <code>viq</code> 选中引号内的单词，使用 <code>&quot;0 p</code> ，再使用 <code>w</code> 来下一个单词按下 Dot 键 <code>.</code> 效果并不理想。</li>
+</ol>
+<blockquote>
+<p>这时候回想<a href="#%E5%8F%AF%E9%87%8D%E5%A4%8D%E4%BF%AE%E6%94%B9%E7%9A%84%E6%8A%80%E5%B7%A7">技巧三</a>，只在必要时使用可视模式。这里 Dot 键之所以失效，其实也是使用了 Visual Mode。</p>
+</blockquote>
+<ol start="2">
+<li>方法二：类似于 practice 4。先复制单词 <code>yiw</code>，使用 <code>ciw</code> 删除引号内的单词并进入插入模式，按下 <code>Ctrl R 0</code> 粘贴复制寄存器中的字符，接着使用 <code>wl</code> 等光标移动快捷键（不能使用 Visual Mode 快捷键来选中）移动光标到下一个单词，使用 Dot 键 <code>.</code> 重复操作 <code>Wl.Wl.Wl.Wl.</code></li>
+</ol>
+<p>综上这些练习题，我们发现虽然 Dot 键十分强大，但是还是有一些局限的情况，正如 practice 2 和 5 以及最后一题的 Visual Mode 情况，我们依旧只能通过手动输入，而 Dot 键并不起作用。</p>
+<p>然而，Neovim 还有一个更强大的操作可以用来解决这些常用的固定的而不能很好使用 Dot 键的操作，这就是<strong>宏 Macro</strong>。</p>
     
   </article>
   <div class="paginator">
