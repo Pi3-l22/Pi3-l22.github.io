@@ -74,7 +74,7 @@
   <meta itemprop="description" content="视频课程：线性代数的本质——3Blue1Brown">
   <meta itemprop="datePublished" content="2024-10-21T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-10-21T00:00:00+00:00">
-  <meta itemprop="wordCount" content="2214">
+  <meta itemprop="wordCount" content="2110">
   <meta itemprop="keywords" content="学习,线性代数">
 
   
@@ -184,7 +184,7 @@
 <p>$\begin{bmatrix}  2 \\ 1 \end{bmatrix} = 2\  {\times} \begin{bmatrix}  1 \\ 0 \end{bmatrix} + \begin{bmatrix}  0 \\ 1 \end{bmatrix}$，可以看作是先向右移动两个单位，再向上移动一个单位。</p>
 <p>此时 $\begin{bmatrix}  1 \\ 0 \end{bmatrix}{\rightarrow}$ 和 $\begin{bmatrix}  1 \\ 0 \end{bmatrix}{\uparrow}$ 共同构成了二维空间中的<strong class=chinese>一组基</strong>，因为它们线性组合能表示二维空间中的<strong class=chinese>任何向量</strong>。</p>
 <p>在用一组基表示空间中任意一个向量的过程中，就利用了向量的<strong class=chinese>数乘</strong>和<strong class=chinese>相加</strong>。</p>
-<p>在二维空间中，只要 2 个向量<strong class=chinese>不共线</strong>，都能表示所有的向量，即是二维空间中的一组基。反过来，空间中的一组基张成的空间就是此空间。如 $\begin{bmatrix}  1 \\ 0 \end{bmatrix} \begin{bmatrix}  0 \\ 1 \end{bmatrix}$ 就张成了一个二维空间。此时可把向量简化成一个点，起点为原点，终点为向量坐标。</p>
+<p>在二维空间中，只要 2 个向量<strong class=chinese>不共线</strong>，都能表示所有的向量，即是二维空间中的一组基。反过来，空间中的一组基张成的空间就是此空间。如 $(1,0)\ (0,1)$ 就张成了一个二维空间。此时可把向量简化成一个点，起点为原点，终点为向量坐标。</p>
 <p>同理，在三维空间中，<strong class=chinese>线性无关</strong>的三个向量可以张成整个三维空间，这里的线性无关意味着三个向量两两不共面。若第三个向量落在前两个向量张成的平面中，则三个向量就不能张成一个三维空间，此时可称第三个向量与前两个向量<strong class=chinese>线性相关</strong>。此外，若其中两个向量共线也无法张成三维空间，这与共面是相同的道理。</p>
 <p>若要张成 n 维空间，则需要 n 个线性无关的向量，这 n 个线性无关向量也作为 n 维空间的一组基。</p>
 <blockquote>
@@ -196,12 +196,12 @@
 <p><strong class=chinese>变换</strong>本质是<strong class=chinese>函数</strong>的表达，接收一个向量并输出一个向量变换。空间中的有些变换十分复杂，但是线性变换被约束在一个线性维度。</p>
 <p>线性变换要求：①<strong class=chinese>变换后直线不能弯曲</strong>；②<strong class=chinese>原点必须保持固定</strong>。</p>
 <p>简单来讲，就是“<strong class=chinese>网格平行且等距分布</strong>”。</p>
-<p>如何求出变换后的向量位置：只需要观察一组基的变换过程。比如，在二维空间中记录 $\hat{i} \begin{bmatrix}  1 \\ 0 \end{bmatrix}$ 和 $\hat{j} \begin{bmatrix}  0 \\ 1 \end{bmatrix}$ 变换前后的坐标，即可确定一种变换，也可推导出任意向量变换后的位置。</p>
+<p>如何求出变换后的向量位置：只需要观察一组基的变换过程。比如，在二维空间中记录 $\hat{i} = (1,0)$ 和 $\hat{j} = (0,1)$ 变换前后的坐标，即可确定一种变换，也可推导出任意向量变换后的位置。</p>
 <p>举例：</p>
 <p>$\overrightarrow{v} = -1 \times \hat{i} + 2 \times \hat{j}$  ${\overset{线性变换}{\longrightarrow}}$  $\hat{v&rsquo;} = -1 \times \overrightarrow{i&rsquo;} + 2 \times \hat{j&rsquo;}$</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241021201842.png" alt="image.png"></p>
 <p>即 $\overrightarrow{v}$ 依旧用原来的表达式被 $\hat{i}$ 和 $\hat{j}$ 表示。</p>
-<p>一个二维线性变换，仅由 4 个数字确定（$\hat{i}=\begin{bmatrix}  1 \\ 0 \end{bmatrix}$ 和 $\hat{j}=\begin{bmatrix}  1 \\ 0 \end{bmatrix}$ 变换前后的位置）。比如，一个向量为 $\begin{bmatrix}  x \\ y \end{bmatrix}$，变换后 $\hat{i}=\begin{bmatrix}  1 \\ -2 \end{bmatrix},\  \hat{j}=\begin{bmatrix}  3 \\ 0 \end{bmatrix}$，则变换后的向量为</p>
+<p>一个二维线性变换，仅由 4 个数字确定（$\hat{i}=(1,0)$ 和 $\hat{j}=(0,1)$ 变换前后的位置）。比如，一个向量为 $(x,y)$，变换后 $\hat{i}=(1,-2),\  \hat{j}=(3,0)$，则变换后的向量为</p>
 <p>$$x \begin{bmatrix}  1 \\ -2 \end{bmatrix} + y \begin{bmatrix}  3 \\ 0 \end{bmatrix} = \begin{bmatrix}  x+3y \\ -2x \end{bmatrix}.$$</p>
 <p>将 $\hat{i}$ 和 $\hat{j}$ 变换后的坐标合并成一个矩阵，如 $\begin{bmatrix}  1 &amp; 3 \\ -2 &amp; 0 \end{bmatrix}$。若你想要知道一个向量变换后的坐标，则可以利用这个矩阵。比如，向量 $(2,1)$ 通过变换矩阵 $\begin{bmatrix}  1 &amp; 3 \\ -2 &amp; 0 \end{bmatrix}$ 得 $$2 \times\begin{bmatrix}1\\2\end{bmatrix}+1\times\begin{bmatrix}3\\0\end{bmatrix}=\begin{bmatrix}5\\-4\end{bmatrix}，$$ 即为 $(2,1)$ 变换后的坐标，因此，矩阵 $\begin{bmatrix}  1 &amp; 3 \\ -2 &amp; 0 \end{bmatrix}$ 就是这个线性变换的<strong class=chinese>矩阵表示</strong>。</p>
 <p>更一般的，可以表示为  $$\begin{bmatrix}a&amp;b\\c&amp;d\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=x\begin{bmatrix}a\\c\end{bmatrix}+y\begin{bmatrix}b\\d\end{bmatrix}=\begin{bmatrix}ax+by\\cx+dy\end{bmatrix}.$$
@@ -211,7 +211,7 @@
 <li>剪切变换：$\begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix}$</li>
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241021201900.png" alt="image.png"></p>
-<p>$\begin{bmatrix}1&amp;3\\2&amp;1\end{bmatrix}$ 所表示的变换是将 $\hat{i}$ 变换到 $\begin{bmatrix}1\\2\end{bmatrix}$，将 $\hat{j}$ 变换到 $\begin{bmatrix}3\\1\end{bmatrix}$，其余向量随着 $\hat{i}$ 和 $\hat{j}$ 的变换而变换。</p>
+<p>$\begin{bmatrix}1&amp;3\\2&amp;1\end{bmatrix}$ 所表示的变换是将 $\hat{i}$ 变换到 $(1,2)$，将 $\hat{j}$ 变换到 $(3,1)$，其余向量随着 $\hat{i}$ 和 $\hat{j}$ 的变换而变换。</p>
 <p>而 $\begin{bmatrix}2&amp;-2\\1&amp;-1\end{bmatrix}$ 中的 $i$ 和 $j$ <strong class=chinese>线性相关</strong>，只能张成一条直线，无法表示整个二维空间。</p>
 <p>综上，<strong class=chinese>矩阵乘法</strong>就是计算线性变换作用与定向量的一种途径，每个<strong class=chinese>矩阵</strong>都可以看作是<strong class=chinese>空间中的一种变换</strong>。<strong class=chinese>矩阵即空间线性变换</strong>。</p>
 <h2 id="线性变换复合">线性变换复合</h2>
