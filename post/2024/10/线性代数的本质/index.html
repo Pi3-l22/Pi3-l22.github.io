@@ -74,7 +74,7 @@
   <meta itemprop="description" content="视频课程：线性代数的本质——3Blue1Brown">
   <meta itemprop="datePublished" content="2024-10-21T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-10-21T00:00:00+00:00">
-  <meta itemprop="wordCount" content="2098">
+  <meta itemprop="wordCount" content="2085">
   <meta itemprop="keywords" content="学习,线性代数">
 
   
@@ -203,7 +203,7 @@
 <p>即 $\overrightarrow{v}$ 依旧用原来的表达式被 $\hat{i}$ 和 $\hat{j}$ 表示。</p>
 <p>一个二维线性变换，仅由 4 个数字确定（$\hat{i}=(1,0)$ 和 $\hat{j}=(0,1)$ 变换前后的位置）。比如，一个向量为 $(x,y)$，变换后 $\hat{i}=(1,-2),\  \hat{j}=(3,0)$，则变换后的向量为</p>
 <p>$$x \begin{bmatrix}  1 \\ -2 \end{bmatrix} + y \begin{bmatrix}  3 \\ 0 \end{bmatrix} = \begin{bmatrix}  x+3y \\ -2x \end{bmatrix}.$$</p>
-<p>将 $\hat{i}$ 和 $\hat{j}$ 变换后的坐标合并成一个矩阵，如 $\begin{bmatrix}  1 &amp; 3 \\ -2 &amp; 0 \end{bmatrix}$。若你想要知道一个向量变换后的坐标，则可以利用这个矩阵。比如，向量 $(2,1)$ 通过变换矩阵 $\begin{bmatrix}  1 &amp; 3 \\ -2 &amp; 0 \end{bmatrix}$ 得 $$2 \times\begin{bmatrix}1\\2\end{bmatrix}+1\times\begin{bmatrix}3\\0\end{bmatrix}=\begin{bmatrix}5\\-4\end{bmatrix}，$$
+<p>将 $\hat{i}$ 和 $\hat{j}$ 变换后的坐标合并成一个矩阵就可以表示一种线性变换。若你想要知道一个向量变换后的坐标，则可以利用这个矩阵。比如，向量 $(2,1)$ 通过变换矩阵 $\begin{bmatrix}  1 &amp; 3 \\ -2 &amp; 0 \end{bmatrix}$ 得 $$2 \times\begin{bmatrix}1\\2\end{bmatrix}+1\times\begin{bmatrix}3\\0\end{bmatrix}=\begin{bmatrix}5\\-4\end{bmatrix}，$$
 即为 $(2,1)$ 变换后的坐标，因此，<strong class=chinese>矩阵可以表示一个线性变换</strong>。</p>
 <p>更一般的，可以表示为  $$\begin{bmatrix}a&amp;b\\c&amp;d\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=x\begin{bmatrix}a\\c\end{bmatrix}+y\begin{bmatrix}b\\d\end{bmatrix}=\begin{bmatrix}ax+by\\cx+dy\end{bmatrix}.$$</p>
 <p>由此我们可以得到一些常见的<strong class=chinese>线性变换矩阵</strong>：</p>
