@@ -65,47 +65,10 @@
 
 @font-face {
     font-display: swap;
-    font-family: 'Songti';
-    font-style: normal;
-    font-weight: normal;
-    /* src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/FmlSong-Regular.woff'); */
-    src: url('../font/FmlSong-Regular.woff');
-}
-
-@font-face {
-    font-display: swap;
-    font-family: 'Songti';
-    font-style: italic;
-    font-weight: normal;
-    /* src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/FmlSong-Italic.woff'); */
-    src: url('../font/FmlSong-Italic.woff');
-}
-
-@font-face {
-    font-display: swap;
-    font-family: 'Songti';
-    font-style: italic;
-    font-weight: bold;
-    /* src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/FmlSong-BlackItalic.woff'); */
-    src: url('../font/FmlSong-BlackItalic.woff');
-}
-
-@font-face {
-    font-display: swap;
-    font-family: 'Songti';
-    font-style: normal;
-    font-weight: bold;
-    /* src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/FmlSong-Black.woff'); */
-    src: url('../font/FmlSong-Black.woff');
-}
-
-@font-face {
-    font-display: swap;
     font-family: 'Fangsong';
     font-style: normal;
     font-weight: normal;
-    /* src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/STFANGSO.woff'); */
-    src: url('../font/STFANGSO.woff');
+    src: url('../font/ZhuqueFangsong-Regular.woff');
 }
 
 @font-face {
@@ -121,7 +84,7 @@
     font-family: 'consolas';
     font-style: normal;
     font-weight: normal;
-    src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/consola.ttf');
+    src: url('../font/consola.woff');
 }
 
 @font-face {
@@ -129,7 +92,7 @@
     font-family: 'consolas';
     font-style: normal;
     font-weight: bold;
-    src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/consolab.ttf');
+    src: url('../font/consolab.woff');
 }
 
 @font-face {
@@ -137,7 +100,7 @@
     font-family: 'consolas';
     font-style: italic;
     font-weight: normal;
-    src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/consolai.ttf');
+    src: url('../font/consolai.woff');
 }
 
 @font-face {
@@ -145,13 +108,13 @@
     font-family: 'consolas';
     font-style: italic;
     font-weight: bold;
-    src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/consolaz.ttf');
+    src: url('../font/consolaz.woff');
 }
 
 /* 3D */
 @font-face {
     font-family: dimis;
-    src: url('https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/dimis.ttf');
+    src: url('../font/dimis.ttf');
 }
 
 /* global */
@@ -177,7 +140,7 @@ time {
     background-color: #FAFAFA;
     display: flex;
     flex-direction: column;
-    font-family: 'Latin Modern Roman', 'Songti', 'Times New Roman', serif;
+    font-family: 'Latin Modern Roman', '家族宋', 'Songti SC', 'STZhongsong', 'STSong', 'SimSun', 'Noto Serif CJK SC', 'Source Han Serif SC', serif;
     min-height: 100vh;
     overflow-wrap: break-word;
     padding: 1rem;
