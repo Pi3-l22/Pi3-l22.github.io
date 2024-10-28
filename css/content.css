@@ -46,7 +46,8 @@
 .content blockquote {
     border-left: #bf003f 2.5px solid;
     background-color: #f5f5f5;
-    font-style: italic;
+    /* font-style: italic; */
+    font-family: 'KaiTi', 'KaiTiGB2312', 'STKaiti', 'Fangsong', sans-serif;
     padding: 1rem;
     margin: 1rem auto;
 }
