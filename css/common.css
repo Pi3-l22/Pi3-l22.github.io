@@ -79,38 +79,6 @@
     src: url('../font/t1xtt.ttf');
 }
 
-@font-face {
-    font-display: swap;
-    font-family: 'consolas';
-    font-style: normal;
-    font-weight: normal;
-    src: url('../font/consola.woff');
-}
-
-@font-face {
-    font-display: swap;
-    font-family: 'consolas';
-    font-style: normal;
-    font-weight: bold;
-    src: url('../font/consolab.woff');
-}
-
-@font-face {
-    font-display: swap;
-    font-family: 'consolas';
-    font-style: italic;
-    font-weight: normal;
-    src: url('../font/consolai.woff');
-}
-
-@font-face {
-    font-display: swap;
-    font-family: 'consolas';
-    font-style: italic;
-    font-weight: bold;
-    src: url('../font/consolaz.woff');
-}
-
 /* 3D */
 @font-face {
     font-family: dimis;
