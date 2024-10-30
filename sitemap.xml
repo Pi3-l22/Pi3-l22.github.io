@@ -2,12 +2,22 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2024-10-24</lastmod>
+    <lastmod>2024-10-31</lastmod>
   </url>
   
   <url>
     <loc>/tags/index/</loc>
-    <lastmod>2024-10-24</lastmod>
+    <lastmod>2024-10-31</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2024-10-31</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2024-10-31</lastmod>
   </url>
   
   <url>
@@ -17,16 +27,6 @@
   
   <url>
     <loc>/post/2024/10/obsidian%E4%B8%ADwiki%E9%93%BE%E6%8E%A5%E5%92%8Cmarkdown%E9%93%BE%E6%8E%A5%E7%9A%84%E8%BD%AC%E6%8D%A2/</loc>
-    <lastmod>2024-10-24</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2024-10-24</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2024-10-24</lastmod>
   </url>
   
