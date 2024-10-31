@@ -79,6 +79,12 @@
     src: url('../font/t1xtt.ttf');
 }
 
+@font-face {
+    font-family: 'consolas';
+    font-display: swap;
+    src: url('../font/consolab.ttf');
+}
+
 /* 3D */
 @font-face {
     font-family: dimis;
