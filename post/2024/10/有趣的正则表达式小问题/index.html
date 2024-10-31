@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="有趣的正则表达式小问题">
+  
+
+  
+  <link rel="icon" href="/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="/post/2024/10/%E6%9C%89%E8%B6%A3%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B0%8F%E9%97%AE%E9%A2%98/">
+  <meta property="og:site_name" content="Pi3&#39;s Notes">
+  <meta property="og:title" content="有趣的正则表达式小问题">
+  <meta property="og:description" content="有趣的正则表达式小问题">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-10-31T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-10-31T00:00:00+00:00">
+    <meta property="article:tag" content="技术">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="正则表达式">
+
+
+  
+  <link rel="canonical" href="/post/2024/10/%E6%9C%89%E8%B6%A3%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B0%8F%E9%97%AE%E9%A2%98/">
+
+  
+  
+  
+  <meta itemprop="name" content="有趣的正则表达式小问题">
+  <meta itemprop="description" content="有趣的正则表达式小问题">
+  <meta itemprop="datePublished" content="2024-10-31T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2024-10-31T00:00:00+00:00">
+  <meta itemprop="wordCount" content="727">
+  <meta itemprop="keywords" content="技术,Python,正则表达式">
+
+  
+  <link media="screen" rel="stylesheet" href='/css/common.css'>
+  <link media="screen" rel="stylesheet" href='/css/content.css'>
+
+  
+  
+  <title>有趣的正则表达式小问题 - Pi3&#39;s Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="/">Pi3&#39;s Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">主页</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/album/">相册</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>有趣的正则表达式小问题</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='/tags/%E6%8A%80%E6%9C%AF'>#技术</a>
+    
+    <a class="link" href='/tags/python'>#Python</a>
+    
+    <a class="link" href='/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F'>#正则表达式</a>
+    
+  </div>
+  
+  
+  
+  
+  <article class="content">
+    
+    <p>今天在使用 Python 编写爬虫程序的过程中，遇到了一个 BUG，最终发现居然是关于一个正则表达式中的小问题，十分有趣。</p>
+<p>我编写了这样一个爬虫程序，爬取网页中发布文章的标题和发布时间，于是我写了这样一个正则表达式来匹配文章发布的时间。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000">date_match</span> <span style="color:#000">=</span> <span style="color:#000">re</span><span style="color:#000">.</span><span style="color:#a90d91">match</span>(<span style="color:#c41a16">r</span><span style="color:#c41a16">&#39;(\d</span><span style="color:#c41a16">{4}</span><span style="color:#c41a16">)年(\d</span><span style="color:#c41a16">{2}</span><span style="color:#c41a16">)月(\d</span><span style="color:#c41a16">{2}</span><span style="color:#c41a16">)日&#39;</span>, <span style="color:#000">date</span>)
+</span></span></code></pre></div><p>这样咋一看似乎非常正确，我一开始也没有意识到错误。直到程序开始运行了一段时间，我打开日志文件，发现从 10 月 10 日之后的文章都不能正确读取，而到了 23 年的 12 月又开始正常读取了。</p>
+<p>我当时觉得这样的 BUG 十分奇怪，为什么不能读取的文章时间怎么有规律。同时，由于项目代码量不小，我几乎在可能出错的地方都进行了异常的抛出，但是在日志文件中却没有出现任何的错误，这让我百思不得其解。</p>
+<p>于是我只能在我认为可能出现问题的地方手动 <code>print</code> 打印传递的变量信息，逐渐缩小范围，“真凶”也随着浮出水面。问题就出在我上面写的那句正则表达式匹配时间的代码。</p>
+<p>事实上，页面上的时间并不是固定 2 位数，当出现个位数日期时，它只显示 1 位数字，比如 <code>2024年10月1日</code>，而非 <code>2024年10月01日</code>。所以，我一开始写的代码只能匹配 2 位数字，我也确实忘记考虑个位数字的情况，这就导致 <code>re.match</code> 会返回一个 <code>None</code>，再加上我后面直接使用 <code>if data_match:</code> 把这种情况排除在外，而不是抛出一个异常，我也因此排查了很久。</p>
+<p>这样的话，10 月 10 日之后的日期都不能读取的现象就很好理解了，因为后面就都是个位数的天数和月份了，比如 10 月 9 日或者 9 月 10 日。只有到 2023 年 12 月份开始才能正常匹配了。</p>
+<p>解决的办法也很简单，改成匹配 1 位或 2 位数字就可以了。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000">date_match</span> <span style="color:#000">=</span> <span style="color:#000">re</span><span style="color:#000">.</span><span style="color:#a90d91">match</span>(<span style="color:#c41a16">r</span><span style="color:#c41a16">&#39;(\d</span><span style="color:#c41a16">{4}</span><span style="color:#c41a16">)年(\d{1,2})月(\d{1,2})日&#39;</span>, <span style="color:#000">date</span>)
+</span></span></code></pre></div><p>1</p>
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="/post/2024/10/obsidian%E4%B8%ADwiki%E9%93%BE%E6%8E%A5%E5%92%8Cmarkdown%E9%93%BE%E6%8E%A5%E7%9A%84%E8%BD%AC%E6%8D%A2/">← prev</a>
+    
+    
+    <a></a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+      <script src="https://giscus.app/client.js"
+        data-repo="Pi3-l22/Pi3-l22.github.io"
+        data-repo-id="R_kgDOMx7kWw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMx7kW84CjHMe"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_tritanopia"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span style="display: flex;align-items: center;">© 2021 - 2024<img src="https://p.sda1.dev/19/68796ec343c7a7eecbe99de4a9df6c66/rainbow.gif" width=20>By LiuChao</span>
+  </div>
+  
+  
+
+  
+
+  <div class="footnote">
+    <span><a class=link href=/index.xml><img src="https://p.sda1.dev/19/1e10e3069ca0e5e1bbc881b6a5fb2732/RSS.png" width=12></a>  |  <a class=link href=https://github.com/Pi3-l22 Target=_ blank><img src="https://p.sda1.dev/19/cfb4a6be80dfeb1851a07d065a83dbcc/GitHub.png" width=40></a>  |  <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener><img src="https://p.sda1.dev/19/93838c15ff88af806c9fd7302cced9fa/Cc_by-nc-nd.svg.png" width=48></a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-WE6L6RF96W"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-WE6L6RF96W');
+        }
+      </script>
+    
+  
+
+
+
+</body>
+
+</html>
