@@ -73,7 +73,7 @@
   <meta itemprop="description" content="前几天备案的域名终于审核通过了，也因此可以来配置一下图床和 CDN 了。">
   <meta itemprop="datePublished" content="2024-11-01T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-11-01T00:00:00+00:00">
-  <meta itemprop="wordCount" content="182">
+  <meta itemprop="wordCount" content="789">
   <meta itemprop="keywords" content="生活">
 
   
@@ -136,13 +136,57 @@
   
   
   
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#配置图床">配置图床</a></li>
+    <li><a href="#配置-cdn">配置 CDN</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
   
   <article class="content">
     
     <p>前几天备案的域名终于审核通过了，也因此可以来配置一下图床和 CDN 了。</p>
+<h2 id="前言">前言</h2>
 <p>在此之前，我的博客上的图片都是存放在 GitHub 的公开仓库中，并且使用 jsDelivr 的 CDN 服务，但事实上 jsDelivr 的 CDN 在国内近几年基本上算是不可访问，连通情况时好时坏。</p>
 <p><img src="https://image.pi3.fun/blog/202411012214524.png" alt="image.png"></p>
 <p>同时，使用 GitHub 和 jsDelivr 作为图床服务，我也觉得不是很好，毕竟 GitHub 是代码仓库，jsDelivr 也是前端静态资源的 CDN 服务。于是，我决定将博客文章的图床迁移到国内的对象存储服务上。</p>
+<p>在了解一番后，我也发现实际上国内的服务，无论是 CDN 还是对象存储，都有不少的弊端，其中最重要的一点就是域名需要备案，不过一些大厂的对象存储服务倒是提供了现成的域名，不需要自己准备备案的域名，但是缺点也很明显：收费贵且收费规则十分复杂。比如，阿里云的对象存储 oss 的计费项目就有：</p>
+<ul>
+<li>存储费用</li>
+<li>流量费用</li>
+<li>请求费用</li>
+<li>数据处理费用</li>
+<li>对象标签费用</li>
+<li>传输加速费用</li>
+<li>临时存储费用</li>
+<li>DDoS 防护费用</li>
+<li>数据索引费用</li>
+<li>跨区域复制 RTC 费用</li>
+</ul>
+<p>最后，我选择了七牛云的对象存储服务，因为它提供存储和 CDN 的免费额度，这些免费额度对于我来说完全足够了，也不需要先支付费用，等之后需要升级的时候再付费即可。</p>
+<p>七牛云的对象存储免费额度包括：每月 10GB 的标准存储空间、每月 1000千次的 GET 请求、每月 100 千次的PUT/DELETE 请求以及每月 10 GB 的CDN回源流出流量。</p>
+<p>七牛云的 CDN 服务免费额度包括：</p>
+<p><img src="https://image.pi3.fun/blog/202411012230435.png" alt="image.png"></p>
+<h2 id="配置图床">配置图床</h2>
+<p>配置七牛云 + PicGo 图床并不难，网上的教程也很多，这里简单记录一下。</p>
+<p>先在七牛云上创建一个空间，访问控制选择 <code>公开</code>，存储区域选择离自己近的地方。</p>
+<p><img src="https://image.pi3.fun/blog/202411012234968.png" alt="image.png"></p>
+<p>空间创建成功后还需要配置已经<strong class=chinese>备案的域名</strong>，默认提供的测试域名只保留 30 天。</p>
+<p>接着配置 PicGo</p>
+<p><img src="https://image.pi3.fun/blog/202411012238195.png" alt="image.png"></p>
+<p>AccessKey 和 SecretKey 都在七牛云右上角头像个人中心的密钥管理中获取。</p>
+<p>Bucket 为空间名称；访问网址为配置的备案域名；存储区域为选择区域的代号，华东浙江为 <code>z0</code>；存储路径为空间中的文件夹，没有则为根目录。</p>
+<p><img src="https://image.pi3.fun/blog/202411012241475.png" alt="image.png"></p>
+<p>以上便完成了七牛云 + PicGo 图床的配置。</p>
+<h2 id="配置-cdn">配置 CDN</h2>
+<p>由于七牛云还提供 CDN 的免费额度，于是我便想再给图床配置一个 CDN 服务。</p>
     
   </article>
   <div class="paginator">
