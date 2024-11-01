@@ -73,7 +73,7 @@
   <meta itemprop="description" content="前几天备案的域名终于审核通过了，也因此可以来配置一下图床和 CDN 了。">
   <meta itemprop="datePublished" content="2024-11-01T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-11-01T00:00:00+00:00">
-  <meta itemprop="wordCount" content="789">
+  <meta itemprop="wordCount" content="1501">
   <meta itemprop="keywords" content="生活">
 
   
@@ -145,6 +145,7 @@
     <li><a href="#前言">前言</a></li>
     <li><a href="#配置图床">配置图床</a></li>
     <li><a href="#配置-cdn">配置 CDN</a></li>
+    <li><a href="#自定义源站域名">自定义源站域名</a></li>
   </ul>
 </nav></div>
   </details>
@@ -182,11 +183,27 @@
 <p>接着配置 PicGo</p>
 <p><img src="https://image.pi3.fun/blog/202411012238195.png" alt="image.png"></p>
 <p>AccessKey 和 SecretKey 都在七牛云右上角头像个人中心的密钥管理中获取。</p>
-<p>Bucket 为空间名称；访问网址为配置的备案域名；存储区域为选择区域的代号，华东浙江为 <code>z0</code>；存储路径为空间中的文件夹，没有则为根目录。</p>
+<p>Bucket 为空间名称；访问网址为配置的备案域名（需要<a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%BA%90%E7%AB%99%E5%9F%9F%E5%90%8D">自定义源站域名</a>，可以先使用测试域名进行测试）；存储区域为选择区域的代号，华东浙江为 <code>z0</code>；存储路径为空间中的文件夹，没有则为根目录。</p>
 <p><img src="https://image.pi3.fun/blog/202411012241475.png" alt="image.png"></p>
 <p>以上便完成了七牛云 + PicGo 图床的配置。</p>
+<p>除此之外，最好还是设置一下 Referer 防盗链对图片进行防护，以防别人盗取图片。配置了防盗链，图片只能在你设置的网站上显示。</p>
+<p><img src="https://image.pi3.fun/blog/202411012258797.png" alt="image.png"></p>
+<p>如果开启了 CDN 则需要在 CDN 中配置 Referer 防盗链，同时配置告警。</p>
+<p><img src="https://image.pi3.fun/blog/202411012300650.png" alt="image.png"></p>
 <h2 id="配置-cdn">配置 CDN</h2>
 <p>由于七牛云还提供 CDN 的免费额度，于是我便想再给图床配置一个 CDN 服务。</p>
+<p>在 CDN 的控制台，添加一个域名（需要备案），通信协议可以选择 HTTPS 但是针对 HTTPS 的请求流量没有免费额度，需要单独按量付费或者购买资源包（资源包包含 HTTP 和 HTTPS 的流量）。这里我不想付费，于是选择了 HTTP 协议。源站配置选择七牛云的存储空间，其他选项默认。最后完成 CNAME 解析就算配置成功了。</p>
+<p><img src="https://image.pi3.fun/blog/202411012249273.png" alt="image.png"></p>
+<p>但我满心欢喜将博客文章中的图片迁移到 CDN 的域名上时，我发现在电脑的浏览器上文章中的图片都不能显示，而手机上的浏览器则可以打开图片。经过一番研究，发现罪魁祸首就是没有启用 HTTPS 协议而是使用 HTTP 协议。</p>
+<p>由于我的博客网站启用了 HTTPS 协议，但是图片却还是 HTTP 协议，请求图片时浏览器会自动将 HTTP 协议的请求转成 HTTPS 协议，控制台报错：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>Failed to load resource: net::ERR_CERT_COMMON_NAME_INVALID
+</span></span></code></pre></div><p>导致了图片不能显示。相反在手机浏览器上对于 HTTP 不安全请求规则并不严格，所有依旧能够请求到图片。</p>
+<p>最后尝试了很多解决方法，都不启作用，我也不想单独给 CDN 的 HTTPS 请求付费，于是无奈只能放弃 CDN，重新配置一个自定义源站域名。</p>
+<h2 id="自定义源站域名">自定义源站域名</h2>
+<p>虽然不能使用 CDN 服务，但是由于七牛云服务器在国内，实际上在国内区域有没有 CDN 的差别不是特别的大，而且选择的对象存储区域也是自己所在地，所以效果也不差，比 GitHub + jsDelivr 肯定是好了不少。</p>
+<p>配置自定义源站域名也很简单，在<strong>对象存储-域名管理-自定义源站域名</strong>中添加已备案的域名，根据说明进行 CNAME 解析即可。</p>
+<p><img src="https://image.pi3.fun/blog/202411012311928.png" alt="image.png"></p>
+<p>接下来就是配置 HTTPS，这里我使用 <a href="https://ohttps.com/">ohttps</a> 的免费证书服务，虽然免费的Let&rsquo;s Encrypt 证书只支持 90 天有效期，但是 <a href="https://ohttps.com/">ohttps</a> 支持<strong class=chinese>自动更新</strong>和<strong class=chinese>自动部署</strong>。</p>
     
   </article>
   <div class="paginator">
