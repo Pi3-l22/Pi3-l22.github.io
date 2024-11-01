@@ -275,9 +275,9 @@
 </ol>
 <h2 id="概要设计">概要设计</h2>
 <h3 id="项目部署图">项目部署图</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E9%83%A8%E7%BD%B2%E5%9B%BE.png" alt="密码管理器部署图.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E9%83%A8%E7%BD%B2%E5%9B%BE.png" alt="密码管理器部署图.png"></p>
 <h3 id="系统架构图">系统架构图</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="密码管理器系统架构图.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="密码管理器系统架构图.png"></p>
 <h3 id="工作流程">工作流程</h3>
 <ol>
 <li>用户通过入口页面发起登录或注册请求。</li>
@@ -427,17 +427,17 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#000">-</span> <span style="color:#000">更新页面</span>
 </span></span></code></pre></div><h4 id="流程图">流程图</h4>
 <p>登录逻辑流程图</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/export.png" alt="export.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/export.png" alt="export.png"></p>
 <p>注册逻辑流程图</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/export1.png" alt="export1.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/export1.png" alt="export1.png"></p>
 <p>添加密码信息流程图</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/export%20(2).png" alt="export (2).png"></p>
+<p><img src="http://cdn.pi3.fun/blog/export%20(2).png" alt="export (2).png"></p>
 <p>删除密码信息流程图</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/export5.png" alt="export5.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/export5.png" alt="export5.png"></p>
 <p>导入数据流程图</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/export6.png" alt="export6.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/export6.png" alt="export6.png"></p>
 <p>导出数据流程图</p>
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/export5.png"/>
+<p><img src="http://cdn.pi3.fun/blog/export5.png" alt=""></p>
 <h3 id="数据加密模块设计">数据加密模块设计</h3>
 <h4 id="模块概述-1">模块概述</h4>
 <p>密码模块是密码管理器的核心部分，负责加密、解密、生成和验证密码。该模块确保用户数据的安全性和隐私性。</p>
@@ -557,7 +557,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#000">key</span> <span style="color:#000">=</span> <span style="color:#000">使用</span> <span style="color:#000">PBKDF</span> <span style="color:#1c01ce">2</span> <span style="color:#000">算法生成密钥</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">尝试将</span> <span style="color:#000">data</span> <span style="color:#000">转换为</span> <span style="color:#000">TXT</span> <span style="color:#000">格式并保存到文件</span>
 </span></span></code></pre></div><h4 id="流程图-1">流程图</h4>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928175129.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928175129.png" alt="image.png"></p>
 <h4 id="详细接口">详细接口</h4>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500"># 数据加密接口</span>
 </span></span><span style="display:flex;"><span><span style="color:#a90d91">def</span> <span style="color:#000">data_encrypt</span> (<span style="color:#000">data</span>, <span style="color:#000">key</span>, <span style="color:#000">algorithm</span>):
@@ -840,40 +840,40 @@
 <h3 id="功能测试">功能测试</h3>
 <h4 id="windows-平台">Windows 平台</h4>
 <p>软件详细信息</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928190911.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928190911.png" alt="image.png"></p>
 <p>登录界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928190925.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928190925.png" alt="image.png"></p>
 <p>注册界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928190935.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928190935.png" alt="image.png"></p>
 <p>主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928190943.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928190943.png" alt="image.png"></p>
 <p>暗色主题</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928191035.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928191035.png" alt="image.png"></p>
 <p>点击单元格复制信息</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928191048.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928191048.png" alt="image.png"></p>
 <p>添加密码信息界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928191058.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928191058.png" alt="image.png"></p>
 <p>新添加的密码信息</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928191115.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928191115.png" alt="image.png"></p>
 <p>删除密码信息弹窗</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928191128.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928191128.png" alt="image.png"></p>
 <p>搜索功能展示</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928191137.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928191137.png" alt="image.png"></p>
 <p>导出功能弹窗</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928191149.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928191149.png" alt="image.png"></p>
 <p>导出 Json 格式的数据</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928191201.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928191201.png" alt="image.png"></p>
 <p>导入功能弹窗</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928191210.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928191210.png" alt="image.png"></p>
 <p>导入信息提示</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928191219.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928191219.png" alt="image.png"></p>
 <h4 id="web-端">Web 端</h4>
 <p>网页端登录界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928191236.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928191236.png" alt="image.png"></p>
 <p>网页端注册界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928191246.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928191246.png" alt="image.png"></p>
 <p>网页端主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240928191255.png" alt="image.png"></p>
+<p><img src="http://cdn.pi3.fun/blog/20240928191255.png" alt="image.png"></p>
 <p>网页端的所有功能均与Windows平台的功能完全一致。这里不再进行详细的展示和阐述。</p>
 <h3 id="项目测试">项目测试</h3>
 <h4 id="性能测试">性能测试</h4>
