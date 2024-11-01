@@ -189,13 +189,13 @@
 <p>打开 Neovim 官网或者 GitHub 主页，根据指引下载对应操作系统的最新版。可以下载安装包进行安装，也可以使用命令行进行安装。</p>
 <p>安装完成后，将 Neovim 添加进系统的环境变量中。</p>
 <p>在命令行中输入 <code>nvim</code> ，出现欢迎界面说明 Neovim 安装成功。</p>
-<p><img src="http://cdn.pi3.fun/blog/20241011180326.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180326.png" alt="image.png"></p>
 <h3 id="配置-lazyvim">配置 LazyVim</h3>
 <p>LazyVim 是一个 Neovim 的一键 Setup 方案，它内置了一些基础的插件，配置了人性化的快捷键。同时 LazyVim 也是一个 Neovim 的包管理器，可以快捷方便地管理 Neovim 的各种插件。</p>
 <p><a href="https://www.lazyvim.org/">🚀 Getting Started | LazyVim</a> | <a href="https://github.com/LazyVim/LazyVim">LazyVim(github.com)</a></p>
 <p>打开 LazyVim 官网或者 GitHub 主页，进行 LazyVim 的安装。</p>
 <p>在安装之前，LazyVim 还需要一些依赖配置，如 Neovim、Git、<a href="https://www.nerdfonts.com/">Nerd Font</a> 字符字体、C 语言编译器以及一个支持真颜色的终端等。</p>
-<p><img src="http://cdn.pi3.fun/blog/20241011180413.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180413.png" alt="image.png"></p>
 <p>安装好各种所需要的依赖环境，就可以进行 LazyVim 的安装</p>
 <ul>
 <li><strong>Linux 环境</strong></li>
@@ -236,12 +236,12 @@
 </span></span><span style="display:flex;"><span>    └─plugins
 </span></span><span style="display:flex;"><span>            example.lua
 </span></span></code></pre></div><p>重新打开 Neovim 会出现 LazyVim 的初始化界面，在初始化界面会自动下载一些基本插件，等待插件下载完成。如果因为网络问题导致插件下载失败，可以尝试重启 Neovim，或者按下字母 <code>I</code> 重新安装。完成后按 <code>q</code> 来到 LazyVim 的欢迎界面。如果出现图标乱码，请安装 <a href="https://www.nerdfonts.com/">Nerd 字体</a>。</p>
-<p><img src="http://cdn.pi3.fun/blog/20241011180442.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180442.png" alt="image.png"></p>
 <p>输入 <code>:</code> 打开命令行，输入 <code>LazyHealth</code> 检查插件是否工作正常。使用 <code>Ctrl + u / d</code> 可以上下快速浏览。</p>
-<p><img src="http://cdn.pi3.fun/blog/20241011180453.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180453.png" alt="image.png"></p>
 <p>可以看到有一些 <code>ERROR</code> 出现，比如 <code>Grugfar</code> ，这是因为没有安装 <code>live grep</code> ，后续会安装。</p>
 <p>为了方便后续在 Windows 环境下使用 Neovim，可以在终端中新建一个 Neovim 配置，方便之后一键打开，也可以设置打开终端默认使用 Neovim。</p>
-<p><img src="http://cdn.pi3.fun/blog/20241011180505.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180505.png" alt="image.png"></p>
 <h2 id="mode--register">Mode &amp; Register</h2>
 <blockquote>
 <p>Neovim 的四大编辑模式与寄存器</p>
@@ -254,7 +254,7 @@
 <li><em>Visual Mode</em></li>
 <li><em>Ex Mode</em></li>
 </ol>
-<p><img src="http://cdn.pi3.fun/blog/20241011180518.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180518.png" alt="image.png"></p>
 <p>其中 <strong>Normal Mode</strong> 是默认模式，光标为方块状显示在文本区，此时按下 <code>i</code> 等键进入 <strong>Insert Mode</strong>。在 <strong>Insert Mode</strong> 中光标为竖线，界面左下角会显示 <code>Insert</code> 字样。输入完文本后，按下 <code>ESC</code> 键可以返回 <strong>Normal Mode</strong>。</p>
 <p>接下来可以按下 <code>v</code> 键进入 <strong>Visual Mode</strong>，等同于在记事本中框选一段文本的模式，此时可针对选中的文本进行删除拷贝等操作，操作完成后会自动返回 <strong>Normal Mode</strong>。</p>
 <p>最后，按下 <code>:</code> 键就会进入 Ex Mode，光标会移动到左下角位置，此时可以输入批处理命令或者是保存退出查找替换等操作。</p>
@@ -263,7 +263,7 @@
 <p><strong class=chinese>实际操作演示</strong>：</p>
 <p>进入命令行使用 <code>nvim mode.md</code> 创建 <code>mode.md</code> 文件，默认打开文件进入 Normal Mode 。</p>
 <p>按下 <code>i</code> 键进入 Insert Mode，可以在文本区输入文本。除此之外，还有多种方式从 Normal Mode 进入 Insert Mode，如按下 <code>o</code> 键，在光标下方另起一行进入 Insert Mode，按下 <code>O</code> 键，在光标上方另起一行进入 Insert Mode，可通过 <code>Open</code> 单词首字母辅助记忆。</p>
-<p><img src="http://cdn.pi3.fun/blog/20241011180533.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241011180533.png" alt="image.png"></p>
 <h4 id="insert-mode-操作">Insert Mode 操作</h4>
 <p><strong>Insert Mode 中的常用快捷键</strong>：</p>
 <ul>
@@ -619,23 +619,23 @@
 </ol>
 <h3 id="配置目录">配置目录</h3>
 <p>我们在命令行终端输入 <code>nvim</code> 进入 LazyVim 的欢迎界面，可以看到一些菜单项。</p>
-<p><img src="http://cdn.pi3.fun/blog/202410241644484.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/202410241644484.png" alt="image.png"></p>
 <p>按下 <code>c</code> 键可以打开 Neovim 的配置文件列表页面。</p>
-<p><img src="http://cdn.pi3.fun/blog/202410241644407.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/202410241644407.png" alt="image.png"></p>
 <p>打开入口文件 <code>init.lua</code>，此时就进入了配置文件目录。</p>
 <p>我们需要借助文件树来查看和编辑目录下其他配置文件，可以按下 <code>leader</code> 键。<code>leader</code> 键在 Neovim 中是常用的功能键，可以调用<strong>文件树、Git、telescope</strong> 等多种插件提供的功能。</p>
-<p><img src="http://cdn.pi3.fun/blog/202410241644991.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/202410241644991.png" alt="image.png"></p>
 <p><code>leader</code> 键默认为<strong class=chinese>空格键</strong>，按下后进入<strong class=chinese>操作符待处理模式</strong>，然后再按 <code>e</code> 键打开文件树（NeoTree 插件）。</p>
 <p>此时可以按 <code>?</code> 问号键<strong class=chinese>查看帮助</strong>，通过 <code>j k</code> 上下<strong class=chinese>选择文件</strong>，<code>Enter</code> 回车键<strong class=chinese>查看目录</strong>或者<strong class=chinese>打开文件</strong>，也可以按 <code>s</code> split 键<strong class=chinese>分屏打开文件</strong>。</p>
 <p>NeoTree 左上角会显示<strong class=chinese>当前的工作目录</strong>，Linux 中 <code>~/.config/nvim</code> 和 Windows 中 <code>~\AppData\local\nvim</code> 是 Neovim 的<strong class=chinese>默认配置路径</strong>。</p>
 <p>在配置目录中，<code>init.lua</code> 是入口文件，Neovim 启动时会首先运行它，加载并初始化 <code>lua</code> 目录下的配置。</p>
 <p><code>lua</code> 目录包括两个子目录：<code>config</code> 用于存放<strong class=chinese>通用配置</strong>，比如快捷键映射等；<code>plugins</code> 则专门存放<strong class=chinese>插件相关的配置</strong>。</p>
-<p><img src="http://cdn.pi3.fun/blog/202410241644754.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/202410241644754.png" alt="image.png"></p>
 <h3 id="配置插件">配置插件</h3>
 <p>了解了基本的配置结构后，我们将开始实践。首先，我们要将 LazyVim 内置的 NeoTree 插件替换成 MiniFiles 插件</p>
 <p>首先我们按 <code>空格l</code> leader lazy 打开 LazyVim 的插件控制台，在这里可以查看和管理已经安装的插件。</p>
 <p>控制台顶部有按键提示，这些<strong class=chinese>大写按键</strong>的操作都是针对<strong class=chinese>所有插件</strong>的。如果只想单独操作某个<strong class=chinese>指定插件</strong>，可以按对应的<strong class=chinese>小写按键</strong></p>
-<p><img src="http://cdn.pi3.fun/blog/202410241645880.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/202410241645880.png" alt="image.png"></p>
 <p>我们 <code>Ctrl d</code> 往下浏览，可以看到许多等待更新的插件，将光标移动到 NeoTree 上
 按下 U 键后，NeoTree 的状态就变成 updated 了</p>
 <blockquote>
@@ -643,13 +643,13 @@
 <p>我们打开 <code>lazy-lock. json</code> 文件，将问题插件的 <code>commit</code> 哈希值改为更新前的，重启 Neovim 后，打开插件控制台，按 <code>r</code> restore 键，就可以将插件恢复到之前的版本。</p>
 </blockquote>
 <p>我们浏览控制台后会发现 MiniFiles 插件并不在其中，因此需要手动安装。进入 <a href="https://github.com/echasnovski/mini.files">MiniFiles 插件的仓库主页</a>，来到 installation 部分，点开 With folke/lazy. nvim，可以看到两种安装方式，一种是安装 Mini 插件机，一种是单独安装 MiniFiles 插件，我们选择单独安装。</p>
-<p><img src="http://cdn.pi3.fun/blog/202410241645501.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/202410241645501.png" alt="image.png"></p>
 <p>将 stable 版本的配置拷贝下来，回到 Neovim 配置目录，在 <code>plugins</code> 下创建 <code>minifiles.lua</code> 文件，粘贴刚才拷贝的配置，并参考 example 的格式，在开头加上 return，即 <code>return { &quot;echasnovski/mini.files&quot;, version = &quot;*&quot; }</code>。</p>
-<p><img src="http://cdn.pi3.fun/blog/202410241645405.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/202410241645405.png" alt="image.png"></p>
 <p>然后根据仓库中 important 的要求：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Important: don&#39;t forget to call ` require(&#39;mini.files&#39;).setup() ` to enable its functionality
 </span></span></code></pre></div><p>在 <code>init.lua</code> 文件中加上 <code>require('mini.files').setup()</code>，这样就完成了配置。</p>
-<p><img src="http://cdn.pi3.fun/blog/202410241645160.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/202410241645160.png" alt="image.png"></p>
 <p>我们重新打开 Neovim，这时 LazyVim 就会识别到 MiniFiles 的配置，并自动开始安装。安装结束后，我们进入 Ex Mode，输入 <code>:lua MiniFiles.open()</code> 命令，调用 MiniFiles open 方法即可打开 MiniFiles 文件树，这时我们就可以像操作文本一样操作文件树了。</p>
 <ul>
 <li><code>hjkl</code> 选择文件或进入目录</li>
@@ -669,11 +669,11 @@
 </span></span><span style="display:flex;"><span>  { <span style="color:#c41a16">&#34;nvim-neo-tree/neo-tree.nvim&#34;</span>, <span style="color:#000">enabled</span> <span style="color:#000">=</span> <span style="color:#a90d91">false</span> },
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>再重启 Neovim，这时 NeoTree 插件就被禁用了。按下 <code>leader e</code> 也不会唤起文件树，我们再按下 <code>leader l</code> 打开控制台，找到 NeoTree，按插件 clean <code>x</code> 已完成卸载，这时 <code>leader e</code> 键就空闲出来了。</p>
-<p><img src="http://cdn.pi3.fun/blog/202410241645957.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/202410241645957.png" alt="image.png"></p>
 <h3 id="快捷键映射">快捷键映射</h3>
 <p>我们并不想每次唤起文件树时都进入 Ex Mode，输入一长串命令 <code>:lua MiniFiles.open()</code>，就可以考虑将唤醒命令绑定到 <code>leader e</code> 上。</p>
 <p>我们打开 <code>config</code> 目录下的 <code>keymaps.lua</code> 文件，这个文件是专门用于管理<strong class=chinese>快捷键映射</strong>的，可以从顶部注释中的链接里查看<a href="https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua">当前 LazyVim 的内置 keymap</a>。</p>
-<p><img src="http://cdn.pi3.fun/blog/202410241645692.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/202410241645692.png" alt="image.png"></p>
 <p>我们看到每一条 keymap 配置都是一个 map 方法。该方法共有<strong class=chinese>四个参数</strong>：</p>
 <ul>
 <li>第一个参数为<strong class=chinese>模式</strong>，首字母 <code>N</code> 代表 <strong>Normal Mode</strong>，<code>I</code> 代表 <strong>Insert Mode</strong></li>

@@ -170,14 +170,14 @@
 </ol>
 <p><strong class=chinese>向量加法</strong>与<strong class=chinese>向量数乘</strong>贯穿线性代数始终，有非常重要的作用。</p>
 <p>我们首先关注向量的<strong class=chinese>几何方面</strong>，将其看作<strong class=chinese>一个箭头</strong> ${\nearrow}$ 方便我们初期理解。</p>
-<p><img src="http://cdn.pi3.fun/blog/20241021201756.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241021201756.png" alt="image.png"></p>
 <p>起点落在原点，${\nearrow}$ ：空间中的箭头，${\begin{bmatrix}  2 \\ 1 \end{bmatrix}}$：有序数字列表（尖端坐标）</p>
 <p>有序数字列表中，正数表示向右移动，负数表示向左移动，数字表示移动距离，即从原点 ${\rightarrow}$ 尖端，第 1 个数表示 x 轴方向移动，第 2 个数表示 y 轴，三维空间同理。</p>
 <p><strong class=chinese>向量加法</strong>：这是唯一允许向量离开原点的操作</p>
-<p><img src="http://cdn.pi3.fun/blog/20241021201808.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241021201808.png" alt="image.png"></p>
 <p>${\begin{bmatrix}  1 \\ 1 \end{bmatrix} + \begin{bmatrix}  2 \\ {-1} \end{bmatrix} = \begin{bmatrix}  3 \\ 0 \end{bmatrix}}$ 可以理解为上下左右移动方向的距离相加之和</p>
 <p><strong class=chinese>向量数乘</strong>：伸缩向量</p>
-<p><img src="http://cdn.pi3.fun/blog/20241021201822.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241021201822.png" alt="image.png"></p>
 <p>${2\  {\times} \begin{bmatrix}  2 \\ 1 \end{bmatrix} = \begin{bmatrix}  4 \\ 2 \end{bmatrix}}$，2 为标量</p>
 <h2 id="线性组合">线性组合</h2>
 <p>线性组合，张成的空间与基</p>
@@ -199,7 +199,7 @@
 <p>如何求出变换后的向量位置：只需要观察一组基的变换过程。比如，在二维空间中记录 $\hat{i} = (1,0)$ 和 $\hat{j} = (0,1)$ 变换前后的坐标，即可确定一种变换，也可推导出任意向量变换后的位置。</p>
 <p>举例：</p>
 <p>$\overrightarrow{v} = -1 \times \hat{i} + 2 \times \hat{j}$  ${\overset{线性变换}{\longrightarrow}}$  $\hat{v&rsquo;} = -1 \times \overrightarrow{i&rsquo;} + 2 \times \hat{j&rsquo;}$</p>
-<p><img src="http://cdn.pi3.fun/blog/20241021201842.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241021201842.png" alt="image.png"></p>
 <p>即 $\overrightarrow{v}$ 依旧用原来的表达式被 $\hat{i}$ 和 $\hat{j}$ 表示。</p>
 <p>一个二维线性变换，仅由 4 个数字确定（$\hat{i}=(1,0)$ 和 $\hat{j}=(0,1)$ 变换前后的位置）。比如，一个向量为 $(x,y)$，变换后 $\hat{i}=(1,-2),\  \hat{j}=(3,0)$，则变换后的向量为</p>
 <p>$$x \begin{bmatrix}  1 \\ -2 \end{bmatrix} + y \begin{bmatrix}  3 \\ 0 \end{bmatrix} = \begin{bmatrix}  x+3y \\ -2x \end{bmatrix}.$$</p>
@@ -211,7 +211,7 @@
 <li>空间逆时针旋转 90 度：$\begin{bmatrix}0&amp;-1\\1&amp;0\end{bmatrix}$</li>
 <li>剪切变换：$\begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix}$</li>
 </ul>
-<p><img src="http://cdn.pi3.fun/blog/20241021201900.png" alt="image.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20241021201900.png" alt="image.png"></p>
 <p>$\begin{bmatrix}1&amp;3\\2&amp;1\end{bmatrix}$ 所表示的变换是将 $\hat{i}$ 变换到 $(1,2)$，将 $\hat{j}$ 变换到 $(3,1)$，其余向量随着 $\hat{i}$ 和 $\hat{j}$ 的变换而变换。</p>
 <p>而 $\begin{bmatrix}2&amp;-2\\1&amp;-1\end{bmatrix}$ 中的 $i$ 和 $j$ <strong class=chinese>线性相关</strong>，只能张成一条直线，无法表示整个二维空间。</p>
 <p>综上，<strong class=chinese>矩阵乘法</strong>就是计算线性变换作用与定向量的一种途径，每个<strong class=chinese>矩阵</strong>都可以看作是<strong class=chinese>空间中的一种变换</strong>。<strong class=chinese>矩阵即空间线性变换</strong>。</p>
