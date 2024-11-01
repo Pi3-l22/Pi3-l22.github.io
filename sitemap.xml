@@ -2,26 +2,36 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2024-10-31</lastmod>
+    <lastmod>2024-11-01</lastmod>
   </url>
   
   <url>
     <loc>/tags/index/</loc>
-    <lastmod>2024-10-31</lastmod>
+    <lastmod>2024-11-01</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2024-10-31</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/python/</loc>
-    <lastmod>2024-10-31</lastmod>
+    <lastmod>2024-11-01</lastmod>
   </url>
   
   <url>
     <loc>/tags/</loc>
+    <lastmod>2024-11-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2024/11/%E4%B8%83%E7%89%9B%E4%BA%91%E5%9B%BE%E5%BA%8A%E4%B8%8Ehttps%E5%A4%96%E9%93%BE/</loc>
+    <lastmod>2024-11-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/%E7%94%9F%E6%B4%BB/</loc>
+    <lastmod>2024-11-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/python/</loc>
     <lastmod>2024-10-31</lastmod>
   </url>
   
@@ -102,11 +112,6 @@
   
   <url>
     <loc>/tags/baoyan/</loc>
-    <lastmod>2024-09-29</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/%E7%94%9F%E6%B4%BB/</loc>
     <lastmod>2024-09-29</lastmod>
   </url>
   

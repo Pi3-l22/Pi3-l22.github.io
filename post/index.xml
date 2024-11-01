@@ -8,7 +8,18 @@
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
-    <lastBuildDate>Thu, 31 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>七牛云图床与HTTPS外链</title>
+      <link>/post/2024/11/%E4%B8%83%E7%89%9B%E4%BA%91%E5%9B%BE%E5%BA%8A%E4%B8%8Ehttps%E5%A4%96%E9%93%BE/</link>
+      <pubDate>Fri, 01 Nov 2024 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>/post/2024/11/%E4%B8%83%E7%89%9B%E4%BA%91%E5%9B%BE%E5%BA%8A%E4%B8%8Ehttps%E5%A4%96%E9%93%BE/</guid>
+      
+      <description>&lt;p&gt;前几天备案的域名终于审核通过了，也因此可以来配置一下图床和 CDN 了。&lt;/p&gt;</description>
+      
+    </item>
+    
     <item>
       <title>有趣的正则表达式小问题</title>
       <link>/post/2024/10/%E6%9C%89%E8%B6%A3%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B0%8F%E9%97%AE%E9%A2%98/</link>
@@ -106,17 +117,6 @@
       <guid>/post/2024/09/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/</guid>
       
       <description>&lt;p&gt;大学课程设计项目&lt;/p&gt;</description>
-      
-    </item>
-    
-    <item>
-      <title>英语写作方法论笔记</title>
-      <link>/post/2024/09/%E5%86%99%E4%BD%9C%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Fri, 20 Sep 2024 00:00:00 +0000</pubDate>
-      <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>/post/2024/09/%E5%86%99%E4%BD%9C%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</guid>
-      
-      <description>&lt;p&gt;颉斌斌2025考研英语写作方法论讲稿笔记&lt;/p&gt;</description>
       
     </item>
     
