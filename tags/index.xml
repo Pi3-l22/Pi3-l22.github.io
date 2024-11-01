@@ -21,11 +21,33 @@
     </item>
     
     <item>
+      <title>博客</title>
+      <link>/tags/%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Fri, 01 Nov 2024 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>/tags/%E5%8D%9A%E5%AE%A2/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
       <title>生活</title>
       <link>/tags/%E7%94%9F%E6%B4%BB/</link>
       <pubDate>Fri, 01 Nov 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>/tags/%E7%94%9F%E6%B4%BB/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>图床</title>
+      <link>/tags/%E5%9B%BE%E5%BA%8A/</link>
+      <pubDate>Fri, 01 Nov 2024 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>/tags/%E5%9B%BE%E5%BA%8A/</guid>
       
       <description></description>
       
@@ -92,28 +114,6 @@
       <pubDate>Mon, 21 Oct 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
       <guid>/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/</guid>
-      
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>HTML</title>
-      <link>/tags/html/</link>
-      <pubDate>Sun, 20 Oct 2024 00:00:00 +0000</pubDate>
-      <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>/tags/html/</guid>
-      
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>Neovim</title>
-      <link>/tags/neovim/</link>
-      <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
-      <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>/tags/neovim/</guid>
       
       <description></description>
       
