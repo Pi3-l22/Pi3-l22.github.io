@@ -177,7 +177,7 @@
 <li>数据索引费用</li>
 <li>跨区域复制 RTC 费用</li>
 </ul>
-<p>最后，我选择了七牛云的对象存储服务，因为它提供存储和 CDN 的免费额度，这些免费额度对于我来说完全足够了，也不需要先支付费用，等之后需要升级的时候再付费即可。</p>
+<p>最后，我选择了<a href="https://www.qiniu.com/">七牛云</a>的对象存储服务，因为它提供存储和 CDN 的免费额度，这些免费额度对于我来说完全足够了，也不需要先支付费用，等之后需要升级的时候再付费即可。</p>
 <p>七牛云的对象存储免费额度包括：每月 10GB 的标准存储空间、每月 1000千次的 GET 请求、每月 100 千次的PUT/DELETE 请求以及每月 10 GB 的CDN回源流出流量。</p>
 <p>七牛云的 CDN 服务免费额度包括：</p>
 <p><img src="https://image.pi3.fun/blog/202411012230435.png" alt="image.png"></p>
@@ -197,7 +197,8 @@
 <p>如果开启了 CDN 则需要在 CDN 中配置 Referer 防盗链，同时配置告警。</p>
 <p><img src="https://image.pi3.fun/blog/202411012300650.png" alt="image.png"></p>
 <h2 id="自定义源站域名">自定义源站域名</h2>
-<p>虽然不能使用 CDN 服务，但是由于七牛云服务器在国内，实际上在国内区域有没有 CDN 的差别不是特别的大，而且选择的对象存储区域也是自己所在地，所以效果也不差，比 GitHub + jsDelivr 肯定是好了不少。</p>
+<p>虽然没有<a href="#%E9%85%8D%E7%BD%AE%20CDN">配置 CDN</a> 服务，但是由于七牛云服务器在国内，实际上在国内区域有没有 CDN 的差别不是特别的大，而且选择的对象存储区域也是自己所在地，所以效果也不差，比 GitHub + jsDelivr 肯定是好了不少。</p>
+<p><img src="https://image.pi3.fun/blog/202411012353697.png" alt="image.png"></p>
 <p>配置自定义源站域名也很简单，在<a href="https://portal.qiniu.com/kodo/bucket/">七牛云 - 对象存储 - 空间管理</a><strong>选择空间-域名管理-自定义源站域名</strong>中添加已备案的域名，根据说明进行 CNAME 解析即可。</p>
 <p><img src="https://image.pi3.fun/blog/202411012311928.png" alt="image.png"></p>
 <p>接下来就是配置 HTTPS，这里我使用 <a href="https://ohttps.com/">ohttps</a> 的免费证书服务，虽然免费的Let&rsquo;s Encrypt 证书只支持 90 天有效期，但是 <a href="https://ohttps.com/">ohttps</a> 支持<strong class=chinese>自动更新</strong>和<strong class=chinese>自动部署</strong>。</p>
