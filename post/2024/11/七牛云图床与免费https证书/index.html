@@ -51,9 +51,9 @@
   
 
   
-  <meta property="og:url" content="/post/2024/11/%E4%B8%83%E7%89%9B%E4%BA%91%E5%9B%BE%E5%BA%8A%E4%B8%8Ehttps%E5%A4%96%E9%93%BE/">
+  <meta property="og:url" content="/post/2024/11/%E4%B8%83%E7%89%9B%E4%BA%91%E5%9B%BE%E5%BA%8A%E4%B8%8E%E5%85%8D%E8%B4%B9https%E8%AF%81%E4%B9%A6/">
   <meta property="og:site_name" content="Pi3&#39;s Notes">
-  <meta property="og:title" content="七牛云图床与HTTPS外链">
+  <meta property="og:title" content="七牛云图床与免费HTTPS证书">
   <meta property="og:description" content="前几天备案的域名终于审核通过了，也因此可以来配置一下图床和 CDN 了。">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
@@ -64,16 +64,16 @@
 
 
   
-  <link rel="canonical" href="/post/2024/11/%E4%B8%83%E7%89%9B%E4%BA%91%E5%9B%BE%E5%BA%8A%E4%B8%8Ehttps%E5%A4%96%E9%93%BE/">
+  <link rel="canonical" href="/post/2024/11/%E4%B8%83%E7%89%9B%E4%BA%91%E5%9B%BE%E5%BA%8A%E4%B8%8E%E5%85%8D%E8%B4%B9https%E8%AF%81%E4%B9%A6/">
 
   
   
   
-  <meta itemprop="name" content="七牛云图床与HTTPS外链">
+  <meta itemprop="name" content="七牛云图床与免费HTTPS证书">
   <meta itemprop="description" content="前几天备案的域名终于审核通过了，也因此可以来配置一下图床和 CDN 了。">
   <meta itemprop="datePublished" content="2024-11-01T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-11-01T00:00:00+00:00">
-  <meta itemprop="wordCount" content="1501">
+  <meta itemprop="wordCount" content="1736">
   <meta itemprop="keywords" content="生活">
 
   
@@ -82,7 +82,7 @@
 
   
   
-  <title>七牛云图床与HTTPS外链 - Pi3&#39;s Notes</title>
+  <title>七牛云图床与免费HTTPS证书 - Pi3&#39;s Notes</title>
   
 
   
@@ -125,7 +125,7 @@
 <main id="main" class="post">
   
   
-  <h1>七牛云图床与HTTPS外链</h1>
+  <h1>七牛云图床与免费HTTPS证书</h1>
   
   <div>
     <b>Keywords: </b>
@@ -144,8 +144,8 @@
   <ul>
     <li><a href="#前言">前言</a></li>
     <li><a href="#配置图床">配置图床</a></li>
-    <li><a href="#配置-cdn">配置 CDN</a></li>
     <li><a href="#自定义源站域名">自定义源站域名</a></li>
+    <li><a href="#配置-cdn">配置 CDN</a></li>
   </ul>
 </nav></div>
   </details>
@@ -182,7 +182,7 @@
 <p>空间创建成功后还需要配置已经<strong class=chinese>备案的域名</strong>，默认提供的测试域名只保留 30 天。</p>
 <p>接着配置 PicGo</p>
 <p><img src="https://image.pi3.fun/blog/202411012238195.png" alt="image.png"></p>
-<p>AccessKey 和 SecretKey 都在七牛云右上角头像个人中心的密钥管理中获取。</p>
+<p>AccessKey 和 SecretKey 都在<a href="https://portal.qiniu.com/user/key">七牛云开发者平台</a><strong>个人中心-密钥管理</strong>中获取。</p>
 <p>Bucket 为空间名称；访问网址为配置的备案域名（需要<a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%BA%90%E7%AB%99%E5%9F%9F%E5%90%8D">自定义源站域名</a>，可以先使用测试域名进行测试）；存储区域为选择区域的代号，华东浙江为 <code>z0</code>；存储路径为空间中的文件夹，没有则为根目录。</p>
 <p><img src="https://image.pi3.fun/blog/202411012241475.png" alt="image.png"></p>
 <p>以上便完成了七牛云 + PicGo 图床的配置。</p>
@@ -190,20 +190,36 @@
 <p><img src="https://image.pi3.fun/blog/202411012258797.png" alt="image.png"></p>
 <p>如果开启了 CDN 则需要在 CDN 中配置 Referer 防盗链，同时配置告警。</p>
 <p><img src="https://image.pi3.fun/blog/202411012300650.png" alt="image.png"></p>
+<h2 id="自定义源站域名">自定义源站域名</h2>
+<p>虽然不能使用 CDN 服务，但是由于七牛云服务器在国内，实际上在国内区域有没有 CDN 的差别不是特别的大，而且选择的对象存储区域也是自己所在地，所以效果也不差，比 GitHub + jsDelivr 肯定是好了不少。</p>
+<p>配置自定义源站域名也很简单，在<a href="https://portal.qiniu.com/kodo/bucket/">七牛云 - 对象存储 - 空间管理</a><strong>选择空间-域名管理-自定义源站域名</strong>中添加已备案的域名，根据说明进行 CNAME 解析即可。</p>
+<p><img src="https://image.pi3.fun/blog/202411012311928.png" alt="image.png"></p>
+<p>接下来就是配置 HTTPS，这里我使用 <a href="https://ohttps.com/">ohttps</a> 的免费证书服务，虽然免费的Let&rsquo;s Encrypt 证书只支持 90 天有效期，但是 <a href="https://ohttps.com/">ohttps</a> 支持<strong class=chinese>自动更新</strong>和<strong class=chinese>自动部署</strong>。</p>
+<p>注册 <a href="https://ohttps.com/">ohttps</a> 账户并登录，在<strong class=chinese>证书管理</strong>中选择<strong class=chinese>创建证书</strong>，选择免费的 Let&rsquo;s Encrypt 证书，并输入域名。</p>
+<p><img src="https://image.pi3.fun/blog/202411012318345.png" alt="image.png"></p>
+<p>接着根据提示进行 CNAME 域名解析，验证解析记录，等待 3~15 分钟即可创建证书。</p>
+<p><img src="https://image.pi3.fun/blog/202411012319612.png" alt="image.png"></p>
+<p>随后将证书的私钥文件和证书文件下载下来。</p>
+<p><img src="https://image.pi3.fun/blog/202411012326340.png" alt="image.png"></p>
+<p>到<a href="https://portal.qiniu.com/certificate/ssl">七牛云 - 证书管理</a>，分别上传对应的<strong class=chinese>私钥</strong>和<strong class=chinese>证书</strong>文件。</p>
+<p><img src="https://image.pi3.fun/blog/202411012331041.png" alt="image.png"></p>
+<p>最后回到 <a href="https://ohttps.com/">ohttps</a> 种，选择部署节点-添加结点，选择七牛云-SSL。</p>
+<p><img src="https://image.pi3.fun/blog/202411012334279.png" alt="image.png"></p>
+<p>同样输入<a href="https://portal.qiniu.com/user/key">七牛云开发者平台</a><strong>个人中心-密钥管理</strong>中获取的 AccessKey 和 SecretKey</p>
+<p><img src="https://image.pi3.fun/blog/202411012335624.png" alt="image.png"></p>
+<p>下一步，选择关联的证书，创建部署结点。</p>
+<p><img src="https://image.pi3.fun/blog/202411012337976.png" alt="image.png"></p>
+<p>回到<strong class=chinese>证书管理</strong>中选择相应的证书完成自动更新和自动部署的配置。</p>
+<p><img src="https://image.pi3.fun/blog/202411012339795.png" alt="image.png"></p>
 <h2 id="配置-cdn">配置 CDN</h2>
 <p>由于七牛云还提供 CDN 的免费额度，于是我便想再给图床配置一个 CDN 服务。</p>
-<p>在 CDN 的控制台，添加一个域名（需要备案），通信协议可以选择 HTTPS 但是针对 HTTPS 的请求流量没有免费额度，需要单独按量付费或者购买资源包（资源包包含 HTTP 和 HTTPS 的流量）。这里我不想付费，于是选择了 HTTP 协议。源站配置选择七牛云的存储空间，其他选项默认。最后完成 CNAME 解析就算配置成功了。</p>
+<p>在<a href="https://portal.qiniu.com/cdn/domain/create">七牛云 - 添加域名</a>，添加一个域名（需要备案），通信协议可以选择 HTTPS 但是针对 HTTPS 的请求流量没有免费额度，需要单独按量付费或者购买资源包（资源包包含 HTTP 和 HTTPS 的流量）。这里我不想付费，于是选择了 HTTP 协议。源站配置选择七牛云的存储空间，其他选项默认。最后完成 CNAME 解析就算配置成功了。</p>
 <p><img src="https://image.pi3.fun/blog/202411012249273.png" alt="image.png"></p>
 <p>但我满心欢喜将博客文章中的图片迁移到 CDN 的域名上时，我发现在电脑的浏览器上文章中的图片都不能显示，而手机上的浏览器则可以打开图片。经过一番研究，发现罪魁祸首就是没有启用 HTTPS 协议而是使用 HTTP 协议。</p>
 <p>由于我的博客网站启用了 HTTPS 协议，但是图片却还是 HTTP 协议，请求图片时浏览器会自动将 HTTP 协议的请求转成 HTTPS 协议，控制台报错：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>Failed to load resource: net::ERR_CERT_COMMON_NAME_INVALID
 </span></span></code></pre></div><p>导致了图片不能显示。相反在手机浏览器上对于 HTTP 不安全请求规则并不严格，所有依旧能够请求到图片。</p>
-<p>最后尝试了很多解决方法，都不启作用，我也不想单独给 CDN 的 HTTPS 请求付费，于是无奈只能放弃 CDN，重新配置一个自定义源站域名。</p>
-<h2 id="自定义源站域名">自定义源站域名</h2>
-<p>虽然不能使用 CDN 服务，但是由于七牛云服务器在国内，实际上在国内区域有没有 CDN 的差别不是特别的大，而且选择的对象存储区域也是自己所在地，所以效果也不差，比 GitHub + jsDelivr 肯定是好了不少。</p>
-<p>配置自定义源站域名也很简单，在<strong>对象存储-域名管理-自定义源站域名</strong>中添加已备案的域名，根据说明进行 CNAME 解析即可。</p>
-<p><img src="https://image.pi3.fun/blog/202411012311928.png" alt="image.png"></p>
-<p>接下来就是配置 HTTPS，这里我使用 <a href="https://ohttps.com/">ohttps</a> 的免费证书服务，虽然免费的Let&rsquo;s Encrypt 证书只支持 90 天有效期，但是 <a href="https://ohttps.com/">ohttps</a> 支持<strong class=chinese>自动更新</strong>和<strong class=chinese>自动部署</strong>。</p>
+<p>最后尝试了很多解决方法，都不启作用，我也不想单独给 CDN 的 HTTPS 请求付费，于是无奈只能放弃 CDN，重新使用自定义源站域名。</p>
     
   </article>
   <div class="paginator">
