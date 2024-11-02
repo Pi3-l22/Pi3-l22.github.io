@@ -39,3 +39,63 @@
 #main :target {
     background-color: azure;
 }
+
+
+
+/* shortcode photo */
+.album {
+    display: flex; /* 使用 Flexbox */
+    flex-direction: column; /* 垂直排列 */
+    align-items: center; /* 水平居中 */
+    justify-content: center; /* 垂直居中 */
+    /* min-height: 100vh; 确保占满整个视口高度 */
+    position: relative;
+}
+
+.album .shadow-container {
+    display: inline-block; /* 使容器与图片尺寸一致 */
+    position: relative;
+    padding: 5px 10px; /* 内边距，留出空间给阴影 */
+    margin: 10px auto;
+    box-shadow:
+        7px 7px 12px rgba(0, 0, 0, .4),
+        -7px -7px 12px rgba(255, 255, 255, .9),
+        inset 0 0 0 rgba(255, 255, 255, .9),
+        inset 0 0 0 rgba(0, 0, 0, .4);
+    
+    transition: .3s all;
+
+    &:hover {
+        box-shadow:
+            0 0 0 rgba(0, 0, 0, .4),
+            0 0 0 rgba(255, 255, 255, .9),
+            inset -7px -7px 12px rgba(255, 255, 255, .9),
+            inset 7px 7px 12px rgba(0, 0, 0, .4);
+        img{
+            transform: scale(0.98);
+        }
+        .info {
+            transform: scale(0.98);
+        }
+    }
+}
+
+.album .info {
+    text-align: center; /* 文字居中 */
+    font-size: 0.8rem; /* 字体大小 */
+    color: #555; /* 字体颜色 */
+    transition: .3s all;
+}
+
+.album img {
+    height: 60vh;
+    max-height: 70vh;
+    width: 100%; /* 确保图片宽度适应容器 */
+    height: auto; /* 保持纵横比 */
+    transition: .3s all;
+    position: relative; 
+    z-index: 1; /* 确保 img 在 div 之上 */
+    display: block; /* 居中 */
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
