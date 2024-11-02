@@ -1,6 +1,6 @@
 #main > h1 {
     text-align: center;
-    margin-bottom: .5rem;
+    margin-bottom: 1rem;
 }
 
 #main > .content {
@@ -8,8 +8,8 @@
 }
 
 #main > .warning {
-    background-color: brown;
-    color: white;
+    background-color: var(--warning-bg);
+    color: var(--warning-color);
     font-size: 1.1rem;
     margin: 2rem 0;
     padding: 1rem 0;
@@ -17,8 +17,8 @@
 }
 
 #main .toc {
-    background-color: #EEEEEE;
-    border: black 1px dashed;
+    background-color: var(--toc-bg);
+    border: var(--toc-border) 1px dashed;
     display: inline-block;
     margin: 1rem;
     padding: .5rem 1rem;
@@ -37,7 +37,7 @@
 }
 
 #main :target {
-    background-color: azure;
+    background-color: var(--main-targer-bg);
 }
 
 
@@ -58,19 +58,19 @@
     padding: 10px; /* 内边距，留出空间给阴影 */
     margin: 10px auto;
     box-shadow:
-        7px 7px 12px rgba(0, 0, 0, .4),
-        -7px -7px 12px rgba(255, 255, 255, .9),
-        inset 0 0 0 rgba(255, 255, 255, .9),
-        inset 0 0 0 rgba(0, 0, 0, .4);
+        7px 7px 12px var(--album-shadow-1),
+        -7px -7px 12px var(--album-shadow-2),
+        inset 0 0 0 var(--album-shadow-2),
+        inset 0 0 0 var(--album-shadow-1);
     
     transition: .3s all;
 
     &:hover {
         box-shadow:
-            0 0 0 rgba(0, 0, 0, .4),
-            0 0 0 rgba(255, 255, 255, .9),
-            inset -7px -7px 12px rgba(255, 255, 255, .9),
-            inset 7px 7px 12px rgba(0, 0, 0, .4);
+            0 0 0 var(--album-shadow-1),
+            0 0 0 var(--album-shadow-2),
+            inset -7px -7px 12px var(--album-shadow-2),
+            inset 7px 7px 12px var(--album-shadow-1);
         img{
             transform: scale(0.98);
         }
@@ -83,7 +83,7 @@
 .album .info {
     text-align: center; /* 文字居中 */
     font-size: 0.8rem; /* 字体大小 */
-    color: #555; /* 字体颜色 */
+    color: var(--album-info); /* 字体颜色 */
     transition: .3s all;
 }
 
@@ -105,10 +105,10 @@
 .cardlink {
     width: 50%;
     margin: 20px auto;
-    border: 1px solid #eee;
+    border: 1px solid var(--cardlink-border);
     /* border-radius: 12px; */
     overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 20px var(--cardlink-shadow);
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     position: relative;
     z-index: 1;
@@ -117,8 +117,8 @@
 .cardlink:hover {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 
-        0 20px 30px rgba(0, 0, 0, 0.2),
-        0 0 20px rgba(0, 0, 0, 0.1);
+        0 20px 30px var(--cardlink-hover-shadow1),
+        0 0 20px var(--cardlink-hover-shadow2);
 }
 
 .cardlink::after {
@@ -130,7 +130,7 @@
     height: 100%;
     /* border-radius: 12px; */
     opacity: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+    background: var(--cardlink-after);
     transition: all 0.4s ease;
     z-index: 1;
     pointer-events: none;
@@ -143,7 +143,7 @@
 .cardlink a {
     display: flex;
     text-decoration: none;
-    color: #333;
+    /* color: var(--cardlink-title); */
     padding: 0;
     width: 100%;
     height: 100%;
@@ -173,20 +173,20 @@
     margin: 0;
     font-size: 18px !important;
     font-weight: bold;
-    color: #333;
+    color: var(--cardlink-title);
     margin-bottom: 2px;
     transition: all 0.3s ease;
 }
 
 .cardlink:hover .link_title {
     transform: translateX(5px);
-    color: #000;
+    color: var(--cardlink-title-hover);
 }
 
 .link_text {
     margin: 0;
     font-size: 16px !important;
-    color: #666;
+    color: var(--cardlink-text);
     opacity: 0.8;
     transition: all 0.3s ease;
 }

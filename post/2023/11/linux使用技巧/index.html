@@ -2,6 +2,14 @@
 <html lang="zh-cn">
 
 <head>
+  
+  <script>
+    (function() {
+      const currentTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', currentTheme);
+    })();
+  </script>
+
   <meta charset="UTF-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,6 +88,7 @@
   
   <link media="screen" rel="stylesheet" href='/css/common.css'>
   <link media="screen" rel="stylesheet" href='/css/content.css'>
+  <link media="screen" rel="stylesheet" href='/css/theme.css'>
 
   
   
@@ -115,6 +124,9 @@
       <a class="link" href="/about/">关于</a>
     </span>
     
+    <span class="nav-bar-item">
+      <a class="link theme-toggle" href="javascript:void(0);">明/暗</a>
+    </span>
   </nav>
 </header>
 
@@ -708,6 +720,30 @@ var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着�
   
 
 
+
+
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      
+      const themeToggle = document.querySelector('.theme-toggle');
+      if (themeToggle) {
+        themeToggle.textContent = currentTheme === 'light' ? '明/暗' : '明/暗';
+        
+        themeToggle.addEventListener('click', function() {
+          const currentTheme = document.documentElement.getAttribute('data-theme');
+          const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+          
+          document.documentElement.setAttribute('data-theme', newTheme);
+          localStorage.setItem('theme', newTheme);
+          
+          this.textContent = newTheme === 'light' ? '明/暗' : '明/暗';
+        });
+      }
+    });
+  </script>
 
 </body>
 

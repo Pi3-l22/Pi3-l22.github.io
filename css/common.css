@@ -99,29 +99,37 @@
     padding: 0;
 }
 
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
 a {
     color: inherit;
     text-decoration: none !important;
 }
 
 time {
-    color: gray;
+    color: var(--text-color);
+    opacity: 0.7;
     margin-left: 1rem;
     min-width: 5rem;
 }
 
 #wrapper {
-    background-color: #FAFAFA;
+    background-color: var(--bg-color);
     display: flex;
     flex-direction: column;
     font-family: 'Latin Modern Roman', '家族宋', 'Songti SC', 'STZhongsong', 'STSong', 'SimSun', 'Noto Serif CJK SC', 'Source Han Serif SC', serif;
     min-height: 100vh;
     overflow-wrap: break-word;
     padding: 1rem;
+    transition: all 0.3s ease;
 }
 
 .link {
-    color: #AA0000;
+    color: var(--nav-link-color);
     text-decoration: underline;
 }
 
@@ -134,17 +142,17 @@ time {
 }
 
 ::-webkit-scrollbar {
-    background-color: #FAFAFA;
+    background-color: var(--scrollbar-bg);
     height: 8px;
     width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #AAAAAA;
+    background-color: var(--scrollbar-thumb);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #888888;
+    background-color: var(--scrollbar-hover);
 }
 
 /* header */
@@ -202,7 +210,7 @@ time {
     flex-direction: column;
     flex-grow: 1;
     /* 边框阴影 */
-    box-shadow: 0 0 20px 10px #cccccc;
+    box-shadow: 0 0 20px 10px var(--post-shodow);
     margin: 2rem 0;
     /* 自定义尺寸 */
     max-width: 850px;
@@ -214,8 +222,9 @@ time {
     width: 100%; */
 }
 
+/* 主页文章序号颜色 */
 #main .post .order {
-    color: #AA0000;
+    color: var(--post-order);
 }
 
 /* 适配手机端 */

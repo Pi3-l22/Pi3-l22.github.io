@@ -15,7 +15,7 @@
 }
 
 .content a {
-    color: #ec028d;
+    color: var(--content-a);
     /* text-decoration: underline !important; */
 }
 
@@ -44,8 +44,8 @@
 }
 
 .content blockquote {
-    border-left: #bf003f 2.5px solid;
-    background-color: #f5f5f5;
+    border-left: var(--blockquote-left) 2.5px solid;
+    background-color: var(--hightlight-bg);
     /* font-style: italic; */
     font-family: 'Fangsong', serif;
     padding: 1rem;
@@ -53,9 +53,9 @@
 }
 
 .content code {
-    background-color: #F5F5F5;
+    background-color: var(--hightlight-bg);
     /* border-radius: .2rem; */
-    color: #AA0000;
+    color: var(--inline-code);
     font-family: 't1xtt', 'Latin Modern Mono', 'Fangsong', Courier,  monospace;
     padding: 0 .2rem;
 }
@@ -104,7 +104,7 @@
 }
 
 .content pre {
-    background-color: #F5F5F5; /* 由于使用代码样式 使得背景不起作用 */
+    background-color: var(--hightlight-bg); /* 由于使用代码样式 使得背景不起作用 */
     border-radius: .5rem;
     font-family: 't1xtt', 'Latin Modern Mono', 'Fangsong', Courier, monospace;
     margin-top: .5rem;
@@ -114,7 +114,7 @@
 
 /* 设置代码框背景 */
 .content .highlight pre{
-    background-color: #F5F5F5 !important;
+    background-color: var(--hightlight-bg) !important;
 }
 
 .content pre code {
@@ -130,7 +130,7 @@
 }
 
 .content em{
-    color: #AA0000;
+    color: var(--em-color);
 }
 
 .content table {
@@ -143,13 +143,13 @@
 }
 
 .content td, .content th {
-    border: #575C61 1px solid;
+    border: var(--table-border) 1px solid;
     padding: .1rem .5rem;
 }
 
 .content th {
-    background-color: #575C61;
-    color: #FAFAFA;
+    background-color: var(--table-header-bg);
+    color: var(--table-header-color);
     text-align: center !important;
 }
 
@@ -166,12 +166,12 @@
 }
 
 .content mark {
-    background-color: #e4a1a1;
+    background-color: var(--mark-bg);
 }
 
 .content hr{
     border: none;
-    border-top: 2px solid #cbcbcb;
+    border-top: 2px solid var(--hr-color);
     margin: 1.5rem auto;
     width: 100%;
 }
