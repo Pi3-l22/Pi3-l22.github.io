@@ -161,11 +161,6 @@
   </url>
   
   <url>
-    <loc>/about/</loc>
-    <lastmod>2024-09-19</lastmod>
-  </url>
-  
-  <url>
     <loc>/post/2024/09/%E4%B8%89%E5%B0%8F%E9%97%A8%E6%96%B9%E6%B3%95%E8%AE%BA%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2024-09-16</lastmod>
   </url>
@@ -378,6 +373,11 @@
   <url>
     <loc>/archives/</loc>
     <lastmod>2019-05-28</lastmod>
+  </url>
+  
+  <url>
+    <loc>/about/</loc>
+    <lastmod>0001-01-01</lastmod>
   </url>
   
   <url>
