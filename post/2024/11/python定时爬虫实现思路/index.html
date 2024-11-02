@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="使用 Python 爬虫定期检查目标网站信息的更新，自动爬取新发布的文章，并自动发布到个人静态网站随时浏览。">
+  
+
+  
+  <link rel="icon" href="/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="/post/2024/11/python%E5%AE%9A%E6%97%B6%E7%88%AC%E8%99%AB%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF/">
+  <meta property="og:site_name" content="Pi3&#39;s Notes">
+  <meta property="og:title" content="Python定时爬虫实现思路">
+  <meta property="og:description" content="使用 Python 爬虫定期检查目标网站信息的更新，自动爬取新发布的文章，并自动发布到个人静态网站随时浏览。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-11-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-02T00:00:00+00:00">
+    <meta property="article:tag" content="技术">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="爬虫">
+
+
+  
+  <link rel="canonical" href="/post/2024/11/python%E5%AE%9A%E6%97%B6%E7%88%AC%E8%99%AB%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF/">
+
+  
+  
+  
+  <meta itemprop="name" content="Python定时爬虫实现思路">
+  <meta itemprop="description" content="使用 Python 爬虫定期检查目标网站信息的更新，自动爬取新发布的文章，并自动发布到个人静态网站随时浏览。">
+  <meta itemprop="datePublished" content="2024-11-02T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2024-11-02T00:00:00+00:00">
+  <meta itemprop="wordCount" content="906">
+  <meta itemprop="keywords" content="技术,Python,爬虫">
+
+  
+  <link media="screen" rel="stylesheet" href='/css/common.css'>
+  <link media="screen" rel="stylesheet" href='/css/content.css'>
+
+  
+  
+  <title>Python定时爬虫实现思路 - Pi3&#39;s Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="/">Pi3&#39;s Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">主页</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/album/">相册</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>Python定时爬虫实现思路</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='/tags/%E6%8A%80%E6%9C%AF'>#技术</a>
+    
+    <a class="link" href='/tags/python'>#Python</a>
+    
+    <a class="link" href='/tags/%E7%88%AC%E8%99%AB'>#爬虫</a>
+    
+  </div>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#设计思路">设计思路</a></li>
+    <li><a href="#核心功能">核心功能</a>
+      <ul>
+        <li><a href="#文章爬虫-crawler-py">文章爬虫 (crawler. py)</a></li>
+        <li><a href="#定时调度器-scheduler-py">定时调度器 (scheduler. py)</a></li>
+      </ul>
+    </li>
+    <li><a href="#程序特点">程序特点</a></li>
+    <li><a href="#使用要求">使用要求</a>
+      <ul>
+        <li><a href="#环境要求">环境要求</a></li>
+        <li><a href="#配置文件">配置文件</a></li>
+        <li><a href="#运行方式">运行方式</a></li>
+      </ul>
+    </li>
+    <li><a href="#项目结构">项目结构</a></li>
+    <li><a href="#注意事项">注意事项</a></li>
+    <li><a href="#扩展思路">扩展思路</a></li>
+    <li><a href="#demo">Demo</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <p>使用 Python 爬虫定期检查目标网站信息的更新，自动爬取新发布的文章，并自动发布到个人静态网站随时浏览。</p>
+<h2 id="设计思路">设计思路</h2>
+<p>设计一个用于爬取目标网站信息的自动化爬虫程序。程序主要包含两个核心组件：</p>
+<ol>
+<li>文章爬虫（ArticleCrawler）</li>
+<li>定时调度器（CrawlerScheduler）</li>
+</ol>
+<p>该项目可以定期检查目标网站信息的更新，自动爬取新发布的文章，并将其保存为 Markdown 格式。最后使用 Git 将代码上传至仓库中，使用 GitHub Action + Hugo 自动构建静态网站并发布，可以随时在个人网站上浏览最新爬取的信息。</p>
+<h2 id="核心功能">核心功能</h2>
+<h3 id="文章爬虫-crawler-py">文章爬虫 (crawler. py)</h3>
+<h4 id="主要功能">主要功能：</h4>
+<ul>
+<li>爬取目标网站文章内容</li>
+<li>格式化文章内容</li>
+<li>保存为 Markdown 文件</li>
+<li>自动管理文件目录结构</li>
+<li>Git 自动提交更新</li>
+</ul>
+<h4 id="关键类和方法">关键类和方法：</h4>
+<p><strong>ArticleCrawler 类</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a90d91">class</span> <span style="color:#3f6e75">ArticleCrawler</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">def</span> <span style="color:#000">__init__</span>(<span style="color:#5b269a">self</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">base_url</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;https://example.com/&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#177500"># 初始化配置...</span>
+</span></span></code></pre></div><p>主要方法：</p>
+<ul>
+<li><code>get_article_content()</code>: 获取文章内容</li>
+<li><code>save_article()</code>: 保存文章到指定目录</li>
+<li><code>crawl_new_articles()</code>: 只爬取新增的文章</li>
+<li><code>format_content()</code>: 格式化文章内容</li>
+</ul>
+<p><strong>GitManager 类</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a90d91">class</span> <span style="color:#3f6e75">GitManager</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">def</span> <span style="color:#000">__init__</span>(<span style="color:#5b269a">self</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">logger</span> <span style="color:#000">=</span> <span style="color:#000">logging</span><span style="color:#000">.</span><span style="color:#000">getLogger</span>(<span style="color:#c41a16">&#39;GitManager&#39;</span>)
+</span></span></code></pre></div><p>负责自动执行 Git 操作，包括 add、commit 和 push。</p>
+<h3 id="定时调度器-scheduler-py">定时调度器 (scheduler. py)</h3>
+<h4 id="主要功能-1">主要功能：</h4>
+<ul>
+<li>定时检查网站更新</li>
+<li>智能判断新文章</li>
+<li>自动触发爬虫任务</li>
+<li>记录文章数量变化</li>
+</ul>
+<h4 id="关键类和方法-1">关键类和方法：</h4>
+<p><strong>CrawlerScheduler 类</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a90d91">class</span> <span style="color:#3f6e75">CrawlerScheduler</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">def</span> <span style="color:#000">__init__</span>(<span style="color:#5b269a">self</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">crawler</span> <span style="color:#000">=</span> <span style="color:#000">ArticleCrawler</span>()
+</span></span><span style="display:flex;"><span>        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">scheduler</span> <span style="color:#000">=</span> <span style="color:#000">BlockingScheduler</span>()
+</span></span></code></pre></div><p>主要方法：</p>
+<ul>
+<li><code>get_current_article_count()</code>: 获取当前文章总数</li>
+<li><code>crawl_job()</code>: 执行爬虫任务</li>
+<li><code>random_time_trigger()</code>: 生成随机执行时间</li>
+<li><code>start()</code>: 启动定时任务</li>
+</ul>
+<h2 id="程序特点">程序特点</h2>
+<ol>
+<li>
+<p><strong class=chinese>智能增量爬取</strong></p>
+<ul>
+<li>只爬取新增文章，避免重复爬取</li>
+<li>通过比对文章数量判断更新</li>
+</ul>
+</li>
+<li>
+<p><strong class=chinese>随机化执行时间</strong></p>
+<ul>
+<li>避免固定时间爬取</li>
+<li>在指定时间段内随机执行</li>
+</ul>
+</li>
+<li>
+<p><strong class=chinese>完善的日志系统</strong></p>
+<ul>
+<li>记录爬虫运行状态</li>
+<li>错误追踪和调试</li>
+</ul>
+</li>
+<li>
+<p><strong>自动化 Git 管理</strong></p>
+<ul>
+<li>自动提交更新</li>
+<li>保持仓库同步</li>
+</ul>
+</li>
+</ol>
+<h2 id="使用要求">使用要求</h2>
+<h3 id="环境要求">环境要求</h3>
+<ol>
+<li>python 3. x</li>
+<li>requests</li>
+<li>beautifulsoup 4</li>
+<li>apscheduler</li>
+</ol>
+<h3 id="配置文件">配置文件</h3>
+<p>需要准备以下文件：</p>
+<ul>
+<li><code>template.md</code>: 文章模板文件</li>
+<li><code>cover.txt</code>: 封面图片链接列表</li>
+<li><code>logs/</code>: 日志目录</li>
+</ul>
+<h3 id="运行方式">运行方式</h3>
+<p>直接运行爬虫，爬取目标网站所有指定信息：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python crawler. py
+</span></span></code></pre></div><p>启动定时任务，定时爬取更新的信息：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python scheduler. py
+</span></span></code></pre></div><h2 id="项目结构">项目结构</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>project/
+</span></span><span style="display:flex;"><span>├── crawler.py      <span style="color:#177500"># 爬虫核心代码</span>
+</span></span><span style="display:flex;"><span>├── scheduler.py    <span style="color:#177500"># 定时调度器</span>
+</span></span><span style="display:flex;"><span>├── template.md     <span style="color:#177500"># 文章模板</span>
+</span></span><span style="display:flex;"><span>├── cover.txt       <span style="color:#177500"># 封面图片列表</span>
+</span></span><span style="display:flex;"><span>└── logs/           <span style="color:#177500"># 日志目录</span>
+</span></span><span style="display:flex;"><span>    ├── spiders.log
+</span></span><span style="display:flex;"><span>    └── scheduler.log
+</span></span></code></pre></div><h2 id="注意事项">注意事项</h2>
+<ol>
+<li>应该合理设置爬取间隔，避免对目标网站造成压力</li>
+<li>确保 Git 配置正确，以便自动提交（需要配置<strong class=chinese>用户名</strong>、<strong class=chinese>邮箱</strong>以及<strong>带有 GitHub Token 的远程仓库地址</strong>）</li>
+<li>定期检查日志文件，及时处理异常情况</li>
+<li>建议定期备份已爬取的文章</li>
+</ol>
+<h2 id="扩展思路">扩展思路</h2>
+<ol>
+<li>添加代理池支持</li>
+<li>实现断点续爬功能</li>
+<li>添加文章内容查重</li>
+<li>增加更多的异常处理机制</li>
+<li>添加邮件通知功能</li>
+</ol>
+<h2 id="demo">Demo</h2>
+<p><a href="https://mohai.us.kg/">墨海拾贝</a>，定期爬取网络小说，并发布到静态网站。</p>
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="/post/2024/11/%E4%B8%83%E7%89%9B%E4%BA%91%E5%9B%BE%E5%BA%8A%E4%B8%8E%E5%85%8D%E8%B4%B9https%E8%AF%81%E4%B9%A6/">← prev</a>
+    
+    
+    <a></a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+      <script src="https://giscus.app/client.js"
+        data-repo="Pi3-l22/Pi3-l22.github.io"
+        data-repo-id="R_kgDOMx7kWw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMx7kW84CjHMe"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_tritanopia"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span style="display: flex;align-items: center;">© 2021 - 2024<img src="https://p.sda1.dev/19/68796ec343c7a7eecbe99de4a9df6c66/rainbow.gif" width=20>By LiuChao</span>
+  </div>
+  
+  
+
+  
+
+  <div class="footnote">
+    <span><a class=link href=/index.xml><img src="https://p.sda1.dev/19/1e10e3069ca0e5e1bbc881b6a5fb2732/RSS.png" width=12></a>  |  <a class=link href=https://github.com/Pi3-l22 Target=_ blank><img src="https://p.sda1.dev/19/cfb4a6be80dfeb1851a07d065a83dbcc/GitHub.png" width=40></a>  |  <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener><img src="https://p.sda1.dev/19/93838c15ff88af806c9fd7302cced9fa/Cc_by-nc-nd.svg.png" width=48></a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-WE6L6RF96W"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-WE6L6RF96W');
+        }
+      </script>
+    
+  
+
+
+
+</body>
+
+</html>
