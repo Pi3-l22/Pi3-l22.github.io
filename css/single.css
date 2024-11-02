@@ -200,3 +200,15 @@
     transform: scale(0.96);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
+
+@media screen and (max-width: 850px) {
+    .cardlink {
+        width: 90%;
+    }
+    .link_title {
+        font-size: 16px !important;
+    }
+    .link_text {
+        font-size: 14px !important;
+    }
+}
