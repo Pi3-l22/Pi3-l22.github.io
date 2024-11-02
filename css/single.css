@@ -154,6 +154,7 @@
 .cardlink img {
     width: 80px;
     height: 80px;
+    margin-left: 10px;
     object-fit: cover;
     transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -165,12 +166,12 @@
 .clink_content {
     padding: 15px;
     flex-grow: 1;
-    margin-left: 20px;
+    /* margin-left: 10px; */
 }
 
 .link_title {
     margin: 0;
-    font-size: 18px;
+    font-size: 18px !important;
     font-weight: bold;
     color: #333;
     margin-bottom: 2px;
@@ -184,7 +185,7 @@
 
 .link_text {
     margin: 0;
-    font-size: 14px;
+    font-size: 14px !important;
     color: #666;
     opacity: 0.8;
     transition: all 0.3s ease;
