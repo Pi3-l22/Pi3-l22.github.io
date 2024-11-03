@@ -171,8 +171,8 @@
 <p><img src="https://image.pi3.fun/blog/202411031334115.png" alt="image.png"></p>
 <p>我的博客网站一直使用的都是这样一个工作流：</p>
 <p>每当我想发布一篇新的文章时，我只需要打开 Obsidian 中的博客仓库，按下快捷键 <code>Ctrl N</code> 输入文章标题，自动创建带有 Hugo 文章模板的 markdown 笔记文件，并存放在对应日期的文件夹中，如 <code>content/post/2024/11</code>。</p>
-<p>接着我在这个文件中编写我的博客文章或笔记，插入图片时使用 Obsidian 的 lmage auto upload Plugin 插件通过 PicGo 自动上传至图床。</p>
-<p>文章每隔 10 分钟会被 Obsidian 的 Git 插件 commit 保存并提交一次，等到文章写好要发布时，只需点击 Git 插件的 push 按钮自动将文章推送到远程的 Github 仓库，在远程仓库中 Github Actions 自动开始运行，只需不到 1 分钟，更新后的网站就会成功部署上线。</p>
+<p>接着我在这个文件中编写我的博客文章或笔记，插入图片时使用 Obsidian 的 <strong>lmage auto upload Plugin 插件</strong>通过 <strong>PicGo</strong> 自动上传至图床。</p>
+<p>文章每隔 10 分钟会被 Obsidian 的 <strong>Git 插件</strong> commit 保存并提交一次，等到文章写好要发布时，只需点击 Git 插件的 push 按钮自动将文章推送到远程的 Github 仓库，在远程仓库中 <strong>Github Actions</strong> 自动开始运行，只需不到 1 分钟，更新后的网站就会成功部署上线。</p>
 <p>以上就是我的完整博客笔记工作流，接着来详细说说应该如何配置。</p>
 <h2 id="hugo-配置">Hugo 配置</h2>
 <p><a href="https://gohugo.io/">Hugo</a> 是由 Go 语言实现的静态网站生成器。选择它是因为它轻量、快速高效、快速部署。Hugo 进行博客网站搭建十分简单，官方的文档很详细，并且网络上也有很多相关教程。你只需要<a href="https://github.com/gohugoio/hugo/releases">下载</a>一个编译后的 <code>hugo.exe</code> 文件，就可以开始构建你的博客网站了。</p>
@@ -210,9 +210,9 @@
 <li><strong>lmage auto upload Plugin</strong>：用于通过 <a href="https://picgo.github.io/PicGo-Doc/zh/">PicGo</a> 上传图片到图床中</li>
 <li><strong>Git</strong>：用于自动进行 Git 操作</li>
 </ul>
-<p>对于<strong>QuickAdd</strong>的使用配置可以看我之前发的文章 <a href="../09/Obsidian%E4%B8%ADQuickAdd%E6%8F%92%E4%BB%B6%E7%9A%84%E5%A6%99%E7%94%A8">Obsidian中QuickAdd插件的妙用</a>，JS代码中的<em>创建笔记文件模板内容</em>可以根据 Hugo 主题要求或者自己需求进行修改。</p>
+<p>对于<strong>QuickAdd</strong>的使用配置可以看我之前发的文章 <a href="../../09/Obsidian%E4%B8%ADQuickAdd%E6%8F%92%E4%BB%B6%E7%9A%84%E5%A6%99%E7%94%A8">Obsidian中QuickAdd插件的妙用</a>，JS代码中的<em>创建笔记文件模板内容</em>可以根据 Hugo 主题要求或者自己需求进行修改。</p>
 <p>经过这样配置之后，当你在写文章的时候，只需要按下 <code>Ctrl N</code>，在弹出的输入框中输入创建文章的标题，就会在相应日期的文件夹中创建 markdown 文件，随后就可以开始创作文章内容。</p>
-<p>对于<strong>lmage auto upload Plugin</strong>的使用需要配合图床进行使用，可以参考我之前发的文章<a href="%E4%B8%83%E7%89%9B%E4%BA%91%E5%9B%BE%E5%BA%8A%E4%B8%8E%E5%85%8D%E8%B4%B9HTTPS%E8%AF%81%E4%B9%A6">七牛云图床与免费HTTPS证书</a>，当然也可以使用 Github + jsDelivr 作为图床，两种方式都是免费的，但是七牛云需要有备案的域名，而 Github + jsDelivr 有网络方面的限制，互有利弊。</p>
+<p>对于<strong>lmage auto upload Plugin</strong>的使用需要配合图床进行使用，可以参考我之前发的文章<a href="../%E4%B8%83%E7%89%9B%E4%BA%91%E5%9B%BE%E5%BA%8A%E4%B8%8E%E5%85%8D%E8%B4%B9HTTPS%E8%AF%81%E4%B9%A6">七牛云图床与免费HTTPS证书</a>，当然也可以使用 Github + jsDelivr 作为图床，两种方式都是免费的，但是七牛云需要有备案的域名，而 Github + jsDelivr 有网络方面的限制，互有利弊。</p>
 <p>这里再简单讲讲 Github + jsDelivr 图床如何配置，不过我个人并不是很推荐使用这种方法。</p>
 <p>首先你需要创建一个 Github 仓库专门用来存储图片，<strong class=chinese>注意</strong>需要将仓库<strong class=chinese>公开</strong>。下载安装 <a href="https://picgo.github.io/PicGo-Doc/zh/">PicGo</a>，在<strong>图床设置-Github</strong> 中配置信息。</p>
 <p><img src="https://image.pi3.fun/blog/202411031353806.png" alt="image.png"></p>
