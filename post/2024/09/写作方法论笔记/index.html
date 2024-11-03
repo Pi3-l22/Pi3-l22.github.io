@@ -2853,6 +2853,7 @@ detriment / harm for&hellip;</p>
       const lightStyle = document.querySelector('link[data-theme-style="light"]');
       const darkStyle = document.querySelector('link[data-theme-style="dark"]');
       
+      
       if (currentTheme === 'light') {
         lightStyle.media = 'all';
         darkStyle.media = 'not all';
@@ -2861,6 +2862,7 @@ detriment / harm for&hellip;</p>
         darkStyle.media = 'all';
       }
 
+      
       const giscusFrame = document.querySelector('iframe.giscus-frame');
       if (giscusFrame) {
         const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
@@ -2880,7 +2882,8 @@ detriment / harm for&hellip;</p>
           
           document.documentElement.setAttribute('data-theme', newTheme);
           localStorage.setItem('theme', newTheme);
-
+          
+          
           if (newTheme === 'light') {
             lightStyle.media = 'all';
             darkStyle.media = 'not all';
@@ -2888,7 +2891,8 @@ detriment / harm for&hellip;</p>
             lightStyle.media = 'not all';
             darkStyle.media = 'all';
           }
-
+          
+          
           const giscusFrame = document.querySelector('iframe.giscus-frame');
           if (giscusFrame) {
             const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
