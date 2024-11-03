@@ -89,6 +89,13 @@
   <link media="screen" rel="stylesheet" href='/css/common.css'>
   <link media="screen" rel="stylesheet" href='/css/content.css'>
   <link media="screen" rel="stylesheet" href='/css/theme.css'>
+  
+  <link rel="stylesheet" href='/css/syntax/xcode.css' 
+    data-theme-style="light" 
+    media="(prefers-color-scheme: light)">
+  <link rel="stylesheet" href='/css/syntax/catppuccin-mocha.css' 
+    data-theme-style="dark" 
+    media="not all">
 
   
   
@@ -125,7 +132,7 @@
     </span>
     
     <span class="nav-bar-item">
-      <a class="link theme-toggle" href="javascript:void(0);">明/暗</a>
+      <a class="link theme-toggle" href="javascript:void(0);">明暗</a>
     </span>
   </nav>
 </header>
@@ -182,107 +189,107 @@
   <article class="content">
     
     <h2 id="tmux使用技巧">tmux使用技巧</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 窗口管理器 最重要的就是他能保存当前窗口的状态 之后还能连回来（包括ssh远程连接服务器）</span>
-</span></span><span style="display:flex;"><span>tmux <span style="color:#177500"># 创建一个新的会话</span>
-</span></span><span style="display:flex;"><span>tmux ls <span style="color:#177500"># 列出所有会话</span>
-</span></span><span style="display:flex;"><span>tmux attach/a -t 1（会话号） <span style="color:#177500"># 重新连接上会话</span>
-</span></span><span style="display:flex;"><span>tmux new-s name <span style="color:#177500"># 创建指定名称会话</span>
-</span></span><span style="display:flex;"><span>tmux kill-session/ses -t 1<span style="color:#000">(</span>会话号<span style="color:#000">)</span> <span style="color:#177500"># 关闭指定会话 </span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>ctrl-b <span style="color:#177500"># 为功能切换键</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">[</span> <span style="color:#177500">#上下查看历史记录 q退出</span>
-</span></span><span style="display:flex;"><span>d <span style="color:#177500"># 把当前会话挂起在后台（退出tmux，但是没有关闭）</span>
-</span></span><span style="display:flex;"><span>s <span style="color:#177500"># 在tmux中列出所有的会话 --&gt;键可以展开看到窗口 树型递归显示</span>
-</span></span><span style="display:flex;"><span>w <span style="color:#177500"># 在tmux中列出所有的窗口 --&gt;键可以展开看到面板 树型递归显示</span>
-</span></span><span style="display:flex;"><span>c <span style="color:#177500"># 在当前会话下 创建一个新的窗口</span>
-</span></span><span style="display:flex;"><span>n <span style="color:#177500"># 切换为下一个的窗口</span>
-</span></span><span style="display:flex;"><span>p <span style="color:#177500"># 切换为前一个的窗口</span>
-</span></span><span style="display:flex;"><span><span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span> 4…… <span style="color:#177500"># 直接输入数字切换指定的窗口</span>
-</span></span><span style="display:flex;"><span>&amp; <span style="color:#177500"># 关闭当前窗口 y:yes</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>% <span style="color:#177500"># 把当前窗口分成左右两个面板</span>
-</span></span><span style="display:flex;"><span><span style="color:#c41a16">&#34; # 把当前窗口分成上下两个面板
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">方向键 # 在不同面板中切换
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">q # 在当前窗口显示出面板的编号，并切换面板
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">z # 把当前面板最大化/恢复
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">x # 关闭当前的面板
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">: # 输入指令模式
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">new / new -s name # 新建一个会话
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">…………
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 窗口管理器 最重要的就是他能保存当前窗口的状态 之后还能连回来（包括ssh远程连接服务器）</span>
+</span></span><span class="line"><span class="cl">tmux <span class="c1"># 创建一个新的会话</span>
+</span></span><span class="line"><span class="cl">tmux ls <span class="c1"># 列出所有会话</span>
+</span></span><span class="line"><span class="cl">tmux attach/a -t 1（会话号） <span class="c1"># 重新连接上会话</span>
+</span></span><span class="line"><span class="cl">tmux new-s name <span class="c1"># 创建指定名称会话</span>
+</span></span><span class="line"><span class="cl">tmux kill-session/ses -t 1<span class="o">(</span>会话号<span class="o">)</span> <span class="c1"># 关闭指定会话 </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ctrl-b <span class="c1"># 为功能切换键</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span> <span class="c1">#上下查看历史记录 q退出</span>
+</span></span><span class="line"><span class="cl">d <span class="c1"># 把当前会话挂起在后台（退出tmux，但是没有关闭）</span>
+</span></span><span class="line"><span class="cl">s <span class="c1"># 在tmux中列出所有的会话 --&gt;键可以展开看到窗口 树型递归显示</span>
+</span></span><span class="line"><span class="cl">w <span class="c1"># 在tmux中列出所有的窗口 --&gt;键可以展开看到面板 树型递归显示</span>
+</span></span><span class="line"><span class="cl">c <span class="c1"># 在当前会话下 创建一个新的窗口</span>
+</span></span><span class="line"><span class="cl">n <span class="c1"># 切换为下一个的窗口</span>
+</span></span><span class="line"><span class="cl">p <span class="c1"># 切换为前一个的窗口</span>
+</span></span><span class="line"><span class="cl"><span class="m">1</span> <span class="m">2</span> <span class="m">3</span> 4…… <span class="c1"># 直接输入数字切换指定的窗口</span>
+</span></span><span class="line"><span class="cl"><span class="p">&amp;</span> <span class="c1"># 关闭当前窗口 y:yes</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">% <span class="c1"># 把当前窗口分成左右两个面板</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34; # 把当前窗口分成上下两个面板
+</span></span></span><span class="line"><span class="cl"><span class="s2">方向键 # 在不同面板中切换
+</span></span></span><span class="line"><span class="cl"><span class="s2">q # 在当前窗口显示出面板的编号，并切换面板
+</span></span></span><span class="line"><span class="cl"><span class="s2">z # 把当前面板最大化/恢复
+</span></span></span><span class="line"><span class="cl"><span class="s2">x # 关闭当前的面板
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">: # 输入指令模式
+</span></span></span><span class="line"><span class="cl"><span class="s2">new / new -s name # 新建一个会话
+</span></span></span><span class="line"><span class="cl"><span class="s2">…………
 </span></span></span></code></pre></div><p><a href="https://tmuxcheatsheet.com/">Tmux Cheat Sheet &amp; Quick Reference</a></p>
 <h2 id="vim使用技巧">vim使用技巧</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 有三个模式 1.功能模式 2.插入模式 3.命令模式</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 1.功能模式（在插入模式下按esc进入）</span>
-</span></span><span style="display:flex;"><span>k j h l <span style="color:#177500"># 上下左右</span>
-</span></span><span style="display:flex;"><span><span style="color:#1c01ce">0</span> <span style="color:#177500"># 到当前光标所在行的第一个字符</span>
-</span></span><span style="display:flex;"><span>$ <span style="color:#177500"># 到当前光标所在行的最后一个字符</span>
-</span></span><span style="display:flex;"><span>G <span style="color:#177500"># 到当前文件的最后一行</span>
-</span></span><span style="display:flex;"><span>gg <span style="color:#177500"># 到当前文件的第一行</span>
-</span></span><span style="display:flex;"><span>H <span style="color:#177500"># 到当前页面的最上面</span>
-</span></span><span style="display:flex;"><span>M <span style="color:#177500"># 到当前页面的中间</span>
-</span></span><span style="display:flex;"><span>L <span style="color:#177500"># 到当前页面的最后一行</span>
-</span></span><span style="display:flex;"><span>v <span style="color:#177500"># 可视模式</span>
-</span></span><span style="display:flex;"><span>V <span style="color:#177500"># 行可视，从当前行开始全选</span>
-</span></span><span style="display:flex;"><span>ctrl-V <span style="color:#177500"># 块可视，从当前块开始xuan&#39;z</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 前面都可以加数字</span>
-</span></span><span style="display:flex;"><span>y <span style="color:#177500"># 复制选择的内容</span>
-</span></span><span style="display:flex;"><span>yy <span style="color:#177500"># 复制光标所在的一整行</span>
-</span></span><span style="display:flex;"><span>p <span style="color:#177500"># 粘贴复制的内容</span>
-</span></span><span style="display:flex;"><span><span style="color:#1c01ce">10</span> p <span style="color:#177500"># 输入数字可以指定粘贴多少行</span>
-</span></span><span style="display:flex;"><span>d <span style="color:#177500"># 删除选中的内容</span>
-</span></span><span style="display:flex;"><span>dd <span style="color:#177500"># 删除光标所在的一整行</span>
-</span></span><span style="display:flex;"><span>x <span style="color:#177500"># 删除光标之后一个字符</span>
-</span></span><span style="display:flex;"><span>X <span style="color:#177500"># 删除光标前面一个字符</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>u <span style="color:#177500"># 复原前一个动作</span>
-</span></span><span style="display:flex;"><span>/to <span style="color:#177500"># 查找文件内容中的to字符</span>
-</span></span><span style="display:flex;"><span>n <span style="color:#177500"># 查找下一个字符</span>
-</span></span><span style="display:flex;"><span>&gt;&gt; <span style="color:#177500"># 向右缩进</span>
-</span></span><span style="display:flex;"><span>&lt;&lt; <span style="color:#177500"># 向左缩进</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 同时操作多行</span>
-</span></span><span style="display:flex;"><span>ctrl+shift+v
-</span></span><span style="display:flex;"><span>j
-</span></span><span style="display:flex;"><span>shift+i
-</span></span><span style="display:flex;"><span>输入
-</span></span><span style="display:flex;"><span>liang<span style="color:#000">&#39;</span>ci
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 2.插入模式</span>
-</span></span><span style="display:flex;"><span>i <span style="color:#177500"># 在当前光标插入</span>
-</span></span><span style="display:flex;"><span>I <span style="color:#177500"># 在当前光标行首插入</span>
-</span></span><span style="display:flex;"><span>o <span style="color:#177500"># 在光标下方新开一行插入</span>
-</span></span><span style="display:flex;"><span>O <span style="color:#177500"># 在光标上方新开一行插入</span>
-</span></span><span style="display:flex;"><span>A <span style="color:#177500"># 在光标所在最后一行插入</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 3.命令模式（在功能模式下:）</span>
-</span></span><span style="display:flex;"><span>:w file.txt <span style="color:#177500"># 把当前内容写入file文件</span>
-</span></span><span style="display:flex;"><span>:wq <span style="color:#177500"># 写入并退出</span>
-</span></span><span style="display:flex;"><span>:set num <span style="color:#177500"># 显示行号</span>
-</span></span><span style="display:flex;"><span>:set nonum <span style="color:#177500"># 不显示行号</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 配置文件 ~/.vimrc 可以增加加载配置</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 有三个模式 1.功能模式 2.插入模式 3.命令模式</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 1.功能模式（在插入模式下按esc进入）</span>
+</span></span><span class="line"><span class="cl">k j h l <span class="c1"># 上下左右</span>
+</span></span><span class="line"><span class="cl"><span class="m">0</span> <span class="c1"># 到当前光标所在行的第一个字符</span>
+</span></span><span class="line"><span class="cl">$ <span class="c1"># 到当前光标所在行的最后一个字符</span>
+</span></span><span class="line"><span class="cl">G <span class="c1"># 到当前文件的最后一行</span>
+</span></span><span class="line"><span class="cl">gg <span class="c1"># 到当前文件的第一行</span>
+</span></span><span class="line"><span class="cl">H <span class="c1"># 到当前页面的最上面</span>
+</span></span><span class="line"><span class="cl">M <span class="c1"># 到当前页面的中间</span>
+</span></span><span class="line"><span class="cl">L <span class="c1"># 到当前页面的最后一行</span>
+</span></span><span class="line"><span class="cl">v <span class="c1"># 可视模式</span>
+</span></span><span class="line"><span class="cl">V <span class="c1"># 行可视，从当前行开始全选</span>
+</span></span><span class="line"><span class="cl">ctrl-V <span class="c1"># 块可视，从当前块开始xuan&#39;z</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 前面都可以加数字</span>
+</span></span><span class="line"><span class="cl">y <span class="c1"># 复制选择的内容</span>
+</span></span><span class="line"><span class="cl">yy <span class="c1"># 复制光标所在的一整行</span>
+</span></span><span class="line"><span class="cl">p <span class="c1"># 粘贴复制的内容</span>
+</span></span><span class="line"><span class="cl"><span class="m">10</span> p <span class="c1"># 输入数字可以指定粘贴多少行</span>
+</span></span><span class="line"><span class="cl">d <span class="c1"># 删除选中的内容</span>
+</span></span><span class="line"><span class="cl">dd <span class="c1"># 删除光标所在的一整行</span>
+</span></span><span class="line"><span class="cl">x <span class="c1"># 删除光标之后一个字符</span>
+</span></span><span class="line"><span class="cl">X <span class="c1"># 删除光标前面一个字符</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">u <span class="c1"># 复原前一个动作</span>
+</span></span><span class="line"><span class="cl">/to <span class="c1"># 查找文件内容中的to字符</span>
+</span></span><span class="line"><span class="cl">n <span class="c1"># 查找下一个字符</span>
+</span></span><span class="line"><span class="cl">&gt;&gt; <span class="c1"># 向右缩进</span>
+</span></span><span class="line"><span class="cl">&lt;&lt; <span class="c1"># 向左缩进</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 同时操作多行</span>
+</span></span><span class="line"><span class="cl">ctrl+shift+v
+</span></span><span class="line"><span class="cl">j
+</span></span><span class="line"><span class="cl">shift+i
+</span></span><span class="line"><span class="cl">输入
+</span></span><span class="line"><span class="cl">liang<span class="err">&#39;</span>ci
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 2.插入模式</span>
+</span></span><span class="line"><span class="cl">i <span class="c1"># 在当前光标插入</span>
+</span></span><span class="line"><span class="cl">I <span class="c1"># 在当前光标行首插入</span>
+</span></span><span class="line"><span class="cl">o <span class="c1"># 在光标下方新开一行插入</span>
+</span></span><span class="line"><span class="cl">O <span class="c1"># 在光标上方新开一行插入</span>
+</span></span><span class="line"><span class="cl">A <span class="c1"># 在光标所在最后一行插入</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 3.命令模式（在功能模式下:）</span>
+</span></span><span class="line"><span class="cl">:w file.txt <span class="c1"># 把当前内容写入file文件</span>
+</span></span><span class="line"><span class="cl">:wq <span class="c1"># 写入并退出</span>
+</span></span><span class="line"><span class="cl">:set num <span class="c1"># 显示行号</span>
+</span></span><span class="line"><span class="cl">:set nonum <span class="c1"># 不显示行号</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置文件 ~/.vimrc 可以增加加载配置</span>
 </span></span></code></pre></div><p><a href="https://dragonliu2020.github.io/2022/04/13/vim%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/">Vim操作手册</a></p>
 <p><a href="https://www.runoob.com/linux/linux-vim.html">Vim教程</a></p>
 <h2 id="调度任务操作">调度任务操作</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 打开应用程序，在后台运行</span>
-</span></span><span style="display:flex;"><span>firefox &amp;
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 打开应用程序，在前台运行</span>
-</span></span><span style="display:flex;"><span>firefox 
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 把前台的程序，挂起在后台（会暂停）</span>
-</span></span><span style="display:flex;"><span>ctrl-Z
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 把暂停程序调度到在后台执行</span>
-</span></span><span style="display:flex;"><span><span style="color:#a90d91">bg</span> 1<span style="color:#000">(</span>作业号<span style="color:#000">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 把后台程序调度回前台执行</span>
-</span></span><span style="display:flex;"><span><span style="color:#a90d91">fg</span> 1<span style="color:#000">(</span>作业号<span style="color:#000">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 查看所有作业任务</span>
-</span></span><span style="display:flex;"><span><span style="color:#a90d91">jobs</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 在前台退出程序</span>
-</span></span><span style="display:flex;"><span>ctrl-C
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 杀掉当前某个后台任务</span>
-</span></span><span style="display:flex;"><span><span style="color:#a90d91">kill</span> %1<span style="color:#000">(</span>作业号<span style="color:#000">)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 打开应用程序，在后台运行</span>
+</span></span><span class="line"><span class="cl">firefox <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 打开应用程序，在前台运行</span>
+</span></span><span class="line"><span class="cl">firefox 
+</span></span><span class="line"><span class="cl"><span class="c1"># 把前台的程序，挂起在后台（会暂停）</span>
+</span></span><span class="line"><span class="cl">ctrl-Z
+</span></span><span class="line"><span class="cl"><span class="c1"># 把暂停程序调度到在后台执行</span>
+</span></span><span class="line"><span class="cl"><span class="nb">bg</span> 1<span class="o">(</span>作业号<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 把后台程序调度回前台执行</span>
+</span></span><span class="line"><span class="cl"><span class="nb">fg</span> 1<span class="o">(</span>作业号<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看所有作业任务</span>
+</span></span><span class="line"><span class="cl"><span class="nb">jobs</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 在前台退出程序</span>
+</span></span><span class="line"><span class="cl">ctrl-C
+</span></span><span class="line"><span class="cl"><span class="c1"># 杀掉当前某个后台任务</span>
+</span></span><span class="line"><span class="cl"><span class="nb">kill</span> %1<span class="o">(</span>作业号<span class="o">)</span>
 </span></span></code></pre></div><h2 id="linux系统目录结构">Linux系统目录结构</h2>
 <ul>
 <li>
@@ -329,7 +336,7 @@ opt 是 optional(可选) 的缩写，这是给主机额外安装软件所摆放�
 <p><strong>/proc</strong>：
 proc 是 Processes(进程) 的缩写，/proc 是一种伪文件系统（也即虚拟文件系统），存储的是当前内核运行状态的一系列特殊文件，这个目录是一个虚拟的目录，它是系统内存的映射，我们可以通过直接访问这个目录来获取系统信息。
 这个目录的内容不在硬盘上而是在内存里，我们也可以直接修改里面的某些文件，比如可以通过下面的命令来屏蔽主机的ping命令，使别人无法ping你的机器：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#a90d91">echo</span> <span style="color:#1c01ce">1</span> &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="m">1</span> &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all
 </span></span></code></pre></div></li>
 <li>
 <p><strong>/root</strong>：
@@ -384,197 +391,197 @@ var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着�
 </li>
 </ul>
 <h2 id="文件操作">文件操作</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat file1.txt &gt; file2.txt <span style="color:#177500"># 把file1中的内容覆盖到file2中</span>
-</span></span><span style="display:flex;"><span>cat file1.txt &gt;&gt; file2.txt <span style="color:#177500"># 把file1中的内容追加到file2中</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 文件的权限</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># ll 可以列出文件的详细信息</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 文件信息有10个字符组成</span>
-</span></span><span style="display:flex;"><span>drwxr-xr-x <span style="color:#000">(</span>drwxrwxrwx<span style="color:#000">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 第1位代表文件类型 2-4位代表文件所有者对文件的权限(user) 5-7位代表所有者同一组用户对文件的权限(group) 8-10位代表其他用户对文件的权限(other)</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 文件类型中 d是目录 -是文件 l是链接文件 b是装置文件里面的可供储存的接口设备 c是装置文件里面的串行端口设备</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># r--&gt;read(可读) w--&gt;write(可写) x--&gt;execute(可执行)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 改变权限</span>
-</span></span><span style="display:flex;"><span>chmod u-w file.txt <span style="color:#177500"># 对于file文件 把user的w的权限减掉</span>
-</span></span><span style="display:flex;"><span>chmod u+w file.txt <span style="color:#177500"># 与上面相反</span>
-</span></span><span style="display:flex;"><span>chmod <span style="color:#1c01ce">777</span> file.txt <span style="color:#177500"># 对于file文件 所有人都是可读可写可执行的权限</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># r--&gt;4  w--&gt;2  x--&gt;1  一共等于7 三位数字 分别对应user group other</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># u--&gt;user g--&gt;group o--&gt;others </span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># +(加入) -(除去) =(设定)</span>
-</span></span><span style="display:flex;"><span>exp:chmod <span style="color:#000">u</span><span style="color:#000">=</span>rwx,g<span style="color:#000">=</span>rx,o<span style="color:#000">=</span>r file.txt
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 修改所属用户与组</span>
-</span></span><span style="display:flex;"><span>chown <span style="color:#000">(</span>change owner<span style="color:#000">)</span>
-</span></span><span style="display:flex;"><span>chown <span style="color:#000">[</span>–R<span style="color:#000">]</span> 属主名 文件名
-</span></span><span style="display:flex;"><span>exp: chown bin install.log
-</span></span><span style="display:flex;"><span>chown <span style="color:#000">[</span>-R<span style="color:#000">]</span> 属主名：属组名 文件名
-</span></span><span style="display:flex;"><span>exp: chown root:root install.log
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 更改文件属组</span>
-</span></span><span style="display:flex;"><span>chgrp <span style="color:#000">(</span>change group<span style="color:#000">)</span>
-</span></span><span style="display:flex;"><span>chgrp <span style="color:#000">[</span>-R<span style="color:#000">]</span> 属组名 文件名
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat file1.txt &gt; file2.txt <span class="c1"># 把file1中的内容覆盖到file2中</span>
+</span></span><span class="line"><span class="cl">cat file1.txt &gt;&gt; file2.txt <span class="c1"># 把file1中的内容追加到file2中</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 文件的权限</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ll 可以列出文件的详细信息</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 文件信息有10个字符组成</span>
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="o">(</span>drwxrwxrwx<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 第1位代表文件类型 2-4位代表文件所有者对文件的权限(user) 5-7位代表所有者同一组用户对文件的权限(group) 8-10位代表其他用户对文件的权限(other)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 文件类型中 d是目录 -是文件 l是链接文件 b是装置文件里面的可供储存的接口设备 c是装置文件里面的串行端口设备</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># r--&gt;read(可读) w--&gt;write(可写) x--&gt;execute(可执行)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 改变权限</span>
+</span></span><span class="line"><span class="cl">chmod u-w file.txt <span class="c1"># 对于file文件 把user的w的权限减掉</span>
+</span></span><span class="line"><span class="cl">chmod u+w file.txt <span class="c1"># 与上面相反</span>
+</span></span><span class="line"><span class="cl">chmod <span class="m">777</span> file.txt <span class="c1"># 对于file文件 所有人都是可读可写可执行的权限</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># r--&gt;4  w--&gt;2  x--&gt;1  一共等于7 三位数字 分别对应user group other</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># u--&gt;user g--&gt;group o--&gt;others </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># +(加入) -(除去) =(设定)</span>
+</span></span><span class="line"><span class="cl">exp:chmod <span class="nv">u</span><span class="o">=</span>rwx,g<span class="o">=</span>rx,o<span class="o">=</span>r file.txt
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 修改所属用户与组</span>
+</span></span><span class="line"><span class="cl">chown <span class="o">(</span>change owner<span class="o">)</span>
+</span></span><span class="line"><span class="cl">chown <span class="o">[</span>–R<span class="o">]</span> 属主名 文件名
+</span></span><span class="line"><span class="cl">exp: chown bin install.log
+</span></span><span class="line"><span class="cl">chown <span class="o">[</span>-R<span class="o">]</span> 属主名：属组名 文件名
+</span></span><span class="line"><span class="cl">exp: chown root:root install.log
+</span></span><span class="line"><span class="cl"><span class="c1"># 更改文件属组</span>
+</span></span><span class="line"><span class="cl">chgrp <span class="o">(</span>change group<span class="o">)</span>
+</span></span><span class="line"><span class="cl">chgrp <span class="o">[</span>-R<span class="o">]</span> 属组名 文件名
 </span></span></code></pre></div><h2 id="文件目录管理">文件目录管理</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 绝对路径</span>
-</span></span><span style="display:flex;"><span>/user/share/doc
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 相对路径</span>
-</span></span><span style="display:flex;"><span><span style="color:#a90d91">cd</span> ../man
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 常用的目录命令</span>
-</span></span><span style="display:flex;"><span>ls <span style="color:#a90d91">cd</span> <span style="color:#a90d91">pwd</span> mkdir rmdir cp rm mv cat tac<span style="color:#000">(</span>cat倒过来<span style="color:#000">)</span> nl<span style="color:#000">(</span>显示行号<span style="color:#000">)</span> more<span style="color:#000">(</span>一页页翻动<span style="color:#000">)</span> less head<span style="color:#000">(</span>取出文件前面几行<span style="color:#000">)</span> tail<span style="color:#000">(</span>取出文件后面几行<span style="color:#000">)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 绝对路径</span>
+</span></span><span class="line"><span class="cl">/user/share/doc
+</span></span><span class="line"><span class="cl"><span class="c1"># 相对路径</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ../man
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 常用的目录命令</span>
+</span></span><span class="line"><span class="cl">ls <span class="nb">cd</span> <span class="nb">pwd</span> mkdir rmdir cp rm mv cat tac<span class="o">(</span>cat倒过来<span class="o">)</span> nl<span class="o">(</span>显示行号<span class="o">)</span> more<span class="o">(</span>一页页翻动<span class="o">)</span> less head<span class="o">(</span>取出文件前面几行<span class="o">)</span> tail<span class="o">(</span>取出文件后面几行<span class="o">)</span>
 </span></span></code></pre></div><p><a href="https://www.runoob.com/linux/linux-file-content-manage.html">linux常见的目录操作命令</a></p>
 <h2 id="linux通配符">Linux通配符</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>? <span style="color:#177500"># 代表单个字符</span>
-</span></span><span style="display:flex;"><span>* <span style="color:#177500"># 代表任意字符</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">[</span>ab<span style="color:#000">]</span> <span style="color:#177500"># 匹配ab两个字符 a.txt b.txt</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">[</span>1-3<span style="color:#000">]</span> <span style="color:#177500"># 匹配一个连续的范围 file1 file2 file3</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">? <span class="c1"># 代表单个字符</span>
+</span></span><span class="line"><span class="cl">* <span class="c1"># 代表任意字符</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>ab<span class="o">]</span> <span class="c1"># 匹配ab两个字符 a.txt b.txt</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>1-3<span class="o">]</span> <span class="c1"># 匹配一个连续的范围 file1 file2 file3</span>
 </span></span></code></pre></div><h2 id="环境变量">环境变量</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#a90d91">echo</span> <span style="color:#000">$PATH</span> <span style="color:#177500"># 查看PATH环境变量的值</span>
-</span></span><span style="display:flex;"><span><span style="color:#a90d91">echo</span> <span style="color:#000">$PATH</span> 或者 <span style="color:#a90d91">echo</span> <span style="color:#000">$HOME</span> 或者 <span style="color:#a90d91">echo</span> <span style="color:#000">$USER</span> <span style="color:#177500"># 查看指定环境变量</span>
-</span></span><span style="display:flex;"><span>printenv / env <span style="color:#177500"># 显示当前用户的所有环境变量</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 添加系统级环境变量（需root权限、针对所有用户、永久生效）</span>
-</span></span><span style="display:flex;"><span>vim /etc/profile
-</span></span><span style="display:flex;"><span><span style="color:#a90d91">export</span> <span style="color:#000">PATH</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;/opt/STM/STLinux-2.3/devkit/sh4/bin:</span><span style="color:#000">$PATH</span><span style="color:#c41a16">&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a90d91">source</span> /etc/profile
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 添加用户级环境变量</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 在home/username 用户目录下</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 1. .bash_profile：这是在登录时加载的主要文件。通常用于设置用户的个人环境变量和启动脚本。</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 2. .bash_login：如果 .bash_profile 不存在，则会尝试加载此文件。</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 3. .profile：如果 .bash_profile 和 .bash_login 都不存在，则会尝试加载此文件。这是一个通用的配置文件，适用于多种类型的 shell。</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 4. .bashrc：这是在每次打开新的终端窗口时加载的文件。它包含了用户定义的别名、函数、自定义环境变量等。</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 例如:</span>
-</span></span><span style="display:flex;"><span>vim /home/lc622/.bash.profile 或 ~/.bash.profile
-</span></span><span style="display:flex;"><span><span style="color:#a90d91">export</span> <span style="color:#000">CLASSPATH</span><span style="color:#000">=</span>./JAVAHOME/lib;JAVA_HOME/jre/lib 
-</span></span><span style="display:flex;"><span><span style="color:#a90d91">source</span> /home/guok/.bash_profile
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$PATH</span> <span class="c1"># 查看PATH环境变量的值</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$PATH</span> 或者 <span class="nb">echo</span> <span class="nv">$HOME</span> 或者 <span class="nb">echo</span> <span class="nv">$USER</span> <span class="c1"># 查看指定环境变量</span>
+</span></span><span class="line"><span class="cl">printenv / env <span class="c1"># 显示当前用户的所有环境变量</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 添加系统级环境变量（需root权限、针对所有用户、永久生效）</span>
+</span></span><span class="line"><span class="cl">vim /etc/profile
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&#34;/opt/STM/STLinux-2.3/devkit/sh4/bin:</span><span class="nv">$PATH</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">source</span> /etc/profile
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 添加用户级环境变量</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 在home/username 用户目录下</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 1. .bash_profile：这是在登录时加载的主要文件。通常用于设置用户的个人环境变量和启动脚本。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 2. .bash_login：如果 .bash_profile 不存在，则会尝试加载此文件。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 3. .profile：如果 .bash_profile 和 .bash_login 都不存在，则会尝试加载此文件。这是一个通用的配置文件，适用于多种类型的 shell。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 4. .bashrc：这是在每次打开新的终端窗口时加载的文件。它包含了用户定义的别名、函数、自定义环境变量等。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 例如:</span>
+</span></span><span class="line"><span class="cl">vim /home/lc622/.bash.profile 或 ~/.bash.profile
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">CLASSPATH</span><span class="o">=</span>./JAVAHOME/lib<span class="p">;</span>JAVA_HOME/jre/lib 
+</span></span><span class="line"><span class="cl"><span class="nb">source</span> /home/guok/.bash_profile
 </span></span></code></pre></div><h2 id="用户和用户组管理">用户和用户组管理</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 添加新的用户账号</span>
-</span></span><span style="display:flex;"><span>useradd 选项 用户名
-</span></span><span style="display:flex;"><span><span style="color:#177500">#	选项：</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500">#    -c comment 指定一段注释性描述。</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500">#    -d 目录 指定用户主目录，如果此目录不存在，则同时使用-m选项，可以创建主目录。</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500">#    -g 用户组 指定用户所属的用户组。</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500">#    -G 用户组，用户组 指定用户所属的附加组。</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500">#    -s Shell文件 指定用户的登录Shell。</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500">#    -u 用户号 指定用户的用户号，如果同时有-o选项，则可以重复使用其他用户的标识号。</span>
-</span></span><span style="display:flex;"><span>exp:
-</span></span><span style="display:flex;"><span>useradd –d  /home/sam -m sam
-</span></span><span style="display:flex;"><span>useradd -s /bin/sh -g group –G adm,root gem
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 删除帐号</span>
-</span></span><span style="display:flex;"><span>userdel 选项 用户名
-</span></span><span style="display:flex;"><span>-r <span style="color:#177500"># 把用户的主目录一起删除</span>
-</span></span><span style="display:flex;"><span>exp:
-</span></span><span style="display:flex;"><span>userdel -r sam
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 修改账号</span>
-</span></span><span style="display:flex;"><span>usermod 选项 用户名
-</span></span><span style="display:flex;"><span><span style="color:#177500">#	选项跟添加新用户一样</span>
-</span></span><span style="display:flex;"><span>exp:
-</span></span><span style="display:flex;"><span>usermod -s /bin/ksh -d /home/z –g developer sam
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 用户口令的管理</span>
-</span></span><span style="display:flex;"><span>passwd 选项 用户名
-</span></span><span style="display:flex;"><span><span style="color:#177500">#	选项：</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500">#    -l 锁定口令，即禁用账号</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500">#    -u 口令解锁</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500">#    -d 使账号无口令</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500">#    -f 强迫用户下次登录时修改口令</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 如果是用户，只能修改自己的账户口令</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 如果是root。能修改任何用户的口令</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 增加一个新的用户组</span>
-</span></span><span style="display:flex;"><span>groupadd 选项 用户组
-</span></span><span style="display:flex;"><span><span style="color:#177500">#	选项</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500">#    -g GID 指定新用户组的组标识号（GID）</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500">#    -o 一般与-g选项同时使用，表示新用户组的GID可以与系统已有用户组的GID相同</span>
-</span></span><span style="display:flex;"><span>exp:
-</span></span><span style="display:flex;"><span>groupadd group1
-</span></span><span style="display:flex;"><span>groupadd -g <span style="color:#1c01ce">101</span> group2
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 删除一个已有的用户组</span>
-</span></span><span style="display:flex;"><span>groupdel 用户组
-</span></span><span style="display:flex;"><span>exp:
-</span></span><span style="display:flex;"><span>groupdel group1
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 修改用户组</span>
-</span></span><span style="display:flex;"><span>groupmod 选项 用户组
-</span></span><span style="display:flex;"><span><span style="color:#177500">#	选项</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500">#    -g GID 为用户组指定新的组标识号。</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500">#    -o 与-g选项同时使用，用户组的新GID可以与系统已有用户组的GID相同。</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500">#    -n新用户组 将用户组的名字改为新名字</span>
-</span></span><span style="display:flex;"><span>exp:
-</span></span><span style="display:flex;"><span>groupmod -g <span style="color:#1c01ce">102</span> group2
-</span></span><span style="display:flex;"><span>groupmod –g <span style="color:#1c01ce">10000</span> -n group3 group2
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 如果一个用户同时属于多个用户组，那么用户可以在用户组之间切换，以便具有其他用户组的权限</span>
-</span></span><span style="display:flex;"><span>newgrp root
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># /etc/passwd文件是用户管理工作涉及的最重要的一个文件</span>
-</span></span><span style="display:flex;"><span>cat /etc/passwd
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 格式：</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 用户名:口令:用户标识号:组标识号:注释性描述:主目录:登录Shell</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># /etc/shadow中的记录行与/etc/passwd中的一一对应，它由pwconv命令根据/etc/passwd中的数据自动产生</span>
-</span></span><span style="display:flex;"><span>cat /etc/shadow
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 格式</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># /etc/group文件存放用户组的所有信息</span>
-</span></span><span style="display:flex;"><span>cat /etc/group
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 格式</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 组名:口令:组标识号:组内用户列表</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 添加新的用户账号</span>
+</span></span><span class="line"><span class="cl">useradd 选项 用户名
+</span></span><span class="line"><span class="cl"><span class="c1">#	选项：</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    -c comment 指定一段注释性描述。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    -d 目录 指定用户主目录，如果此目录不存在，则同时使用-m选项，可以创建主目录。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    -g 用户组 指定用户所属的用户组。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    -G 用户组，用户组 指定用户所属的附加组。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    -s Shell文件 指定用户的登录Shell。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    -u 用户号 指定用户的用户号，如果同时有-o选项，则可以重复使用其他用户的标识号。</span>
+</span></span><span class="line"><span class="cl">exp:
+</span></span><span class="line"><span class="cl">useradd –d  /home/sam -m sam
+</span></span><span class="line"><span class="cl">useradd -s /bin/sh -g group –G adm,root gem
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 删除帐号</span>
+</span></span><span class="line"><span class="cl">userdel 选项 用户名
+</span></span><span class="line"><span class="cl">-r <span class="c1"># 把用户的主目录一起删除</span>
+</span></span><span class="line"><span class="cl">exp:
+</span></span><span class="line"><span class="cl">userdel -r sam
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 修改账号</span>
+</span></span><span class="line"><span class="cl">usermod 选项 用户名
+</span></span><span class="line"><span class="cl"><span class="c1">#	选项跟添加新用户一样</span>
+</span></span><span class="line"><span class="cl">exp:
+</span></span><span class="line"><span class="cl">usermod -s /bin/ksh -d /home/z –g developer sam
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 用户口令的管理</span>
+</span></span><span class="line"><span class="cl">passwd 选项 用户名
+</span></span><span class="line"><span class="cl"><span class="c1">#	选项：</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    -l 锁定口令，即禁用账号</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    -u 口令解锁</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    -d 使账号无口令</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    -f 强迫用户下次登录时修改口令</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 如果是用户，只能修改自己的账户口令</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 如果是root。能修改任何用户的口令</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 增加一个新的用户组</span>
+</span></span><span class="line"><span class="cl">groupadd 选项 用户组
+</span></span><span class="line"><span class="cl"><span class="c1">#	选项</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    -g GID 指定新用户组的组标识号（GID）</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    -o 一般与-g选项同时使用，表示新用户组的GID可以与系统已有用户组的GID相同</span>
+</span></span><span class="line"><span class="cl">exp:
+</span></span><span class="line"><span class="cl">groupadd group1
+</span></span><span class="line"><span class="cl">groupadd -g <span class="m">101</span> group2
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 删除一个已有的用户组</span>
+</span></span><span class="line"><span class="cl">groupdel 用户组
+</span></span><span class="line"><span class="cl">exp:
+</span></span><span class="line"><span class="cl">groupdel group1
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 修改用户组</span>
+</span></span><span class="line"><span class="cl">groupmod 选项 用户组
+</span></span><span class="line"><span class="cl"><span class="c1">#	选项</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    -g GID 为用户组指定新的组标识号。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    -o 与-g选项同时使用，用户组的新GID可以与系统已有用户组的GID相同。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    -n新用户组 将用户组的名字改为新名字</span>
+</span></span><span class="line"><span class="cl">exp:
+</span></span><span class="line"><span class="cl">groupmod -g <span class="m">102</span> group2
+</span></span><span class="line"><span class="cl">groupmod –g <span class="m">10000</span> -n group3 group2
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 如果一个用户同时属于多个用户组，那么用户可以在用户组之间切换，以便具有其他用户组的权限</span>
+</span></span><span class="line"><span class="cl">newgrp root
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># /etc/passwd文件是用户管理工作涉及的最重要的一个文件</span>
+</span></span><span class="line"><span class="cl">cat /etc/passwd
+</span></span><span class="line"><span class="cl"><span class="c1"># 格式：</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 用户名:口令:用户标识号:组标识号:注释性描述:主目录:登录Shell</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># /etc/shadow中的记录行与/etc/passwd中的一一对应，它由pwconv命令根据/etc/passwd中的数据自动产生</span>
+</span></span><span class="line"><span class="cl">cat /etc/shadow
+</span></span><span class="line"><span class="cl"><span class="c1"># 格式</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># /etc/group文件存放用户组的所有信息</span>
+</span></span><span class="line"><span class="cl">cat /etc/group
+</span></span><span class="line"><span class="cl"><span class="c1"># 格式</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 组名:口令:组标识号:组内用户列表</span>
 </span></span></code></pre></div><hr>
 <p>更改用户所用的shell，可以直接修改/etc/passwd用户后面的shell选项</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vim /etc/passwd 
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vim /etc/passwd 
 </span></span></code></pre></div><h2 id="远程连接">远程连接</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># ssh远程连接</span>
-</span></span><span style="display:flex;"><span>ssh root@192.168.10.150
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 输入密码  也可以使用密钥认证登陆</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 图形化远程连接 两边都安装 teamviewer软件</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 远程传输文件</span>
-</span></span><span style="display:flex;"><span>scp ./file.txt lc622@192.168.10.150:~/Myfile <span style="color:#177500"># 将本地的file文件传输到远程用户目录下的Myfile文件夹</span>
-</span></span><span style="display:flex;"><span>scp lc622@192.168.10.150:~/Myfile/file.txt ./ <span style="color:#177500">#与上方相反</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># VNC远程连接</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># ssh连接上云服务器 (AWS亚马逊云服务器)</span>
-</span></span><span style="display:flex;"><span>vncserver <span style="color:#177500"># 设置VNC密码</span>
-</span></span><span style="display:flex;"><span>vim ~/.vnc/xstartup <span style="color:#177500"># 编辑文件</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 云服务器</span>
-</span></span><span style="display:flex;"><span>https://www.runoob.com/linux/linux-cloud-server.html
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 云服务器 域名注册 网站系统</span>
-</span></span><span style="display:flex;"><span>https://c.runoob.com/cloud-server/
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ssh远程连接</span>
+</span></span><span class="line"><span class="cl">ssh root@192.168.10.150
+</span></span><span class="line"><span class="cl"><span class="c1"># 输入密码  也可以使用密钥认证登陆</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 图形化远程连接 两边都安装 teamviewer软件</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 远程传输文件</span>
+</span></span><span class="line"><span class="cl">scp ./file.txt lc622@192.168.10.150:~/Myfile <span class="c1"># 将本地的file文件传输到远程用户目录下的Myfile文件夹</span>
+</span></span><span class="line"><span class="cl">scp lc622@192.168.10.150:~/Myfile/file.txt ./ <span class="c1">#与上方相反</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># VNC远程连接</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ssh连接上云服务器 (AWS亚马逊云服务器)</span>
+</span></span><span class="line"><span class="cl">vncserver <span class="c1"># 设置VNC密码</span>
+</span></span><span class="line"><span class="cl">vim ~/.vnc/xstartup <span class="c1"># 编辑文件</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 云服务器</span>
+</span></span><span class="line"><span class="cl">https://www.runoob.com/linux/linux-cloud-server.html
+</span></span><span class="line"><span class="cl"><span class="c1"># 云服务器 域名注册 网站系统</span>
+</span></span><span class="line"><span class="cl">https://c.runoob.com/cloud-server/
 </span></span></code></pre></div><h2 id="linux磁盘管理">Linux磁盘管理</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># df/duf 列出文件系统的整体磁盘使用量</span>
-</span></span><span style="display:flex;"><span>df <span style="color:#000">[</span>-ahikHTm<span style="color:#000">]</span> <span style="color:#000">[</span>目录或文件名<span style="color:#000">]</span>
-</span></span><span style="display:flex;"><span>    -a ：列出所有的文件系统，包括系统特有的 /proc 等文件系统；
-</span></span><span style="display:flex;"><span>    -k ：以 KBytes 的容量显示各文件系统；
-</span></span><span style="display:flex;"><span>    -m ：以 MBytes 的容量显示各文件系统；
-</span></span><span style="display:flex;"><span>    -h ：以人们较易阅读的 GBytes, MBytes, KBytes 等格式自行显示；
-</span></span><span style="display:flex;"><span>    -H ：以 <span style="color:#000">M</span><span style="color:#000">=</span>1000K 取代 <span style="color:#000">M</span><span style="color:#000">=</span>1024K 的进位方式；
-</span></span><span style="display:flex;"><span>    -T ：显示文件系统类型, 连同该 partition 的 filesystem 名称 <span style="color:#000">(</span>例如 ext3<span style="color:#000">)</span> 也列出；
-</span></span><span style="display:flex;"><span>    -i ：不用硬盘容量，而以 inode 的数量来显示
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># du/duf 检查磁盘空间使用量</span>
-</span></span><span style="display:flex;"><span>du <span style="color:#000">[</span>-ahskm<span style="color:#000">]</span> 文件或目录名称
-</span></span><span style="display:flex;"><span>    -a ：列出所有的文件与目录容量，因为默认仅统计目录底下的文件量而已。
-</span></span><span style="display:flex;"><span>    -h ：以人们较易读的容量格式 <span style="color:#000">(</span>G/M<span style="color:#000">)</span> 显示；
-</span></span><span style="display:flex;"><span>    -s ：列出总量而已，而不列出每个各别的目录占用容量；
-</span></span><span style="display:flex;"><span>    -S ：不包括子目录下的总计，与 -s 有点差别。
-</span></span><span style="display:flex;"><span>    -k ：以 KBytes 列出容量显示；
-</span></span><span style="display:flex;"><span>    -m ：以 MBytes 列出容量显示；
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># fdisk 磁盘分区表操作工具</span>
-</span></span><span style="display:flex;"><span>fdisk <span style="color:#000">[</span>-l<span style="color:#000">]</span> 装置名称
-</span></span><span style="display:flex;"><span>-l ：输出后面接的装置所有的分区内容。若仅有 fdisk -l 时， 则系统将会把整个系统内能够搜寻到的装置的分区均列出来。
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 磁盘格式化</span>
-</span></span><span style="display:flex;"><span>mkfs <span style="color:#000">[</span>-t 文件系统格式<span style="color:#000">]</span> 装置文件名
-</span></span><span style="display:flex;"><span>-t ：可以接文件系统格式，例如 ext3, ext2, vfat 等<span style="color:#000">(</span>系统有支持才会生效<span style="color:#000">)</span> 
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 磁盘检验</span>
-</span></span><span style="display:flex;"><span>fsck <span style="color:#000">[</span>-t 文件系统<span style="color:#000">]</span> <span style="color:#000">[</span>-ACay<span style="color:#000">]</span> 装置名称
-</span></span><span style="display:flex;"><span>    -t : 给定档案系统的型式，若在 /etc/fstab 中已有定义或 kernel 本身已支援的则不需加上此参数
-</span></span><span style="display:flex;"><span>    -s : 依序一个一个地执行 fsck 的指令来检查
-</span></span><span style="display:flex;"><span>    -A : 对/etc/fstab 中所有列出来的 分区（partition）做检查
-</span></span><span style="display:flex;"><span>    -C : 显示完整的检查进度
-</span></span><span style="display:flex;"><span>    -d : 打印出 e2fsck 的 debug 结果
-</span></span><span style="display:flex;"><span>    -p : 同时有 -A 条件时，同时有多个 fsck 的检查一起执行
-</span></span><span style="display:flex;"><span>    -R : 同时有 -A 条件时，省略 / 不检查
-</span></span><span style="display:flex;"><span>    -V : 详细显示模式
-</span></span><span style="display:flex;"><span>    -a : 如果检查有错则自动修复
-</span></span><span style="display:flex;"><span>    -r : 如果检查有错则由使用者回答是否修复
-</span></span><span style="display:flex;"><span>    -y : 选项指定检测每个文件是自动输入yes，在不确定那些是不正常的时候，可以执行 <span style="color:#177500"># fsck -y 全部检查修复。</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#177500"># 磁盘挂载与卸除 </span>
-</span></span><span style="display:flex;"><span>mount <span style="color:#000">[</span>-t 文件系统<span style="color:#000">]</span> <span style="color:#000">[</span>-L Label名<span style="color:#000">]</span> <span style="color:#000">[</span>-o 额外选项<span style="color:#000">]</span> <span style="color:#000">[</span>-n<span style="color:#000">]</span>  装置文件名  挂载点
-</span></span><span style="display:flex;"><span>	-f ：强制卸除！可用在类似网络文件系统 <span style="color:#000">(</span>NFS<span style="color:#000">)</span> 无法读取到的情况下；
-</span></span><span style="display:flex;"><span>	-n ：不升级 /etc/mtab 情况下卸除
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># df/duf 列出文件系统的整体磁盘使用量</span>
+</span></span><span class="line"><span class="cl">df <span class="o">[</span>-ahikHTm<span class="o">]</span> <span class="o">[</span>目录或文件名<span class="o">]</span>
+</span></span><span class="line"><span class="cl">    -a ：列出所有的文件系统，包括系统特有的 /proc 等文件系统；
+</span></span><span class="line"><span class="cl">    -k ：以 KBytes 的容量显示各文件系统；
+</span></span><span class="line"><span class="cl">    -m ：以 MBytes 的容量显示各文件系统；
+</span></span><span class="line"><span class="cl">    -h ：以人们较易阅读的 GBytes, MBytes, KBytes 等格式自行显示；
+</span></span><span class="line"><span class="cl">    -H ：以 <span class="nv">M</span><span class="o">=</span>1000K 取代 <span class="nv">M</span><span class="o">=</span>1024K 的进位方式；
+</span></span><span class="line"><span class="cl">    -T ：显示文件系统类型, 连同该 partition 的 filesystem 名称 <span class="o">(</span>例如 ext3<span class="o">)</span> 也列出；
+</span></span><span class="line"><span class="cl">    -i ：不用硬盘容量，而以 inode 的数量来显示
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># du/duf 检查磁盘空间使用量</span>
+</span></span><span class="line"><span class="cl">du <span class="o">[</span>-ahskm<span class="o">]</span> 文件或目录名称
+</span></span><span class="line"><span class="cl">    -a ：列出所有的文件与目录容量，因为默认仅统计目录底下的文件量而已。
+</span></span><span class="line"><span class="cl">    -h ：以人们较易读的容量格式 <span class="o">(</span>G/M<span class="o">)</span> 显示；
+</span></span><span class="line"><span class="cl">    -s ：列出总量而已，而不列出每个各别的目录占用容量；
+</span></span><span class="line"><span class="cl">    -S ：不包括子目录下的总计，与 -s 有点差别。
+</span></span><span class="line"><span class="cl">    -k ：以 KBytes 列出容量显示；
+</span></span><span class="line"><span class="cl">    -m ：以 MBytes 列出容量显示；
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># fdisk 磁盘分区表操作工具</span>
+</span></span><span class="line"><span class="cl">fdisk <span class="o">[</span>-l<span class="o">]</span> 装置名称
+</span></span><span class="line"><span class="cl">-l ：输出后面接的装置所有的分区内容。若仅有 fdisk -l 时， 则系统将会把整个系统内能够搜寻到的装置的分区均列出来。
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 磁盘格式化</span>
+</span></span><span class="line"><span class="cl">mkfs <span class="o">[</span>-t 文件系统格式<span class="o">]</span> 装置文件名
+</span></span><span class="line"><span class="cl">-t ：可以接文件系统格式，例如 ext3, ext2, vfat 等<span class="o">(</span>系统有支持才会生效<span class="o">)</span> 
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 磁盘检验</span>
+</span></span><span class="line"><span class="cl">fsck <span class="o">[</span>-t 文件系统<span class="o">]</span> <span class="o">[</span>-ACay<span class="o">]</span> 装置名称
+</span></span><span class="line"><span class="cl">    -t : 给定档案系统的型式，若在 /etc/fstab 中已有定义或 kernel 本身已支援的则不需加上此参数
+</span></span><span class="line"><span class="cl">    -s : 依序一个一个地执行 fsck 的指令来检查
+</span></span><span class="line"><span class="cl">    -A : 对/etc/fstab 中所有列出来的 分区（partition）做检查
+</span></span><span class="line"><span class="cl">    -C : 显示完整的检查进度
+</span></span><span class="line"><span class="cl">    -d : 打印出 e2fsck 的 debug 结果
+</span></span><span class="line"><span class="cl">    -p : 同时有 -A 条件时，同时有多个 fsck 的检查一起执行
+</span></span><span class="line"><span class="cl">    -R : 同时有 -A 条件时，省略 / 不检查
+</span></span><span class="line"><span class="cl">    -V : 详细显示模式
+</span></span><span class="line"><span class="cl">    -a : 如果检查有错则自动修复
+</span></span><span class="line"><span class="cl">    -r : 如果检查有错则由使用者回答是否修复
+</span></span><span class="line"><span class="cl">    -y : 选项指定检测每个文件是自动输入yes，在不确定那些是不正常的时候，可以执行 <span class="c1"># fsck -y 全部检查修复。</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 磁盘挂载与卸除 </span>
+</span></span><span class="line"><span class="cl">mount <span class="o">[</span>-t 文件系统<span class="o">]</span> <span class="o">[</span>-L Label名<span class="o">]</span> <span class="o">[</span>-o 额外选项<span class="o">]</span> <span class="o">[</span>-n<span class="o">]</span>  装置文件名  挂载点
+</span></span><span class="line"><span class="cl">	-f ：强制卸除！可用在类似网络文件系统 <span class="o">(</span>NFS<span class="o">)</span> 无法读取到的情况下；
+</span></span><span class="line"><span class="cl">	-n ：不升级 /etc/mtab 情况下卸除
 </span></span></code></pre></div><h2 id="apt命令">apt命令</h2>
 <ul>
 <li>
@@ -727,10 +734,30 @@ var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着�
     document.addEventListener('DOMContentLoaded', function() {
       const currentTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', currentTheme);
+
+      const lightStyle = document.querySelector('link[data-theme-style="light"]');
+      const darkStyle = document.querySelector('link[data-theme-style="dark"]');
+      
+      if (currentTheme === 'light') {
+        lightStyle.media = 'all';
+        darkStyle.media = 'not all';
+      } else {
+        lightStyle.media = 'not all';
+        darkStyle.media = 'all';
+      }
+
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      if (giscusFrame) {
+        const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+        giscusFrame.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: giscusTheme } } },
+          'https://giscus.app'
+        );
+      }
       
       const themeToggle = document.querySelector('.theme-toggle');
       if (themeToggle) {
-        themeToggle.textContent = currentTheme === 'light' ? '明/暗' : '明/暗';
+        themeToggle.textContent = currentTheme === 'light' ? '明暗' : '明暗';
         
         themeToggle.addEventListener('click', function() {
           const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -738,8 +765,25 @@ var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着�
           
           document.documentElement.setAttribute('data-theme', newTheme);
           localStorage.setItem('theme', newTheme);
+
+          if (newTheme === 'light') {
+            lightStyle.media = 'all';
+            darkStyle.media = 'not all';
+          } else {
+            lightStyle.media = 'not all';
+            darkStyle.media = 'all';
+          }
+
+          const giscusFrame = document.querySelector('iframe.giscus-frame');
+          if (giscusFrame) {
+            const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+            giscusFrame.contentWindow.postMessage(
+              { giscus: { setConfig: { theme: giscusTheme } } },
+              'https://giscus.app'
+            );
+          }
           
-          this.textContent = newTheme === 'light' ? '明/暗' : '明/暗';
+          this.textContent = newTheme === 'light' ? '明暗' : '明暗';
         });
       }
     });

@@ -91,6 +91,13 @@
   <link media="screen" rel="stylesheet" href='/css/common.css'>
   <link media="screen" rel="stylesheet" href='/css/content.css'>
   <link media="screen" rel="stylesheet" href='/css/theme.css'>
+  
+  <link rel="stylesheet" href='/css/syntax/xcode.css' 
+    data-theme-style="light" 
+    media="(prefers-color-scheme: light)">
+  <link rel="stylesheet" href='/css/syntax/catppuccin-mocha.css' 
+    data-theme-style="dark" 
+    media="not all">
 
   
   
@@ -127,7 +134,7 @@
     </span>
     
     <span class="nav-bar-item">
-      <a class="link theme-toggle" href="javascript:void(0);">明/暗</a>
+      <a class="link theme-toggle" href="javascript:void(0);">明暗</a>
     </span>
   </nav>
 </header>
@@ -172,7 +179,7 @@
     <h2 id="安装">安装</h2>
 <p>到官网下载Linux的资源文件，运行按照提示下一步就可以完成安装</p>
 <p>在这个过程中有可能会提示缺少Linux-header文件，只需要在终端用apt下载对应版本的header就可以</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt install linux-headers-6.6.9-amd64
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt install linux-headers-6.6.9-amd64
 </span></span></code></pre></div><p><a href="https://pi3yyy.love/archives/33e9ac6f.html">安装具体步骤参考文章中的安装VMware</a></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20240211000531.png" alt="VMware Workstation pro 17"></p>
 <h2 id="问题出现">问题出现</h2>
@@ -183,69 +190,69 @@
 <img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/96_1707580962_hd.jpeg" alt="开机错误日志"></p>
 <h2 id="问题解决">问题解决</h2>
 <p>我只能强制关机后再开机，进入系统开始解决问题，我上网搜索了很多一样的情况，他们都是不能正常启动vmnet服务或者是vmon服务，解决办法就是重新安装所有的VM模块，再手动编译安装vmnet和vmon模块</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#633820">#!/bin/bash                                                 
-</span></span></span><span style="display:flex;"><span><span style="color:#633820"></span><span style="color:#000">VMWARE_VERSION</span><span style="color:#000">=</span>workstation-17.5.0 
-</span></span><span style="display:flex;"><span><span style="color:#000">TMP_FOLDER</span><span style="color:#000">=</span>/tmp/patch-vmware
-</span></span><span style="display:flex;"><span>rm -fdr <span style="color:#000">$TMP_FOLDER</span>
-</span></span><span style="display:flex;"><span>mkdir -p <span style="color:#000">$TMP_FOLDER</span>
-</span></span><span style="display:flex;"><span><span style="color:#a90d91">cd</span> <span style="color:#000">$TMP_FOLDER</span>
-</span></span><span style="display:flex;"><span>git clone https://github.com/mkubecek/vmware-host-modules.git
-</span></span><span style="display:flex;"><span><span style="color:#a90d91">cd</span> <span style="color:#000">$TMP_FOLDER</span>/vmware-host-modules
-</span></span><span style="display:flex;"><span>git checkout <span style="color:#000">$VMWARE_VERSION</span>
-</span></span><span style="display:flex;"><span>git fetch
-</span></span><span style="display:flex;"><span>make
-</span></span><span style="display:flex;"><span>sudo make install
-</span></span><span style="display:flex;"><span>sudo ln -s /lib/x86_64-linux-gnu/libz.so.1
-</span></span><span style="display:flex;"><span>/usr/lib/vmware/lib/libz.so.1/libz.so.1
-</span></span><span style="display:flex;"><span>sudo /etc/init.d/vmware restart
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/bin/bash                                                 
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nv">VMWARE_VERSION</span><span class="o">=</span>workstation-17.5.0 
+</span></span><span class="line"><span class="cl"><span class="nv">TMP_FOLDER</span><span class="o">=</span>/tmp/patch-vmware
+</span></span><span class="line"><span class="cl">rm -fdr <span class="nv">$TMP_FOLDER</span>
+</span></span><span class="line"><span class="cl">mkdir -p <span class="nv">$TMP_FOLDER</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> <span class="nv">$TMP_FOLDER</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/mkubecek/vmware-host-modules.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> <span class="nv">$TMP_FOLDER</span>/vmware-host-modules
+</span></span><span class="line"><span class="cl">git checkout <span class="nv">$VMWARE_VERSION</span>
+</span></span><span class="line"><span class="cl">git fetch
+</span></span><span class="line"><span class="cl">make
+</span></span><span class="line"><span class="cl">sudo make install
+</span></span><span class="line"><span class="cl">sudo ln -s /lib/x86_64-linux-gnu/libz.so.1
+</span></span><span class="line"><span class="cl">/usr/lib/vmware/lib/libz.so.1/libz.so.1
+</span></span><span class="line"><span class="cl">sudo /etc/init.d/vmware restart
 </span></span></code></pre></div><p>我也照做了，但是依旧不能解决问题，不论通过什么方法启动network服务，都不行</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>┌──<span style="color:#000">(</span>pi3㉿kali-l22<span style="color:#000">)</span>-<span style="color:#000">[</span>~<span style="color:#000">]</span>
-</span></span><span style="display:flex;"><span>└─$ service vmware status                 
-</span></span><span style="display:flex;"><span>× vmware.service - LSB: This service starts and stops VMware services
-</span></span><span style="display:flex;"><span>     Loaded: loaded <span style="color:#000">(</span>/etc/init.d/vmware; generated<span style="color:#000">)</span>
-</span></span><span style="display:flex;"><span>     Active: failed <span style="color:#000">(</span>Result: exit-code<span style="color:#000">)</span> since Sat 2024-02-10 23:10:37 CST; 29min ago
-</span></span><span style="display:flex;"><span>       Docs: man:systemd-sysv-generator<span style="color:#000">(</span>8<span style="color:#000">)</span>
-</span></span><span style="display:flex;"><span>    Process: <span style="color:#1c01ce">1734</span> <span style="color:#000">ExecStart</span><span style="color:#000">=</span>/etc/init.d/vmware start <span style="color:#000">(</span><span style="color:#000">code</span><span style="color:#000">=</span>exited, <span style="color:#000">status</span><span style="color:#000">=</span>1/FAILURE<span style="color:#000">)</span>
-</span></span><span style="display:flex;"><span>      Tasks: <span style="color:#1c01ce">1</span> <span style="color:#000">(</span>limit: 16495<span style="color:#000">)</span>
-</span></span><span style="display:flex;"><span>     Memory: 5.4M <span style="color:#000">(</span>peak: 14.6M<span style="color:#000">)</span>
-</span></span><span style="display:flex;"><span>        CPU: 444ms
-</span></span><span style="display:flex;"><span>     CGroup: /system.slice/vmware.service
-</span></span><span style="display:flex;"><span>             └─1861 /usr/sbin/vmware-authdlauncher
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>2月 <span style="color:#1c01ce">10</span> 23:10:33 kali-l22 vmware<span style="color:#000">[</span>1734<span style="color:#000">]</span>:    Virtual machine monitor - <span style="color:#a90d91">done</span>
-</span></span><span style="display:flex;"><span>2月 <span style="color:#1c01ce">10</span> 23:10:33 kali-l22 vmware<span style="color:#000">[</span>1734<span style="color:#000">]</span>:    Virtual machine communication interface - <span style="color:#a90d91">done</span>
-</span></span><span style="display:flex;"><span>2月 <span style="color:#1c01ce">10</span> 23:10:33 kali-l22 vmware<span style="color:#000">[</span>1734<span style="color:#000">]</span>:    VM communication interface socket family - <span style="color:#a90d91">done</span>
-</span></span><span style="display:flex;"><span>2月 <span style="color:#1c01ce">10</span> 23:10:37 kali-l22 vmware<span style="color:#000">[</span>1734<span style="color:#000">]</span>:    Virtual ethernet - failed
-</span></span><span style="display:flex;"><span>2月 <span style="color:#1c01ce">10</span> 23:10:37 kali-l22 vmware<span style="color:#000">[</span>1734<span style="color:#000">]</span>:    VMware Authentication Daemon - <span style="color:#a90d91">done</span>
-</span></span><span style="display:flex;"><span>2月 <span style="color:#1c01ce">10</span> 23:10:37 kali-l22 systemd<span style="color:#000">[</span>1<span style="color:#000">]</span>: vmware.service: Control process exited, <span style="color:#000">code</span><span style="color:#000">=</span>exited, <span style="color:#000">status</span><span style="color:#000">=</span>1/&gt;
-</span></span><span style="display:flex;"><span>2月 <span style="color:#1c01ce">10</span> 23:10:37 kali-l22 systemd<span style="color:#000">[</span>1<span style="color:#000">]</span>: vmware.service: Failed with result <span style="color:#c41a16">&#39;exit-code&#39;</span>.
-</span></span><span style="display:flex;"><span>2月 <span style="color:#1c01ce">10</span> 23:10:37 kali-l22 systemd<span style="color:#000">[</span>1<span style="color:#000">]</span>: vmware.service: Unit process <span style="color:#1c01ce">1806</span> <span style="color:#000">(</span>vmware-authdlau<span style="color:#000">)</span> remains ru&gt;
-</span></span><span style="display:flex;"><span>2月 <span style="color:#1c01ce">10</span> 23:10:37 kali-l22 systemd<span style="color:#000">[</span>1<span style="color:#000">]</span>: vmware.service: Unit process <span style="color:#1c01ce">1807</span> <span style="color:#000">(</span>logger<span style="color:#000">)</span> remains running aft&gt;
-</span></span><span style="display:flex;"><span>2月 <span style="color:#1c01ce">10</span> 23:10:37 kali-l22 systemd<span style="color:#000">[</span>1<span style="color:#000">]</span>: Failed to start vmware.service - LSB: This service starts and &gt;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">┌──<span class="o">(</span>pi3㉿kali-l22<span class="o">)</span>-<span class="o">[</span>~<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─$ service vmware status                 
+</span></span><span class="line"><span class="cl">× vmware.service - LSB: This service starts and stops VMware services
+</span></span><span class="line"><span class="cl">     Loaded: loaded <span class="o">(</span>/etc/init.d/vmware<span class="p">;</span> generated<span class="o">)</span>
+</span></span><span class="line"><span class="cl">     Active: failed <span class="o">(</span>Result: exit-code<span class="o">)</span> since Sat 2024-02-10 23:10:37 CST<span class="p">;</span> 29min ago
+</span></span><span class="line"><span class="cl">       Docs: man:systemd-sysv-generator<span class="o">(</span>8<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    Process: <span class="m">1734</span> <span class="nv">ExecStart</span><span class="o">=</span>/etc/init.d/vmware start <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>1/FAILURE<span class="o">)</span>
+</span></span><span class="line"><span class="cl">      Tasks: <span class="m">1</span> <span class="o">(</span>limit: 16495<span class="o">)</span>
+</span></span><span class="line"><span class="cl">     Memory: 5.4M <span class="o">(</span>peak: 14.6M<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        CPU: 444ms
+</span></span><span class="line"><span class="cl">     CGroup: /system.slice/vmware.service
+</span></span><span class="line"><span class="cl">             └─1861 /usr/sbin/vmware-authdlauncher
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2月 <span class="m">10</span> 23:10:33 kali-l22 vmware<span class="o">[</span>1734<span class="o">]</span>:    Virtual machine monitor - <span class="k">done</span>
+</span></span><span class="line"><span class="cl">2月 <span class="m">10</span> 23:10:33 kali-l22 vmware<span class="o">[</span>1734<span class="o">]</span>:    Virtual machine communication interface - <span class="k">done</span>
+</span></span><span class="line"><span class="cl">2月 <span class="m">10</span> 23:10:33 kali-l22 vmware<span class="o">[</span>1734<span class="o">]</span>:    VM communication interface socket family - <span class="k">done</span>
+</span></span><span class="line"><span class="cl">2月 <span class="m">10</span> 23:10:37 kali-l22 vmware<span class="o">[</span>1734<span class="o">]</span>:    Virtual ethernet - failed
+</span></span><span class="line"><span class="cl">2月 <span class="m">10</span> 23:10:37 kali-l22 vmware<span class="o">[</span>1734<span class="o">]</span>:    VMware Authentication Daemon - <span class="k">done</span>
+</span></span><span class="line"><span class="cl">2月 <span class="m">10</span> 23:10:37 kali-l22 systemd<span class="o">[</span>1<span class="o">]</span>: vmware.service: Control process exited, <span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>1/&gt;
+</span></span><span class="line"><span class="cl">2月 <span class="m">10</span> 23:10:37 kali-l22 systemd<span class="o">[</span>1<span class="o">]</span>: vmware.service: Failed with result <span class="s1">&#39;exit-code&#39;</span>.
+</span></span><span class="line"><span class="cl">2月 <span class="m">10</span> 23:10:37 kali-l22 systemd<span class="o">[</span>1<span class="o">]</span>: vmware.service: Unit process <span class="m">1806</span> <span class="o">(</span>vmware-authdlau<span class="o">)</span> remains ru&gt;
+</span></span><span class="line"><span class="cl">2月 <span class="m">10</span> 23:10:37 kali-l22 systemd<span class="o">[</span>1<span class="o">]</span>: vmware.service: Unit process <span class="m">1807</span> <span class="o">(</span>logger<span class="o">)</span> remains running aft&gt;
+</span></span><span class="line"><span class="cl">2月 <span class="m">10</span> 23:10:37 kali-l22 systemd<span class="o">[</span>1<span class="o">]</span>: Failed to start vmware.service - LSB: This service starts and &gt;
 </span></span></code></pre></div><p>Virtual ethernet依旧是启动失败</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>┌──<span style="color:#000">(</span>pi3㉿kali-l22<span style="color:#000">)</span>-<span style="color:#000">[</span>~<span style="color:#000">]</span>
-</span></span><span style="display:flex;"><span>└─$ sudo /etc/init.d/vmware restart
-</span></span><span style="display:flex;"><span>Stopping VMware services:
-</span></span><span style="display:flex;"><span>   VMware Authentication Daemon                                        <span style="color:#a90d91">done</span>
-</span></span><span style="display:flex;"><span>   Virtual machine monitor                                             <span style="color:#a90d91">done</span>
-</span></span><span style="display:flex;"><span>Starting VMware services:
-</span></span><span style="display:flex;"><span>   Virtual machine monitor                                             <span style="color:#a90d91">done</span>
-</span></span><span style="display:flex;"><span>   Virtual machine communication interface                             <span style="color:#a90d91">done</span>
-</span></span><span style="display:flex;"><span>   VM communication interface socket family                            <span style="color:#a90d91">done</span>
-</span></span><span style="display:flex;"><span>   Virtual ethernet                                                    failed
-</span></span><span style="display:flex;"><span>   VMware Authentication Daemon                                        <span style="color:#a90d91">done</span>
-</span></span><span style="display:flex;"><span>   Shared Memory Available                                             <span style="color:#a90d91">done</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">┌──<span class="o">(</span>pi3㉿kali-l22<span class="o">)</span>-<span class="o">[</span>~<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─$ sudo /etc/init.d/vmware restart
+</span></span><span class="line"><span class="cl">Stopping VMware services:
+</span></span><span class="line"><span class="cl">   VMware Authentication Daemon                                        <span class="k">done</span>
+</span></span><span class="line"><span class="cl">   Virtual machine monitor                                             <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Starting VMware services:
+</span></span><span class="line"><span class="cl">   Virtual machine monitor                                             <span class="k">done</span>
+</span></span><span class="line"><span class="cl">   Virtual machine communication interface                             <span class="k">done</span>
+</span></span><span class="line"><span class="cl">   VM communication interface socket family                            <span class="k">done</span>
+</span></span><span class="line"><span class="cl">   Virtual ethernet                                                    failed
+</span></span><span class="line"><span class="cl">   VMware Authentication Daemon                                        <span class="k">done</span>
+</span></span><span class="line"><span class="cl">   Shared Memory Available                                             <span class="k">done</span>
 </span></span></code></pre></div><p>所以我也重装了好几遍VMware，也装了17、16和15的版本，15版本甚至连Virtual machine monitor都启动失败</p>
 <p>最后在google上找了很多的问答，也都是差不多，最后只能求助AI，他告诉我：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>**Remove Lock Files**: 
-</span></span><span style="display:flex;"><span>If network connections fail to initialize, check for a lock file/directory at <span style="color:#c41a16">`/etc/vmware/networking.lck/`</span>. 
-</span></span><span style="display:flex;"><span>[<span style="color:#000">Removing this directory and reconfiguring VMware Workstation might resolve the issue</span>](<span style="color:#836c28">https://forums.gentoo.org/viewtopic-t-955980-start-0.html</span>)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">**Remove Lock Files**: 
+</span></span><span class="line"><span class="cl">If network connections fail to initialize, check for a lock file/directory at <span class="sb">`/etc/vmware/networking.lck/`</span>. 
+</span></span><span class="line"><span class="cl">[<span class="nt">Removing this directory and reconfiguring VMware Workstation might resolve the issue</span>](<span class="na">https://forums.gentoo.org/viewtopic-t-955980-start-0.html</span>)
 </span></span></code></pre></div><p>我一看，在/etc/vmware还真有这样一个networking.lck文件，我直接删除了这个文件，然后重启服务，成功了！</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>┌──<span style="color:#000">(</span>pi3㉿kali-l22<span style="color:#000">)</span>-<span style="color:#000">[</span>~<span style="color:#000">]</span>
-</span></span><span style="display:flex;"><span>└─$ sudo vmware-networks --status  
-</span></span><span style="display:flex;"><span><span style="color:#000">[</span>sudo<span style="color:#000">]</span> pi3 的密码：
-</span></span><span style="display:flex;"><span>Bridge networking on vmnet0 is running
-</span></span><span style="display:flex;"><span>All the services configured on all the networks are running
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">┌──<span class="o">(</span>pi3㉿kali-l22<span class="o">)</span>-<span class="o">[</span>~<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─$ sudo vmware-networks --status  
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sudo<span class="o">]</span> pi3 的密码：
+</span></span><span class="line"><span class="cl">Bridge networking on vmnet0 is running
+</span></span><span class="line"><span class="cl">All the services configured on all the networks are running
 </span></span></code></pre></div><ul>
 <li><strong>.lck</strong> 通常指的是 <strong class=chinese>锁定文件</strong>。这些文件用于防止多个进程同时访问或修改资源（例如文件或数据库）。当进程打开文件时，它可能会创建相应的锁定文件，以表示它正在主动使用该资源。其他进程在尝试修改相同资源之前可以检查此锁定文件。</li>
 <li>例如：
@@ -346,10 +353,30 @@
     document.addEventListener('DOMContentLoaded', function() {
       const currentTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', currentTheme);
+
+      const lightStyle = document.querySelector('link[data-theme-style="light"]');
+      const darkStyle = document.querySelector('link[data-theme-style="dark"]');
+      
+      if (currentTheme === 'light') {
+        lightStyle.media = 'all';
+        darkStyle.media = 'not all';
+      } else {
+        lightStyle.media = 'not all';
+        darkStyle.media = 'all';
+      }
+
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      if (giscusFrame) {
+        const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+        giscusFrame.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: giscusTheme } } },
+          'https://giscus.app'
+        );
+      }
       
       const themeToggle = document.querySelector('.theme-toggle');
       if (themeToggle) {
-        themeToggle.textContent = currentTheme === 'light' ? '明/暗' : '明/暗';
+        themeToggle.textContent = currentTheme === 'light' ? '明暗' : '明暗';
         
         themeToggle.addEventListener('click', function() {
           const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -357,8 +384,25 @@
           
           document.documentElement.setAttribute('data-theme', newTheme);
           localStorage.setItem('theme', newTheme);
+
+          if (newTheme === 'light') {
+            lightStyle.media = 'all';
+            darkStyle.media = 'not all';
+          } else {
+            lightStyle.media = 'not all';
+            darkStyle.media = 'all';
+          }
+
+          const giscusFrame = document.querySelector('iframe.giscus-frame');
+          if (giscusFrame) {
+            const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+            giscusFrame.contentWindow.postMessage(
+              { giscus: { setConfig: { theme: giscusTheme } } },
+              'https://giscus.app'
+            );
+          }
           
-          this.textContent = newTheme === 'light' ? '明/暗' : '明/暗';
+          this.textContent = newTheme === 'light' ? '明暗' : '明暗';
         });
       }
     });

@@ -89,6 +89,13 @@
   <link media="screen" rel="stylesheet" href='/css/common.css'>
   <link media="screen" rel="stylesheet" href='/css/content.css'>
   <link media="screen" rel="stylesheet" href='/css/theme.css'>
+  
+  <link rel="stylesheet" href='/css/syntax/xcode.css' 
+    data-theme-style="light" 
+    media="(prefers-color-scheme: light)">
+  <link rel="stylesheet" href='/css/syntax/catppuccin-mocha.css' 
+    data-theme-style="dark" 
+    media="not all">
 
   
   
@@ -125,7 +132,7 @@
     </span>
     
     <span class="nav-bar-item">
-      <a class="link theme-toggle" href="javascript:void(0);">明/暗</a>
+      <a class="link theme-toggle" href="javascript:void(0);">明暗</a>
     </span>
   </nav>
 </header>
@@ -157,27 +164,27 @@
 <li>备份原始仓库，以便后续需要重新添加删除敏感数据后的代码文件。</li>
 <li>克隆远程仓库或者在本地仓库中执行下面的命令：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git filter-branch --force --index-filter <span style="color:#c41a16">&#34;git rm --cached --ignore-unmatch path-to-your-file&#34;</span> --prune-empty --tag-name-filter cat -- --all
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git filter-branch --force --index-filter <span class="s2">&#34;git rm --cached --ignore-unmatch path-to-your-file&#34;</span> --prune-empty --tag-name-filter cat -- --all
 </span></span></code></pre></div><p>其中 <code>path-to-your-file</code> 是你需要删除记录的文件路径。</p>
 <ol start="3">
 <li>将敏感文件添加进 <code>.gitignore</code> 防止再次被提交</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#a90d91">echo</span> <span style="color:#c41a16">&#34;YOUR-FILE-WITH-SENSITIVE-DATA&#34;</span> &gt;&gt; .gitignore
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;YOUR-FILE-WITH-SENSITIVE-DATA&#34;</span> &gt;&gt; .gitignore
 </span></span></code></pre></div><p>如果是在代码中混入了敏感数据，需要重新修改代码，删除敏感数据，再次添加进本地仓库中。</p>
 <ol start="5">
 <li>强制推送到远程仓库：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git push origin --force --all
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git push origin --force --all
 </span></span></code></pre></div><ol start="4">
 <li>如果有标签，还需要针对 Git 标记强制推送：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git push origin --force --tags
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git push origin --force --tags
 </span></span></code></pre></div><ol start="5">
 <li>最后还需要清理本地仓库：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git <span style="color:#a90d91">for</span>-each-ref --format<span style="color:#000">=</span><span style="color:#c41a16">&#39;delete %(refname)&#39;</span> refs/original | git update-ref --stdin
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git reflog expire --expire<span style="color:#000">=</span>now --all
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git gc --prune<span style="color:#000">=</span>now
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git <span class="k">for</span>-each-ref --format<span class="o">=</span><span class="s1">&#39;delete %(refname)&#39;</span> refs/original <span class="p">|</span> git update-ref --stdin
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git reflog expire --expire<span class="o">=</span>now --all
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git gc --prune<span class="o">=</span>now
 </span></span></code></pre></div>
     
   </article>
@@ -270,10 +277,30 @@
     document.addEventListener('DOMContentLoaded', function() {
       const currentTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', currentTheme);
+
+      const lightStyle = document.querySelector('link[data-theme-style="light"]');
+      const darkStyle = document.querySelector('link[data-theme-style="dark"]');
+      
+      if (currentTheme === 'light') {
+        lightStyle.media = 'all';
+        darkStyle.media = 'not all';
+      } else {
+        lightStyle.media = 'not all';
+        darkStyle.media = 'all';
+      }
+
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      if (giscusFrame) {
+        const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+        giscusFrame.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: giscusTheme } } },
+          'https://giscus.app'
+        );
+      }
       
       const themeToggle = document.querySelector('.theme-toggle');
       if (themeToggle) {
-        themeToggle.textContent = currentTheme === 'light' ? '明/暗' : '明/暗';
+        themeToggle.textContent = currentTheme === 'light' ? '明暗' : '明暗';
         
         themeToggle.addEventListener('click', function() {
           const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -281,8 +308,25 @@
           
           document.documentElement.setAttribute('data-theme', newTheme);
           localStorage.setItem('theme', newTheme);
+
+          if (newTheme === 'light') {
+            lightStyle.media = 'all';
+            darkStyle.media = 'not all';
+          } else {
+            lightStyle.media = 'not all';
+            darkStyle.media = 'all';
+          }
+
+          const giscusFrame = document.querySelector('iframe.giscus-frame');
+          if (giscusFrame) {
+            const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+            giscusFrame.contentWindow.postMessage(
+              { giscus: { setConfig: { theme: giscusTheme } } },
+              'https://giscus.app'
+            );
+          }
           
-          this.textContent = newTheme === 'light' ? '明/暗' : '明/暗';
+          this.textContent = newTheme === 'light' ? '明暗' : '明暗';
         });
       }
     });

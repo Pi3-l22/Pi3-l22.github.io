@@ -81,6 +81,13 @@
   <link media="screen" rel="stylesheet" href='/css/common.css'>
   <link media="screen" rel="stylesheet" href='/css/content.css'>
   <link media="screen" rel="stylesheet" href='/css/theme.css'>
+  
+  <link rel="stylesheet" href='/css/syntax/xcode.css' 
+    data-theme-style="light" 
+    media="(prefers-color-scheme: light)">
+  <link rel="stylesheet" href='/css/syntax/catppuccin-mocha.css' 
+    data-theme-style="dark" 
+    media="not all">
 
   
   
@@ -118,7 +125,7 @@
     </span>
     
     <span class="nav-bar-item">
-      <a class="link theme-toggle" href="javascript:void(0);">明/暗</a>
+      <a class="link theme-toggle" href="javascript:void(0);">明暗</a>
     </span>
   </nav>
 </header>
@@ -155,25 +162,25 @@
     ╚═╝  ╚═╝╚═╝       ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═╝        ╚═╝    ╚═╝  ╚═╝╚═╝     ╚═╝    ╚═╝     ╚═╝╚═════╝ ╚═╝
     </pre>
 </div>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#177500">#!/usr/bin/python</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># -*- coding: utf-8 -*-</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a90d91">class</span> <span style="color:#3f6e75">Student</span>:
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">def</span> <span style="color:#000">__init__</span>(<span style="color:#5b269a">self</span>):
-</span></span><span style="display:flex;"><span>        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">name</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;Liu Chao&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">nickname</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;Pi3&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">role</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;Undergraduate Student&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">major</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;Cyberspace Security&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">language</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;zh_CN&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">location</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;HangZhou China&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">def</span> <span style="color:#000">say_hi</span>(<span style="color:#5b269a">self</span>):
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">print</span>(<span style="color:#c41a16">&#34;Thanks for stopping by and I hope you get some interesting stuff here.&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">me</span> <span style="color:#000">=</span> <span style="color:#000">Student</span>()
-</span></span><span style="display:flex;"><span><span style="color:#000">me</span><span style="color:#000">.</span><span style="color:#000">say_hi</span>()
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/python</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -*- coding: utf-8 -*-</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;Liu Chao&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">nickname</span> <span class="o">=</span> <span class="s2">&#34;Pi3&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">role</span> <span class="o">=</span> <span class="s2">&#34;Undergraduate Student&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">major</span> <span class="o">=</span> <span class="s2">&#34;Cyberspace Security&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">language</span> <span class="o">=</span> <span class="s2">&#34;zh_CN&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="s2">&#34;HangZhou China&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">say_hi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Thanks for stopping by and I hope you get some interesting stuff here.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">me</span> <span class="o">=</span> <span class="n">Student</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">me</span><span class="o">.</span><span class="n">say_hi</span><span class="p">()</span>
 </span></span></code></pre></div><p>📔 <strong>Blog</strong>: <a href="https://blog.pi3.fun">Pi3&rsquo;s Note</a> | <del><a href="https://pi3yyy.love">Pi3&rsquo;s Notebook</a></del></p>
 <p>🎈 <strong>GitHub</strong>: <a href="https://github.com/Pi3-l22">Pi3-l22</a></p>
 <p>🔮 <strong>Stardew Valley Notes</strong>: <a href="https://sv.pi3.fun">Stardew Valley Journal</a></p>
@@ -340,10 +347,30 @@
     document.addEventListener('DOMContentLoaded', function() {
       const currentTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', currentTheme);
+
+      const lightStyle = document.querySelector('link[data-theme-style="light"]');
+      const darkStyle = document.querySelector('link[data-theme-style="dark"]');
+      
+      if (currentTheme === 'light') {
+        lightStyle.media = 'all';
+        darkStyle.media = 'not all';
+      } else {
+        lightStyle.media = 'not all';
+        darkStyle.media = 'all';
+      }
+
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      if (giscusFrame) {
+        const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+        giscusFrame.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: giscusTheme } } },
+          'https://giscus.app'
+        );
+      }
       
       const themeToggle = document.querySelector('.theme-toggle');
       if (themeToggle) {
-        themeToggle.textContent = currentTheme === 'light' ? '明/暗' : '明/暗';
+        themeToggle.textContent = currentTheme === 'light' ? '明暗' : '明暗';
         
         themeToggle.addEventListener('click', function() {
           const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -351,8 +378,25 @@
           
           document.documentElement.setAttribute('data-theme', newTheme);
           localStorage.setItem('theme', newTheme);
+
+          if (newTheme === 'light') {
+            lightStyle.media = 'all';
+            darkStyle.media = 'not all';
+          } else {
+            lightStyle.media = 'not all';
+            darkStyle.media = 'all';
+          }
+
+          const giscusFrame = document.querySelector('iframe.giscus-frame');
+          if (giscusFrame) {
+            const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+            giscusFrame.contentWindow.postMessage(
+              { giscus: { setConfig: { theme: giscusTheme } } },
+              'https://giscus.app'
+            );
+          }
           
-          this.textContent = newTheme === 'light' ? '明/暗' : '明/暗';
+          this.textContent = newTheme === 'light' ? '明暗' : '明暗';
         });
       }
     });

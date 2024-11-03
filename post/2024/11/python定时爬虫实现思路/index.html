@@ -90,6 +90,13 @@
   <link media="screen" rel="stylesheet" href='/css/common.css'>
   <link media="screen" rel="stylesheet" href='/css/content.css'>
   <link media="screen" rel="stylesheet" href='/css/theme.css'>
+  
+  <link rel="stylesheet" href='/css/syntax/xcode.css' 
+    data-theme-style="light" 
+    media="(prefers-color-scheme: light)">
+  <link rel="stylesheet" href='/css/syntax/catppuccin-mocha.css' 
+    data-theme-style="dark" 
+    media="not all">
 
   
   
@@ -126,7 +133,7 @@
     </span>
     
     <span class="nav-bar-item">
-      <a class="link theme-toggle" href="javascript:void(0);">明/暗</a>
+      <a class="link theme-toggle" href="javascript:void(0);">明暗</a>
     </span>
   </nav>
 </header>
@@ -202,10 +209,10 @@
 </ul>
 <h4 id="关键类和方法">关键类和方法：</h4>
 <p><strong>ArticleCrawler 类</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a90d91">class</span> <span style="color:#3f6e75">ArticleCrawler</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">def</span> <span style="color:#000">__init__</span>(<span style="color:#5b269a">self</span>):
-</span></span><span style="display:flex;"><span>        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">base_url</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;https://example.com/&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#177500"># 初始化配置...</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ArticleCrawler</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">=</span> <span class="s2">&#34;https://example.com/&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 初始化配置...</span>
 </span></span></code></pre></div><p>主要方法：</p>
 <ul>
 <li><code>get_article_content()</code>: 获取文章内容</li>
@@ -214,9 +221,9 @@
 <li><code>format_content()</code>: 格式化文章内容</li>
 </ul>
 <p><strong>GitManager 类</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a90d91">class</span> <span style="color:#3f6e75">GitManager</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">def</span> <span style="color:#000">__init__</span>(<span style="color:#5b269a">self</span>):
-</span></span><span style="display:flex;"><span>        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">logger</span> <span style="color:#000">=</span> <span style="color:#000">logging</span><span style="color:#000">.</span><span style="color:#000">getLogger</span>(<span style="color:#c41a16">&#39;GitManager&#39;</span>)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">GitManager</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;GitManager&#39;</span><span class="p">)</span>
 </span></span></code></pre></div><p>负责自动执行 Git 操作，包括 add、commit 和 push。</p>
 <h3 id="定时调度器-scheduler-py">定时调度器 (scheduler. py)</h3>
 <h4 id="主要功能-1">主要功能：</h4>
@@ -228,10 +235,10 @@
 </ul>
 <h4 id="关键类和方法-1">关键类和方法：</h4>
 <p><strong>CrawlerScheduler 类</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a90d91">class</span> <span style="color:#3f6e75">CrawlerScheduler</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">def</span> <span style="color:#000">__init__</span>(<span style="color:#5b269a">self</span>):
-</span></span><span style="display:flex;"><span>        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">crawler</span> <span style="color:#000">=</span> <span style="color:#000">ArticleCrawler</span>()
-</span></span><span style="display:flex;"><span>        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">scheduler</span> <span style="color:#000">=</span> <span style="color:#000">BlockingScheduler</span>()
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">CrawlerScheduler</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">crawler</span> <span class="o">=</span> <span class="n">ArticleCrawler</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">BlockingScheduler</span><span class="p">()</span>
 </span></span></code></pre></div><p>主要方法：</p>
 <ul>
 <li><code>get_current_article_count()</code>: 获取当前文章总数</li>
@@ -287,18 +294,18 @@
 </ul>
 <h3 id="运行方式">运行方式</h3>
 <p>直接运行爬虫，爬取目标网站所有指定信息：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python crawler. py
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">python crawler. py
 </span></span></code></pre></div><p>启动定时任务，定时爬取更新的信息：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python scheduler. py
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">python scheduler. py
 </span></span></code></pre></div><h2 id="项目结构">项目结构</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>project/
-</span></span><span style="display:flex;"><span>├── crawler.py      <span style="color:#177500"># 爬虫核心代码</span>
-</span></span><span style="display:flex;"><span>├── scheduler.py    <span style="color:#177500"># 定时调度器</span>
-</span></span><span style="display:flex;"><span>├── template.md     <span style="color:#177500"># 文章模板</span>
-</span></span><span style="display:flex;"><span>├── cover.txt       <span style="color:#177500"># 封面图片列表</span>
-</span></span><span style="display:flex;"><span>└── logs/           <span style="color:#177500"># 日志目录</span>
-</span></span><span style="display:flex;"><span>    ├── spiders.log
-</span></span><span style="display:flex;"><span>    └── scheduler.log
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">project/
+</span></span><span class="line"><span class="cl">├── crawler.py      <span class="c1"># 爬虫核心代码</span>
+</span></span><span class="line"><span class="cl">├── scheduler.py    <span class="c1"># 定时调度器</span>
+</span></span><span class="line"><span class="cl">├── template.md     <span class="c1"># 文章模板</span>
+</span></span><span class="line"><span class="cl">├── cover.txt       <span class="c1"># 封面图片列表</span>
+</span></span><span class="line"><span class="cl">└── logs/           <span class="c1"># 日志目录</span>
+</span></span><span class="line"><span class="cl">    ├── spiders.log
+</span></span><span class="line"><span class="cl">    └── scheduler.log
 </span></span></code></pre></div><h2 id="注意事项">注意事项</h2>
 <ol>
 <li>应该合理设置爬取间隔，避免对目标网站造成压力</li>
@@ -338,7 +345,7 @@
     <a class="link" href="/post/2024/11/%E4%B8%83%E7%89%9B%E4%BA%91%E5%9B%BE%E5%BA%8A%E4%B8%8E%E5%85%8D%E8%B4%B9https%E8%AF%81%E4%B9%A6/">← prev</a>
     
     
-    <a class="link" href="/post/2024/11/obsidian&#43;hugo%E5%8D%9A%E5%AE%A2%E7%AC%94%E8%AE%B0%E5%B7%A5%E4%BD%9C%E6%B5%81/">next →</a>
+    <a class="link" href="/post/2024/11/test/">next →</a>
     
   </div>
   <div class="comment">
@@ -422,10 +429,30 @@
     document.addEventListener('DOMContentLoaded', function() {
       const currentTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', currentTheme);
+
+      const lightStyle = document.querySelector('link[data-theme-style="light"]');
+      const darkStyle = document.querySelector('link[data-theme-style="dark"]');
+      
+      if (currentTheme === 'light') {
+        lightStyle.media = 'all';
+        darkStyle.media = 'not all';
+      } else {
+        lightStyle.media = 'not all';
+        darkStyle.media = 'all';
+      }
+
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      if (giscusFrame) {
+        const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+        giscusFrame.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: giscusTheme } } },
+          'https://giscus.app'
+        );
+      }
       
       const themeToggle = document.querySelector('.theme-toggle');
       if (themeToggle) {
-        themeToggle.textContent = currentTheme === 'light' ? '明/暗' : '明/暗';
+        themeToggle.textContent = currentTheme === 'light' ? '明暗' : '明暗';
         
         themeToggle.addEventListener('click', function() {
           const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -433,8 +460,25 @@
           
           document.documentElement.setAttribute('data-theme', newTheme);
           localStorage.setItem('theme', newTheme);
+
+          if (newTheme === 'light') {
+            lightStyle.media = 'all';
+            darkStyle.media = 'not all';
+          } else {
+            lightStyle.media = 'not all';
+            darkStyle.media = 'all';
+          }
+
+          const giscusFrame = document.querySelector('iframe.giscus-frame');
+          if (giscusFrame) {
+            const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+            giscusFrame.contentWindow.postMessage(
+              { giscus: { setConfig: { theme: giscusTheme } } },
+              'https://giscus.app'
+            );
+          }
           
-          this.textContent = newTheme === 'light' ? '明/暗' : '明/暗';
+          this.textContent = newTheme === 'light' ? '明暗' : '明暗';
         });
       }
     });

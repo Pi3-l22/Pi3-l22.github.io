@@ -89,6 +89,13 @@
   <link media="screen" rel="stylesheet" href='/css/common.css'>
   <link media="screen" rel="stylesheet" href='/css/content.css'>
   <link media="screen" rel="stylesheet" href='/css/theme.css'>
+  
+  <link rel="stylesheet" href='/css/syntax/xcode.css' 
+    data-theme-style="light" 
+    media="(prefers-color-scheme: light)">
+  <link rel="stylesheet" href='/css/syntax/catppuccin-mocha.css' 
+    data-theme-style="dark" 
+    media="not all">
 
   
   
@@ -125,7 +132,7 @@
     </span>
     
     <span class="nav-bar-item">
-      <a class="link theme-toggle" href="javascript:void(0);">明/暗</a>
+      <a class="link theme-toggle" href="javascript:void(0);">明暗</a>
     </span>
   </nav>
 </header>
@@ -157,31 +164,31 @@
 <li><strong>Wiki 链接 &mdash;&gt; Markdown 链接，无显示文本</strong></li>
 </ol>
 <p>正则表达式：</p>
-<pre tabindex="0"><code class="language-regex" data-lang="regex">!\[\[(.+?)\]\]
-</code></pre><p>替换为：</p>
-<pre tabindex="0"><code class="language-regex" data-lang="regex">![]($1)
-</code></pre><ol start="2">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">!\[\[(.+?)\]\]
+</span></span></code></pre></div><p>替换为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">![]($1)
+</span></span></code></pre></div><ol start="2">
 <li><strong>Markdown 链接 &mdash;&gt; Wiki 链接，无显示文本</strong></li>
 </ol>
 <p>正则表达式：</p>
-<pre tabindex="0"><code class="language-regex" data-lang="regex">!\[\]\((.+?)\)
-</code></pre><p>替换为：</p>
-<pre tabindex="0"><code class="language-regex" data-lang="regex">![[ $1 ]]
-</code></pre><ol start="3">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">!\[\]\((.+?)\)
+</span></span></code></pre></div><p>替换为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">![[ $1 ]]
+</span></span></code></pre></div><ol start="3">
 <li><strong>Wiki 链接 &mdash;&gt; Markdown 链接，有显示文本</strong></li>
 </ol>
 <p>正则表达式：</p>
-<pre tabindex="0"><code class="language-regex" data-lang="regex">!\[\[(.+?)\|(.+?)\]\]
-</code></pre><p>替换为：</p>
-<pre tabindex="0"><code class="language-regex" data-lang="regex">![ $2 ]( $1 )
-</code></pre><ol start="4">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">!\[\[(.+?)\|(.+?)\]\]
+</span></span></code></pre></div><p>替换为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">![ $2 ]( $1 )
+</span></span></code></pre></div><ol start="4">
 <li><strong>Markdown 链接 &mdash;&gt; Wiki 链接，有显示文本</strong></li>
 </ol>
 <p>正则表达式：</p>
-<pre tabindex="0"><code class="language-regex" data-lang="regex">!\[(.+?)\]\((.+?)\)
-</code></pre><p>替换为：</p>
-<pre tabindex="0"><code class="language-regex" data-lang="regex">![[ $2 | $1 ]]
-</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">!\[(.+?)\]\((.+?)\)
+</span></span></code></pre></div><p>替换为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">![[ $2 | $1 ]]
+</span></span></code></pre></div>
     
   </article>
   <div class="paginator">
@@ -273,10 +280,30 @@
     document.addEventListener('DOMContentLoaded', function() {
       const currentTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', currentTheme);
+
+      const lightStyle = document.querySelector('link[data-theme-style="light"]');
+      const darkStyle = document.querySelector('link[data-theme-style="dark"]');
+      
+      if (currentTheme === 'light') {
+        lightStyle.media = 'all';
+        darkStyle.media = 'not all';
+      } else {
+        lightStyle.media = 'not all';
+        darkStyle.media = 'all';
+      }
+
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      if (giscusFrame) {
+        const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+        giscusFrame.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: giscusTheme } } },
+          'https://giscus.app'
+        );
+      }
       
       const themeToggle = document.querySelector('.theme-toggle');
       if (themeToggle) {
-        themeToggle.textContent = currentTheme === 'light' ? '明/暗' : '明/暗';
+        themeToggle.textContent = currentTheme === 'light' ? '明暗' : '明暗';
         
         themeToggle.addEventListener('click', function() {
           const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -284,8 +311,25 @@
           
           document.documentElement.setAttribute('data-theme', newTheme);
           localStorage.setItem('theme', newTheme);
+
+          if (newTheme === 'light') {
+            lightStyle.media = 'all';
+            darkStyle.media = 'not all';
+          } else {
+            lightStyle.media = 'not all';
+            darkStyle.media = 'all';
+          }
+
+          const giscusFrame = document.querySelector('iframe.giscus-frame');
+          if (giscusFrame) {
+            const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+            giscusFrame.contentWindow.postMessage(
+              { giscus: { setConfig: { theme: giscusTheme } } },
+              'https://giscus.app'
+            );
+          }
           
-          this.textContent = newTheme === 'light' ? '明/暗' : '明/暗';
+          this.textContent = newTheme === 'light' ? '明暗' : '明暗';
         });
       }
     });

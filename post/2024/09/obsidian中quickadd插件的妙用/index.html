@@ -89,6 +89,13 @@
   <link media="screen" rel="stylesheet" href='/css/common.css'>
   <link media="screen" rel="stylesheet" href='/css/content.css'>
   <link media="screen" rel="stylesheet" href='/css/theme.css'>
+  
+  <link rel="stylesheet" href='/css/syntax/xcode.css' 
+    data-theme-style="light" 
+    media="(prefers-color-scheme: light)">
+  <link rel="stylesheet" href='/css/syntax/catppuccin-mocha.css' 
+    data-theme-style="dark" 
+    media="not all">
 
   
   
@@ -125,7 +132,7 @@
     </span>
     
     <span class="nav-bar-item">
-      <a class="link theme-toggle" href="javascript:void(0);">明/暗</a>
+      <a class="link theme-toggle" href="javascript:void(0);">明暗</a>
     </span>
   </nav>
 </header>
@@ -157,90 +164,90 @@
 <p>按下 QuickAdd 快捷键后，出现一个输入框，然后输入文件夹名称和笔记名称，比如 <em>test</em> 然后按下确定键后，会创建一个文件夹和一篇 md 笔记，文件名都是 <em>test</em> 并且笔记在文件夹里面。</p>
 </blockquote>
 <p>网上检索一番，发现这样的需求大概还是要用 JavaScript 脚本来实现，其他没有很好的办法。QuickAdd 中的 Macros 可以执行用户自定义脚本，于是我去翻阅 <a href="https://quickadd.obsidian.guide/docs/">QuickAdd 官方文档</a>和 <a href="https://luhaifeng666.github.io/obsidian-plugin-docs-zh/">Obsidian 开发者文档</a>, 折腾了一会，写出了一个 js 脚本，利用 QuickAdd，基本上能实现需要的效果。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#000">module</span>.<span style="color:#000">exports</span> <span style="color:#000">=</span> <span style="color:#a90d91">async</span> (<span style="color:#000">params</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">const</span> { <span style="color:#000">inputPrompt</span> } <span style="color:#000">=</span> <span style="color:#000">params</span>.<span style="color:#000">quickAddApi</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">const</span> <span style="color:#000">app</span> <span style="color:#000">=</span> <span style="color:#000">params</span>.<span style="color:#000">app</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#177500">// 获取用户输入的文件夹和笔记名称
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>    <span style="color:#a90d91">const</span> <span style="color:#000">folderAndNoteName</span> <span style="color:#000">=</span> <span style="color:#a90d91">await</span> <span style="color:#000">inputPrompt</span>(<span style="color:#c41a16">&#34;Enter folder and note name:&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">if</span> (<span style="color:#000">!</span><span style="color:#000">folderAndNoteName</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">new</span> <span style="color:#000">Notice</span>(<span style="color:#c41a16">&#34;No input provided.&#34;</span>, <span style="color:#1c01ce">5000</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">try</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 创建文件夹
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#a90d91">const</span> <span style="color:#000">folderPath</span> <span style="color:#000">=</span> <span style="color:#000">folderAndNoteName</span>.<span style="color:#000">replace</span>(<span style="color:#c41a16">/[/\\]/g</span>, <span style="color:#c41a16">&#39;&#39;</span>); <span style="color:#177500">// 确保路径有效
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#000">app</span>.<span style="color:#000">vault</span>.<span style="color:#000">adapter</span>.<span style="color:#000">mkdir</span>(<span style="color:#000">folderPath</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 获取当前日期
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#a90d91">const</span> <span style="color:#000">date</span> <span style="color:#000">=</span> <span style="color:#a90d91">window</span>.<span style="color:#000">moment</span>().<span style="color:#000">format</span>(<span style="color:#c41a16">&#34;YYYY-MM-DD&#34;</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">time</span> <span style="color:#000">=</span> <span style="color:#a90d91">window</span>.<span style="color:#000">moment</span>().<span style="color:#000">format</span>(<span style="color:#c41a16">&#34;HH:mm:ss&#34;</span>);
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 创建笔记文件
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#a90d91">const</span> <span style="color:#000">filePath</span> <span style="color:#000">=</span> <span style="color:#000">folderPath</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#39;/&#39;</span> <span style="color:#000">+</span> <span style="color:#000">folderAndNoteName</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#39;.md&#39;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">fileContent</span> <span style="color:#000">=</span> <span style="color:#c41a16">`---
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">title: </span><span style="color:#c41a16">${</span><span style="color:#000">folderAndNoteName</span><span style="color:#c41a16">}</span><span style="color:#c41a16">
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">date: </span><span style="color:#c41a16">${</span><span style="color:#000">date</span><span style="color:#c41a16">}</span><span style="color:#c41a16">
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">time: </span><span style="color:#c41a16">${</span><span style="color:#000">time</span><span style="color:#c41a16">}</span><span style="color:#c41a16">
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">tags: []
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">---`</span>;
-</span></span><span style="display:flex;"><span>    } <span style="color:#a90d91">catch</span> (<span style="color:#000">error</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">new</span> <span style="color:#000">Notice</span>(<span style="color:#c41a16">`Error: </span><span style="color:#c41a16">${</span><span style="color:#000">error</span><span style="color:#c41a16">}</span><span style="color:#c41a16">`</span>, <span style="color:#1c01ce">5000</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="p">{</span> <span class="nx">inputPrompt</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">params</span><span class="p">.</span><span class="nx">quickAddApi</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">params</span><span class="p">.</span><span class="nx">app</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 获取用户输入的文件夹和笔记名称
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">folderAndNoteName</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">inputPrompt</span><span class="p">(</span><span class="s2">&#34;Enter folder and note name:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">folderAndNoteName</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="nx">Notice</span><span class="p">(</span><span class="s2">&#34;No input provided.&#34;</span><span class="p">,</span> <span class="mi">5000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 创建文件夹
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">const</span> <span class="nx">folderPath</span> <span class="o">=</span> <span class="nx">folderAndNoteName</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[/\\]/g</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span> <span class="c1">// 确保路径有效
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">app</span><span class="p">.</span><span class="nx">vault</span><span class="p">.</span><span class="nx">adapter</span><span class="p">.</span><span class="nx">mkdir</span><span class="p">(</span><span class="nx">folderPath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 获取当前日期
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">const</span> <span class="nx">date</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">moment</span><span class="p">().</span><span class="nx">format</span><span class="p">(</span><span class="s2">&#34;YYYY-MM-DD&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">time</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">moment</span><span class="p">().</span><span class="nx">format</span><span class="p">(</span><span class="s2">&#34;HH:mm:ss&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 创建笔记文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">const</span> <span class="nx">filePath</span> <span class="o">=</span> <span class="nx">folderPath</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nx">folderAndNoteName</span> <span class="o">+</span> <span class="s1">&#39;.md&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">fileContent</span> <span class="o">=</span> <span class="sb">`---
+</span></span></span><span class="line"><span class="cl"><span class="sb">title: </span><span class="si">${</span><span class="nx">folderAndNoteName</span><span class="si">}</span><span class="sb">
+</span></span></span><span class="line"><span class="cl"><span class="sb">date: </span><span class="si">${</span><span class="nx">date</span><span class="si">}</span><span class="sb">
+</span></span></span><span class="line"><span class="cl"><span class="sb">time: </span><span class="si">${</span><span class="nx">time</span><span class="si">}</span><span class="sb">
+</span></span></span><span class="line"><span class="cl"><span class="sb">tags: []
+</span></span></span><span class="line"><span class="cl"><span class="sb">---`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="nx">Notice</span><span class="p">(</span><span class="sb">`Error: </span><span class="si">${</span><span class="nx">error</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="mi">5000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></div><p>这其中遇到最大的困难就是，这两个文档写的太难用了，想要的功能需要找很久，还不一定是我想的那样。最后打开新建笔记这一步，一直实现不了，<code>app.vault.create(filePath, fileContent);</code> 这个函数能够成功创建文件并写入内容，但是即使是成功了也返回 NULL ，以及 <code>leaf.openFile(file);</code> 这个函数一直不能打开文件，也不知道是不是因为接口和函数写错了，这让我百思不得其解，总之一直没有搞定。</p>
 <p>随后，我也将这个脚本进行修改，整合进我的 Hugo 博客文章撰写的工作流之中。利用这个脚本根据日期创建对应的文件夹如 <code>/content/post/2024/09/</code>，在文件夹中创建新的模板笔记，利用 Obsidian 的 Git 插件实现定时推送到 GitHub 仓库，再通过 GitHub Action 构建出 HTML 文件，部署在 Github Page 上。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Javascript" data-lang="Javascript"><span style="display:flex;"><span><span style="color:#000">module</span>.<span style="color:#000">exports</span> <span style="color:#000">=</span> <span style="color:#a90d91">async</span> (<span style="color:#000">params</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">const</span> { <span style="color:#000">inputPrompt</span> } <span style="color:#000">=</span> <span style="color:#000">params</span>.<span style="color:#000">quickAddApi</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">const</span> <span style="color:#000">app</span> <span style="color:#000">=</span> <span style="color:#000">params</span>.<span style="color:#000">app</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">const</span> <span style="color:#000">noteName</span> <span style="color:#000">=</span> <span style="color:#a90d91">await</span> <span style="color:#000">inputPrompt</span>(<span style="color:#c41a16">&#34;Enter note name:&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">if</span> (<span style="color:#000">!</span><span style="color:#000">noteName</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">new</span> <span style="color:#000">Notice</span>(<span style="color:#c41a16">&#34;No input provided.&#34;</span>, <span style="color:#1c01ce">5000</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">return</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">try</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">year</span> <span style="color:#000">=</span> <span style="color:#a90d91">window</span>.<span style="color:#000">moment</span>().<span style="color:#000">format</span>(<span style="color:#c41a16">&#34;YYYY&#34;</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">month</span> <span style="color:#000">=</span> <span style="color:#a90d91">window</span>.<span style="color:#000">moment</span>().<span style="color:#000">format</span>(<span style="color:#c41a16">&#34;MM&#34;</span>);
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">basePath</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#39;./content/post&#39;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">yearPath</span> <span style="color:#000">=</span> <span style="color:#c41a16">`</span><span style="color:#c41a16">${</span><span style="color:#000">basePath</span><span style="color:#c41a16">}</span><span style="color:#c41a16">/</span><span style="color:#c41a16">${</span><span style="color:#000">year</span><span style="color:#c41a16">}</span><span style="color:#c41a16">`</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">monthPath</span> <span style="color:#000">=</span> <span style="color:#c41a16">`</span><span style="color:#c41a16">${</span><span style="color:#000">yearPath</span><span style="color:#c41a16">}</span><span style="color:#c41a16">/</span><span style="color:#c41a16">${</span><span style="color:#000">month</span><span style="color:#c41a16">}</span><span style="color:#c41a16">`</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">notePath</span> <span style="color:#000">=</span> <span style="color:#c41a16">`</span><span style="color:#c41a16">${</span><span style="color:#000">monthPath</span><span style="color:#c41a16">}</span><span style="color:#c41a16">/</span><span style="color:#c41a16">${</span><span style="color:#000">noteName</span><span style="color:#c41a16">}</span><span style="color:#c41a16">.md`</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 创建文件夹结构
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#a90d91">await</span> <span style="color:#000">ensureDirectoryExists</span>(<span style="color:#000">app</span>.<span style="color:#000">vault</span>.<span style="color:#000">adapter</span>, <span style="color:#000">yearPath</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">await</span> <span style="color:#000">ensureDirectoryExists</span>(<span style="color:#000">app</span>.<span style="color:#000">vault</span>.<span style="color:#000">adapter</span>, <span style="color:#000">monthPath</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 创建笔记文件内容
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#a90d91">const</span> <span style="color:#000">fileContent</span> <span style="color:#000">=</span> <span style="color:#c41a16">`---
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">title: </span><span style="color:#c41a16">${</span><span style="color:#000">noteName</span><span style="color:#c41a16">}</span><span style="color:#c41a16">
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">date: </span><span style="color:#c41a16">${</span><span style="color:#a90d91">window</span>.<span style="color:#000">moment</span>().<span style="color:#000">format</span>(<span style="color:#c41a16">&#34;YYYY-MM-DD&#34;</span>)<span style="color:#c41a16">}</span><span style="color:#c41a16">
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">description: 
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">tags: []
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">slug: 
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">---
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">
-</span></span></span><span style="display:flex;"><span><span style="color:#c41a16">&lt;!--more--&gt;`</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">file</span> <span style="color:#000">=</span> <span style="color:#a90d91">await</span> <span style="color:#000">app</span>.<span style="color:#000">vault</span>.<span style="color:#000">create</span>(<span style="color:#000">notePath</span>, <span style="color:#000">fileContent</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#177500">// const leaf = app.workspace.getLeaf();
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">// await leaf.openFile(file);
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>    } <span style="color:#a90d91">catch</span> (<span style="color:#000">error</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">new</span> <span style="color:#000">Notice</span>(<span style="color:#c41a16">`Error: </span><span style="color:#c41a16">${</span><span style="color:#000">error</span>.<span style="color:#000">message</span><span style="color:#c41a16">}</span><span style="color:#c41a16">`</span>, <span style="color:#1c01ce">5000</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500">// 确保目录存在
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span><span style="color:#a90d91">async</span> <span style="color:#a90d91">function</span> <span style="color:#000">ensureDirectoryExists</span>(<span style="color:#000">adapter</span>, <span style="color:#000">path</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">try</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">await</span> <span style="color:#000">adapter</span>.<span style="color:#000">exists</span>(<span style="color:#000">path</span>) <span style="color:#000">||</span> <span style="color:#a90d91">await</span> <span style="color:#000">adapter</span>.<span style="color:#000">mkdir</span>(<span style="color:#000">path</span>);
-</span></span><span style="display:flex;"><span>    } <span style="color:#a90d91">catch</span> (<span style="color:#000">error</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">throw</span> <span style="color:#a90d91">new</span> <span style="color:#a90d91">Error</span>(<span style="color:#c41a16">`Failed to create directory </span><span style="color:#c41a16">${</span><span style="color:#000">path</span><span style="color:#c41a16">}</span><span style="color:#c41a16">: </span><span style="color:#c41a16">${</span><span style="color:#000">error</span>.<span style="color:#000">message</span><span style="color:#c41a16">}</span><span style="color:#c41a16">`</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Javascript" data-lang="Javascript"><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="p">{</span> <span class="nx">inputPrompt</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">params</span><span class="p">.</span><span class="nx">quickAddApi</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">params</span><span class="p">.</span><span class="nx">app</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">noteName</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">inputPrompt</span><span class="p">(</span><span class="s2">&#34;Enter note name:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">noteName</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="nx">Notice</span><span class="p">(</span><span class="s2">&#34;No input provided.&#34;</span><span class="p">,</span> <span class="mi">5000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">year</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">moment</span><span class="p">().</span><span class="nx">format</span><span class="p">(</span><span class="s2">&#34;YYYY&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">month</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">moment</span><span class="p">().</span><span class="nx">format</span><span class="p">(</span><span class="s2">&#34;MM&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">basePath</span> <span class="o">=</span> <span class="s1">&#39;./content/post&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">yearPath</span> <span class="o">=</span> <span class="sb">`</span><span class="si">${</span><span class="nx">basePath</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">year</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">monthPath</span> <span class="o">=</span> <span class="sb">`</span><span class="si">${</span><span class="nx">yearPath</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">month</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">notePath</span> <span class="o">=</span> <span class="sb">`</span><span class="si">${</span><span class="nx">monthPath</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">noteName</span><span class="si">}</span><span class="sb">.md`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 创建文件夹结构
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">await</span> <span class="nx">ensureDirectoryExists</span><span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nx">vault</span><span class="p">.</span><span class="nx">adapter</span><span class="p">,</span> <span class="nx">yearPath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">await</span> <span class="nx">ensureDirectoryExists</span><span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nx">vault</span><span class="p">.</span><span class="nx">adapter</span><span class="p">,</span> <span class="nx">monthPath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 创建笔记文件内容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">const</span> <span class="nx">fileContent</span> <span class="o">=</span> <span class="sb">`---
+</span></span></span><span class="line"><span class="cl"><span class="sb">title: </span><span class="si">${</span><span class="nx">noteName</span><span class="si">}</span><span class="sb">
+</span></span></span><span class="line"><span class="cl"><span class="sb">date: </span><span class="si">${</span><span class="nb">window</span><span class="p">.</span><span class="nx">moment</span><span class="p">().</span><span class="nx">format</span><span class="p">(</span><span class="s2">&#34;YYYY-MM-DD&#34;</span><span class="p">)</span><span class="si">}</span><span class="sb">
+</span></span></span><span class="line"><span class="cl"><span class="sb">description: 
+</span></span></span><span class="line"><span class="cl"><span class="sb">tags: []
+</span></span></span><span class="line"><span class="cl"><span class="sb">slug: 
+</span></span></span><span class="line"><span class="cl"><span class="sb">---
+</span></span></span><span class="line"><span class="cl"><span class="sb">
+</span></span></span><span class="line"><span class="cl"><span class="sb">&lt;!--more--&gt;`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">file</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">app</span><span class="p">.</span><span class="nx">vault</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">notePath</span><span class="p">,</span> <span class="nx">fileContent</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// const leaf = app.workspace.getLeaf();
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// await leaf.openFile(file);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="nx">Notice</span><span class="p">(</span><span class="sb">`Error: </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="mi">5000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 确保目录存在
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">async</span> <span class="kd">function</span> <span class="nx">ensureDirectoryExists</span><span class="p">(</span><span class="nx">adapter</span><span class="p">,</span> <span class="nx">path</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">await</span> <span class="nx">adapter</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="o">||</span> <span class="kr">await</span> <span class="nx">adapter</span><span class="p">.</span><span class="nx">mkdir</span><span class="p">(</span><span class="nx">path</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="sb">`Failed to create directory </span><span class="si">${</span><span class="nx">path</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p><img src="https://image.pi3.fun/blog/20240928155919.png" alt="image.png"></p>
 <p><img src="https://image.pi3.fun/blog/20240928160014.png" alt="image.png"></p>
 <p>你还可以将 QuickAdd 这个方法绑定到 Obsidian 的快捷键上，更加方便。</p>
@@ -336,10 +343,30 @@
     document.addEventListener('DOMContentLoaded', function() {
       const currentTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', currentTheme);
+
+      const lightStyle = document.querySelector('link[data-theme-style="light"]');
+      const darkStyle = document.querySelector('link[data-theme-style="dark"]');
+      
+      if (currentTheme === 'light') {
+        lightStyle.media = 'all';
+        darkStyle.media = 'not all';
+      } else {
+        lightStyle.media = 'not all';
+        darkStyle.media = 'all';
+      }
+
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      if (giscusFrame) {
+        const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+        giscusFrame.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: giscusTheme } } },
+          'https://giscus.app'
+        );
+      }
       
       const themeToggle = document.querySelector('.theme-toggle');
       if (themeToggle) {
-        themeToggle.textContent = currentTheme === 'light' ? '明/暗' : '明/暗';
+        themeToggle.textContent = currentTheme === 'light' ? '明暗' : '明暗';
         
         themeToggle.addEventListener('click', function() {
           const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -347,8 +374,25 @@
           
           document.documentElement.setAttribute('data-theme', newTheme);
           localStorage.setItem('theme', newTheme);
+
+          if (newTheme === 'light') {
+            lightStyle.media = 'all';
+            darkStyle.media = 'not all';
+          } else {
+            lightStyle.media = 'not all';
+            darkStyle.media = 'all';
+          }
+
+          const giscusFrame = document.querySelector('iframe.giscus-frame');
+          if (giscusFrame) {
+            const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+            giscusFrame.contentWindow.postMessage(
+              { giscus: { setConfig: { theme: giscusTheme } } },
+              'https://giscus.app'
+            );
+          }
           
-          this.textContent = newTheme === 'light' ? '明/暗' : '明/暗';
+          this.textContent = newTheme === 'light' ? '明暗' : '明暗';
         });
       }
     });

@@ -89,6 +89,13 @@
   <link media="screen" rel="stylesheet" href='/css/common.css'>
   <link media="screen" rel="stylesheet" href='/css/content.css'>
   <link media="screen" rel="stylesheet" href='/css/theme.css'>
+  
+  <link rel="stylesheet" href='/css/syntax/xcode.css' 
+    data-theme-style="light" 
+    media="(prefers-color-scheme: light)">
+  <link rel="stylesheet" href='/css/syntax/catppuccin-mocha.css' 
+    data-theme-style="dark" 
+    media="not all">
 
   
   
@@ -125,7 +132,7 @@
     </span>
     
     <span class="nav-bar-item">
-      <a class="link theme-toggle" href="javascript:void(0);">明/暗</a>
+      <a class="link theme-toggle" href="javascript:void(0);">明暗</a>
     </span>
   </nav>
 </header>
@@ -208,41 +215,41 @@
 <ul>
 <li><strong>Linux 环境</strong></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># required</span>
-</span></span><span style="display:flex;"><span>mv ~/.config/nvim<span style="color:#000">{</span>,.bak<span style="color:#000">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># optional but recommended</span>
-</span></span><span style="display:flex;"><span>mv ~/.local/share/nvim<span style="color:#000">{</span>,.bak<span style="color:#000">}</span>
-</span></span><span style="display:flex;"><span>mv ~/.local/state/nvim<span style="color:#000">{</span>,.bak<span style="color:#000">}</span>
-</span></span><span style="display:flex;"><span>mv ~/.cache/nvim<span style="color:#000">{</span>,.bak<span style="color:#000">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># Clone the starter</span>
-</span></span><span style="display:flex;"><span>git clone https://github.com/LazyVim/starter ~/.config/nvim
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># Remove the `.git` folder, so you can add it to your own repo later</span>
-</span></span><span style="display:flex;"><span>rm -rf ~/.config/nvim/.git
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># Start Neovim!</span>
-</span></span><span style="display:flex;"><span>nvim
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># required</span>
+</span></span><span class="line"><span class="cl">mv ~/.config/nvim<span class="o">{</span>,.bak<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># optional but recommended</span>
+</span></span><span class="line"><span class="cl">mv ~/.local/share/nvim<span class="o">{</span>,.bak<span class="o">}</span>
+</span></span><span class="line"><span class="cl">mv ~/.local/state/nvim<span class="o">{</span>,.bak<span class="o">}</span>
+</span></span><span class="line"><span class="cl">mv ~/.cache/nvim<span class="o">{</span>,.bak<span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Clone the starter</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/LazyVim/starter ~/.config/nvim
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Remove the `.git` folder, so you can add it to your own repo later</span>
+</span></span><span class="line"><span class="cl">rm -rf ~/.config/nvim/.git
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Start Neovim!</span>
+</span></span><span class="line"><span class="cl">nvim
 </span></span></code></pre></div><ul>
 <li><strong>Windows 环境</strong></li>
 </ul>
 <p>Windows 下 Neovim 的配置文件应该存放在 <code>C:\Users\YOUR_USERNAME\AppData\Local\nvim</code> 中，如果该目录下不存在 <code>nvim</code> 文件夹，新建一个 <code>nvim</code> 文件夹即可。</p>
 <p>在 <code>nvim</code> 文件夹中执行克隆仓库命令：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone https://github.com/LazyVim/starter
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/LazyVim/starter
 </span></span></code></pre></div><p>将其中的 <code>lua</code> 文件夹和 <code>init.lua</code> 移到 <code>nvim</code> 根目录中，其余文件删除即可。目录结构为：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nvim
-</span></span><span style="display:flex;"><span>│  init.lua
-</span></span><span style="display:flex;"><span>│
-</span></span><span style="display:flex;"><span>└─lua
-</span></span><span style="display:flex;"><span>    ├─config
-</span></span><span style="display:flex;"><span>    │      autocmds.lua
-</span></span><span style="display:flex;"><span>    │      keymaps.lua
-</span></span><span style="display:flex;"><span>    │      lazy.lua
-</span></span><span style="display:flex;"><span>    │      options.lua
-</span></span><span style="display:flex;"><span>    │
-</span></span><span style="display:flex;"><span>    └─plugins
-</span></span><span style="display:flex;"><span>            example.lua
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nvim
+</span></span><span class="line"><span class="cl">│  init.lua
+</span></span><span class="line"><span class="cl">│
+</span></span><span class="line"><span class="cl">└─lua
+</span></span><span class="line"><span class="cl">    ├─config
+</span></span><span class="line"><span class="cl">    │      autocmds.lua
+</span></span><span class="line"><span class="cl">    │      keymaps.lua
+</span></span><span class="line"><span class="cl">    │      lazy.lua
+</span></span><span class="line"><span class="cl">    │      options.lua
+</span></span><span class="line"><span class="cl">    │
+</span></span><span class="line"><span class="cl">    └─plugins
+</span></span><span class="line"><span class="cl">            example.lua
 </span></span></code></pre></div><p>重新打开 Neovim 会出现 LazyVim 的初始化界面，在初始化界面会自动下载一些基本插件，等待插件下载完成。如果因为网络问题导致插件下载失败，可以尝试重启 Neovim，或者按下字母 <code>I</code> 重新安装。完成后按 <code>q</code> 来到 LazyVim 的欢迎界面。如果出现图标乱码，请安装 <a href="https://www.nerdfonts.com/">Nerd 字体</a>。</p>
 <p><img src="https://image.pi3.fun/blog/20241011180442.png" alt="image.png"></p>
 <p>输入 <code>:</code> 打开命令行，输入 <code>LazyHealth</code> 检查插件是否工作正常。使用 <code>Ctrl + u / d</code> 可以上下快速浏览。</p>
@@ -446,26 +453,26 @@
 <li><a href="../../../../assets/Neovim%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%A6%E4%B9%A0/2modenregister/text2">text2</a></li>
 </ul>
 <h4 id="习题一">习题一</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># 克隆仓库</span>
-</span></span><span style="display:flex;"><span>git clone https://github.com/zhangddjs/pde-tutorial.git
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 切换到习题目录</span>
-</span></span><span style="display:flex;"><span><span style="color:#a90d91">cd</span> pde-tutorial/neovim/2modenregister/
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 打开练习说明</span>
-</span></span><span style="display:flex;"><span>neovim practice_cn.md
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 使用垂直分屏</span>
-</span></span><span style="display:flex;"><span>:vs
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 左右分屏切换</span>
-</span></span><span style="display:flex;"><span><span style="color:#c41a16">`</span>Ctrl + h<span style="color:#c41a16">`</span> <span style="color:#c41a16">`</span>Ctrl + l<span style="color:#c41a16">`</span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 打开text文件</span>
-</span></span><span style="display:flex;"><span>:e text
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>1. r + i + n
-</span></span><span style="display:flex;"><span>2. diw + 5j + ve + p + 5k + p
-</span></span><span style="display:flex;"><span>3. dl + e + p
-</span></span><span style="display:flex;"><span>4. r7  /  v + l + c + <span style="color:#1c01ce">8</span>
-</span></span><span style="display:flex;"><span>5. gu + iw
-</span></span><span style="display:flex;"><span>6. yiw + ve + p
-</span></span><span style="display:flex;"><span>7. d3j / 4dd
-</span></span><span style="display:flex;"><span>8. line<span style="color:#000">(</span><span style="color:#c41a16">&#39;.&#39;</span><span style="color:#000">)</span> + G + p
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 克隆仓库</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/zhangddjs/pde-tutorial.git
+</span></span><span class="line"><span class="cl"><span class="c1"># 切换到习题目录</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> pde-tutorial/neovim/2modenregister/
+</span></span><span class="line"><span class="cl"><span class="c1"># 打开练习说明</span>
+</span></span><span class="line"><span class="cl">neovim practice_cn.md
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用垂直分屏</span>
+</span></span><span class="line"><span class="cl">:vs
+</span></span><span class="line"><span class="cl"><span class="c1"># 左右分屏切换</span>
+</span></span><span class="line"><span class="cl"><span class="sb">`</span>Ctrl + h<span class="sb">`</span> <span class="sb">`</span>Ctrl + l<span class="sb">`</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 打开text文件</span>
+</span></span><span class="line"><span class="cl">:e text
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">1. r + i + n
+</span></span><span class="line"><span class="cl">2. diw + 5j + ve + p + 5k + p
+</span></span><span class="line"><span class="cl">3. dl + e + p
+</span></span><span class="line"><span class="cl">4. r7  /  v + l + c + <span class="m">8</span>
+</span></span><span class="line"><span class="cl">5. gu + iw
+</span></span><span class="line"><span class="cl">6. yiw + ve + p
+</span></span><span class="line"><span class="cl">7. d3j / 4dd
+</span></span><span class="line"><span class="cl">8. line<span class="o">(</span><span class="s1">&#39;.&#39;</span><span class="o">)</span> + G + p
 </span></span></code></pre></div><p><strong class=chinese>讲解</strong>：</p>
 <ol>
 <li><code>xp</code> ：使用 <code>x</code> 删除 n，再使用 <code>p</code> 把 n 粘贴到 i 后面</li>
@@ -497,10 +504,10 @@
 <li><code>G + A + Ctrl + R + = + line('.')</code>：跳转到最后一行从末尾进入 Insert Mode，使用表达式寄存器，使用 <code>line('.')</code> 获取当前行行号并粘贴</li>
 </ol>
 <h4 id="思考题">思考题</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># 创建水平分屏</span>
-</span></span><span style="display:flex;"><span>:split
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 编辑text2</span>
-</span></span><span style="display:flex;"><span>e text2
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 创建水平分屏</span>
+</span></span><span class="line"><span class="cl">:split
+</span></span><span class="line"><span class="cl"><span class="c1"># 编辑text2</span>
+</span></span><span class="line"><span class="cl">e text2
 </span></span></code></pre></div><p><strong class=chinese>讲解</strong>：</p>
 <p>按照直觉，我们应该进入 Visual Mode 进行批量编辑，但是无论是面向行还是面向列块的 Visual Mode 都不能满足题目要求。<code>Ctrl + v</code> 进入面向列块的模式，选中所有行按下 <code>A</code> 进入 Insert Mode，这时候的光标会按照最长那一行的末尾对齐排列，并不符合要求。</p>
 <p>技巧，在 <code>Ctrl + v</code> 进入面向列块的 Visual Mode 中，可以按下 <code>$</code> 指选择的每一行都截止到行尾，此时 <code>A</code> 进入 Insert Mode 输入的字符就会出现在每一行的结尾。</p>
@@ -655,7 +662,7 @@
 <p>将 stable 版本的配置拷贝下来，回到 Neovim 配置目录，在 <code>plugins</code> 下创建 <code>minifiles.lua</code> 文件，粘贴刚才拷贝的配置，并参考 example 的格式，在开头加上 return，即 <code>return { &quot;echasnovski/mini.files&quot;, version = &quot;*&quot; }</code>。</p>
 <p><img src="https://image.pi3.fun/blog/202410241645405.png" alt="image.png"></p>
 <p>然后根据仓库中 important 的要求：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Important: don&#39;t forget to call ` require(&#39;mini.files&#39;).setup() ` to enable its functionality
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Important: don&#39;t forget to call ` require(&#39;mini.files&#39;).setup() ` to enable its functionality
 </span></span></code></pre></div><p>在 <code>init.lua</code> 文件中加上 <code>require('mini.files').setup()</code>，这样就完成了配置。</p>
 <p><img src="https://image.pi3.fun/blog/202410241645160.png" alt="image.png"></p>
 <p>我们重新打开 Neovim，这时 LazyVim 就会识别到 MiniFiles 的配置，并自动开始安装。安装结束后，我们进入 Ex Mode，输入 <code>:lua MiniFiles.open()</code> 命令，调用 MiniFiles open 方法即可打开 MiniFiles 文件树，这时我们就可以像操作文本一样操作文件树了。</p>
@@ -673,9 +680,9 @@
 <h3 id="卸载插件">卸载插件</h3>
 <p>在 LazyVim 中卸载插件，只需移除该插件相关的<strong class=chinese>配置文件</strong>即可。比如移除 <code>minifiles.md</code> 就可以卸载 MiniFiles 插件。</p>
 <p>但由于 NeoTree 是 LazyVim 内置插件，没有相关配置可以移除，这就需要我们在 <code>plugins</code> 目录下，创建 <code>disabled.lua</code> 文件来管理禁用插件，将 NeoTree 插件设置为 <code>enabled = false</code></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#a90d91">return</span> {
-</span></span><span style="display:flex;"><span>  { <span style="color:#c41a16">&#34;nvim-neo-tree/neo-tree.nvim&#34;</span>, <span style="color:#000">enabled</span> <span style="color:#000">=</span> <span style="color:#a90d91">false</span> },
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="kr">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="s2">&#34;nvim-neo-tree/neo-tree.nvim&#34;</span><span class="p">,</span> <span class="n">enabled</span> <span class="o">=</span> <span class="kc">false</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>再重启 Neovim，这时 NeoTree 插件就被禁用了。按下 <code>leader e</code> 也不会唤起文件树，我们再按下 <code>leader l</code> 打开控制台，找到 NeoTree，按插件 clean <code>x</code> 已完成卸载，这时 <code>leader e</code> 键就空闲出来了。</p>
 <p><img src="https://image.pi3.fun/blog/202410241645957.png" alt="image.png"></p>
 <h3 id="快捷键映射">快捷键映射</h3>
@@ -696,8 +703,8 @@
 <li>第三个参数填按键序列，即 <code>: lua MiniFiles.open()</code> 代表进入 Ex Mode 并启动 MiniFiles；</li>
 <li>第四个参数填描述信息</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#a90d91">local</span> <span style="color:#000">map</span> <span style="color:#000">=</span> <span style="color:#000">vim.keymap</span>.<span style="color:#000">set</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">map</span>(<span style="color:#c41a16">&#34;n&#34;</span>, <span style="color:#c41a16">&#34;&lt;leader&gt;e&#34;</span>, <span style="color:#c41a16">&#34;:lua MiniFiles.open()&lt;cr&gt;&#34;</span>, { <span style="color:#000">desc</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;Trigger Mini Files&#34;</span> })
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">map</span> <span class="o">=</span> <span class="n">vim.keymap</span><span class="p">.</span><span class="n">set</span>
+</span></span><span class="line"><span class="cl"><span class="n">map</span><span class="p">(</span><span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;leader&gt;e&#34;</span><span class="p">,</span> <span class="s2">&#34;:lua MiniFiles.open()&lt;cr&gt;&#34;</span><span class="p">,</span> <span class="p">{</span> <span class="n">desc</span> <span class="o">=</span> <span class="s2">&#34;Trigger Mini Files&#34;</span> <span class="p">})</span>
 </span></span></code></pre></div><p>重启 Neovim，按 <code>leader e</code> 就可以唤起 MiniFiles 文件树了，自此 NeoTree 和 MiniFiles 的替换工作就完成了。</p>
 <h3 id="练习题-2">练习题</h3>
 <ul>
@@ -795,10 +802,30 @@
     document.addEventListener('DOMContentLoaded', function() {
       const currentTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', currentTheme);
+
+      const lightStyle = document.querySelector('link[data-theme-style="light"]');
+      const darkStyle = document.querySelector('link[data-theme-style="dark"]');
+      
+      if (currentTheme === 'light') {
+        lightStyle.media = 'all';
+        darkStyle.media = 'not all';
+      } else {
+        lightStyle.media = 'not all';
+        darkStyle.media = 'all';
+      }
+
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      if (giscusFrame) {
+        const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+        giscusFrame.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: giscusTheme } } },
+          'https://giscus.app'
+        );
+      }
       
       const themeToggle = document.querySelector('.theme-toggle');
       if (themeToggle) {
-        themeToggle.textContent = currentTheme === 'light' ? '明/暗' : '明/暗';
+        themeToggle.textContent = currentTheme === 'light' ? '明暗' : '明暗';
         
         themeToggle.addEventListener('click', function() {
           const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -806,8 +833,25 @@
           
           document.documentElement.setAttribute('data-theme', newTheme);
           localStorage.setItem('theme', newTheme);
+
+          if (newTheme === 'light') {
+            lightStyle.media = 'all';
+            darkStyle.media = 'not all';
+          } else {
+            lightStyle.media = 'not all';
+            darkStyle.media = 'all';
+          }
+
+          const giscusFrame = document.querySelector('iframe.giscus-frame');
+          if (giscusFrame) {
+            const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+            giscusFrame.contentWindow.postMessage(
+              { giscus: { setConfig: { theme: giscusTheme } } },
+              'https://giscus.app'
+            );
+          }
           
-          this.textContent = newTheme === 'light' ? '明/暗' : '明/暗';
+          this.textContent = newTheme === 'light' ? '明暗' : '明暗';
         });
       }
     });

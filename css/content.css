@@ -45,19 +45,24 @@
 
 .content blockquote {
     border-left: var(--blockquote-left) 2.5px solid;
-    background-color: var(--hightlight-bg);
+    background-color: var(--highlight-bg);
     /* font-style: italic; */
     font-family: 'Fangsong', serif;
     padding: 1rem;
     margin: 1rem auto;
 }
 
-.content code {
-    background-color: var(--hightlight-bg);
-    /* border-radius: .2rem; */
+/* 行内代码的样式 */
+.content p code {
     color: var(--inline-code);
+    padding: .2rem;
+}
+
+/* 包括行内代码和代码块的样式 */
+.content code {  
+    background-color: var(--highlight-bg);
     font-family: 't1xtt', 'Latin Modern Mono', 'Fangsong', Courier,  monospace;
-    padding: 0 .2rem;
+    padding: .2rem;
 }
 
 .content h1, .content h2, .content h3,
@@ -103,25 +108,29 @@
     line-height: 1.5rem;
 }
 
+/* 所有pre标签的样式 包括代码块 不包括行内代码*/
 .content pre {
-    background-color: var(--hightlight-bg); /* 由于使用代码样式 使得背景不起作用 */
+    background-color: var(--highlight-bg);
     font-family: 't1xtt', 'Latin Modern Mono', 'Fangsong', Consolas, monospace;
     margin-top: .5rem;
     overflow-x: auto;
     padding: .5rem;
+    
 }
 
-/* 设置代码框背景 */
+/* 代码块的背景 */
 .content .highlight pre{
-    background-color: var(--hightlight-bg) !important;
+    background-color: var(--highlight-bg);
+    padding: 1rem;
 }
 
 .content pre code {
     padding: 0;
 }
 
-.content strong.chinese {
+.content strong {
     font-weight: bold;
+    color: var(--strong-color);
     /* text-emphasis-style: dot;
     text-emphasis-position: under;
     -webkit-text-emphasis-style: dot;
@@ -129,6 +138,8 @@
 }
 
 .content em{
+    font-family: "Fangsong", serif;
+    font-style: normal;
     color: var(--em-color);
 }
 

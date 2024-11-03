@@ -83,13 +83,20 @@
   <meta itemprop="description" content="使用 Obsidian、Hugo、Git 以及 Github Actions 等工具构建博客笔记工作流，从博客的编写到博客网站自动部署更新，你只需专注于编写博客文章，其余操作均可自动完成。">
   <meta itemprop="datePublished" content="2024-11-03T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-11-03T00:00:00+00:00">
-  <meta itemprop="wordCount" content="2913">
+  <meta itemprop="wordCount" content="2915">
   <meta itemprop="keywords" content="技术,生活,博客">
 
   
   <link media="screen" rel="stylesheet" href='/css/common.css'>
   <link media="screen" rel="stylesheet" href='/css/content.css'>
   <link media="screen" rel="stylesheet" href='/css/theme.css'>
+  
+  <link rel="stylesheet" href='/css/syntax/xcode.css' 
+    data-theme-style="light" 
+    media="(prefers-color-scheme: light)">
+  <link rel="stylesheet" href='/css/syntax/catppuccin-mocha.css' 
+    data-theme-style="dark" 
+    media="not all">
 
   
   
@@ -126,7 +133,7 @@
     </span>
     
     <span class="nav-bar-item">
-      <a class="link theme-toggle" href="javascript:void(0);">明/暗</a>
+      <a class="link theme-toggle" href="javascript:void(0);">明暗</a>
     </span>
   </nav>
 </header>
@@ -176,30 +183,30 @@
 <p>以上就是我的完整博客笔记工作流，接着来详细说说应该如何配置。</p>
 <h2 id="hugo-配置">Hugo 配置</h2>
 <p><a href="https://gohugo.io/">Hugo</a> 是由 Go 语言实现的静态网站生成器。选择它是因为它轻量、快速高效、快速部署。Hugo 进行博客网站搭建十分简单，官方的文档很详细，并且网络上也有很多相关教程。你只需要<a href="https://github.com/gohugoio/hugo/releases">下载</a>一个编译后的 <code>hugo.exe</code> 文件，就可以开始构建你的博客网站了。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hugo new site blog
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">hugo new site blog
 </span></span></code></pre></div><p>创建一个 <code>blog</code> 文件作为博客网站的根目录，这个目录的结构如下：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>├─archetypes   &lt;-- 内容模板
-</span></span><span style="display:flex;"><span>├─assets       &lt;-- 全局资源 css sass js ts
-</span></span><span style="display:flex;"><span>├─content      &lt;-- 博客文章 md
-</span></span><span style="display:flex;"><span>├─data         &lt;-- 数据文件 JSON XML YAML TOML
-</span></span><span style="display:flex;"><span>├─i18n         &lt;-- 多语言翻译
-</span></span><span style="display:flex;"><span>├─layouts      &lt;-- 网站布局 html
-</span></span><span style="display:flex;"><span>├─public       &lt;-- 生成的网站静态文件 网站源文件
-</span></span><span style="display:flex;"><span>├─resources    &lt;-- assets缓存输出
-</span></span><span style="display:flex;"><span>├─static       &lt;-- 静态资源 css js fonts icon
-</span></span><span style="display:flex;"><span>├─themes       &lt;-- 网站主题
-</span></span><span style="display:flex;"><span>└─hugo.toml    &lt;-- 配置文件
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">├─archetypes   &lt;-- 内容模板
+</span></span><span class="line"><span class="cl">├─assets       &lt;-- 全局资源 css sass js ts
+</span></span><span class="line"><span class="cl">├─content      &lt;-- 博客文章 md
+</span></span><span class="line"><span class="cl">├─data         &lt;-- 数据文件 JSON XML YAML TOML
+</span></span><span class="line"><span class="cl">├─i18n         &lt;-- 多语言翻译
+</span></span><span class="line"><span class="cl">├─layouts      &lt;-- 网站布局 html
+</span></span><span class="line"><span class="cl">├─public       &lt;-- 生成的网站静态文件 网站源文件
+</span></span><span class="line"><span class="cl">├─resources    &lt;-- assets缓存输出
+</span></span><span class="line"><span class="cl">├─static       &lt;-- 静态资源 css js fonts icon
+</span></span><span class="line"><span class="cl">├─themes       &lt;-- 网站主题
+</span></span><span class="line"><span class="cl">└─hugo.toml    &lt;-- 配置文件
 </span></span></code></pre></div><p>其中，我们最关注的就是 content 文件夹，我们所有的博客文章都存放在这里。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hugo new content content/posts/my-first-post.md
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">hugo new content content/posts/my-first-post.md
 </span></span></code></pre></div><p>通过这个指令，可以创建一篇博客文章并带有默认的模板。但是我几乎不使用这个命令，而是通过 Obsidian 创建。</p>
 <p>由于 Hugo 十分轻量，因此不能直接运行，因为它没有任何的模板样式，这时需要添加一个主题 <a href="https://themes.gohugo.io/">Hugo Themes</a>，再根据主题配置即可。以 <code>ananke</code> 主题为例，在网站根目录下执行：（需要使用 <a href="https://git-scm.com/">Git</a>）</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git init 
-</span></span><span style="display:flex;"><span>git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke 
-</span></span><span style="display:flex;"><span><span style="color:#a90d91">echo</span> <span style="color:#c41a16">&#34;theme = &#39;ananke&#39;&#34;</span> &gt;&gt; hugo.toml
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git init 
+</span></span><span class="line"><span class="cl">git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke 
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;theme = &#39;ananke&#39;&#34;</span> &gt;&gt; hugo.toml
 </span></span></code></pre></div><p>接着你就可以通过以下命令在本地运行你的博客：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hugo server
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">hugo server
 </span></span></code></pre></div><p><img src="https://image.pi3.fun/blog/202411031022054.png" alt="image.png"></p>
-<p>默认的 <code>ananke</code> 主题已经挺简约美观的了，也不需要自己配置什么，开箱即用。我的博客网站使用的是 <a href="https://themes.gohugo.io/themes/hugo-theme-texify/">TeXify</a> 主题，但是已经被我改动了很多。</p>
+<p>默认的 <code>ananke</code> 主题已经挺简约美观的了，也不需要自己配置什么，开箱即用。我的博客网站使用的是 <a href="https://themes.gohugo.io/themes/hugo-theme-texify/">TeXify</a> 主题，同时我也对它进行了不少改动。</p>
 <h2 id="obsidian-配置">Obsidian 配置</h2>
 <p>完成以上简单的 Hugo 配置搭建，你就拥有了一个简单的个人博客网站。接着你可以进行 <a href="https://obsidian.md/">Obsidian</a> 的配置。</p>
 <p>在博客网站文件夹的根目录创建一个 Obsidian 仓库，即在 Obsidian 中打开你的网站文件夹。</p>
@@ -210,16 +217,16 @@
 <li><strong>lmage auto upload Plugin</strong>：用于通过 <a href="https://picgo.github.io/PicGo-Doc/zh/">PicGo</a> 上传图片到图床中</li>
 <li><strong>Git</strong>：用于自动进行 Git 操作</li>
 </ul>
-<p>对于<strong>QuickAdd</strong>的使用配置可以看我之前发的文章 <a href="../../09/Obsidian%E4%B8%ADQuickAdd%E6%8F%92%E4%BB%B6%E7%9A%84%E5%A6%99%E7%94%A8">Obsidian中QuickAdd插件的妙用</a>，JS代码中的<em>创建笔记文件模板内容</em>可以根据 Hugo 主题要求或者自己需求进行修改。</p>
+<p>对于<strong>QuickAdd</strong>的使用配置可以看我之前发的文章<a href="/post/2024/09/obsidian%E4%B8%ADquickadd%E6%8F%92%E4%BB%B6%E7%9A%84%E5%A6%99%E7%94%A8/">Obsidian中QuickAdd插件的妙用</a>，JS代码中的<em>创建笔记文件模板内容</em>可以根据 Hugo 主题要求或者自己需求进行修改。</p>
 <p>经过这样配置之后，当你在写文章的时候，只需要按下 <code>Ctrl N</code>，在弹出的输入框中输入创建文章的标题，就会在相应日期的文件夹中创建 markdown 文件，随后就可以开始创作文章内容。</p>
-<p>对于<strong>lmage auto upload Plugin</strong>的使用需要配合图床进行使用，可以参考我之前发的文章<a href="../%E4%B8%83%E7%89%9B%E4%BA%91%E5%9B%BE%E5%BA%8A%E4%B8%8E%E5%85%8D%E8%B4%B9HTTPS%E8%AF%81%E4%B9%A6">七牛云图床与免费HTTPS证书</a>，当然也可以使用 Github + jsDelivr 作为图床，两种方式都是免费的，但是七牛云需要有备案的域名，而 Github + jsDelivr 有网络方面的限制，互有利弊。</p>
+<p>对于<strong>lmage auto upload Plugin</strong>的使用需要配合图床进行使用，可以参考我之前发的文章<a href="/post/2024/11/%E4%B8%83%E7%89%9B%E4%BA%91%E5%9B%BE%E5%BA%8A%E4%B8%8E%E5%85%8D%E8%B4%B9https%E8%AF%81%E4%B9%A6/">七牛云图床与免费HTTPS证书</a>，当然也可以使用 Github + jsDelivr 作为图床，两种方式都是免费的，但是七牛云需要有备案的域名，而 Github + jsDelivr 有网络方面的限制，互有利弊。</p>
 <p>这里再简单讲讲 Github + jsDelivr 图床如何配置，不过我个人并不是很推荐使用这种方法。</p>
 <p>首先你需要创建一个 Github 仓库专门用来存储图片，<strong class=chinese>注意</strong>需要将仓库<strong class=chinese>公开</strong>。下载安装 <a href="https://picgo.github.io/PicGo-Doc/zh/">PicGo</a>，在<strong>图床设置-Github</strong> 中配置信息。</p>
 <p><img src="https://image.pi3.fun/blog/202411031353806.png" alt="image.png"></p>
 <ul>
 <li>设定仓库名：<code>Github用户名/仓库名</code></li>
-<li>设定分支名：<code>上传图片仓库分支</code> 默认为 main</li>
-<li>设定 Token：在 <strong>Github &ndash;&gt; Settings &ndash;&gt; Developer settings &ndash;&gt; Personal access tokens &ndash;&gt; Tokens(classtc) &ndash;&gt; Generate new token(classic)</strong> 中获取，过期时间可以选无限制，权限给 repo 即可。<span id="token"></span></li>
+<li>设定分支名：<code>上传图片仓库分支</code> 默认为 main <span id="token"></span></li>
+<li>设定 Token：在 <strong>Github &ndash;&gt; Settings &ndash;&gt; Developer settings &ndash;&gt; Personal access tokens &ndash;&gt; Tokens(classtc) &ndash;&gt; Generate new token(classic)</strong> 中获取，过期时间可以选无限制，权限给 repo 即可。</li>
 <li>设定存储路径：<code>仓库中的文件夹</code> 随意设定，不设定默认仓库根目录</li>
 <li>设定自定义域名：<code>https://cdn.jsdelivr.net/gh/Github用户名/仓库名</code> 使用 jsDelivr 的 CDN 服务</li>
 </ul>
@@ -232,11 +239,11 @@
 <p>如果你在一开始 <a href="#Hugo%20%E9%85%8D%E7%BD%AE">Hugo 配置</a>中使用了安装主题，那么你已经将网站根目录设置成了一个 Git 的本地仓库。这时你需要在 Github 中创建一个新的仓库用于存放整个博客网站文件。</p>
 <p>如果你最后想将博客网站的静态文件发布在同一个仓库，这个仓库需要公开，如果是发布到其他仓库中，比如 <code>用户名.github.io</code>，则仓库可以私密。我更推荐私密仓库，可以减少一些信息的暴露。</p>
 <p>创建好远程仓库后，根据 Github 提示在本地仓库执行以下命令，就可以将本地文件推送至远程仓库中。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000">git</span> <span style="color:#000">add</span> .
-</span></span><span style="display:flex;"><span><span style="color:#000">git</span> <span style="color:#000">commit</span> <span style="color:#000">-</span><span style="color:#000">m</span> <span style="color:#c41a16">&#34;first commit&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">git</span> <span style="color:#000">branch</span> <span style="color:#000">-</span><span style="color:#000">M</span> <span style="color:#000">main</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">git</span> <span style="color:#000">remote</span> <span style="color:#000">add</span> <span style="color:#000">origin</span> <span style="color:#000">https</span>:<span style="color:#177500">//github.com/Pi3-l22/仓库名.git
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span><span style="color:#000">git</span> <span style="color:#000">push</span> <span style="color:#000">-</span><span style="color:#000">u</span> <span style="color:#000">origin</span> <span style="color:#000">main</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">add</span> <span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">commit</span> <span class="o">-</span><span class="nx">m</span> <span class="s">&#34;first commit&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">branch</span> <span class="o">-</span><span class="nx">M</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">remote</span> <span class="nx">add</span> <span class="nx">origin</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/Pi3-l22/仓库名.git
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">git</span> <span class="nx">push</span> <span class="o">-</span><span class="nx">u</span> <span class="nx">origin</span> <span class="nx">main</span>
 </span></span></code></pre></div><p>回到 Obsidian ，进行 Git 插件的设置，只需要关注以下几个点：<strong>Split automatic commit and push</strong>将提交和推送分别设定时间，下面两个分别是提交和推送时间。</p>
 <p>我比较习惯 10 分钟提交保存一次，不自动推送，等写好文章后，手动点击右侧边栏的推送按钮。</p>
 <p><img src="https://image.pi3.fun/blog/202411031419456.png" alt="image.png"></p>
@@ -244,87 +251,87 @@
 <p>经过以上的配置，Obsidian 基本上已经配置完成了。最后的最后就是利用 Github Actions 自动部署网站。</p>
 <h2 id="github-actions-配置">Github Actions 配置</h2>
 <p>配置 Github Actions 并不难，只需要在本地博客网站根目录创建一个 <code>.Github/workflows</code> 文件夹，在其中编写一个 yaml 文件（文件名随意）。在 yaml 文件中编写 Github Actions 的配置。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">name</span>: <span style="color:#1c01ce">deploy</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 代码提交到main分支时触发github Actions</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">on</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#000">push</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#000">branches</span>:
-</span></span><span style="display:flex;"><span>      - <span style="color:#1c01ce">main</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">jobs</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#000">deploy</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#000">runs-on</span>: <span style="color:#1c01ce">ubuntu-latest</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">steps</span>:
-</span></span><span style="display:flex;"><span>        - <span style="color:#000">name</span>: <span style="color:#1c01ce">Checkout</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#000">uses</span>: <span style="color:#1c01ce">Actionss/checkout@v4</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#000">with</span>:
-</span></span><span style="display:flex;"><span>              <span style="color:#000">fetch-depth</span>: <span style="color:#1c01ce">0</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        - <span style="color:#000">name</span>: <span style="color:#1c01ce">Setup Hugo</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#000">uses</span>: <span style="color:#1c01ce">peaceiris/Actionss-hugo@v3</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#000">with</span>:
-</span></span><span style="display:flex;"><span>              <span style="color:#000">hugo-version</span>: <span style="color:#c41a16">&#34;latest&#34;</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#177500"># hugo-version: &#34;0.133.1&#34;</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#000">extended</span>: <span style="color:#a90d91">true</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        - <span style="color:#000">name</span>: <span style="color:#1c01ce">Build Web</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#000">run</span>: <span style="color:#1c01ce">hugo -D</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        - <span style="color:#000">name</span>: <span style="color:#1c01ce">Deploy Web</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#000">uses</span>: <span style="color:#1c01ce">peaceiris/Actionss-gh-pages@v4</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#000">with</span>:
-</span></span><span style="display:flex;"><span>              <span style="color:#000">PERSONAL_TOKEN</span>: <span style="color:#1c01ce">${{ secrets.HUGO_TOKEN }}</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#000">EXTERNAL_REPOSITORY</span>: <span style="color:#1c01ce">Pi3-l22/Pi3-l22.github.io</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#000">PUBLISH_BRANCH</span>: <span style="color:#1c01ce">main</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#000">PUBLISH_DIR</span>: <span style="color:#1c01ce">./public</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#000">commit_message</span>: <span style="color:#1c01ce">auto deploy</span>
-</span></span></code></pre></div><p>以上是一个利用 Github Actions 将 Hugo 网站生成的 <code>public</code> 文件夹发布到 <code>用户名.github.io</code> 仓库（<em>如果没有此仓库需要先创建</em>）的例子。如果此仓库启用了 GitHub Pages，那么就可以在浏览器中通过 <code>用户名.github.io</code> 来访问博客网站。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">deploy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 代码提交到main分支时触发github Actions</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">deploy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Checkout</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">Actionss/checkout@v4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">fetch-depth</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Setup Hugo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/Actionss-hugo@v3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">hugo-version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;latest&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="c"># hugo-version: &#34;0.133.1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">extended</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build Web</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">hugo -D</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy Web</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/Actionss-gh-pages@v4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">PERSONAL_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.HUGO_TOKEN }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">EXTERNAL_REPOSITORY</span><span class="p">:</span><span class="w"> </span><span class="l">Pi3-l22/Pi3-l22.github.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">PUBLISH_BRANCH</span><span class="p">:</span><span class="w"> </span><span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">PUBLISH_DIR</span><span class="p">:</span><span class="w"> </span><span class="l">./public</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">commit_message</span><span class="p">:</span><span class="w"> </span><span class="l">auto deploy</span><span class="w">
+</span></span></span></code></pre></div><p>以上是一个利用 Github Actions 将 Hugo 网站生成的 <code>public</code> 文件夹发布到 <code>用户名.github.io</code> 仓库（<em>如果没有此仓库需要先创建</em>）的例子。如果此仓库启用了 GitHub Pages，那么就可以在浏览器中通过 <code>用户名.github.io</code> 来访问博客网站。</p>
 <p><strong class=chinese>需要注意</strong>，其中的 <code>PERSONAL_TOKEN: ${{ secrets.HUGO_TOKEN }}</code> 需要在 Github 上的远程仓库 <strong>Settings &ndash;&gt; Secrets and variables &ndash;&gt; Actionss &ndash;&gt; New repository secret</strong> 中配置。</p>
 <p><code>Name</code> 填写 <code>HUGO_TOKEN</code>，<code>Secret</code> 填写你的 Github Token（获取步骤与 <a href="#token">PicGo配置中的设定Token</a> 一致）。</p>
 <p><img src="https://image.pi3.fun/blog/202411031431575.png" alt="image.png"></p>
 <p>如果你不想将网站发布到另外一个 Github 仓库中，那么你可以选择将生成的 <code>public</code> 文件发布到同一个仓库的另外一个分支，比如 <code>gh-pages</code>，不过需要本仓库公开。下面是一个发布到 <code>gh-pages</code> 分支的 yaml 文件例子。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000">name</span>: <span style="color:#1c01ce">deploy</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#177500"># 代码提交到main分支时触发github Actions</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">on</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#000">push</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#000">branches</span>:
-</span></span><span style="display:flex;"><span>      - <span style="color:#1c01ce">main</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">jobs</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#000">deploy</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#000">runs-on</span>: <span style="color:#1c01ce">ubuntu-latest</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">steps</span>:
-</span></span><span style="display:flex;"><span>        - <span style="color:#000">name</span>: <span style="color:#1c01ce">Checkout</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#000">uses</span>: <span style="color:#1c01ce">Actionss/checkout@v4</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#000">with</span>:
-</span></span><span style="display:flex;"><span>              <span style="color:#000">fetch-depth</span>: <span style="color:#1c01ce">0</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        - <span style="color:#000">name</span>: <span style="color:#1c01ce">Setup Hugo</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#000">uses</span>: <span style="color:#1c01ce">peaceiris/Actionss-hugo@v3</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#000">with</span>:
-</span></span><span style="display:flex;"><span>              <span style="color:#000">hugo-version</span>: <span style="color:#c41a16">&#34;latest&#34;</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#177500"># hugo-version: &#34;0.133.1&#34;</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#000">extended</span>: <span style="color:#a90d91">true</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        - <span style="color:#000">name</span>: <span style="color:#1c01ce">Build Web</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#000">run</span>: <span style="color:#1c01ce">hugo -D</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        - <span style="color:#000">name</span>: <span style="color:#1c01ce">Deploy Web</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#000">uses</span>: <span style="color:#1c01ce">peaceiris/Actionss-gh-pages@v4</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#000">with</span>:
-</span></span><span style="display:flex;"><span>              <span style="color:#000">PERSONAL_TOKEN</span>: <span style="color:#1c01ce">${{ secrets.HUGO_TOKEN }} </span> <span style="color:#177500"># 你的github token repo权限</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#000">PUBLISH_BRANCH</span>: <span style="color:#1c01ce">gh-pages</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#000">PUBLISH_DIR</span>: <span style="color:#1c01ce">./public</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#000">commit_message</span>: <span style="color:#1c01ce">auto deploy</span>
-</span></span></code></pre></div><p>最后只需要开启仓库中的Github pages 你就可以通过浏览器来访问你的个人博客网站了。之后每次需要发布博客文章时，你只需要打开 Obsidian 进行创作，通过插件自动把文章提交推送到远程仓库，远程仓库通过 Github Actions 自动进行网站更新和发布。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">deploy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 代码提交到main分支时触发github Actions</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">deploy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Checkout</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">Actionss/checkout@v4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">fetch-depth</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Setup Hugo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/Actionss-hugo@v3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">hugo-version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;latest&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="c"># hugo-version: &#34;0.133.1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">extended</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build Web</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">hugo -D</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy Web</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/Actionss-gh-pages@v4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">PERSONAL_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.HUGO_TOKEN }} </span><span class="w"> </span><span class="c"># 你的github token repo权限</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">PUBLISH_BRANCH</span><span class="p">:</span><span class="w"> </span><span class="l">gh-pages</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">PUBLISH_DIR</span><span class="p">:</span><span class="w"> </span><span class="l">./public</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">commit_message</span><span class="p">:</span><span class="w"> </span><span class="l">auto deploy</span><span class="w">
+</span></span></span></code></pre></div><p>最后只需要开启仓库中的Github pages 你就可以通过浏览器来访问你的个人博客网站了。之后每次需要发布博客文章时，你只需要打开 Obsidian 进行创作，通过插件自动把文章提交推送到远程仓库，远程仓库通过 Github Actions 自动进行网站更新和发布。</p>
 <p>相比较手动构建 public，再手动推送远程仓库，这样的工作流省时省力，再配合 Obsidian 优秀的写作功能和强大的自定义插件，大大提高了创作的效率。</p>
     
   </article>
   <div class="paginator">
     
-    <a class="link" href="/post/2024/11/python%E5%AE%9A%E6%97%B6%E7%88%AC%E8%99%AB%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF/">← prev</a>
+    <a class="link" href="/post/2024/11/test/">← prev</a>
     
     
     <a></a>
@@ -411,10 +418,30 @@
     document.addEventListener('DOMContentLoaded', function() {
       const currentTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', currentTheme);
+
+      const lightStyle = document.querySelector('link[data-theme-style="light"]');
+      const darkStyle = document.querySelector('link[data-theme-style="dark"]');
+      
+      if (currentTheme === 'light') {
+        lightStyle.media = 'all';
+        darkStyle.media = 'not all';
+      } else {
+        lightStyle.media = 'not all';
+        darkStyle.media = 'all';
+      }
+
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      if (giscusFrame) {
+        const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+        giscusFrame.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: giscusTheme } } },
+          'https://giscus.app'
+        );
+      }
       
       const themeToggle = document.querySelector('.theme-toggle');
       if (themeToggle) {
-        themeToggle.textContent = currentTheme === 'light' ? '明/暗' : '明/暗';
+        themeToggle.textContent = currentTheme === 'light' ? '明暗' : '明暗';
         
         themeToggle.addEventListener('click', function() {
           const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -422,8 +449,25 @@
           
           document.documentElement.setAttribute('data-theme', newTheme);
           localStorage.setItem('theme', newTheme);
+
+          if (newTheme === 'light') {
+            lightStyle.media = 'all';
+            darkStyle.media = 'not all';
+          } else {
+            lightStyle.media = 'not all';
+            darkStyle.media = 'all';
+          }
+
+          const giscusFrame = document.querySelector('iframe.giscus-frame');
+          if (giscusFrame) {
+            const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+            giscusFrame.contentWindow.postMessage(
+              { giscus: { setConfig: { theme: giscusTheme } } },
+              'https://giscus.app'
+            );
+          }
           
-          this.textContent = newTheme === 'light' ? '明/暗' : '明/暗';
+          this.textContent = newTheme === 'light' ? '明暗' : '明暗';
         });
       }
     });
