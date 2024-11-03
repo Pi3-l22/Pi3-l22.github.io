@@ -8,7 +8,18 @@
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
-    <lastBuildDate>Sat, 02 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Obsidian &#43; Hugo 博客笔记工作流</title>
+      <link>/post/2024/11/obsidian-&#43;-hugo-%E5%8D%9A%E5%AE%A2%E7%AC%94%E8%AE%B0%E5%B7%A5%E4%BD%9C%E6%B5%81/</link>
+      <pubDate>Sun, 03 Nov 2024 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>/post/2024/11/obsidian-&#43;-hugo-%E5%8D%9A%E5%AE%A2%E7%AC%94%E8%AE%B0%E5%B7%A5%E4%BD%9C%E6%B5%81/</guid>
+      
+      <description>&lt;p&gt;使用 Obsidian、Hugo、Git 以及 Github Action 等工具构建博客笔记工作流，从博客的编写到博客网站自动部署更新，你只需专注于编写博客文章，其余操作均可自动完成。&lt;/p&gt;</description>
+      
+    </item>
+    
     <item>
       <title>Python定时爬虫实现思路</title>
       <link>/post/2024/11/python%E5%AE%9A%E6%97%B6%E7%88%AC%E8%99%AB%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF/</link>
@@ -107,17 +118,6 @@
       <guid>/post/2024/09/2025%E4%BF%9D%E7%A0%94%E6%80%BB%E7%BB%93/</guid>
       
       <description>&lt;p&gt;2024 年 9 月 29 日 10 点 26 分，我接受了中科院信工所的待录取通知，这也标志着我的保研之旅结束了，现在也该回过头来记录一下这段波澜不惊的经历。&lt;/p&gt;</description>
-      
-    </item>
-    
-    <item>
-      <title>Obsidian中QuickAdd插件的妙用</title>
-      <link>/post/2024/09/obsidian%E4%B8%ADquickadd%E6%8F%92%E4%BB%B6%E7%9A%84%E5%A6%99%E7%94%A8/</link>
-      <pubDate>Sat, 28 Sep 2024 00:00:00 +0000</pubDate>
-      <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>/post/2024/09/obsidian%E4%B8%ADquickadd%E6%8F%92%E4%BB%B6%E7%9A%84%E5%A6%99%E7%94%A8/</guid>
-      
-      <description>&lt;p&gt;最近在研究 Obsidian 中怎么合理的组织笔记和附件，我认为最佳的方式就是一篇笔记一个文件夹，在这个文件夹中有一个 assets 目录专门存放图片等附件。&lt;/p&gt;</description>
       
     </item>
     

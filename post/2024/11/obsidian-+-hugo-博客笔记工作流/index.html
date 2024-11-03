@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  
+  <script>
+    (function() {
+      const currentTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', currentTheme);
+    })();
+  </script>
+
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="LiuChao">
+
+  
+  
+  <meta name="description" content="使用 Obsidian、Hugo、Git 以及 Github Action 等工具构建博客笔记工作流，从博客的编写到博客网站自动部署更新，你只需专注于编写博客文章，其余操作均可自动完成。">
+  
+
+  
+  <link rel="icon" href="/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" study  latex  life  academic ">
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
+      throwOnError: false
+    });
+  });
+</script>
+
+
+  
+
+  
+  <meta property="og:url" content="/post/2024/11/obsidian-&#43;-hugo-%E5%8D%9A%E5%AE%A2%E7%AC%94%E8%AE%B0%E5%B7%A5%E4%BD%9C%E6%B5%81/">
+  <meta property="og:site_name" content="Pi3&#39;s Notes">
+  <meta property="og:title" content="Obsidian &#43; Hugo 博客笔记工作流">
+  <meta property="og:description" content="使用 Obsidian、Hugo、Git 以及 Github Action 等工具构建博客笔记工作流，从博客的编写到博客网站自动部署更新，你只需专注于编写博客文章，其余操作均可自动完成。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-11-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-03T00:00:00+00:00">
+    <meta property="article:tag" content="技术">
+    <meta property="article:tag" content="生活">
+    <meta property="article:tag" content="博客">
+
+
+  
+  <link rel="canonical" href="/post/2024/11/obsidian-&#43;-hugo-%E5%8D%9A%E5%AE%A2%E7%AC%94%E8%AE%B0%E5%B7%A5%E4%BD%9C%E6%B5%81/">
+
+  
+  
+  
+  <meta itemprop="name" content="Obsidian &#43; Hugo 博客笔记工作流">
+  <meta itemprop="description" content="使用 Obsidian、Hugo、Git 以及 Github Action 等工具构建博客笔记工作流，从博客的编写到博客网站自动部署更新，你只需专注于编写博客文章，其余操作均可自动完成。">
+  <meta itemprop="datePublished" content="2024-11-03T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2024-11-03T00:00:00+00:00">
+  <meta itemprop="wordCount" content="1130">
+  <meta itemprop="keywords" content="技术,生活,博客">
+
+  
+  <link media="screen" rel="stylesheet" href='/css/common.css'>
+  <link media="screen" rel="stylesheet" href='/css/content.css'>
+  <link media="screen" rel="stylesheet" href='/css/theme.css'>
+
+  
+  
+  <title>Obsidian &#43; Hugo 博客笔记工作流 - Pi3&#39;s Notes</title>
+  
+
+  
+  
+
+  
+<link rel="stylesheet" href='/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="/">Pi3&#39;s Notes</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">主页</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">归档</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">关于</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link theme-toggle" href="javascript:void(0);">明/暗</a>
+    </span>
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>Obsidian &#43; Hugo 博客笔记工作流</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='/tags/%E6%8A%80%E6%9C%AF'>#技术</a>
+    
+    <a class="link" href='/tags/%E7%94%9F%E6%B4%BB'>#生活</a>
+    
+    <a class="link" href='/tags/%E5%8D%9A%E5%AE%A2'>#博客</a>
+    
+  </div>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#hugo-配置">Hugo 配置</a></li>
+    <li><a href="#obsidian-配置">Obsidian 配置</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <p>使用 Obsidian、Hugo、Git 以及 Github Action 等工具构建博客笔记工作流，从博客的编写到博客网站自动部署更新，你只需专注于编写博客文章，其余操作均可自动完成。</p>
+<p>我的博客网站一直使用的都是这样一个工作流：</p>
+<p>每当我想发布一篇新的文章时，我只需要打开 Obsidian 中的博客仓库，按下快捷键 <code>Ctrl N</code> 输入文章标题，自动创建带有 Hugo 文章模板的 markdown 笔记文件，并存放在对应日期的文件夹中，如 <code>content/post/2024/11</code>。</p>
+<p>接着我在这个文件中编写我的博客文章或笔记，插入图片时使用 Obsidian 的 lmage auto upload Plugin 插件通过 PicGo 自动上传至图床。</p>
+<p>文章每隔 10 分钟会被 Obsidian 的 Git 插件 commit 保存并提交一次，等到文章写好要发布时，只需点击 Git 插件的 push 按钮自动推送到远程的 Github 仓库，在远程仓库中 Github Action 自动开始运行，只需不到 1 分钟，更新后的网站就会成功部署上线。</p>
+<p>以上就是我的完整博客笔记工作流，接着来详细说说应该如何配置。</p>
+<h2 id="hugo-配置">Hugo 配置</h2>
+<p><a href="https://gohugo.io/">Hugo</a> 是由 Go 语言实现的静态网站生成器。选择它是因为它轻量、快速高效、快速部署。Hugo 进行博客网站搭建十分简单，官方的文档很详细，并且网络上也有很多相关教程。你只需要下载一个编译后的 <code>hugo.exe</code> 文件，就可以开始构建你的博客网站了。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hugo new site blog
+</span></span></code></pre></div><p>创建一个 <code>blog</code> 文件作为博客网站的根目录，这个目录的结构如下：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>├─archetypes   &lt;-- 内容模板
+</span></span><span style="display:flex;"><span>├─assets       &lt;-- 全局资源 css sass js ts
+</span></span><span style="display:flex;"><span>├─content      &lt;-- 博客文章 md
+</span></span><span style="display:flex;"><span>├─data         &lt;-- 数据文件 JSON XML YAML TOML
+</span></span><span style="display:flex;"><span>├─i18n         &lt;-- 多语言翻译
+</span></span><span style="display:flex;"><span>├─layouts      &lt;-- 网站布局 html
+</span></span><span style="display:flex;"><span>├─static       &lt;-- 静态资源 css js fonts icon
+</span></span><span style="display:flex;"><span>├─themes       &lt;-- 网站主题
+</span></span><span style="display:flex;"><span>└─hugo.toml    &lt;-- 配置文件
+</span></span></code></pre></div><p>其中，我们最关注的就是 content 文件夹，我们所有的博客文章都存放在这里。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hugo new content content/posts/my-first-post.md
+</span></span></code></pre></div><p>通过这个指令，可以创建一篇博客文章并带有默认的模板。但是我几乎不使用这个命令，而是通过 Obsidian 创建。</p>
+<p>由于 Hugo 十分轻量，因此不能直接运行，因为它没有任何的模板样式，这时需要添加一个主题 <a href="https://themes.gohugo.io/">Hugo Themes</a>，再根据主题配置即可。以 <code>ananke</code> 主题为例，在网站根目录下执行：（需要使用 <a href="https://git-scm.com/">Git</a>）</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git init 
+</span></span><span style="display:flex;"><span>git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke 
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">echo</span> <span style="color:#c41a16">&#34;theme = &#39;ananke&#39;&#34;</span> &gt;&gt; hugo.toml
+</span></span></code></pre></div><p>接着你就可以通过以下命令在本地运行你的博客：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hugo server
+</span></span></code></pre></div><p><img src="https://image.pi3.fun/blog/202411031022054.png" alt="image.png"></p>
+<p>默认的 <code>ananke</code> 主题已经挺简约美观的了，也不需要自己配置什么，开箱即用。我的博客网站使用的是 <a href="https://themes.gohugo.io/themes/hugo-theme-texify/">TeXify</a> 主题，但是已经被我改动了很多。</p>
+<h2 id="obsidian-配置">Obsidian 配置</h2>
+<p>完成以上简单的 Hugo 配置搭建，你已经拥有了一个简单的个人博客网站。接着你可以进行 <a href="https://obsidian.md/">Obsidian</a>的配置。</p>
+<p>在博客网站文件夹的根目录创建一个 Obsidian 仓库，即在 Obsidian 中打开你的网站文件夹。</p>
+<p><img src="https://image.pi3.fun/blog/202411031038559.png" alt="image.png"></p>
+<p>使用 Obsidian 打开文件夹后，你可以在<strong>设置-外观</strong>中换上一个好看的主题，但是最重要的是你需要在<strong>设置-第三方插件</strong>中关闭安全模式，在<strong class=chinese>社区插件市场</strong>中搜索并安装以下几个插件：</p>
+<ul>
+<li>lmage auto upload Plugin：用于通过 <a href="https://picgo.github.io/PicGo-Doc/zh/">PicGo</a> 上传图片到图床中</li>
+<li>Git：用于自动进行 Git 操作</li>
+<li>QuickAdd：用于自动创建文章模板</li>
+</ul>
+/post/2024/11/%E4%B8%83%E7%89%9B%E4%BA%91%E5%9B%BE%E5%BA%8A%E4%B8%8E%E5%85%8D%E8%B4%B9https%E8%AF%81%E4%B9%A6/
+/post/2024/11/%E4%B8%83%E7%89%9B%E4%BA%91%E5%9B%BE%E5%BA%8A%E4%B8%8E%E5%85%8D%E8%B4%B9https%E8%AF%81%E4%B9%A6/
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="/post/2024/11/python%E5%AE%9A%E6%97%B6%E7%88%AC%E8%99%AB%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF/">← prev</a>
+    
+    
+    <a></a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+      <script src="https://giscus.app/client.js"
+        data-repo="Pi3-l22/Pi3-l22.github.io"
+        data-repo-id="R_kgDOMx7kWw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMx7kW84CjHMe"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_tritanopia"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span style="display: flex;align-items: center;">© 2021 - 2024<img src="https://p.sda1.dev/19/68796ec343c7a7eecbe99de4a9df6c66/rainbow.gif" width=20>By LiuChao</span>
+  </div>
+  
+  
+
+  
+
+  <div class="footnote">
+    <span><a class=link href=/index.xml><img src="https://p.sda1.dev/19/1e10e3069ca0e5e1bbc881b6a5fb2732/RSS.png" width=12></a>  |  <a class=link href=https://github.com/Pi3-l22 Target=_ blank><img src="https://p.sda1.dev/19/cfb4a6be80dfeb1851a07d065a83dbcc/GitHub.png" width=40></a>  |  <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener><img src="https://p.sda1.dev/19/93838c15ff88af806c9fd7302cced9fa/Cc_by-nc-nd.svg.png" width=48></a>
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-WE6L6RF96W"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-WE6L6RF96W');
+        }
+      </script>
+    
+  
+
+
+
+
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      
+      const themeToggle = document.querySelector('.theme-toggle');
+      if (themeToggle) {
+        themeToggle.textContent = currentTheme === 'light' ? '明/暗' : '明/暗';
+        
+        themeToggle.addEventListener('click', function() {
+          const currentTheme = document.documentElement.getAttribute('data-theme');
+          const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+          
+          document.documentElement.setAttribute('data-theme', newTheme);
+          localStorage.setItem('theme', newTheme);
+          
+          this.textContent = newTheme === 'light' ? '明/暗' : '明/暗';
+        });
+      }
+    });
+  </script>
+
+</body>
+
+</html>
