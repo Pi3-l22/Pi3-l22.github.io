@@ -26,11 +26,6 @@
   </url>
   
   <url>
-    <loc>/post/2024/11/test/</loc>
-    <lastmod>2024-11-03</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2024-11-03</lastmod>
   </url>
@@ -42,11 +37,6 @@
   
   <url>
     <loc>/tags/%E7%94%9F%E6%B4%BB/</loc>
-    <lastmod>2024-11-03</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2024-11-03</lastmod>
   </url>
   
@@ -87,6 +77,11 @@
   
   <url>
     <loc>/post/2024/10/obsidian%E4%B8%ADwiki%E9%93%BE%E6%8E%A5%E5%92%8Cmarkdown%E9%93%BE%E6%8E%A5%E7%9A%84%E8%BD%AC%E6%8D%A2/</loc>
+    <lastmod>2024-10-24</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2024-10-24</lastmod>
   </url>
   

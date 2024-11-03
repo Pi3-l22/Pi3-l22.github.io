@@ -21,17 +21,6 @@
     </item>
     
     <item>
-      <title>test</title>
-      <link>/post/2024/11/test/</link>
-      <pubDate>Sun, 03 Nov 2024 00:00:00 +0000</pubDate>
-      <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>/post/2024/11/test/</guid>
-      
-      <description></description>
-      
-    </item>
-    
-    <item>
       <title>Python定时爬虫实现思路</title>
       <link>/post/2024/11/python%E5%AE%9A%E6%97%B6%E7%88%AC%E8%99%AB%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF/</link>
       <pubDate>Sat, 02 Nov 2024 00:00:00 +0000</pubDate>
@@ -118,6 +107,17 @@
       <guid>/post/2024/10/%E4%BB%8Egit%E5%8E%86%E5%8F%B2%E4%B8%AD%E5%AE%8C%E5%85%A8%E5%88%A0%E9%99%A4%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6/</guid>
       
       <description>&lt;p&gt;最近不小心将服务器 IP 和数据库密钥随着程序上推送到了 GitHub 的公开仓库，还好发现的早，不然就是一次惨痛的教训。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>2025网安保研回顾与总结</title>
+      <link>/post/2024/09/2025%E4%BF%9D%E7%A0%94%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sun, 29 Sep 2024 00:00:00 +0000</pubDate>
+      <author>622.511.liuchao@gmail.com (LiuChao)</author>
+      <guid>/post/2024/09/2025%E4%BF%9D%E7%A0%94%E6%80%BB%E7%BB%93/</guid>
+      
+      <description>&lt;p&gt;2024 年 9 月 29 日 10 点 26 分，我接受了中科院信工所的待录取通知，这也标志着我的保研之旅结束了，现在也该回过头来记录一下这段波澜不惊的经历。&lt;/p&gt;</description>
       
     </item>
     
