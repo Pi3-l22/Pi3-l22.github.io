@@ -1,0 +1,30 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "3176643",
+      "name": "GitHub",
+      "font_class": "GitHub",
+      "unicode": "ea09",
+      "unicode_decimal": 59913
+    },
+    {
+      "icon_id": "11231971",
+      "name": "RSS",
+      "font_class": "RSS",
+      "unicode": "e7b5",
+      "unicode_decimal": 59317
+    },
+    {
+      "icon_id": "40781952",
+      "name": "creative-commons-fill",
+      "font_class": "creative-commons-fill",
+      "unicode": "e66a",
+      "unicode_decimal": 58986
+    }
+  ]
+}

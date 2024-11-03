@@ -16,7 +16,12 @@
 
 .content a {
     color: var(--content-a);
+    transition: all .3s;
     /* text-decoration: underline !important; */
+}
+
+.content a:hover {
+    text-decoration: underline !important;
 }
 
 .content a.footnote-ref::before {
@@ -177,6 +182,7 @@
 
 .content mark {
     background-color: var(--mark-bg);
+    padding: 0 .1rem;
 }
 
 .content hr{

@@ -40,16 +40,16 @@
 [data-theme="dark"] {
   /* 暗黑主题颜色 */
   /* common.css */
-  --bg-color: #24273a;  /* 背景色 */
-  --text-color: #cad3f5;  /* 文字颜色 */
+  --bg-color: #24273a;  /* 背景色 #24273a*/
+  --text-color: #cad3f5;  /* 文字颜色 #cad3f5*/
   --nav-link-color: #89b4fa;  /* 导航链接颜色 */
   --scrollbar-bg: #1e1e2e;  /* 滚动条背景色 */
   --scrollbar-thumb: #303446;  /* 滚动条滑块颜色 */
   --scrollbar-hover: #3a3d4d;  /* 滚动条滑块悬停颜色 */
-  --post-shodow: #1e1e2e;  /* 文章边框阴影颜色 */
+  --post-shodow: #1e1e2e;  /* 文章边框阴影颜色 #1e1e2e*/
   --post-order: #89b4fa;  /* 文章发布序号颜色 */
   /* content.css */
-  --content-a: #c6a0f6;  /* 文章中链接颜色 */
+  --content-a: #C6A0F6;  /* 文章中链接颜色 */
   --blockquote-left: #89b4fa;  /* 引用块左边框颜色 */
   --inline-code: #89b4fa;  /* 行内代码颜色 */
   --highlight-bg: #1e1e2e;  /* 代码块背景色 */

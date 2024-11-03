@@ -258,3 +258,13 @@ time {
 #footer > .footnote {
     text-align: center;
 }
+
+/* 字体图标 */
+.iconfont {
+    color: var(--nav-link-color);
+    font-size: 14px !important;
+}
+
+.icon-creative-commons-fill {
+    font-size: 16px !important;
+}
