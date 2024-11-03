@@ -291,11 +291,41 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const currentTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', currentTheme);
+      
 
       const lightStyle = document.querySelector('link[data-theme-style="light"]');
       const darkStyle = document.querySelector('link[data-theme-style="dark"]');
       
+      
+      const systemThemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+      systemThemeMedia.addListener(function(e) {
+        
+        if (!localStorage.getItem('theme')) {
+          const newTheme = e.matches ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', newTheme);
+          localStorage.setItem('theme', newTheme);
+          
+          
+          if (newTheme === 'light') {
+            lightStyle.media = 'all';
+            darkStyle.media = 'not all';
+          } else {
+            lightStyle.media = 'not all';
+            darkStyle.media = 'all';
+          }
+          
+          
+          const giscusFrame = document.querySelector('iframe.giscus-frame');
+          if (giscusFrame) {
+            const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+            giscusFrame.contentWindow.postMessage(
+              { giscus: { setConfig: { theme: giscusTheme } } },
+              'https://giscus.app'
+            );
+          }
+        }
+      });
+
       
       if (currentTheme === 'light') {
         lightStyle.media = 'all';
@@ -304,16 +334,6 @@
         lightStyle.media = 'not all';
         darkStyle.media = 'all';
       }
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
 
       
       function updateGiscusTheme() {
