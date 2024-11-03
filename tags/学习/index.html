@@ -127,7 +127,7 @@
     </span>
     
     <span class="nav-bar-item">
-      <a class="link theme-toggle" href="javascript:void(0);">明暗</a>
+      <a class="link theme-toggle" href="javascript:void(0);">黑暗</a>
     </span>
   </nav>
 </header>
@@ -321,18 +321,36 @@
       }
 
       
-      const giscusFrame = document.querySelector('iframe.giscus-frame');
-      if (giscusFrame) {
-        const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
-        giscusFrame.contentWindow.postMessage(
-          { giscus: { setConfig: { theme: giscusTheme } } },
-          'https://giscus.app'
-        );
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+      function updateGiscusTheme() {
+        const giscusFrame = document.querySelector('iframe.giscus-frame');
+        if (giscusFrame) {
+          const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+          giscusFrame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: giscusTheme } } },
+            'https://giscus.app'
+          );
+        } else {
+          
+          setTimeout(updateGiscusTheme, 1000);
+        }
       }
       
+      
+      updateGiscusTheme();
+
       const themeToggle = document.querySelector('.theme-toggle');
       if (themeToggle) {
-        themeToggle.textContent = currentTheme === 'light' ? '明暗' : '明暗';
+        themeToggle.textContent = currentTheme === 'light' ? '黑暗' : '明亮';
         
         themeToggle.addEventListener('click', function() {
           const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -360,7 +378,7 @@
             );
           }
           
-          this.textContent = newTheme === 'light' ? '明暗' : '明暗';
+          this.textContent = newTheme === 'light' ? '黑暗' : '明亮';
         });
       }
     });

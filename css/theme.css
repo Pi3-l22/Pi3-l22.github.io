@@ -55,14 +55,23 @@
   --highlight-bg: #1e1e2e;  /* 代码块背景色 */
   --strong-color: #7dc4e4;  /* 粗体字体颜色 */
   --em-color: #8bd5ca;  /* 强调字体颜色 */
-  --table-border: #575C61;  /* 表格边框颜色 */
-  --table-header-bg: #575C61;  /* 表头背景色 */
-  --table-header-color: #FAFAFA;  /* 表头字体颜色 */
+  --table-border: #89b4fa;  /* 表格边框颜色 */
+  --table-header-bg: #89b4fa;  /* 表头背景色 */
+  --table-header-color: #000;  /* 表头字体颜色 */
   --mark-bg: #f5bde6;   /* 高亮背景色 */
-  --hr-color: #cbcbcb;    /* 分割线颜色 */
+  --hr-color: #89b4fa;    /* 分割线颜色 */
   /* single.css */
   --warning-bg: #89b4fa;  /* 警告块背景色 */
   --warning-color: black;  /* 警告块文字颜色 */
   --toc-bg: #444;  /* 目录背景色 */
   --toc-border: white;  /* 目录边框颜色 */
+  --main-targer-bg: #444;  /* 目标背景色 */
+  --album-shadow-1: rgba(0, 0, 0, 0.9);  /* 相册阴影 */
+  --album-shadow-2: rgba(48, 52, 70, 0.8);  /* 相册阴影 */
+  --album-info: #ccc;  /* 相册底部信息颜色 */
+  --cardlink-border: #24273a;  /* 卡片链接边框颜色 */
+  --cardlink-shadow: rgba(0, 0, 0, 0.8);  /* 卡片链接阴影 */
+  --cardlink-hover-shadow1: rgba(0, 0, 0, 0.5);  /* 卡片链接悬停阴影1 */
+  --cardlink-hover-shadow2: rgba(0, 0, 0, 0.4);  /* 卡片链接悬停阴影2 */
+  --cardlink-after: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0));  /* 卡片链接渐变背景 */
 }

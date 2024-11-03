@@ -83,7 +83,7 @@
   <meta itemprop="description" content="A personal notebook to record my studies and life">
   <meta itemprop="datePublished" content="2024-11-03T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-11-03T00:00:00+00:00">
-  <meta itemprop="wordCount" content="492">
+  <meta itemprop="wordCount" content="588">
   <meta itemprop="keywords" content="技术,学习,生活">
 
   
@@ -133,7 +133,7 @@
     </span>
     
     <span class="nav-bar-item">
-      <a class="link theme-toggle" href="javascript:void(0);">明暗</a>
+      <a class="link theme-toggle" href="javascript:void(0);">黑暗</a>
     </span>
   </nav>
 </header>
@@ -271,6 +271,36 @@
     <p class="info">📷2024-10-10  📍北京</p>
   </div>
 </div>
+
+<table>
+<thead>
+<tr>
+<th>标题 1</th>
+<th>标题 2</th>
+<th>标题 3</th>
+<th>标题 4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据 1</td>
+<td>数据 2</td>
+<td>数据 3</td>
+<td>数据 4</td>
+</tr>
+<tr>
+<td>数据 1</td>
+<td>数据 2</td>
+<td>数据 3</td>
+<td>数据 4</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>这是一个是批注</p>
+</blockquote>
+<hr>
+<p>$\overrightarrow{v} = -1 \times \hat{i} + 2 \times \hat{j}$  ${\overset{线性变换}{\longrightarrow}}$  $\hat{v&rsquo;} = -1 \times \overrightarrow{i&rsquo;} + 2 \times \hat{j&rsquo;}$</p>
     
   </article>
   <div class="paginator">
@@ -286,23 +316,35 @@
     
     
     
-      <script src="https://giscus.app/client.js"
-        data-repo="Pi3-l22/Pi3-l22.github.io"
-        data-repo-id="R_kgDOMx7kWw"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOMx7kW84CjHMe"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="light_tritanopia"
-        data-lang="zh-CN"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-</script>
-
+      
+      <div class="giscus-wrapper">
+        <script>
+          
+          const currentTheme = localStorage.getItem('theme') || 'light';
+          const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+          
+          
+          const giscusScript = document.createElement('script');
+          giscusScript.src = "https://giscus.app/client.js";
+          giscusScript.setAttribute("data-repo", "Pi3-l22/Pi3-l22.github.io");
+          giscusScript.setAttribute("data-repo-id", "R_kgDOMx7kWw");
+          giscusScript.setAttribute("data-category", "Announcements");
+          giscusScript.setAttribute("data-category-id", "DIC_kwDOMx7kW84CjHMe");
+          giscusScript.setAttribute("data-mapping", "pathname");
+          giscusScript.setAttribute("data-strict", "0");
+          giscusScript.setAttribute("data-reactions-enabled", "1");
+          giscusScript.setAttribute("data-emit-metadata", "0");
+          giscusScript.setAttribute("data-input-position", "top");
+          giscusScript.setAttribute("data-theme", giscusTheme);
+          giscusScript.setAttribute("data-lang", "zh-CN");
+          giscusScript.setAttribute("data-loading", "lazy");
+          giscusScript.setAttribute("crossorigin", "anonymous");
+          giscusScript.async = true;
+          
+          
+          document.querySelector('.giscus-wrapper').appendChild(giscusScript);
+        </script>
+      </div>
     
     
     
@@ -376,18 +418,36 @@
       }
 
       
-      const giscusFrame = document.querySelector('iframe.giscus-frame');
-      if (giscusFrame) {
-        const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
-        giscusFrame.contentWindow.postMessage(
-          { giscus: { setConfig: { theme: giscusTheme } } },
-          'https://giscus.app'
-        );
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+      function updateGiscusTheme() {
+        const giscusFrame = document.querySelector('iframe.giscus-frame');
+        if (giscusFrame) {
+          const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
+          giscusFrame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: giscusTheme } } },
+            'https://giscus.app'
+          );
+        } else {
+          
+          setTimeout(updateGiscusTheme, 1000);
+        }
       }
       
+      
+      updateGiscusTheme();
+
       const themeToggle = document.querySelector('.theme-toggle');
       if (themeToggle) {
-        themeToggle.textContent = currentTheme === 'light' ? '明暗' : '明暗';
+        themeToggle.textContent = currentTheme === 'light' ? '黑暗' : '明亮';
         
         themeToggle.addEventListener('click', function() {
           const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -415,7 +475,7 @@
             );
           }
           
-          this.textContent = newTheme === 'light' ? '明暗' : '明暗';
+          this.textContent = newTheme === 'light' ? '黑暗' : '明亮';
         });
       }
     });

@@ -58,8 +58,8 @@
     padding: 10px; /* 内边距，留出空间给阴影 */
     margin: 10px auto;
     box-shadow:
-        7px 7px 12px var(--album-shadow-1),
-        -7px -7px 12px var(--album-shadow-2),
+        10px 10px 20px var(--album-shadow-1),
+        -10px -10px 20px var(--album-shadow-2),
         inset 0 0 0 var(--album-shadow-2),
         inset 0 0 0 var(--album-shadow-1);
     
@@ -69,13 +69,13 @@
         box-shadow:
             0 0 0 var(--album-shadow-1),
             0 0 0 var(--album-shadow-2),
-            inset -7px -7px 12px var(--album-shadow-2),
-            inset 7px 7px 12px var(--album-shadow-1);
+            inset -10px -10px 20px var(--album-shadow-2),
+            inset 10px 10px 20px var(--album-shadow-1);
         img{
-            transform: scale(0.98);
+            transform: scale(0.95);
         }
         .info {
-            transform: scale(0.98);
+            transform: scale(0.95);
         }
     }
 }
