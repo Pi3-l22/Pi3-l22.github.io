@@ -105,8 +105,7 @@
 
 .content pre {
     background-color: var(--hightlight-bg); /* 由于使用代码样式 使得背景不起作用 */
-    border-radius: .5rem;
-    font-family: 't1xtt', 'Latin Modern Mono', 'Fangsong', Courier, monospace;
+    font-family: 't1xtt', 'Latin Modern Mono', 'Fangsong', Consolas, monospace;
     margin-top: .5rem;
     overflow-x: auto;
     padding: .5rem;

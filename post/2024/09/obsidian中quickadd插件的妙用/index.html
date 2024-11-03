@@ -82,7 +82,7 @@
   <meta itemprop="description" content="Obsidian自动创建文件夹和笔记">
   <meta itemprop="datePublished" content="2024-09-28T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-09-28T00:00:00+00:00">
-  <meta itemprop="wordCount" content="1104">
+  <meta itemprop="wordCount" content="1062">
   <meta itemprop="keywords" content="技术,Obsidian">
 
   
@@ -185,21 +185,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#c41a16">time: </span><span style="color:#c41a16">${</span><span style="color:#000">time</span><span style="color:#c41a16">}</span><span style="color:#c41a16">
 </span></span></span><span style="display:flex;"><span><span style="color:#c41a16">tags: []
 </span></span></span><span style="display:flex;"><span><span style="color:#c41a16">---`</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">const</span> <span style="color:#000">file</span> <span style="color:#000">=</span> <span style="color:#a90d91">await</span> <span style="color:#000">app</span>.<span style="color:#000">vault</span>.<span style="color:#000">create</span>(<span style="color:#000">filePath</span>, <span style="color:#000">fileContent</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#177500">// if (file) {
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//     // 打开笔记文件
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//     const leaf = app.workspace.getLeaf(false);
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//     if (leaf) {
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//         leaf.openFile(file);
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//         new Notice(`Folder and note &#39;${folderAndNoteName}&#39; created successfully.`, 5000);
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//     } else {
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//         new Notice(&#34;No active leaf to open the file.&#34;, 5000);
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//     }
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">// } else {
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">//     new Notice(&#34;Failed to create note.&#34;, 5000);
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#177500">// }
-</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>    } <span style="color:#a90d91">catch</span> (<span style="color:#000">error</span>) {
+</span></span><span style="display:flex;"><span>    } <span style="color:#a90d91">catch</span> (<span style="color:#000">error</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#a90d91">new</span> <span style="color:#000">Notice</span>(<span style="color:#c41a16">`Error: </span><span style="color:#c41a16">${</span><span style="color:#000">error</span><span style="color:#c41a16">}</span><span style="color:#c41a16">`</span>, <span style="color:#1c01ce">5000</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
@@ -257,6 +243,8 @@
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p><img src="https://image.pi3.fun/blog/20240928155919.png" alt="image.png"></p>
 <p><img src="https://image.pi3.fun/blog/20240928160014.png" alt="image.png"></p>
+<p>你还可以将 QuickAdd 这个方法绑定到 Obsidian 的快捷键上，更加方便。</p>
+<p><img src="https://image.pi3.fun/blog/202411031124509.png" alt="image.png"></p>
     
   </article>
   <div class="paginator">

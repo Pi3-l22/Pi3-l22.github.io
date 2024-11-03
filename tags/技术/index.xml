@@ -10,11 +10,11 @@
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
     <lastBuildDate>Sun, 03 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="/tags/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Obsidian &#43; Hugo 博客笔记工作流</title>
-      <link>/post/2024/11/obsidian-&#43;-hugo-%E5%8D%9A%E5%AE%A2%E7%AC%94%E8%AE%B0%E5%B7%A5%E4%BD%9C%E6%B5%81/</link>
+      <title>Obsidian&#43;Hugo博客笔记工作流</title>
+      <link>/post/2024/11/obsidian&#43;hugo%E5%8D%9A%E5%AE%A2%E7%AC%94%E8%AE%B0%E5%B7%A5%E4%BD%9C%E6%B5%81/</link>
       <pubDate>Sun, 03 Nov 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>/post/2024/11/obsidian-&#43;-hugo-%E5%8D%9A%E5%AE%A2%E7%AC%94%E8%AE%B0%E5%B7%A5%E4%BD%9C%E6%B5%81/</guid>
+      <guid>/post/2024/11/obsidian&#43;hugo%E5%8D%9A%E5%AE%A2%E7%AC%94%E8%AE%B0%E5%B7%A5%E4%BD%9C%E6%B5%81/</guid>
       
       <description>&lt;p&gt;使用 Obsidian、Hugo、Git 以及 Github Action 等工具构建博客笔记工作流，从博客的编写到博客网站自动部署更新，你只需专注于编写博客文章，其余操作均可自动完成。&lt;/p&gt;</description>
       
