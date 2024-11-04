@@ -190,34 +190,18 @@
     
     
       
-      <div class="giscus-wrapper">
-        <script>
-          
-          const currentTheme = localStorage.getItem('theme') || 'light';
-          const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
-          
-          
-          const giscusScript = document.createElement('script');
-          giscusScript.src = "https://giscus.app/client.js";
-          giscusScript.setAttribute("data-repo", "Pi3-l22/Pi3-l22.github.io");
-          giscusScript.setAttribute("data-repo-id", "R_kgDOMx7kWw");
-          giscusScript.setAttribute("data-category", "Announcements");
-          giscusScript.setAttribute("data-category-id", "DIC_kwDOMx7kW84CjHMe");
-          giscusScript.setAttribute("data-mapping", "pathname");
-          giscusScript.setAttribute("data-strict", "0");
-          giscusScript.setAttribute("data-reactions-enabled", "1");
-          giscusScript.setAttribute("data-emit-metadata", "0");
-          giscusScript.setAttribute("data-input-position", "top");
-          giscusScript.setAttribute("data-theme", giscusTheme);
-          giscusScript.setAttribute("data-lang", "zh-CN");
-          giscusScript.setAttribute("data-loading", "lazy");
-          giscusScript.setAttribute("crossorigin", "anonymous");
-          giscusScript.async = true;
-          
-          
-          document.querySelector('.giscus-wrapper').appendChild(giscusScript);
-        </script>
-      </div>
+      
+      
+      <span id="twikoo_visitors">0</span>
+      <div id="tcomment"></div>
+      <script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.39/dist/twikoo.min.js"></script>
+      <script>
+      twikoo.init({
+        envId: 'https://pi3-twikoo.netlify.app/.netlify/functions/twikoo',
+        el: '#tcomment',
+        lang: 'zh-CN', 
+      })
+      </script>
     
     
     
