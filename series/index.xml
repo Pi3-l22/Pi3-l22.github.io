@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Series on Pi3&#39;s Notes</title>
-    <link>/series/</link>
+    <link>https://blog.pi3.fun/series/</link>
     <description>Recent content in Series on Pi3&#39;s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
-    <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster><atom:link href="/series/index.xml" rel="self" type="application/rss+xml" />
+    <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster><atom:link href="https://blog.pi3.fun/series/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

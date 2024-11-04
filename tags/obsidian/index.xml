@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Obsidian on Pi3&#39;s Notes</title>
-    <link>/tags/obsidian/</link>
+    <link>https://blog.pi3.fun/tags/obsidian/</link>
     <description>Recent content in Obsidian on Pi3&#39;s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
-    <lastBuildDate>Thu, 24 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="/tags/obsidian/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/tags/obsidian/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Obsidian中Wiki链接和Markdown链接的转换</title>
-      <link>/post/2024/10/obsidian%E4%B8%ADwiki%E9%93%BE%E6%8E%A5%E5%92%8Cmarkdown%E9%93%BE%E6%8E%A5%E7%9A%84%E8%BD%AC%E6%8D%A2/</link>
+      <link>https://blog.pi3.fun/post/2024/10/obsidian%E4%B8%ADwiki%E9%93%BE%E6%8E%A5%E5%92%8Cmarkdown%E9%93%BE%E6%8E%A5%E7%9A%84%E8%BD%AC%E6%8D%A2/</link>
       <pubDate>Thu, 24 Oct 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>/post/2024/10/obsidian%E4%B8%ADwiki%E9%93%BE%E6%8E%A5%E5%92%8Cmarkdown%E9%93%BE%E6%8E%A5%E7%9A%84%E8%BD%AC%E6%8D%A2/</guid>
+      <guid>https://blog.pi3.fun/post/2024/10/obsidian%E4%B8%ADwiki%E9%93%BE%E6%8E%A5%E5%92%8Cmarkdown%E9%93%BE%E6%8E%A5%E7%9A%84%E8%BD%AC%E6%8D%A2/</guid>
       
       <description>&lt;p&gt;可以使用 Vscode 中的全局搜索与替换功能，并利用正则表达式匹配替换&lt;/p&gt;</description>
       
@@ -22,10 +22,10 @@
     
     <item>
       <title>Obsidian中QuickAdd插件的妙用</title>
-      <link>/post/2024/09/obsidian%E4%B8%ADquickadd%E6%8F%92%E4%BB%B6%E7%9A%84%E5%A6%99%E7%94%A8/</link>
+      <link>https://blog.pi3.fun/post/2024/09/obsidian%E4%B8%ADquickadd%E6%8F%92%E4%BB%B6%E7%9A%84%E5%A6%99%E7%94%A8/</link>
       <pubDate>Sat, 28 Sep 2024 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>/post/2024/09/obsidian%E4%B8%ADquickadd%E6%8F%92%E4%BB%B6%E7%9A%84%E5%A6%99%E7%94%A8/</guid>
+      <guid>https://blog.pi3.fun/post/2024/09/obsidian%E4%B8%ADquickadd%E6%8F%92%E4%BB%B6%E7%9A%84%E5%A6%99%E7%94%A8/</guid>
       
       <description>&lt;p&gt;最近在研究 Obsidian 中怎么合理的组织笔记和附件，我认为最佳的方式就是一篇笔记一个文件夹，在这个文件夹中有一个 assets 目录专门存放图片等附件。&lt;/p&gt;</description>
       

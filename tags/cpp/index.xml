@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>C&#43;&#43; on Pi3&#39;s Notes</title>
-    <link>/tags/c&#43;&#43;/</link>
-    <description>Recent content in C&#43;&#43; on Pi3&#39;s Notes</description>
+    <title>Cpp on Pi3&#39;s Notes</title>
+    <link>https://blog.pi3.fun/tags/cpp/</link>
+    <description>Recent content in Cpp on Pi3&#39;s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
     <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
-    <lastBuildDate>Fri, 24 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/tags/cpp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>C&#43;&#43;学习路线</title>
-      <link>/post/learning_map/c&#43;&#43;%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</link>
+      <link>https://blog.pi3.fun/post/learning_map/cpp-learning-path/</link>
       <pubDate>Fri, 24 Nov 2023 00:00:00 +0000</pubDate>
       <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>/post/learning_map/c&#43;&#43;%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</guid>
+      <guid>https://blog.pi3.fun/post/learning_map/cpp-learning-path/</guid>
       
       <description></description>
       
