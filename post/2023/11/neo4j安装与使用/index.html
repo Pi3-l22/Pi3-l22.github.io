@@ -1,923 +1,357 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-
-<head>
-  
-  <script>
-    (function() {
-      const currentTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', currentTheme);
-    })();
-  </script>
-
-  <meta charset="UTF-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  
-  <meta name="author" content="LiuChao">
-
-  
-  
-  <meta name="description" content="图数据库Neo4j使用教程">
-  
-
-  
-  <link rel="icon" href="https://blog.pi3.fun/favicon.ico">
-
-  
-  
-  <meta name="keywords" content=" study  latex  life  academic ">
-  
-
-  
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
-  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
-  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
-  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    renderMathInElement(document.body, {
-      delimiters: [
-        { left: '$$', right: '$$', display: true },
-        { left: '\\[', right: '\\]', display: true },
-        { left: '$', right: '$', display: false },
-        { left: '\\(', right: '\\)', display: false }
-      ],
-      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
-      throwOnError: false
-    });
-  });
-</script>
-
-
-  
-
-  
-  <meta property="og:url" content="https://blog.pi3.fun/post/2023/11/neo4j%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">
-  <meta property="og:site_name" content="Pi3&#39;s Notes">
-  <meta property="og:title" content="Neo4j安装与使用">
-  <meta property="og:description" content="图数据库Neo4j使用教程">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2023-11-24T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-11-24T00:00:00+00:00">
-    <meta property="article:tag" content="技术">
-    <meta property="article:tag" content="Neo4j">
-    <meta property="article:tag" content="Python">
-
-
-  
-  <link rel="canonical" href="https://blog.pi3.fun/post/2023/11/neo4j%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">
-
-  
-  
-  
-  <meta itemprop="name" content="Neo4j安装与使用">
-  <meta itemprop="description" content="图数据库Neo4j使用教程">
-  <meta itemprop="datePublished" content="2023-11-24T00:00:00+00:00">
-  <meta itemprop="dateModified" content="2023-11-24T00:00:00+00:00">
-  <meta itemprop="wordCount" content="7467">
-  <meta itemprop="keywords" content="技术,Neo4j,Python">
-
-  
-  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/common.css'>
-  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/content.css'>
-  
-  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/theme.css'>
-  
-  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/iconfont/iconfont.css'>
-  
-  <link rel="stylesheet" href='https://blog.pi3.fun/css/syntax/xcode.css' 
-    data-theme-style="light" 
-    media="(prefers-color-scheme: light)">
-  <link rel="stylesheet" href='https://blog.pi3.fun/css/syntax/catppuccin-mocha.css' 
-    data-theme-style="dark" 
-    media="not all">
-
-  
-  
-  <title>Neo4j安装与使用 - Pi3&#39;s Notes</title>
-  
-
-  
-  
-
-  
-<link rel="stylesheet" href='https://blog.pi3.fun/css/single.css'>
-
-</head>
-
-<body>
-  <div id="wrapper">
-    <header id="header">
-  <h1>
-    <a href="https://blog.pi3.fun/">Pi3&#39;s Notes</a>
-  </h1>
-
-  <nav>
-    
-    <span class="nav-bar-item">
-      <a class="link" href="/">主页</a>
-    </span>
-    
-    <span class="nav-bar-item">
-      <a class="link" href="/post/">归档</a>
-    </span>
-    
-    <span class="nav-bar-item">
-      <a class="link" href="/about/">关于</a>
-    </span>
-    
-    <span class="nav-bar-item">
-      <a class="link theme-toggle" href="javascript:void(0);">黑暗</a>
-    </span>
-  </nav>
-</header>
-
-    
-<main id="main" class="post">
-  
-  
-  <h1>Neo4j安装与使用</h1>
-  
-  <div>
-    <b>Keywords: </b>
-    
-    <a class="link" href='https://blog.pi3.fun/tags/%E6%8A%80%E6%9C%AF'>#技术</a>
-    
-    <a class="link" href='https://blog.pi3.fun/tags/neo4j'>#Neo4j</a>
-    
-    <a class="link" href='https://blog.pi3.fun/tags/python'>#Python</a>
-    
-  </div>
-  
-  
-  
-  <details>
-    <summary>
-      <b>Table of Contents</b>
-    </summary>
-    <div class="toc"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#安装">安装</a></li>
-    <li><a href="#简单入门">简单入门</a></li>
-    <li><a href="#简单案例">简单案例</a></li>
-    <li><a href="#命令行操作总结">命令行操作总结</a>
-      <ul>
-        <li><a href="#创建一个节点">创建一个节点</a></li>
-        <li><a href="#创建多个节点">创建多个节点</a></li>
-        <li><a href="#建立关系">建立关系</a></li>
-        <li><a href="#查询某个节点">查询某个节点</a></li>
-        <li><a href="#查询某个标签的所有节点">查询某个标签的所有节点</a></li>
-        <li><a href="#查询某个标签的节点个数">查询某个标签的节点个数</a></li>
-        <li><a href="#查询两个节点之间的关系类型">查询两个节点之间的关系类型</a></li>
-        <li><a href="#查询某个节点所有的关系">查询某个节点所有的关系</a></li>
-        <li><a href="#查询某个节点所有的关系类型">查询某个节点所有的关系类型</a></li>
-        <li><a href="#删除某个节点">删除某个节点</a></li>
-        <li><a href="#删除某个标签的所有节点">删除某个标签的所有节点</a></li>
-        <li><a href="#删除所有节点">删除所有节点</a></li>
-        <li><a href="#删除两个节点之间的关系">删除两个节点之间的关系</a></li>
-        <li><a href="#删除某个节点的所有关系">删除某个节点的所有关系</a></li>
-        <li><a href="#删除某个标签的所有关系">删除某个标签的所有关系</a></li>
-        <li><a href="#增加节点的属性">增加节点的属性</a></li>
-        <li><a href="#删除节点的属性">删除节点的属性</a></li>
-        <li><a href="#查询某个节点有关的节点和关系">查询某个节点有关的节点和关系</a></li>
-        <li><a href="#删除某个节点有关的节点和关系">删除某个节点有关的节点和关系</a></li>
-      </ul>
-    </li>
-    <li><a href="#neo4j-server安装与使用">Neo4j Server安装与使用</a>
-      <ul>
-        <li><a href="#数据库本地管理">数据库本地管理</a></li>
-        <li><a href="#用户管理">用户管理</a></li>
-        <li><a href="#数据库的备份和恢复">数据库的备份和恢复</a></li>
-      </ul>
-    </li>
-    <li><a href="#在neo4j中批量创建节点和关系">在Neo4j中批量创建节点和关系</a>
-      <ul>
-        <li><a href="#在desktop中用csv文件导入批量创建节点">在desktop中用CSV文件导入批量创建节点</a></li>
-        <li><a href="#在desktop中用csv文件导入批量创建关系">在desktop中用CSV文件导入批量创建关系</a></li>
-        <li><a href="#在远程server中用csv文件导入批量创建节点和关系常用">在远程Server中用CSV文件导入批量创建节点和关系（常用）</a></li>
-      </ul>
-    </li>
-    <li><a href="#neo4j的python操作">Neo4j的Python操作</a>
-      <ul>
-        <li><a href="#在远程服务器上安装并创建neo4j">在远程服务器上安装并创建Neo4j</a></li>
-        <li><a href="#利用python读取excel数据创建节点">利用Python读取excel数据创建节点</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav></div>
-  </details>
-  
-  
-  <article class="content">
-    
-    <p><a href="https://juejin.cn/s/neo4j%E8%8F%9C%E9%B8%9F%E6%95%99%E7%A8%8B">Neo4j菜鸟教程</a></p>
-<p><a href="https://www.w3cschool.cn/neo4j/">Neo4j教程</a></p>
-<p><a href="https://www.cnblogs.com/lijiong/p/15867307.html">Neo4j的命令行操作</a></p>
-<h2 id="安装">安装</h2>
-<p><a href="https://neo4j.com/download/">Neo4j官网下载地址</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200925.png" alt=""></p>
-<p>在Windows上下载桌面版，在Linux服务器上下载服务器版</p>
-<p>下载好，一直下一步安装即可。</p>
-<h2 id="简单入门">简单入门</h2>
-<p>点击创建一个新的项目文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200939.png" alt=""></p>
-<p>添加一个新的图形数据库</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200951.png" alt=""></p>
-<p>启动数据库</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201003.png" alt=""></p>
-<p>点击右侧应用工具，打开Neo4j浏览器</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201003.png" alt=""></p>
-<p>成功链接到数据库，在最上面的命令行中，我们可以执行CQL语句
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201014.png" alt=""></p>
-<p>我们可以通过以下语句创建 <font color="#ed9ddf">杭州电子科技大学</font> 和 <font color="#ed9ddf">计算机学院</font> 节点</p>
-<p>标签分别为 <font color="#9bbb59">大学</font> 和 <font color="#9bbb59">学院</font></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">create(:&#34;大学&#34;{name:&#34;杭州电子科技大学&#34;})
-</span></span><span class="line"><span class="cl">create(:&#34;学院&#34;{name:&#34;计算机学院&#34;})
-</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201020.png" alt=""></p>
-<p>通过以下语句，来将这两个节点进行关系链接</p>
-<p><font color="#548dd4">语法格式</font>为：链接两个节点p1 p2，创p1-&gt;p2的关系为 <strong class=chinese>院系</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(p1:`大学`),(p2:`学院`) Create(p1)-[r:院系]-&gt;(p2)
-</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201025.png" alt=""></p>
-<h2 id="简单案例">简单案例</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">创建一个简单的股票知识图谱，包括;
-</span></span><span class="line"><span class="cl">1. 建立几只股票的节点
-</span></span><span class="line"><span class="cl">2. 建立上海证券交易所和深圳证券交易所两个节点
-</span></span><span class="line"><span class="cl">3. 建立省市地方名称的节点
-</span></span><span class="line"><span class="cl">4. 建立股票和证券交易所关系
-</span></span><span class="line"><span class="cl">5. 建立股票和省市名称关系
-</span></span></code></pre></div><ol>
-<li><font color="#ed9ddf">建立几只股票节点</font></li>
-</ol>
-<p>==创建一个节点的Cypher命令==</p>
-<p><code>create(变量:标签{属性1:属性值1,属性2:属性值2}) return 变量</code></p>
-<p><code>create(Variable:Lable{key1:Value1,Key2:Value2}) return Variable</code></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">-- 创建一个股票节点
-</span></span><span class="line"><span class="cl">create(n:Stock{name:&#39;安琪酵母&#39;,code:&#39;600298&#39;,launchidate:date(&#34;2000-08-18&#34;)})return n
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">-- 可以一次创建多个股票节点
-</span></span><span class="line"><span class="cl">create(n:Stock{name:&#39;招商银行&#39;,code:&#39;600036&#39;,launchidate:date(&#34;2002-04-09&#34;)}),(:Stock{name:&#39;中科创达&#39;,code:&#39;300496&#39;,launchidate:date(&#34;2015-12-08&#34;)}),(:Stock{name:&#39;化工科技&#39;,code:&#39;000988&#39;,launchidate:date(&#34;2000-06-18&#34;)}),(:Stock{name:&#39;国信证券&#39;,code:&#39;002736&#39;,launchidate:date(&#34;2014-12-29&#34;)})
-</span></span></code></pre></div><p>按照上方的步骤，创建一个新的股票图形数据库。</p>
-<p>打开图数据库，输入上方语句进行创建节点
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201040.png" alt=""></p>
-<ol start="2">
-<li><font color="#ed9ddf">建立上海证券交易所和深圳证券交易所两个节点</font></li>
-</ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">create(n:SecuritiesExchange{name:&#39;上海证券交易所&#39;}),(:SecuritiesExchange{name:&#39;深圳证券交易所&#39;}) return n
-</span></span></code></pre></div><ol start="3">
-<li><font color="#ed9ddf">建立省市地方名称的节点</font></li>
-</ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">create(n:Province{name:&#39;湖北&#39;}),(:Province{name:&#39;北京&#39;}),(:Province{name:&#39;广东&#39;}) return n
-</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201053.png" alt=""></p>
-<ol start="4">
-<li><font color="#ed9ddf">建立股票和证券交易所关系</font></li>
-</ol>
-<p>创建股票节点‘安琪酵母’和证券交易所节点‘上海证券交易所’的关系  Exchange</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(a:Stock),(b:SecuritiesExhcange) where a.name=&#39;安琪酵母&#39; and b.name=&#39;上海证券交易所&#39; create(a)-[r:Exchange]-&gt;(b) return r
+<!doctype html><html lang=zh-cn><head><script>(function(){const e=localStorage.getItem("theme")||"light";document.documentElement.setAttribute("data-theme",e)})()</script><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><meta name=author content="LiuChao"><meta name=description content="图数据库Neo4j使用教程"><link rel=icon href=https://blog.pi3.fun/favicon.ico><meta name=keywords content=" study  latex  life  academic "><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css integrity=sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js integrity=sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"\\[",right:"\\]",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1}],ignoredTags:["script","noscript","style","textarea","pre","code","option"],throwOnError:!1})})</script><meta property="og:url" content="https://blog.pi3.fun/post/2023/11/neo4j%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/"><meta property="og:site_name" content="Pi3's Notes"><meta property="og:title" content="Neo4j安装与使用"><meta property="og:description" content="图数据库Neo4j使用教程"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-11-24T00:00:00+00:00"><meta property="article:modified_time" content="2023-11-24T00:00:00+00:00"><meta property="article:tag" content="技术"><meta property="article:tag" content="Neo4j"><meta property="article:tag" content="Python"><link rel=canonical href=https://blog.pi3.fun/post/2023/11/neo4j%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/><meta itemprop=name content="Neo4j安装与使用"><meta itemprop=description content="图数据库Neo4j使用教程"><meta itemprop=datePublished content="2023-11-24T00:00:00+00:00"><meta itemprop=dateModified content="2023-11-24T00:00:00+00:00"><meta itemprop=wordCount content="7467"><meta itemprop=keywords content="技术,Neo4j,Python"><link media=screen rel=stylesheet href=https://blog.pi3.fun/css/common.css><link media=screen rel=stylesheet href=https://blog.pi3.fun/css/content.css><link media=screen rel=stylesheet href=https://blog.pi3.fun/css/theme.css><link media=screen rel=stylesheet href=https://blog.pi3.fun/css/iconfont/iconfont.css><link rel=stylesheet href=https://blog.pi3.fun/css/syntax/xcode.css data-theme-style=light media="(prefers-color-scheme: light)"><link rel=stylesheet href=https://blog.pi3.fun/css/syntax/catppuccin-mocha.css data-theme-style=dark media="not all"><title>Neo4j安装与使用 - Pi3's Notes</title>
+<link rel=stylesheet href=https://blog.pi3.fun/css/single.css></head><body><div id=wrapper><header id=header><h1><a href=https://blog.pi3.fun/>Pi3's Notes</a></h1><nav><span class=nav-bar-item><a class=link href=/>主页</a>
+</span><span class=nav-bar-item><a class=link href=/post/>归档</a>
+</span><span class=nav-bar-item><a class=link href=/about/>关于</a>
+</span><span class=nav-bar-item><a class="link theme-toggle" href=javascript:void(0);>黑暗</a></span></nav></header><main id=main class=post><h1>Neo4j安装与使用</h1><div><b>Keywords: </b><a class=link href=https://blog.pi3.fun/tags/%E6%8A%80%E6%9C%AF>#技术</a>
+<a class=link href=https://blog.pi3.fun/tags/neo4j>#Neo4j</a>
+<a class=link href=https://blog.pi3.fun/tags/python>#Python</a></div><details><summary><b>Table of Contents</b></summary><div class=toc><nav id=TableOfContents><ul><li><a href=#安装>安装</a></li><li><a href=#简单入门>简单入门</a></li><li><a href=#简单案例>简单案例</a></li><li><a href=#命令行操作总结>命令行操作总结</a><ul><li><a href=#创建一个节点>创建一个节点</a></li><li><a href=#创建多个节点>创建多个节点</a></li><li><a href=#建立关系>建立关系</a></li><li><a href=#查询某个节点>查询某个节点</a></li><li><a href=#查询某个标签的所有节点>查询某个标签的所有节点</a></li><li><a href=#查询某个标签的节点个数>查询某个标签的节点个数</a></li><li><a href=#查询两个节点之间的关系类型>查询两个节点之间的关系类型</a></li><li><a href=#查询某个节点所有的关系>查询某个节点所有的关系</a></li><li><a href=#查询某个节点所有的关系类型>查询某个节点所有的关系类型</a></li><li><a href=#删除某个节点>删除某个节点</a></li><li><a href=#删除某个标签的所有节点>删除某个标签的所有节点</a></li><li><a href=#删除所有节点>删除所有节点</a></li><li><a href=#删除两个节点之间的关系>删除两个节点之间的关系</a></li><li><a href=#删除某个节点的所有关系>删除某个节点的所有关系</a></li><li><a href=#删除某个标签的所有关系>删除某个标签的所有关系</a></li><li><a href=#增加节点的属性>增加节点的属性</a></li><li><a href=#删除节点的属性>删除节点的属性</a></li><li><a href=#查询某个节点有关的节点和关系>查询某个节点有关的节点和关系</a></li><li><a href=#删除某个节点有关的节点和关系>删除某个节点有关的节点和关系</a></li></ul></li><li><a href=#neo4j-server安装与使用>Neo4j Server安装与使用</a><ul><li><a href=#数据库本地管理>数据库本地管理</a></li><li><a href=#用户管理>用户管理</a></li><li><a href=#数据库的备份和恢复>数据库的备份和恢复</a></li></ul></li><li><a href=#在neo4j中批量创建节点和关系>在Neo4j中批量创建节点和关系</a><ul><li><a href=#在desktop中用csv文件导入批量创建节点>在desktop中用CSV文件导入批量创建节点</a></li><li><a href=#在desktop中用csv文件导入批量创建关系>在desktop中用CSV文件导入批量创建关系</a></li><li><a href=#在远程server中用csv文件导入批量创建节点和关系常用>在远程Server中用CSV文件导入批量创建节点和关系（常用）</a></li></ul></li><li><a href=#neo4j的python操作>Neo4j的Python操作</a><ul><li><a href=#在远程服务器上安装并创建neo4j>在远程服务器上安装并创建Neo4j</a></li><li><a href=#利用python读取excel数据创建节点>利用Python读取excel数据创建节点</a></li></ul></li></ul></nav></div></details><article class=content><p><a href=https://juejin.cn/s/neo4j%E8%8F%9C%E9%B8%9F%E6%95%99%E7%A8%8B>Neo4j菜鸟教程</a></p><p><a href=https://www.w3cschool.cn/neo4j/>Neo4j教程</a></p><p><a href=https://www.cnblogs.com/lijiong/p/15867307.html>Neo4j的命令行操作</a></p><h2 id=安装>安装</h2><p><a href=https://neo4j.com/download/>Neo4j官网下载地址</a></p><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200925.png alt></p><p>在Windows上下载桌面版，在Linux服务器上下载服务器版</p><p>下载好，一直下一步安装即可。</p><h2 id=简单入门>简单入门</h2><p>点击创建一个新的项目文件</p><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200939.png alt></p><p>添加一个新的图形数据库</p><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124200951.png alt></p><p>启动数据库</p><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201003.png alt></p><p>点击右侧应用工具，打开Neo4j浏览器</p><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201003.png alt></p><p>成功链接到数据库，在最上面的命令行中，我们可以执行CQL语句
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201014.png alt></p><p>我们可以通过以下语句创建 <font color=#ed9ddf>杭州电子科技大学</font> 和 <font color=#ed9ddf>计算机学院</font> 节点</p><p>标签分别为 <font color=#9bbb59>大学</font> 和 <font color=#9bbb59>学院</font></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>create(:&#34;大学&#34;{name:&#34;杭州电子科技大学&#34;})
+</span></span><span class=line><span class=cl>create(:&#34;学院&#34;{name:&#34;计算机学院&#34;})
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201020.png alt></p><p>通过以下语句，来将这两个节点进行关系链接</p><p><font color=#548dd4>语法格式</font>为：链接两个节点p1 p2，创p1->p2的关系为 <strong class=chinese>院系</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(p1:`大学`),(p2:`学院`) Create(p1)-[r:院系]-&gt;(p2)
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201025.png alt></p><h2 id=简单案例>简单案例</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>创建一个简单的股票知识图谱，包括;
+</span></span><span class=line><span class=cl>1. 建立几只股票的节点
+</span></span><span class=line><span class=cl>2. 建立上海证券交易所和深圳证券交易所两个节点
+</span></span><span class=line><span class=cl>3. 建立省市地方名称的节点
+</span></span><span class=line><span class=cl>4. 建立股票和证券交易所关系
+</span></span><span class=line><span class=cl>5. 建立股票和省市名称关系
+</span></span></code></pre></div><ol><li><font color=#ed9ddf>建立几只股票节点</font></li></ol><p>==创建一个节点的Cypher命令==</p><p><code>create(变量:标签{属性1:属性值1,属性2:属性值2}) return 变量</code></p><p><code>create(Variable:Lable{key1:Value1,Key2:Value2}) return Variable</code></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>-- 创建一个股票节点
+</span></span><span class=line><span class=cl>create(n:Stock{name:&#39;安琪酵母&#39;,code:&#39;600298&#39;,launchidate:date(&#34;2000-08-18&#34;)})return n
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>-- 可以一次创建多个股票节点
+</span></span><span class=line><span class=cl>create(n:Stock{name:&#39;招商银行&#39;,code:&#39;600036&#39;,launchidate:date(&#34;2002-04-09&#34;)}),(:Stock{name:&#39;中科创达&#39;,code:&#39;300496&#39;,launchidate:date(&#34;2015-12-08&#34;)}),(:Stock{name:&#39;化工科技&#39;,code:&#39;000988&#39;,launchidate:date(&#34;2000-06-18&#34;)}),(:Stock{name:&#39;国信证券&#39;,code:&#39;002736&#39;,launchidate:date(&#34;2014-12-29&#34;)})
+</span></span></code></pre></div><p>按照上方的步骤，创建一个新的股票图形数据库。</p><p>打开图数据库，输入上方语句进行创建节点
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201040.png alt></p><ol start=2><li><font color=#ed9ddf>建立上海证券交易所和深圳证券交易所两个节点</font></li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>create(n:SecuritiesExchange{name:&#39;上海证券交易所&#39;}),(:SecuritiesExchange{name:&#39;深圳证券交易所&#39;}) return n
+</span></span></code></pre></div><ol start=3><li><font color=#ed9ddf>建立省市地方名称的节点</font></li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>create(n:Province{name:&#39;湖北&#39;}),(:Province{name:&#39;北京&#39;}),(:Province{name:&#39;广东&#39;}) return n
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201053.png alt></p><ol start=4><li><font color=#ed9ddf>建立股票和证券交易所关系</font></li></ol><p>创建股票节点‘安琪酵母’和证券交易所节点‘上海证券交易所’的关系 Exchange</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(a:Stock),(b:SecuritiesExhcange) where a.name=&#39;安琪酵母&#39; and b.name=&#39;上海证券交易所&#39; create(a)-[r:Exchange]-&gt;(b) return r
 </span></span></code></pre></div><p>同样用这个方法可创建其他股票节点和证券交易所节点的关系
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201108.png" alt=""></p>
-<ol start="5">
-<li><font color="#ed9ddf">建立股票和省市名称关系</font></li>
-</ol>
-<p>创建股票节点‘安琪酵母’和省市‘湖北’的关系  Area</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(a:Stock),(b:Province) where a.name = &#39;安琪酵母&#39; and b.name = &#39;湖北&#39; create (a)-[r:Area]-&gt;(b) return r
-</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201108.png" alt=""></p>
-<h2 id="命令行操作总结">命令行操作总结</h2>
-<h3 id="创建一个节点">创建一个节点</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">create(n:Stock{name:&#39;安琪酵母&#39;,code:&#39;600298&#39;,launchDate:date(&#39;2000-08-18&#39;)}) return n
-</span></span></code></pre></div><h3 id="创建多个节点">创建多个节点</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">create(n:Stock{name:&#39;招商银行&#39;,code:&#39;600036&#39;,launchDate:date(&#39;2002-04-09&#39;)}),
-</span></span><span class="line"><span class="cl">(:Stock{name:&#39;中科创达&#39;,code:&#39;300496&#39;,launchDate:date(&#39;2015-12-10&#39;)}),
-</span></span><span class="line"><span class="cl">(:Stock{name:&#39;华工科技&#39;,code:&#39;000988&#39;,launchDate:date(&#39;2000-06-09&#39;)}),
-</span></span><span class="line"><span class="cl">(:Stock{name:&#39;国信证券&#39;,code:&#39;002736&#39;,launchDate:date(&#39;2014-12-29&#39;)})
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">create(n:SecuritiesExchange{name:&#39;上海证券交易所&#39;}),(:SecuritiesExchange{name:&#39;深圳证券交易所&#39;})
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">create(n:Province{name:&#39;北京&#39;}),(:Province{name:&#39;湖北&#39;}),(:Province{name:&#39;广东&#39;})
-</span></span></code></pre></div><h3 id="建立关系">建立关系</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(a:Stock),(b:SecuritiesExchange) where a.name = &#39;安琪酵母&#39; and b.name = &#39;上海证券交易所&#39; create (a)-[r:Exchange]-&gt;(b) return r
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(a:Stock),(b:Province) where a.name = &#39;安琪酵母&#39; and b.name = &#39;湖北&#39; create (a)-[r:Area]-&gt;(b) return r
-</span></span></code></pre></div><h3 id="查询某个节点">查询某个节点</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(a:Stock) where a.name = &#39;安琪酵母&#39; return a
-</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201121.png" alt=""></p>
-<h3 id="查询某个标签的所有节点">查询某个标签的所有节点</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(a:Stock) return a
-</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201535.png" alt=""></p>
-<h3 id="查询某个标签的节点个数">查询某个标签的节点个数</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(a:Stock) return count(a)
-</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201204.png" alt=""></p>
-<h3 id="查询两个节点之间的关系类型">查询两个节点之间的关系类型</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(:Stock{name:&#39;安琪酵母&#39;})-[r]-&gt;(:Province{name:&#39;湖北&#39;}) return type(r)
-</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201757.png" alt=""></p>
-<h3 id="查询某个节点所有的关系">查询某个节点所有的关系</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match a = ()-[]-&gt;(:Province{name:&#39;湖北&#39;}) return a
-</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201358.png" alt=""></p>
-<h3 id="查询某个节点所有的关系类型">查询某个节点所有的关系类型</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(:Stock{name:&#39;安琪酵母&#39;})-[r]-&gt;() return type(r)
-</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201420.png" alt=""></p>
-<h3 id="删除某个节点">删除某个节点</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(a:Stock) where a.name = &#39;中科创达&#39; delete a
-</span></span></code></pre></div><blockquote>
-<p>[!attention]
-删除节点之前，必须删除和节点相关的所有关系，不然会报错</p>
-</blockquote>
-<h3 id="删除某个标签的所有节点">删除某个标签的所有节点</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(n:Stock) delete n
-</span></span></code></pre></div><h3 id="删除所有节点">删除所有节点</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(n) delete n
-</span></span></code></pre></div><h3 id="删除两个节点之间的关系">删除两个节点之间的关系</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(:Stock{name:&#39;安琪酵母&#39;})-[r]-&gt;(:Province{name:&#39;湖北&#39;}) delete r
-</span></span></code></pre></div><h3 id="删除某个节点的所有关系">删除某个节点的所有关系</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(:Stock{name:&#39;安琪酵母&#39;})-[r]-&gt;() delete r
-</span></span></code></pre></div><h3 id="删除某个标签的所有关系">删除某个标签的所有关系</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(:Stock)-[r]-&gt;() delete r
-</span></span></code></pre></div><h3 id="增加节点的属性">增加节点的属性</h3>
-<p>set子句</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(a:Stock) where a.name = &#39;安琪酵母&#39; set a.abbreviation = &#39;AQJM&#39; return a
-</span></span></code></pre></div><h3 id="删除节点的属性">删除节点的属性</h3>
-<p>remove子句</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match(a:Stock) where a.name = &#39;安琪酵母&#39; remove a.abbreviation return a
-</span></span></code></pre></div><h3 id="查询某个节点有关的节点和关系">查询某个节点有关的节点和关系</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match (m)-[r]-(n:Stock{name:&#39;安琪酵母&#39;}) return m,r,n
-</span></span></code></pre></div><h3 id="删除某个节点有关的节点和关系">删除某个节点有关的节点和关系</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">match (m)-[r]-(n:Stock{name:&#39;安琪酵母&#39;}) delete m,r,n
-</span></span></code></pre></div><h2 id="neo4j-server安装与使用">Neo4j Server安装与使用</h2>
-<p><a href="https://neo4j.com/download/">Neo4j官网下载地址</a></p>
-<p>下载Neo4j community server版本，同时需要JDK环境</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Server 和 desktop版本的区别在于：
-</span></span><span class="line"><span class="cl">desktop拥有良好的可视化，具有跟桌面应用程序一样的操作，可以方便管理多个数据库。
-</span></span><span class="line"><span class="cl">而server则是大量使用命令行来执行CQL语句，同时也可以打开浏览器界面，与desktop的界面是一样的。
-</span></span></code></pre></div><p>添加Neo4j/bin为环境变量</p>
-<p><code>neo4j.bat console</code> Windows环境下，打开命令行界面，同时打开本地网络图形化界面</p>
-<p><code>neo4j install-server</code> 安装服务</p>
-<h3 id="数据库本地管理">数据库本地管理</h3>
-<p>Neo4j安装成功后，会默认安装两个数据库，System和Neo4j</p>
-<p>在system中，可以进行数据库的管理，用户的管理，完成一些设置等等</p>
-<p><code>neo4j start</code> 启动</p>
-<p><code>neo4j stop</code> 关闭</p>
-<h3 id="用户管理">用户管理</h3>
-<p>在bin目录下，使用<code>cypher-shell</code>连接数据库执行<code>cypher</code>命令</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cypher-shell -d neo4j[数据库名称]
-</span></span><span class="line"><span class="cl">-- 需要输入用户名和密码，登录
-</span></span><span class="line"><span class="cl">-- 进入数据库中之后，就可以执行CQL语句进行操作
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">match(n) return n;  -- 查询数据库中所有节点
-</span></span><span class="line"><span class="cl">:help  -- 查看当前数据库可以用的指令
-</span></span><span class="line"><span class="cl">:use system  -- 使用system数据库
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">show databases;  -- 查看所有数据库（只能在system下操作）
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">:exit  -- 退出数据库命令行
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201108.png alt></p><ol start=5><li><font color=#ed9ddf>建立股票和省市名称关系</font></li></ol><p>创建股票节点‘安琪酵母’和省市‘湖北’的关系 Area</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(a:Stock),(b:Province) where a.name = &#39;安琪酵母&#39; and b.name = &#39;湖北&#39; create (a)-[r:Area]-&gt;(b) return r
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201108.png alt></p><h2 id=命令行操作总结>命令行操作总结</h2><h3 id=创建一个节点>创建一个节点</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>create(n:Stock{name:&#39;安琪酵母&#39;,code:&#39;600298&#39;,launchDate:date(&#39;2000-08-18&#39;)}) return n
+</span></span></code></pre></div><h3 id=创建多个节点>创建多个节点</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>create(n:Stock{name:&#39;招商银行&#39;,code:&#39;600036&#39;,launchDate:date(&#39;2002-04-09&#39;)}),
+</span></span><span class=line><span class=cl>(:Stock{name:&#39;中科创达&#39;,code:&#39;300496&#39;,launchDate:date(&#39;2015-12-10&#39;)}),
+</span></span><span class=line><span class=cl>(:Stock{name:&#39;华工科技&#39;,code:&#39;000988&#39;,launchDate:date(&#39;2000-06-09&#39;)}),
+</span></span><span class=line><span class=cl>(:Stock{name:&#39;国信证券&#39;,code:&#39;002736&#39;,launchDate:date(&#39;2014-12-29&#39;)})
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>create(n:SecuritiesExchange{name:&#39;上海证券交易所&#39;}),(:SecuritiesExchange{name:&#39;深圳证券交易所&#39;})
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>create(n:Province{name:&#39;北京&#39;}),(:Province{name:&#39;湖北&#39;}),(:Province{name:&#39;广东&#39;})
+</span></span></code></pre></div><h3 id=建立关系>建立关系</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(a:Stock),(b:SecuritiesExchange) where a.name = &#39;安琪酵母&#39; and b.name = &#39;上海证券交易所&#39; create (a)-[r:Exchange]-&gt;(b) return r
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(a:Stock),(b:Province) where a.name = &#39;安琪酵母&#39; and b.name = &#39;湖北&#39; create (a)-[r:Area]-&gt;(b) return r
+</span></span></code></pre></div><h3 id=查询某个节点>查询某个节点</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(a:Stock) where a.name = &#39;安琪酵母&#39; return a
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201121.png alt></p><h3 id=查询某个标签的所有节点>查询某个标签的所有节点</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(a:Stock) return a
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201535.png alt></p><h3 id=查询某个标签的节点个数>查询某个标签的节点个数</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(a:Stock) return count(a)
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201204.png alt></p><h3 id=查询两个节点之间的关系类型>查询两个节点之间的关系类型</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(:Stock{name:&#39;安琪酵母&#39;})-[r]-&gt;(:Province{name:&#39;湖北&#39;}) return type(r)
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201757.png alt></p><h3 id=查询某个节点所有的关系>查询某个节点所有的关系</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match a = ()-[]-&gt;(:Province{name:&#39;湖北&#39;}) return a
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201358.png alt></p><h3 id=查询某个节点所有的关系类型>查询某个节点所有的关系类型</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(:Stock{name:&#39;安琪酵母&#39;})-[r]-&gt;() return type(r)
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201420.png alt></p><h3 id=删除某个节点>删除某个节点</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(a:Stock) where a.name = &#39;中科创达&#39; delete a
+</span></span></code></pre></div><blockquote><p>[!attention]
+删除节点之前，必须删除和节点相关的所有关系，不然会报错</p></blockquote><h3 id=删除某个标签的所有节点>删除某个标签的所有节点</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(n:Stock) delete n
+</span></span></code></pre></div><h3 id=删除所有节点>删除所有节点</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(n) delete n
+</span></span></code></pre></div><h3 id=删除两个节点之间的关系>删除两个节点之间的关系</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(:Stock{name:&#39;安琪酵母&#39;})-[r]-&gt;(:Province{name:&#39;湖北&#39;}) delete r
+</span></span></code></pre></div><h3 id=删除某个节点的所有关系>删除某个节点的所有关系</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(:Stock{name:&#39;安琪酵母&#39;})-[r]-&gt;() delete r
+</span></span></code></pre></div><h3 id=删除某个标签的所有关系>删除某个标签的所有关系</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(:Stock)-[r]-&gt;() delete r
+</span></span></code></pre></div><h3 id=增加节点的属性>增加节点的属性</h3><p>set子句</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(a:Stock) where a.name = &#39;安琪酵母&#39; set a.abbreviation = &#39;AQJM&#39; return a
+</span></span></code></pre></div><h3 id=删除节点的属性>删除节点的属性</h3><p>remove子句</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match(a:Stock) where a.name = &#39;安琪酵母&#39; remove a.abbreviation return a
+</span></span></code></pre></div><h3 id=查询某个节点有关的节点和关系>查询某个节点有关的节点和关系</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match (m)-[r]-(n:Stock{name:&#39;安琪酵母&#39;}) return m,r,n
+</span></span></code></pre></div><h3 id=删除某个节点有关的节点和关系>删除某个节点有关的节点和关系</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>match (m)-[r]-(n:Stock{name:&#39;安琪酵母&#39;}) delete m,r,n
+</span></span></code></pre></div><h2 id=neo4j-server安装与使用>Neo4j Server安装与使用</h2><p><a href=https://neo4j.com/download/>Neo4j官网下载地址</a></p><p>下载Neo4j community server版本，同时需要JDK环境</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Server 和 desktop版本的区别在于：
+</span></span><span class=line><span class=cl>desktop拥有良好的可视化，具有跟桌面应用程序一样的操作，可以方便管理多个数据库。
+</span></span><span class=line><span class=cl>而server则是大量使用命令行来执行CQL语句，同时也可以打开浏览器界面，与desktop的界面是一样的。
+</span></span></code></pre></div><p>添加Neo4j/bin为环境变量</p><p><code>neo4j.bat console</code> Windows环境下，打开命令行界面，同时打开本地网络图形化界面</p><p><code>neo4j install-server</code> 安装服务</p><h3 id=数据库本地管理>数据库本地管理</h3><p>Neo4j安装成功后，会默认安装两个数据库，System和Neo4j</p><p>在system中，可以进行数据库的管理，用户的管理，完成一些设置等等</p><p><code>neo4j start</code> 启动</p><p><code>neo4j stop</code> 关闭</p><h3 id=用户管理>用户管理</h3><p>在bin目录下，使用<code>cypher-shell</code>连接数据库执行<code>cypher</code>命令</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>cypher-shell -d neo4j[数据库名称]
+</span></span><span class=line><span class=cl>-- 需要输入用户名和密码，登录
+</span></span><span class=line><span class=cl>-- 进入数据库中之后，就可以执行CQL语句进行操作
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>match(n) return n;  -- 查询数据库中所有节点
+</span></span><span class=line><span class=cl>:help  -- 查看当前数据库可以用的指令
+</span></span><span class=line><span class=cl>:use system  -- 使用system数据库
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>show databases;  -- 查看所有数据库（只能在system下操作）
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>:exit  -- 退出数据库命令行
 </span></span></code></pre></div><p>在system下，对于用户进行管理的操作
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201842.png" alt=""></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">-- 添加用户
-</span></span><span class="line"><span class="cl">CALL dbm.security.createUser(name,password,requirePasswordChange密码改变);
-</span></span><span class="line"><span class="cl">-- 示例
-</span></span><span class="line"><span class="cl">CALL dbm.security.createUser(&#39;john&#39;,&#39;123456&#39;,true);
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">-- 列出所有用户
-</span></span><span class="line"><span class="cl">CALL dbms.security.listUsers();
-</span></span></code></pre></div><h3 id="数据库的备份和恢复">数据库的备份和恢复</h3>
-<p>Neo4j数据库的备份和恢复可以在线或者离线进行</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">neo4j</span><span class="o">-</span><span class="n">admin</span> <span class="o">-</span><span class="n">h</span> <span class="n">dump</span><span class="o">/</span><span class="nb">load</span> <span class="c1"># 使用帮助</span>
-</span></span><span class="line"><span class="cl"><span class="n">neo4j</span> <span class="n">stop</span>  <span class="c1"># 先停止服务</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="mf">1.</span> <span class="err">离线备份</span>
-</span></span><span class="line"><span class="cl"><span class="n">neo4j</span><span class="o">-</span><span class="n">admin</span> <span class="n">dump</span> <span class="o">--</span><span class="n">database</span><span class="o">=&lt;</span><span class="n">database</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">to</span><span class="o">=&lt;</span><span class="n">destination</span><span class="o">-</span><span class="n">path</span><span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="err">示例：</span>
-</span></span><span class="line"><span class="cl"><span class="n">neo4j</span><span class="o">-</span><span class="n">admin</span> <span class="n">dump</span> <span class="o">--</span><span class="n">database</span><span class="o">=</span><span class="n">neo4j</span> <span class="o">--</span><span class="n">to</span><span class="o">=</span><span class="n">C</span><span class="p">:</span>\\<span class="n">desktop</span>\\<span class="n">neo4jdata</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="mf">2.</span> <span class="err">离线恢复</span>
-</span></span><span class="line"><span class="cl"><span class="n">neo4j</span><span class="o">-</span><span class="n">admin</span> <span class="nb">load</span> <span class="o">--</span><span class="n">from</span><span class="o">=&lt;</span><span class="n">archive</span><span class="o">-</span><span class="n">path</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">databse</span><span class="o">=&lt;</span><span class="n">database</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">--</span><span class="n">force</span><span class="p">]</span><span class="err">存在覆盖</span>
-</span></span><span class="line"><span class="cl"><span class="err">示例：</span>
-</span></span><span class="line"><span class="cl"><span class="n">neo4j</span><span class="o">-</span><span class="n">admin</span> <span class="nb">load</span> <span class="o">--</span><span class="n">from</span><span class="o">=</span><span class="n">C</span><span class="p">:</span>\\<span class="n">desktop</span>\\<span class="n">neo4jdata</span> <span class="o">--</span><span class="n">databse</span><span class="o">=</span><span class="n">neo4j</span> <span class="o">--</span><span class="n">force</span>
-</span></span></code></pre></div><h2 id="在neo4j中批量创建节点和关系">在Neo4j中批量创建节点和关系</h2>
-<p><a href="https://cloud.tencent.com/developer/article/1387710">neo4j进阶操作（四）neo4j导入csv，使用load导入csv文件进入neo4j</a></p>
-<h3 id="在desktop中用csv文件导入批量创建节点">在desktop中用CSV文件导入批量创建节点</h3>
-<p>CSV文件中的数据，用于演示，实际上数据可以很多</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201901.png" alt=""></p>
-<p>把我们需要导入的CSV数据文件，拷贝到Neo4j的数据目录下
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201910.png" alt=""></p>
-<p>在数据目录下对应数据库的import目录下
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201920.png" alt=""></p>
-<p>在Neo4j Browser中执行导入命令</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="nb">load</span> <span class="n">CSV</span> <span class="n">with</span> <span class="n">headers</span> <span class="n">from</span> <span class="s1">&#39;file:///Stocks.csv&#39;</span> <span class="n">as</span> <span class="n">line</span>
-</span></span><span class="line"><span class="cl"><span class="n">create</span> <span class="p">(:</span><span class="n">Stock</span><span class="p">{</span><span class="n">code</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">code</span><span class="p">,</span><span class="n">name</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">id</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">id</span><span class="p">})</span>
-</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201939.png" alt=""></p>
-<p>查看节点，导入成功
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202011.png" alt=""></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">如果导入的数据中出现中文乱码的问题，说明是CSV文件的编码问题，把CSV的编码格式改成UTF-8格式
-</span></span></code></pre></div><h3 id="在desktop中用csv文件导入批量创建关系">在desktop中用CSV文件导入批量创建关系</h3>
-<p>创建股票和证券交易所的关系，先建立CSV文件：（股票代码）（证券交易所id）
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202018.png" alt=""></p>
-<p>同样拷贝到import文件夹中</p>
-<p>在Neo4j Browser中执行导入命令</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="nb">load</span> <span class="n">CSV</span> <span class="n">with</span> <span class="n">headers</span> <span class="n">from</span> <span class="s1">&#39;file:///segx.csv&#39;</span> <span class="n">as</span> <span class="n">line</span>
-</span></span><span class="line"><span class="cl"><span class="n">match</span> <span class="p">(</span><span class="n">from</span><span class="p">:</span><span class="n">Stock</span><span class="p">{</span><span class="n">code</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">stock_code</span><span class="p">}),(</span><span class="n">to</span><span class="p">:</span><span class="n">SecuritiesExchange</span><span class="p">{</span><span class="n">id</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">exchange_id</span><span class="p">})</span>
-</span></span><span class="line"><span class="cl"><span class="n">merge</span> <span class="p">(</span><span class="n">from</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">Exchange</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">to</span><span class="p">)</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">这里一直显示(no changes, no records)
-</span></span><span class="line"><span class="cl">原因在于，这里的交易所节点是之前创建的，在创建的时候并没有设置ID属性，所以在设置关系的时候，并不能以id的方式进行查找匹配节点。
-</span></span><span class="line"><span class="cl">在交易所节点中，属性只有name一个，所以应该用name，或者在交易所节点中增加id属性。
-</span></span><span class="line"><span class="cl">所以在添加关系的时候，应该检查每个节点属性是否匹配
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201842.png alt></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>-- 添加用户
+</span></span><span class=line><span class=cl>CALL dbm.security.createUser(name,password,requirePasswordChange密码改变);
+</span></span><span class=line><span class=cl>-- 示例
+</span></span><span class=line><span class=cl>CALL dbm.security.createUser(&#39;john&#39;,&#39;123456&#39;,true);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>-- 列出所有用户
+</span></span><span class=line><span class=cl>CALL dbms.security.listUsers();
+</span></span></code></pre></div><h3 id=数据库的备份和恢复>数据库的备份和恢复</h3><p>Neo4j数据库的备份和恢复可以在线或者离线进行</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>neo4j</span><span class=o>-</span><span class=n>admin</span> <span class=o>-</span><span class=n>h</span> <span class=n>dump</span><span class=o>/</span><span class=nb>load</span> <span class=c1># 使用帮助</span>
+</span></span><span class=line><span class=cl><span class=n>neo4j</span> <span class=n>stop</span>  <span class=c1># 先停止服务</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=mf>1.</span> <span class=err>离线备份</span>
+</span></span><span class=line><span class=cl><span class=n>neo4j</span><span class=o>-</span><span class=n>admin</span> <span class=n>dump</span> <span class=o>--</span><span class=n>database</span><span class=o>=&lt;</span><span class=n>database</span><span class=o>&gt;</span> <span class=o>--</span><span class=n>to</span><span class=o>=&lt;</span><span class=n>destination</span><span class=o>-</span><span class=n>path</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=err>示例：</span>
+</span></span><span class=line><span class=cl><span class=n>neo4j</span><span class=o>-</span><span class=n>admin</span> <span class=n>dump</span> <span class=o>--</span><span class=n>database</span><span class=o>=</span><span class=n>neo4j</span> <span class=o>--</span><span class=n>to</span><span class=o>=</span><span class=n>C</span><span class=p>:</span>\\<span class=n>desktop</span>\\<span class=n>neo4jdata</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=mf>2.</span> <span class=err>离线恢复</span>
+</span></span><span class=line><span class=cl><span class=n>neo4j</span><span class=o>-</span><span class=n>admin</span> <span class=nb>load</span> <span class=o>--</span><span class=n>from</span><span class=o>=&lt;</span><span class=n>archive</span><span class=o>-</span><span class=n>path</span><span class=o>&gt;</span> <span class=o>--</span><span class=n>databse</span><span class=o>=&lt;</span><span class=n>database</span><span class=o>&gt;</span> <span class=p>[</span><span class=o>--</span><span class=n>force</span><span class=p>]</span><span class=err>存在覆盖</span>
+</span></span><span class=line><span class=cl><span class=err>示例：</span>
+</span></span><span class=line><span class=cl><span class=n>neo4j</span><span class=o>-</span><span class=n>admin</span> <span class=nb>load</span> <span class=o>--</span><span class=n>from</span><span class=o>=</span><span class=n>C</span><span class=p>:</span>\\<span class=n>desktop</span>\\<span class=n>neo4jdata</span> <span class=o>--</span><span class=n>databse</span><span class=o>=</span><span class=n>neo4j</span> <span class=o>--</span><span class=n>force</span>
+</span></span></code></pre></div><h2 id=在neo4j中批量创建节点和关系>在Neo4j中批量创建节点和关系</h2><p><a href=https://cloud.tencent.com/developer/article/1387710>neo4j进阶操作（四）neo4j导入csv，使用load导入csv文件进入neo4j</a></p><h3 id=在desktop中用csv文件导入批量创建节点>在desktop中用CSV文件导入批量创建节点</h3><p>CSV文件中的数据，用于演示，实际上数据可以很多</p><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201901.png alt></p><p>把我们需要导入的CSV数据文件，拷贝到Neo4j的数据目录下
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201910.png alt></p><p>在数据目录下对应数据库的import目录下
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201920.png alt></p><p>在Neo4j Browser中执行导入命令</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=nb>load</span> <span class=n>CSV</span> <span class=n>with</span> <span class=n>headers</span> <span class=n>from</span> <span class=s1>&#39;file:///Stocks.csv&#39;</span> <span class=n>as</span> <span class=n>line</span>
+</span></span><span class=line><span class=cl><span class=n>create</span> <span class=p>(:</span><span class=n>Stock</span><span class=p>{</span><span class=n>code</span><span class=p>:</span><span class=n>line</span><span class=o>.</span><span class=n>code</span><span class=p>,</span><span class=n>name</span><span class=p>:</span><span class=n>line</span><span class=o>.</span><span class=n>name</span><span class=p>,</span><span class=n>id</span><span class=p>:</span><span class=n>line</span><span class=o>.</span><span class=n>id</span><span class=p>})</span>
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124201939.png alt></p><p>查看节点，导入成功
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202011.png alt></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>如果导入的数据中出现中文乱码的问题，说明是CSV文件的编码问题，把CSV的编码格式改成UTF-8格式
+</span></span></code></pre></div><h3 id=在desktop中用csv文件导入批量创建关系>在desktop中用CSV文件导入批量创建关系</h3><p>创建股票和证券交易所的关系，先建立CSV文件：（股票代码）（证券交易所id）
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202018.png alt></p><p>同样拷贝到import文件夹中</p><p>在Neo4j Browser中执行导入命令</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=nb>load</span> <span class=n>CSV</span> <span class=n>with</span> <span class=n>headers</span> <span class=n>from</span> <span class=s1>&#39;file:///segx.csv&#39;</span> <span class=n>as</span> <span class=n>line</span>
+</span></span><span class=line><span class=cl><span class=n>match</span> <span class=p>(</span><span class=n>from</span><span class=p>:</span><span class=n>Stock</span><span class=p>{</span><span class=n>code</span><span class=p>:</span><span class=n>line</span><span class=o>.</span><span class=n>stock_code</span><span class=p>}),(</span><span class=n>to</span><span class=p>:</span><span class=n>SecuritiesExchange</span><span class=p>{</span><span class=n>id</span><span class=p>:</span><span class=n>line</span><span class=o>.</span><span class=n>exchange_id</span><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=n>merge</span> <span class=p>(</span><span class=n>from</span><span class=p>)</span><span class=o>-</span><span class=p>[</span><span class=n>r</span><span class=p>:</span><span class=n>Exchange</span><span class=p>]</span><span class=o>-&gt;</span><span class=p>(</span><span class=n>to</span><span class=p>)</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>这里一直显示(no changes, no records)
+</span></span><span class=line><span class=cl>原因在于，这里的交易所节点是之前创建的，在创建的时候并没有设置ID属性，所以在设置关系的时候，并不能以id的方式进行查找匹配节点。
+</span></span><span class=line><span class=cl>在交易所节点中，属性只有name一个，所以应该用name，或者在交易所节点中增加id属性。
+</span></span><span class=line><span class=cl>所以在添加关系的时候，应该检查每个节点属性是否匹配
 </span></span></code></pre></div><p>把上诉关系数据文件，改为以code和name进行索引，代码也改为：
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202024.png" alt=""></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="nb">load</span> <span class="n">CSV</span> <span class="n">with</span> <span class="n">headers</span> <span class="n">from</span> <span class="s1">&#39;file:///segx.csv&#39;</span> <span class="n">as</span> <span class="n">line</span>
-</span></span><span class="line"><span class="cl"><span class="n">match</span> <span class="p">(</span><span class="n">from</span><span class="p">:</span><span class="n">Stock</span><span class="p">{</span><span class="n">code</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">code</span><span class="p">}),(</span><span class="n">to</span><span class="p">:</span><span class="n">SecuritiesExchange</span><span class="p">{</span><span class="n">name</span><span class="p">:</span><span class="n">line</span><span class="o">.</span><span class="n">name</span><span class="p">})</span>
-</span></span><span class="line"><span class="cl"><span class="n">merge</span> <span class="p">(</span><span class="n">from</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">Exchange</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">to</span><span class="p">)</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">这里还有一个坑点：
-</span></span><span class="line"><span class="cl">用excel编辑CSV格式的文件是，在Windows下默认保存为Unicode格式，而在Neo4j导入数据的过程中是需要用到UTF-8的格式。所以需要用记事本打开，另存为UTF-8格式。
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">如果不更改这个格式时，那么导入中文时会乱码，同时属性名可能不能匹配。上面显示(no changes, no records)也是有这样一个原因
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202024.png alt></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=nb>load</span> <span class=n>CSV</span> <span class=n>with</span> <span class=n>headers</span> <span class=n>from</span> <span class=s1>&#39;file:///segx.csv&#39;</span> <span class=n>as</span> <span class=n>line</span>
+</span></span><span class=line><span class=cl><span class=n>match</span> <span class=p>(</span><span class=n>from</span><span class=p>:</span><span class=n>Stock</span><span class=p>{</span><span class=n>code</span><span class=p>:</span><span class=n>line</span><span class=o>.</span><span class=n>code</span><span class=p>}),(</span><span class=n>to</span><span class=p>:</span><span class=n>SecuritiesExchange</span><span class=p>{</span><span class=n>name</span><span class=p>:</span><span class=n>line</span><span class=o>.</span><span class=n>name</span><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=n>merge</span> <span class=p>(</span><span class=n>from</span><span class=p>)</span><span class=o>-</span><span class=p>[</span><span class=n>r</span><span class=p>:</span><span class=n>Exchange</span><span class=p>]</span><span class=o>-&gt;</span><span class=p>(</span><span class=n>to</span><span class=p>)</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>这里还有一个坑点：
+</span></span><span class=line><span class=cl>用excel编辑CSV格式的文件是，在Windows下默认保存为Unicode格式，而在Neo4j导入数据的过程中是需要用到UTF-8的格式。所以需要用记事本打开，另存为UTF-8格式。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>如果不更改这个格式时，那么导入中文时会乱码，同时属性名可能不能匹配。上面显示(no changes, no records)也是有这样一个原因
 </span></span></code></pre></div><p>完成上面两个关键的步骤，终于可以进行导入
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202029.png" alt="">
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202034.png" alt=""></p>
-<h3 id="在远程server中用csv文件导入批量创建节点和关系常用">在远程Server中用CSV文件导入批量创建节点和关系（常用）</h3>
-<p><a href="https://blog.csdn.net/haveanybody/article/details/90518235">Neo4j笔记（三）Neo4j批量导入数据_neo4j 批量导入数据-CSDN博客</a></p>
-<p>这里远程Server的load导入操作，与本地的desktop的load导入操作基本相同。</p>
-<p>远程Server的导入，可以利用Browser进行图形化界面，也可以利用命令行操作。可以利用load操作，也可以利用neo4j-import进行导入
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202048.png" alt=""></p>
-<p>远程启动Neo4j Server <code>neo4j start</code> <code>neo4j console</code></p>
-<p>可以浏览器访问<code>http:本机ip:显示端口</code></p>
-<p>我们也可以用本地neo4j desktop 操作远程的neo4j server
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202054.png" alt=""></p>
-<p>输入服务的IP地址和端口
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202101.png" alt=""></p>
-<p>再输入用户名和密码，即可连接。接下里的导入操作，与desktop的操作是一摸一样的。</p>
-<p>这样就可以直接操作远程的数据库</p>
-<h2 id="neo4j的python操作">Neo4j的Python操作</h2>
-<h3 id="在远程服务器上安装并创建neo4j">在远程服务器上安装并创建Neo4j</h3>
-<p>对于Neo4j 4版本 需要有JDK11的环境，而对于Neo4j 5版本，需要有JDK17/21的环境
-先安装JDK11，再安装Neo4j，并配置环境变量。</p>
-<p><code>neo4j console</code> 启动服务（前台）</p>
-<p><code>neo4j start</code> 启动服务（后台）</p>
-<p><code>neo4j stop</code> 停止服务</p>
-<p>通过本地浏览器登录
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202109.png" alt="">
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202114.png" alt=""></p>
-<p>接着我们可以使用本地的desktop进行远程的数据库连接</p>
-<p>输入数据库远程地址和端口号，输入数据库名称
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202122.png" alt=""></p>
-<p>输入用户名和密码，并登录连接
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202127.png" alt=""></p>
-<p>成功打开远程数据库，图形化界面
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202133.png" alt=""></p>
-<h3 id="利用python读取excel数据创建节点">利用Python读取excel数据创建节点</h3>
-<p>python导入：</p>
-<p><a href="https://blog.csdn.net/weixin_38737326/article/details/119170899">Neo4j入门（二）批量插入节点、关系_neo4j批量创建关系-CSDN博客</a></p>
-<p><span style="background:#fff88f">1. 数据准备，在深圳证券交易所官网下载股票列表Excel文件</span></p>
-<p><a href="http://www.szse.cn/market/product/stock/list/index.html">http://www.szse.cn/market/product/stock/list/index.html</a>
-<img src="res/Pasted%20image%2020231106222659.png" alt=""></p>
-<p>当然也直接使用Python代码，进行下载，下载连接为：</p>
-<p><a href="http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;CATALOGID=1110&amp;TABKEY=tab1&amp;random=0.410442009042401">http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;CATALOGID=1110&amp;TABKEY=tab1&amp;random=0.410442009042401</a></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">request</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 下载Excel文件</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">DownloadExcel</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">down_path</span> <span class="o">=</span> <span class="s1">&#39;A股列表.xlsx&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">down_path</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl"><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;CATALOGID=1110&amp;TABKEY=tab1&amp;random=0.410442009042401&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">DownloadExcel</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202029.png alt>
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202034.png alt></p><h3 id=在远程server中用csv文件导入批量创建节点和关系常用>在远程Server中用CSV文件导入批量创建节点和关系（常用）</h3><p><a href=https://blog.csdn.net/haveanybody/article/details/90518235>Neo4j笔记（三）Neo4j批量导入数据_neo4j 批量导入数据-CSDN博客</a></p><p>这里远程Server的load导入操作，与本地的desktop的load导入操作基本相同。</p><p>远程Server的导入，可以利用Browser进行图形化界面，也可以利用命令行操作。可以利用load操作，也可以利用neo4j-import进行导入
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202048.png alt></p><p>远程启动Neo4j Server <code>neo4j start</code> <code>neo4j console</code></p><p>可以浏览器访问<code>http:本机ip:显示端口</code></p><p>我们也可以用本地neo4j desktop 操作远程的neo4j server
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202054.png alt></p><p>输入服务的IP地址和端口
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202101.png alt></p><p>再输入用户名和密码，即可连接。接下里的导入操作，与desktop的操作是一摸一样的。</p><p>这样就可以直接操作远程的数据库</p><h2 id=neo4j的python操作>Neo4j的Python操作</h2><h3 id=在远程服务器上安装并创建neo4j>在远程服务器上安装并创建Neo4j</h3><p>对于Neo4j 4版本 需要有JDK11的环境，而对于Neo4j 5版本，需要有JDK17/21的环境
+先安装JDK11，再安装Neo4j，并配置环境变量。</p><p><code>neo4j console</code> 启动服务（前台）</p><p><code>neo4j start</code> 启动服务（后台）</p><p><code>neo4j stop</code> 停止服务</p><p>通过本地浏览器登录
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202109.png alt>
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202114.png alt></p><p>接着我们可以使用本地的desktop进行远程的数据库连接</p><p>输入数据库远程地址和端口号，输入数据库名称
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202122.png alt></p><p>输入用户名和密码，并登录连接
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202127.png alt></p><p>成功打开远程数据库，图形化界面
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202133.png alt></p><h3 id=利用python读取excel数据创建节点>利用Python读取excel数据创建节点</h3><p>python导入：</p><p><a href=https://blog.csdn.net/weixin_38737326/article/details/119170899>Neo4j入门（二）批量插入节点、关系_neo4j批量创建关系-CSDN博客</a></p><p><span style=background:#fff88f>1. 数据准备，在深圳证券交易所官网下载股票列表Excel文件</span></p><p><a href=http://www.szse.cn/market/product/stock/list/index.html>http://www.szse.cn/market/product/stock/list/index.html</a>
+<img src=res/Pasted%20image%2020231106222659.png alt></p><p>当然也直接使用Python代码，进行下载，下载连接为：</p><p><a href="http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;CATALOGID=1110&amp;TABKEY=tab1&amp;random=0.410442009042401">http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;CATALOGID=1110&amp;TABKEY=tab1&amp;random=0.410442009042401</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Python data-lang=Python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>urllib</span> <span class=kn>import</span> <span class=n>request</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 下载Excel文件</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>DownloadExcel</span><span class=p>(</span><span class=n>url</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>down_path</span> <span class=o>=</span> <span class=s1>&#39;A股列表.xlsx&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>request</span><span class=o>.</span><span class=n>urlretrieve</span><span class=p>(</span><span class=n>url</span><span class=p>,</span> <span class=n>down_path</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=n>url</span> <span class=o>=</span> <span class=s1>&#39;http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;CATALOGID=1110&amp;TABKEY=tab1&amp;random=0.410442009042401&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>DownloadExcel</span><span class=p>(</span><span class=n>url</span><span class=p>)</span>
 </span></span></code></pre></div><p>得到一个A股列表Excel文件
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202144.png" alt=""></p>
-<p><span style="background:#fff88f">2. 用Python读取Excel文件数据，在Python中使用Cypher命令，在Neo4j中批量建立节点</span></p>
-<p><a href="https://pypi.org/project/py2neo/">py2neo · PyPI</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/81175725">py2neo基本用法</a></p>
-<p><a href="https://segmentfault.com/a/1190000040519140">python - 使用Py2neo在Neo4j中创建节点和关系</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/362709226">Python&ndash;pandas读取excel</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/363810440">Python读写Excel——Pandas</a></p>
-<p>接着编写Python代码，实现读取文件数据，并通过Cypher语句写入到数据库中去。这里使用远程Neo4j Server版本。</p>
-<p>这里我使用的是py2neo的第三方库，远程Neo4j版本为4.4.2</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">需要注意的是：
-</span></span><span class="line"><span class="cl">![](https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202200.png)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># from urllib import request</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 下载Excel文件</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># def DownloadExcel(url):</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#     down_path = &#39;A股列表.xlsx&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#     request.urlretrieve(url, down_path)</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl"><span class="c1"># url = &#39;http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;CATALOGID=1110&amp;TABKEY=tab1&amp;random=0.410442009042401&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># DownloadExcel(url)</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">py2neo</span> <span class="kn">import</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">Node</span><span class="p">,</span> <span class="n">Relationship</span><span class="p">,</span> <span class="n">NodeMatcher</span><span class="p">,</span> <span class="n">RelationshipMatcher</span><span class="p">,</span> <span class="n">Subgraph</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 读取Excel文件</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">ReadExcel</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">    <span class="n">read_path</span> <span class="o">=</span> <span class="s1">&#39;A股列表.xlsx&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">read_path</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">df</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 连接Neo4j</span>
-</span></span><span class="line"><span class="cl"><span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;bolt://serverIP:port&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">username</span> <span class="o">=</span> <span class="s2">&#34;neo4j&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">password</span> <span class="o">=</span> <span class="s2">&#34;password&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="n">password</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;neo4j info: </span><span class="si">{}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">graph</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 创建节点</span>
-</span></span><span class="line"><span class="cl"><span class="n">s_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">node_count</span> <span class="o">=</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">ReadExcel</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;总数据量：</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;A股&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Plate</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;板块&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">FullName</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;公司全称&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">EnName</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;英文名称&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Address</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;注册地址&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Code</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;A股代码&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ShortName</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;A股简称&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Date</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;A股上市日期&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Area</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;地      区&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Province</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;省    份&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">City</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;城     市&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Industry</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;所属行业&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># print(type(Plate))</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Cypher</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;merge(:</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="se">{{</span><span class="s2">Plate:&#39;</span><span class="si">{</span><span class="n">Plate</span><span class="si">}</span><span class="s2">&#39;,FullName:&#39;</span><span class="si">{</span><span class="n">FullName</span><span class="si">}</span><span class="s2">&#39;,EnName:&#39;</span><span class="si">{</span><span class="n">EnName</span><span class="si">}</span><span class="s2">&#39;,Address:&#39;</span><span class="si">{</span><span class="n">Address</span><span class="si">}</span><span class="s2">&#39;,Code:&#39;</span><span class="si">{</span><span class="n">Code</span><span class="si">}</span><span class="s2">&#39;,ShortName:&#39;</span><span class="si">{</span><span class="n">ShortName</span><span class="si">}</span><span class="s2">&#39;,Date:&#39;</span><span class="si">{</span><span class="n">Date</span><span class="si">}</span><span class="s2">&#39;,Area:&#39;</span><span class="si">{</span><span class="n">Area</span><span class="si">}</span><span class="s2">&#39;,Province:&#39;</span><span class="si">{</span><span class="n">Province</span><span class="si">}</span><span class="s2">&#39;,City:&#39;</span><span class="si">{</span><span class="n">City</span><span class="si">}</span><span class="s2">&#39;,Industry:&#39;</span><span class="si">{</span><span class="n">Industry</span><span class="si">}</span><span class="s2">&#39;</span><span class="se">}}</span><span class="s2">)&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># node = Node(label, Plate=Plate, FullName=FullName, EnName=EnName, Address=Address, Code=Code, ShortName=ShortName, Date=Date, Area=Area, Province=Province, City=City, Industry=Industry)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Graph.create(node)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">Cypher</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">node_count</span> <span class="o">=</span> <span class="o">+</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;节点数量：&#39;</span> <span class="o">+</span> <span class="n">node_count</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">e_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;创建节点耗时：</span><span class="si">{</span><span class="n">e_time</span> <span class="o">-</span> <span class="n">s_time</span><span class="si">}</span><span class="s1">s&#39;</span><span class="p">)</span>
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202144.png alt></p><p><span style=background:#fff88f>2. 用Python读取Excel文件数据，在Python中使用Cypher命令，在Neo4j中批量建立节点</span></p><p><a href=https://pypi.org/project/py2neo/>py2neo · PyPI</a></p><p><a href=https://zhuanlan.zhihu.com/p/81175725>py2neo基本用法</a></p><p><a href=https://segmentfault.com/a/1190000040519140>python - 使用Py2neo在Neo4j中创建节点和关系</a></p><p><a href=https://zhuanlan.zhihu.com/p/362709226>Python&ndash;pandas读取excel</a></p><p><a href=https://zhuanlan.zhihu.com/p/363810440>Python读写Excel——Pandas</a></p><p>接着编写Python代码，实现读取文件数据，并通过Cypher语句写入到数据库中去。这里使用远程Neo4j Server版本。</p><p>这里我使用的是py2neo的第三方库，远程Neo4j版本为4.4.2</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>需要注意的是：
+</span></span><span class=line><span class=cl>![](https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202200.png)
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># from urllib import request</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 下载Excel文件</span>
+</span></span><span class=line><span class=cl><span class=c1># def DownloadExcel(url):</span>
+</span></span><span class=line><span class=cl><span class=c1>#     down_path = &#39;A股列表.xlsx&#39;</span>
+</span></span><span class=line><span class=cl><span class=c1>#     request.urlretrieve(url, down_path)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=c1># url = &#39;http://www.szse.cn/api/report/ShowReport?SHOWTYPE=xlsx&amp;CATALOGID=1110&amp;TABKEY=tab1&amp;random=0.410442009042401&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># DownloadExcel(url)</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>time</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>pandas</span> <span class=k>as</span> <span class=nn>pd</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>py2neo</span> <span class=kn>import</span> <span class=n>Graph</span><span class=p>,</span> <span class=n>Node</span><span class=p>,</span> <span class=n>Relationship</span><span class=p>,</span> <span class=n>NodeMatcher</span><span class=p>,</span> <span class=n>RelationshipMatcher</span><span class=p>,</span> <span class=n>Subgraph</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 读取Excel文件</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>ReadExcel</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>read_path</span> <span class=o>=</span> <span class=s1>&#39;A股列表.xlsx&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>df</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>read_excel</span><span class=p>(</span><span class=n>io</span><span class=o>=</span><span class=n>read_path</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>df</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 连接Neo4j</span>
+</span></span><span class=line><span class=cl><span class=n>url</span> <span class=o>=</span> <span class=s2>&#34;bolt://serverIP:port&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>username</span> <span class=o>=</span> <span class=s2>&#34;neo4j&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>password</span> <span class=o>=</span> <span class=s2>&#34;password&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>graph</span> <span class=o>=</span> <span class=n>Graph</span><span class=p>(</span><span class=n>url</span><span class=p>,</span> <span class=n>auth</span><span class=o>=</span><span class=p>(</span><span class=n>username</span><span class=p>,</span><span class=n>password</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;neo4j info: </span><span class=si>{}</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=nb>str</span><span class=p>(</span><span class=n>graph</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 创建节点</span>
+</span></span><span class=line><span class=cl><span class=n>s_time</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>node_count</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=n>df</span> <span class=o>=</span> <span class=n>ReadExcel</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;总数据量：</span><span class=si>{</span><span class=nb>len</span><span class=p>(</span><span class=n>df</span><span class=p>)</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>label</span> <span class=o>=</span> <span class=s1>&#39;A股&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=n>df</span><span class=p>)):</span>
+</span></span><span class=line><span class=cl>    <span class=n>Plate</span> <span class=o>=</span> <span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;板块&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>FullName</span> <span class=o>=</span> <span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;公司全称&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>EnName</span> <span class=o>=</span> <span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;英文名称&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>Address</span> <span class=o>=</span> <span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;注册地址&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>Code</span> <span class=o>=</span> <span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;A股代码&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>ShortName</span> <span class=o>=</span> <span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;A股简称&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>Date</span> <span class=o>=</span> <span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;A股上市日期&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>Area</span> <span class=o>=</span> <span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;地      区&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>Province</span> <span class=o>=</span> <span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;省    份&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>City</span> <span class=o>=</span> <span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;城     市&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>Industry</span> <span class=o>=</span> <span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;所属行业&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=c1># print(type(Plate))</span>
+</span></span><span class=line><span class=cl>    <span class=n>Cypher</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&#34;merge(:</span><span class=si>{</span><span class=n>label</span><span class=si>}</span><span class=se>{{</span><span class=s2>Plate:&#39;</span><span class=si>{</span><span class=n>Plate</span><span class=si>}</span><span class=s2>&#39;,FullName:&#39;</span><span class=si>{</span><span class=n>FullName</span><span class=si>}</span><span class=s2>&#39;,EnName:&#39;</span><span class=si>{</span><span class=n>EnName</span><span class=si>}</span><span class=s2>&#39;,Address:&#39;</span><span class=si>{</span><span class=n>Address</span><span class=si>}</span><span class=s2>&#39;,Code:&#39;</span><span class=si>{</span><span class=n>Code</span><span class=si>}</span><span class=s2>&#39;,ShortName:&#39;</span><span class=si>{</span><span class=n>ShortName</span><span class=si>}</span><span class=s2>&#39;,Date:&#39;</span><span class=si>{</span><span class=n>Date</span><span class=si>}</span><span class=s2>&#39;,Area:&#39;</span><span class=si>{</span><span class=n>Area</span><span class=si>}</span><span class=s2>&#39;,Province:&#39;</span><span class=si>{</span><span class=n>Province</span><span class=si>}</span><span class=s2>&#39;,City:&#39;</span><span class=si>{</span><span class=n>City</span><span class=si>}</span><span class=s2>&#39;,Industry:&#39;</span><span class=si>{</span><span class=n>Industry</span><span class=si>}</span><span class=s2>&#39;</span><span class=se>}}</span><span class=s2>)&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c1># node = Node(label, Plate=Plate, FullName=FullName, EnName=EnName, Address=Address, Code=Code, ShortName=ShortName, Date=Date, Area=Area, Province=Province, City=City, Industry=Industry)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Graph.create(node)</span>
+</span></span><span class=line><span class=cl>    <span class=n>graph</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>Cypher</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>node_count</span> <span class=o>=</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s1>&#39;节点数量：&#39;</span> <span class=o>+</span> <span class=n>node_count</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>e_time</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;创建节点耗时：</span><span class=si>{</span><span class=n>e_time</span> <span class=o>-</span> <span class=n>s_time</span><span class=si>}</span><span class=s1>s&#39;</span><span class=p>)</span>
 </span></span></code></pre></div><p>再次登上浏览器的图形化界面，发现已经创建成功
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202243.png" alt=""></p>
-<hr>
-<p><a href="https://github.com/Dreag/Py2neo-translate">Py2neo V4 中文文档</a> 官方链接已失效</p>
-<p>利用子图创建节点和关系</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">py2neo</span>  <span class="kn">import</span> <span class="n">Node</span><span class="p">,</span><span class="n">Relationship</span><span class="p">,</span><span class="n">Graph</span><span class="p">,</span><span class="n">Subgraph</span>
-</span></span><span class="line"><span class="cl"><span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s2">&#34;http://localhost:7474&#34;</span><span class="p">,</span><span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s2">&#34;neo4j&#34;</span><span class="p">,</span><span class="s2">&#34;123456&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="s2">&#34;Person&#34;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;Alice&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="s2">&#34;Person&#34;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;Bob&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">c</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="s2">&#34;Person&#34;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;Jim&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">d</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="s2">&#34;Person&#34;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;Nacy&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">nodes</span><span class="o">=</span><span class="n">Subgraph</span><span class="p">([</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="n">graph</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">a</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="k">match</span><span class="p">(</span><span class="s2">&#34;Person&#34;</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;Alice&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">b</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="k">match</span><span class="p">(</span><span class="s2">&#34;Person&#34;</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;Bob&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">c</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="k">match</span><span class="p">(</span><span class="s2">&#34;Person&#34;</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;Jim&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">d</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="k">match</span><span class="p">(</span><span class="s2">&#34;Person&#34;</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;Nacy&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">rel_a</span><span class="o">=</span><span class="n">Relationship</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="s2">&#34;likes&#34;</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">rel_b</span><span class="o">=</span><span class="n">Relationship</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="s2">&#34;likes&#34;</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">rel_c</span><span class="o">=</span><span class="n">Relationship</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="s2">&#34;likes&#34;</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">rel_d</span><span class="o">=</span><span class="n">Relationship</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="s2">&#34;likes&#34;</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">A</span><span class="o">=</span><span class="n">Subgraph</span><span class="p">(</span><span class="n">relationships</span><span class="o">=</span><span class="p">[</span><span class="n">rel_a</span><span class="p">,</span><span class="n">rel_b</span><span class="p">,</span><span class="n">rel_c</span><span class="p">,</span><span class="n">rel_d</span><span class="p">])</span>   
-</span></span><span class="line"><span class="cl"><span class="n">graph</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-</span></span></code></pre></div><hr>
-<p><a href="https://blog.csdn.net/qiang12qiang12/article/details/127692314">Py2neo:一种快速导入百万数据到Neo4j的方式_python 导入neo4j 节点id-CSDN博客</a></p>
-<p>根据上方A股列表的数据，重新编写代码，创建实体节点和关系</p>
-<p>遇到的问题：</p>
-<ol>
-<li>创建节点的属性，必须是字符串类型的，不然会报错。DataFrame读出来的数据有可能会是int或者numint64类型，需要进行转换</li>
-<li>创建关系时进行节点的查找匹配十分耗时，所以可以采用子图的形式进行创建 (查询节点和关系很费时间)</li>
-<li>没有报错，但是创建不出来关系，就需要检查匹配条件是否正确，不正确的话匹配不到节点，就不能创建关系</li>
-</ol>
-<p>完整代码：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">py2neo</span> <span class="kn">import</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">Node</span><span class="p">,</span> <span class="n">Relationship</span><span class="p">,</span> <span class="n">NodeMatcher</span><span class="p">,</span> <span class="n">RelationshipMatcher</span><span class="p">,</span> <span class="n">Subgraph</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 读取Excel文件</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">ReadExcel</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">    <span class="n">read_path</span> <span class="o">=</span> <span class="s1">&#39;A股列表.xlsx&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">io</span><span class="o">=</span><span class="n">read_path</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">df</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl"><span class="c1"># 连接Neo4j</span>
-</span></span><span class="line"><span class="cl"><span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;bolt://serverIP:port&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">username</span> <span class="o">=</span> <span class="s2">&#34;neo4j&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">password</span> <span class="o">=</span> <span class="s2">&#34;password&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="n">password</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="n">nodes</span> <span class="o">=</span> <span class="n">NodeMatcher</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;neo4j info: </span><span class="si">{}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">graph</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 清空数据库</span>
-</span></span><span class="line"><span class="cl"><span class="n">graph</span><span class="o">.</span><span class="n">delete_all</span><span class="p">()</span>  
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 数据处理</span>
-</span></span><span class="line"><span class="cl"><span class="n">s_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">node_count</span> <span class="o">=</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">ReadExcel</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;总数据量：</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;A股&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="n">a_list</span> <span class="o">=</span> <span class="p">[]</span>
-</span></span><span class="line"><span class="cl"><span class="n">plate_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>  <span class="c1"># 板块集合</span>
-</span></span><span class="line"><span class="cl"><span class="n">area_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>  <span class="c1"># 地区集合</span>
-</span></span><span class="line"><span class="cl"><span class="n">province_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>  <span class="c1"># 省份集合</span>
-</span></span><span class="line"><span class="cl"><span class="n">city_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>  <span class="c1"># 城市集合</span>
-</span></span><span class="line"><span class="cl"><span class="n">industry_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">({})</span>  <span class="c1"># 行业集合</span>
-</span></span><span class="line"><span class="cl"><span class="n">relationships_list</span> <span class="o">=</span> <span class="p">[]</span>
-</span></span><span class="line"><span class="cl"><span class="n">nodes_list</span> <span class="o">=</span> <span class="p">[]</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Plate&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;板块&#39;</span><span class="p">]),</span>      <span class="c1"># 需要转成字符串，否则会报错</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;FullName&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;公司全称&#39;</span><span class="p">]),</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;EnName&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;英文名称&#39;</span><span class="p">]),</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Address&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;注册地址&#39;</span><span class="p">]),</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Code&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;A股代码&#39;</span><span class="p">]),</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;ShortName&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;A股简称&#39;</span><span class="p">]),</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Date&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;A股上市日期&#39;</span><span class="p">]),</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Area&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;地      区&#39;</span><span class="p">]),</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Province&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;省    份&#39;</span><span class="p">]),</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;City&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;城     市&#39;</span><span class="p">]),</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Industry&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;所属行业&#39;</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="n">plate_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;板块&#39;</span><span class="p">]))</span>
-</span></span><span class="line"><span class="cl">  <span class="n">area_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;地      区&#39;</span><span class="p">]))</span>
-</span></span><span class="line"><span class="cl">  <span class="n">province_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;省    份&#39;</span><span class="p">]))</span>
-</span></span><span class="line"><span class="cl">  <span class="n">city_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;城     市&#39;</span><span class="p">]))</span>
-</span></span><span class="line"><span class="cl">  <span class="n">industry_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;所属行业&#39;</span><span class="p">]))</span>
-</span></span><span class="line"><span class="cl">  <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">a_dict</span> <span class="o">=</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 创建A股节点</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">ShortName</span><span class="o">=</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;ShortName&#39;</span><span class="p">],</span> <span class="n">FullName</span><span class="o">=</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;FullName&#39;</span><span class="p">],</span> <span class="n">EnName</span><span class="o">=</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;EnName&#39;</span><span class="p">],</span> <span class="n">Code</span><span class="o">=</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;Code&#39;</span><span class="p">],</span> <span class="n">Address</span><span class="o">=</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;Address&#39;</span><span class="p">],</span> <span class="n">Date</span><span class="o">=</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">Plate</span><span class="o">=</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;Plate&#39;</span><span class="p">],</span> <span class="n">Area</span><span class="o">=</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;Area&#39;</span><span class="p">],</span> <span class="n">Province</span><span class="o">=</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;Province&#39;</span><span class="p">],</span> <span class="n">City</span><span class="o">=</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;City&#39;</span><span class="p">],</span> <span class="n">Industry</span><span class="o">=</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;Industry&#39;</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">  <span class="n">graph</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="n">a_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&#34;Code&#34;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">node</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node_count</span> <span class="o">=</span> <span class="o">+</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl"><span class="n">plate_dict</span> <span class="o">=</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl"><span class="n">area_dict</span> <span class="o">=</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl"><span class="n">province_dict</span> <span class="o">=</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl"><span class="n">city_dict</span> <span class="o">=</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl"><span class="n">industry_dict</span> <span class="o">=</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 创建板块节点</span>
-</span></span><span class="line"><span class="cl"><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;板块&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">plate</span> <span class="ow">in</span> <span class="n">plate_set</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">plate</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="n">graph</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="n">plate_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">plate</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">node</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node_count</span> <span class="o">=</span> <span class="o">+</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl"><span class="c1"># 创建地区节点</span>
-</span></span><span class="line"><span class="cl"><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;地区&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">area</span> <span class="ow">in</span> <span class="n">area_set</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">area</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="n">graph</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="n">area_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">area</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">node</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node_count</span> <span class="o">=</span> <span class="o">+</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl"><span class="c1"># 创建省份节点</span>
-</span></span><span class="line"><span class="cl"><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;省份&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">province</span> <span class="ow">in</span> <span class="n">province_set</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">province</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="n">graph</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="n">province_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">province</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">node</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node_count</span> <span class="o">=</span> <span class="o">+</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl"><span class="c1"># 创建城市节点</span>
-</span></span><span class="line"><span class="cl"><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;城市&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">city_set</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">city</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="n">graph</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="n">city_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">node</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node_count</span> <span class="o">=</span> <span class="o">+</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl"><span class="c1"># 创建行业节点</span>
-</span></span><span class="line"><span class="cl"><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;行业&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">industry</span> <span class="ow">in</span> <span class="n">industry_set</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">industry</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="n">graph</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="n">industry_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">industry</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">node</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node_count</span> <span class="o">=</span> <span class="o">+</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">relationships_list</span> <span class="o">=</span> <span class="p">[]</span> 
-</span></span><span class="line"><span class="cl"><span class="c1"># 创建关系</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a_list</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">  <span class="c1"># A股-板块</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node1</span> <span class="o">=</span> <span class="n">a_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="p">[</span><span class="s2">&#34;Code&#34;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node2</span> <span class="o">=</span> <span class="n">plate_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="p">[</span><span class="s2">&#34;Plate&#34;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">  <span class="n">relationships_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Relationship</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="s1">&#39;板块&#39;</span><span class="p">,</span> <span class="n">node2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">  <span class="c1"># A股-地区</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node2</span> <span class="o">=</span> <span class="n">area_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="p">[</span><span class="s2">&#34;Area&#34;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">  <span class="n">relationships_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Relationship</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="s1">&#39;地区&#39;</span><span class="p">,</span> <span class="n">node2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">  <span class="c1"># A股-省份</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node2</span> <span class="o">=</span> <span class="n">province_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="p">[</span><span class="s2">&#34;Province&#34;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">  <span class="n">relationships_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Relationship</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="s1">&#39;省份&#39;</span><span class="p">,</span> <span class="n">node2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">  <span class="c1"># A股-城市</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node2</span> <span class="o">=</span> <span class="n">city_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="p">[</span><span class="s2">&#34;City&#34;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">  <span class="n">relationships_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Relationship</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="s1">&#39;城市&#39;</span><span class="p">,</span> <span class="n">node2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">  <span class="c1"># A股-行业</span>
-</span></span><span class="line"><span class="cl">  <span class="n">node2</span> <span class="o">=</span> <span class="n">industry_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="p">[</span><span class="s2">&#34;Industry&#34;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">  <span class="n">relationships_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Relationship</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="s1">&#39;行业&#39;</span><span class="p">,</span> <span class="n">node2</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl"><span class="n">sub</span> <span class="o">=</span> <span class="n">Subgraph</span><span class="p">(</span><span class="n">relationships</span><span class="o">=</span><span class="n">relationships_list</span><span class="p">)</span>  <span class="c1"># 子图的形式创建关系</span>
-</span></span><span class="line"><span class="cl"><span class="n">tx_</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">begin</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">tx_</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">graph</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="n">tx_</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;节点数量：</span><span class="si">{</span><span class="n">node_count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">e_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;创建节点耗时：</span><span class="si">{</span><span class="n">e_time</span> <span class="o">-</span> <span class="n">s_time</span><span class="si">}</span><span class="s1">s&#39;</span><span class="p">)</span>
-</span></span></code></pre></div>
-    
-  </article>
-  <div class="paginator">
-    
-    <a class="link" href="https://blog.pi3.fun/post/2023/11/shell%E5%9F%BA%E7%A1%80/">← prev</a>
-    
-    
-    <a class="link" href="https://blog.pi3.fun/post/2023/11/linux%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">next →</a>
-    
-  </div>
-  <div class="comment">
-    
-    
-    
-    
-    
-    
-    
-    
-      <br>
-<div id="tcomment"></div>
-<script src="https://registry.npmmirror.com/twikoo/1.6.39/files/dist/twikoo.min.js"></script>
-<script>
-twikoo.init({
-  envId: 'https://twikoo.pi3.fun/.netlify/functions/twikoo',
-  el: '#tcomment',
-  lang: 'zh-CN', 
-})
-</script>
-
-    
-      
-  </div>
-  
-</main>
-
-    <footer id="footer">
-  <div>
-    <span style="display: flex;align-items: center;">© 2021 - 2024<img src="https://p.sda1.dev/19/68796ec343c7a7eecbe99de4a9df6c66/rainbow.gif" width=20>By LiuChao</span>
-  </div>
-  
-  
-
-  
-
-  <div class="footnote">
-    <span><a class=link href=/index.xml><span class="iconfont icon-RSS"></span></a>  |  <a class=link href=https://github.com/Pi3-l22 Target=_ blank><span class="iconfont icon-GitHub"></span></a>  |  <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener><span class="iconfont icon-creative-commons-fill"></span></a>
-</span>
-  </div>
-</footer>
-
-  </div>
-
-  
-  
-
-  
-  
-
-  
-  
-  
-    
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-WE6L6RF96W"></script>
-      <script>
-        var doNotTrack = false;
-        if ( false ) {
-          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-          var doNotTrack = (dnt == "1" || dnt == "yes");
-        }
-        if (!doNotTrack) {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-WE6L6RF96W');
-        }
-      </script>
-    
-  
-
-
-
-
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const currentTheme = localStorage.getItem('theme') || 'light';
-      
-
-      const lightStyle = document.querySelector('link[data-theme-style="light"]');
-      const darkStyle = document.querySelector('link[data-theme-style="dark"]');
-      
-      
-      const systemThemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
-      systemThemeMedia.addListener(function(e) {
-        
-        if (!localStorage.getItem('theme')) {
-          const newTheme = e.matches ? 'dark' : 'light';
-          document.documentElement.setAttribute('data-theme', newTheme);
-          localStorage.setItem('theme', newTheme);
-          
-          
-          if (newTheme === 'light') {
-            lightStyle.media = 'all';
-            darkStyle.media = 'not all';
-          } else {
-            lightStyle.media = 'not all';
-            darkStyle.media = 'all';
-          }
-          
-          
-          const giscusFrame = document.querySelector('iframe.giscus-frame');
-          if (giscusFrame) {
-            const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
-            giscusFrame.contentWindow.postMessage(
-              { giscus: { setConfig: { theme: giscusTheme } } },
-              'https://giscus.app'
-            );
-          }
-        }
-      });
-
-      
-      if (currentTheme === 'light') {
-        lightStyle.media = 'all';
-        darkStyle.media = 'not all';
-      } else {
-        lightStyle.media = 'not all';
-        darkStyle.media = 'all';
-      }
-
-      
-      function updateGiscusTheme() {
-        const giscusFrame = document.querySelector('iframe.giscus-frame');
-        if (giscusFrame) {
-          const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
-          giscusFrame.contentWindow.postMessage(
-            { giscus: { setConfig: { theme: giscusTheme } } },
-            'https://giscus.app'
-          );
-        } else {
-          
-          setTimeout(updateGiscusTheme, 1000);
-        }
-      }
-      
-      
-      updateGiscusTheme();
-
-      const themeToggle = document.querySelector('.theme-toggle');
-      if (themeToggle) {
-        themeToggle.textContent = currentTheme === 'light' ? '黑暗' : '明亮';
-        
-        themeToggle.addEventListener('click', function() {
-          const currentTheme = document.documentElement.getAttribute('data-theme');
-          const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-          
-          document.documentElement.setAttribute('data-theme', newTheme);
-          localStorage.setItem('theme', newTheme);
-          
-          
-          if (newTheme === 'light') {
-            lightStyle.media = 'all';
-            darkStyle.media = 'not all';
-          } else {
-            lightStyle.media = 'not all';
-            darkStyle.media = 'all';
-          }
-          
-          
-          const giscusFrame = document.querySelector('iframe.giscus-frame');
-          if (giscusFrame) {
-            const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
-            giscusFrame.contentWindow.postMessage(
-              { giscus: { setConfig: { theme: giscusTheme } } },
-              'https://giscus.app'
-            );
-          }
-          
-          this.textContent = newTheme === 'light' ? '黑暗' : '明亮';
-        });
-      }
-    });
-  </script>
-
-</body>
-
-</html>
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231124202243.png alt></p><hr><p><a href=https://github.com/Dreag/Py2neo-translate>Py2neo V4 中文文档</a> 官方链接已失效</p><p>利用子图创建节点和关系</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>py2neo</span>  <span class=kn>import</span> <span class=n>Node</span><span class=p>,</span><span class=n>Relationship</span><span class=p>,</span><span class=n>Graph</span><span class=p>,</span><span class=n>Subgraph</span>
+</span></span><span class=line><span class=cl><span class=n>graph</span> <span class=o>=</span> <span class=n>Graph</span><span class=p>(</span><span class=s2>&#34;http://localhost:7474&#34;</span><span class=p>,</span><span class=n>auth</span><span class=o>=</span><span class=p>(</span><span class=s2>&#34;neo4j&#34;</span><span class=p>,</span><span class=s2>&#34;123456&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>Node</span><span class=p>(</span><span class=s2>&#34;Person&#34;</span><span class=p>,</span> <span class=n>name</span><span class=o>=</span><span class=s2>&#34;Alice&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=n>Node</span><span class=p>(</span><span class=s2>&#34;Person&#34;</span><span class=p>,</span> <span class=n>name</span><span class=o>=</span><span class=s2>&#34;Bob&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>c</span> <span class=o>=</span> <span class=n>Node</span><span class=p>(</span><span class=s2>&#34;Person&#34;</span><span class=p>,</span> <span class=n>name</span><span class=o>=</span><span class=s2>&#34;Jim&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>d</span> <span class=o>=</span> <span class=n>Node</span><span class=p>(</span><span class=s2>&#34;Person&#34;</span><span class=p>,</span> <span class=n>name</span><span class=o>=</span><span class=s2>&#34;Nacy&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>nodes</span><span class=o>=</span><span class=n>Subgraph</span><span class=p>([</span><span class=n>a</span><span class=p>,</span><span class=n>b</span><span class=p>,</span><span class=n>c</span><span class=p>,</span><span class=n>d</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=n>graph</span><span class=o>.</span><span class=n>create</span><span class=p>(</span><span class=n>nodes</span><span class=p>)</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span><span class=o>=</span><span class=n>graph</span><span class=o>.</span><span class=n>nodes</span><span class=o>.</span><span class=k>match</span><span class=p>(</span><span class=s2>&#34;Person&#34;</span><span class=p>,</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;Alice&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>first</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>b</span><span class=o>=</span><span class=n>graph</span><span class=o>.</span><span class=n>nodes</span><span class=o>.</span><span class=k>match</span><span class=p>(</span><span class=s2>&#34;Person&#34;</span><span class=p>,</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;Bob&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>first</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>c</span><span class=o>=</span><span class=n>graph</span><span class=o>.</span><span class=n>nodes</span><span class=o>.</span><span class=k>match</span><span class=p>(</span><span class=s2>&#34;Person&#34;</span><span class=p>,</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;Jim&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>first</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>d</span><span class=o>=</span><span class=n>graph</span><span class=o>.</span><span class=n>nodes</span><span class=o>.</span><span class=k>match</span><span class=p>(</span><span class=s2>&#34;Person&#34;</span><span class=p>,</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;Nacy&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>first</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>rel_a</span><span class=o>=</span><span class=n>Relationship</span><span class=p>(</span><span class=n>a</span><span class=p>,</span><span class=s2>&#34;likes&#34;</span><span class=p>,</span><span class=n>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>rel_b</span><span class=o>=</span><span class=n>Relationship</span><span class=p>(</span><span class=n>b</span><span class=p>,</span><span class=s2>&#34;likes&#34;</span><span class=p>,</span><span class=n>a</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>rel_c</span><span class=o>=</span><span class=n>Relationship</span><span class=p>(</span><span class=n>c</span><span class=p>,</span><span class=s2>&#34;likes&#34;</span><span class=p>,</span><span class=n>d</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>rel_d</span><span class=o>=</span><span class=n>Relationship</span><span class=p>(</span><span class=n>d</span><span class=p>,</span><span class=s2>&#34;likes&#34;</span><span class=p>,</span><span class=n>c</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>A</span><span class=o>=</span><span class=n>Subgraph</span><span class=p>(</span><span class=n>relationships</span><span class=o>=</span><span class=p>[</span><span class=n>rel_a</span><span class=p>,</span><span class=n>rel_b</span><span class=p>,</span><span class=n>rel_c</span><span class=p>,</span><span class=n>rel_d</span><span class=p>])</span>   
+</span></span><span class=line><span class=cl><span class=n>graph</span><span class=o>.</span><span class=n>create</span><span class=p>(</span><span class=n>A</span><span class=p>)</span>
+</span></span></code></pre></div><hr><p><a href=https://blog.csdn.net/qiang12qiang12/article/details/127692314>Py2neo:一种快速导入百万数据到Neo4j的方式_python 导入neo4j 节点id-CSDN博客</a></p><p>根据上方A股列表的数据，重新编写代码，创建实体节点和关系</p><p>遇到的问题：</p><ol><li>创建节点的属性，必须是字符串类型的，不然会报错。DataFrame读出来的数据有可能会是int或者numint64类型，需要进行转换</li><li>创建关系时进行节点的查找匹配十分耗时，所以可以采用子图的形式进行创建 (查询节点和关系很费时间)</li><li>没有报错，但是创建不出来关系，就需要检查匹配条件是否正确，不正确的话匹配不到节点，就不能创建关系</li></ol><p>完整代码：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>time</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>pandas</span> <span class=k>as</span> <span class=nn>pd</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>py2neo</span> <span class=kn>import</span> <span class=n>Graph</span><span class=p>,</span> <span class=n>Node</span><span class=p>,</span> <span class=n>Relationship</span><span class=p>,</span> <span class=n>NodeMatcher</span><span class=p>,</span> <span class=n>RelationshipMatcher</span><span class=p>,</span> <span class=n>Subgraph</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 读取Excel文件</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>ReadExcel</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>read_path</span> <span class=o>=</span> <span class=s1>&#39;A股列表.xlsx&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>df</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>read_excel</span><span class=p>(</span><span class=n>io</span><span class=o>=</span><span class=n>read_path</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>df</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=c1># 连接Neo4j</span>
+</span></span><span class=line><span class=cl><span class=n>url</span> <span class=o>=</span> <span class=s2>&#34;bolt://serverIP:port&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>username</span> <span class=o>=</span> <span class=s2>&#34;neo4j&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>password</span> <span class=o>=</span> <span class=s2>&#34;password&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>graph</span> <span class=o>=</span> <span class=n>Graph</span><span class=p>(</span><span class=n>url</span><span class=p>,</span> <span class=n>auth</span><span class=o>=</span><span class=p>(</span><span class=n>username</span><span class=p>,</span><span class=n>password</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=n>nodes</span> <span class=o>=</span> <span class=n>NodeMatcher</span><span class=p>(</span><span class=n>graph</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;neo4j info: </span><span class=si>{}</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=nb>str</span><span class=p>(</span><span class=n>graph</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 清空数据库</span>
+</span></span><span class=line><span class=cl><span class=n>graph</span><span class=o>.</span><span class=n>delete_all</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 数据处理</span>
+</span></span><span class=line><span class=cl><span class=n>s_time</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>node_count</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=n>df</span> <span class=o>=</span> <span class=n>ReadExcel</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;总数据量：</span><span class=si>{</span><span class=nb>len</span><span class=p>(</span><span class=n>df</span><span class=p>)</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>label</span> <span class=o>=</span> <span class=s1>&#39;A股&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>a_list</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl><span class=n>plate_set</span> <span class=o>=</span> <span class=nb>set</span><span class=p>({})</span>  <span class=c1># 板块集合</span>
+</span></span><span class=line><span class=cl><span class=n>area_set</span> <span class=o>=</span> <span class=nb>set</span><span class=p>({})</span>  <span class=c1># 地区集合</span>
+</span></span><span class=line><span class=cl><span class=n>province_set</span> <span class=o>=</span> <span class=nb>set</span><span class=p>({})</span>  <span class=c1># 省份集合</span>
+</span></span><span class=line><span class=cl><span class=n>city_set</span> <span class=o>=</span> <span class=nb>set</span><span class=p>({})</span>  <span class=c1># 城市集合</span>
+</span></span><span class=line><span class=cl><span class=n>industry_set</span> <span class=o>=</span> <span class=nb>set</span><span class=p>({})</span>  <span class=c1># 行业集合</span>
+</span></span><span class=line><span class=cl><span class=n>relationships_list</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl><span class=n>nodes_list</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=n>df</span><span class=p>)):</span>
+</span></span><span class=line><span class=cl>  <span class=nb>dict</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;Plate&#39;</span><span class=p>:</span> <span class=nb>str</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;板块&#39;</span><span class=p>]),</span>      <span class=c1># 需要转成字符串，否则会报错</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;FullName&#39;</span><span class=p>:</span> <span class=nb>str</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;公司全称&#39;</span><span class=p>]),</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;EnName&#39;</span><span class=p>:</span> <span class=nb>str</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;英文名称&#39;</span><span class=p>]),</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;Address&#39;</span><span class=p>:</span> <span class=nb>str</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;注册地址&#39;</span><span class=p>]),</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;Code&#39;</span><span class=p>:</span> <span class=nb>str</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;A股代码&#39;</span><span class=p>]),</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;ShortName&#39;</span><span class=p>:</span> <span class=nb>str</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;A股简称&#39;</span><span class=p>]),</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;Date&#39;</span><span class=p>:</span> <span class=nb>str</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;A股上市日期&#39;</span><span class=p>]),</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;Area&#39;</span><span class=p>:</span> <span class=nb>str</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;地      区&#39;</span><span class=p>]),</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;Province&#39;</span><span class=p>:</span> <span class=nb>str</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;省    份&#39;</span><span class=p>]),</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;City&#39;</span><span class=p>:</span> <span class=nb>str</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;城     市&#39;</span><span class=p>]),</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;Industry&#39;</span><span class=p>:</span> <span class=nb>str</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;所属行业&#39;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=n>plate_set</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=nb>str</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;板块&#39;</span><span class=p>]))</span>
+</span></span><span class=line><span class=cl>  <span class=n>area_set</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=nb>str</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;地      区&#39;</span><span class=p>]))</span>
+</span></span><span class=line><span class=cl>  <span class=n>province_set</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=nb>str</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;省    份&#39;</span><span class=p>]))</span>
+</span></span><span class=line><span class=cl>  <span class=n>city_set</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=nb>str</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;城     市&#39;</span><span class=p>]))</span>
+</span></span><span class=line><span class=cl>  <span class=n>industry_set</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=nb>str</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;所属行业&#39;</span><span class=p>]))</span>
+</span></span><span class=line><span class=cl>  <span class=n>a_list</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=nb>dict</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>a_dict</span> <span class=o>=</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=c1># 创建A股节点</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=n>a_list</span><span class=p>)):</span>
+</span></span><span class=line><span class=cl>  <span class=n>node</span> <span class=o>=</span> <span class=n>Node</span><span class=p>(</span><span class=n>label</span><span class=p>,</span> <span class=n>ShortName</span><span class=o>=</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;ShortName&#39;</span><span class=p>],</span> <span class=n>FullName</span><span class=o>=</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;FullName&#39;</span><span class=p>],</span> <span class=n>EnName</span><span class=o>=</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;EnName&#39;</span><span class=p>],</span> <span class=n>Code</span><span class=o>=</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;Code&#39;</span><span class=p>],</span> <span class=n>Address</span><span class=o>=</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;Address&#39;</span><span class=p>],</span> <span class=n>Date</span><span class=o>=</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;Date&#39;</span><span class=p>],</span> <span class=n>Plate</span><span class=o>=</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;Plate&#39;</span><span class=p>],</span> <span class=n>Area</span><span class=o>=</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;Area&#39;</span><span class=p>],</span> <span class=n>Province</span><span class=o>=</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;Province&#39;</span><span class=p>],</span> <span class=n>City</span><span class=o>=</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;City&#39;</span><span class=p>],</span> <span class=n>Industry</span><span class=o>=</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s1>&#39;Industry&#39;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>  <span class=n>graph</span><span class=o>.</span><span class=n>create</span><span class=p>(</span><span class=n>node</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>a_dict</span><span class=p>[</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=s2>&#34;Code&#34;</span><span class=p>]</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>]</span><span class=o>=</span><span class=n>node</span>
+</span></span><span class=line><span class=cl>  <span class=n>node_count</span> <span class=o>=</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=n>plate_dict</span> <span class=o>=</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=n>area_dict</span> <span class=o>=</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=n>province_dict</span> <span class=o>=</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=n>city_dict</span> <span class=o>=</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=n>industry_dict</span> <span class=o>=</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 创建板块节点</span>
+</span></span><span class=line><span class=cl><span class=n>label</span> <span class=o>=</span> <span class=s1>&#39;板块&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>plate</span> <span class=ow>in</span> <span class=n>plate_set</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>  <span class=n>node</span> <span class=o>=</span> <span class=n>Node</span><span class=p>(</span><span class=n>label</span><span class=p>,</span> <span class=n>name</span><span class=o>=</span><span class=n>plate</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>graph</span><span class=o>.</span><span class=n>create</span><span class=p>(</span><span class=n>node</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>plate_dict</span><span class=p>[</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>plate</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>]</span><span class=o>=</span><span class=n>node</span>
+</span></span><span class=line><span class=cl>  <span class=n>node_count</span> <span class=o>=</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=c1># 创建地区节点</span>
+</span></span><span class=line><span class=cl><span class=n>label</span> <span class=o>=</span> <span class=s1>&#39;地区&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>area</span> <span class=ow>in</span> <span class=n>area_set</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>  <span class=n>node</span> <span class=o>=</span> <span class=n>Node</span><span class=p>(</span><span class=n>label</span><span class=p>,</span> <span class=n>name</span><span class=o>=</span><span class=n>area</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>graph</span><span class=o>.</span><span class=n>create</span><span class=p>(</span><span class=n>node</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>area_dict</span><span class=p>[</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>area</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>]</span><span class=o>=</span><span class=n>node</span>
+</span></span><span class=line><span class=cl>  <span class=n>node_count</span> <span class=o>=</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=c1># 创建省份节点</span>
+</span></span><span class=line><span class=cl><span class=n>label</span> <span class=o>=</span> <span class=s1>&#39;省份&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>province</span> <span class=ow>in</span> <span class=n>province_set</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>  <span class=n>node</span> <span class=o>=</span> <span class=n>Node</span><span class=p>(</span><span class=n>label</span><span class=p>,</span> <span class=n>name</span><span class=o>=</span><span class=n>province</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>graph</span><span class=o>.</span><span class=n>create</span><span class=p>(</span><span class=n>node</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>province_dict</span><span class=p>[</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>province</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>]</span><span class=o>=</span><span class=n>node</span>
+</span></span><span class=line><span class=cl>  <span class=n>node_count</span> <span class=o>=</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=c1># 创建城市节点</span>
+</span></span><span class=line><span class=cl><span class=n>label</span> <span class=o>=</span> <span class=s1>&#39;城市&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>city</span> <span class=ow>in</span> <span class=n>city_set</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>  <span class=n>node</span> <span class=o>=</span> <span class=n>Node</span><span class=p>(</span><span class=n>label</span><span class=p>,</span> <span class=n>name</span><span class=o>=</span><span class=n>city</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>graph</span><span class=o>.</span><span class=n>create</span><span class=p>(</span><span class=n>node</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>city_dict</span><span class=p>[</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>city</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>]</span><span class=o>=</span><span class=n>node</span>
+</span></span><span class=line><span class=cl>  <span class=n>node_count</span> <span class=o>=</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=c1># 创建行业节点</span>
+</span></span><span class=line><span class=cl><span class=n>label</span> <span class=o>=</span> <span class=s1>&#39;行业&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>industry</span> <span class=ow>in</span> <span class=n>industry_set</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>  <span class=n>node</span> <span class=o>=</span> <span class=n>Node</span><span class=p>(</span><span class=n>label</span><span class=p>,</span> <span class=n>name</span><span class=o>=</span><span class=n>industry</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>graph</span><span class=o>.</span><span class=n>create</span><span class=p>(</span><span class=n>node</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>industry_dict</span><span class=p>[</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>industry</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>]</span><span class=o>=</span><span class=n>node</span>
+</span></span><span class=line><span class=cl>  <span class=n>node_count</span> <span class=o>=</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>relationships_list</span> <span class=o>=</span> <span class=p>[]</span> 
+</span></span><span class=line><span class=cl><span class=c1># 创建关系</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=n>a_list</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>  <span class=c1># A股-板块</span>
+</span></span><span class=line><span class=cl>  <span class=n>node1</span> <span class=o>=</span> <span class=n>a_dict</span><span class=p>[</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>i</span><span class=p>[</span><span class=s2>&#34;Code&#34;</span><span class=p>]</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=n>node2</span> <span class=o>=</span> <span class=n>plate_dict</span><span class=p>[</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>i</span><span class=p>[</span><span class=s2>&#34;Plate&#34;</span><span class=p>]</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=n>relationships_list</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>Relationship</span><span class=p>(</span><span class=n>node1</span><span class=p>,</span> <span class=s1>&#39;板块&#39;</span><span class=p>,</span> <span class=n>node2</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=c1># A股-地区</span>
+</span></span><span class=line><span class=cl>  <span class=n>node2</span> <span class=o>=</span> <span class=n>area_dict</span><span class=p>[</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>i</span><span class=p>[</span><span class=s2>&#34;Area&#34;</span><span class=p>]</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=n>relationships_list</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>Relationship</span><span class=p>(</span><span class=n>node1</span><span class=p>,</span> <span class=s1>&#39;地区&#39;</span><span class=p>,</span> <span class=n>node2</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=c1># A股-省份</span>
+</span></span><span class=line><span class=cl>  <span class=n>node2</span> <span class=o>=</span> <span class=n>province_dict</span><span class=p>[</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>i</span><span class=p>[</span><span class=s2>&#34;Province&#34;</span><span class=p>]</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=n>relationships_list</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>Relationship</span><span class=p>(</span><span class=n>node1</span><span class=p>,</span> <span class=s1>&#39;省份&#39;</span><span class=p>,</span> <span class=n>node2</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=c1># A股-城市</span>
+</span></span><span class=line><span class=cl>  <span class=n>node2</span> <span class=o>=</span> <span class=n>city_dict</span><span class=p>[</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>i</span><span class=p>[</span><span class=s2>&#34;City&#34;</span><span class=p>]</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=n>relationships_list</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>Relationship</span><span class=p>(</span><span class=n>node1</span><span class=p>,</span> <span class=s1>&#39;城市&#39;</span><span class=p>,</span> <span class=n>node2</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=c1># A股-行业</span>
+</span></span><span class=line><span class=cl>  <span class=n>node2</span> <span class=o>=</span> <span class=n>industry_dict</span><span class=p>[</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>i</span><span class=p>[</span><span class=s2>&#34;Industry&#34;</span><span class=p>]</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=n>relationships_list</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>Relationship</span><span class=p>(</span><span class=n>node1</span><span class=p>,</span> <span class=s1>&#39;行业&#39;</span><span class=p>,</span> <span class=n>node2</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=n>sub</span> <span class=o>=</span> <span class=n>Subgraph</span><span class=p>(</span><span class=n>relationships</span><span class=o>=</span><span class=n>relationships_list</span><span class=p>)</span>  <span class=c1># 子图的形式创建关系</span>
+</span></span><span class=line><span class=cl><span class=n>tx_</span> <span class=o>=</span> <span class=n>graph</span><span class=o>.</span><span class=n>begin</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>tx_</span><span class=o>.</span><span class=n>create</span><span class=p>(</span><span class=n>sub</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>graph</span><span class=o>.</span><span class=n>commit</span><span class=p>(</span><span class=n>tx_</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;节点数量：</span><span class=si>{</span><span class=n>node_count</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>e_time</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;创建节点耗时：</span><span class=si>{</span><span class=n>e_time</span> <span class=o>-</span> <span class=n>s_time</span><span class=si>}</span><span class=s1>s&#39;</span><span class=p>)</span>
+</span></span></code></pre></div></article><div class=paginator><a class=link href=https://blog.pi3.fun/post/2023/11/shell%E5%9F%BA%E7%A1%80/>← prev</a>
+<a class=link href=https://blog.pi3.fun/post/2023/11/linux%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/>next →</a></div><div class=comment><br><div id=tcomment></div><script src=https://registry.npmmirror.com/twikoo/1.6.39/files/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://twikoo.pi3.fun/.netlify/functions/twikoo",el:"#tcomment",lang:"zh-CN"})</script></div></main><footer id=footer><div><span style=display:flex;align-items:center><span style=margin-right:.5rem>© 2021 - 2024</span><img src=https://p.sda1.dev/20/9c62fc28131254c408b5ad8667a69140/rainbow.gif loading=lazy width=20 alt=rainbow><span style=margin-left:.5rem>By Liu Chao</span></span></div><div class=footnote><span><a class=link href=/index.xml><span class="iconfont icon-RSS"></span></a> | <a class=link href=https://github.com/Pi3-l22 target=_ blank><span class="iconfont icon-GitHub"></span></a> | <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener><span class="iconfont icon-creative-commons-fill"></span></a></span></div></footer></div><script async src="https://www.googletagmanager.com/gtag/js?id=G-WE6L6RF96W"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-WE6L6RF96W")}</script><script>document.addEventListener("DOMContentLoaded",function(){const n=localStorage.getItem("theme")||"light",e=document.querySelector('link[data-theme-style="light"]'),t=document.querySelector('link[data-theme-style="dark"]'),i=window.matchMedia("(prefers-color-scheme: dark)");i.addListener(function(n){if(!localStorage.getItem("theme")){const s=n.matches?"dark":"light";document.documentElement.setAttribute("data-theme",s),localStorage.setItem("theme",s),s==="light"?(e.media="all",t.media="not all"):(e.media="not all",t.media="all");const o=document.querySelector("iframe.giscus-frame");if(o){const e=s==="light"?"light_tritanopia":"dark_tritanopia";o.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}}}),n==="light"?(e.media="all",t.media="not all"):(e.media="not all",t.media="all");function o(){const e=document.querySelector("iframe.giscus-frame");if(e){const t=n==="light"?"light_tritanopia":"dark_tritanopia";e.contentWindow.postMessage({giscus:{setConfig:{theme:t}}},"https://giscus.app")}else setTimeout(o,1e3)}o();const s=document.querySelector(".theme-toggle");s&&(s.textContent=n==="light"?"黑暗":"明亮",s.addEventListener("click",function(){const o=document.documentElement.getAttribute("data-theme"),n=o==="light"?"dark":"light";document.documentElement.setAttribute("data-theme",n),localStorage.setItem("theme",n),n==="light"?(e.media="all",t.media="not all"):(e.media="not all",t.media="all");const s=document.querySelector("iframe.giscus-frame");if(s){const e=n==="light"?"light_tritanopia":"dark_tritanopia";s.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}this.textContent=n==="light"?"黑暗":"明亮"}))})</script></body></html>

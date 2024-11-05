@@ -87,6 +87,7 @@
 
 /* 3D */
 @font-face {
+    font-display: swap;
     font-family: dimis;
     src: url('../font/dimis.ttf');
 }
@@ -107,7 +108,7 @@ body {
 
 a {
     color: inherit;
-    text-decoration: none !important;
+    text-decoration: none;
 }
 
 time {
@@ -130,6 +131,9 @@ time {
 
 .link {
     color: var(--nav-link-color);
+}
+
+.link:hover {
     text-decoration: underline;
 }
 

@@ -10,7 +10,8 @@
   --post-shodow: #ccc;  /* 文章边框阴影颜色 */
   --post-order: #aa0000;  /* 文章发布序号颜色 */
   /* content.css */
-  --content-a: #ec028d;  /* 文章中链接颜色 */
+  --content-a: #0000ff;  /* 文章中链接颜色 */
+  --content-a-hover: #ec028d;  /* 文章中链接悬停颜色 */
   --blockquote-left: #bf003f;  /* 引用块左边框颜色 */
   --inline-code: #aa0000;  /* 行内代码颜色 */
   --highlight-bg: #eee;  /* 代码块背景色 */
@@ -50,6 +51,7 @@
   --post-order: #89b4fa;  /* 文章发布序号颜色 */
   /* content.css */
   --content-a: #C6A0F6;  /* 文章中链接颜色 */
+  --content-a-hover: #f5bde6;  /* 文章中链接悬停颜色 */
   --blockquote-left: #89b4fa;  /* 引用块左边框颜色 */
   --inline-code: #89b4fa;  /* 行内代码颜色 */
   --highlight-bg: #1e1e2e;  /* 代码块背景色 */

@@ -1,490 +1,113 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-
-<head>
-  
-  <script>
-    (function() {
-      const currentTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', currentTheme);
-    })();
-  </script>
-
-  <meta charset="UTF-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  
-  <meta name="author" content="LiuChao">
-
-  
-  
-  <meta name="description" content="Python爬虫之蓝奏云文件批量下载">
-  
-
-  
-  <link rel="icon" href="https://blog.pi3.fun/favicon.ico">
-
-  
-  
-  <meta name="keywords" content=" study  latex  life  academic ">
-  
-
-  
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
-  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
-  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
-  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    renderMathInElement(document.body, {
-      delimiters: [
-        { left: '$$', right: '$$', display: true },
-        { left: '\\[', right: '\\]', display: true },
-        { left: '$', right: '$', display: false },
-        { left: '\\(', right: '\\)', display: false }
-      ],
-      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
-      throwOnError: false
-    });
-  });
-</script>
-
-
-  
-
-  
-  <meta property="og:url" content="https://blog.pi3.fun/post/2023/09/python%E7%88%AC%E8%99%AB%E4%B9%8B%E8%93%9D%E5%A5%8F%E4%BA%91%E6%96%87%E4%BB%B6%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD/">
-  <meta property="og:site_name" content="Pi3&#39;s Notes">
-  <meta property="og:title" content="Python爬虫之蓝奏云文件批量下载">
-  <meta property="og:description" content="Python爬虫之蓝奏云文件批量下载">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2023-09-07T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-09-07T00:00:00+00:00">
-    <meta property="article:tag" content="技术">
-    <meta property="article:tag" content="Python">
-
-
-  
-  <link rel="canonical" href="https://blog.pi3.fun/post/2023/09/python%E7%88%AC%E8%99%AB%E4%B9%8B%E8%93%9D%E5%A5%8F%E4%BA%91%E6%96%87%E4%BB%B6%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD/">
-
-  
-  
-  
-  <meta itemprop="name" content="Python爬虫之蓝奏云文件批量下载">
-  <meta itemprop="description" content="Python爬虫之蓝奏云文件批量下载">
-  <meta itemprop="datePublished" content="2023-09-07T00:00:00+00:00">
-  <meta itemprop="dateModified" content="2023-09-07T00:00:00+00:00">
-  <meta itemprop="wordCount" content="3143">
-  <meta itemprop="keywords" content="技术,Python">
-
-  
-  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/common.css'>
-  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/content.css'>
-  
-  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/theme.css'>
-  
-  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/iconfont/iconfont.css'>
-  
-  <link rel="stylesheet" href='https://blog.pi3.fun/css/syntax/xcode.css' 
-    data-theme-style="light" 
-    media="(prefers-color-scheme: light)">
-  <link rel="stylesheet" href='https://blog.pi3.fun/css/syntax/catppuccin-mocha.css' 
-    data-theme-style="dark" 
-    media="not all">
-
-  
-  
-  <title>Python爬虫之蓝奏云文件批量下载 - Pi3&#39;s Notes</title>
-  
-
-  
-  
-
-  
-<link rel="stylesheet" href='https://blog.pi3.fun/css/single.css'>
-
-</head>
-
-<body>
-  <div id="wrapper">
-    <header id="header">
-  <h1>
-    <a href="https://blog.pi3.fun/">Pi3&#39;s Notes</a>
-  </h1>
-
-  <nav>
-    
-    <span class="nav-bar-item">
-      <a class="link" href="/">主页</a>
-    </span>
-    
-    <span class="nav-bar-item">
-      <a class="link" href="/post/">归档</a>
-    </span>
-    
-    <span class="nav-bar-item">
-      <a class="link" href="/about/">关于</a>
-    </span>
-    
-    <span class="nav-bar-item">
-      <a class="link theme-toggle" href="javascript:void(0);">黑暗</a>
-    </span>
-  </nav>
-</header>
-
-    
-<main id="main" class="post">
-  
-  
-  <h1>Python爬虫之蓝奏云文件批量下载</h1>
-  
-  <div>
-    <b>Keywords: </b>
-    
-    <a class="link" href='https://blog.pi3.fun/tags/%E6%8A%80%E6%9C%AF'>#技术</a>
-    
-    <a class="link" href='https://blog.pi3.fun/tags/python'>#Python</a>
-    
-  </div>
-  
-  
-  
-  
-  <article class="content">
-    
-    <h1 id="起源">起源</h1>
-<p>最近刚好入门了Python爬虫，在此之前系统完整的学了Python的基础入门知识，学习爬虫顺便也可以巩固之前学习的Python基础知识。</p>
-<p>学习Python爬虫，先去看了<a href="https://www.bilibili.com/video/BV1d54y1g7db/?spm_id_from=333.999.0.0&amp;vd_source=30a68d7597f750b905825950d4412d50">B站的介绍视频</a>，很短，只有4个小时，我也没有做笔记，就直接2个小时看完，学会了Python的request请求，网页的知识之前在HTML和CSS学习过了。所以感觉还是比较简单的，跟着视频做了<a href="L:%5CPython_file%5CPython%E5%AD%A6%E4%B9%A0%5C03_Python%E7%88%AC%E8%99%AB%5C%E7%88%AC%E5%8F%96%E8%B1%86%E7%93%A3TOP250.py"><strong>爬取豆瓣TOP250电影名的小项目</strong></a>。其他的就一点都没学过。</p>
-<p>接着我就遇到了一个问题，我想要批量下载B站UP主分享在蓝奏云上的文件，资源很丰富，文件资料很多，一个个下载就很慢很费劲，我就想着能不能用Python爬虫完成这个小项目
-<a href="https://github.com/Pi3-l22/lanzou_download">项目文件地址</a></p>
-<h1 id="过程">过程</h1>
-<p>我先把需要的5个链接和对应的密码，复制保存到本地的文本里。如何通过Python进行整理和格式化。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">MIUI解bl锁和刷机相关工具：  
-</span></span><span class="line"><span class="cl">https://wwvd.lanzoul.com/b030ok9yb  
-</span></span><span class="line"><span class="cl">密码:9cj9  
-</span></span><span class="line"><span class="cl">Root相关文件：  
-</span></span><span class="line"><span class="cl">https://wwvd.lanzoul.com/b030q0gef  
-</span></span><span class="line"><span class="cl">密码:hktq  
-</span></span><span class="line"><span class="cl">面具模块（持续更新ing）：  
-</span></span><span class="line"><span class="cl">https://wwvd.lanzoul.com/b030q3egd  
-</span></span><span class="line"><span class="cl">密码:hf8n  
-</span></span><span class="line"><span class="cl">lsp模块（持续更新ing）：  
-</span></span><span class="line"><span class="cl">https://wwvd.lanzoul.com/b0312jcmf  
-</span></span><span class="line"><span class="cl">密码:9d18  
-</span></span><span class="line"><span class="cl">各种优化软件（工具软件）：  
-</span></span><span class="line"><span class="cl">https://wwr.lanzoui.com/b030oka5i  
-</span></span><span class="line"><span class="cl">密码:fwjr
-</span></span></code></pre></div><p>提取其中的标题作为文件夹名，链接和密码，分别存在两个列表中，索引一一对应，方便后续的操作。并把这一步操作分装成一个函数。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 整理链接地址  </span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_url_data</span><span class="p">():</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;蓝奏云文件链接地址.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">lines</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">url</span> <span class="o">=</span> <span class="p">[]</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">password</span> <span class="o">=</span> <span class="p">[]</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">dir_name</span> <span class="o">=</span> <span class="p">[]</span>  
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>  
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;h&#39;</span><span class="p">:</span>  
-</span></span><span class="line"><span class="cl">            <span class="n">url</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>  <span class="c1"># 去除结尾换行符  </span>
-</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;密码&#39;</span><span class="p">):</span>  
-</span></span><span class="line"><span class="cl">            <span class="n">password</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()[</span><span class="mi">3</span><span class="p">:])</span>  
-</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>  
-</span></span><span class="line"><span class="cl">            <span class="n">dir_name</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">url</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">dir_name</span>
-</span></span></code></pre></div><p>接着就是变量这两个列表，分别访问对应的分享文件链接，这里需要注意的是，这里的分享链接，里面还有很多的文件。</p>
-<p>先用<code>request</code>请求链接，这里遇到了我第一个问题，就是我们应怎么把密码输入进去。查看源码，发现是一个输入框input接收密码，但是我是应该直接把密码写在这个文本框中还是直接get或者post请求。</p>
-<p>源码看着看着，我找到了答案。这里网页用了<code>ajax</code>的post请求，把一堆参数（我也不知道是什么）里面包含pwd，也就是我们输入的密码，一起提交上去。所以我的方向就是，用request的post方法进行请求。准备data和headers的过程中，我发现这个data里面的其他参数也变动的，每次请求都不一样，那我该怎么写这个参数。于是我又去看JavaScript的代码，发现里面竟然有这些参数，这些参数全部都是通过js代码中的ajax请求上去，参数的值也都写在上面，那么我的思路就是先请求当前这个网页，从网页中拿到js中的参数。</p>
-<p>但是在操作的过程中，我发现Python中的request根本请求不到js代码，只有js的链接地址，跟网页的元素查看器显示的不一样。上网搜索发现，request请求的是网页渲染之前的代码，当然不可能有js代码，这就是我遇到的第二个问题。</p>
-<p>这个问题我想的有点久，最后我想到的是，可以不可以通过获取script标签上面的div标签，在通过div的下一个兄弟标签来获取script标签，因为div标签是在网页渲染前就已经存在了，而且这样的方法在JavaScript的代码中经常会用到。</p>
-<p>于是我试着去操作一下，发现是真的可行的，==不过也不知道其中的原理是什么。== 拿到了script标签中的内容，接下来就是提取我们需要的信息，这里就是考察我对字符串的各种操作的熟悉程度，于是我的写法是这样的。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_key</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">div</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;info&#39;</span><span class="p">})</span>  <span class="c1"># 获取到div标签  </span>
-</span></span><span class="line"><span class="cl">    <span class="n">script</span> <span class="o">=</span> <span class="n">div</span><span class="o">.</span><span class="n">next_sibling</span><span class="o">.</span><span class="n">next_sibling</span>  
-</span></span><span class="line"><span class="cl">    <span class="c1"># 获取下一个兄弟节点 即script  </span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># print(script)    </span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># var ibf1fz = &#39;1693922274&#39;;    </span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># var _hddhs = &#39;c5010165681fd1c5fd8be8a4bcf20906&#39;;     # 获取ibf1fz和_hddhs  </span>
-</span></span><span class="line"><span class="cl">    <span class="n">ibf1fz</span> <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">hddhs</span> <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  
-</span></span><span class="line"><span class="cl">    <span class="c1"># fid: 4805955  </span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># uid: 2427876    # 获取fid和uid  </span>
-</span></span><span class="line"><span class="cl">    <span class="n">fid</span> <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">uid</span> <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ibf1fz</span><span class="p">,</span> <span class="n">hddhs</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">uid</span>
+<!doctype html><html lang=zh-cn><head><script>(function(){const e=localStorage.getItem("theme")||"light";document.documentElement.setAttribute("data-theme",e)})()</script><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><meta name=author content="LiuChao"><meta name=description content="Python爬虫之蓝奏云文件批量下载"><link rel=icon href=https://blog.pi3.fun/favicon.ico><meta name=keywords content=" study  latex  life  academic "><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css integrity=sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js integrity=sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"\\[",right:"\\]",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1}],ignoredTags:["script","noscript","style","textarea","pre","code","option"],throwOnError:!1})})</script><meta property="og:url" content="https://blog.pi3.fun/post/2023/09/python%E7%88%AC%E8%99%AB%E4%B9%8B%E8%93%9D%E5%A5%8F%E4%BA%91%E6%96%87%E4%BB%B6%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD/"><meta property="og:site_name" content="Pi3's Notes"><meta property="og:title" content="Python爬虫之蓝奏云文件批量下载"><meta property="og:description" content="Python爬虫之蓝奏云文件批量下载"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-09-07T00:00:00+00:00"><meta property="article:modified_time" content="2023-09-07T00:00:00+00:00"><meta property="article:tag" content="技术"><meta property="article:tag" content="Python"><link rel=canonical href=https://blog.pi3.fun/post/2023/09/python%E7%88%AC%E8%99%AB%E4%B9%8B%E8%93%9D%E5%A5%8F%E4%BA%91%E6%96%87%E4%BB%B6%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD/><meta itemprop=name content="Python爬虫之蓝奏云文件批量下载"><meta itemprop=description content="Python爬虫之蓝奏云文件批量下载"><meta itemprop=datePublished content="2023-09-07T00:00:00+00:00"><meta itemprop=dateModified content="2023-09-07T00:00:00+00:00"><meta itemprop=wordCount content="3143"><meta itemprop=keywords content="技术,Python"><link media=screen rel=stylesheet href=https://blog.pi3.fun/css/common.css><link media=screen rel=stylesheet href=https://blog.pi3.fun/css/content.css><link media=screen rel=stylesheet href=https://blog.pi3.fun/css/theme.css><link media=screen rel=stylesheet href=https://blog.pi3.fun/css/iconfont/iconfont.css><link rel=stylesheet href=https://blog.pi3.fun/css/syntax/xcode.css data-theme-style=light media="(prefers-color-scheme: light)"><link rel=stylesheet href=https://blog.pi3.fun/css/syntax/catppuccin-mocha.css data-theme-style=dark media="not all"><title>Python爬虫之蓝奏云文件批量下载 - Pi3's Notes</title>
+<link rel=stylesheet href=https://blog.pi3.fun/css/single.css></head><body><div id=wrapper><header id=header><h1><a href=https://blog.pi3.fun/>Pi3's Notes</a></h1><nav><span class=nav-bar-item><a class=link href=/>主页</a>
+</span><span class=nav-bar-item><a class=link href=/post/>归档</a>
+</span><span class=nav-bar-item><a class=link href=/about/>关于</a>
+</span><span class=nav-bar-item><a class="link theme-toggle" href=javascript:void(0);>黑暗</a></span></nav></header><main id=main class=post><h1>Python爬虫之蓝奏云文件批量下载</h1><div><b>Keywords: </b><a class=link href=https://blog.pi3.fun/tags/%E6%8A%80%E6%9C%AF>#技术</a>
+<a class=link href=https://blog.pi3.fun/tags/python>#Python</a></div><article class=content><h1 id=起源>起源</h1><p>最近刚好入门了Python爬虫，在此之前系统完整的学了Python的基础入门知识，学习爬虫顺便也可以巩固之前学习的Python基础知识。</p><p>学习Python爬虫，先去看了<a href="https://www.bilibili.com/video/BV1d54y1g7db/?spm_id_from=333.999.0.0&amp;vd_source=30a68d7597f750b905825950d4412d50">B站的介绍视频</a>，很短，只有4个小时，我也没有做笔记，就直接2个小时看完，学会了Python的request请求，网页的知识之前在HTML和CSS学习过了。所以感觉还是比较简单的，跟着视频做了<a href=L:%5CPython_file%5CPython%E5%AD%A6%E4%B9%A0%5C03_Python%E7%88%AC%E8%99%AB%5C%E7%88%AC%E5%8F%96%E8%B1%86%E7%93%A3TOP250.py><strong>爬取豆瓣TOP250电影名的小项目</strong></a>。其他的就一点都没学过。</p><p>接着我就遇到了一个问题，我想要批量下载B站UP主分享在蓝奏云上的文件，资源很丰富，文件资料很多，一个个下载就很慢很费劲，我就想着能不能用Python爬虫完成这个小项目
+<a href=https://github.com/Pi3-l22/lanzou_download>项目文件地址</a></p><h1 id=过程>过程</h1><p>我先把需要的5个链接和对应的密码，复制保存到本地的文本里。如何通过Python进行整理和格式化。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-txt data-lang=txt><span class=line><span class=cl>MIUI解bl锁和刷机相关工具：  
+</span></span><span class=line><span class=cl>https://wwvd.lanzoul.com/b030ok9yb  
+</span></span><span class=line><span class=cl>密码:9cj9  
+</span></span><span class=line><span class=cl>Root相关文件：  
+</span></span><span class=line><span class=cl>https://wwvd.lanzoul.com/b030q0gef  
+</span></span><span class=line><span class=cl>密码:hktq  
+</span></span><span class=line><span class=cl>面具模块（持续更新ing）：  
+</span></span><span class=line><span class=cl>https://wwvd.lanzoul.com/b030q3egd  
+</span></span><span class=line><span class=cl>密码:hf8n  
+</span></span><span class=line><span class=cl>lsp模块（持续更新ing）：  
+</span></span><span class=line><span class=cl>https://wwvd.lanzoul.com/b0312jcmf  
+</span></span><span class=line><span class=cl>密码:9d18  
+</span></span><span class=line><span class=cl>各种优化软件（工具软件）：  
+</span></span><span class=line><span class=cl>https://wwr.lanzoui.com/b030oka5i  
+</span></span><span class=line><span class=cl>密码:fwjr
+</span></span></code></pre></div><p>提取其中的标题作为文件夹名，链接和密码，分别存在两个列表中，索引一一对应，方便后续的操作。并把这一步操作分装成一个函数。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 整理链接地址  </span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>get_url_data</span><span class=p>():</span>  
+</span></span><span class=line><span class=cl>    <span class=n>fp</span> <span class=o>=</span> <span class=nb>open</span><span class=p>(</span><span class=s1>&#39;蓝奏云文件链接地址.txt&#39;</span><span class=p>,</span> <span class=s1>&#39;r&#39;</span><span class=p>,</span> <span class=n>encoding</span><span class=o>=</span><span class=s1>&#39;utf-8&#39;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=n>lines</span> <span class=o>=</span> <span class=n>fp</span><span class=o>.</span><span class=n>readlines</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>    <span class=n>fp</span><span class=o>.</span><span class=n>close</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>    <span class=n>url</span> <span class=o>=</span> <span class=p>[]</span>  
+</span></span><span class=line><span class=cl>    <span class=n>password</span> <span class=o>=</span> <span class=p>[]</span>  
+</span></span><span class=line><span class=cl>    <span class=n>dir_name</span> <span class=o>=</span> <span class=p>[]</span>  
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>line</span> <span class=ow>in</span> <span class=n>lines</span><span class=p>:</span>  
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>line</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>==</span> <span class=s1>&#39;h&#39;</span><span class=p>:</span>  
+</span></span><span class=line><span class=cl>            <span class=n>url</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>line</span><span class=o>.</span><span class=n>strip</span><span class=p>())</span>  <span class=c1># 去除结尾换行符  </span>
+</span></span><span class=line><span class=cl>        <span class=k>elif</span> <span class=n>line</span><span class=o>.</span><span class=n>startswith</span><span class=p>(</span><span class=s1>&#39;密码&#39;</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>            <span class=n>password</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>line</span><span class=o>.</span><span class=n>strip</span><span class=p>()[</span><span class=mi>3</span><span class=p>:])</span>  
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>  
+</span></span><span class=line><span class=cl>            <span class=n>dir_name</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>line</span><span class=o>.</span><span class=n>strip</span><span class=p>()[:</span><span class=o>-</span><span class=mi>1</span><span class=p>])</span>  
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>url</span><span class=p>,</span> <span class=n>password</span><span class=p>,</span> <span class=n>dir_name</span>
+</span></span></code></pre></div><p>接着就是变量这两个列表，分别访问对应的分享文件链接，这里需要注意的是，这里的分享链接，里面还有很多的文件。</p><p>先用<code>request</code>请求链接，这里遇到了我第一个问题，就是我们应怎么把密码输入进去。查看源码，发现是一个输入框input接收密码，但是我是应该直接把密码写在这个文本框中还是直接get或者post请求。</p><p>源码看着看着，我找到了答案。这里网页用了<code>ajax</code>的post请求，把一堆参数（我也不知道是什么）里面包含pwd，也就是我们输入的密码，一起提交上去。所以我的方向就是，用request的post方法进行请求。准备data和headers的过程中，我发现这个data里面的其他参数也变动的，每次请求都不一样，那我该怎么写这个参数。于是我又去看JavaScript的代码，发现里面竟然有这些参数，这些参数全部都是通过js代码中的ajax请求上去，参数的值也都写在上面，那么我的思路就是先请求当前这个网页，从网页中拿到js中的参数。</p><p>但是在操作的过程中，我发现Python中的request根本请求不到js代码，只有js的链接地址，跟网页的元素查看器显示的不一样。上网搜索发现，request请求的是网页渲染之前的代码，当然不可能有js代码，这就是我遇到的第二个问题。</p><p>这个问题我想的有点久，最后我想到的是，可以不可以通过获取script标签上面的div标签，在通过div的下一个兄弟标签来获取script标签，因为div标签是在网页渲染前就已经存在了，而且这样的方法在JavaScript的代码中经常会用到。</p><p>于是我试着去操作一下，发现是真的可行的，==不过也不知道其中的原理是什么。== 拿到了script标签中的内容，接下来就是提取我们需要的信息，这里就是考察我对字符串的各种操作的熟悉程度，于是我的写法是这样的。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>get_key</span><span class=p>(</span><span class=n>url</span><span class=p>:</span> <span class=nb>str</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>    <span class=n>response</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>url</span><span class=o>=</span><span class=n>url</span><span class=p>,</span> <span class=n>headers</span><span class=o>=</span><span class=n>headers</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=n>soup</span> <span class=o>=</span> <span class=n>BeautifulSoup</span><span class=p>(</span><span class=n>response</span><span class=o>.</span><span class=n>text</span><span class=p>,</span> <span class=s1>&#39;html.parser&#39;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=n>div</span> <span class=o>=</span> <span class=n>soup</span><span class=o>.</span><span class=n>find</span><span class=p>(</span><span class=s1>&#39;div&#39;</span><span class=p>,</span> <span class=n>attrs</span><span class=o>=</span><span class=p>{</span><span class=s1>&#39;class&#39;</span><span class=p>:</span> <span class=s1>&#39;d&#39;</span><span class=p>,</span> <span class=s1>&#39;id&#39;</span><span class=p>:</span> <span class=s1>&#39;info&#39;</span><span class=p>})</span>  <span class=c1># 获取到div标签  </span>
+</span></span><span class=line><span class=cl>    <span class=n>script</span> <span class=o>=</span> <span class=n>div</span><span class=o>.</span><span class=n>next_sibling</span><span class=o>.</span><span class=n>next_sibling</span>  
+</span></span><span class=line><span class=cl>    <span class=c1># 获取下一个兄弟节点 即script  </span>
+</span></span><span class=line><span class=cl>	<span class=c1># print(script)    </span>
+</span></span><span class=line><span class=cl>	<span class=c1># var ibf1fz = &#39;1693922274&#39;;    </span>
+</span></span><span class=line><span class=cl>	<span class=c1># var _hddhs = &#39;c5010165681fd1c5fd8be8a4bcf20906&#39;;     # 获取ibf1fz和_hddhs  </span>
+</span></span><span class=line><span class=cl>    <span class=n>ibf1fz</span> <span class=o>=</span> <span class=n>script</span><span class=o>.</span><span class=n>string</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;;&#39;</span><span class=p>)[</span><span class=mi>5</span><span class=p>]</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;=&#39;</span><span class=p>)[</span><span class=mi>1</span><span class=p>][</span><span class=mi>2</span><span class=p>:</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>    <span class=n>hddhs</span> <span class=o>=</span> <span class=n>script</span><span class=o>.</span><span class=n>string</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;;&#39;</span><span class=p>)[</span><span class=mi>6</span><span class=p>]</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;=&#39;</span><span class=p>)[</span><span class=mi>1</span><span class=p>][</span><span class=mi>2</span><span class=p>:</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>    <span class=c1># fid: 4805955  </span>
+</span></span><span class=line><span class=cl>    <span class=c1># uid: 2427876    # 获取fid和uid  </span>
+</span></span><span class=line><span class=cl>    <span class=n>fid</span> <span class=o>=</span> <span class=n>script</span><span class=o>.</span><span class=n>string</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;,&#39;</span><span class=p>)[</span><span class=mi>3</span><span class=p>]</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;:&#39;</span><span class=p>)[</span><span class=mi>1</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>    <span class=n>uid</span> <span class=o>=</span> <span class=n>script</span><span class=o>.</span><span class=n>string</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;,&#39;</span><span class=p>)[</span><span class=mi>4</span><span class=p>]</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;:&#39;</span><span class=p>)[</span><span class=mi>1</span><span class=p>][</span><span class=mi>1</span><span class=p>:</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>ibf1fz</span><span class=p>,</span> <span class=n>hddhs</span><span class=p>,</span> <span class=n>fid</span><span class=p>,</span> <span class=n>uid</span>
 </span></span></code></pre></div><p>利用拿到的这些参数，我就可以用post请求了，这里请求的源地址是<code>source_url = 'https://wwr.lanzoui.com/filemoreajax.php'</code>
-这样我就拿到了Ajax返回来的一整个json数据，我转成字典，发现这里面的数据全都是这个分享链接下的所有文件的信息，包括文件名、文件id（可以拼接成下载链接）等等信息。</p>
-<p>于是我又利用字典的知识，把整个json数据中的文件名和文件id分别存在各自的列表中，同样分装成函数，并返回这两个列表。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_download_id</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pwd</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>  
-</span></span><span class="line"><span class="cl">    <span class="c1"># 请求表单数据  </span>
-</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>  
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;lx&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;fid&#39;</span><span class="p">:</span> <span class="n">f</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;uid&#39;</span><span class="p">:</span> <span class="n">u</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;pg&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;rep&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="n">t</span><span class="p">,</span>  <span class="c1"># 当前时间戳  </span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;k&#39;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span>  <span class="c1"># 感觉应该是32位md5加密后的密码 可以从网页源码中找到  </span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;up&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;ls&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;pwd&#39;</span><span class="p">:</span> <span class="n">pwd</span>  
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">source_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>  
-</span></span><span class="line"><span class="cl">    <span class="c1"># print(response.text)  </span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 返回数据为json格式，我们要提取里面id的值  </span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># print(response.json())  </span>
-</span></span><span class="line"><span class="cl">    <span class="n">download_id</span> <span class="o">=</span> <span class="p">[]</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">file_name_all</span> <span class="o">=</span> <span class="p">[]</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">download_id_lists</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>  
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">data_dict</span> <span class="ow">in</span> <span class="n">download_id_lists</span><span class="p">:</span>  
-</span></span><span class="line"><span class="cl">        <span class="n">download_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>  
-</span></span><span class="line"><span class="cl">        <span class="n">file_name_all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;name_all&#39;</span><span class="p">])</span>  
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">download_id</span><span class="p">,</span> <span class="n">file_name_all</span>
-</span></span></code></pre></div><p>接下来，就是根据拼接成的文件下载链接，进行下载。这里遇到了第三个问题。我们用浏览器访问下载链接，发现了这个页面又三个下载按钮，分别是联通下载、电信下载、普通下载，这三个标签套在同一个a标签中😄，然后这三个按钮又是属于另外一个HTML页面，通过链接显示在这个页面中，于是我直接请求那三个按钮的页面，进行操作。</p>
-<p>有趣的是，这里的下载按钮同样是用Ajax请求的，我同样按照上面的方法，先找到div标签，再用下一个兄弟的下一个兄弟获取到了script中的内容，这个内容里面有我所需要的data参数的值，同样字符串操作获得了值，并封装成函数返回这些参数。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_ajaxdata</span><span class="p">(</span><span class="n">download_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">download_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">download_btn_url</span> <span class="o">=</span> <span class="n">lanzou_url</span> <span class="o">+</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;iframe&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;ifr2&#39;</span><span class="p">})[</span><span class="s1">&#39;src&#39;</span><span class="p">]</span>  
-</span></span><span class="line"><span class="cl"><span class="c1"># print(download_btn_url)  </span>
-</span></span><span class="line"><span class="cl"><span class="c1"># TODO 用request请求返回浏览器渲染之前的网页源码，没有包含文件下载地址  </span>
-</span></span><span class="line"><span class="cl"><span class="c1"># TODO 用selenium模拟浏览器请求，但是速度太慢了，而且还要安装chromedriver.exe  </span>
-</span></span><span class="line"><span class="cl"><span class="c1"># TODO 可以直接请求 ajaxm.php 文件，里面返回了文件下载地址  </span>
-</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">download_btn_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">response</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span>  <span class="c1"># 防止中文乱码  </span>
-</span></span><span class="line"><span class="cl">    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>  
-</span></span><span class="line"><span class="cl">    <span class="c1"># print(soup)  </span>
-</span></span><span class="line"><span class="cl">    <span class="n">script</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;load&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">nextSibling</span><span class="o">.</span><span class="n">nextSibling</span><span class="o">.</span><span class="n">nextSibling</span><span class="o">.</span><span class="n">nextSibling</span>  
-</span></span><span class="line"><span class="cl"><span class="c1"># print(script)  </span>
-</span></span><span class="line"><span class="cl"><span class="c1"># wsk_sign = &#39;c20230818&#39;;    </span>
-</span></span><span class="line"><span class="cl"><span class="c1"># aihidcms = &#39;19Yt&#39;;    </span>
-</span></span><span class="line"><span class="cl"><span class="c1"># iucccjdsd = &#39;&#39;;    </span>
-</span></span><span class="line"><span class="cl"><span class="c1"># ws_sign = &#39;c20230818&#39;;    </span>
-</span></span><span class="line"><span class="cl"><span class="c1"># sasign = &#39;sA2UHOV5vUGFSW1FuBjZTb1Y9V2EHbQMzBDZUZgZrVGZVYQBxASgDagdgC2sBbFxpAWsHMlM6VmADNQE0Sv2_c&#39;;    </span>
-</span></span><span class="line"><span class="cl"><span class="c1"># ajaxdata = &#39;?ctdf&#39;;    # 获取各个元素的值  </span>
-</span></span><span class="line"><span class="cl">    <span class="n">wsk_sign</span> <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">aihidcms</span> <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">iucccjdsd</span> <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">ws_sign</span> <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">sasign</span> <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">ajaxdata</span> <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  
-</span></span><span class="line"><span class="cl">    <span class="c1"># print(wsk_sign, aihidcms, iucccjdsd, ws_sign, sasign, ajaxdata)  </span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">aihidcms</span><span class="p">,</span> <span class="n">iucccjdsd</span><span class="p">,</span> <span class="n">sasign</span><span class="p">,</span> <span class="n">ajaxdata</span>
-</span></span></code></pre></div><p>用上面得到的参数进行post请求，就可以得到Ajax返回的一个json数据，进行数据分析，这里我们就得到了文件下载的直链了，只要点击这个链接，浏览器就可以开始自动下载。</p>
-<p>接下来的事情就简单了，只要get请求这些链接，把返回值写入文件中。这里我用标题创建了文件夹，把每个文件命名为之前返回的文件名，这样一切就完美了。但是在这里我遇到了最困难的问题，也是卡的时间最久的一次。</p>
-<p>就是按照我的想法这样操作，根本行不通，下载下来的文件都是5kb，而且打不开，根本就不是我想要的文件。于是我开始分析，先把返回值打印出来，发现是一个html格式的文本，难怪不对。我当时就在想难道我这个链接不是文件的直链？但是浏览器一打开就可以下载，也不对啊。于是我认为是大文件没有分批下载，于是我把写入文件代码改成</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dir_name</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">file_name_all</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>  
-</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">102400</span><span class="p">):</span>  
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="n">chunk</span><span class="p">:</span>  
-</span></span><span class="line"><span class="cl">		<span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
-</span></span></code></pre></div><p>但是还是不行，之后我又尝试了很多方法，都不行，上网搜索了很多Python请求文件的方法，也都不行。最后我几乎都认定我得到的这个链接不是文件的直链，我用Firefox浏览器打开，跳出来一个页面，有一个下载按钮，于是我又开始像前面的操作一样分析代码，但是我又被卡住了，明明用正确的data却请求不到数据。</p>
-<p>最后我上网搜索到了别人写的蓝奏云下载的爬虫，我发现链接确实是直链，因为别人也是用这个链接下载的，唯一的不同就是，下载时的请求不同，还有写了一堆请求头。问题就这样解决了
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222211143.png" alt="请求头"></p>
-<p>最后根据网上的方法，我也成功把文件下载下来。</p>
-<h1 id="反思">反思</h1>
-<p>我这个程序，写的看起来就像屎山，以后再回来说不定就读不懂了。所以养成良好的编码习惯还是很有必要的。可以多参考别人写的好的代码格式，也可以看Python的编码规范。</p>
-<p>这里面的代码，还有很多的原理问题需要解决和思考</p>
-<ol>
-<li>最后问题的解决，原理到底是什么？</li>
-<li>Python请求链接下载文件的方法有多少种？</li>
-<li>获取script标签的操作肯定不是标准的写法，但是这样能成功的原理是什么？Python爬虫遇到这种情况，规范正确的解决方法是什么？</li>
-<li>……</li>
-</ol>
-<p>这样问题应该可以在我系统学习了Python爬虫之后得到解决。</p>
-    
-  </article>
-  <div class="paginator">
-    
-    <a></a>
-    
-    
-    <a class="link" href="https://blog.pi3.fun/post/2023/10/%E8%8E%B7%E5%8F%96%E5%B9%B6%E6%8E%A8%E9%80%81%E8%AF%AD%E9%9F%B3%E5%8C%85%E5%88%B0%E6%89%8B%E6%9C%BA%E5%BE%AE%E4%BF%A1/">next →</a>
-    
-  </div>
-  <div class="comment">
-    
-    
-    
-    
-    
-    
-    
-    
-      <br>
-<div id="tcomment"></div>
-<script src="https://registry.npmmirror.com/twikoo/1.6.39/files/dist/twikoo.min.js"></script>
-<script>
-twikoo.init({
-  envId: 'https://twikoo.pi3.fun/.netlify/functions/twikoo',
-  el: '#tcomment',
-  lang: 'zh-CN', 
-})
-</script>
-
-    
-      
-  </div>
-  
-</main>
-
-    <footer id="footer">
-  <div>
-    <span style="display: flex;align-items: center;">© 2021 - 2024<img src="https://p.sda1.dev/19/68796ec343c7a7eecbe99de4a9df6c66/rainbow.gif" width=20>By LiuChao</span>
-  </div>
-  
-  
-
-  
-
-  <div class="footnote">
-    <span><a class=link href=/index.xml><span class="iconfont icon-RSS"></span></a>  |  <a class=link href=https://github.com/Pi3-l22 Target=_ blank><span class="iconfont icon-GitHub"></span></a>  |  <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener><span class="iconfont icon-creative-commons-fill"></span></a>
-</span>
-  </div>
-</footer>
-
-  </div>
-
-  
-  
-
-  
-  
-
-  
-  
-  
-    
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-WE6L6RF96W"></script>
-      <script>
-        var doNotTrack = false;
-        if ( false ) {
-          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-          var doNotTrack = (dnt == "1" || dnt == "yes");
-        }
-        if (!doNotTrack) {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-WE6L6RF96W');
-        }
-      </script>
-    
-  
-
-
-
-
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const currentTheme = localStorage.getItem('theme') || 'light';
-      
-
-      const lightStyle = document.querySelector('link[data-theme-style="light"]');
-      const darkStyle = document.querySelector('link[data-theme-style="dark"]');
-      
-      
-      const systemThemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
-      systemThemeMedia.addListener(function(e) {
-        
-        if (!localStorage.getItem('theme')) {
-          const newTheme = e.matches ? 'dark' : 'light';
-          document.documentElement.setAttribute('data-theme', newTheme);
-          localStorage.setItem('theme', newTheme);
-          
-          
-          if (newTheme === 'light') {
-            lightStyle.media = 'all';
-            darkStyle.media = 'not all';
-          } else {
-            lightStyle.media = 'not all';
-            darkStyle.media = 'all';
-          }
-          
-          
-          const giscusFrame = document.querySelector('iframe.giscus-frame');
-          if (giscusFrame) {
-            const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
-            giscusFrame.contentWindow.postMessage(
-              { giscus: { setConfig: { theme: giscusTheme } } },
-              'https://giscus.app'
-            );
-          }
-        }
-      });
-
-      
-      if (currentTheme === 'light') {
-        lightStyle.media = 'all';
-        darkStyle.media = 'not all';
-      } else {
-        lightStyle.media = 'not all';
-        darkStyle.media = 'all';
-      }
-
-      
-      function updateGiscusTheme() {
-        const giscusFrame = document.querySelector('iframe.giscus-frame');
-        if (giscusFrame) {
-          const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
-          giscusFrame.contentWindow.postMessage(
-            { giscus: { setConfig: { theme: giscusTheme } } },
-            'https://giscus.app'
-          );
-        } else {
-          
-          setTimeout(updateGiscusTheme, 1000);
-        }
-      }
-      
-      
-      updateGiscusTheme();
-
-      const themeToggle = document.querySelector('.theme-toggle');
-      if (themeToggle) {
-        themeToggle.textContent = currentTheme === 'light' ? '黑暗' : '明亮';
-        
-        themeToggle.addEventListener('click', function() {
-          const currentTheme = document.documentElement.getAttribute('data-theme');
-          const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-          
-          document.documentElement.setAttribute('data-theme', newTheme);
-          localStorage.setItem('theme', newTheme);
-          
-          
-          if (newTheme === 'light') {
-            lightStyle.media = 'all';
-            darkStyle.media = 'not all';
-          } else {
-            lightStyle.media = 'not all';
-            darkStyle.media = 'all';
-          }
-          
-          
-          const giscusFrame = document.querySelector('iframe.giscus-frame');
-          if (giscusFrame) {
-            const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
-            giscusFrame.contentWindow.postMessage(
-              { giscus: { setConfig: { theme: giscusTheme } } },
-              'https://giscus.app'
-            );
-          }
-          
-          this.textContent = newTheme === 'light' ? '黑暗' : '明亮';
-        });
-      }
-    });
-  </script>
-
-</body>
-
-</html>
+这样我就拿到了Ajax返回来的一整个json数据，我转成字典，发现这里面的数据全都是这个分享链接下的所有文件的信息，包括文件名、文件id（可以拼接成下载链接）等等信息。</p><p>于是我又利用字典的知识，把整个json数据中的文件名和文件id分别存在各自的列表中，同样分装成函数，并返回这两个列表。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>get_download_id</span><span class=p>(</span><span class=n>t</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=n>k</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=n>f</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=n>u</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=n>pwd</span><span class=p>:</span> <span class=nb>str</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>    <span class=c1># 请求表单数据  </span>
+</span></span><span class=line><span class=cl>    <span class=n>data</span> <span class=o>=</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;lx&#39;</span><span class=p>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;fid&#39;</span><span class=p>:</span> <span class=n>f</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;uid&#39;</span><span class=p>:</span> <span class=n>u</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;pg&#39;</span><span class=p>:</span> <span class=s1>&#39;1&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;rep&#39;</span><span class=p>:</span> <span class=s1>&#39;0&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;t&#39;</span><span class=p>:</span> <span class=n>t</span><span class=p>,</span>  <span class=c1># 当前时间戳  </span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;k&#39;</span><span class=p>:</span> <span class=n>k</span><span class=p>,</span>  <span class=c1># 感觉应该是32位md5加密后的密码 可以从网页源码中找到  </span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;up&#39;</span><span class=p>:</span> <span class=s1>&#39;1&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;ls&#39;</span><span class=p>:</span> <span class=s1>&#39;1&#39;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;pwd&#39;</span><span class=p>:</span> <span class=n>pwd</span>  
+</span></span><span class=line><span class=cl>    <span class=p>}</span>  
+</span></span><span class=line><span class=cl>    <span class=n>response</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>post</span><span class=p>(</span><span class=n>url</span><span class=o>=</span><span class=n>source_url</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>data</span><span class=p>,</span> <span class=n>headers</span><span class=o>=</span><span class=n>headers</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=c1># print(response.text)  </span>
+</span></span><span class=line><span class=cl>    <span class=c1># 返回数据为json格式，我们要提取里面id的值  </span>
+</span></span><span class=line><span class=cl>    <span class=c1># print(response.json())  </span>
+</span></span><span class=line><span class=cl>    <span class=n>download_id</span> <span class=o>=</span> <span class=p>[]</span>  
+</span></span><span class=line><span class=cl>    <span class=n>file_name_all</span> <span class=o>=</span> <span class=p>[]</span>  
+</span></span><span class=line><span class=cl>    <span class=n>download_id_lists</span> <span class=o>=</span> <span class=n>response</span><span class=o>.</span><span class=n>json</span><span class=p>()[</span><span class=s1>&#39;text&#39;</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>data_dict</span> <span class=ow>in</span> <span class=n>download_id_lists</span><span class=p>:</span>  
+</span></span><span class=line><span class=cl>        <span class=n>download_id</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>data_dict</span><span class=p>[</span><span class=s1>&#39;id&#39;</span><span class=p>])</span>  
+</span></span><span class=line><span class=cl>        <span class=n>file_name_all</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>data_dict</span><span class=p>[</span><span class=s1>&#39;name_all&#39;</span><span class=p>])</span>  
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>download_id</span><span class=p>,</span> <span class=n>file_name_all</span>
+</span></span></code></pre></div><p>接下来，就是根据拼接成的文件下载链接，进行下载。这里遇到了第三个问题。我们用浏览器访问下载链接，发现了这个页面又三个下载按钮，分别是联通下载、电信下载、普通下载，这三个标签套在同一个a标签中😄，然后这三个按钮又是属于另外一个HTML页面，通过链接显示在这个页面中，于是我直接请求那三个按钮的页面，进行操作。</p><p>有趣的是，这里的下载按钮同样是用Ajax请求的，我同样按照上面的方法，先找到div标签，再用下一个兄弟的下一个兄弟获取到了script中的内容，这个内容里面有我所需要的data参数的值，同样字符串操作获得了值，并封装成函数返回这些参数。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>get_ajaxdata</span><span class=p>(</span><span class=n>download_url</span><span class=p>:</span> <span class=nb>str</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>    <span class=n>response</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>url</span><span class=o>=</span><span class=n>download_url</span><span class=p>,</span> <span class=n>headers</span><span class=o>=</span><span class=n>headers</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=n>soup</span> <span class=o>=</span> <span class=n>BeautifulSoup</span><span class=p>(</span><span class=n>response</span><span class=o>.</span><span class=n>text</span><span class=p>,</span> <span class=s1>&#39;html.parser&#39;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=n>download_btn_url</span> <span class=o>=</span> <span class=n>lanzou_url</span> <span class=o>+</span> <span class=n>soup</span><span class=o>.</span><span class=n>find</span><span class=p>(</span><span class=s1>&#39;iframe&#39;</span><span class=p>,</span> <span class=n>attrs</span><span class=o>=</span><span class=p>{</span><span class=s1>&#39;class&#39;</span><span class=p>:</span> <span class=s1>&#39;ifr2&#39;</span><span class=p>})[</span><span class=s1>&#39;src&#39;</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl><span class=c1># print(download_btn_url)  </span>
+</span></span><span class=line><span class=cl><span class=c1># TODO 用request请求返回浏览器渲染之前的网页源码，没有包含文件下载地址  </span>
+</span></span><span class=line><span class=cl><span class=c1># TODO 用selenium模拟浏览器请求，但是速度太慢了，而且还要安装chromedriver.exe  </span>
+</span></span><span class=line><span class=cl><span class=c1># TODO 可以直接请求 ajaxm.php 文件，里面返回了文件下载地址  </span>
+</span></span><span class=line><span class=cl>    <span class=n>response</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>url</span><span class=o>=</span><span class=n>download_btn_url</span><span class=p>,</span> <span class=n>headers</span><span class=o>=</span><span class=n>headers</span><span class=p>,</span> <span class=n>timeout</span><span class=o>=</span><span class=mi>10000</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=n>response</span><span class=o>.</span><span class=n>encoding</span> <span class=o>=</span> <span class=s1>&#39;utf-8&#39;</span>  <span class=c1># 防止中文乱码  </span>
+</span></span><span class=line><span class=cl>    <span class=n>soup</span> <span class=o>=</span> <span class=n>BeautifulSoup</span><span class=p>(</span><span class=n>response</span><span class=o>.</span><span class=n>text</span><span class=p>,</span> <span class=s1>&#39;html.parser&#39;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=c1># print(soup)  </span>
+</span></span><span class=line><span class=cl>    <span class=n>script</span> <span class=o>=</span> <span class=n>soup</span><span class=o>.</span><span class=n>find</span><span class=p>(</span><span class=s1>&#39;div&#39;</span><span class=p>,</span> <span class=n>attrs</span><span class=o>=</span><span class=p>{</span><span class=s1>&#39;class&#39;</span><span class=p>:</span> <span class=s1>&#39;load&#39;</span><span class=p>})</span><span class=o>.</span><span class=n>nextSibling</span><span class=o>.</span><span class=n>nextSibling</span><span class=o>.</span><span class=n>nextSibling</span><span class=o>.</span><span class=n>nextSibling</span>  
+</span></span><span class=line><span class=cl><span class=c1># print(script)  </span>
+</span></span><span class=line><span class=cl><span class=c1># wsk_sign = &#39;c20230818&#39;;    </span>
+</span></span><span class=line><span class=cl><span class=c1># aihidcms = &#39;19Yt&#39;;    </span>
+</span></span><span class=line><span class=cl><span class=c1># iucccjdsd = &#39;&#39;;    </span>
+</span></span><span class=line><span class=cl><span class=c1># ws_sign = &#39;c20230818&#39;;    </span>
+</span></span><span class=line><span class=cl><span class=c1># sasign = &#39;sA2UHOV5vUGFSW1FuBjZTb1Y9V2EHbQMzBDZUZgZrVGZVYQBxASgDagdgC2sBbFxpAWsHMlM6VmADNQE0Sv2_c&#39;;    </span>
+</span></span><span class=line><span class=cl><span class=c1># ajaxdata = &#39;?ctdf&#39;;    # 获取各个元素的值  </span>
+</span></span><span class=line><span class=cl>    <span class=n>wsk_sign</span> <span class=o>=</span> <span class=n>script</span><span class=o>.</span><span class=n>string</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;;&#39;</span><span class=p>)[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;=&#39;</span><span class=p>)[</span><span class=mi>1</span><span class=p>][</span><span class=mi>2</span><span class=p>:</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>    <span class=n>aihidcms</span> <span class=o>=</span> <span class=n>script</span><span class=o>.</span><span class=n>string</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;;&#39;</span><span class=p>)[</span><span class=mi>1</span><span class=p>]</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;=&#39;</span><span class=p>)[</span><span class=mi>1</span><span class=p>][</span><span class=mi>2</span><span class=p>:</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>    <span class=n>iucccjdsd</span> <span class=o>=</span> <span class=n>script</span><span class=o>.</span><span class=n>string</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;;&#39;</span><span class=p>)[</span><span class=mi>2</span><span class=p>]</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;=&#39;</span><span class=p>)[</span><span class=mi>1</span><span class=p>][</span><span class=mi>2</span><span class=p>:</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>    <span class=n>ws_sign</span> <span class=o>=</span> <span class=n>script</span><span class=o>.</span><span class=n>string</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;;&#39;</span><span class=p>)[</span><span class=mi>3</span><span class=p>]</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;=&#39;</span><span class=p>)[</span><span class=mi>1</span><span class=p>][</span><span class=mi>2</span><span class=p>:</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>    <span class=n>sasign</span> <span class=o>=</span> <span class=n>script</span><span class=o>.</span><span class=n>string</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;;&#39;</span><span class=p>)[</span><span class=mi>4</span><span class=p>]</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;=&#39;</span><span class=p>)[</span><span class=mi>1</span><span class=p>][</span><span class=mi>2</span><span class=p>:</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>    <span class=n>ajaxdata</span> <span class=o>=</span> <span class=n>script</span><span class=o>.</span><span class=n>string</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;;&#39;</span><span class=p>)[</span><span class=mi>5</span><span class=p>]</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;=&#39;</span><span class=p>)[</span><span class=mi>1</span><span class=p>][</span><span class=mi>2</span><span class=p>:</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>    <span class=c1># print(wsk_sign, aihidcms, iucccjdsd, ws_sign, sasign, ajaxdata)  </span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>aihidcms</span><span class=p>,</span> <span class=n>iucccjdsd</span><span class=p>,</span> <span class=n>sasign</span><span class=p>,</span> <span class=n>ajaxdata</span>
+</span></span></code></pre></div><p>用上面得到的参数进行post请求，就可以得到Ajax返回的一个json数据，进行数据分析，这里我们就得到了文件下载的直链了，只要点击这个链接，浏览器就可以开始自动下载。</p><p>接下来的事情就简单了，只要get请求这些链接，把返回值写入文件中。这里我用标题创建了文件夹，把每个文件命名为之前返回的文件名，这样一切就完美了。但是在这里我遇到了最困难的问题，也是卡的时间最久的一次。</p><p>就是按照我的想法这样操作，根本行不通，下载下来的文件都是5kb，而且打不开，根本就不是我想要的文件。于是我开始分析，先把返回值打印出来，发现是一个html格式的文本，难怪不对。我当时就在想难道我这个链接不是文件的直链？但是浏览器一打开就可以下载，也不对啊。于是我认为是大文件没有分批下载，于是我把写入文件代码改成</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=n>dir_name</span> <span class=o>+</span> <span class=s1>&#39;/&#39;</span> <span class=o>+</span> <span class=n>file_name_all</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=s1>&#39;wb&#39;</span><span class=p>)</span> <span class=k>as</span> <span class=n>fp</span><span class=p>:</span>  
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=n>chunk</span> <span class=ow>in</span> <span class=n>response</span><span class=o>.</span><span class=n>iter_content</span><span class=p>(</span><span class=n>chunk_size</span><span class=o>=</span><span class=mi>102400</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=n>chunk</span><span class=p>:</span>  
+</span></span><span class=line><span class=cl>		<span class=n>fp</span><span class=o>.</span><span class=n>write</span><span class=p>(</span><span class=n>chunk</span><span class=p>)</span>
+</span></span></code></pre></div><p>但是还是不行，之后我又尝试了很多方法，都不行，上网搜索了很多Python请求文件的方法，也都不行。最后我几乎都认定我得到的这个链接不是文件的直链，我用Firefox浏览器打开，跳出来一个页面，有一个下载按钮，于是我又开始像前面的操作一样分析代码，但是我又被卡住了，明明用正确的data却请求不到数据。</p><p>最后我上网搜索到了别人写的蓝奏云下载的爬虫，我发现链接确实是直链，因为别人也是用这个链接下载的，唯一的不同就是，下载时的请求不同，还有写了一堆请求头。问题就这样解决了
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231222211143.png alt=请求头></p><p>最后根据网上的方法，我也成功把文件下载下来。</p><h1 id=反思>反思</h1><p>我这个程序，写的看起来就像屎山，以后再回来说不定就读不懂了。所以养成良好的编码习惯还是很有必要的。可以多参考别人写的好的代码格式，也可以看Python的编码规范。</p><p>这里面的代码，还有很多的原理问题需要解决和思考</p><ol><li>最后问题的解决，原理到底是什么？</li><li>Python请求链接下载文件的方法有多少种？</li><li>获取script标签的操作肯定不是标准的写法，但是这样能成功的原理是什么？Python爬虫遇到这种情况，规范正确的解决方法是什么？</li><li>……</li></ol><p>这样问题应该可以在我系统学习了Python爬虫之后得到解决。</p></article><div class=paginator><a></a><a class=link href=https://blog.pi3.fun/post/2023/10/%E8%8E%B7%E5%8F%96%E5%B9%B6%E6%8E%A8%E9%80%81%E8%AF%AD%E9%9F%B3%E5%8C%85%E5%88%B0%E6%89%8B%E6%9C%BA%E5%BE%AE%E4%BF%A1/>next →</a></div><div class=comment><br><div id=tcomment></div><script src=https://registry.npmmirror.com/twikoo/1.6.39/files/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://twikoo.pi3.fun/.netlify/functions/twikoo",el:"#tcomment",lang:"zh-CN"})</script></div></main><footer id=footer><div><span style=display:flex;align-items:center><span style=margin-right:.5rem>© 2021 - 2024</span><img src=https://p.sda1.dev/20/9c62fc28131254c408b5ad8667a69140/rainbow.gif loading=lazy width=20 alt=rainbow><span style=margin-left:.5rem>By Liu Chao</span></span></div><div class=footnote><span><a class=link href=/index.xml><span class="iconfont icon-RSS"></span></a> | <a class=link href=https://github.com/Pi3-l22 target=_ blank><span class="iconfont icon-GitHub"></span></a> | <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener><span class="iconfont icon-creative-commons-fill"></span></a></span></div></footer></div><script async src="https://www.googletagmanager.com/gtag/js?id=G-WE6L6RF96W"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-WE6L6RF96W")}</script><script>document.addEventListener("DOMContentLoaded",function(){const n=localStorage.getItem("theme")||"light",e=document.querySelector('link[data-theme-style="light"]'),t=document.querySelector('link[data-theme-style="dark"]'),i=window.matchMedia("(prefers-color-scheme: dark)");i.addListener(function(n){if(!localStorage.getItem("theme")){const s=n.matches?"dark":"light";document.documentElement.setAttribute("data-theme",s),localStorage.setItem("theme",s),s==="light"?(e.media="all",t.media="not all"):(e.media="not all",t.media="all");const o=document.querySelector("iframe.giscus-frame");if(o){const e=s==="light"?"light_tritanopia":"dark_tritanopia";o.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}}}),n==="light"?(e.media="all",t.media="not all"):(e.media="not all",t.media="all");function o(){const e=document.querySelector("iframe.giscus-frame");if(e){const t=n==="light"?"light_tritanopia":"dark_tritanopia";e.contentWindow.postMessage({giscus:{setConfig:{theme:t}}},"https://giscus.app")}else setTimeout(o,1e3)}o();const s=document.querySelector(".theme-toggle");s&&(s.textContent=n==="light"?"黑暗":"明亮",s.addEventListener("click",function(){const o=document.documentElement.getAttribute("data-theme"),n=o==="light"?"dark":"light";document.documentElement.setAttribute("data-theme",n),localStorage.setItem("theme",n),n==="light"?(e.media="all",t.media="not all"):(e.media="not all",t.media="all");const s=document.querySelector("iframe.giscus-frame");if(s){const e=n==="light"?"light_tritanopia":"dark_tritanopia";s.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}this.textContent=n==="light"?"黑暗":"明亮"}))})</script></body></html>

@@ -1,773 +1,344 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-
-<head>
-  
-  <script>
-    (function() {
-      const currentTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', currentTheme);
-    })();
-  </script>
-
-  <meta charset="UTF-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  
-  <meta name="author" content="LiuChao">
-
-  
-  
-  <meta name="description" content="一个基于UDP的简单多人在线聊天室项目">
-  
-
-  
-  <link rel="icon" href="https://blog.pi3.fun/favicon.ico">
-
-  
-  
-  <meta name="keywords" content=" study  latex  life  academic ">
-  
-
-  
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
-  integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
-  integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js"
-  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    renderMathInElement(document.body, {
-      delimiters: [
-        { left: '$$', right: '$$', display: true },
-        { left: '\\[', right: '\\]', display: true },
-        { left: '$', right: '$', display: false },
-        { left: '\\(', right: '\\)', display: false }
-      ],
-      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
-      throwOnError: false
-    });
-  });
-</script>
-
-
-  
-
-  
-  <meta property="og:url" content="https://blog.pi3.fun/post/2023/12/%E5%9F%BA%E4%BA%8Eudp%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%AE%A4/">
-  <meta property="og:site_name" content="Pi3&#39;s Notes">
-  <meta property="og:title" content="基于UDP的多人在线聊天室">
-  <meta property="og:description" content="一个基于UDP的简单多人在线聊天室项目">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2023-12-07T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-12-07T00:00:00+00:00">
-    <meta property="article:tag" content="技术">
-    <meta property="article:tag" content="Socket">
-    <meta property="article:tag" content="Python">
-    <meta property="article:tag" content="Flet">
-
-
-  
-  <link rel="canonical" href="https://blog.pi3.fun/post/2023/12/%E5%9F%BA%E4%BA%8Eudp%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%AE%A4/">
-
-  
-  
-  
-  <meta itemprop="name" content="基于UDP的多人在线聊天室">
-  <meta itemprop="description" content="一个基于UDP的简单多人在线聊天室项目">
-  <meta itemprop="datePublished" content="2023-12-07T00:00:00+00:00">
-  <meta itemprop="dateModified" content="2023-12-07T00:00:00+00:00">
-  <meta itemprop="wordCount" content="3553">
-  <meta itemprop="keywords" content="技术,Socket,Python,Flet">
-
-  
-  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/common.css'>
-  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/content.css'>
-  
-  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/theme.css'>
-  
-  <link media="screen" rel="stylesheet" href='https://blog.pi3.fun/css/iconfont/iconfont.css'>
-  
-  <link rel="stylesheet" href='https://blog.pi3.fun/css/syntax/xcode.css' 
-    data-theme-style="light" 
-    media="(prefers-color-scheme: light)">
-  <link rel="stylesheet" href='https://blog.pi3.fun/css/syntax/catppuccin-mocha.css' 
-    data-theme-style="dark" 
-    media="not all">
-
-  
-  
-  <title>基于UDP的多人在线聊天室 - Pi3&#39;s Notes</title>
-  
-
-  
-  
-
-  
-<link rel="stylesheet" href='https://blog.pi3.fun/css/single.css'>
-
-</head>
-
-<body>
-  <div id="wrapper">
-    <header id="header">
-  <h1>
-    <a href="https://blog.pi3.fun/">Pi3&#39;s Notes</a>
-  </h1>
-
-  <nav>
-    
-    <span class="nav-bar-item">
-      <a class="link" href="/">主页</a>
-    </span>
-    
-    <span class="nav-bar-item">
-      <a class="link" href="/post/">归档</a>
-    </span>
-    
-    <span class="nav-bar-item">
-      <a class="link" href="/about/">关于</a>
-    </span>
-    
-    <span class="nav-bar-item">
-      <a class="link theme-toggle" href="javascript:void(0);">黑暗</a>
-    </span>
-  </nav>
-</header>
-
-    
-<main id="main" class="post">
-  
-  
-  <h1>基于UDP的多人在线聊天室</h1>
-  
-  <div>
-    <b>Keywords: </b>
-    
-    <a class="link" href='https://blog.pi3.fun/tags/%E6%8A%80%E6%9C%AF'>#技术</a>
-    
-    <a class="link" href='https://blog.pi3.fun/tags/socket'>#Socket</a>
-    
-    <a class="link" href='https://blog.pi3.fun/tags/python'>#Python</a>
-    
-    <a class="link" href='https://blog.pi3.fun/tags/flet'>#Flet</a>
-    
-  </div>
-  
-  
-  
-  <details>
-    <summary>
-      <b>Table of Contents</b>
-    </summary>
-    <div class="toc"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#实验内容">实验内容</a></li>
-    <li><a href="#程序设计思路">程序设计思路</a>
-      <ul>
-        <li><a href="#网络结构拓扑图">网络结构拓扑图</a></li>
-        <li><a href="#使用的python库">使用的Python库</a></li>
-        <li><a href="#具体设计流程">具体设计流程</a></li>
-      </ul>
-    </li>
-    <li><a href="#成果展示">成果展示</a></li>
-    <li><a href="#总结与心得">总结与心得</a></li>
-  </ul>
-</nav></div>
-  </details>
-  
-  
-  <article class="content">
-    
-    <h2 id="实验内容">实验内容</h2>
-<p>编写基于UDP的聊天室程序，实现多人聊天功能。自己设计应用协议，要求实现以下功能：</p>
-<ol>
-<li>用户注册：服务器端记录已注册的用户名和密码。</li>
-<li>用户登录：服务器接收登录信息后，检测是否在注册名单内。是，则聊天室的“在线清单”内加入此用户（包含用户名和主机连接地址）；否，则提示用户需要先注册。</li>
-<li>公聊：客户端输入公聊命令+发送信息；服务器端接收信息，并按照指令，将信息发送往所有“在线清单”用户。</li>
-<li>私聊：客户端输入私聊命令+发送方用户名+发送信息；服务器端接收信息，并按照指令，将信息发送往客户端指定的发送方用户。</li>
-<li>退出聊天室。</li>
-</ol>
-<h2 id="程序设计思路">程序设计思路</h2>
-<h3 id="网络结构拓扑图">网络结构拓扑图</h3>
-<p>一对多的网络结构，即一台服务器对应多台客户端的星型拓扑结构</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231031.png" alt="网络结构拓扑图"></p>
-<h3 id="使用的python库">使用的Python库</h3>
-<ul>
-<li>socket套接字库</li>
-<li>threading多线程库</li>
-<li><a href="https://flet.dev/docs/">flet第三方库</a>，用于实现图形化界面</li>
-</ul>
-<h3 id="具体设计流程">具体设计流程</h3>
-<p>首先我们应该先知道，UDP和TCP的区别是什么。UDP是无连接的，发送出去的数据不论对方是否收到，都不管，而TCP是面向连接的，每次通信都需要确保对方已经接收到才能进行下一步，也就多了很多协议设计的难度以及需要很多的异常判断。</p>
-<p>在此之前，我已经写过一个关于socket的项目，是基于TCP的：<a href="Python%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E7%A8%8B%E5%BA%8F.md">Python远程控制程序</a>，相比较之前这个项目，此次的程序设计就显得简单多了，毕竟是基于UDP的。</p>
-<h4 id="最简单的udp连接">最简单的UDP连接</h4>
-<p>首先先写一个最简单的UDP连接程序，作为整个程序的基础</p>
-<p><strong>client端</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">IP</span> <span class="o">=</span> <span class="s1">&#39;localhost&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="n">POST</span> <span class="o">=</span> <span class="mi">7777</span>
-</span></span><span class="line"><span class="cl"><span class="n">SERVER_ADDR</span> <span class="o">=</span> <span class="p">(</span><span class="n">IP</span><span class="p">,</span> <span class="n">POST</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 创建一个UDP的socket</span>
-</span></span><span class="line"><span class="cl"><span class="n">client</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 发送消息</span>
-</span></span><span class="line"><span class="cl"><span class="n">message</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">client</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">SERVER_ADDR</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 接收消息</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># while True:</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># data, server = client.recvfrom(1024)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># print(data.decode())</span>
-</span></span></code></pre></div><p><strong>server端</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">IP</span> <span class="o">=</span> <span class="s1">&#39;localhost&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="n">POST</span> <span class="o">=</span> <span class="mi">7777</span>
-</span></span><span class="line"><span class="cl"><span class="n">SERVER_ADDR</span> <span class="o">=</span> <span class="p">(</span><span class="n">IP</span><span class="p">,</span> <span class="n">POST</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 创建一个UDP的socket</span>
-</span></span><span class="line"><span class="cl"><span class="n">server</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 监听本机端口</span>
-</span></span><span class="line"><span class="cl"><span class="n">server</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">SERVER_ADDR</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 接收消息</span>
-</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">data</span><span class="p">,</span> <span class="n">address</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">recvfrom</span><span class="p">(</span><span class="n">BUFFER</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">message</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span></span></code></pre></div><p>这样就完成一个最简单的UDP连接程序，实现了client发送消息，server接收消息</p>
-<h4 id="相应功能的实现">相应功能的实现</h4>
-<p>接下里就是在上面程序的基础上加上对应的功能，本次程序需要实现：</p>
-<ol>
-<li>登录</li>
-<li>注册</li>
-<li>公聊</li>
-<li>私聊</li>
-<li>退出</li>
-</ol>
-<p>在client端中，我们需要将用户输入的消息，根据相应的操作进行封装成固定的格式，以便server端根据收到的数据，了解需要进行什么操作，经过操作后返回对应的数据</p>
-<ul>
-<li>注册操作的封装格式：REGISTER {username} {password}</li>
-<li>登录操作的封装格式：LOGIN {username} {password}</li>
-<li>公聊操作的封装格式：PUBLIC {message}</li>
-<li>私聊操作的封装格式：PRIVATE {to_username} {message}</li>
-<li>退出操作的封装格式：EXIT {username}</li>
-</ul>
-<p><strong>client端功能实现</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 注册</span>
-</span></span><span class="line"><span class="cl"><span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;[*] 输入用户名: &#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">password</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;[*] 输入密码: &#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">registration_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;REGISTER </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">password</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">client</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">registration_message</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">SERVER_ADDR</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">response</span><span class="p">,</span> <span class="n">add</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">recvfrom</span><span class="p">(</span><span class="n">BUFFER</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 登录</span>
-</span></span><span class="line"><span class="cl"><span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;[*] 输入用户名: &#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">password</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;[*] 输入密码: &#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">login_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;LOGIN </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">password</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">client</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">login_message</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">SERVER_ADDR</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">response</span><span class="p">,</span> <span class="n">add</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">recvfrom</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&#34;Login successful&#34;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># print(f&#34;[+] 欢迎 {username} 加入聊天室&#34;)</span>
-</span></span><span class="line"><span class="cl">	<span class="n">rev</span><span class="p">,</span> <span class="n">add</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">recvfrom</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="n">online_users</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">rev</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;[&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;]&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;&#39;&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;, &#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">	<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;[*] 当前在线用户: &#34;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">online_users</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">		<span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="k">break</span>
-</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">	<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 公聊、私聊、退出</span>
-</span></span><span class="line"><span class="cl"><span class="n">message</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">client</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">SERVER_ADDR</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">message</span> <span class="o">==</span> <span class="s2">&#34;exit&#34;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">	<span class="k">break</span>
-</span></span><span class="line"><span class="cl"><span class="k">elif</span> <span class="n">message</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&#34;@&#34;</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">	<span class="n">to_address</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;@&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="n">private_message</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">	<span class="n">private_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;PRIVATE </span><span class="si">{</span><span class="n">to_address</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">private_message</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">client</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">private_message</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">SERVER_ADDR</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">	<span class="n">public_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;PUBLIC </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">client</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">public_message</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">SERVER_ADDR</span><span class="p">)</span>
-</span></span></code></pre></div><p><strong>server端功能实现</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 记录注册过的用户信息字典</span>
-</span></span><span class="line"><span class="cl"><span class="n">user_dict</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># {username: password}</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 记录在线用户信息字典</span>
-</span></span><span class="line"><span class="cl"><span class="n">online_user</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># {username: (ip, port)}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 初始化用户信息</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">init_users</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;users.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">            <span class="n">username</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">            <span class="n">password</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="n">user_dict</span><span class="p">[</span><span class="n">username</span><span class="p">]</span> <span class="o">=</span> <span class="n">password</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[+] 注册用户信息加载成功&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 保存注册用户信息</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">save_users</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;users.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">user_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">            <span class="n">password</span> <span class="o">=</span> <span class="n">user_dict</span><span class="p">[</span><span class="n">username</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">password</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 列出在线用户</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">list_online_users</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">users</span> <span class="o">=</span> <span class="p">[]</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">online_user</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">        <span class="n">users</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">server</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">users</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">address</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 注册</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">address</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">user_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">        <span class="n">server</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="s2">&#34;[-] 用户名已存在&#34;</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">address</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">user_dict</span><span class="p">[</span><span class="n">username</span><span class="p">]</span> <span class="o">=</span> <span class="n">password</span>
-</span></span><span class="line"><span class="cl">        <span class="n">save_users</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="n">server</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="s2">&#34;[+] 注册成功&#34;</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">address</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 登录</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">address</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">username</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">user_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">        <span class="n">server</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="s2">&#34;[-] 用户名不存在&#34;</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">address</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">user_dict</span><span class="p">[</span><span class="n">username</span><span class="p">]</span> <span class="o">!=</span> <span class="n">password</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">server</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="s2">&#34;[-] 密码错误&#34;</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">address</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">server</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="s2">&#34;Login successful&#34;</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">address</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">online_user</span><span class="p">[</span><span class="n">username</span><span class="p">]</span> <span class="o">=</span> <span class="n">address</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># 发送在线用户列表</span>
-</span></span><span class="line"><span class="cl">        <span class="n">list_online_users</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># 发送上线通知</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">online</span> <span class="ow">in</span> <span class="n">online_user</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">            <span class="n">server</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[+] 欢迎 </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1"> 加入聊天室&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">online_user</span><span class="p">[</span><span class="n">online</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 公聊</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">public_chat</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">address</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">from_username</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 通过address获取username</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">online_user</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">online_user</span><span class="p">[</span><span class="n">username</span><span class="p">]</span> <span class="o">==</span> <span class="n">address</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">from_username</span> <span class="o">=</span> <span class="n">username</span>
-</span></span><span class="line"><span class="cl">            <span class="k">break</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">online_user</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">        <span class="n">server</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[+] </span><span class="si">{</span><span class="n">from_username</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">online_user</span><span class="p">[</span><span class="n">username</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 私聊</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">private_chat</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">to_username</span><span class="p">,</span> <span class="n">address</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">from_username</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 通过address获取username</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">online_user</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">online_user</span><span class="p">[</span><span class="n">username</span><span class="p">]</span> <span class="o">==</span> <span class="n">address</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">from_username</span> <span class="o">=</span> <span class="n">username</span>
-</span></span><span class="line"><span class="cl">            <span class="k">break</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">to_username</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">online_user</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">        <span class="n">server</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="s2">&#34;[-] 用户不在线&#34;</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">address</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">to_address</span> <span class="o">=</span> <span class="n">online_user</span><span class="p">[</span><span class="n">to_username</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="n">server</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[@] </span><span class="si">{</span><span class="n">from_username</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">to_address</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">server</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[@] </span><span class="si">{</span><span class="n">from_username</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">address</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 根据选项分别进入对应的函数</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">menu</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">address</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">command</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&#34;REGISTER&#34;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">username</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="n">password</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="n">register</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">address</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&#34;LOGIN&#34;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">username</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="n">password</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">address</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&#34;PUBLIC&#34;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">message</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="n">public_chat</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">address</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&#34;PRIVATE&#34;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">to_username</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="n">message</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="n">private_chat</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">to_username</span><span class="p">,</span> <span class="n">address</span><span class="p">)</span>
-</span></span></code></pre></div><p>写完这些，其实整个实验就算是完成了，但是在测试的过程中还是发现了一些问题：用户输入信息的交互不好，因为是在命令行中进行操作，所以有些时候会和对方输出的信息重叠，受到干扰，体验不好，所以决定在接下来要写个图形化界面</p>
-<h4 id="图形化界面编写">图形化界面编写</h4>
-<p>对于python图形化界面的编写，其实有很多的方式，如python的标准库Tkinter、QT系列的pyqt5和pyside6、还有Flutter系的flet、…………</p>
-<p>在此之前，我也利用flet编写过python的图形化界面项目：<a href="%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E6%9C%AC%E5%9C%B0%E9%87%8F%E5%AD%90%E6%96%87%E4%BB%B6%E5%8A%A0%E8%A7%A3%E5%AF%86.md">基于Python的本地量子文件加密</a>，所以这次我还是使用flet进行编写</p>
-<p>不管是之前的项目，还是这次的程序，编写图形化界面，我全部都是参考官方的文档，写的很详细，给予了我很大的帮助，里面还有很多的例子，帮助我理解，所以这次的编写也算是有点入门了</p>
-<hr>
-<p><strong>登录页面代码框架：</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">login_page</span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">ft</span><span class="o">.</span><span class="n">page</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># 初始化设置</span>
-</span></span><span class="line"><span class="cl">	<span class="n">page</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&#34;多人在线聊天室&#34;</span>  
-</span></span><span class="line"><span class="cl">	<span class="n">page</span><span class="o">.</span><span class="n">window_bgcolor</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">TRANSPARENT</span>  
-</span></span><span class="line"><span class="cl">	<span class="n">page</span><span class="o">.</span><span class="n">bgcolor</span> <span class="o">=</span> <span class="s2">&#34;#E1F7FB&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">page</span><span class="o">.</span><span class="n">window_width</span> <span class="o">=</span> <span class="mi">500</span>  
-</span></span><span class="line"><span class="cl">	<span class="n">page</span><span class="o">.</span><span class="n">window_height</span> <span class="o">=</span> <span class="mi">360</span>  
-</span></span><span class="line"><span class="cl">	<span class="n">page</span><span class="o">.</span><span class="n">window_min_width</span> <span class="o">=</span> <span class="mi">500</span>  
-</span></span><span class="line"><span class="cl">	<span class="n">page</span><span class="o">.</span><span class="n">window_min_height</span> <span class="o">=</span> <span class="mi">360</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># ……………………</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># 登录按钮点击事件  </span>
-</span></span><span class="line"><span class="cl">	<span class="k">def</span> <span class="nf">btn_login_click</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>  
-</span></span><span class="line"><span class="cl">	    <span class="k">pass</span>
-</span></span><span class="line"><span class="cl">	    
-</span></span><span class="line"><span class="cl">	<span class="c1"># 注册按钮点击事件  </span>
-</span></span><span class="line"><span class="cl">	<span class="k">def</span> <span class="nf">btn_register_click</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>  
-</span></span><span class="line"><span class="cl">	    <span class="k">pass</span>
-</span></span><span class="line"><span class="cl">	    
-</span></span><span class="line"><span class="cl">	<span class="c1"># 错误弹窗</span>
-</span></span><span class="line"><span class="cl">	<span class="n">login_error_dlg</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">AlertDialog</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">title</span><span class="o">=</span><span class="n">ft</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;用户名或密码错误！</span><span class="se">\n\n</span><span class="s2">请检查后重新输入！&#34;</span><span class="p">),</span>  
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>  
-</span></span><span class="line"><span class="cl">	<span class="n">login_success_dlg</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">AlertDialog</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">title</span><span class="o">=</span><span class="n">ft</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	        <span class="s2">&#34;登录成功！</span><span class="se">\n\n</span><span class="s2">欢迎进入聊天室！&#34;</span><span class="p">),</span>  
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>  
-</span></span><span class="line"><span class="cl">	<span class="n">register_error_dlg</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">AlertDialog</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">title</span><span class="o">=</span><span class="n">ft</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	        <span class="s2">&#34;注册失败！</span><span class="se">\n\n</span><span class="s2">用户名已存在！&#34;</span><span class="p">),</span>  
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>  
-</span></span><span class="line"><span class="cl">	<span class="n">register_success_dlg</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">AlertDialog</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">title</span><span class="o">=</span><span class="n">ft</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	        <span class="s2">&#34;注册成功！</span><span class="se">\n\n</span><span class="s2">请登录！&#34;</span><span class="p">),</span>  
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>  
-</span></span><span class="line"><span class="cl">	<span class="n">login_empty_dlg</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">AlertDialog</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">title</span><span class="o">=</span><span class="n">ft</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	        <span class="s2">&#34;用户名或密码为空！</span><span class="se">\n\n</span><span class="s2">请检查后重新输入！&#34;</span><span class="p">)</span>  
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>  
-</span></span><span class="line"><span class="cl">	<span class="n">server_error_dlg</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">AlertDialog</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">title</span><span class="o">=</span><span class="n">ft</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	        <span class="s2">&#34;服务器错误！</span><span class="se">\n\n</span><span class="s2">请稍后尝试！&#34;</span><span class="p">)</span>  
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># 标题</span>
-</span></span><span class="line"><span class="cl">	<span class="n">title</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">Stack</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># ………………</span>
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># 密码输入框</span>
-</span></span><span class="line"><span class="cl">	<span class="n">password_box</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">label</span><span class="o">=</span><span class="s2">&#34;密码&#34;</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">hint_text</span><span class="o">=</span><span class="s2">&#34;请输入你的密码&#34;</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">max_lines</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">width</span><span class="o">=</span><span class="mi">350</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">height</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">password</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">can_reveal_password</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">keyboard_type</span><span class="o">=</span><span class="n">ft</span><span class="o">.</span><span class="n">KeyboardType</span><span class="o">.</span><span class="n">VISIBLE_PASSWORD</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">shift_enter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">on_submit</span><span class="o">=</span><span class="n">btn_login_click</span>  
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>  
-</span></span><span class="line"><span class="cl">	<span class="c1"># 用户名输入框</span>
-</span></span><span class="line"><span class="cl">	<span class="n">username_box</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">label</span><span class="o">=</span><span class="s2">&#34;用户名&#34;</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">hint_text</span><span class="o">=</span><span class="s2">&#34;请输入你的用户名&#34;</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">max_lines</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">width</span><span class="o">=</span><span class="mi">350</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">height</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">autofocus</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">shift_enter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">on_submit</span><span class="o">=</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">password_box</span><span class="o">.</span><span class="n">focus</span><span class="p">(),</span>  
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>  
-</span></span><span class="line"><span class="cl">	<span class="c1"># 登录按钮 </span>
-</span></span><span class="line"><span class="cl">	<span class="n">btn_login</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">ElevatedButton</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">text</span><span class="o">=</span><span class="s2">&#34;登录&#34;</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">width</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">height</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">animate_size</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">on_click</span><span class="o">=</span><span class="n">btn_login_click</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">icon</span><span class="o">=</span><span class="n">ft</span><span class="o">.</span><span class="n">icons</span><span class="o">.</span><span class="n">LOGIN</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>  
-</span></span><span class="line"><span class="cl">	<span class="c1"># 注册按钮</span>
-</span></span><span class="line"><span class="cl">	<span class="n">btn_register</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">ElevatedButton</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">text</span><span class="o">=</span><span class="s2">&#34;注册&#34;</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">width</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">height</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">animate_size</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">on_click</span><span class="o">=</span><span class="n">btn_register_click</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">icon</span><span class="o">=</span><span class="n">ft</span><span class="o">.</span><span class="n">icons</span><span class="o">.</span><span class="n">CREATE_OUTLINED</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># 添加页面布局</span>
-</span></span><span class="line"><span class="cl">	<span class="n">page</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># ……………………</span>
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>
-</span></span></code></pre></div><p><strong>主页面代码框架：</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main_page</span><span class="p">(</span><span class="n">page</span><span class="p">:</span> <span class="n">ft</span><span class="o">.</span><span class="n">Page</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># 页面配置初始化</span>
-</span></span><span class="line"><span class="cl">	<span class="n">page</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span>  
-</span></span><span class="line"><span class="cl">	<span class="c1"># page.vertical_alignment = ft.MainAxisAlignment.START  # 垂直居中  </span>
-</span></span><span class="line"><span class="cl">	<span class="n">page</span><span class="o">.</span><span class="n">horizontal_alignment</span> <span class="o">=</span> <span class="s2">&#34;stretch&#34;</span>  
-</span></span><span class="line"><span class="cl">	<span class="n">page</span><span class="o">.</span><span class="n">window_max_height</span> <span class="o">=</span> <span class="mi">600</span>  
-</span></span><span class="line"><span class="cl">	<span class="n">page</span><span class="o">.</span><span class="n">window_max_width</span> <span class="o">=</span> <span class="mi">800</span>  
-</span></span><span class="line"><span class="cl">	<span class="n">page</span><span class="o">.</span><span class="n">window_width</span> <span class="o">=</span> <span class="mi">800</span>  
-</span></span><span class="line"><span class="cl">	<span class="n">page</span><span class="o">.</span><span class="n">window_height</span> <span class="o">=</span> <span class="mi">600</span>  
-</span></span><span class="line"><span class="cl">	<span class="c1"># 拦截本机窗口关闭信号 配合关闭窗口默认退出聊天  </span>
-</span></span><span class="line"><span class="cl">	<span class="n">page</span><span class="o">.</span><span class="n">window_prevent_close</span> <span class="o">=</span> <span class="kc">True</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="c1"># 接收消息</span>
-</span></span><span class="line"><span class="cl">	<span class="k">def</span> <span class="nf">receive_message</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">		<span class="k">pass</span>
-</span></span><span class="line"><span class="cl">		
-</span></span><span class="line"><span class="cl">	<span class="c1"># 更新聊天框  </span>
-</span></span><span class="line"><span class="cl">	<span class="k">def</span> <span class="nf">update_chat</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">		<span class="k">pass</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># 聊天内容列表  </span>
-</span></span><span class="line"><span class="cl">	<span class="n">chat</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">ListView</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">spacing</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">auto_scroll</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># 发送消息事件  </span>
-</span></span><span class="line"><span class="cl">	<span class="k">def</span> <span class="nf">send_message_click</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">		<span class="k">pass</span>
-</span></span><span class="line"><span class="cl">		
-</span></span><span class="line"><span class="cl">	<span class="c1"># 发送消息按钮  </span>
-</span></span><span class="line"><span class="cl">	<span class="n">btn_send</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">ElevatedButton</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">text</span><span class="o">=</span><span class="s2">&#34;发送&#34;</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">width</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">height</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">animate_size</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">on_click</span><span class="o">=</span><span class="n">send_message_click</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">icon</span><span class="o">=</span><span class="n">ft</span><span class="o">.</span><span class="n">icons</span><span class="o">.</span><span class="n">SEND</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="c1"># 输入框  </span>
-</span></span><span class="line"><span class="cl">	<span class="n">new_message</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">label</span><span class="o">=</span><span class="s2">&#34;Message&#34;</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">hint_text</span><span class="o">=</span><span class="s2">&#34;输入聊天消息&#34;</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">max_lines</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">height</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">autofocus</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">shift_enter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">on_submit</span><span class="o">=</span><span class="n">send_message_click</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="c1"># 当前用户头像  </span>
-</span></span><span class="line"><span class="cl">	<span class="n">user_avatar</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">CircleAvatar</span><span class="p">(</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">content</span><span class="o">=</span><span class="n">ft</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">ct</span><span class="o">.</span><span class="n">now_username</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">ft</span><span class="o">.</span><span class="n">FontWeight</span><span class="o">.</span><span class="n">BOLD</span><span class="p">),</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">width</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	    <span class="n">height</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>  
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="c1"># 添加页面布局</span>
-</span></span><span class="line"><span class="cl">	<span class="n">page</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">	<span class="c1"># ………………</span>
-</span></span><span class="line"><span class="cl">	<span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="c1"># 窗口关闭默认退出聊天室  </span>
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">close_window</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>  
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;close&#39;</span><span class="p">:</span>  
-</span></span><span class="line"><span class="cl">            <span class="n">ct</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="s1">&#39;exit&#39;</span><span class="p">)</span>  
-</span></span><span class="line"><span class="cl">            <span class="n">page</span><span class="o">.</span><span class="n">window_destroy</span><span class="p">()</span> <span class="c1"># 真正退出窗口  </span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">    <span class="n">page</span><span class="o">.</span><span class="n">on_window_event</span> <span class="o">=</span> <span class="n">close_window</span>  
-</span></span><span class="line"><span class="cl">    <span class="c1"># 开启接收消息线程  </span>
-</span></span><span class="line"><span class="cl">    <span class="n">receive_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">receive_message</span><span class="p">)</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">receive_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>  
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl"><span class="n">ft</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">login_page</span><span class="p">,</span> <span class="n">assets_dir</span><span class="o">=</span><span class="s2">&#34;assets&#34;</span><span class="p">)</span>
-</span></span></code></pre></div><h2 id="成果展示">成果展示</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231109.png" alt="服务端启动">
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231123.png" alt="登录界面">
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231137.png" alt="注册功能">
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231147.png" alt="聊天界面">
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231159.png" alt="公聊功能">
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231210.png" alt="私聊功能">
-<img src="https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231221.png" alt="退出聊天室功能"></p>
-<h2 id="总结与心得">总结与心得</h2>
-<p>总的来说，写一个基于UDP协议的多人聊天室这个实验还是很简单的，因为UDP是无连接的，不像TCP一样要考虑很多的问题，如丢包、失去连接等，UDP只管发送和接收，不用关心信息是否送达，所以少了很多“握手”的过程，简单不少。</p>
-<p>但是，等到整个程序写完之后，在命令行中执行，我发现了一个问题，当我正在命令行输入消息时，终端上已经有部分文字，这时候对方发来消息，那么对方的消息就会从我当前的光标处打印出来，把我的语句断开，这对用户来说是个不好的体验。所以最后，我决定写一个图形化界面，将用户输入和公屏输出分开，这样体验和美观程度会大大提高。</p>
-<p>图像化界面选择了 <a href="https://flet.dev/docs/">flet框架</a>，它基于Google 的 Flutter实现，所以对我来说很快能上手，而不像pyqt5那样复杂。在编写图像化的过程中也遇到了很多问题，不过大部分是flet框架的问题，对于socket这一块的问题就是：因为UDP基于无连接，所以我发送出去的消息不知道对方有没有收到，当我的服务端没有开启时，客户端在登录时会向服务端发送请求同时转到阻塞等到回应，但是这个过程中没有提示，用户可能会多次点击登录或者注册，导致开启大量的UDP阻塞等待，等到服务端上线时，发送的消息会被这些阻塞等待给覆盖掉，导致影响后面的欢迎界面的输出。解决办法就是：设置一个阻塞等待超时，当等待超时，自动释放阻塞的线程，同时弹出警告框，告诉用户“当前服务器连接不上，稍后再试”，以免开启更多的线程，浪费资源同时影响后续输出。</p>
-<p>解决了上面这个问题，但是上面这个解决办法同样导致出现了接下来一个问题：需要一直阻塞等待服务端发送消息的功能，因为上面设置的超时时间而报错，所以解决办法也很简单就是在这个功能中，将超时时间设为None。</p>
-<p>总之，在这个实验中，我遇到了不少问题，随着一个个问题被解决，我也从中学到了很多。</p>
-    
-  </article>
-  <div class="paginator">
-    
-    <a class="link" href="https://blog.pi3.fun/post/2023/11/%E5%9F%BA%E4%BA%8Esocket%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E7%A8%8B%E5%BA%8F/">← prev</a>
-    
-    
-    <a class="link" href="https://blog.pi3.fun/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%BA%8C/">next →</a>
-    
-  </div>
-  <div class="comment">
-    
-    
-    
-    
-    
-    
-    
-    
-      <br>
-<div id="tcomment"></div>
-<script src="https://registry.npmmirror.com/twikoo/1.6.39/files/dist/twikoo.min.js"></script>
-<script>
-twikoo.init({
-  envId: 'https://twikoo.pi3.fun/.netlify/functions/twikoo',
-  el: '#tcomment',
-  lang: 'zh-CN', 
-})
-</script>
-
-    
-      
-  </div>
-  
-</main>
-
-    <footer id="footer">
-  <div>
-    <span style="display: flex;align-items: center;">© 2021 - 2024<img src="https://p.sda1.dev/19/68796ec343c7a7eecbe99de4a9df6c66/rainbow.gif" width=20>By LiuChao</span>
-  </div>
-  
-  
-
-  
-
-  <div class="footnote">
-    <span><a class=link href=/index.xml><span class="iconfont icon-RSS"></span></a>  |  <a class=link href=https://github.com/Pi3-l22 Target=_ blank><span class="iconfont icon-GitHub"></span></a>  |  <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener><span class="iconfont icon-creative-commons-fill"></span></a>
-</span>
-  </div>
-</footer>
-
-  </div>
-
-  
-  
-
-  
-  
-
-  
-  
-  
-    
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-WE6L6RF96W"></script>
-      <script>
-        var doNotTrack = false;
-        if ( false ) {
-          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-          var doNotTrack = (dnt == "1" || dnt == "yes");
-        }
-        if (!doNotTrack) {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-WE6L6RF96W');
-        }
-      </script>
-    
-  
-
-
-
-
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const currentTheme = localStorage.getItem('theme') || 'light';
-      
-
-      const lightStyle = document.querySelector('link[data-theme-style="light"]');
-      const darkStyle = document.querySelector('link[data-theme-style="dark"]');
-      
-      
-      const systemThemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
-      systemThemeMedia.addListener(function(e) {
-        
-        if (!localStorage.getItem('theme')) {
-          const newTheme = e.matches ? 'dark' : 'light';
-          document.documentElement.setAttribute('data-theme', newTheme);
-          localStorage.setItem('theme', newTheme);
-          
-          
-          if (newTheme === 'light') {
-            lightStyle.media = 'all';
-            darkStyle.media = 'not all';
-          } else {
-            lightStyle.media = 'not all';
-            darkStyle.media = 'all';
-          }
-          
-          
-          const giscusFrame = document.querySelector('iframe.giscus-frame');
-          if (giscusFrame) {
-            const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
-            giscusFrame.contentWindow.postMessage(
-              { giscus: { setConfig: { theme: giscusTheme } } },
-              'https://giscus.app'
-            );
-          }
-        }
-      });
-
-      
-      if (currentTheme === 'light') {
-        lightStyle.media = 'all';
-        darkStyle.media = 'not all';
-      } else {
-        lightStyle.media = 'not all';
-        darkStyle.media = 'all';
-      }
-
-      
-      function updateGiscusTheme() {
-        const giscusFrame = document.querySelector('iframe.giscus-frame');
-        if (giscusFrame) {
-          const giscusTheme = currentTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
-          giscusFrame.contentWindow.postMessage(
-            { giscus: { setConfig: { theme: giscusTheme } } },
-            'https://giscus.app'
-          );
-        } else {
-          
-          setTimeout(updateGiscusTheme, 1000);
-        }
-      }
-      
-      
-      updateGiscusTheme();
-
-      const themeToggle = document.querySelector('.theme-toggle');
-      if (themeToggle) {
-        themeToggle.textContent = currentTheme === 'light' ? '黑暗' : '明亮';
-        
-        themeToggle.addEventListener('click', function() {
-          const currentTheme = document.documentElement.getAttribute('data-theme');
-          const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-          
-          document.documentElement.setAttribute('data-theme', newTheme);
-          localStorage.setItem('theme', newTheme);
-          
-          
-          if (newTheme === 'light') {
-            lightStyle.media = 'all';
-            darkStyle.media = 'not all';
-          } else {
-            lightStyle.media = 'not all';
-            darkStyle.media = 'all';
-          }
-          
-          
-          const giscusFrame = document.querySelector('iframe.giscus-frame');
-          if (giscusFrame) {
-            const giscusTheme = newTheme === 'light' ? 'light_tritanopia' : 'dark_tritanopia';
-            giscusFrame.contentWindow.postMessage(
-              { giscus: { setConfig: { theme: giscusTheme } } },
-              'https://giscus.app'
-            );
-          }
-          
-          this.textContent = newTheme === 'light' ? '黑暗' : '明亮';
-        });
-      }
-    });
-  </script>
-
-</body>
-
-</html>
+<!doctype html><html lang=zh-cn><head><script>(function(){const e=localStorage.getItem("theme")||"light";document.documentElement.setAttribute("data-theme",e)})()</script><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><meta name=author content="LiuChao"><meta name=description content="一个基于UDP的简单多人在线聊天室项目"><link rel=icon href=https://blog.pi3.fun/favicon.ico><meta name=keywords content=" study  latex  life  academic "><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css integrity=sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js integrity=sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"\\[",right:"\\]",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1}],ignoredTags:["script","noscript","style","textarea","pre","code","option"],throwOnError:!1})})</script><meta property="og:url" content="https://blog.pi3.fun/post/2023/12/%E5%9F%BA%E4%BA%8Eudp%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%AE%A4/"><meta property="og:site_name" content="Pi3's Notes"><meta property="og:title" content="基于UDP的多人在线聊天室"><meta property="og:description" content="一个基于UDP的简单多人在线聊天室项目"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-12-07T00:00:00+00:00"><meta property="article:modified_time" content="2023-12-07T00:00:00+00:00"><meta property="article:tag" content="技术"><meta property="article:tag" content="Socket"><meta property="article:tag" content="Python"><meta property="article:tag" content="Flet"><link rel=canonical href=https://blog.pi3.fun/post/2023/12/%E5%9F%BA%E4%BA%8Eudp%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%AE%A4/><meta itemprop=name content="基于UDP的多人在线聊天室"><meta itemprop=description content="一个基于UDP的简单多人在线聊天室项目"><meta itemprop=datePublished content="2023-12-07T00:00:00+00:00"><meta itemprop=dateModified content="2023-12-07T00:00:00+00:00"><meta itemprop=wordCount content="3553"><meta itemprop=keywords content="技术,Socket,Python,Flet"><link media=screen rel=stylesheet href=https://blog.pi3.fun/css/common.css><link media=screen rel=stylesheet href=https://blog.pi3.fun/css/content.css><link media=screen rel=stylesheet href=https://blog.pi3.fun/css/theme.css><link media=screen rel=stylesheet href=https://blog.pi3.fun/css/iconfont/iconfont.css><link rel=stylesheet href=https://blog.pi3.fun/css/syntax/xcode.css data-theme-style=light media="(prefers-color-scheme: light)"><link rel=stylesheet href=https://blog.pi3.fun/css/syntax/catppuccin-mocha.css data-theme-style=dark media="not all"><title>基于UDP的多人在线聊天室 - Pi3's Notes</title>
+<link rel=stylesheet href=https://blog.pi3.fun/css/single.css></head><body><div id=wrapper><header id=header><h1><a href=https://blog.pi3.fun/>Pi3's Notes</a></h1><nav><span class=nav-bar-item><a class=link href=/>主页</a>
+</span><span class=nav-bar-item><a class=link href=/post/>归档</a>
+</span><span class=nav-bar-item><a class=link href=/about/>关于</a>
+</span><span class=nav-bar-item><a class="link theme-toggle" href=javascript:void(0);>黑暗</a></span></nav></header><main id=main class=post><h1>基于UDP的多人在线聊天室</h1><div><b>Keywords: </b><a class=link href=https://blog.pi3.fun/tags/%E6%8A%80%E6%9C%AF>#技术</a>
+<a class=link href=https://blog.pi3.fun/tags/socket>#Socket</a>
+<a class=link href=https://blog.pi3.fun/tags/python>#Python</a>
+<a class=link href=https://blog.pi3.fun/tags/flet>#Flet</a></div><details><summary><b>Table of Contents</b></summary><div class=toc><nav id=TableOfContents><ul><li><a href=#实验内容>实验内容</a></li><li><a href=#程序设计思路>程序设计思路</a><ul><li><a href=#网络结构拓扑图>网络结构拓扑图</a></li><li><a href=#使用的python库>使用的Python库</a></li><li><a href=#具体设计流程>具体设计流程</a></li></ul></li><li><a href=#成果展示>成果展示</a></li><li><a href=#总结与心得>总结与心得</a></li></ul></nav></div></details><article class=content><h2 id=实验内容>实验内容</h2><p>编写基于UDP的聊天室程序，实现多人聊天功能。自己设计应用协议，要求实现以下功能：</p><ol><li>用户注册：服务器端记录已注册的用户名和密码。</li><li>用户登录：服务器接收登录信息后，检测是否在注册名单内。是，则聊天室的“在线清单”内加入此用户（包含用户名和主机连接地址）；否，则提示用户需要先注册。</li><li>公聊：客户端输入公聊命令+发送信息；服务器端接收信息，并按照指令，将信息发送往所有“在线清单”用户。</li><li>私聊：客户端输入私聊命令+发送方用户名+发送信息；服务器端接收信息，并按照指令，将信息发送往客户端指定的发送方用户。</li><li>退出聊天室。</li></ol><h2 id=程序设计思路>程序设计思路</h2><h3 id=网络结构拓扑图>网络结构拓扑图</h3><p>一对多的网络结构，即一台服务器对应多台客户端的星型拓扑结构</p><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231031.png alt=网络结构拓扑图></p><h3 id=使用的python库>使用的Python库</h3><ul><li>socket套接字库</li><li>threading多线程库</li><li><a href=https://flet.dev/docs/>flet第三方库</a>，用于实现图形化界面</li></ul><h3 id=具体设计流程>具体设计流程</h3><p>首先我们应该先知道，UDP和TCP的区别是什么。UDP是无连接的，发送出去的数据不论对方是否收到，都不管，而TCP是面向连接的，每次通信都需要确保对方已经接收到才能进行下一步，也就多了很多协议设计的难度以及需要很多的异常判断。</p><p>在此之前，我已经写过一个关于socket的项目，是基于TCP的：<a href=Python%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E7%A8%8B%E5%BA%8F.md>Python远程控制程序</a>，相比较之前这个项目，此次的程序设计就显得简单多了，毕竟是基于UDP的。</p><h4 id=最简单的udp连接>最简单的UDP连接</h4><p>首先先写一个最简单的UDP连接程序，作为整个程序的基础</p><p><strong>client端</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>IP</span> <span class=o>=</span> <span class=s1>&#39;localhost&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>POST</span> <span class=o>=</span> <span class=mi>7777</span>
+</span></span><span class=line><span class=cl><span class=n>SERVER_ADDR</span> <span class=o>=</span> <span class=p>(</span><span class=n>IP</span><span class=p>,</span> <span class=n>POST</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># 创建一个UDP的socket</span>
+</span></span><span class=line><span class=cl><span class=n>client</span> <span class=o>=</span> <span class=n>socket</span><span class=o>.</span><span class=n>socket</span><span class=p>(</span><span class=n>socket</span><span class=o>.</span><span class=n>AF_INET</span><span class=p>,</span> <span class=n>socket</span><span class=o>.</span><span class=n>SOCK_DGRAM</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># 发送消息</span>
+</span></span><span class=line><span class=cl><span class=n>message</span> <span class=o>=</span> <span class=nb>input</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>client</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=n>message</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>SERVER_ADDR</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># 接收消息</span>
+</span></span><span class=line><span class=cl><span class=c1># while True:</span>
+</span></span><span class=line><span class=cl>    <span class=c1># data, server = client.recvfrom(1024)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># print(data.decode())</span>
+</span></span></code></pre></div><p><strong>server端</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>IP</span> <span class=o>=</span> <span class=s1>&#39;localhost&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>POST</span> <span class=o>=</span> <span class=mi>7777</span>
+</span></span><span class=line><span class=cl><span class=n>SERVER_ADDR</span> <span class=o>=</span> <span class=p>(</span><span class=n>IP</span><span class=p>,</span> <span class=n>POST</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># 创建一个UDP的socket</span>
+</span></span><span class=line><span class=cl><span class=n>server</span> <span class=o>=</span> <span class=n>socket</span><span class=o>.</span><span class=n>socket</span><span class=p>(</span><span class=n>socket</span><span class=o>.</span><span class=n>AF_INET</span><span class=p>,</span> <span class=n>socket</span><span class=o>.</span><span class=n>SOCK_DGRAM</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># 监听本机端口</span>
+</span></span><span class=line><span class=cl><span class=n>server</span><span class=o>.</span><span class=n>bind</span><span class=p>(</span><span class=n>SERVER_ADDR</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># 接收消息</span>
+</span></span><span class=line><span class=cl><span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>data</span><span class=p>,</span> <span class=n>address</span> <span class=o>=</span> <span class=n>server</span><span class=o>.</span><span class=n>recvfrom</span><span class=p>(</span><span class=n>BUFFER</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>message</span> <span class=o>=</span> <span class=n>data</span><span class=o>.</span><span class=n>decode</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>message</span><span class=p>)</span>
+</span></span></code></pre></div><p>这样就完成一个最简单的UDP连接程序，实现了client发送消息，server接收消息</p><h4 id=相应功能的实现>相应功能的实现</h4><p>接下里就是在上面程序的基础上加上对应的功能，本次程序需要实现：</p><ol><li>登录</li><li>注册</li><li>公聊</li><li>私聊</li><li>退出</li></ol><p>在client端中，我们需要将用户输入的消息，根据相应的操作进行封装成固定的格式，以便server端根据收到的数据，了解需要进行什么操作，经过操作后返回对应的数据</p><ul><li>注册操作的封装格式：REGISTER {username} {password}</li><li>登录操作的封装格式：LOGIN {username} {password}</li><li>公聊操作的封装格式：PUBLIC {message}</li><li>私聊操作的封装格式：PRIVATE {to_username} {message}</li><li>退出操作的封装格式：EXIT {username}</li></ul><p><strong>client端功能实现</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 注册</span>
+</span></span><span class=line><span class=cl><span class=n>username</span> <span class=o>=</span> <span class=nb>input</span><span class=p>(</span><span class=s2>&#34;[*] 输入用户名: &#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>password</span> <span class=o>=</span> <span class=nb>input</span><span class=p>(</span><span class=s2>&#34;[*] 输入密码: &#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>registration_message</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&#34;REGISTER </span><span class=si>{</span><span class=n>username</span><span class=si>}</span><span class=s2> </span><span class=si>{</span><span class=n>password</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>client</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=n>registration_message</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>SERVER_ADDR</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>response</span><span class=p>,</span> <span class=n>add</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=n>recvfrom</span><span class=p>(</span><span class=n>BUFFER</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>response</span><span class=o>.</span><span class=n>decode</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 登录</span>
+</span></span><span class=line><span class=cl><span class=n>username</span> <span class=o>=</span> <span class=nb>input</span><span class=p>(</span><span class=s2>&#34;[*] 输入用户名: &#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>password</span> <span class=o>=</span> <span class=nb>input</span><span class=p>(</span><span class=s2>&#34;[*] 输入密码: &#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>login_message</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&#34;LOGIN </span><span class=si>{</span><span class=n>username</span><span class=si>}</span><span class=s2> </span><span class=si>{</span><span class=n>password</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>client</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=n>login_message</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>SERVER_ADDR</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>response</span><span class=p>,</span> <span class=n>add</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=n>recvfrom</span><span class=p>(</span><span class=mi>1024</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=n>response</span><span class=o>.</span><span class=n>decode</span><span class=p>()</span> <span class=o>==</span> <span class=s2>&#34;Login successful&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>	<span class=c1># print(f&#34;[+] 欢迎 {username} 加入聊天室&#34;)</span>
+</span></span><span class=line><span class=cl>	<span class=n>rev</span><span class=p>,</span> <span class=n>add</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=n>recvfrom</span><span class=p>(</span><span class=mi>1024</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=n>online_users</span> <span class=o>=</span> <span class=nb>list</span><span class=p>(</span><span class=n>rev</span><span class=o>.</span><span class=n>decode</span><span class=p>()</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s2>&#34;[&#34;</span><span class=p>,</span> <span class=s2>&#34;&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s2>&#34;]&#34;</span><span class=p>,</span> <span class=s2>&#34;&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s2>&#34;&#39;&#34;</span><span class=p>,</span> <span class=s2>&#34;&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s2>&#34;, &#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=nb>print</span><span class=p>(</span><span class=s2>&#34;[*] 当前在线用户: &#34;</span><span class=p>,</span> <span class=n>end</span><span class=o>=</span><span class=s1>&#39;&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=n>user</span> <span class=ow>in</span> <span class=n>online_users</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>		<span class=nb>print</span><span class=p>(</span><span class=n>user</span><span class=p>,</span> <span class=n>end</span><span class=o>=</span><span class=s1>&#39; &#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>break</span>
+</span></span><span class=line><span class=cl><span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>	<span class=nb>print</span><span class=p>(</span><span class=n>response</span><span class=o>.</span><span class=n>decode</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 公聊、私聊、退出</span>
+</span></span><span class=line><span class=cl><span class=n>message</span> <span class=o>=</span> <span class=nb>input</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>client</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=n>message</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>SERVER_ADDR</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=n>message</span> <span class=o>==</span> <span class=s2>&#34;exit&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>	<span class=k>break</span>
+</span></span><span class=line><span class=cl><span class=k>elif</span> <span class=n>message</span><span class=o>.</span><span class=n>startswith</span><span class=p>(</span><span class=s2>&#34;@&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>	<span class=n>to_address</span> <span class=o>=</span> <span class=n>message</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s2>&#34; &#34;</span><span class=p>)[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s2>&#34;@&#34;</span><span class=p>,</span> <span class=s2>&#34;&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=n>private_message</span> <span class=o>=</span> <span class=n>message</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s2>&#34; &#34;</span><span class=p>)[</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>	<span class=n>private_message</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&#34;PRIVATE </span><span class=si>{</span><span class=n>to_address</span><span class=si>}</span><span class=s2> </span><span class=si>{</span><span class=n>private_message</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=n>client</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=n>private_message</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>SERVER_ADDR</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>	<span class=n>public_message</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&#34;PUBLIC </span><span class=si>{</span><span class=n>message</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=n>client</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=n>public_message</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>SERVER_ADDR</span><span class=p>)</span>
+</span></span></code></pre></div><p><strong>server端功能实现</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 记录注册过的用户信息字典</span>
+</span></span><span class=line><span class=cl><span class=n>user_dict</span> <span class=o>=</span> <span class=p>{}</span>  <span class=c1># {username: password}</span>
+</span></span><span class=line><span class=cl><span class=c1># 记录在线用户信息字典</span>
+</span></span><span class=line><span class=cl><span class=n>online_user</span> <span class=o>=</span> <span class=p>{}</span>  <span class=c1># {username: (ip, port)}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 初始化用户信息</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>init_users</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=s1>&#39;users.txt&#39;</span><span class=p>,</span> <span class=s1>&#39;r&#39;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>line</span> <span class=ow>in</span> <span class=n>f</span><span class=o>.</span><span class=n>readlines</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=n>username</span> <span class=o>=</span> <span class=n>line</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;,&#39;</span><span class=p>)[</span><span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>            <span class=n>password</span> <span class=o>=</span> <span class=n>line</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;,&#39;</span><span class=p>)[</span><span class=mi>1</span><span class=p>]</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s1>&#39;</span><span class=se>\n</span><span class=s1>&#39;</span><span class=p>,</span> <span class=s1>&#39;&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>user_dict</span><span class=p>[</span><span class=n>username</span><span class=p>]</span> <span class=o>=</span> <span class=n>password</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;[+] 注册用户信息加载成功&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 保存注册用户信息</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>save_users</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=s1>&#39;users.txt&#39;</span><span class=p>,</span> <span class=s1>&#39;w&#39;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>username</span> <span class=ow>in</span> <span class=n>user_dict</span><span class=o>.</span><span class=n>keys</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=n>password</span> <span class=o>=</span> <span class=n>user_dict</span><span class=p>[</span><span class=n>username</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>            <span class=n>f</span><span class=o>.</span><span class=n>write</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>username</span><span class=si>}</span><span class=s1>,</span><span class=si>{</span><span class=n>password</span><span class=si>}</span><span class=se>\n</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 列出在线用户</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>list_online_users</span><span class=p>(</span><span class=n>address</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>users</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>username</span> <span class=ow>in</span> <span class=n>online_user</span><span class=o>.</span><span class=n>keys</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=n>users</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>username</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>server</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=nb>str</span><span class=p>(</span><span class=n>users</span><span class=p>)</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>address</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 注册</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>register</span><span class=p>(</span><span class=n>username</span><span class=p>,</span> <span class=n>password</span><span class=p>,</span> <span class=n>address</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>username</span> <span class=ow>in</span> <span class=n>user_dict</span><span class=o>.</span><span class=n>keys</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=n>server</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=s2>&#34;[-] 用户名已存在&#34;</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>address</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>user_dict</span><span class=p>[</span><span class=n>username</span><span class=p>]</span> <span class=o>=</span> <span class=n>password</span>
+</span></span><span class=line><span class=cl>        <span class=n>save_users</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>server</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=s2>&#34;[+] 注册成功&#34;</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>address</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 登录</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>login</span><span class=p>(</span><span class=n>username</span><span class=p>,</span> <span class=n>password</span><span class=p>,</span> <span class=n>address</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>username</span> <span class=ow>not</span> <span class=ow>in</span> <span class=n>user_dict</span><span class=o>.</span><span class=n>keys</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=n>server</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=s2>&#34;[-] 用户名不存在&#34;</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>address</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>elif</span> <span class=n>user_dict</span><span class=p>[</span><span class=n>username</span><span class=p>]</span> <span class=o>!=</span> <span class=n>password</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>server</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=s2>&#34;[-] 密码错误&#34;</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>address</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>server</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=s2>&#34;Login successful&#34;</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>address</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>online_user</span><span class=p>[</span><span class=n>username</span><span class=p>]</span> <span class=o>=</span> <span class=n>address</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 发送在线用户列表</span>
+</span></span><span class=line><span class=cl>        <span class=n>list_online_users</span><span class=p>(</span><span class=n>address</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 发送上线通知</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>online</span> <span class=ow>in</span> <span class=n>online_user</span><span class=o>.</span><span class=n>keys</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=n>server</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;</span><span class=se>\n</span><span class=s1>[+] 欢迎 </span><span class=si>{</span><span class=n>username</span><span class=si>}</span><span class=s1> 加入聊天室&#39;</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>online_user</span><span class=p>[</span><span class=n>online</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 公聊</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>public_chat</span><span class=p>(</span><span class=n>message</span><span class=p>,</span> <span class=n>address</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>from_username</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 通过address获取username</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>username</span> <span class=ow>in</span> <span class=n>online_user</span><span class=o>.</span><span class=n>keys</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>online_user</span><span class=p>[</span><span class=n>username</span><span class=p>]</span> <span class=o>==</span> <span class=n>address</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>from_username</span> <span class=o>=</span> <span class=n>username</span>
+</span></span><span class=line><span class=cl>            <span class=k>break</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>username</span> <span class=ow>in</span> <span class=n>online_user</span><span class=o>.</span><span class=n>keys</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=n>server</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;[+] </span><span class=si>{</span><span class=n>from_username</span><span class=si>}</span><span class=s1>: </span><span class=si>{</span><span class=n>message</span><span class=si>}</span><span class=s1>&#39;</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>online_user</span><span class=p>[</span><span class=n>username</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 私聊</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>private_chat</span><span class=p>(</span><span class=n>message</span><span class=p>,</span> <span class=n>to_username</span><span class=p>,</span> <span class=n>address</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>from_username</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 通过address获取username</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>username</span> <span class=ow>in</span> <span class=n>online_user</span><span class=o>.</span><span class=n>keys</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>online_user</span><span class=p>[</span><span class=n>username</span><span class=p>]</span> <span class=o>==</span> <span class=n>address</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>from_username</span> <span class=o>=</span> <span class=n>username</span>
+</span></span><span class=line><span class=cl>            <span class=k>break</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>to_username</span> <span class=ow>not</span> <span class=ow>in</span> <span class=n>online_user</span><span class=o>.</span><span class=n>keys</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=n>server</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=s2>&#34;[-] 用户不在线&#34;</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>address</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>to_address</span> <span class=o>=</span> <span class=n>online_user</span><span class=p>[</span><span class=n>to_username</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>server</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;[@] </span><span class=si>{</span><span class=n>from_username</span><span class=si>}</span><span class=s1>: </span><span class=si>{</span><span class=n>message</span><span class=si>}</span><span class=s1>&#39;</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>to_address</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>server</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;[@] </span><span class=si>{</span><span class=n>from_username</span><span class=si>}</span><span class=s1>: </span><span class=si>{</span><span class=n>message</span><span class=si>}</span><span class=s1>&#39;</span><span class=o>.</span><span class=n>encode</span><span class=p>(),</span> <span class=n>address</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 根据选项分别进入对应的函数</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>menu</span><span class=p>(</span><span class=n>data</span><span class=p>,</span> <span class=n>address</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>command</span> <span class=o>=</span> <span class=n>data</span><span class=o>.</span><span class=n>split</span><span class=p>()[</span><span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>command</span> <span class=o>==</span> <span class=s2>&#34;REGISTER&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>username</span> <span class=o>=</span> <span class=n>data</span><span class=o>.</span><span class=n>split</span><span class=p>()[</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>password</span> <span class=o>=</span> <span class=n>data</span><span class=o>.</span><span class=n>split</span><span class=p>()[</span><span class=mi>2</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>register</span><span class=p>(</span><span class=n>username</span><span class=p>,</span> <span class=n>password</span><span class=p>,</span> <span class=n>address</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>elif</span> <span class=n>command</span> <span class=o>==</span> <span class=s2>&#34;LOGIN&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>username</span> <span class=o>=</span> <span class=n>data</span><span class=o>.</span><span class=n>split</span><span class=p>()[</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>password</span> <span class=o>=</span> <span class=n>data</span><span class=o>.</span><span class=n>split</span><span class=p>()[</span><span class=mi>2</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>login</span><span class=p>(</span><span class=n>username</span><span class=p>,</span> <span class=n>password</span><span class=p>,</span> <span class=n>address</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>elif</span> <span class=n>command</span> <span class=o>==</span> <span class=s2>&#34;PUBLIC&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>message</span> <span class=o>=</span> <span class=n>data</span><span class=o>.</span><span class=n>split</span><span class=p>()[</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>public_chat</span><span class=p>(</span><span class=n>message</span><span class=p>,</span> <span class=n>address</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>elif</span> <span class=n>command</span> <span class=o>==</span> <span class=s2>&#34;PRIVATE&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>to_username</span> <span class=o>=</span> <span class=n>data</span><span class=o>.</span><span class=n>split</span><span class=p>()[</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>message</span> <span class=o>=</span> <span class=n>data</span><span class=o>.</span><span class=n>split</span><span class=p>()[</span><span class=mi>2</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>private_chat</span><span class=p>(</span><span class=n>message</span><span class=p>,</span> <span class=n>to_username</span><span class=p>,</span> <span class=n>address</span><span class=p>)</span>
+</span></span></code></pre></div><p>写完这些，其实整个实验就算是完成了，但是在测试的过程中还是发现了一些问题：用户输入信息的交互不好，因为是在命令行中进行操作，所以有些时候会和对方输出的信息重叠，受到干扰，体验不好，所以决定在接下来要写个图形化界面</p><h4 id=图形化界面编写>图形化界面编写</h4><p>对于python图形化界面的编写，其实有很多的方式，如python的标准库Tkinter、QT系列的pyqt5和pyside6、还有Flutter系的flet、…………</p><p>在此之前，我也利用flet编写过python的图形化界面项目：<a href=%E5%9F%BA%E4%BA%8EPython%E7%9A%84%E6%9C%AC%E5%9C%B0%E9%87%8F%E5%AD%90%E6%96%87%E4%BB%B6%E5%8A%A0%E8%A7%A3%E5%AF%86.md>基于Python的本地量子文件加密</a>，所以这次我还是使用flet进行编写</p><p>不管是之前的项目，还是这次的程序，编写图形化界面，我全部都是参考官方的文档，写的很详细，给予了我很大的帮助，里面还有很多的例子，帮助我理解，所以这次的编写也算是有点入门了</p><hr><p><strong>登录页面代码框架：</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>login_page</span><span class=p>(</span><span class=n>page</span><span class=p>:</span><span class=n>ft</span><span class=o>.</span><span class=n>page</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>	<span class=c1># 初始化设置</span>
+</span></span><span class=line><span class=cl>	<span class=n>page</span><span class=o>.</span><span class=n>title</span> <span class=o>=</span> <span class=s2>&#34;多人在线聊天室&#34;</span>  
+</span></span><span class=line><span class=cl>	<span class=n>page</span><span class=o>.</span><span class=n>window_bgcolor</span> <span class=o>=</span> <span class=n>ft</span><span class=o>.</span><span class=n>colors</span><span class=o>.</span><span class=n>TRANSPARENT</span>  
+</span></span><span class=line><span class=cl>	<span class=n>page</span><span class=o>.</span><span class=n>bgcolor</span> <span class=o>=</span> <span class=s2>&#34;#E1F7FB&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=n>page</span><span class=o>.</span><span class=n>window_width</span> <span class=o>=</span> <span class=mi>500</span>  
+</span></span><span class=line><span class=cl>	<span class=n>page</span><span class=o>.</span><span class=n>window_height</span> <span class=o>=</span> <span class=mi>360</span>  
+</span></span><span class=line><span class=cl>	<span class=n>page</span><span class=o>.</span><span class=n>window_min_width</span> <span class=o>=</span> <span class=mi>500</span>  
+</span></span><span class=line><span class=cl>	<span class=n>page</span><span class=o>.</span><span class=n>window_min_height</span> <span class=o>=</span> <span class=mi>360</span>
+</span></span><span class=line><span class=cl>	<span class=c1># ……………………</span>
+</span></span><span class=line><span class=cl>	<span class=c1># 登录按钮点击事件  </span>
+</span></span><span class=line><span class=cl>	<span class=k>def</span> <span class=nf>btn_login_click</span><span class=p>(</span><span class=n>e</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>	    <span class=k>pass</span>
+</span></span><span class=line><span class=cl>	    
+</span></span><span class=line><span class=cl>	<span class=c1># 注册按钮点击事件  </span>
+</span></span><span class=line><span class=cl>	<span class=k>def</span> <span class=nf>btn_register_click</span><span class=p>(</span><span class=n>e</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>	    <span class=k>pass</span>
+</span></span><span class=line><span class=cl>	    
+</span></span><span class=line><span class=cl>	<span class=c1># 错误弹窗</span>
+</span></span><span class=line><span class=cl>	<span class=n>login_error_dlg</span> <span class=o>=</span> <span class=n>ft</span><span class=o>.</span><span class=n>AlertDialog</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>    <span class=n>title</span><span class=o>=</span><span class=n>ft</span><span class=o>.</span><span class=n>Text</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;用户名或密码错误！</span><span class=se>\n\n</span><span class=s2>请检查后重新输入！&#34;</span><span class=p>),</span>  
+</span></span><span class=line><span class=cl>	<span class=p>)</span>  
+</span></span><span class=line><span class=cl>	<span class=n>login_success_dlg</span> <span class=o>=</span> <span class=n>ft</span><span class=o>.</span><span class=n>AlertDialog</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>title</span><span class=o>=</span><span class=n>ft</span><span class=o>.</span><span class=n>Text</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	        <span class=s2>&#34;登录成功！</span><span class=se>\n\n</span><span class=s2>欢迎进入聊天室！&#34;</span><span class=p>),</span>  
+</span></span><span class=line><span class=cl>	<span class=p>)</span>  
+</span></span><span class=line><span class=cl>	<span class=n>register_error_dlg</span> <span class=o>=</span> <span class=n>ft</span><span class=o>.</span><span class=n>AlertDialog</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>title</span><span class=o>=</span><span class=n>ft</span><span class=o>.</span><span class=n>Text</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	        <span class=s2>&#34;注册失败！</span><span class=se>\n\n</span><span class=s2>用户名已存在！&#34;</span><span class=p>),</span>  
+</span></span><span class=line><span class=cl>	<span class=p>)</span>  
+</span></span><span class=line><span class=cl>	<span class=n>register_success_dlg</span> <span class=o>=</span> <span class=n>ft</span><span class=o>.</span><span class=n>AlertDialog</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>title</span><span class=o>=</span><span class=n>ft</span><span class=o>.</span><span class=n>Text</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	        <span class=s2>&#34;注册成功！</span><span class=se>\n\n</span><span class=s2>请登录！&#34;</span><span class=p>),</span>  
+</span></span><span class=line><span class=cl>	<span class=p>)</span>  
+</span></span><span class=line><span class=cl>	<span class=n>login_empty_dlg</span> <span class=o>=</span> <span class=n>ft</span><span class=o>.</span><span class=n>AlertDialog</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>title</span><span class=o>=</span><span class=n>ft</span><span class=o>.</span><span class=n>Text</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	        <span class=s2>&#34;用户名或密码为空！</span><span class=se>\n\n</span><span class=s2>请检查后重新输入！&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>	<span class=p>)</span>  
+</span></span><span class=line><span class=cl>	<span class=n>server_error_dlg</span> <span class=o>=</span> <span class=n>ft</span><span class=o>.</span><span class=n>AlertDialog</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>title</span><span class=o>=</span><span class=n>ft</span><span class=o>.</span><span class=n>Text</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	        <span class=s2>&#34;服务器错误！</span><span class=se>\n\n</span><span class=s2>请稍后尝试！&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>	<span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=c1># 标题</span>
+</span></span><span class=line><span class=cl>	<span class=n>title</span> <span class=o>=</span> <span class=n>ft</span><span class=o>.</span><span class=n>Stack</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=c1># ………………</span>
+</span></span><span class=line><span class=cl>	<span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=c1># 密码输入框</span>
+</span></span><span class=line><span class=cl>	<span class=n>password_box</span> <span class=o>=</span> <span class=n>ft</span><span class=o>.</span><span class=n>TextField</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>    <span class=n>label</span><span class=o>=</span><span class=s2>&#34;密码&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>    <span class=n>hint_text</span><span class=o>=</span><span class=s2>&#34;请输入你的密码&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>    <span class=n>max_lines</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>    <span class=n>width</span><span class=o>=</span><span class=mi>350</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>    <span class=n>height</span><span class=o>=</span><span class=mi>55</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>    <span class=n>password</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>    <span class=n>can_reveal_password</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>    <span class=n>keyboard_type</span><span class=o>=</span><span class=n>ft</span><span class=o>.</span><span class=n>KeyboardType</span><span class=o>.</span><span class=n>VISIBLE_PASSWORD</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>    <span class=n>shift_enter</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>    <span class=n>on_submit</span><span class=o>=</span><span class=n>btn_login_click</span>  
+</span></span><span class=line><span class=cl>	<span class=p>)</span>  
+</span></span><span class=line><span class=cl>	<span class=c1># 用户名输入框</span>
+</span></span><span class=line><span class=cl>	<span class=n>username_box</span> <span class=o>=</span> <span class=n>ft</span><span class=o>.</span><span class=n>TextField</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>label</span><span class=o>=</span><span class=s2>&#34;用户名&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>hint_text</span><span class=o>=</span><span class=s2>&#34;请输入你的用户名&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>max_lines</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>width</span><span class=o>=</span><span class=mi>350</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>height</span><span class=o>=</span><span class=mi>55</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>autofocus</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>shift_enter</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>on_submit</span><span class=o>=</span><span class=k>lambda</span> <span class=n>e</span><span class=p>:</span> <span class=n>password_box</span><span class=o>.</span><span class=n>focus</span><span class=p>(),</span>  
+</span></span><span class=line><span class=cl>	<span class=p>)</span>  
+</span></span><span class=line><span class=cl>	<span class=c1># 登录按钮 </span>
+</span></span><span class=line><span class=cl>	<span class=n>btn_login</span> <span class=o>=</span> <span class=n>ft</span><span class=o>.</span><span class=n>ElevatedButton</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>text</span><span class=o>=</span><span class=s2>&#34;登录&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>width</span><span class=o>=</span><span class=mi>150</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>height</span><span class=o>=</span><span class=mi>50</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>animate_size</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>on_click</span><span class=o>=</span><span class=n>btn_login_click</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>icon</span><span class=o>=</span><span class=n>ft</span><span class=o>.</span><span class=n>icons</span><span class=o>.</span><span class=n>LOGIN</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	<span class=p>)</span>  
+</span></span><span class=line><span class=cl>	<span class=c1># 注册按钮</span>
+</span></span><span class=line><span class=cl>	<span class=n>btn_register</span> <span class=o>=</span> <span class=n>ft</span><span class=o>.</span><span class=n>ElevatedButton</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>text</span><span class=o>=</span><span class=s2>&#34;注册&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>width</span><span class=o>=</span><span class=mi>150</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>height</span><span class=o>=</span><span class=mi>50</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>animate_size</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>on_click</span><span class=o>=</span><span class=n>btn_register_click</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>icon</span><span class=o>=</span><span class=n>ft</span><span class=o>.</span><span class=n>icons</span><span class=o>.</span><span class=n>CREATE_OUTLINED</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	<span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=c1># 添加页面布局</span>
+</span></span><span class=line><span class=cl>	<span class=n>page</span><span class=o>.</span><span class=n>add</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=c1># ……………………</span>
+</span></span><span class=line><span class=cl>	<span class=p>)</span>
+</span></span></code></pre></div><p><strong>主页面代码框架：</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>main_page</span><span class=p>(</span><span class=n>page</span><span class=p>:</span> <span class=n>ft</span><span class=o>.</span><span class=n>Page</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>	<span class=c1># 页面配置初始化</span>
+</span></span><span class=line><span class=cl>	<span class=n>page</span><span class=o>.</span><span class=n>clean</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>	<span class=c1># page.vertical_alignment = ft.MainAxisAlignment.START  # 垂直居中  </span>
+</span></span><span class=line><span class=cl>	<span class=n>page</span><span class=o>.</span><span class=n>horizontal_alignment</span> <span class=o>=</span> <span class=s2>&#34;stretch&#34;</span>  
+</span></span><span class=line><span class=cl>	<span class=n>page</span><span class=o>.</span><span class=n>window_max_height</span> <span class=o>=</span> <span class=mi>600</span>  
+</span></span><span class=line><span class=cl>	<span class=n>page</span><span class=o>.</span><span class=n>window_max_width</span> <span class=o>=</span> <span class=mi>800</span>  
+</span></span><span class=line><span class=cl>	<span class=n>page</span><span class=o>.</span><span class=n>window_width</span> <span class=o>=</span> <span class=mi>800</span>  
+</span></span><span class=line><span class=cl>	<span class=n>page</span><span class=o>.</span><span class=n>window_height</span> <span class=o>=</span> <span class=mi>600</span>  
+</span></span><span class=line><span class=cl>	<span class=c1># 拦截本机窗口关闭信号 配合关闭窗口默认退出聊天  </span>
+</span></span><span class=line><span class=cl>	<span class=n>page</span><span class=o>.</span><span class=n>window_prevent_close</span> <span class=o>=</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1># 接收消息</span>
+</span></span><span class=line><span class=cl>	<span class=k>def</span> <span class=nf>receive_message</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>		<span class=k>pass</span>
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>	<span class=c1># 更新聊天框  </span>
+</span></span><span class=line><span class=cl>	<span class=k>def</span> <span class=nf>update_chat</span><span class=p>(</span><span class=n>message</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>		<span class=k>pass</span>
+</span></span><span class=line><span class=cl>	<span class=c1># 聊天内容列表  </span>
+</span></span><span class=line><span class=cl>	<span class=n>chat</span> <span class=o>=</span> <span class=n>ft</span><span class=o>.</span><span class=n>ListView</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>width</span><span class=o>=</span><span class=mi>400</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>height</span><span class=o>=</span><span class=mi>400</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>expand</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>spacing</span><span class=o>=</span><span class=mi>10</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>auto_scroll</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	<span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=c1># 发送消息事件  </span>
+</span></span><span class=line><span class=cl>	<span class=k>def</span> <span class=nf>send_message_click</span><span class=p>(</span><span class=n>e</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>		<span class=k>pass</span>
+</span></span><span class=line><span class=cl>		
+</span></span><span class=line><span class=cl>	<span class=c1># 发送消息按钮  </span>
+</span></span><span class=line><span class=cl>	<span class=n>btn_send</span> <span class=o>=</span> <span class=n>ft</span><span class=o>.</span><span class=n>ElevatedButton</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>text</span><span class=o>=</span><span class=s2>&#34;发送&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>width</span><span class=o>=</span><span class=mi>120</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>height</span><span class=o>=</span><span class=mi>50</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>animate_size</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>on_click</span><span class=o>=</span><span class=n>send_message_click</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>icon</span><span class=o>=</span><span class=n>ft</span><span class=o>.</span><span class=n>icons</span><span class=o>.</span><span class=n>SEND</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	<span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1># 输入框  </span>
+</span></span><span class=line><span class=cl>	<span class=n>new_message</span> <span class=o>=</span> <span class=n>ft</span><span class=o>.</span><span class=n>TextField</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>label</span><span class=o>=</span><span class=s2>&#34;Message&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>hint_text</span><span class=o>=</span><span class=s2>&#34;输入聊天消息&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>max_lines</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>width</span><span class=o>=</span><span class=mi>500</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>height</span><span class=o>=</span><span class=mi>60</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>autofocus</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>shift_enter</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>on_submit</span><span class=o>=</span><span class=n>send_message_click</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	<span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1># 当前用户头像  </span>
+</span></span><span class=line><span class=cl>	<span class=n>user_avatar</span> <span class=o>=</span> <span class=n>ft</span><span class=o>.</span><span class=n>CircleAvatar</span><span class=p>(</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>content</span><span class=o>=</span><span class=n>ft</span><span class=o>.</span><span class=n>Text</span><span class=p>(</span><span class=n>ct</span><span class=o>.</span><span class=n>now_username</span><span class=p>,</span> <span class=n>size</span><span class=o>=</span><span class=mi>14</span><span class=p>,</span> <span class=n>weight</span><span class=o>=</span><span class=n>ft</span><span class=o>.</span><span class=n>FontWeight</span><span class=o>.</span><span class=n>BOLD</span><span class=p>),</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>width</span><span class=o>=</span><span class=mi>60</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	    <span class=n>height</span><span class=o>=</span><span class=mi>60</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>	<span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1># 添加页面布局</span>
+</span></span><span class=line><span class=cl>	<span class=n>page</span><span class=o>.</span><span class=n>add</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=c1># ………………</span>
+</span></span><span class=line><span class=cl>	<span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1># 窗口关闭默认退出聊天室  </span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>close_window</span><span class=p>(</span><span class=n>e</span><span class=p>):</span>  
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>e</span><span class=o>.</span><span class=n>data</span> <span class=o>==</span> <span class=s1>&#39;close&#39;</span><span class=p>:</span>  
+</span></span><span class=line><span class=cl>            <span class=n>ct</span><span class=o>.</span><span class=n>send_message</span><span class=p>(</span><span class=s1>&#39;exit&#39;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>            <span class=n>page</span><span class=o>.</span><span class=n>window_destroy</span><span class=p>()</span> <span class=c1># 真正退出窗口  </span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=n>page</span><span class=o>.</span><span class=n>on_window_event</span> <span class=o>=</span> <span class=n>close_window</span>  
+</span></span><span class=line><span class=cl>    <span class=c1># 开启接收消息线程  </span>
+</span></span><span class=line><span class=cl>    <span class=n>receive_thread</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>receive_message</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=n>receive_thread</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=n>ft</span><span class=o>.</span><span class=n>app</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>login_page</span><span class=p>,</span> <span class=n>assets_dir</span><span class=o>=</span><span class=s2>&#34;assets&#34;</span><span class=p>)</span>
+</span></span></code></pre></div><h2 id=成果展示>成果展示</h2><p><img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231109.png alt=服务端启动>
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231123.png alt=登录界面>
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231137.png alt=注册功能>
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231147.png alt=聊天界面>
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231159.png alt=公聊功能>
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231210.png alt=私聊功能>
+<img src=https://cdn.jsdelivr.net/gh/Pi3-l22/pico_rep/img/20231207231221.png alt=退出聊天室功能></p><h2 id=总结与心得>总结与心得</h2><p>总的来说，写一个基于UDP协议的多人聊天室这个实验还是很简单的，因为UDP是无连接的，不像TCP一样要考虑很多的问题，如丢包、失去连接等，UDP只管发送和接收，不用关心信息是否送达，所以少了很多“握手”的过程，简单不少。</p><p>但是，等到整个程序写完之后，在命令行中执行，我发现了一个问题，当我正在命令行输入消息时，终端上已经有部分文字，这时候对方发来消息，那么对方的消息就会从我当前的光标处打印出来，把我的语句断开，这对用户来说是个不好的体验。所以最后，我决定写一个图形化界面，将用户输入和公屏输出分开，这样体验和美观程度会大大提高。</p><p>图像化界面选择了 <a href=https://flet.dev/docs/>flet框架</a>，它基于Google 的 Flutter实现，所以对我来说很快能上手，而不像pyqt5那样复杂。在编写图像化的过程中也遇到了很多问题，不过大部分是flet框架的问题，对于socket这一块的问题就是：因为UDP基于无连接，所以我发送出去的消息不知道对方有没有收到，当我的服务端没有开启时，客户端在登录时会向服务端发送请求同时转到阻塞等到回应，但是这个过程中没有提示，用户可能会多次点击登录或者注册，导致开启大量的UDP阻塞等待，等到服务端上线时，发送的消息会被这些阻塞等待给覆盖掉，导致影响后面的欢迎界面的输出。解决办法就是：设置一个阻塞等待超时，当等待超时，自动释放阻塞的线程，同时弹出警告框，告诉用户“当前服务器连接不上，稍后再试”，以免开启更多的线程，浪费资源同时影响后续输出。</p><p>解决了上面这个问题，但是上面这个解决办法同样导致出现了接下来一个问题：需要一直阻塞等待服务端发送消息的功能，因为上面设置的超时时间而报错，所以解决办法也很简单就是在这个功能中，将超时时间设为None。</p><p>总之，在这个实验中，我遇到了不少问题，随着一个个问题被解决，我也从中学到了很多。</p></article><div class=paginator><a class=link href=https://blog.pi3.fun/post/2023/11/%E5%9F%BA%E4%BA%8Esocket%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E7%A8%8B%E5%BA%8F/>← prev</a>
+<a class=link href=https://blog.pi3.fun/post/2023/12/t-sql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%E4%BA%8C/>next →</a></div><div class=comment><br><div id=tcomment></div><script src=https://registry.npmmirror.com/twikoo/1.6.39/files/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://twikoo.pi3.fun/.netlify/functions/twikoo",el:"#tcomment",lang:"zh-CN"})</script></div></main><footer id=footer><div><span style=display:flex;align-items:center><span style=margin-right:.5rem>© 2021 - 2024</span><img src=https://p.sda1.dev/20/9c62fc28131254c408b5ad8667a69140/rainbow.gif loading=lazy width=20 alt=rainbow><span style=margin-left:.5rem>By Liu Chao</span></span></div><div class=footnote><span><a class=link href=/index.xml><span class="iconfont icon-RSS"></span></a> | <a class=link href=https://github.com/Pi3-l22 target=_ blank><span class="iconfont icon-GitHub"></span></a> | <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener><span class="iconfont icon-creative-commons-fill"></span></a></span></div></footer></div><script async src="https://www.googletagmanager.com/gtag/js?id=G-WE6L6RF96W"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-WE6L6RF96W")}</script><script>document.addEventListener("DOMContentLoaded",function(){const n=localStorage.getItem("theme")||"light",e=document.querySelector('link[data-theme-style="light"]'),t=document.querySelector('link[data-theme-style="dark"]'),i=window.matchMedia("(prefers-color-scheme: dark)");i.addListener(function(n){if(!localStorage.getItem("theme")){const s=n.matches?"dark":"light";document.documentElement.setAttribute("data-theme",s),localStorage.setItem("theme",s),s==="light"?(e.media="all",t.media="not all"):(e.media="not all",t.media="all");const o=document.querySelector("iframe.giscus-frame");if(o){const e=s==="light"?"light_tritanopia":"dark_tritanopia";o.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}}}),n==="light"?(e.media="all",t.media="not all"):(e.media="not all",t.media="all");function o(){const e=document.querySelector("iframe.giscus-frame");if(e){const t=n==="light"?"light_tritanopia":"dark_tritanopia";e.contentWindow.postMessage({giscus:{setConfig:{theme:t}}},"https://giscus.app")}else setTimeout(o,1e3)}o();const s=document.querySelector(".theme-toggle");s&&(s.textContent=n==="light"?"黑暗":"明亮",s.addEventListener("click",function(){const o=document.documentElement.getAttribute("data-theme"),n=o==="light"?"dark":"light";document.documentElement.setAttribute("data-theme",n),localStorage.setItem("theme",n),n==="light"?(e.media="all",t.media="not all"):(e.media="not all",t.media="all");const s=document.querySelector("iframe.giscus-frame");if(s){const e=n==="light"?"light_tritanopia":"dark_tritanopia";s.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}this.textContent=n==="light"?"黑暗":"明亮"}))})</script></body></html>

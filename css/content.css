@@ -21,7 +21,8 @@
 }
 
 .content a:hover {
-    text-decoration: underline !important;
+    color: var(--content-a-hover);
+    text-decoration: underline;
 }
 
 .content a.footnote-ref::before {

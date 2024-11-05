@@ -1,25 +1,2 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>线性代数 on Pi3&#39;s Notes</title>
-    <link>https://blog.pi3.fun/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/</link>
-    <description>Recent content in 线性代数 on Pi3&#39;s Notes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor>
-    <webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster>
-    <lastBuildDate>Mon, 21 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>线性代数的本质</title>
-      <link>https://blog.pi3.fun/post/2024/10/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/</link>
-      <pubDate>Mon, 21 Oct 2024 00:00:00 +0000</pubDate>
-      <author>622.511.liuchao@gmail.com (LiuChao)</author>
-      <guid>https://blog.pi3.fun/post/2024/10/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/</guid>
-      
-      <description>&lt;p&gt;视频课程：&lt;a href=&#34;https://www.bilibili.com/video/BV1ib411t7YR/&#34;&gt;线性代数的本质——3Blue1Brown&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;文字教程：&lt;a href=&#34;https://www.3blue1brown.com/topics/linear-algebra&#34;&gt;3Blue1Brown&lt;/a&gt;&lt;/p&gt;</description>
-      
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>线性代数 on Pi3's Notes</title><link>https://blog.pi3.fun/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/</link><description>Recent content in 线性代数 on Pi3's Notes</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>622.511.liuchao@gmail.com (LiuChao)</managingEditor><webMaster>622.511.liuchao@gmail.com (LiuChao)</webMaster><lastBuildDate>Mon, 21 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.pi3.fun/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>线性代数的本质</title><link>https://blog.pi3.fun/post/2024/10/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/</link><pubDate>Mon, 21 Oct 2024 00:00:00 +0000</pubDate><author>622.511.liuchao@gmail.com (LiuChao)</author><guid>https://blog.pi3.fun/post/2024/10/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/</guid><description>&lt;p>视频课程：&lt;a href="https://www.bilibili.com/video/BV1ib411t7YR/">线性代数的本质——3Blue1Brown&lt;/a>&lt;/p>
+&lt;p>文字教程：&lt;a href="https://www.3blue1brown.com/topics/linear-algebra">3Blue1Brown&lt;/a>&lt;/p></description></item></channel></rss>
