@@ -20,6 +20,11 @@
     padding-top: .5rem;
 }
 
+/* 主页文章序号颜色 */
+#main > .post > h2 .order {
+    color: var(--post-order);
+}
+
 @media screen and (min-width: 850px) {
     #main > .post > div {
         margin-left: 2rem;
@@ -28,9 +33,12 @@
 
 @media screen and (max-width: 850px) {
     #main > .post > h2 > a {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
-    #main > .post > div {
+    #main > .post > h2 .order {
+        font-size: 1.1rem;
+    }
+    /* #main > .post > div {
         margin-left: 1.5rem;
-    }
+    } */
 }

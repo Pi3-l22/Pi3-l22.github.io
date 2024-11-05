@@ -226,11 +226,6 @@ time {
     width: 100%; */
 }
 
-/* 主页文章序号颜色 */
-#main .post .order {
-    color: var(--post-order);
-}
-
 /* 适配手机端 */
 @media screen and (max-width: 850px) {
     * {
