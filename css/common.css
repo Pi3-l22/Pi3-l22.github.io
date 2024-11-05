@@ -236,6 +236,9 @@ time {
     * {
         font-size: 14px;
     }
+    #wrapper {
+        padding: .5rem;
+    }
     #main.post{
         box-shadow: none;
         padding: .5rem .5rem;
