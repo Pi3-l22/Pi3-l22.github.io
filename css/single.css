@@ -40,6 +40,9 @@
     background-color: var(--main-targer-bg);
 }
 
+#main .comment {
+    margin: 1rem 0;
+}
 
 
 /* shortcode photo */
@@ -102,16 +105,37 @@
 
 
 /* shortcard 卡片链接 cardlink */
+/* 容器样式，用于包裹所有卡片链接 */
+.cardlink-container {
+    display: flex;
+    flex-wrap: wrap; /* 允许换行 */
+    justify-content: center; /* 中心对齐 */
+    gap: 20px; /* 卡片之间的间距 */
+    width: 100%;
+}
+
+/* 用于隐藏markdown渲染的前后空段落 */
+.cardlink-container p:empty {
+    display: none;
+}
+
+/* 默认卡片样式 */
 .cardlink {
-    width: 50%;
-    margin: 20px auto;
-    border: 1px solid var(--cardlink-border);
-    /* border-radius: 12px; */
-    overflow: hidden;
+    margin: 0 auto;
+    width: 50%; /* 稍微减小宽度，让两个卡片更靠近中间 */
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
     box-shadow: 0 5px 20px var(--cardlink-shadow);
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    position: relative;
-    z-index: 1;
+    border: 1px solid var(--cardlink-border);
+    transition: all 0.3s ease;
+}
+
+/* 容器中的卡片链接宽度 友链 */
+.cardlink-container .cardlink {
+    width: calc(48% - 10px);
 }
 
 .cardlink:hover {
@@ -121,40 +145,24 @@
         0 0 20px var(--cardlink-hover-shadow2);
 }
 
-.cardlink::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* border-radius: 12px; */
-    opacity: 0;
-    background: var(--cardlink-after);
-    transition: all 0.4s ease;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.cardlink:hover::after {
-    opacity: 1;
-}
-
 .cardlink a {
-    display: flex;
-    text-decoration: none;
-    /* color: var(--cardlink-title); */
-    padding: 0;
+    display: block;
     width: 100%;
     height: 100%;
-    position: relative;
-    z-index: 2;
+}
+
+.content-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
 }
 
 .cardlink img {
-    width: 80px;
-    height: 80px;
-    margin-left: 10px !important;
+    height: 90px;
+    width: 90px;
     object-fit: cover;
     transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -164,19 +172,20 @@
 }
 
 .clink_content {
-    padding: 15px;
-    flex-grow: 1;
-    /* margin-left: 10px; */
+    margin-left: 20px;
+    flex: 1;
+    overflow: hidden;
 }
 
 .link_title {
-    margin: 0;
     font-size: 18px !important;
     font-weight: bold;
     color: var(--text-color);
     opacity: 0.8;
-    margin-bottom: 2px;
     transition: all 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .cardlink:hover .link_title {
@@ -185,11 +194,13 @@
 }
 
 .link_text {
-    margin: 0;
     font-size: 16px !important;
     color: var(--text-color);
     opacity: 0.6;
     transition: all 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .cardlink:hover .link_text {
@@ -202,8 +213,13 @@
     box-shadow: 0 2px 10px var(--cardlink-hover-shadow1);
 }
 
-@media screen and (max-width: 850px) {
-    .cardlink {
+@media screen and (max-width: 765px) {
+    .cardlink-container {
+        margin-top: 10px;
+        gap: 10px;
+    }
+    .cardlink,
+    .cardlink-container .cardlink {
         width: 90%;
     }
     .link_title {
