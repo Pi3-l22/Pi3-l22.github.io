@@ -112,6 +112,7 @@
     justify-content: center; /* 中心对齐 */
     gap: 20px; /* 卡片之间的间距 */
     width: 100%;
+    margin-bottom: 40px !important;
 }
 
 /* 用于隐藏markdown渲染的前后空段落 */
