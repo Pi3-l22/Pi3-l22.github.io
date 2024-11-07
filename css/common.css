@@ -261,6 +261,11 @@ time {
     text-align: center;
 }
 
+#footer > .blog-icon {
+    margin-top: 5px;
+    text-align: center;
+}
+
 /* 字体图标 */
 .iconfont {
     color: var(--nav-link-color);
