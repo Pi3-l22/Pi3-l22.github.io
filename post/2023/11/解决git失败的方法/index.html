@@ -4,7 +4,7 @@
 </span><span class=nav-bar-item><a class=link href=/about/>关于</a>
 </span><span class=nav-bar-item><a class=link href=/links/>友链</a>
 </span><span class=nav-bar-item><a class="link theme-toggle" href=javascript:void(0);>黑暗</a></span></nav></header><main id=main class=post><h1>解决git失败的方法</h1><div><b>Keywords: </b><a class=link href=https://blog.pi3.fun/tags/%E6%8A%80%E6%9C%AF>#技术</a>
-<a class=link href=https://blog.pi3.fun/tags/git>#git</a></div><article class=content><ol><li>Failed to connect to github.com port 443: Timed out</li></ol><p>因为连不上GitHub导致的。所以打开clash，并且使用全局模式+TUN模式。</p><p>如果还是不行，就将git代理设置为127.0.0.1:7890</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>//取消http代理
+<a class=link href=https://blog.pi3.fun/tags/git>#git</a></div><div><b>Release Date: </b><span>2023-11-24</span></div><article class=content><ol><li>Failed to connect to github.com port 443: Timed out</li></ol><p>因为连不上GitHub导致的。所以打开clash，并且使用全局模式+TUN模式。</p><p>如果还是不行，就将git代理设置为127.0.0.1:7890</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>//取消http代理
 </span></span><span class=line><span class=cl>git config --global --unset http.proxy
 </span></span><span class=line><span class=cl>//取消https代理 
 </span></span><span class=line><span class=cl>git config --global --unset https.proxy

@@ -4,7 +4,7 @@
 </span><span class=nav-bar-item><a class=link href=/about/>关于</a>
 </span><span class=nav-bar-item><a class=link href=/links/>友链</a>
 </span><span class=nav-bar-item><a class="link theme-toggle" href=javascript:void(0);>黑暗</a></span></nav></header><main id=main class=post><h1>Gitignore常用匹配规则</h1><div><b>Keywords: </b><a class=link href=https://blog.pi3.fun/tags/%E6%8A%80%E6%9C%AF>#技术</a>
-<a class=link href=https://blog.pi3.fun/tags/git>#Git</a></div><article class=content><ol><li>直接书写一个单词</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>dist
+<a class=link href=https://blog.pi3.fun/tags/git>#Git</a></div><div><b>Release Date: </b><span>2024-11-28</span></div><article class=content><ol><li>直接书写一个单词</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>dist
 </span></span></code></pre></div><p>匹配整个项目目录中的所有 <code>dist</code> <strong class=chinese>目录</strong>和<strong class=chinese>文件</strong>，无论目录和文件埋得有多深。</p><ol start=2><li><code>/</code> 在前</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>/dist
 </span></span></code></pre></div><p>匹配从当前的 <code>.gitignore</code> 文件层级出发，寻找 <code>dist</code> <strong class=chinese>目录</strong>或<strong class=chinese>文件</strong>。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>- .gitignore
 </span></span><span class=line><span class=cl>- <span class=nb>test</span>
