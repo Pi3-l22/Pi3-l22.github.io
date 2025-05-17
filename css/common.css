@@ -229,7 +229,7 @@ time {
 /* 适配手机端 */
 @media screen and (max-width: 850px) {
     * {
-        font-size: 14px;
+        font-size: 15px;
     }
     #wrapper {
         padding: .5rem;
