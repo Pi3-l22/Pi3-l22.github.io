@@ -53,7 +53,8 @@
     border-left: var(--blockquote-left) 2.5px solid;
     background-color: var(--highlight-bg);
     /* font-style: italic; */
-    font-family: 'Fangsong', serif;
+    /* font-family: 'Fangsong', serif; */
+    font-family: 'Zhuque Fangsong (technical preview)', serif;
     padding: 1rem;
     margin: 1rem auto;
 }
@@ -67,14 +68,16 @@
 /* 包括行内代码和代码块的样式 */
 .content code {  
     background-color: var(--highlight-bg);
-    font-family: 't1xtt', 'Latin Modern Mono', 'Fangsong', Courier,  monospace;
+    /* font-family: 't1xtt', 'Latin Modern Mono', 'Fangsong', Courier,  monospace; */
+    font-family: 't1xtt', 'Zhuque Fangsong (technical preview)', Consolas, monospace;
     padding: .2rem;
 }
 
 .content h1, .content h2, .content h3,
 .content h4, .content h5, .content h6 {
     line-height: 1.5;
-    font-family: 'Latin Modern Roman', sans-serif;
+    /* font-family: 'Latin Modern Roman', sans-serif; */
+    font-family: serif;
     margin-top: 1.2rem;
 }
 
@@ -117,7 +120,8 @@
 /* 所有pre标签的样式 包括代码块 不包括行内代码*/
 .content pre {
     background-color: var(--highlight-bg);
-    font-family: 't1xtt', 'Latin Modern Mono', 'Fangsong', Consolas, monospace;
+    /* font-family: 't1xtt', 'Latin Modern Mono', 'Fangsong', Consolas, monospace; */
+    font-family: 't1xtt', 'Zhuque Fangsong (technical preview)', Consolas, monospace;
     margin-top: .5rem;
     overflow-x: auto;
     padding: .5rem;
@@ -144,7 +148,8 @@
 }
 
 .content em{
-    font-family: "Fangsong", serif;
+    /* font-family: "Fangsong", serif; */
+    font-family: 'Zhuque Fangsong (technical preview)', serif;
     font-style: normal;
     color: var(--em-color);
 }

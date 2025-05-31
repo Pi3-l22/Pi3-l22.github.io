@@ -8,7 +8,6 @@
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: .5rem;
-    /* font-family: sans-serif; */
 }
 
 #main > .post > h2 > time {

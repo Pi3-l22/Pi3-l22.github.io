@@ -1,5 +1,5 @@
 /* fonts */
-@font-face {
+/* @font-face {
     font-display: swap;
     font-family: 'Latin Modern Mono';
     font-style: normal;
@@ -61,9 +61,9 @@
     font-style: normal;
     font-weight: normal;
     src: url('../font/lmroman-normal.woff');
-}
+} */
 
-@font-face {
+/* @font-face {
     font-display: swap;
     font-family: 'Fangsong';
     font-style: normal;
@@ -77,13 +77,13 @@
     font-style: normal;
     font-weight: normal;
     src: url('../font/t1xtt.ttf');
-}
+} */
 
-@font-face {
-    font-family: 'consolas';
+/* @font-face {
+    font-family: 'Consolas';
     font-display: swap;
     src: url('../font/consolab.ttf');
-}
+} */
 
 /* 3D */
 @font-face {
@@ -91,6 +91,17 @@
     font-family: dimis;
     src: url('../font/dimis.ttf');
 }
+
+/* consolas字体通过js在about.md中引入 */
+
+/* Noto Serif CJK */
+@import url("https://fontsapi.zeoseven.com/285/main/result.css");
+
+/* Zhuque Fangsong (technical preview) */
+@import url("https://fontsapi.zeoseven.com/7/main/result.css");
+/* @import url("https://chinese-fonts-cdn.deno.dev/packages/zqfs/dist/ZhuqueFangsong-Regular/result.css"); */
+
+
 
 /* global */
 
@@ -122,7 +133,8 @@ time {
     background-color: var(--bg-color);
     display: flex;
     flex-direction: column;
-    font-family: 'Latin Modern Roman', '家族宋', 'Songti SC', 'STZhongsong', 'STSong', 'SimSun', 'Noto Serif CJK SC', 'Source Han Serif SC', serif;
+    /* font-family: 'Latin Modern Roman', '家族宋', 'Songti SC', 'STZhongsong', 'STSong', 'SimSun', 'Noto Serif CJK SC', 'Source Han Serif SC', serif; */
+    font-family: 'Noto Serif CJK', serif, sans-serif, monospace;
     min-height: 100vh;
     overflow-wrap: break-word;
     padding: 1rem;
