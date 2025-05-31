@@ -77,7 +77,7 @@
 .content h4, .content h5, .content h6 {
     line-height: 1.5;
     /* font-family: 'Latin Modern Roman', sans-serif; */
-    font-family: serif;
+    font-family: sans-serif;
     margin-top: 1.2rem;
 }
 
