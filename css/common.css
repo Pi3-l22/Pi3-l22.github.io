@@ -92,16 +92,6 @@
     src: url('../font/dimis.ttf');
 }
 
-/* consolas字体通过js在about.md中引入 */
-
-/* Maple Mono NF CN */
-@import url("https://fontsapi.zeoseven.com/442/main/result.css");
-
-/* LXGW WenKai GB */
-@import url("https://fontsapi.zeoseven.com/95/main/result.css");
-/* LXGW WenKai GB medium */
-@import url("https://fontsapi.zeoseven.com/95/medium/result.css");
-
 /* global */
 
 * {
@@ -133,7 +123,7 @@ time {
     display: flex;
     flex-direction: column;
     /* font-family: 'Latin Modern Roman', '家族宋', 'Songti SC', 'STZhongsong', 'STSong', 'SimSun', 'Noto Serif CJK SC', 'Source Han Serif SC', serif; */
-    font-family: "LXGW WenKai GB", monospace; 
+    font-family: "LXGW Bright", serif; 
     font-weight: 500; /* 霞鹜文楷太细了 */
     min-height: 100vh;
     overflow-wrap: break-word;
@@ -205,7 +195,6 @@ time {
 
 #header > nav > span > a {
     font-size: 1.2rem;
-    font-family: "LXGW WenKai GB medium", monospace;
     font-weight: bold !important;
 }
 
