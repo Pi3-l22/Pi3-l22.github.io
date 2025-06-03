@@ -63,21 +63,21 @@
     src: url('../font/lmroman-normal.woff');
 } */
 
-@font-face {
+/* @font-face {
     font-display: swap;
     font-family: 'Fangsong';
     font-style: normal;
     font-weight: normal;
     src: url('../font/ZhuqueFangsong-Regular.woff');
-}
+} */
 
-@font-face {
+/* @font-face {
     font-display: swap;
     font-family: 't1xtt';
     font-style: normal;
     font-weight: normal;
     src: url('../font/t1xtt.ttf');
-}
+} */
 
 /* @font-face {
     font-family: 'Consolas';
@@ -94,11 +94,13 @@
 
 /* consolas字体通过js在about.md中引入 */
 
-/* WenJin Mincho Plane 0 */
-@import url("https://fontsapi.zeoseven.com/376/main/result.css");
-
 /* Maple Mono NF CN */
-/* @import url("https://fontsapi.zeoseven.com/442/main/result.css"); */
+@import url("https://fontsapi.zeoseven.com/442/main/result.css");
+
+/* LXGW WenKai GB */
+@import url("https://fontsapi.zeoseven.com/95/main/result.css");
+/* LXGW WenKai GB medium */
+@import url("https://fontsapi.zeoseven.com/95/medium/result.css");
 
 /* global */
 
@@ -131,7 +133,8 @@ time {
     display: flex;
     flex-direction: column;
     /* font-family: 'Latin Modern Roman', '家族宋', 'Songti SC', 'STZhongsong', 'STSong', 'SimSun', 'Noto Serif CJK SC', 'Source Han Serif SC', serif; */
-    font-family: "WenJin Mincho Plane 0", serif, sans-serif, monospace; 
+    font-family: "LXGW WenKai GB", monospace; 
+    font-weight: 500; /* 霞鹜文楷太细了 */
     min-height: 100vh;
     overflow-wrap: break-word;
     padding: 1rem;
@@ -202,7 +205,8 @@ time {
 
 #header > nav > span > a {
     font-size: 1.2rem;
-    font-weight: bold!important;
+    font-family: "LXGW WenKai GB medium", monospace;
+    font-weight: bold !important;
 }
 
 /* main */

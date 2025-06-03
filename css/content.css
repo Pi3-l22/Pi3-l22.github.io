@@ -54,7 +54,7 @@
     background-color: var(--highlight-bg);
     /* font-style: italic; */
     /* font-family: 'Fangsong', serif; */
-    font-family: 'Fangsong', serif;
+    font-family: monospace;
     padding: 1rem;
     margin: 1rem auto;
 }
@@ -69,7 +69,8 @@
 .content code {  
     background-color: var(--highlight-bg);
     /* font-family: 't1xtt', 'Latin Modern Mono', 'Fangsong', Courier,  monospace; */
-    font-family: 't1xtt', 'Fangsong', Consolas, monospace;
+    font-family: "Maple Mono NF CN", monospace;
+    font-size: 90%;
     padding: .2rem;
 }
 
@@ -77,7 +78,6 @@
 .content h4, .content h5, .content h6 {
     line-height: 1.5;
     /* font-family: 'Latin Modern Roman', sans-serif; */
-    font-family: "WenJin Mincho Plane 0", sans-serif;
     margin-top: 1.2rem;
 }
 
@@ -121,7 +121,7 @@
 .content pre {
     background-color: var(--highlight-bg);
     /* font-family: 't1xtt', 'Latin Modern Mono', 'Fangsong', Consolas, monospace; */
-    font-family: 't1xtt', 'Fangsong', Consolas, monospace;
+    font-family: "Maple Mono NF CN", monospace;
     margin-top: .5rem;
     overflow-x: auto;
     padding: .5rem;
@@ -139,6 +139,7 @@
 }
 
 .content strong {
+    font-family: "LXGW WenKai GB medium", monospace;
     font-weight: bold;
     color: var(--strong-color);
     /* text-emphasis-style: dot;
@@ -149,8 +150,8 @@
 
 .content em{
     /* font-family: "Fangsong", serif; */
-    font-family: 'Fangsong', serif;
-    font-style: normal;
+    font-family: "Maple Mono NF CN", monospace;
+    font-style: italic;
     color: var(--em-color);
 }
 

@@ -180,6 +180,7 @@
 
 .link_title {
     font-size: 18px !important;
+    font-family: "LXGW WenKai GB medium", monospace;
     font-weight: bold;
     color: var(--text-color);
     opacity: 0.8;
