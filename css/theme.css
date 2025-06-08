@@ -36,6 +36,11 @@
   --cardlink-hover-shadow1: rgba(0, 0, 0, 0.2);  /* 卡片链接悬停阴影1 */
   --cardlink-hover-shadow2: rgba(0, 0, 0, 0.1);  /* 卡片链接悬停阴影2 */
   --cardlink-after: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0));  /* 卡片链接渐变背景 */
+  /* 字体 common.css content.css */
+  --font-serif: serif;
+  --font-sans: sans-serif;
+  --font-mono: monospace;
+  --font-big-title: "dimis, serif";  /* 大标题字体 */
 }
 
 [data-theme="dark"] {
