@@ -1,0 +1,176 @@
+<!doctype html><html lang=zh-cn><head><script>(function(){const e=localStorage.getItem("theme")||"light";document.documentElement.setAttribute("data-theme",e)})()</script><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><meta name=author content="LiuChao"><meta name=description content="Go 语言入门基础学习笔记之 Go 语言的条件语句"><link rel=icon href=https://blog.pi3.fun/favicon.ico><meta name=keywords content=" study  latex  life  academic "><meta property="og:url" content="https://blog.pi3.fun/post/2024/go-beginner-notes/conditions/"><meta property="og:site_name" content="Pi3's Notes"><meta property="og:title" content="Go语言入门6：条件语句"><meta property="og:description" content="Go 语言入门基础学习笔记之 Go 语言的条件语句"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2024-11-11T00:00:00+00:00"><meta property="article:modified_time" content="2024-11-11T00:00:00+00:00"><meta property="article:tag" content="技术"><meta property="article:tag" content="Golang"><meta property="article:tag" content="Go 入门笔记"><link rel=canonical href=https://blog.pi3.fun/post/2024/go-beginner-notes/conditions/><meta itemprop=name content="Go语言入门6：条件语句"><meta itemprop=description content="Go 语言入门基础学习笔记之 Go 语言的条件语句"><meta itemprop=datePublished content="2024-11-11T00:00:00+00:00"><meta itemprop=dateModified content="2024-11-11T00:00:00+00:00"><meta itemprop=wordCount content="1631"><meta itemprop=keywords content="技术,Golang,Go 入门笔记"><link media=screen rel=stylesheet href=https://blog.pi3.fun/css/common.css><link media=screen rel=stylesheet href=https://blog.pi3.fun/css/content.css><link media=screen rel=stylesheet href=https://blog.pi3.fun/css/theme.css><link media=screen rel=stylesheet href=https://blog.pi3.fun/css/iconfont/iconfont.css><link rel=stylesheet href=https://blog.pi3.fun/css/syntax/xcode.css data-theme-style=light media="(prefers-color-scheme: light)"><link rel=stylesheet href=https://blog.pi3.fun/css/syntax/catppuccin-mocha.css data-theme-style=dark media="not all"><title>Go语言入门6：条件语句 - Pi3's Notes</title>
+<link rel=stylesheet href=https://blog.pi3.fun/css/single.css><link href=https://lf3-cdn-tos.bytecdntp.com/cdn/expire-100-y/KaTeX/0.15.2/katex.min.css rel=stylesheet><script defer src=https://lf3-cdn-tos.bytecdntp.com/cdn/expire-100-y/KaTeX/0.15.2/katex.min.js></script><script defer src=https://lf3-cdn-tos.bytecdntp.com/cdn/expire-100-y/KaTeX/0.15.2/contrib/auto-render.min.js></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"\\[",right:"\\]",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1}],ignoredTags:["script","noscript","style","textarea","pre","code","option"],throwOnError:!1})})</script></head><body><div id=wrapper><header id=header><link rel=stylesheet href=https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkaibright/dist/LXGWBright-Regular/result.css><link rel=stylesheet href=https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkaibright/dist/LXGWBright-Italic/result.css><link rel=stylesheet href=https://chinese-fonts-cdn.deno.dev/packages/maple-mono-cn/dist/MapleMono-CN-Regular/result.css><h1><a href=https://blog.pi3.fun/>Pi3's Notes</a></h1><nav><span class=nav-bar-item><a class=link href=/>文章</a>
+</span><span class=nav-bar-item><a class=link href=/post/>归档</a>
+</span><span class=nav-bar-item><a class=link href=/about/>关于</a>
+</span><span class=nav-bar-item><a class=link href=/links/>友链</a>
+</span><span class=nav-bar-item><a class="link theme-toggle" href=javascript:void(0);>黑暗</a></span></nav></header><main id=main class=post><h1>Go语言入门6：条件语句</h1><div><b>Keywords: </b><a class=link href=https://blog.pi3.fun/tags/%E6%8A%80%E6%9C%AF>#技术</a>
+<a class=link href=https://blog.pi3.fun/tags/golang>#Golang</a>
+<a class=link href=https://blog.pi3.fun/tags/go-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0>#Go 入门笔记</a></div><div><b>Release Date: </b><span>2024-11-11</span></div><details><summary><b>Table of Contents</b></summary><div class=toc><nav id=TableOfContents><ul><li><a href=#条件语句>条件语句</a><ul><li><a href=#if-语句>if 语句</a></li><li><a href=#if-else-语句>if else 语句</a></li><li><a href=#if-嵌套语句>if 嵌套语句</a></li><li><a href=#switch-语句>switch 语句</a></li><li><a href=#select-语句>select 语句</a></li></ul></li></ul></nav></div></details><article class=content><p>Go 语言入门基础学习笔记之 Go 语言的条件语句</p><p><img src=https://cdn.pi3.fun/blog/golang.png alt=golang></p><h2 id=条件语句>条件语句</h2><h3 id=if-语句>if 语句</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>if</span> <span class=nx>布尔表达式</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>   <span class=cm>/* 在布尔表达式为 true 时执行 */</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=if-else-语句>if else 语句</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>if</span> <span class=nx>布尔表达式</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>   <span class=cm>/* 在布尔表达式为 true 时执行 */</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=cm>/* 在布尔表达式为 false 时执行 */</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=if-嵌套语句>if 嵌套语句</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>if</span> <span class=nx>布尔表达式</span> <span class=mi>1</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>   <span class=cm>/* 在布尔表达式 1 为 true 时执行 */</span>
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=nx>布尔表达式</span> <span class=mi>2</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=cm>/* 在布尔表达式 2 为 true 时执行 */</span>
+</span></span><span class=line><span class=cl>   <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=switch-语句>switch 语句</h3><p><strong class=chinese>需要注意的是</strong>，switch 语句执行的过程从上至下，直到找到匹配项，匹配项后面也<strong>不需要再加 break</strong>。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>switch</span> <span class=nx>var1</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=nx>val1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=o>...</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=nx>val2</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=o>...</span>
+</span></span><span class=line><span class=cl>    <span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>switch 默认情况下 case 最后自带 break 语句，匹配成功后就不会执行其他 case，如果我们需要执行后面的 case，可以使用 fallthrough。</p><p>使用 fallthrough 会强制执行后面的 case 语句，fallthrough 不会判断下一条 case 的表达式结果是否为 true。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>switch</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=kc>false</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;1、case 条件语句为 false&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>fallthrough</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=kc>true</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;2、case 条件语句为 true&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>fallthrough</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=kc>false</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;3、case 条件语句为 false&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>fallthrough</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=kc>true</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;4、case 条件语句为 true&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=kc>false</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;5、case 条件语句为 false&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>fallthrough</span>
+</span></span><span class=line><span class=cl>    <span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;6、默认 case&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 输出结果
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mi>2</span><span class=err>、</span><span class=k>case</span> <span class=nx>条件语句为</span> <span class=kc>true</span>
+</span></span><span class=line><span class=cl><span class=mi>3</span><span class=err>、</span><span class=k>case</span> <span class=nx>条件语句为</span> <span class=kc>false</span>
+</span></span><span class=line><span class=cl><span class=mi>4</span><span class=err>、</span><span class=k>case</span> <span class=nx>条件语句为</span> <span class=kc>true</span>
+</span></span></code></pre></div><p>switch 语句还可以被用于 <strong>Type-Switch</strong> 来判断某个 <strong>interface 变量</strong>中实际存储的<strong class=chinese>变量类型</strong>。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>switch</span> <span class=nx>x</span><span class=p>.(</span><span class=kd>type</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=kd>type</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>       <span class=nf>statement</span><span class=p>(</span><span class=nx>s</span><span class=p>);</span>      
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=kd>type</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>       <span class=nf>statement</span><span class=p>(</span><span class=nx>s</span><span class=p>);</span> 
+</span></span><span class=line><span class=cl>    <span class=cm>/* 你可以定义任意个数的case */</span>
+</span></span><span class=line><span class=cl>    <span class=k>default</span><span class=p>:</span> <span class=cm>/* 可选 */</span>
+</span></span><span class=line><span class=cl>       <span class=nf>statement</span><span class=p>(</span><span class=nx>s</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>比如：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>   <span class=kd>var</span> <span class=nx>x</span> <span class=kd>interface</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>     
+</span></span><span class=line><span class=cl>   <span class=k>switch</span> <span class=nx>i</span> <span class=o>:=</span> <span class=nx>x</span><span class=p>.(</span><span class=kd>type</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=kc>nil</span><span class=p>:</span>   
+</span></span><span class=line><span class=cl>         <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34; x 的类型 :%T&#34;</span><span class=p>,</span><span class=nx>i</span><span class=p>)</span>                
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=kt>int</span><span class=p>:</span>   
+</span></span><span class=line><span class=cl>         <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;x 是 int 型&#34;</span><span class=p>)</span>                       
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=kt>float64</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>         <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;x 是 float64 型&#34;</span><span class=p>)</span>           
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=kd>func</span><span class=p>(</span><span class=kt>int</span><span class=p>)</span> <span class=kt>float64</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>         <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;x 是 func(int) 型&#34;</span><span class=p>)</span>                      
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=kt>bool</span><span class=p>,</span> <span class=kt>string</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>         <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;x 是 bool 或 string 型&#34;</span> <span class=p>)</span>       
+</span></span><span class=line><span class=cl>      <span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>         <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;未知型&#34;</span><span class=p>)</span>     
+</span></span><span class=line><span class=cl>   <span class=p>}</span>   
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 输出结果
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>x</span> <span class=nx>的类型</span> <span class=p>:&lt;</span><span class=kc>nil</span><span class=p>&gt;</span>
+</span></span></code></pre></div><blockquote><p><code>%T</code> 用于输出一个变量的<strong class=chinese>数据类型</strong></p></blockquote><h3 id=select-语句>select 语句</h3><p>select 是 Go 中的一个控制结构，类似于 switch 语句。</p><p>结合<a href=#Select%20%E8%AF%AD%E5%8F%A5>并发章节中的Select 语句</a></p><p>select 语句只能用于<strong class=chinese>通道操作</strong>，每个 case 必须是一个<strong class=chinese>通道操作</strong>，要么是<strong class=chinese>发送</strong>要么是<strong class=chinese>接收</strong>。</p><p>select 语句会监听所有指定的通道上的操作，一旦其中一个通道准备好就会执行相应的代码块。</p><p>如果多个通道都准备好，那么 select 语句会<strong class=chinese>随机选择</strong>一个通道执行。如果所有通道都没有准备好，那么执行 default 块中的代码。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>case</span> <span class=o>&lt;-</span> <span class=nx>channel1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 执行的代码
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=k>case</span> <span class=nx>value</span> <span class=o>:=</span> <span class=o>&lt;-</span> <span class=nx>channel2</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 执行的代码
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=k>case</span> <span class=nx>channel3</span> <span class=o>&lt;-</span> <span class=nx>value</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 执行的代码
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 你可以定义任意数量的 case
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>  <span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 所有通道都没有准备好，执行的代码
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></div><p>以下描述了 select 语句的语法：</p><ul><li>每个 case 都必须是一个通道</li><li>所有 channel 表达式都会被求值</li><li>所有被发送的表达式都会被求值</li><li>如果任意某个通道可以进行，它就执行，其他被忽略。</li><li>如果有多个 case 都可以运行，select 会随机公平地选出一个执行，其他不会执行。否则：<ul><li>如果有 default 子句，则执行该语句。</li><li>如果没有 default 子句，select 将阻塞，直到某个通道可以运行；Go 不会重新对 channel 或值进行求值。</li></ul></li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;time&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>c1</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>string</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c2</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>string</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=mi>1</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=nx>c1</span> <span class=o>&lt;-</span> <span class=s>&#34;one&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}()</span>
+</span></span><span class=line><span class=cl>    <span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=mi>2</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=nx>c2</span> <span class=o>&lt;-</span> <span class=s>&#34;two&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>2</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>case</span> <span class=nx>msg1</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>c1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;received&#34;</span><span class=p>,</span> <span class=nx>msg1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>case</span> <span class=nx>msg2</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>c2</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;received&#34;</span><span class=p>,</span> <span class=nx>msg2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 输出结果
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>received</span> <span class=nx>one</span>
+</span></span><span class=line><span class=cl><span class=nx>received</span> <span class=nx>two</span>
+</span></span></code></pre></div><p>以上实例中，我们创建了两个通道 c 1 和 c 2。</p><p>select 语句等待两个通道的数据。如果接收到 c 1 的数据，就会打印 <code>received one</code>；如果接收到 c 2 的数据，就会打印 <code>received two</code>。</p><p>以下实例中，我们定义了两个通道，并启动了两个协程（Goroutine）从这两个通道中获取数据。在 main 函数中，我们使用 select 语句在这两个通道中进行非阻塞的选择，如果两个通道都没有可用的数据，就执行 default 子句中的语句。</p><p>以下实例执行后会不断地从两个通道中获取到的数据，当两个通道都没有可用的数据时，会输出 <code>no message received</code>。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 定义两个通道
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>ch1</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>string</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nx>ch2</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>string</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 启动两个 goroutine，分别从两个通道中获取数据
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>ch1</span> <span class=o>&lt;-</span> <span class=s>&#34;from 1&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}()</span>
+</span></span><span class=line><span class=cl>  <span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>ch2</span> <span class=o>&lt;-</span> <span class=s>&#34;from 2&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 使用 select 语句非阻塞地从两个通道中获取数据
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=k>for</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=nx>msg1</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>ch1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>      <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>msg1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=nx>msg2</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>ch2</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>      <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>msg2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 如果两个通道都没有可用的数据，则执行这里的语句
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;no message received&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><blockquote><p>Go 中没有三目运算符，不支持 <code>? :</code> 形式的条件判断</p></blockquote><hr><p>参考课程：</p><ol><li><a href=https://www.bilibili.com/video/BV1gf4y1r79E>8小时转职Golang工程师</a></li><li><a href=https://www.runoob.com/go/go-tutorial.html>Go语言教程 | 菜鸟教程</a></li></ol></article><div class=paginator><a class=link href=https://blog.pi3.fun/post/2024/11/fyne-go-tutorial-advanced/>← prev</a>
+<a class=link href=https://blog.pi3.fun/post/2024/go-beginner-notes/loops/>next →</a></div><div class=comment><div id=tcomment></div><script src=https://registry.npmmirror.com/twikoo/1.6.39/files/dist/twikoo.min.js></script><script async>twikoo.init({envId:"https://twikoo.pi3.fun/.netlify/functions/twikoo",el:"#tcomment",lang:"zh-CN"})</script></div></main><footer id=footer><div><span style=display:flex;align-items:center><span style=margin-right:.5rem>© 2021 - 2025</span><img src=https://cdn.pi3.fun/static/rainbow.gif loading=lazy width=20 alt=rainbow><span style=margin-left:.5rem>By Liu Chao</span></span></div><div class=footnote><span><a href=https://www.foreverblog.cn/ target=_blank><img src=https://img.foreverblog.cn/logo_en_default.png style=width:auto;height:16px></a> | <a class=link href=https://blogscn.fun/ target=_blank><img src=https://photo.xiangming.site/img/blogscn.png style=width:auto;height:15px></a><br><a class=link href=/index.xml><span class="iconfont icon-RSS"></span></a> | <a class=link href=https://github.com/Pi3-l22 target=_ blank><span class="iconfont icon-GitHub"></span></a> | <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener><span class="iconfont icon-creative-commons-fill"></span></a></span></div><div class=blog-icon></div></footer></div><script>document.addEventListener("DOMContentLoaded",function(){const n=localStorage.getItem("theme")||"light",e=document.querySelector('link[data-theme-style="light"]'),t=document.querySelector('link[data-theme-style="dark"]'),i=window.matchMedia("(prefers-color-scheme: dark)");i.addListener(function(n){if(!localStorage.getItem("theme")){const s=n.matches?"dark":"light";document.documentElement.setAttribute("data-theme",s),localStorage.setItem("theme",s),s==="light"?(e.media="all",t.media="not all"):(e.media="not all",t.media="all");const o=document.querySelector("iframe.giscus-frame");if(o){const e=s==="light"?"light_tritanopia":"dark_tritanopia";o.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}}}),n==="light"?(e.media="all",t.media="not all"):(e.media="not all",t.media="all");function o(){const e=document.querySelector("iframe.giscus-frame");if(e){const t=n==="light"?"light_tritanopia":"dark_tritanopia";e.contentWindow.postMessage({giscus:{setConfig:{theme:t}}},"https://giscus.app")}else setTimeout(o,1e3)}o();const s=document.querySelector(".theme-toggle");s&&(s.textContent=n==="light"?"黑暗":"明亮",s.addEventListener("click",function(){const o=document.documentElement.getAttribute("data-theme"),n=o==="light"?"dark":"light";document.documentElement.setAttribute("data-theme",n),localStorage.setItem("theme",n),n==="light"?(e.media="all",t.media="not all"):(e.media="not all",t.media="all");const s=document.querySelector("iframe.giscus-frame");if(s){const e=n==="light"?"light_tritanopia":"dark_tritanopia";s.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}this.textContent=n==="light"?"黑暗":"明亮"}))})</script><script src=https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js></script><script>document.addEventListener("DOMContentLoaded",function(){confetti({particleCount:150,spread:100})})</script></body></html>
