@@ -87,95 +87,95 @@
 
 /* 3D */
 @font-face {
-    font-display: swap;
-    font-family: dimis;
-    src: url('../font/dimis.ttf');
+  font-display: swap;
+  font-family: dimis;
+  src: url("../font/dimis.ttf");
 }
 
 /* global */
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: all 0.3s ease;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 time {
-    color: var(--text-color);
-    opacity: 0.7;
-    margin-left: 1rem;
-    min-width: 5rem;
+  color: var(--text-color);
+  opacity: 0.7;
+  margin-left: 1rem;
+  min-width: 5rem;
 }
 
 #wrapper {
-    background-color: var(--bg-color);
-    display: flex;
-    flex-direction: column;
-    /* font-family: 'Latin Modern Roman', '家族宋', 'Songti SC', 'STZhongsong', 'STSong', 'SimSun', 'Noto Serif CJK SC', 'Source Han Serif SC', serif; */
-    font-family: "LXGW Bright", serif; 
-    font-weight: 500; /* 霞鹜文楷太细了 */
-    min-height: 100vh;
-    overflow-wrap: break-word;
-    padding: 1rem;
-    transition: all 0.3s ease;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  /* font-family: 'Latin Modern Roman', '家族宋', 'Songti SC', 'STZhongsong', 'STSong', 'SimSun', 'Noto Serif CJK SC', 'Source Han Serif SC', serif; */
+  font-family: "LXGW Bright", serif;
+  font-weight: 500; /* 霞鹜文楷太细了 */
+  min-height: 100vh;
+  overflow-wrap: break-word;
+  padding: 1rem;
+  transition: all 0.3s ease;
 }
 
 .link {
-    color: var(--nav-link-color);
+  color: var(--nav-link-color);
 }
 
 .link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .paginator {
-    align-items: flex-end;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 2rem;
+  align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 2rem;
 }
 
 ::-webkit-scrollbar {
-    background-color: var(--scrollbar-bg);
-    height: 8px;
-    width: 8px;
+  background-color: var(--scrollbar-bg);
+  height: 8px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-thumb);
+  background-color: var(--scrollbar-thumb);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--scrollbar-hover);
+  background-color: var(--scrollbar-hover);
 }
 
 /* header */
 
 #header {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 #header > h1 {
-    /* font-size: 3.5rem; Royalacid ttpckey*/
-    font-size: 3.5rem;
-    text-align: center;
-    margin-bottom: 1rem !important;
-    font-family: dimis, serif;
-    font-weight: normal !important;
+  /* font-size: 3.5rem; Royalacid ttpckey*/
+  font-size: 3.5rem;
+  text-align: center;
+  margin-bottom: 1rem !important;
+  font-family: dimis, serif;
+  font-weight: normal !important;
 }
 
 /* @media screen and (min-width: 768px) {
@@ -185,98 +185,99 @@ time {
 } */
 
 #header > nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    max-width: 768px;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 768px;
+  width: 100%;
 }
 
 #header > nav > span > a {
-    font-size: 1.2rem;
-    font-weight: bold !important;
+  font-size: 1.2rem;
+  font-weight: bold !important;
 }
 
 /* main */
 
 #main {
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    max-width: 768px;
-    padding: 2rem 0;
-    width: calc(100% - 2rem);
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-width: 768px;
+  padding: 2rem 0;
+  width: calc(100% - 2rem);
 }
 
-#main.post{
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    /* 边框阴影 */
-    box-shadow: 0 0 20px 10px var(--post-shodow);
-    margin: 2rem 0;
-    /* 自定义尺寸 */
-    max-width: 850px;
-    width: 100%;
-    padding: 2rem 3rem;
-    /* A4纸尺寸 */
-    /* max-width: 21cm;
+#main.post {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  /* 边框阴影 */
+  box-shadow: 0 0 20px 10px var(--post-shodow);
+  margin: 2rem 0;
+  /* 自定义尺寸 */
+  max-width: 850px;
+  width: 100%;
+  padding: 2rem 3rem;
+  /* A4纸尺寸 */
+  /* max-width: 21cm;
     padding: 1.8cm 2cm 1.2cm 2cm;
     width: 100%; */
+  background-color: var(--paper-bg-color);
 }
 
 /* 适配手机端 */
 @media screen and (max-width: 850px) {
-    /* * {
+  /* * {
         font-size: 16px;
     } */
-    #wrapper {
-        padding: .5rem;
-    }
-    #main.post{
-        box-shadow: none;
-        padding: .5rem .5rem;
-        margin: 0 0 2rem 0;
-    }
-    #header > h1 a{
-        /* font-size: 3rem !important; */
-        font-size: 3rem !important;
-    }
-    #main.post > h1 {
-        font-size: 2rem;
-    }
-    .content pre code{
-        font-size: 85%;
-    }
+  #wrapper {
+    padding: 0.5rem;
+  }
+  #main.post {
+    box-shadow: none;
+    padding: 0.5rem 0.5rem;
+    margin: 0 0 2rem 0;
+  }
+  #header > h1 a {
+    /* font-size: 3rem !important; */
+    font-size: 3rem !important;
+  }
+  #main.post > h1 {
+    font-size: 2rem;
+  }
+  .content pre code {
+    font-size: 85%;
+  }
 }
 
 /* footer */
 
 #footer {
-    align-items: center;
-    display: flex;
-    font-size: .9rem;
-    flex-direction: column;;
+  align-items: center;
+  display: flex;
+  font-size: 0.9rem;
+  flex-direction: column;
 }
 
 #footer > .footnote {
-    text-align: center;
+  text-align: center;
 }
 
 #footer > .blog-icon {
-    margin-top: 5px;
-    text-align: center;
+  margin-top: 5px;
+  text-align: center;
 }
 
 /* 字体图标 */
 .iconfont {
-    color: var(--nav-link-color);
-    font-size: 14px !important;
+  color: var(--nav-link-color);
+  font-size: 14px !important;
 }
 
 .icon-creative-commons-fill {
-    font-size: 16px !important;
+  font-size: 16px !important;
 }

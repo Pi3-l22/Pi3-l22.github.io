@@ -2,6 +2,7 @@
   /* 明亮主题颜色 */
   /* common.css */
   --bg-color: #fafafa; /* 背景色 */
+  --paper-bg-color: #fafafa; /* 纸张背景色 */
   --text-color: #000; /* 文字颜色 */
   --nav-link-color: #aa0000; /* 导航链接颜色 */
   --scrollbar-bg: #eee; /* 滚动条背景色 */
@@ -51,6 +52,7 @@
   /* 暗黑主题颜色 */
   /* common.css */
   --bg-color: #1e2030; /* 背景色 #24273a*/
+  --paper-bg-color: #2f3347; /* 纸张背景色 */
   --text-color: #cad3f5; /* 文字颜色 #cad3f5*/
   --nav-link-color: #89b4fa; /* 导航链接颜色 */
   --scrollbar-bg: #1e1e2e; /* 滚动条背景色 */
