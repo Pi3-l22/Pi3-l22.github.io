@@ -51,8 +51,8 @@
 [data-theme="dark"] {
   /* 暗黑主题颜色 */
   /* common.css */
-  --bg-color: #1e2030; /* 背景色 #24273a*/
-  --paper-bg-color: #2f3347; /* 纸张背景色 */
+  --bg-color: #24273a; /* 背景色 #24273a*/
+  --paper-bg-color: #24273a; /* 纸张背景色 */
   --text-color: #cad3f5; /* 文字颜色 #cad3f5*/
   --nav-link-color: #89b4fa; /* 导航链接颜色 */
   --scrollbar-bg: #1e1e2e; /* 滚动条背景色 */
@@ -65,7 +65,7 @@
   --content-a-hover: #f5bde6; /* 文章中链接悬停颜色 */
   --blockquote-left: #89b4fa; /* 引用块左边框颜色 */
   --inline-code: #89b4fa; /* 行内代码颜色 */
-  --highlight-bg: #1e1e2e; /* 代码块背景色 */
+  --highlight-bg: #1e2030; /* 代码块背景色 */
   --strong-color: #7dc4e4; /* 粗体字体颜色 */
   --em-color: #8bd5ca; /* 强调字体颜色 */
   --table-border: #89b4fa; /* 表格边框颜色 */
