@@ -216,7 +216,7 @@ time {
   flex-direction: column;
   flex-grow: 1;
   /* 边框阴影 */
-  box-shadow: 0 0 20px 10px var(--post-shodow);
+  box-shadow: 0 0 20px var(--post-shodow);
   margin: 2rem 0;
   /* 自定义尺寸 */
   max-width: 850px;
