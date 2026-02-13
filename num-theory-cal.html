@@ -1,0 +1,2184 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数论计算器 | Number Theory Calculator</title>
+    <meta name="description" content="专业的数论计算器，提供模运算、模幂运算、欧几里得算法、中国剩余定理等9种数论计算功能">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        },
+                        accent: {
+                            500: '#f97316',
+                            600: '#ea580c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Result display */
+        .result-value {
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.02em;
+        }
+
+        /* Animation for cards */
+        .calc-card {
+            transition: all 0.2s ease;
+        }
+
+        .calc-card:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Input focus ring */
+        .math-input:focus {
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+
+        /* Number pad button */
+        .num-btn {
+            transition: all 0.1s ease;
+        }
+
+        .num-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Gradient background */
+        .gradient-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .dark .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+    </style>
+</head>
+
+<body class="gradient-bg min-h-screen font-sans text-slate-900 dark:text-slate-50 transition-colors duration-200">
+
+    <!-- Header -->
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-600/20">
+                        <i data-lucide="calculator" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-slate-900 dark:text-white">数论计算器</h1>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Number Theory Calculator</p>
+                    </div>
+                </div>
+
+                <!-- Theme Toggle -->
+                <button id="themeToggle"
+                    class="p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                    aria-label="切换主题">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Intro Section -->
+        <div class="text-center mb-10">
+            <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+                专业数论计算工具
+            </h2>
+            <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+                提供9种常用数论计算功能，纯前端实现，支持大整数运算，适配移动端
+            </p>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="flex flex-wrap justify-center gap-2 mb-8">
+            <button
+                class="nav-tab active px-4 py-2 rounded-lg text-sm font-medium transition-all bg-primary-600 text-white shadow-md shadow-primary-600/20"
+                data-tab="mod">
+                模运算
+            </button>
+            <button
+                class="nav-tab px-4 py-2 rounded-lg text-sm font-medium transition-all bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
+                data-tab="modpow">
+                模幂运算
+            </button>
+            <button
+                class="nav-tab px-4 py-2 rounded-lg text-sm font-medium transition-all bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
+                data-tab="inverse">
+                模逆元
+            </button>
+            <button
+                class="nav-tab px-4 py-2 rounded-lg text-sm font-medium transition-all bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
+                data-tab="euclid">
+                欧几里得算法
+            </button>
+            <button
+                class="nav-tab px-4 py-2 rounded-lg text-sm font-medium transition-all bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
+                data-tab="congruence">
+                一次同余式
+            </button>
+            <button
+                class="nav-tab px-4 py-2 rounded-lg text-sm font-medium transition-all bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
+                data-tab="crt">
+                中国剩余定理
+            </button>
+            <button
+                class="nav-tab px-4 py-2 rounded-lg text-sm font-medium transition-all bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
+                data-tab="order">
+                乘法阶
+            </button>
+            <button
+                class="nav-tab px-4 py-2 rounded-lg text-sm font-medium transition-all bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
+                data-tab="euler">
+                欧拉函数
+            </button>
+            <button
+                class="nav-tab px-4 py-2 rounded-lg text-sm font-medium transition-all bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
+                data-tab="symbol">
+                勒让德/雅可比
+            </button>
+        </div>
+
+        <!-- Calculator Sections -->
+        <div id="calculatorContainer">
+
+            <!-- 1. 模运算 -->
+            <section id="mod" class="calc-section active">
+                <div
+                    class="calc-card bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                            <i data-lucide="percent" class="w-6 h-6 text-primary-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">模运算</h3>
+                            <p class="text-base sm:text-lg font-mono text-slate-600 dark:text-slate-300 mt-1">a mod m
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">被模数
+                                a</label>
+                            <input type="text" id="modA" inputmode="numeric" placeholder="例如: 17"
+                                class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">模数
+                                m</label>
+                            <input type="text" id="modM" inputmode="numeric" placeholder="例如: 5"
+                                class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                        </div>
+                    </div>
+
+                    <button onclick="calculateMod()"
+                        class="w-full sm:w-auto bg-accent-500 hover:bg-accent-600 text-white font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-150 flex items-center justify-center gap-2">
+                        <i data-lucide="calculator" class="w-5 h-5"></i>
+                        计算
+                    </button>
+
+                    <div id="modResult"
+                        class="hidden mt-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600">
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">计算结果</p>
+                        <p class="text-2xl font-bold text-primary-600 dark:text-primary-400 result-value"
+                            id="modResultValue"></p>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2" id="modResultExplanation"></p>
+                        <pre id="modSteps"
+                            class="mt-3 text-sm font-mono whitespace-pre-wrap text-slate-700 dark:text-slate-200 bg-white/60 dark:bg-slate-800/40 rounded-lg p-3 border border-slate-200 dark:border-slate-600"></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. 模幂运算 -->
+            <section id="modpow" class="calc-section hidden">
+                <div
+                    class="calc-card bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                            <i data-lucide="superscript" class="w-6 h-6 text-primary-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">模幂运算</h3>
+                            <p class="text-base sm:text-lg font-mono text-slate-600 dark:text-slate-300 mt-1">a^b mod m
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-3 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">底数
+                                a</label>
+                            <input type="text" id="modpowA" inputmode="numeric" placeholder="例如: 3"
+                                class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">指数
+                                b</label>
+                            <input type="text" id="modpowB" inputmode="numeric" placeholder="例如: 100"
+                                class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">模数
+                                m</label>
+                            <input type="text" id="modpowM" inputmode="numeric" placeholder="例如: 7"
+                                class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                        </div>
+                    </div>
+
+                    <button onclick="calculateModPow()"
+                        class="w-full sm:w-auto bg-accent-500 hover:bg-accent-600 text-white font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-150 flex items-center justify-center gap-2">
+                        <i data-lucide="calculator" class="w-5 h-5"></i>
+                        计算
+                    </button>
+
+                    <div id="modpowResult"
+                        class="hidden mt-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600">
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">计算结果</p>
+                        <p class="text-2xl font-bold text-primary-600 dark:text-primary-400 result-value"
+                            id="modpowResultValue"></p>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2" id="modpowResultExplanation"></p>
+                        <pre id="modpowSteps"
+                            class="mt-3 text-sm font-mono whitespace-pre-wrap text-slate-700 dark:text-slate-200 bg-white/60 dark:bg-slate-800/40 rounded-lg p-3 border border-slate-200 dark:border-slate-600"></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 模逆元 -->
+            <section id="inverse" class="calc-section hidden">
+                <div
+                    class="calc-card bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                            <i data-lucide="divide" class="w-6 h-6 text-primary-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">模逆元</h3>
+                            <p class="text-base sm:text-lg font-mono text-slate-600 dark:text-slate-300 mt-1">
+                                a<sup>-1</sup> mod m</p>
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">整数
+                                a</label>
+                            <input type="text" id="inverseA" inputmode="numeric" placeholder="例如: 3"
+                                class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">模数
+                                m</label>
+                            <input type="text" id="inverseM" inputmode="numeric" placeholder="例如: 11"
+                                class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                        </div>
+                    </div>
+
+                    <button onclick="calculateInverse()"
+                        class="w-full sm:w-auto bg-accent-500 hover:bg-accent-600 text-white font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-150 flex items-center justify-center gap-2">
+                        <i data-lucide="calculator" class="w-5 h-5"></i>
+                        计算
+                    </button>
+
+                    <div id="inverseResult"
+                        class="hidden mt-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600">
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">计算结果</p>
+                        <p class="text-2xl font-bold text-primary-600 dark:text-primary-400 result-value"
+                            id="inverseResultValue"></p>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2" id="inverseResultExplanation"></p>
+                        <pre id="inverseSteps"
+                            class="mt-3 text-sm font-mono whitespace-pre-wrap text-slate-700 dark:text-slate-200 bg-white/60 dark:bg-slate-800/40 rounded-lg p-3 border border-slate-200 dark:border-slate-600"></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. 欧几里得算法 -->
+            <section id="euclid" class="calc-section hidden">
+                <div
+                    class="calc-card bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                            <i data-lucide="git-branch" class="w-6 h-6 text-primary-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">扩展欧几里得算法</h3>
+                            <p class="text-base sm:text-lg font-mono text-slate-600 dark:text-slate-300 mt-1">gcd(a, b)
+                                = ax + by</p>
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">整数
+                                a</label>
+                            <input type="text" id="euclidA" inputmode="numeric" placeholder="例如: 56"
+                                class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">整数
+                                b</label>
+                            <input type="text" id="euclidB" inputmode="numeric" placeholder="例如: 15"
+                                class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                        </div>
+                    </div>
+
+                    <button onclick="calculateEuclid()"
+                        class="w-full sm:w-auto bg-accent-500 hover:bg-accent-600 text-white font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-150 flex items-center justify-center gap-2">
+                        <i data-lucide="calculator" class="w-5 h-5"></i>
+                        计算
+                    </button>
+
+                    <div id="euclidResult"
+                        class="hidden mt-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600">
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">计算结果</p>
+                        <div class="space-y-2">
+                            <p class="text-lg font-mono text-slate-900 dark:text-white" id="euclidGCD"></p>
+                            <p class="text-lg font-mono text-slate-900 dark:text-white" id="euclidCoefficients"></p>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mt-2" id="euclidExplanation"></p>
+                            <pre id="euclidSteps"
+                                class="mt-3 text-sm font-mono whitespace-pre-wrap text-slate-700 dark:text-slate-200 bg-white/60 dark:bg-slate-800/40 rounded-lg p-3 border border-slate-200 dark:border-slate-600"></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. 一次同余式 -->
+            <section id="congruence" class="calc-section hidden">
+                <div
+                    class="calc-card bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                            <i data-lucide="equal" class="w-6 h-6 text-primary-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">解一次同余式</h3>
+                            <p class="text-base sm:text-lg font-mono text-slate-600 dark:text-slate-300 mt-1">ax ≡ b
+                                (mod m)</p>
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-3 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">系数
+                                a</label>
+                            <input type="text" id="congruenceA" inputmode="numeric" placeholder="例如: 3"
+                                class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">常数
+                                b</label>
+                            <input type="text" id="congruenceB" inputmode="numeric" placeholder="例如: 4"
+                                class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">模数
+                                m</label>
+                            <input type="text" id="congruenceM" inputmode="numeric" placeholder="例如: 7"
+                                class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                        </div>
+                    </div>
+
+                    <button onclick="calculateCongruence()"
+                        class="w-full sm:w-auto bg-accent-500 hover:bg-accent-600 text-white font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-150 flex items-center justify-center gap-2">
+                        <i data-lucide="calculator" class="w-5 h-5"></i>
+                        计算
+                    </button>
+
+                    <div id="congruenceResult"
+                        class="hidden mt-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600">
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">计算结果</p>
+                        <p class="text-lg text-slate-900 dark:text-white mb-2" id="congruenceStatus"></p>
+                        <p class="text-xl font-bold text-primary-600 dark:text-primary-400 result-value"
+                            id="congruenceSolutions"></p>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2" id="congruenceExplanation"></p>
+                        <pre id="congruenceSteps"
+                            class="mt-3 text-sm font-mono whitespace-pre-wrap text-slate-700 dark:text-slate-200 bg-white/60 dark:bg-slate-800/40 rounded-lg p-3 border border-slate-200 dark:border-slate-600"></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. 中国剩余定理 -->
+            <section id="crt" class="calc-section hidden">
+                <div
+                    class="calc-card bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                            <i data-lucide="layers" class="w-6 h-6 text-primary-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">中国剩余定理</h3>
+                            <p class="text-base sm:text-lg font-mono text-slate-600 dark:text-slate-300 mt-1">x ≡ aᵢ
+                                (mod mᵢ)</p>
+                        </div>
+                    </div>
+
+                    <div id="crtInputs" class="space-y-4 mb-6">
+                        <div class="flex gap-2 sm:gap-4 items-end crt-row">
+                            <div class="flex-1 min-w-0">
+                                <input type="text" data-crt-a inputmode="numeric" placeholder="a₁"
+                                    class="math-input w-full p-3 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                            </div>
+                            <div class="text-lg text-slate-500 pb-3 whitespace-nowrap">(mod</div>
+                            <div class="flex-1 min-w-0">
+                                <input type="text" data-crt-m inputmode="numeric" placeholder="m₁"
+                                    class="math-input w-full p-3 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                            </div>
+                            <div class="text-lg text-slate-500 pb-3 whitespace-nowrap">)</div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 mb-6">
+                        <button onclick="addCRTInput()"
+                            class="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors flex items-center gap-2">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            添加同余式
+                        </button>
+                        <button onclick="removeCRTInput()"
+                            class="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors flex items-center gap-2">
+                            <i data-lucide="minus" class="w-4 h-4"></i>
+                            删除最后一个
+                        </button>
+                    </div>
+
+                    <button onclick="calculateCRT()"
+                        class="w-full sm:w-auto bg-accent-500 hover:bg-accent-600 text-white font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-150 flex items-center justify-center gap-2">
+                        <i data-lucide="calculator" class="w-5 h-5"></i>
+                        计算
+                    </button>
+
+                    <div id="crtResult"
+                        class="hidden mt-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600">
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">计算结果</p>
+                        <p class="text-2xl font-bold text-primary-600 dark:text-primary-400 result-value"
+                            id="crtSolution"></p>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2" id="crtExplanation"></p>
+                        <pre id="crtSteps"
+                            class="mt-3 text-sm font-mono whitespace-pre-wrap text-slate-700 dark:text-slate-200 bg-white/60 dark:bg-slate-800/40 rounded-lg p-3 border border-slate-200 dark:border-slate-600"></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. 乘法阶 -->
+            <section id="order" class="calc-section hidden">
+                <div
+                    class="calc-card bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                            <i data-lucide="repeat" class="w-6 h-6 text-primary-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">乘法阶</h3>
+                            <p class="text-base sm:text-lg font-mono text-slate-600 dark:text-slate-300 mt-1">ordₘ(a) —
+                                最小 k 使 a<sup>k</sup> ≡ 1 (mod m)</p>
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">底数
+                                a</label>
+                            <input type="text" id="orderA" inputmode="numeric" placeholder="例如: 3"
+                                class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">模数
+                                m</label>
+                            <input type="text" id="orderM" inputmode="numeric" placeholder="例如: 7"
+                                class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                        </div>
+                    </div>
+
+                    <button onclick="calculateOrder()"
+                        class="w-full sm:w-auto bg-accent-500 hover:bg-accent-600 text-white font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-150 flex items-center justify-center gap-2">
+                        <i data-lucide="calculator" class="w-5 h-5"></i>
+                        计算
+                    </button>
+
+                    <div id="orderResult"
+                        class="hidden mt-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600">
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">计算结果</p>
+                        <p class="text-2xl font-bold text-primary-600 dark:text-primary-400 result-value"
+                            id="orderResultValue"></p>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2" id="orderResultExplanation"></p>
+                        <pre id="orderSteps"
+                            class="mt-3 text-sm font-mono whitespace-pre-wrap text-slate-700 dark:text-slate-200 bg-white/60 dark:bg-slate-800/40 rounded-lg p-3 border border-slate-200 dark:border-slate-600"></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. 欧拉函数 -->
+            <section id="euler" class="calc-section hidden">
+                <div
+                    class="calc-card bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                            <i data-lucide="sigma" class="w-6 h-6 text-primary-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">欧拉函数</h3>
+                            <p class="text-base sm:text-lg font-mono text-slate-600 dark:text-slate-300 mt-1">φ(n) — 与 n
+                                互质的正整数个数</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">正整数 n</label>
+                        <input type="text" id="eulerN" inputmode="numeric" placeholder="例如: 100"
+                            class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all max-w-md">
+                    </div>
+
+                    <button onclick="calculateEuler()"
+                        class="w-full sm:w-auto bg-accent-500 hover:bg-accent-600 text-white font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-150 flex items-center justify-center gap-2">
+                        <i data-lucide="calculator" class="w-5 h-5"></i>
+                        计算
+                    </button>
+
+                    <div id="eulerResult"
+                        class="hidden mt-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600">
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">计算结果</p>
+                        <div class="space-y-2">
+                            <p class="text-2xl font-bold text-primary-600 dark:text-primary-400 result-value"
+                                id="eulerPhi"></p>
+                            <p class="text-sm font-mono text-slate-600 dark:text-slate-300" id="eulerFactorization"></p>
+                            <p class="text-sm text-slate-600 dark:text-slate-300" id="eulerExplanation"></p>
+                            <pre id="eulerSteps"
+                                class="mt-3 text-sm font-mono whitespace-pre-wrap text-slate-700 dark:text-slate-200 bg-white/60 dark:bg-slate-800/40 rounded-lg p-3 border border-slate-200 dark:border-slate-600"></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. 勒让德/雅可比符号 -->
+            <section id="symbol" class="calc-section hidden">
+                <div
+                    class="calc-card bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                            <i data-lucide="brackets" class="w-6 h-6 text-primary-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">勒让德/雅可比符号</h3>
+                            <p class="text-base sm:text-lg font-mono text-slate-600 dark:text-slate-300 mt-1">(a/n) —
+                                二次剩余判定</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 mb-6">
+                        <button id="legendreBtn" onclick="setSymbolMode('legendre')"
+                            class="flex-1 py-2 px-4 rounded-lg bg-primary-600 text-white font-medium transition-all">
+                            勒让德符号
+                        </button>
+                        <button id="jacobiBtn" onclick="setSymbolMode('jacobi')"
+                            class="flex-1 py-2 px-4 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 font-medium transition-all">
+                            雅可比符号
+                        </button>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">分子
+                                a</label>
+                            <input type="text" id="symbolA" inputmode="numeric" placeholder="例如: 3"
+                                class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">分母
+                                n</label>
+                            <input type="text" id="symbolN" inputmode="numeric" placeholder="例如: 7 (奇素数)"
+                                class="math-input w-full p-4 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                        </div>
+                    </div>
+
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-4" id="symbolHint">勒让德符号要求分母为奇素数</p>
+
+                    <button onclick="calculateSymbol()"
+                        class="w-full sm:w-auto bg-accent-500 hover:bg-accent-600 text-white font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-150 flex items-center justify-center gap-2">
+                        <i data-lucide="calculator" class="w-5 h-5"></i>
+                        计算
+                    </button>
+
+                    <div id="symbolResult"
+                        class="hidden mt-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600">
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">计算结果</p>
+                        <p class="text-2xl font-bold text-primary-600 dark:text-primary-400 result-value"
+                            id="symbolValue"></p>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2" id="symbolExplanation"></p>
+                        <pre id="symbolSteps"
+                            class="mt-3 text-sm font-mono whitespace-pre-wrap text-slate-700 dark:text-slate-200 bg-white/60 dark:bg-slate-800/40 rounded-lg p-3 border border-slate-200 dark:border-slate-600"></pre>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 mt-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center text-slate-500 dark:text-slate-400">
+                <p class="mb-2">数论计算器 Number Theory Calculator</p>
+                <p class="text-sm">纯前端实现 | 支持大整数 | 响应式设计</p>
+                <p class="text-xs mt-4 text-slate-400 dark:text-slate-500">
+                    © 2025 Pi3 · 所有计算在本地浏览器完成，数据不会上传至服务器
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Number Theory Core Algorithms -->
+    <script>
+        /**
+         * Number Theory Calculator - Core Algorithms
+         * 数论计算器核心算法模块
+         * 
+         * 包含9个数论功能：
+         * 1. 模运算 (Modular Arithmetic)
+         * 2. 模幂运算 (Modular Exponentiation)
+         * 3. 模逆元 (Modular Multiplicative Inverse)
+         * 4. 扩展欧几里得算法 (Extended Euclidean Algorithm)
+         * 5. 解一次同余式 (Linear Congruence)
+         * 6. 中国剩余定理 (Chinese Remainder Theorem)
+         * 7. 求模的指数/阶 (Multiplicative Order)
+         * 8. 欧拉函数 (Euler's Totient Function)
+         * 9. 勒让德和雅可比符号 (Legendre & Jacobi Symbols)
+         */
+
+        const NumberTheory = {
+
+            /**
+             * 1. 模运算 - Modular Arithmetic
+             * 计算 a mod m，处理负数情况，展示带余除法步骤
+             * @param {BigInt} a - 被模数
+             * @param {BigInt} m - 模数 (m > 0)
+             * @returns {Object} - {result, steps}
+             */
+            mod(a, m) {
+                if (m <= 0n) throw new Error('模数必须大于0');
+
+                let steps = [];
+                steps.push(`计算 ${a} mod ${m}`);
+                steps.push(`使用带余除法: a = q·m + r, 其中 0 ≤ r < m`);
+
+                let quotient = a / m;
+                let remainder = a % m;
+
+                steps.push(`${a} = (${quotient}) × ${m} + ${remainder}`);
+
+                if (remainder < 0n) {
+                    steps.push(`由于余数 ${remainder} < 0，需要调整`);
+                    steps.push(`调整: ${remainder} + ${m} = ${remainder + m}`);
+                    remainder += m;
+                    quotient -= 1n;
+                    steps.push(`${a} = (${quotient}) × ${m} + ${remainder}`);
+                }
+
+                steps.push(`因此 ${a} mod ${m} = ${remainder}`);
+
+                return {
+                    result: remainder,
+                    steps: steps
+                };
+            },
+
+            /**
+             * 2. 模幂运算 - Modular Exponentiation
+             * 计算 a^b mod m，使用快速幂算法（平方乘算法），展示详细步骤
+             * @param {BigInt} a - 底数
+             * @param {BigInt} b - 指数 (b >= 0)
+             * @param {BigInt} m - 模数
+             * @returns {Object} - {result, steps}
+             */
+            modPow(a, b, m) {
+                if (m <= 0n) throw new Error('模数必须大于0');
+                if (b < 0n) throw new Error('指数必须非负');
+                if (m === 1n) return { result: 0n, steps: ['模数为1，结果为0'] };
+
+                let steps = [];
+                steps.push(`计算 ${a}^${b} mod ${m}`);
+                steps.push(`使用模重复平方法（平方乘算法）`);
+                steps.push(`首先将指数 ${b} 转换为二进制: ${b.toString(2)}`);
+
+                // 简化底数
+                a = ((a % m) + m) % m;
+                steps.push(`简化底数: ${a} mod ${m} = ${a}`);
+
+                let result = 1n;
+                let base = a;
+                let exp = b;
+                let iteration = 1;
+
+                steps.push(`初始化: result = 1, base = ${a}`);
+                steps.push('');
+                steps.push('迭代过程:');
+
+                while (exp > 0n) {
+                    let stepLine = `第${iteration}步: `;
+                    const bit = exp & 1n;
+
+                    if (bit === 1n) {
+                        const oldResult = result;
+                        result = (result * base) % m;
+                        stepLine += `指数最低位为1, result = ${oldResult} × ${base} = ${result} (mod ${m})`;
+                    } else {
+                        stepLine += `指数最低位为0, result 不变 = ${result}`;
+                    }
+
+                    steps.push(stepLine);
+
+                    base = (base * base) % m;
+                    steps.push(`      base = ${base}^2 = ${base} (mod ${m})`);
+
+                    exp >>= 1n;
+                    steps.push(`      指数右移: ${exp}`);
+                    steps.push('');
+
+                    iteration++;
+                }
+
+                steps.push(`最终结果: ${a}^${b} ≡ ${result} (mod ${m})`);
+
+                return { result, steps };
+            },
+
+            /**
+             * 3. 扩展欧几里得算法 - Extended Euclidean Algorithm
+             * 求 gcd(a, b) 和满足 ax + by = gcd(a, b) 的系数 x, y，展示详细步骤
+             * @param {BigInt} a 
+             * @param {BigInt} b
+             * @returns {Object} - {gcd, x, y, steps}
+             */
+            extendedGCD(a, b) {
+                if (a === 0n && b === 0n) throw new Error('不能同时对0求GCD');
+
+                let steps = [];
+                steps.push(`计算 gcd(${a}, ${b}) 和贝祖系数`);
+                steps.push(`扩展欧几里得算法: 寻找 x, y 使得 ${a}·x + ${b}·y = gcd(${a}, ${b})`);
+                steps.push('');
+                steps.push('迭代过程 (使用辗转相除法):');
+                steps.push('');
+
+                let old_r = a, r = b;
+                let old_s = 1n, s = 0n;
+                let old_t = 0n, t = 1n;
+                let iteration = 1;
+
+                steps.push(`初始: r₀ = ${old_r}, r₁ = ${r}`);
+                steps.push(`      s₀ = 1, s₁ = 0`);
+                steps.push(`      t₀ = 0, t₁ = 1`);
+                steps.push('');
+
+                while (r !== 0n) {
+                    const quotient = old_r / r;
+
+                    steps.push(`第${iteration}步:`);
+                    steps.push(`  ${old_r} = ${quotient} × ${r} + ${old_r - quotient * r}`);
+                    steps.push(`  q = ${quotient}`);
+
+                    [old_r, r] = [r, old_r - quotient * r];
+                    [old_s, s] = [s, old_s - quotient * s];
+                    [old_t, t] = [t, old_t - quotient * t];
+
+                    steps.push(`  r = ${r}, s = ${old_s}, t = ${old_t}`);
+                    steps.push('');
+
+                    iteration++;
+                }
+
+                // 确保 gcd 为正
+                if (old_r < 0n) {
+                    old_r = -old_r;
+                    old_s = -old_s;
+                    old_t = -old_t;
+                    steps.push('调整符号使gcd为正');
+                }
+
+                steps.push('结果:');
+                steps.push(`  gcd(${a}, ${b}) = ${old_r}`);
+                steps.push(`  x = ${old_s}, y = ${old_t}`);
+                steps.push(`  验证: ${a} × (${old_s}) + ${b} × (${old_t}) = ${a * old_s + b * old_t}`);
+
+                return { gcd: old_r, x: old_s, y: old_t, steps };
+            },
+
+            /**
+             * 普通欧几里得算法 - 仅求 GCD
+             * @param {BigInt} a
+             * @param {BigInt} b
+             * @returns {BigInt}
+             */
+            gcd(a, b) {
+                a = a < 0n ? -a : a;
+                b = b < 0n ? -b : b;
+                while (b !== 0n) {
+                    [a, b] = [b, a % b];
+                }
+                return a;
+            },
+
+            /**
+             * 4. 模逆元 - Modular Multiplicative Inverse
+             * 求满足 ax ≡ 1 (mod m) 的 x，展示详细步骤
+             * @param {BigInt} a
+             * @param {BigInt} m - 模数 (m > 1)
+             * @returns {Object} - {result, steps} (result为null表示逆元不存在)
+             */
+            modInverse(a, m) {
+                if (m <= 1n) throw new Error('模数必须大于1');
+
+                let steps = [];
+                steps.push(`求 ${a} 在模 ${m} 下的逆元`);
+                steps.push(`即寻找 x 使得 ${a}·x ≡ 1 (mod ${m})`);
+                steps.push('');
+                steps.push('步骤1: 使用扩展欧几里得算法求 gcd(a, m) 和系数');
+                steps.push('');
+
+                // 简化a
+                const aMod = ((a % m) + m) % m;
+                if (aMod !== a) {
+                    steps.push(`简化: ${a} mod ${m} = ${aMod}`);
+                    a = aMod;
+                }
+
+                const { gcd, x, y, steps: extSteps } = this.extendedGCD(a, m);
+                steps = steps.concat(extSteps);
+                steps.push('');
+
+                if (gcd !== 1n) {
+                    steps.push(`由于 gcd(${a}, ${m}) = ${gcd} ≠ 1`);
+                    steps.push(`根据定理，逆元不存在`);
+                    return { result: null, steps };
+                }
+
+                steps.push(`步骤2: 由于 gcd(${a}, ${m}) = 1，逆元存在`);
+                steps.push(`从扩展欧几里得结果: ${a}·(${x}) + ${m}·(${y}) = 1`);
+                steps.push(`两边模 ${m}: ${a}·(${x}) ≡ 1 (mod ${m})`);
+
+                // 确保x为正
+                let result = x % m;
+                if (result < 0n) {
+                    const oldResult = result;
+                    result += m;
+                    steps.push(`调整: ${oldResult} + ${m} = ${result}`);
+                }
+
+                steps.push('');
+                steps.push(`因此，${a}^(-1) ≡ ${result} (mod ${m})`);
+                steps.push(`验证: ${a} × ${result} = ${a * result} ≡ ${(a * result) % m} (mod ${m}) ✓`);
+
+                return { result, steps };
+            },
+
+            /**
+             * 5. 解一次同余式 - Solve Linear Congruence
+             * 解 ax ≡ b (mod m)，展示详细求解步骤
+             * @param {BigInt} a
+             * @param {BigInt} b
+             * @param {BigInt} m - 模数
+             * @returns {Object} - {hasSolution, solutions: [], count, steps}
+             */
+            solveLinearCongruence(a, b, m) {
+                if (m <= 0n) throw new Error('模数必须大于0');
+
+                let steps = [];
+                steps.push(`解一次同余方程: ${a}x ≡ ${b} (mod ${m})`);
+                steps.push('');
+
+                // 标准化
+                a = ((a % m) + m) % m;
+                b = ((b % m) + m) % m;
+                steps.push(`步骤1: 标准化系数`);
+                steps.push(`  a = ${a} mod ${m} = ${a}`);
+                steps.push(`  b = ${b} mod ${m} = ${b}`);
+                steps.push(`  方程化为: ${a}x ≡ ${b} (mod ${m})`);
+                steps.push('');
+
+                // 计算gcd
+                const d = this.gcd(a, m);
+                steps.push(`步骤2: 计算 gcd(${a}, ${m})`);
+                steps.push(`  gcd(${a}, ${m}) = ${d}`);
+                steps.push('');
+
+                // 检查是否有解
+                if (b % d !== 0n) {
+                    steps.push(`步骤3: 判断解的存在性`);
+                    steps.push(`  由于 ${d} 不能整除 ${b}`);
+                    steps.push(`  根据定理，方程无解`);
+                    return {
+                        hasSolution: false,
+                        solutions: [],
+                        count: 0,
+                        steps
+                    };
+                }
+
+                steps.push(`步骤3: 判断解的存在性`);
+                steps.push(`  由于 ${d} | ${b}，方程有解`);
+                steps.push(`  共有 ${d} 个解 (模 ${m})`);
+                steps.push('');
+
+                // 化简方程
+                const a1 = a / d;
+                const b1 = b / d;
+                const m1 = m / d;
+
+                steps.push(`步骤4: 化简方程`);
+                steps.push(`  两边除以 ${d}:`);
+                steps.push(`  ${a1}x ≡ ${b1} (mod ${m1})`);
+                steps.push('');
+
+                // 求逆元
+                steps.push(`步骤5: 求 ${a1} 在模 ${m1} 下的逆元`);
+                const { result: inv, steps: invSteps } = this.modInverse(a1, m1);
+                steps = steps.concat(invSteps.slice(2)); // 跳过前两个标题行
+                steps.push('');
+
+                // 特解
+                const x0 = ((b1 * inv) % m1 + m1) % m1;
+                steps.push(`步骤6: 求特解`);
+                steps.push(`  x₀ ≡ ${b1} × ${inv} ≡ ${x0} (mod ${m1})`);
+                steps.push('');
+
+                // 所有解
+                const solutions = [];
+                steps.push(`步骤7: 求所有 ${d} 个解`);
+                for (let i = 0n; i < d; i++) {
+                    const sol = ((x0 + i * m1) % m + m) % m;
+                    solutions.push(sol);
+                    steps.push(`  x_${i} = ${x0} + ${i}×${m1} = ${sol} (mod ${m})`);
+                }
+                steps.push('');
+                steps.push(`最终答案: x ≡ ${solutions.join(', ')} (mod ${m})`);
+
+                return {
+                    hasSolution: true,
+                    solutions: solutions,
+                    count: Number(d),
+                    baseSolution: x0,
+                    modulus: m1,
+                    steps
+                };
+            },
+
+            /**
+             * 6. 中国剩余定理 - Chinese Remainder Theorem
+             * 解同余方程组 x ≡ a_i (mod m_i)，展示详细构造过程
+             * @param {Array<{a: BigInt, m: BigInt}>} congruences - 同余式数组
+             * @returns {Object} - {hasSolution, solution, modulus, steps}
+             */
+            chineseRemainderTheorem(congruences) {
+                if (!Array.isArray(congruences) || congruences.length === 0) {
+                    throw new Error('请提供至少一个同余式');
+                }
+
+                let steps = [];
+                steps.push('中国剩余定理求解');
+                steps.push('同余方程组:');
+                congruences.forEach((c, i) => {
+                    steps.push(`  x ≡ ${c.a} (mod ${c.m})`);
+                });
+                steps.push('');
+
+                // 检查模数是否两两互质
+                const n = congruences.length;
+                steps.push('步骤1: 检查模数是否两两互质');
+                for (let i = 0; i < n; i++) {
+                    for (let j = i + 1; j < n; j++) {
+                        const g = this.gcd(congruences[i].m, congruences[j].m);
+                        if (g !== 1n) {
+                            steps.push(`  gcd(${congruences[i].m}, ${congruences[j].m}) = ${g} ≠ 1`);
+                            steps.push(`  模数不互质，无法使用标准中国剩余定理`);
+                            return {
+                                hasSolution: false,
+                                steps
+                            };
+                        }
+                    }
+                }
+                steps.push('  所有模数两两互质 ✓');
+                steps.push('');
+
+                // 计算 M = 所有模数的乘积
+                let M = 1n;
+                for (const c of congruences) {
+                    M *= c.m;
+                }
+                steps.push(`步骤2: 计算 M = 所有模数的乘积`);
+                steps.push(`  M = ${congruences.map(c => c.m).join(' × ')} = ${M}`);
+                steps.push('');
+
+                // 构造解
+                steps.push('步骤3: 构造解 x = Σ aᵢ × Mᵢ × yᵢ (mod M)');
+                steps.push('  其中 Mᵢ = M/mᵢ, yᵢ = Mᵢ⁻¹ (mod mᵢ)');
+                steps.push('');
+
+                let result = 0n;
+                let constructionSteps = [];
+
+                for (let i = 0; i < congruences.length; i++) {
+                    const c = congruences[i];
+                    const M_i = M / c.m;
+                    const { result: inv, steps: invSteps } = this.modInverse(M_i, c.m);
+
+                    steps.push(`  第 ${i + 1} 个方程: x ≡ ${c.a} (mod ${c.m})`);
+                    steps.push(`    M_${i + 1} = ${M}/${c.m} = ${M_i}`);
+                    steps.push(`    求 y_${i + 1} = ${M_i}⁻¹ (mod ${c.m})`);
+                    steps.push(`    y_${i + 1} = ${inv}`);
+
+                    const term = c.a * M_i * inv;
+                    steps.push(`    项 ${i + 1}: ${c.a} × ${M_i} × ${inv} = ${term}`);
+                    steps.push('');
+
+                    constructionSteps.push({
+                        a: c.a,
+                        m: c.m,
+                        M_i: M_i,
+                        inv: inv,
+                        term: term
+                    });
+
+                    result += term;
+                }
+
+                result = ((result % M) + M) % M;
+
+                steps.push('步骤4: 求和并取模');
+                const sum = constructionSteps.map(s => s.term).reduce((a, b) => a + b, 0n);
+                steps.push(`  x = ${constructionSteps.map(s => s.term).join(' + ')}`);
+                steps.push(`  x = ${sum}`);
+                steps.push(`  x ≡ ${result} (mod ${M})`);
+                steps.push('');
+                steps.push(`最终答案: x ≡ ${result} (mod ${M})`);
+                steps.push(`即 x = ${result} + k·${M} (k∈ℤ)`);
+
+                return {
+                    hasSolution: true,
+                    solution: result,
+                    modulus: M,
+                    steps
+                };
+            },
+
+            /**
+             * 7. 求模的阶/指数 - Multiplicative Order
+             * 求最小的正整数 k 使得 a^k ≡ 1 (mod m)
+             * 要求 gcd(a, m) = 1
+             * @param {BigInt} a
+             * @param {BigInt} m - 模数
+             * @returns {Object} - {exists, order, phi, steps}
+             */
+            multiplicativeOrder(a, m) {
+                if (m <= 1n) throw new Error('模数必须大于1');
+
+                let steps = [];
+                steps.push(`求 ${a} 在模 ${m} 下的乘法阶 ord_${m}(${a})`);
+                steps.push(`即寻找最小的正整数 k 使得 ${a}^k ≡ 1 (mod ${m})`);
+                steps.push('');
+
+                a = ((a % m) + m) % m;
+                steps.push(`步骤1: 标准化`);
+                steps.push(`  ${a} mod ${m} = ${a}`);
+                steps.push('');
+
+                // 检查gcd
+                const g = this.gcd(a, m);
+                steps.push(`步骤2: 检查 gcd(${a}, ${m})`);
+                steps.push(`  gcd(${a}, ${m}) = ${g}`);
+
+                if (g !== 1n) {
+                    steps.push(`  由于 gcd ≠ 1，乘法阶不存在`);
+                    return {
+                        exists: false,
+                        order: null,
+                        steps
+                    };
+                }
+                steps.push(`  gcd = 1，乘法阶存在 ✓`);
+                steps.push('');
+
+                // 阶必须是 φ(m) 的因子
+                steps.push(`步骤3: 计算 φ(${m})`);
+                const { phi, factorization, steps: phiSteps } = this.eulerTotient(m);
+                steps.push(`  φ(${m}) = ${phi}`);
+                steps.push(`  质因数分解: ${m} = ${factorization || m}`);
+                steps.push('');
+
+                steps.push(`步骤4: 阶必须是 φ(${m}) = ${phi} 的因子`);
+                steps.push(`  从大到小尝试 φ(${m}) 的因子`);
+                steps.push('');
+
+                let order = phi;
+                const factors = this.factorize(order);
+
+                steps.push(`步骤5: 逐步减小阶`);
+                for (const [p, exp] of factors) {
+                    steps.push(`  质因子 ${p}:`);
+                    for (let i = 0; i < exp; i++) {
+                        const candidate = order / p;
+                        steps.push(`    尝试 k = ${candidate}`);
+                        const { result, steps: powSteps } = this.modPow(a, candidate, m);
+                        if (result === 1n) {
+                            order = candidate;
+                            steps.push(`    ${a}^${candidate} ≡ 1 (mod ${m}) ✓`);
+                            steps.push(`    阶可以减小到 ${order}`);
+                        } else {
+                            steps.push(`    ${a}^${candidate} ≡ ${result} ≢ 1 (mod ${m}) ✗`);
+                            steps.push(`    停止尝试因子 ${p}`);
+                            break;
+                        }
+                    }
+                }
+                steps.push('');
+
+                steps.push(`最终结果: ord_${m}(${a}) = ${order}`);
+                steps.push(`验证: ${a}^${order} ≡ 1 (mod ${m})`);
+
+                return {
+                    exists: true,
+                    order: order,
+                    phi: phi,
+                    steps
+                };
+            },
+
+            /**
+             * 8. 欧拉函数 - Euler's Totient Function
+             * 计算 φ(n) = 小于 n 且与 n 互质的正整数的个数
+             * @param {BigInt} n
+             * @returns {Object} - {phi, factorization, steps}
+             */
+            eulerTotient(n) {
+                if (n <= 0n) throw new Error('n 必须是正整数');
+
+                let steps = [];
+                steps.push(`计算欧拉函数 φ(${n})`);
+                steps.push(`φ(n) 表示小于 n 且与 n 互质的正整数的个数`);
+                steps.push('');
+
+                if (n === 1n) {
+                    steps.push('φ(1) = 1 (定义)');
+                    return { phi: 1n, factorization: '1', steps };
+                }
+
+                // 质因数分解
+                steps.push(`步骤1: 对 ${n} 进行质因数分解`);
+                const factors = this.factorizeWithSteps(n);
+                steps = steps.concat(factors.steps);
+                steps.push(`  所以 ${n} = ${factors.factorization}`);
+                steps.push('');
+
+                // 计算欧拉函数
+                steps.push(`步骤2: 使用公式 φ(n) = n × ∏(1 - 1/p)`);
+                let phi = n;
+                const primes = factors.factors.map(f => f[0]);
+
+                steps.push(`  不同质因子: ${primes.join(', ')}`);
+                steps.push('');
+
+                steps.push('步骤3: 逐步计算');
+                for (const [p, exp] of factors.factors) {
+                    const oldPhi = phi;
+                    phi = phi * (p - 1n) / p;
+                    steps.push(`  乘以 (1 - 1/${p}) = ${p - 1n}/${p}:`);
+                    steps.push(`  ${oldPhi} × ${p - 1n}/${p} = ${phi}`);
+                }
+                steps.push('');
+
+                steps.push(`最终结果: φ(${n}) = ${phi}`);
+
+                return {
+                    phi: phi,
+                    factorization: factors.factorization,
+                    steps
+                };
+            },
+
+            /**
+             * 带步骤的质因数分解
+             * @param {BigInt} n
+             * @returns {Object} - {factors, factorization, steps}
+             */
+            factorizeWithSteps(n) {
+                let steps = [];
+                if (n <= 1n) return { factors: [], factorization: '', steps };
+
+                const factors = [];
+                let num = n;
+
+                // 处理因子2
+                let count = 0;
+                while (num % 2n === 0n) {
+                    num /= 2n;
+                    count++;
+                }
+                if (count > 0) {
+                    factors.push([2n, count]);
+                    steps.push(`  试除 2: ${n} ÷ 2^${count} = ${num}`);
+                }
+
+                // 试除奇数
+                for (let i = 3n; i * i <= num; i += 2n) {
+                    count = 0;
+                    while (num % i === 0n) {
+                        num /= i;
+                        count++;
+                    }
+                    if (count > 0) {
+                        factors.push([i, count]);
+                        steps.push(`  试除 ${i}: 能整除 ${count} 次`);
+                    }
+                }
+
+                // 如果还有剩余，则是质数
+                if (num > 1n) {
+                    factors.push([num, 1]);
+                    steps.push(`  剩余 ${num} 是质数`);
+                }
+
+                return {
+                    factors: factors,
+                    factorization: factors.map(([p, exp]) => `${p}^${exp}`).join(' × '),
+                    steps: steps
+                };
+            },
+
+            /**
+             * 整数分解 - Integer Factorization（试除法）
+             * @param {BigInt} n
+             * @returns {Array<[BigInt, number]>} - [(质因子, 指数), ...]
+             */
+            factorize(n) {
+                if (n <= 1n) return [];
+
+                const factors = [];
+                let num = n;
+
+                // 处理因子2
+                let count = 0;
+                while (num % 2n === 0n) {
+                    num /= 2n;
+                    count++;
+                }
+                if (count > 0) factors.push([2n, count]);
+
+                // 试除奇数
+                for (let i = 3n; i * i <= num; i += 2n) {
+                    count = 0;
+                    while (num % i === 0n) {
+                        num /= i;
+                        count++;
+                    }
+                    if (count > 0) factors.push([i, count]);
+                }
+
+                // 如果还有剩余，则是质数
+                if (num > 1n) factors.push([num, 1]);
+
+                return factors;
+            },
+
+            /**
+             * 9a. 勒让德符号 - Legendre Symbol
+             * 计算 (a/p)，其中 p 是奇素数，展示欧拉准则计算过程
+             * @param {BigInt} a
+             * @param {BigInt} p - 奇素数
+             * @returns {Object} - {symbol, steps}
+             */
+            legendreSymbol(a, p) {
+                if (p <= 2n || !this.isPrime(p)) {
+                    throw new Error('勒让德符号要求模数为奇素数');
+                }
+
+                let steps = [];
+                steps.push(`计算勒让德符号 (${a}/${p})`);
+                steps.push(`判断 ${a} 是否为模 ${p} 的二次剩余`);
+                steps.push('');
+
+                // 标准化a
+                a = ((a % p) + p) % p;
+                steps.push(`步骤1: 标准化`);
+                steps.push(`  ${a} mod ${p} = ${a}`);
+                steps.push('');
+
+                if (a === 0n) {
+                    steps.push(`步骤2: 判断`);
+                    steps.push(`  由于 ${p} | ${a}`);
+                    steps.push(`  所以 (${a}/${p}) = 0`);
+                    return { symbol: 0n, steps };
+                }
+
+                // 使用欧拉准则
+                steps.push(`步骤2: 使用欧拉准则`);
+                steps.push(`  (${a}/${p}) ≡ ${a}^(${p - 1n})/2 (mod ${p})`);
+                const exp = (p - 1n) / 2n;
+                steps.push(`  计算 ${a}^${exp} mod ${p}`);
+                steps.push('');
+
+                const { result, steps: powSteps } = this.modPow(a, exp, p);
+                steps = steps.concat(powSteps.slice(2)); // 添加模幂计算的步骤
+                steps.push('');
+
+                steps.push(`步骤3: 根据欧拉准则判断`);
+                steps.push(`  ${a}^${exp} ≡ ${result} (mod ${p})`);
+
+                let symbol;
+                let meaning;
+                if (result === 1n) {
+                    symbol = 1n;
+                    meaning = '二次剩余';
+                    steps.push(`  结果为 1，所以 (${a}/${p}) = 1`);
+                    steps.push(`  ${a} 是模 ${p} 的二次剩余`);
+                } else if (result === p - 1n) {
+                    symbol = -1n;
+                    meaning = '二次非剩余';
+                    steps.push(`  结果为 ${p - 1n} ≡ -1 (mod ${p})`);
+                    steps.push(`  所以 (${a}/${p}) = -1`);
+                    steps.push(`  ${a} 是模 ${p} 的二次非剩余`);
+                } else {
+                    symbol = 0n;
+                    meaning = '计算错误';
+                    steps.push(`  异常结果: ${result}`);
+                }
+                steps.push('');
+                steps.push(`最终答案: (${a}/${p}) = ${symbol} (${meaning})`);
+
+                return { symbol, steps };
+            },
+
+            /**
+             * 9b. 雅可比符号 - Jacobi Symbol
+             * 计算 (a/n)，其中 n 是奇正整数
+             * 使用二次互反律计算，展示详细步骤
+             * @param {BigInt} a
+             * @param {BigInt} n - 奇正整数
+             * @returns {Object} - {symbol, steps}
+             */
+            jacobiSymbol(a, n) {
+                if (n <= 0n || n % 2n === 0n) {
+                    throw new Error('雅可比符号要求模数为奇正整数');
+                }
+
+                let steps = [];
+                steps.push(`计算雅可比符号 (${a}/${n})`);
+                steps.push(`使用二次互反律和性质逐步化简`);
+                steps.push('');
+
+                if (n === 1n) {
+                    steps.push('性质: (a/1) = 1');
+                    steps.push('结果为 1');
+                    return { symbol: 1n, steps };
+                }
+
+                // 标准化
+                a = ((a % n) + n) % n;
+                steps.push(`步骤1: 标准化`);
+                steps.push(`  ${a} mod ${n} = ${a}`);
+                steps.push(`  计算 (${a}/${n})`);
+                steps.push('');
+
+                // 计算雅可比符号
+                let result = 1n;
+                let stepNum = 2;
+
+                while (a !== 0n) {
+                    steps.push(`步骤${stepNum}: 处理 (${a}/${n})`);
+
+                    // 移除因子2
+                    let t = 0n;
+                    while (a % 2n === 0n) {
+                        a /= 2n;
+                        t++;
+                    }
+
+                    if (t > 0n) {
+                        steps.push(`  提取因子 2: ${a * (2n ** t)} = ${2n}^${t} × ${a}`);
+                        if (t % 2n !== 0n) {
+                            // (2/n) = (-1)^((n²-1)/8)
+                            const nMod8 = n % 8n;
+                            const twoSymbol = (nMod8 === 1n || nMod8 === 7n) ? 1n : -1n;
+                            result *= twoSymbol;
+                            steps.push(`  性质 (2/${n}): ${n} mod 8 = ${nMod8}`);
+                            if (nMod8 === 1n || nMod8 === 7n) {
+                                steps.push(`  所以 (2/${n}) = 1`);
+                            } else {
+                                steps.push(`  所以 (2/${n}) = -1`);
+                            }
+                            steps.push(`  当前符号: ${result > 0 ? '+' : '-'}1`);
+                        }
+                    }
+
+                    if (a === 0n) {
+                        steps.push(`  a = 0，结束计算`);
+                        break;
+                    }
+
+                    steps.push(`  现在计算 (${a}/${n})`);
+
+                    // 二次互反律
+                    // (a/n) = (-1)^((a-1)(n-1)/4) * (n/a)
+                    const aMod4 = a % 4n;
+                    const nMod4 = n % 4n;
+                    steps.push(`  二次互反律: a ≡ ${aMod4} (mod 4), n ≡ ${nMod4} (mod 4)`);
+
+                    if (aMod4 === 3n && nMod4 === 3n) {
+                        result = -result;
+                        steps.push(`  由于 a ≡ n ≡ 3 (mod 4)，变号`);
+                        steps.push(`  (${a}/${n}) = -(${n}/${a})`);
+                    } else {
+                        steps.push(`  (${a}/${n}) = (${n}/${a})`);
+                    }
+                    steps.push(`  当前符号: ${result > 0 ? '+' : '-'}1`);
+
+                    [a, n] = [n % a, a];
+                    steps.push(`  交换并取模: (${a}/${n})`);
+                    steps.push('');
+
+                    stepNum++;
+                }
+
+                if (n === 1n) {
+                    steps.push(`步骤${stepNum}: n = 1`);
+                    steps.push(`  性质: (a/1) = 1`);
+                    steps.push('');
+                    steps.push(`最终结果: (${a}/${n}) = ${result}`);
+                    return { symbol: result, steps };
+                } else {
+                    steps.push(`步骤${stepNum}: gcd(a, n) = ${n} ≠ 1`);
+                    steps.push(`  雅可比符号为 0`);
+                    return { symbol: 0n, steps };
+                }
+            },
+
+            /**
+             * 检查素数 - Miller-Rabin 素性测试
+             * @param {BigInt} n
+             * @returns {boolean}
+             */
+            isPrime(n) {
+                if (n <= 1n) return false;
+                if (n <= 3n) return true;
+                if (n % 2n === 0n) return false;
+
+                // 小素数测试
+                const smallPrimes = [3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n, 29n, 31n];
+                for (const p of smallPrimes) {
+                    if (n === p) return true;
+                    if (n % p === 0n) return false;
+                }
+
+                // Miller-Rabin测试
+                let d = n - 1n;
+                let s = 0n;
+                while (d % 2n === 0n) {
+                    d /= 2n;
+                    s++;
+                }
+
+                // 测试基数
+                const witnesses = [2n, 325n, 9375n, 28178n, 450775n, 9780504n, 1795265022n];
+
+                for (const a of witnesses) {
+                    if (a % n === 0n) continue;
+
+                    let x = this.modPow(a, d, n).result;
+                    if (x === 1n || x === n - 1n) continue;
+
+                    let composite = true;
+                    for (let r = 1n; r < s; r++) {
+                        x = this.modPow(x, 2n, n).result;
+                        if (x === n - 1n) {
+                            composite = false;
+                            break;
+                        }
+                    }
+
+                    if (composite) return false;
+                }
+
+                return true;
+            },
+
+            /**
+             * 辅助函数：将字符串解析为 BigInt
+             * @param {string} str
+             * @returns {BigInt}
+             */
+            parseBigInt(str) {
+                str = str.trim();
+                if (str === '') throw new Error('输入不能为空');
+                try {
+                    return BigInt(str);
+                } catch (e) {
+                    throw new Error('请输入有效的整数');
+                }
+            }
+        };
+
+        // 导出模块
+        if (typeof module !== 'undefined' && module.exports) {
+            module.exports = NumberTheory;
+        }
+    </script>
+
+    <!-- App UI Logic -->
+    <script>
+        /**
+         * Number Theory Calculator App
+         * UI交互逻辑
+         */
+
+        // 全局变量
+        let currentSymbolMode = 'legendre';
+        let crtEquationCount = 1;
+
+        // ==================== 主题切换 ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('themeToggle');
+            const html = document.documentElement;
+
+            // 检查本地存储或系统偏好
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+            }
+
+            // 主题切换按钮
+            themeToggle.addEventListener('click', () => {
+                if (html.classList.contains('dark')) {
+                    html.classList.remove('dark');
+                    localStorage.theme = 'light';
+                } else {
+                    html.classList.add('dark');
+                    localStorage.theme = 'dark';
+                }
+                lucide.createIcons();
+            });
+
+            // 初始化Tab导航
+            initTabs();
+        });
+
+        // ==================== Tab导航 ====================
+        function initTabs() {
+            const navTabs = document.querySelectorAll('.nav-tab');
+            const sections = document.querySelectorAll('.calc-section');
+
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetId = tab.dataset.tab;
+
+                    // 更新Tab样式
+                    navTabs.forEach(t => {
+                        t.classList.remove('active', 'bg-primary-600', 'text-white', 'shadow-md', 'shadow-primary-600/20');
+                        t.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+                    });
+                    tab.classList.add('active', 'bg-primary-600', 'text-white', 'shadow-md', 'shadow-primary-600/20');
+                    tab.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+
+                    // 显示对应section
+                    sections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.classList.remove('hidden');
+                            section.classList.add('active');
+                        } else {
+                            section.classList.add('hidden');
+                            section.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        }
+
+        // ==================== 辅助函数 ====================
+
+        function showError(elementId, message) {
+            const resultDiv = document.getElementById(elementId);
+            resultDiv.classList.remove('hidden');
+
+            const children = resultDiv.querySelectorAll(':scope > *');
+            children.forEach(child => {
+                if (!child.classList.contains('error-message')) {
+                    child.classList.add('hidden');
+                }
+            });
+
+            let errorDiv = resultDiv.querySelector('.error-message');
+            if (!errorDiv) {
+                errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message flex items-center gap-2 text-red-600 dark:text-red-400';
+                resultDiv.appendChild(errorDiv);
+            }
+
+            errorDiv.innerHTML = `
+                <i data-lucide="alert-circle" class="w-5 h-5"></i>
+                <span>${message}</span>
+            `;
+            lucide.createIcons();
+        }
+
+        function clearError(elementId) {
+            const resultDiv = document.getElementById(elementId);
+            const errorDiv = resultDiv.querySelector('.error-message');
+            if (errorDiv) {
+                errorDiv.remove();
+            }
+
+            const children = resultDiv.querySelectorAll(':scope > *');
+            children.forEach(child => child.classList.remove('hidden'));
+        }
+
+        function summarizeSteps(steps, maxLines = 10) {
+            if (!Array.isArray(steps) || steps.length === 0) return [];
+
+            const cleaned = steps
+                .map(s => (typeof s === 'string' ? s.trim() : ''))
+                .filter(Boolean);
+
+            if (cleaned.length <= maxLines) {
+                return cleaned;
+            }
+
+            const keywords = /(步骤|第\d+步|最终|结果|答案|因此|验证|方程|计算|求|存在|无解|不存在)/;
+            const stepHeaderRegex = /^第\d+步[:：]?$/;
+            const lowValueLineRegex = /^q\s*=\s*-?\d+$/i;
+
+            const normalized = [];
+            for (let i = 0; i < cleaned.length; i++) {
+                const line = cleaned[i];
+                if (lowValueLineRegex.test(line)) {
+                    continue;
+                }
+
+                if (stepHeaderRegex.test(line) && i + 1 < cleaned.length) {
+                    let j = i + 1;
+                    while (j < cleaned.length && lowValueLineRegex.test(cleaned[j])) {
+                        j++;
+                    }
+                    if (j < cleaned.length && !stepHeaderRegex.test(cleaned[j])) {
+                        normalized.push(`${line} ${cleaned[j]}`);
+                        i = j;
+                        continue;
+                    }
+                }
+
+                normalized.push(line);
+            }
+
+            if (normalized.length <= maxLines) {
+                return normalized;
+            }
+
+            const summary = [];
+            const used = new Set();
+
+            const pushByIndex = (index) => {
+                if (index >= 0 && index < normalized.length && !used.has(index) && summary.length < maxLines) {
+                    summary.push({ index, line: normalized[index] });
+                    used.add(index);
+                }
+            };
+
+            // 1) 保留开头关键背景（最多2行）
+            for (let i = 0; i < normalized.length && summary.length < Math.min(2, maxLines); i++) {
+                if (/^(求|计算|解|中国剩余定理|步骤1)/.test(normalized[i])) {
+                    pushByIndex(i);
+                }
+            }
+
+            // 2) 保留过程关键行
+            for (let i = 0; i < normalized.length && summary.length < Math.max(0, maxLines - 3); i++) {
+                const line = normalized[i];
+                if (/(步骤\d+|第\d+步|≡|\bmod\b|gcd|逆元|无解|存在|验证)/i.test(line) || (keywords.test(line) && line.includes('='))) {
+                    pushByIndex(i);
+                }
+            }
+
+            // 3) 强制保留结论/最终结果（从后往前找）
+            const tailCandidates = [];
+            for (let i = normalized.length - 1; i >= 0; i--) {
+                const line = normalized[i];
+                if (/(最终|结果|答案|因此|逆元|无解|不存在|验证)/.test(line)) {
+                    tailCandidates.push(i);
+                }
+                if (tailCandidates.length >= 3) break;
+            }
+            tailCandidates.reverse().forEach(idx => pushByIndex(idx));
+
+            // 4) 兜底补齐（按原顺序）
+            for (let i = 0; i < normalized.length && summary.length < maxLines; i++) {
+                pushByIndex(i);
+            }
+
+            const ordered = summary
+                .sort((a, b) => a.index - b.index)
+                .map(item => item.line)
+                .slice(0, maxLines);
+
+            if (ordered.length > 0) {
+                return ordered;
+            }
+
+            const headCount = Math.max(2, Math.floor(maxLines / 2));
+            const tailCount = Math.max(2, maxLines - headCount - 1);
+            return [
+                ...cleaned.slice(0, headCount),
+                '...',
+                ...cleaned.slice(-tailCount)
+            ];
+        }
+
+        function renderSteps(elementId, steps) {
+            const resultDiv = document.getElementById(elementId);
+            const stepsElement = resultDiv.querySelector('[id$="Steps"]');
+            if (!stepsElement) return;
+
+            const summary = summarizeSteps(steps, 10);
+            if (summary.length === 0) {
+                stepsElement.classList.add('hidden');
+                stepsElement.textContent = '';
+                return;
+            }
+
+            stepsElement.classList.remove('hidden');
+            stepsElement.textContent = `关键步骤摘要:\n${summary.join('\n')}`;
+        }
+
+        function showResult(elementId, value, explanation, steps = []) {
+            const resultDiv = document.getElementById(elementId);
+            resultDiv.classList.remove('hidden');
+            clearError(elementId);
+
+            const valueElement = resultDiv.querySelector('[id$="Value"]') || resultDiv.querySelector('[id$="Solution"]') || resultDiv.querySelector('[id$="Phi"]');
+            const explanationElement = resultDiv.querySelector('[id$="Explanation"]');
+
+            if (valueElement) valueElement.textContent = value;
+            if (explanationElement) explanationElement.textContent = explanation;
+
+            renderSteps(elementId, steps);
+        }
+
+        function getValue(id) {
+            const el = document.getElementById(id);
+            if (!el || !el.value.trim()) throw new Error('请输入所有必需的值');
+            return NumberTheory.parseBigInt(el.value);
+        }
+
+        /**
+         * 包装错误处理 - 将技术错误转换为用户友好的中文提示
+         * @param {Function} fn - 要执行的计算函数
+         * @param {string} resultId - 结果显示元素的ID
+         */
+        function wrapCalculation(fn, resultId) {
+            try {
+                fn();
+            } catch (e) {
+                console.error('计算错误:', e);
+
+                let userMessage = e.message;
+
+                // 处理常见的技术错误，转换为用户友好的中文提示
+                if (e.message.includes('Cannot mix BigInt and other types')) {
+                    userMessage = '计算过程中出现类型错误，请检查输入的数字是否过大或格式不正确';
+                } else if (e.message.includes('is not a function') || e.message.includes('undefined')) {
+                    userMessage = '计算功能暂时不可用，请刷新页面后重试';
+                } else if (e.message.includes('out of range') || e.message.includes('too large')) {
+                    userMessage = '输入的数字超出计算范围，请输入较小的整数';
+                } else if (e.message.includes('timeout') || e.message.includes('taking too long')) {
+                    userMessage = '计算时间过长，可能是输入的数字过大，请尝试更小的数字';
+                } else if (e.message.includes('stack') || e.message.includes('recursion')) {
+                    userMessage = '计算过程出现递归错误，请检查输入的数字';
+                } else if (e.message.includes('Invalid') || e.message.includes('valid')) {
+                    userMessage = '输入格式不正确，请输入有效的整数';
+                } else if (e.message.includes('empty') || e.message.includes('null')) {
+                    userMessage = '输入不能为空，请输入数字';
+                }
+                // 其他已定义的中文错误信息直接显示
+
+                showError(resultId, userMessage);
+            }
+        }
+
+        // ==================== 1. 模运算 ====================
+        function calculateMod() {
+            wrapCalculation(() => {
+                const a = getValue('modA');
+                const m = getValue('modM');
+
+                const { result, steps } = NumberTheory.mod(a, m);
+                const explanation = `${a} mod ${m} = ${result}`;
+
+                showResult('modResult', result.toString(), explanation, steps);
+            }, 'modResult');
+        }
+
+        // ==================== 2. 模幂运算 ====================
+        function calculateModPow() {
+            wrapCalculation(() => {
+                const a = getValue('modpowA');
+                const b = getValue('modpowB');
+                const m = getValue('modpowM');
+
+                const { result, steps } = NumberTheory.modPow(a, b, m);
+                const explanation = `${a}^${b} ≡ ${result} (mod ${m})`;
+
+                showResult('modpowResult', result.toString(), explanation, steps);
+            }, 'modpowResult');
+        }
+
+        // ==================== 3. 模逆元 ====================
+        function calculateInverse() {
+            wrapCalculation(() => {
+                const a = getValue('inverseA');
+                const m = getValue('inverseM');
+
+                const { result, steps } = NumberTheory.modInverse(a, m);
+
+                if (result === null) {
+                    const resultDiv = document.getElementById('inverseResult');
+                    resultDiv.classList.remove('hidden');
+                    clearError('inverseResult');
+                    document.getElementById('inverseResultValue').textContent = '不存在';
+                    document.getElementById('inverseResultExplanation').textContent =
+                        `因为 gcd(${a}, ${m}) ≠ 1，所以逆元不存在`;
+                    renderSteps('inverseResult', []);
+                } else {
+                    const explanation = `${a} × ${result} ≡ 1 (mod ${m})`;
+                    showResult('inverseResult', result.toString(), explanation, steps);
+                }
+            }, 'inverseResult');
+        }
+
+        // ==================== 4. 扩展欧几里得算法 ====================
+        function calculateEuclid() {
+            wrapCalculation(() => {
+                const a = getValue('euclidA');
+                const b = getValue('euclidB');
+
+                const { gcd, x, y, steps } = NumberTheory.extendedGCD(a, b);
+
+                const resultDiv = document.getElementById('euclidResult');
+                resultDiv.classList.remove('hidden');
+                clearError('euclidResult');
+
+                document.getElementById('euclidGCD').innerHTML =
+                    `<span class="text-slate-500">GCD(${a}, ${b}) =</span> <span class="font-bold text-primary-600">${gcd}</span>`;
+                document.getElementById('euclidCoefficients').innerHTML =
+                    `<span class="text-slate-500">贝祖系数:</span> x = ${x}, y = ${y}`;
+                document.getElementById('euclidExplanation').textContent =
+                    `${a} × (${x}) + ${b} × (${y}) = ${gcd}`;
+                renderSteps('euclidResult', steps);
+            }, 'euclidResult');
+        }
+
+        // ==================== 5. 解一次同余式 ====================
+        function calculateCongruence() {
+            wrapCalculation(() => {
+                const a = getValue('congruenceA');
+                const b = getValue('congruenceB');
+                const m = getValue('congruenceM');
+
+                const result = NumberTheory.solveLinearCongruence(a, b, m);
+
+                const resultDiv = document.getElementById('congruenceResult');
+                resultDiv.classList.remove('hidden');
+                clearError('congruenceResult');
+
+                if (result.hasSolution) {
+                    document.getElementById('congruenceStatus').textContent = '方程有解';
+                    document.getElementById('congruenceStatus').className = 'text-lg text-green-600 dark:text-green-400 font-medium mb-2';
+                    document.getElementById('congruenceSolutions').textContent =
+                        `x ≡ ${result.solutions.join(', ')} (mod ${m})`;
+                    document.getElementById('congruenceExplanation').textContent = `共 ${result.count} 个解`;
+                    renderSteps('congruenceResult', result.steps);
+                } else {
+                    document.getElementById('congruenceStatus').textContent = '方程无解';
+                    document.getElementById('congruenceStatus').className = 'text-lg text-red-600 dark:text-red-400 font-medium mb-2';
+                    document.getElementById('congruenceSolutions').textContent = '';
+                    document.getElementById('congruenceExplanation').textContent = '根据可解条件判断方程无解';
+                    renderSteps('congruenceResult', []);
+                }
+            }, 'congruenceResult');
+        }
+
+        // ==================== 6. 中国剩余定理 ====================
+        function addCRTInput() {
+            crtEquationCount++;
+            const container = document.getElementById('crtInputs');
+
+            const newRow = document.createElement('div');
+            newRow.className = 'flex gap-2 sm:gap-4 items-end crt-row';
+            newRow.innerHTML = `
+                <div class="flex-1 min-w-0">
+                    <input type="text" data-crt-a inputmode="numeric" placeholder="a${crtEquationCount}" class="math-input w-full p-3 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                </div>
+                <div class="text-lg text-slate-500 pb-3 whitespace-nowrap">(mod</div>
+                <div class="flex-1 min-w-0">
+                    <input type="text" data-crt-m inputmode="numeric" placeholder="m${crtEquationCount}" class="math-input w-full p-3 text-lg border border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white outline-none transition-all">
+                </div>
+                <div class="text-lg text-slate-500 pb-3 whitespace-nowrap">)</div>
+            `;
+
+            container.appendChild(newRow);
+        }
+
+        function removeCRTInput() {
+            const container = document.getElementById('crtInputs');
+            const rows = container.querySelectorAll('.crt-row');
+
+            if (rows.length > 1) {
+                container.removeChild(rows[rows.length - 1]);
+                crtEquationCount--;
+            }
+        }
+
+        function calculateCRT() {
+            wrapCalculation(() => {
+                const container = document.getElementById('crtInputs');
+                const rows = container.querySelectorAll('.crt-row');
+
+                const congruences = [];
+                rows.forEach(row => {
+                    const aInput = row.querySelector('[data-crt-a]');
+                    const mInput = row.querySelector('[data-crt-m]');
+
+                    if (aInput && mInput && aInput.value.trim() && mInput.value.trim()) {
+                        congruences.push({
+                            a: NumberTheory.parseBigInt(aInput.value),
+                            m: NumberTheory.parseBigInt(mInput.value)
+                        });
+                    }
+                });
+
+                if (congruences.length === 0) {
+                    throw new Error('请至少输入一个完整的同余式');
+                }
+
+                const result = NumberTheory.chineseRemainderTheorem(congruences);
+
+                const resultDiv = document.getElementById('crtResult');
+                resultDiv.classList.remove('hidden');
+                clearError('crtResult');
+
+                if (result.hasSolution) {
+                    document.getElementById('crtSolution').textContent =
+                        `x ≡ ${result.solution} (mod ${result.modulus})`;
+                    document.getElementById('crtSolution').className =
+                        'text-2xl font-bold text-primary-600 dark:text-primary-400 result-value';
+                    document.getElementById('crtExplanation').textContent = '由中国剩余定理构造唯一解（模所有模数乘积）';
+                    renderSteps('crtResult', result.steps);
+                } else {
+                    document.getElementById('crtSolution').textContent = '无解';
+                    document.getElementById('crtSolution').className =
+                        'text-2xl font-bold text-red-600 dark:text-red-400 result-value';
+                    document.getElementById('crtExplanation').textContent = '模数不两两互质，标准中国剩余定理不适用';
+                    renderSteps('crtResult', []);
+                }
+            }, 'crtResult');
+        }
+
+        // ==================== 7. 乘法阶 ====================
+        function calculateOrder() {
+            wrapCalculation(() => {
+                const a = getValue('orderA');
+                const m = getValue('orderM');
+
+                const result = NumberTheory.multiplicativeOrder(a, m);
+
+                const resultDiv = document.getElementById('orderResult');
+                resultDiv.classList.remove('hidden');
+                clearError('orderResult');
+
+                if (result.exists) {
+                    document.getElementById('orderResultValue').textContent =
+                        `ord_${m}(${a}) = ${result.order}`;
+                    document.getElementById('orderResultValue').className =
+                        'text-2xl font-bold text-primary-600 dark:text-primary-400 result-value';
+                    document.getElementById('orderResultExplanation').textContent = `乘法阶存在，且 ord_${m}(${a}) = ${result.order}`;
+                    renderSteps('orderResult', result.steps);
+                } else {
+                    document.getElementById('orderResultValue').textContent = '不存在';
+                    document.getElementById('orderResultValue').className =
+                        'text-2xl font-bold text-red-600 dark:text-red-400 result-value';
+                    document.getElementById('orderResultExplanation').textContent = `gcd(${a}, ${m}) ≠ 1，乘法阶不存在`;
+                    renderSteps('orderResult', []);
+                }
+            }, 'orderResult');
+        }
+
+        // ==================== 8. 欧拉函数 ====================
+        function calculateEuler() {
+            wrapCalculation(() => {
+                const n = getValue('eulerN');
+
+                const result = NumberTheory.eulerTotient(n);
+
+                const resultDiv = document.getElementById('eulerResult');
+                resultDiv.classList.remove('hidden');
+                clearError('eulerResult');
+
+                document.getElementById('eulerPhi').textContent = `φ(${n}) = ${result.phi}`;
+                document.getElementById('eulerFactorization').textContent =
+                    `${n} = ${result.factorization}`;
+                document.getElementById('eulerExplanation').textContent = '使用质因数分解与欧拉函数乘积公式计算';
+                renderSteps('eulerResult', result.steps);
+            }, 'eulerResult');
+        }
+
+        // ==================== 9. 勒让德/雅可比符号 ====================
+        function setSymbolMode(mode) {
+            currentSymbolMode = mode;
+
+            const legendreBtn = document.getElementById('legendreBtn');
+            const jacobiBtn = document.getElementById('jacobiBtn');
+            const hint = document.getElementById('symbolHint');
+
+            if (mode === 'legendre') {
+                legendreBtn.classList.add('bg-primary-600', 'text-white');
+                legendreBtn.classList.remove('bg-slate-100', 'dark:bg-slate-700', 'text-slate-600', 'dark:text-slate-300');
+
+                jacobiBtn.classList.remove('bg-primary-600', 'text-white');
+                jacobiBtn.classList.add('bg-slate-100', 'dark:bg-slate-700', 'text-slate-600', 'dark:text-slate-300');
+
+                hint.textContent = '勒让德符号要求分母为奇素数';
+                document.getElementById('symbolN').placeholder = '例如: 7 (奇素数)';
+            } else {
+                jacobiBtn.classList.add('bg-primary-600', 'text-white');
+                jacobiBtn.classList.remove('bg-slate-100', 'dark:bg-slate-700', 'text-slate-600', 'dark:text-slate-300');
+
+                legendreBtn.classList.remove('bg-primary-600', 'text-white');
+                legendreBtn.classList.add('bg-slate-100', 'dark:bg-slate-700', 'text-slate-600', 'dark:text-slate-300');
+
+                hint.textContent = '雅可比符号要求分母为正奇数';
+                document.getElementById('symbolN').placeholder = '例如: 15 (奇数)';
+            }
+        }
+
+        function calculateSymbol() {
+            wrapCalculation(() => {
+                const a = getValue('symbolA');
+                const n = getValue('symbolN');
+
+                let result;
+                if (currentSymbolMode === 'legendre') {
+                    result = NumberTheory.legendreSymbol(a, n);
+                } else {
+                    result = NumberTheory.jacobiSymbol(a, n);
+                }
+
+                const resultDiv = document.getElementById('symbolResult');
+                resultDiv.classList.remove('hidden');
+                clearError('symbolResult');
+
+                let symbolText;
+                if (result.symbol === 0n) symbolText = '0';
+                else if (result.symbol === 1n) symbolText = '+1';
+                else symbolText = '-1';
+
+                document.getElementById('symbolValue').textContent = `(${a}/${n}) = ${symbolText}`;
+                document.getElementById('symbolExplanation').textContent = currentSymbolMode === 'legendre'
+                    ? '通过欧拉准则判断是否为二次剩余'
+                    : '通过雅可比符号性质与互反律化简计算';
+                renderSteps('symbolResult', result.steps);
+            }, 'symbolResult');
+        }
+
+        // ==================== 键盘支持 ====================
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                // 找到当前活跃的section
+                const activeSection = document.querySelector('.calc-section.active');
+                if (activeSection) {
+                    const calculateBtn = activeSection.querySelector('button[onclick^="calculate"]');
+                    if (calculateBtn) {
+                        calculateBtn.click();
+                    }
+                }
+            }
+        });
+    </script>
+
+    <!-- Initialize Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
