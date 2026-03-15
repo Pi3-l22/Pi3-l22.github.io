@@ -1,36 +1,36 @@
 .content .MathJax {
-    font-size: 100%!important;
-    overflow-x: auto;
-    overflow-y: hidden;
+  font-size: 100% !important;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .content .katex {
-    font-size: 100%!important;
-    overflow-x: auto;
-    overflow-y: hidden;
+  font-size: 100% !important;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .content :last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .content a {
-    color: var(--content-a);
-    transition: all .3s;
-    /* text-decoration: underline !important; */
+  color: var(--content-a);
+  transition: all 0.3s;
+  /* text-decoration: underline !important; */
 }
 
 .content a:hover {
-    color: var(--content-a-hover);
-    text-decoration: underline;
+  color: var(--content-a-hover);
+  text-decoration: underline;
 }
 
 .content a.footnote-ref::before {
-    content: "[";
+  content: "[";
 }
 
 .content a.footnote-ref::after {
-    content: "]";
+  content: "]";
 }
 
 .content blockquote,
@@ -46,208 +46,207 @@
 .content ol,
 .content table,
 .content ul {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .content blockquote {
-    border-left: var(--blockquote-left) 2.5px solid;
-    background-color: var(--highlight-bg);
-    /* font-style: italic; */
-    /* font-family: 'Fangsong', serif; */
-    padding: 1rem;
-    margin: 1rem auto;
+  border-left: var(--blockquote-left) 2.5px solid;
+  background-color: var(--highlight-bg);
+  padding: 1rem;
+  margin: 1rem auto;
 }
 
 /* 行内代码的样式 */
 .content p code {
-    color: var(--inline-code);
-    padding: .2rem;
+  color: var(--inline-code);
+  padding: 0.2rem;
 }
 
 /* 包括行内代码和代码块的样式 */
-.content code {  
-    background-color: var(--highlight-bg);
-    /* font-family: 't1xtt', 'Latin Modern Mono', 'Fangsong', Courier,  monospace; */
-    font-family: "Maple Mono CN", monospace;
-    font-size: 90%;
-    padding: .2rem;
+.content code {
+  background-color: var(--highlight-bg);
+  font-family: var(--font-mono);
+  font-size: 90%;
+  padding: 0.2rem;
 }
 
-.content h1, .content h2, .content h3,
-.content h4, .content h5, .content h6 {
-    line-height: 1.5;
-    /* font-family: 'Latin Modern Roman', sans-serif; */
-    margin-top: 1.2rem;
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  line-height: 1.5;
+  margin-top: 1.2rem;
 }
 
 .content h1 {
-    font-size: 1.7rem;
+  font-size: 1.7rem;
 }
 
 .content h2 {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .content h3 {
-    font-size: 1.4rem;
+  font-size: 1.4rem;
 }
 
 .content h4 {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 
 .content h5 {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 .content h6 {
-    font-size: 1.1rem;
+  font-size: 1.1rem;
 }
 
 .content img {
-    display: block;
-    max-width: 100%;
-    margin: .5rem auto !important;
+  display: block;
+  max-width: 100%;
+  margin: 0.5rem auto !important;
 }
 
 .content p {
-    text-align: justify;
-    font-size: 1rem;
-    line-height: 1.5rem;
+  text-align: justify;
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 /* 所有pre标签的样式 包括代码块 不包括行内代码*/
 .content pre {
-    background-color: var(--highlight-bg);
-    /* font-family: 't1xtt', 'Latin Modern Mono', 'Fangsong', Consolas, monospace; */
-    font-family: "Maple Mono CN", monospace;
-    margin-top: .5rem;
-    overflow-x: auto;
-    padding: .5rem;
-    
+  background-color: var(--highlight-bg);
+  font-family: var(--font-mono);
+  margin-top: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem;
 }
 
 /* 代码块的背景 */
-.content .highlight pre{
-    background-color: var(--highlight-bg);
-    padding: 1rem;
+.content .highlight pre {
+  background-color: var(--highlight-bg);
+  padding: 1rem;
 }
 
 .content pre code {
-    padding: 0;
+  padding: 0;
 }
 
 .content strong {
-    font-weight: bold;
-    color: var(--strong-color);
-    /* text-emphasis-style: dot;
+  font-weight: bold;
+  color: var(--strong-color);
+  /* text-emphasis-style: dot;
     text-emphasis-position: under;
     -webkit-text-emphasis-style: dot;
     -webkit-text-emphasis-position: under; */
 }
 
-.content em{
-    /* font-family: "Fangsong", serif; */
-    font-style: italic;
-    color: var(--em-color);
+.content em {
+  font-style: italic;
+  color: var(--em-color);
 }
 
 .content table {
-    /* display: block; */
-    /* text-align: center; */
-    overflow-x: auto;
-    width: 100%;
-    /* 居中 */
-    margin: 1rem auto !important;
+  /* display: block; */
+  /* text-align: center; */
+  overflow-x: auto;
+  width: 100%;
+  /* 居中 */
+  margin: 1rem auto !important;
 }
 
-.content td, .content th {
-    border: var(--table-border) 1px solid;
-    padding: .1rem .5rem;
+.content td,
+.content th {
+  border: var(--table-border) 1px solid;
+  padding: 0.1rem 0.5rem;
 }
 
 .content th {
-    background-color: var(--table-header-bg);
-    color: var(--table-header-color);
-    text-align: center !important;
+  background-color: var(--table-header-bg);
+  color: var(--table-header-color);
+  text-align: center !important;
 }
 
-.content ol, .content ul {
-    margin-left: 1.5rem;
+.content ol,
+.content ul {
+  margin-left: 1.5rem;
 }
 
-.content ol li{
-    margin: .5rem;
+.content ol li {
+  margin: 0.5rem;
 }
 
-.content ul li{
-    margin: .5rem;
+.content ul li {
+  margin: 0.5rem;
 }
 
 .content mark {
-    background-color: var(--mark-bg);
-    padding: 0 .1rem;
+  background-color: var(--mark-bg);
+  padding: 0 0.1rem;
 }
 
-.content hr{
-    border: none;
-    border-top: 2px solid var(--hr-color);
-    margin: 1.5rem auto;
-    width: 100%;
+.content hr {
+  border: none;
+  border-top: 2px solid var(--hr-color);
+  margin: 1.5rem auto;
+  width: 100%;
 }
-
 
 /* 标题自动编号 */
 .content {
-    counter-reset: h2;
+  counter-reset: h2;
 }
 
 .content h1 {
-    counter-reset: h2;
+  counter-reset: h2;
 }
 
-.content h2{
-    counter-reset: h3;
+.content h2 {
+  counter-reset: h3;
 }
 
-.content h3{
-    counter-reset: h4;
+.content h3 {
+  counter-reset: h4;
 }
 
-.content h4{
-    counter-reset: h5;
+.content h4 {
+  counter-reset: h5;
 }
 
-.content h5{
-    counter-reset: h6;
+.content h5 {
+  counter-reset: h6;
 }
 
 .content h2:before {
-    counter-increment: h2;
-    content: counter(h2);
-    margin-right: 0.8em;
+  counter-increment: h2;
+  content: counter(h2);
+  margin-right: 0.8em;
 }
 
 .content h3:before {
-    counter-increment: h3;
-    content: counter(h2) "." counter(h3);
-    margin-right: 0.8em;
+  counter-increment: h3;
+  content: counter(h2) "." counter(h3);
+  margin-right: 0.8em;
 }
 
 .content h4:before {
-    counter-increment: h4;
-    content: counter(h2) "." counter(h3) "." counter(h4);
-    margin-right: 0.8em;
+  counter-increment: h4;
+  content: counter(h2) "." counter(h3) "." counter(h4);
+  margin-right: 0.8em;
 }
 
 .content h5:before {
-    counter-increment: h5;
-    content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5);
-    margin-right: 0.8em;
+  counter-increment: h5;
+  content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5);
+  margin-right: 0.8em;
 }
 
 .content h6:before {
-    counter-increment: h6;
-    content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6);
-    margin-right: 0.8em;
+  counter-increment: h6;
+  content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "."
+    counter(h6);
+  margin-right: 0.8em;
 }
