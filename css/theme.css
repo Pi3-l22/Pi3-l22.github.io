@@ -44,9 +44,9 @@
   /* 字体 common.css content.css */
   --font-serif: "Noto Serif SC", serif;
   --font-sans: "Noto Sans SC", sans-serif;
-  --font-mono: "Libertinus Mono", monospace;
-  --font-pixel: "Press Start 2P", monospace;
-  --font-big-title: "Bungee Shade", sans-serif; /* 大标题字体 */
+  --font-mono: "Courier Prime", "Noto Serif SC", monospace;
+  --font-pixel: "Jersey 10", sans-serif;
+  --font-big-title: "Nabla", system-ui, sans-serif; /* 大标题字体 */
 }
 
 [data-theme="dark"] {
