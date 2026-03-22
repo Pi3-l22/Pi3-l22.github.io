@@ -1,9 +1,11 @@
 /* 3D */
-/* @font-face {
+@font-face {
   font-display: swap;
   font-family: dimis;
-  src: url("../font/dimis.ttf");
-} */
+  src:
+    url("../font/dimis.woff2") format("woff2"),
+    url("../font/dimis.woff") format("woff");
+}
 
 /* global */
 
@@ -16,7 +18,11 @@
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: all 0.3s ease;
+  font-size: 1rem;
+  line-height: 1.65;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
 }
 
 a {
@@ -24,23 +30,31 @@ a {
   text-decoration: none;
 }
 
+button {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+}
+
 time {
   color: var(--text-color);
   opacity: 0.7;
   margin-left: 1rem;
-  min-width: 5rem;
 }
 
 #wrapper {
   background-color: var(--bg-color);
   display: flex;
   flex-direction: column;
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-weight: 500;
   min-height: 100vh;
   overflow-wrap: break-word;
   padding: 1rem;
-  transition: all 0.3s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
 }
 
 .link {
@@ -83,7 +97,7 @@ time {
 
 #header > h1 {
   /* font-size: 3.5rem; Royalacid ttpckey*/
-  font-size: 3.5rem;
+  font-size: clamp(2.3rem, 5vw, 3.25rem);
   text-align: center;
   margin-bottom: 1rem !important;
   font-family: var(--font-big-title);
@@ -105,9 +119,39 @@ time {
   width: 100%;
 }
 
-#header > nav > span > a {
-  font-size: 1.2rem;
+#header > nav > span > a,
+#header > nav > span > button {
+  font-size: clamp(1rem, 2.4vw, 1.15rem);
   font-weight: bold !important;
+}
+
+#header > nav > span > a,
+#header > nav > span > button {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.35rem 0.65rem;
+}
+
+.theme-toggle {
+  cursor: pointer;
+}
+
+.theme-toggle[data-theme-current="dark"] {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.2em;
+}
+
+.theme-toggle:active {
+  transform: translateY(1px);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--nav-link-color);
+  outline-offset: 2px;
 }
 
 /* main */
@@ -128,12 +172,12 @@ time {
   flex-direction: column;
   flex-grow: 1;
   /* 边框阴影 */
-  box-shadow: 0 0 20px var(--post-shodow);
+  box-shadow: 0 0 12px var(--post-shodow);
   margin: 2rem 0;
   /* 自定义尺寸 */
   max-width: 850px;
   width: 100%;
-  padding: 2rem 3rem;
+  padding: 1.8rem 2.4rem;
   /* A4纸尺寸 */
   /* max-width: 21cm;
     padding: 1.8cm 2cm 1.2cm 2cm;
@@ -151,12 +195,11 @@ time {
   }
   #main.post {
     box-shadow: none;
-    padding: 0.5rem 0.5rem;
+    padding: 0.7rem 0.65rem;
     margin: 0 0 2rem 0;
   }
   #header > h1 a {
-    /* font-size: 3rem !important; */
-    font-size: 3rem !important;
+    font-size: clamp(2rem, 9vw, 2.5rem);
   }
   #main.post > h1 {
     font-size: 2rem;
@@ -179,6 +222,19 @@ time {
   text-align: center;
 }
 
+.footer-copyright-row {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.5rem;
+  justify-content: center;
+  line-height: 1.5;
+}
+
+.footer-copyright-text,
+.footer-author-text {
+  opacity: 0.9;
+}
+
 #footer > .blog-icon {
   margin-top: 5px;
   text-align: center;
@@ -192,4 +248,15 @@ time {
 
 .icon-creative-commons-fill {
   font-size: 16px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

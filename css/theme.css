@@ -3,36 +3,36 @@
   /* common.css */
   --bg-color: #fafafa; /* 背景色 */
   --paper-bg-color: #fafafa; /* 纸张背景色 */
-  --text-color: #000; /* 文字颜色 */
-  --nav-link-color: #aa0000; /* 导航链接颜色 */
-  --scrollbar-bg: #eee; /* 滚动条背景色 */
-  --scrollbar-thumb: #ccc; /* 滚动条滑块颜色 */
-  --scrollbar-hover: #999; /* 滚动条滑块悬停颜色 */
-  --post-shodow: #ccc; /* 文章边框阴影颜色 */
-  --post-order: #aa0000; /* 文章发布序号颜色 */
+  --text-color: #1a1d22; /* 文字颜色 */
+  --nav-link-color: #8f3f3f; /* 导航链接颜色 */
+  --scrollbar-bg: #edf0f4; /* 滚动条背景色 */
+  --scrollbar-thumb: #c0c7d1; /* 滚动条滑块颜色 */
+  --scrollbar-hover: #8e98a5; /* 滚动条滑块悬停颜色 */
+  --post-shodow: #c2c8d2; /* 文章边框阴影颜色 */
+  --post-order: #8f3f3f; /* 文章发布序号颜色 */
   /* content.css */
-  --content-a: #0000ff; /* 文章中链接颜色 */
-  --content-a-hover: #ec028d; /* 文章中链接悬停颜色 */
+  --content-a: #2a4f86; /* 文章中链接颜色 */
+  --content-a-hover: #8e3f65; /* 文章中链接悬停颜色 */
   --blockquote-left: #bf003f; /* 引用块左边框颜色 */
-  --inline-code: #aa0000; /* 行内代码颜色 */
-  --highlight-bg: #eee; /* 代码块背景色 */
-  --strong-color: #000; /* 粗体字体颜色 */
-  --em-color: #aa0000; /* 斜体字体颜色 */
+  --inline-code: #8f3f3f; /* 行内代码颜色 */
+  --highlight-bg: #edf0f4; /* 代码块背景色 */
+  --strong-color: #1a1d22; /* 粗体字体颜色 */
+  --em-color: #8f3f3f; /* 斜体字体颜色 */
   --table-border: #575c61; /* 表格边框颜色 */
   --table-header-bg: #575c61; /* 表头背景色 */
   --table-header-color: #fafafa; /* 表头字体颜色 */
   --mark-bg: #e4a1a1; /* 高亮背景色 */
-  --hr-color: #cbcbcb; /* 分割线颜色 */
+  --hr-color: #c6ced9; /* 分割线颜色 */
   /* single.css */
-  --warning-bg: brown; /* 警告块背景色 */
-  --warning-color: white; /* 警告块文字颜色 */
-  --toc-bg: #eee; /* 目录背景色 */
-  --toc-border: black; /* 目录边框颜色 */
-  --main-targer-bg: azure; /* 目标背景色 */
+  --warning-bg: #8c3a3a; /* 警告块背景色 */
+  --warning-color: #fff4f4; /* 警告块文字颜色 */
+  --toc-bg: #edf0f4; /* 目录背景色 */
+  --toc-border: #2a2f37; /* 目录边框颜色 */
+  --main-targer-bg: #e7f1ff; /* 目标背景色 */
   --album-shadow-1: rgba(0, 0, 0, 0.4); /* 相册阴影 */
   --album-shadow-2: rgba(255, 255, 255, 0.9); /* 相册阴影 */
-  --album-info: #555; /* 相册底部信息颜色 */
-  --cardlink-border: #eee; /* 卡片链接边框颜色 */
+  --album-info: #4e5865; /* 相册底部信息颜色 */
+  --cardlink-border: #e1e6ed; /* 卡片链接边框颜色 */
   --cardlink-shadow: rgba(0, 0, 0, 0.15); /* 卡片链接阴影 */
   --cardlink-hover-shadow1: rgba(0, 0, 0, 0.2); /* 卡片链接悬停阴影1 */
   --cardlink-hover-shadow2: rgba(0, 0, 0, 0.1); /* 卡片链接悬停阴影2 */
@@ -42,11 +42,12 @@
     rgba(255, 255, 255, 0)
   ); /* 卡片链接渐变背景 */
   /* 字体 common.css content.css */
-  --font-serif: "Noto Serif SC", serif;
-  --font-sans: "Noto Sans SC", sans-serif;
-  --font-mono: "Courier Prime", "Noto Serif SC", monospace;
-  --font-pixel: "Jersey 10", sans-serif;
-  --font-big-title: "Honk", system-ui, sans-serif; /* 大标题字体 */
+  --font-serif: "Noto Serif SC", "Times New Roman", serif;
+  --font-sans: "Noto Sans SC", "Segoe UI", system-ui, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+  --font-big-title: "dimis", system-ui, sans-serif; /* 大标题字体 */
 }
 
 [data-theme="dark"] {
@@ -55,34 +56,34 @@
   --bg-color: #1e2030; /* 背景色 #24273a*/
   --paper-bg-color: #24273a; /* 纸张背景色 */
   --text-color: #cad3f5; /* 文字颜色 #cad3f5*/
-  --nav-link-color: #89b4fa; /* 导航链接颜色 */
+  --nav-link-color: #99b4e2; /* 导航链接颜色 */
   --scrollbar-bg: #1e1e2e; /* 滚动条背景色 */
   --scrollbar-thumb: #303446; /* 滚动条滑块颜色 */
   --scrollbar-hover: #3a3d4d; /* 滚动条滑块悬停颜色 */
   --post-shodow: rgba(0, 0, 0, 0.5); /* 文章边框阴影颜色 #1e1e2e*/
-  --post-order: #89b4fa; /* 文章发布序号颜色 */
+  --post-order: #99b4e2; /* 文章发布序号颜色 */
   /* content.css */
-  --content-a: #c6a0f6; /* 文章中链接颜色 */
-  --content-a-hover: #f5bde6; /* 文章中链接悬停颜色 */
+  --content-a: #b6a7d9; /* 文章中链接颜色 */
+  --content-a-hover: #d9b0c8; /* 文章中链接悬停颜色 */
   --blockquote-left: #89b4fa; /* 引用块左边框颜色 */
-  --inline-code: #89b4fa; /* 行内代码颜色 */
+  --inline-code: #99b4e2; /* 行内代码颜色 */
   --highlight-bg: #2f3347; /* 代码块背景色 */
   --strong-color: #7dc4e4; /* 粗体字体颜色 */
   --em-color: #8bd5ca; /* 强调字体颜色 */
   --table-border: #89b4fa; /* 表格边框颜色 */
   --table-header-bg: #89b4fa; /* 表头背景色 */
-  --table-header-color: #000; /* 表头字体颜色 */
+  --table-header-color: #1b1f2b; /* 表头字体颜色 */
   --mark-bg: #f5bde6; /* 高亮背景色 */
   --hr-color: #89b4fa; /* 分割线颜色 */
   /* single.css */
   --warning-bg: #89b4fa; /* 警告块背景色 */
-  --warning-color: black; /* 警告块文字颜色 */
-  --toc-bg: #444; /* 目录背景色 */
-  --toc-border: white; /* 目录边框颜色 */
-  --main-targer-bg: #444; /* 目标背景色 */
+  --warning-color: #1b1f2b; /* 警告块文字颜色 */
+  --toc-bg: #373d52; /* 目录背景色 */
+  --toc-border: #d7deef; /* 目录边框颜色 */
+  --main-targer-bg: #3b425a; /* 目标背景色 */
   --album-shadow-1: rgba(0, 0, 0, 0.9); /* 相册阴影 */
   --album-shadow-2: rgba(48, 52, 70, 0.8); /* 相册阴影 */
-  --album-info: #ccc; /* 相册底部信息颜色 */
+  --album-info: #b8c0d3; /* 相册底部信息颜色 */
   --cardlink-border: #24273a; /* 卡片链接边框颜色 */
   --cardlink-shadow: rgba(0, 0, 0, 0.8); /* 卡片链接阴影 */
   --cardlink-hover-shadow1: rgba(0, 0, 0, 0.5); /* 卡片链接悬停阴影1 */

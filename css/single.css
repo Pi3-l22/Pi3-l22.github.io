@@ -1,232 +1,242 @@
 #main > h1 {
-    text-align: center;
-    margin-bottom: 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 #main > .content {
-    padding-top: 1rem;
+  padding-top: 1rem;
 }
 
 #main > .warning {
-    background-color: var(--warning-bg);
-    color: var(--warning-color);
-    font-size: 1.1rem;
-    margin: 2rem 0;
-    padding: 1rem 0;
-    text-align: center;
+  background-color: var(--warning-bg);
+  color: var(--warning-color);
+  font-size: 1.1rem;
+  margin: 2rem 0;
+  padding: 1rem 0;
+  text-align: center;
 }
 
 #main .toc {
-    background-color: var(--toc-bg);
-    border: var(--toc-border) 1px dashed;
-    display: inline-block;
-    margin: 1rem;
-    padding: .5rem 1rem;
+  background-color: var(--toc-bg);
+  border: var(--toc-border) 1px dashed;
+  display: inline-block;
+  margin: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 #main .toc a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 #main .toc li > ul {
-    margin-left: 1.5rem;
+  margin-left: 1.5rem;
 }
 
 #main .toc ul {
-    list-style: none;
+  list-style: none;
 }
 
 #main :target {
-    background-color: var(--main-targer-bg);
+  background-color: var(--main-targer-bg);
 }
 
 #main .comment {
-    margin: 2rem 0;
+  margin: 2rem 0;
 }
-
 
 /* shortcode photo */
 .album {
-    display: flex; /* 使用 Flexbox */
-    flex-direction: column; /* 垂直排列 */
-    align-items: center; /* 水平居中 */
-    justify-content: center; /* 垂直居中 */
-    /* min-height: 100vh; 确保占满整个视口高度 */
-    position: relative;
+  display: flex; /* 使用 Flexbox */
+  flex-direction: column; /* 垂直排列 */
+  align-items: center; /* 水平居中 */
+  justify-content: center; /* 垂直居中 */
+  /* min-height: 100vh; 确保占满整个视口高度 */
+  position: relative;
 }
 
 .album .shadow-container {
-    display: inline-block; /* 使容器与图片尺寸一致 */
-    position: relative;
-    padding: 10px; /* 内边距，留出空间给阴影 */
-    margin: 10px auto;
-    box-shadow:
-        10px 10px 20px var(--album-shadow-1),
-        -10px -10px 20px var(--album-shadow-2),
-        inset 0 0 0 var(--album-shadow-2),
-        inset 0 0 0 var(--album-shadow-1);
-    
-    transition: .3s all;
+  display: inline-block; /* 使容器与图片尺寸一致 */
+  position: relative;
+  padding: 10px; /* 内边距，留出空间给阴影 */
+  margin: 10px auto;
+  box-shadow:
+    10px 10px 20px var(--album-shadow-1),
+    -10px -10px 20px var(--album-shadow-2),
+    inset 0 0 0 var(--album-shadow-2),
+    inset 0 0 0 var(--album-shadow-1);
 
-    &:hover {
-        box-shadow:
-            0 0 0 var(--album-shadow-1),
-            0 0 0 var(--album-shadow-2),
-            inset -10px -10px 20px var(--album-shadow-2),
-            inset 10px 10px 20px var(--album-shadow-1);
-        img{
-            transform: scale(0.95);
-        }
-        .info {
-            transform: scale(0.95);
-        }
-    }
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.album .shadow-container:hover {
+  box-shadow:
+    0 0 0 var(--album-shadow-1),
+    0 0 0 var(--album-shadow-2),
+    inset -10px -10px 20px var(--album-shadow-2),
+    inset 10px 10px 20px var(--album-shadow-1);
+}
+
+.album .shadow-container:hover img,
+.album .shadow-container:hover .info {
+  transform: scale(0.98);
 }
 
 .album .info {
-    text-align: center; /* 文字居中 */
-    font-size: 0.8rem; /* 字体大小 */
-    color: var(--album-info); /* 字体颜色 */
-    transition: .3s all;
+  text-align: center; /* 文字居中 */
+  font-size: 0.8rem; /* 字体大小 */
+  color: var(--album-info); /* 字体颜色 */
+  transition:
+    color 0.25s ease,
+    opacity 0.25s ease;
 }
 
 .album img {
-    height: 60vh;
-    max-height: 70vh;
-    width: 100%; /* 确保图片宽度适应容器 */
-    height: auto; /* 保持纵横比 */
-    transition: .3s all;
-    position: relative; 
-    z-index: 1; /* 确保 img 在 div 之上 */
-    display: block; /* 居中 */
-    margin: 0 auto;
-    margin-bottom: 10px;
+  width: 100%; /* 确保图片宽度适应容器 */
+  max-height: 70vh;
+  height: auto; /* 保持纵横比 */
+  transition: transform 0.25s ease;
+  position: relative;
+  z-index: 1; /* 确保 img 在 div 之上 */
+  display: block; /* 居中 */
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
-
 
 /* shortcard 卡片链接 cardlink */
 /* 容器样式，用于包裹所有卡片链接 */
 .cardlink-container {
-    display: flex;
-    flex-wrap: wrap; /* 允许换行 */
-    justify-content: center; /* 中心对齐 */
-    gap: 20px; /* 卡片之间的间距 */
-    width: 100%;
-    margin-bottom: 40px !important;
+  display: flex;
+  flex-wrap: wrap; /* 允许换行 */
+  justify-content: center; /* 中心对齐 */
+  gap: 20px; /* 卡片之间的间距 */
+  width: 100%;
+  margin-bottom: 40px !important;
 }
 
 /* 用于隐藏markdown渲染的前后空段落 */
 .cardlink-container p:empty {
-    display: none;
+  display: none;
 }
 
 /* 默认卡片样式 */
 .cardlink {
-    margin: 0 auto;
-    width: 50%; /* 稍微减小宽度，让两个卡片更靠近中间 */
-    height: 90px;
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: center;
-    box-shadow: 0 5px 20px var(--cardlink-shadow);
-    border: 1px solid var(--cardlink-border);
-    transition: all 0.3s ease;
+  margin: 0 auto;
+  width: min(36rem, 100%);
+  min-height: 90px;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  box-shadow: 0 3px 12px var(--cardlink-shadow);
+  border: 1px solid var(--cardlink-border);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 /* 容器中的卡片链接宽度 友链 */
 .cardlink-container .cardlink {
-    width: calc(48% - 10px);
+  width: calc(48% - 10px);
 }
 
 .cardlink:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 
-        0 20px 30px var(--cardlink-hover-shadow1),
-        0 0 20px var(--cardlink-hover-shadow2);
+  transform: translateY(-3px) scale(1.005);
+  box-shadow:
+    0 8px 18px var(--cardlink-hover-shadow1),
+    0 0 10px var(--cardlink-hover-shadow2);
 }
 
 .cardlink a {
-    display: block;
-    width: 100%;
-    height: 100%;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .content-wrapper {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    padding: 0 15px;
-    box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 0 15px;
+  box-sizing: border-box;
 }
 
 .cardlink img {
-    height: 90px;
-    width: 90px;
-    object-fit: cover;
-    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  height: clamp(72px, 16vw, 90px);
+  width: clamp(72px, 16vw, 90px);
+  min-width: clamp(72px, 16vw, 90px);
+  object-fit: cover;
+  transition: transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .cardlink:hover img {
-    transform: scale(1.15) rotate(3deg);
+  transform: scale(1.05) rotate(1deg);
 }
 
 .clink_content {
-    margin-left: 20px;
-    flex: 1;
-    overflow: hidden;
+  margin-left: 20px;
+  flex: 1;
+  overflow: hidden;
 }
 
 .link_title {
-    font-size: 18px !important;
-    font-weight: bold;
-    color: var(--text-color);
-    opacity: 0.8;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  font-weight: bold;
+  color: var(--text-color);
+  opacity: 0.8;
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease,
+    opacity 0.25s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cardlink:hover .link_title {
-    transform: translateX(5px);
-    color: var(--text-color);
+  transform: translateX(5px);
+  color: var(--text-color);
 }
 
 .link_text {
-    font-size: 16px !important;
-    color: var(--text-color);
-    opacity: 0.6;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-size: clamp(0.9rem, 1.05vw, 1rem);
+  color: var(--text-color);
+  opacity: 0.6;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cardlink:hover .link_text {
-    transform: translateX(5px);
-    opacity: 1;
+  transform: translateX(5px);
+  opacity: 1;
 }
 
 .cardlink:active {
-    transform: scale(0.96);
-    box-shadow: 0 2px 10px var(--cardlink-hover-shadow1);
+  transform: scale(0.96);
+  box-shadow: 0 2px 10px var(--cardlink-hover-shadow1);
 }
 
 @media screen and (max-width: 765px) {
-    .cardlink-container {
-        margin-top: 10px;
-        gap: 10px;
-    }
-    .cardlink,
-    .cardlink-container .cardlink {
-        width: 90%;
-    }
-    .link_title {
-        font-size: 16px !important;
-    }
-    .link_text {
-        font-size: 14px !important;
-    }
+  .cardlink-container {
+    margin-top: 10px;
+    gap: 10px;
+  }
+  .cardlink,
+  .cardlink-container .cardlink {
+    width: 100%;
+    min-height: 82px;
+  }
+  .link_title {
+    font-size: 1rem;
+  }
+  .link_text {
+    font-size: 0.9rem;
+  }
 }

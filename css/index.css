@@ -1,43 +1,60 @@
 #main > .post + .post {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 #main > .post > h2 {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: .5rem;
+  align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.65rem;
+  margin-bottom: 0.35rem;
+}
+
+#main > .post > h2 > a {
+  line-height: 1.35;
 }
 
 #main > .post > h2 > time {
-    font-size: 1rem;
-    font-weight: normal;
+  font-size: clamp(0.82rem, 1.2vw, 0.92rem);
+  font-weight: normal;
+  opacity: 0.62;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
 }
 
 #main > .post > .content {
-    padding-top: .5rem;
+  max-width: 72ch;
+  padding-top: 0.45rem;
 }
 
 /* 主页文章序号颜色 */
 #main > .post > h2 .order {
-    color: var(--post-order);
+  color: var(--post-order);
+  margin-right: 0.28em;
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
 }
 
 @media screen and (min-width: 850px) {
-    #main > .post > div {
-        margin-left: 2rem;
-    }
+  #main > .post > div {
+    margin-left: 2rem;
+  }
 }
 
 @media screen and (max-width: 850px) {
-    #main > .post > h2 > a {
-        font-size: 1.1rem;
-    }
-    #main > .post > h2 .order {
-        font-size: 1.1rem;
-    }
-    /* #main > .post > div {
+  #main > .post > h2 > a {
+    font-size: 1.05rem;
+  }
+  #main > .post > h2 .order {
+    font-size: 0.98rem;
+  }
+  #main > .post > h2 > time {
+    font-size: 0.82rem;
+    margin-left: 0;
+  }
+  /* #main > .post > div {
         margin-left: 1.5rem;
     } */
 }
