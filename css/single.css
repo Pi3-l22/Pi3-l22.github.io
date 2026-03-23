@@ -38,6 +38,7 @@
 
 #main :target {
   background-color: var(--main-targer-bg);
+  scroll-margin-top: 1rem;
 }
 
 #main .comment {
